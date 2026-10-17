@@ -1,0 +1,9 @@
+diff a/npc/scripts_custom.conf b/npc/scripts_custom.conf	(rejected hunks)
+@@ -19,6 +19,7 @@
+ //npc: npc/custom/card_remover.txt
+ //npc: npc/custom/item_signer.txt
+ //npc: npc/custom/woe_controller.txt
++npc: npc/custom/MVPBoard.txt
+ 
+ // ----------------------- Other Scripts -----------------------
+ // -- Private MVP & Branch Room

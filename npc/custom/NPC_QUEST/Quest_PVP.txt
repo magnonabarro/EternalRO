@@ -1,0 +1,22 @@
+sala_quest,16,7,5	script	Quest de PVP	796,{	
+	mes "[Quest de PVP]";
+	mes "Ofereço equipamentos Por itens  <ITEM>Caça<INFO>1000367</INFO></ITEM>.";
+	mes "------------------";
+	mes "Caso esteja interessado, eu ofereço equipamentos de todas as raridades";
+	switch(select("Equipamentos PVP")){
+		next;
+		case 1:
+		close2;
+		callshop "Equipamentos_PVP",1;	
+		break;
+	}
+OnInit:
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	showscript("Quest de PVP");
+	setnpctimer 0;
+	end;
+}
+// Lojas localizadas no custom/barters.yml

@@ -1,0 +1,450 @@
+//================================================
+//        _____ _           _ _                   
+//       / ____| |         | (_)                  
+//      | |  __| | __ _  __| |_ _   _ ___         
+//      | | |_ | |/ _` |/ _` | | | | / __|        
+//      | |__| | | (_| | (_| | | |_| \__ \        
+//       \_____|_|\__,_|\__,_|_|\__,_|___/        
+//                                                                                                
+//===== rAthena Script ===========================
+//= Missões de Caça
+//===== Créditos: ================================      
+//= Gladius
+//===== Versão do NPC: ===========================
+//= 1.0
+//= Lojinha: =====================================
+-	pointshop	caca_shop	-1,#Pontos_Caca,607:10;
+//================================================
+
+moc_para01,18,34,5	script	Missões de Caça	4_M_KNIGHT_SILVER,{	goto npc_miss;
+
+//============================================================
+//== Configurações
+OnInit:
+
+//============================================================
+//== Nome do NPC - Não Alterar
+	set .ns$,"^00B2EE["+strnpcinfo(1)+"]^000000";
+	set .ns2$,"[ "+strnpcinfo(1)+" ]";
+	
+//============================================================
+//== Delay de Repetição das Missões - Em Horas
+	set .delay, 6;
+	
+//============================================================
+//== Cobrança de missão
+//== 1 = Ativo / 50008 = Item / 1 = Quantidade
+	setarray .paymiss, 0, 50008, 1;
+	
+//============================================================
+//== Valor para resetar a missão de Caça
+	set .valor, 10000000;
+
+//============================================================
+//== Restrição de repetição das missões de caça
+//== 0 = Conta / 1 = Personagem 
+	set .accharlimit, 0;								
+	
+//============================================================
+//== Loja de Pontos de Caça / 0 = Desativa a Loja
+	set .shopEnabled, 1;
+
+//============================================================
+//== Nível Minimo / Máximo para fazer missão de Caça
+	
+	setarray .qs_elevel,12,99;
+	setarray .qs_nlevel,50,99;
+	setarray .qs_hlevel,70,99;
+	setarray .qs_ilevel,85,99;
+	
+//============================================================
+//== Configuração de Monstros
+//== 1º Linha - Adicionar os monstros que serão selecionados aleatoriamente
+//== 2º Linha - Quantidade de monstros que o jogador terá que matar x ~ y
+//== 3º Linha - Pontos que a missão vale
+//============================================================	
+//== Modo Easy:
+	setarray .easy,1004,1009,1052,1024,1077;
+	setarray .easyc,100,150,200;
+	.easy_points = 10;
+	
+//============================================================
+//== Modo Normal:
+	setarray .normal,1056,1104,1034,1248,1067;
+	setarray .normalc,150,200,250;
+	.normal_points = 20;
+	
+//============================================================
+//== Modo Difícil:
+	setarray .hard,1151,1074,1142,1158,1170;
+	setarray .hardc,200,250,300;
+	.hard_points = 30;
+
+//============================================================
+//== Modo Insano:
+	setarray .indeterminate,1143,1035,1297,1412,1376;
+	setarray .indeterminatec,300,350,400;
+	.indeterminate_points = 50;
+
+//============================================================	
+//== Bônus VIP (Se o jogador foi vip receberá pontos extra)
+	set .nvip, 5;
+	set .vip_easy, 1;
+	set .vip_normal, 2;
+	set .vip_hard, 3;	
+	set .vip_indeterminate, 5;
+	
+//============================================================
+//== NÃO MEXER
+	
+	for (.@i = 0; .@i < getarraysize(.rps_q_shop); .@i += 2)
+		npcshopadditem "caca_shop", .rps_q_shop[.@i], .rps_q_shop[.@i+1];
+	end;
+
+//== Fim das Configurações 
+//============================================================
+	
+npc_miss:
+	if(.accharlimit ==0)	.@time_needed = #s_timeq - gettimetick(2);
+	else					.@time_needed = s_timeq - gettimetick(2);
+	
+	if(.@time_needed > 0 && rps_quest == 0) {
+		.@hours   = .@time_needed / 60 / 60;
+		.@minutes = (.@time_needed % (60 * 60)) / 60;
+		.@seconds = .@time_needed % 60;
+		mes .ns$;
+		mes (gettime(3)>= 6&&gettime(3)<= 12?"Bom dia":(gettime(3)>=13&&gettime(3)<=18?"Boa tarde":"Boa noite"))+", ^FFA500"+strcharinfo(0)+"^000000! Para repetir as missão de caça você deve aguardar: ^FF0000" + sprintf("%02d:%02d:%02d", .@hours, .@minutes, .@seconds) + "^000000." ;
+		if(.shopEnabled !=0){
+			switch(select(""+"^3CB371[»]^000000 Abrir Loja"+":"+"^ff0000[»]^000000 Sair"+"")){
+						Case 1: callsub Q_shop;
+						Case 2: close;
+			}
+		}
+		close;
+	} else {
+		if(rps_quest != 0 )						callsub have_sq;
+		if(rps_quest == 0 && quest_done == 0)	callsub need_sq;
+		if(quest_done != 0)						callsub done_sq;
+	}
+end;
+
+//================================================
+//== Missão Fácil
+	
+Q_easy:
+	next;
+	mes .ns$;
+	if (BaseLevel < .qs_elevel[0] || BaseLevel > .qs_elevel[1]){
+		mes "Você não possui os requisitos necessários de nível de base para iniciar essa missão.";
+		mes " ";
+		mes "^7001E2[»]^000000 Nível Minimo: ^FFA500"+.qs_elevel[0];
+		mes "^7001E2[»]^000000 Nível Máximo: ^FFA500"+.qs_elevel[1];
+		close;
+	}
+	callsub (check_item);
+	mes "^FFA500"+strcharinfo(0)+"^000000! Sua missão é:";
+	mes "^7001E2[»]^000000 Caçar: "+ easycmon +" " + strmobinfo( 1,easymon) +".";
+	set rps_quest,1;
+	set monster_count,0;
+end;	
+
+//================================================
+//== Missão Normal
+
+Q_normal:
+	next;
+	mes .ns$;
+	if (BaseLevel < .qs_nlevel[0] || BaseLevel > .qs_nlevel[1]){
+		mes "Você não possui os requisitos necessários de nível de base para iniciar essa missão.";
+		mes " ";
+		mes "^7001E2[»]^000000 Nível Minimo: ^FFA500"+.qs_nlevel[0];
+		mes "^7001E2[»]^000000 Nível Máximo: ^FFA500"+.qs_nlevel[1];
+		close;
+	}
+	callsub (check_item);
+	mes "^FFA500"+strcharinfo(0)+"^000000! Sua missão é:";
+	mes "^7001E2[»]^000000 Caçar: "+ normalcmon +" " + strmobinfo( 1,normalmon) +".";
+	set rps_quest,2;
+	set monster_count,0;
+end;
+
+//================================================
+//== Missão Difícil
+
+Q_hard:
+	next;
+	mes .ns$;
+	if (BaseLevel < .qs_hlevel[0] || BaseLevel > .qs_hlevel[1]){
+		mes "Você não possui os requisitos necessários de nível de base para iniciar essa missão.";
+		mes " ";
+		mes "^7001E2[»]^000000 Nível Minimo: ^FFA500"+.qs_hlevel[0];
+		mes "^7001E2[»]^000000 Nível Máximo: ^FFA500"+.qs_hlevel[1];
+		close;
+	}
+	callsub (check_item);
+	mes "^FFA500"+strcharinfo(0)+"^000000! Sua missão é:";
+	mes "^7001E2[»]^000000 Caçar: "+ hardcmon +" " + strmobinfo( 1,hardmon) +".";
+	set rps_quest,3;
+	set monster_count,0;
+end;
+
+//================================================
+//== Missão Insana
+
+Q_indeterminate:
+	next;
+	mes .ns$;
+	if (BaseLevel < .qs_ilevel[0] || BaseLevel > .qs_ilevel[1]){
+		mes "Você não possui os requisitos necessários de nível de base para iniciar essa missão.";
+		mes " ";
+		mes "^7001E2[»]^000000 Nível Minimo: ^FFA500"+.qs_ilevel[0];
+		mes "^7001E2[»]^000000 Nível Máximo: ^FFA500"+.qs_ilevel[1];
+		close;
+	}
+	callsub (check_item);
+	mes "^FFA500"+strcharinfo(0)+"^000000. Sua missão é:";
+	mes "^7001E2[»]^000000 Caçar: "+ indeterminatecmon +" " + strmobinfo( 1,indeterminatemon) +".";
+	set rps_quest,4;
+	set monster_count,0;
+	close;
+end;
+
+//================================================
+//== Abre a Loja
+
+Q_shop:
+	close2;
+	callshop "caca_shop",1;
+end;
+	
+//================================================
+//== Controle de Missão e Cancelamento
+
+have_sq:	
+	mes .ns$;
+	mes (gettime(3)>= 6&&gettime(3)<= 12?"Bom dia":(gettime(3)>=13&&gettime(3)<=18?"Boa tarde":"Boa noite"))+", ^FFA500"+strcharinfo(0)+"^000000! O progresso atual da sua missão é:";
+	mes " ";
+	
+	if(rps_quest == 1) {
+		mes "^7001E2[»]^000000 Missão: "+easycmon +" " + strmobinfo( 1,easymon);
+		mes "^7001E2[»]^000000 Derrotado: "+monster_count+" "+ strmobinfo( 1,easymon);
+	}
+	
+	if(rps_quest == 2) {
+		mes "^7001E2[»]^000000 Missão: "+normalcmon +" " + strmobinfo( 1,normalmon);
+		mes "^7001E2[»]^000000 Derrotado: "+monster_count+" " + strmobinfo( 1,normalmon);
+	}
+	
+	if(rps_quest == 3) {
+		mes "^7001E2[»]^000000 Missão: "+hardcmon +" " + strmobinfo( 1,hardmon);
+		mes "^7001E2[»]^000000 Derrotado: "+monster_count+" " + strmobinfo( 1,hardmon);
+	}
+	
+	if(rps_quest == 4) {
+		mes "^7001E2[»]^000000 Missão: "+indeterminatecmon +" " + strmobinfo( 1,indeterminatemon);
+		mes "^7001E2[»]^000000 Derrotado: "+monster_count+" " + strmobinfo( 1,indeterminatemon);
+	}
+
+	switch(select(""+"^3CB371[»]^000000 Abrir Loja"+":"+"^ff0000[»]^000000 Abandonar Missão"+":"+"^ff0000[»]^000000 Sair"+"")){
+		
+		Case 1: 
+			callsub Q_shop;
+			close2;
+		
+		Case 2:
+			next;
+			mes .ns$;
+			mes "Você tem certeza que deseja abandonar a sua missão de caça? Você deve pagar uma quantia de ^FFA500"+callfunc("RPS_CACADOT",.valor)+"^000000 zenys ou aguardar 24 horas pela próxima missão.";
+			switch(select(""+"^3CB371[»]^000000 Pagar Desistência"+":"+"^3CB371[»]^000000 Aguardar 24 Horas"+":"+"^ff0000[»]^000000 Sair"+"")){
+				
+				Case 1:
+					if (Zeny < .valor){
+						next;
+						mes .ns$;
+						mes "Você não tem zeny suficiente para abandonar a sua missão de caça.";
+						close;
+					}
+					
+					set Zeny,Zeny - .valor;
+					mes "^ff0000- Missão Cancelada!^000000";
+					set rps_quest,0;
+					close;
+					
+					Case 2:
+						mes "^ff0000- Missão Cancelada!^000000";
+						set rps_quest,0;
+						if(.accharlimit == 0)	#s_timeq = gettimetick(2) + (.delay * 3600 * 4);
+						else					s_timeq = gettimetick(2) + (.delay * 3600 * 4);
+					close;
+			
+			Case 3:
+				close;
+			
+		}
+		
+		Case 3:
+			close;
+			
+	}
+end;
+
+//================================================
+//== Menu Inicial (Sem Missões Pendentes)
+
+need_sq:
+	easymon = .easy[rand(getarraysize(.easy))];
+	easycmon = .easyc[rand(getarraysize(.easyc))];
+	normalmon = .normal[rand(getarraysize(.normal))];
+	normalcmon = .normalc[rand(getarraysize(.normalc))];
+	hardmon = .hard[rand(getarraysize(.hard))];
+	hardcmon = .hardc[rand(getarraysize(.hardc))];
+	indeterminatemon = .indeterminate[rand(getarraysize(.indeterminate))];
+	indeterminatecmon = .indeterminatec[rand(getarraysize(.indeterminatec))];
+	
+	mes .ns$;
+	mes (gettime(3)>= 6&&gettime(3)<= 12?"Bom dia":(gettime(3)>=13&&gettime(3)<=18?"Boa tarde":"Boa noite"))+", ^FFA500"+strcharinfo(0)+"^000000! Você possui ^00F9FF" + #Pontos_Caca + "^000000 pontos de caça. Que tipo de missão você busca?";
+		switch(select(""+"^3CB371[»]^000000 Missão Fácil "+":"+"^3CB371[»]^000000 Missão Normal"+":"+"^3CB371[»]^000000 Missão Difícil"+":"+"^3CB371[»]^000000 Missão Insana"+":"+"^FFA500[»]^000000 Abrir Loja"+":"+"^FF0000[»]^000000 Sair"+"")){
+			Case 1: callsub Q_easy;
+			Case 2: callsub Q_normal;
+			Case 3: callsub Q_hard;
+			Case 4: callsub Q_indeterminate;
+			Case 5: callsub Q_shop;
+			Case 6: close;
+		}
+end;
+
+//============================================================
+//== Finalizar Caça
+
+done_sq:
+	mes .ns$;
+	mes "O reino de Rune Midgard agradece seus serviços de caçador.";
+	set monster_count,0;
+	set rps_quest,0;
+	if(.accharlimit ==0)	#s_timeq = gettimetick(2) + (.delay * 3600);
+	else					s_timeq = gettimetick(2) + (.delay * 3600);
+	if(quest_done == 1){
+		set #Pontos_Caca,#Pontos_Caca + .easy_points;
+		if(getgroupid() >= .nvip) set #Pontos_Caca,#Pontos_Caca + .vip_easy;
+		set quest_done,0;
+		announce .ns2$+" : O jogador: "+strcharinfo(0)+" finalizou uma caçada (Modo: Fácil) Parabéns!",bc_all,0x52BAA6;
+	} else if(quest_done == 2){
+		set #Pontos_Caca,#Pontos_Caca + .normal_points;
+		if(getgroupid() >= .nvip) set #Pontos_Caca,#Pontos_Caca + .vip_normal;
+		set quest_done,0;
+		announce .ns2$+" : O jogador: "+strcharinfo(0)+" finalizou uma caçada (Modo: Normal) Parabéns!",bc_all,0x52BAA6;
+	} else if(quest_done == 3){
+		set #Pontos_Caca,#Pontos_Caca + .hard_points;
+		if(getgroupid() >= .nvip) set #Pontos_Caca,#Pontos_Caca + .vip_hard;
+		set quest_done,0;
+		announce .ns2$+" : O jogador: "+strcharinfo(0)+" finalizou uma caçada (Modo: Difícil) Parabéns!",bc_all,0x52BAA6;
+	} else if(quest_done == 4){
+		set #Pontos_Caca,#Pontos_Caca + .indeterminate_points;
+		if(getgroupid() >= .nvip) set #Pontos_Caca,#Pontos_Caca + .vip_indeterminate;
+		set quest_done,0;
+		announce .ns2$+" : O jogador: "+strcharinfo(0)+" finalizou uma caçada (Modo: Insano) Parabéns!",bc_all,0x52BAA6;
+	}
+end;
+
+//============================================================
+//== Checar item
+
+check_item:	
+	if (.paymiss[0]) {
+		if (countitem (.paymiss[1]) < .paymiss[2]) {
+			mes "Você não possui o ^FFA500"+getitemname(.paymiss[1])+"^000000 necessário para iniciar a missão de caça...";
+			close;
+		} else 	delitem .paymiss[1], .paymiss[2];
+	}
+	return;
+
+}
+
+//============================================================
+//== Função de Kill
+
+-	script	Caca_Func	-1,{
+
+OnNPCKillEvent:
+	.ns2$ = getvariableofnpc(.ns2$,"Missões de Caça");
+
+	if(rps_quest != 0){
+		if( killedrid == easymon ){
+			if(monster_count < easycmon){
+				monster_count++;
+				dispbottom .ns2$+" : Você caçou: "+monster_count+" "+ strmobinfo( 1,easymon) +"(s) solicitados na missão.";
+				if(monster_count >= easycmon){
+					dispbottom .ns2$+" : Missão Completa!";
+					set quest_done,1;
+					set rps_quest,0;
+				}
+			}
+		} else if( killedrid == normalmon ){
+			if(monster_count < normalcmon){
+				monster_count++;
+				dispbottom .ns2$+" : Você caçou: "+monster_count+" "+ strmobinfo( 1,normalmon) +"(s) solicitados na missão.";
+				if(monster_count >= normalcmon){
+					dispbottom .ns2$+" : Missão Completa!";
+					set quest_done,2;
+					set rps_quest,0;
+				}
+			}
+		} else if( killedrid == hardmon ){
+			if(monster_count < hardcmon){
+				monster_count++;
+				dispbottom .ns2$+" : Você caçou: "+monster_count+" "+ strmobinfo( 1,hardmon) +"(s) solicitados na missão.";
+				if(monster_count >= hardcmon){
+					dispbottom .ns2$+" : Missão Completa!";
+					set quest_done,3;
+					set rps_quest,0;
+				}
+			}
+		} else if( killedrid == indeterminatemon ){
+			if(monster_count < indeterminatecmon){
+				monster_count++;
+				dispbottom .ns2$+" : Você caçou: "+monster_count+" "+ strmobinfo( 1,indeterminatemon) +"(s) solicitados na missão.";
+				if(monster_count >= indeterminatecmon){
+					dispbottom .ns2$+" : Missão Completa!";
+					set quest_done,4;
+					set rps_quest,0;
+				}
+			}
+		}
+	}
+end;
+
+}
+
+//============================================================
+//== Certificado de Caça
+
+function	script	Func_M_Caca	{
+
+	.ns$ = getvariableofnpc(.ns$,"Missões de Caça");
+	.delay = getvariableofnpc(.delay,"Missões de Caça");
+	.accharlimit = getvariableofnpc(.accharlimit,"Missões de Caça");
+
+	dispbottom .ns$+" : Tempo de espera resetado!";
+	set rps_quest,0;
+	if(.accharlimit == 0)	set #s_timeq,0;
+	else					set s_timeq,0;
+	end;
+	
+}
+
+//====================================================================================
+//= Função de Conversão
+
+function	script	RPS_CACADOT	{
+	set .@str$, getarg(0);
+	for (set .@i,getstrlen(.@str$)-3; .@i>0; set .@i,.@i-3)
+		set .@str$, insertchar(.@str$,".",.@i);
+	return .@str$;
+}
+
+//============================================================
+//== Duplicates
+
+morocc,169,84,1	duplicate(Missões de Caça)	Missões de Caça#moc	4_M_KNIGHT_SILVER
+geffen,115,73,5	duplicate(Missões de Caça)	Missões de Caça#gef	4_M_KNIGHT_SILVER
+payon,162,219,4	duplicate(Missões de Caça)	Missões de Caça#pay	4_M_KNIGHT_SILVER

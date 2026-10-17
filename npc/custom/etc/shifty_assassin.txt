@@ -1,0 +1,198 @@
+//
+//==================================================================================
+//-------------------------------- RagnaERO Script ---------------------------------
+//=    __________                              _____________________ ________
+//=    \______   \_____     ____   ____ _____  \_   _____/\______   \\_____  \
+//=     |       _/\__  \   / ___\ /    \\__  \  |    __)_  |       _/ /   |   \
+//=   	|    |   \ / __ \_/ /_/  >   |  \/ __ \_|        \ |    |   \/    |    \
+//=   	|____|_  /(____  /\___  /|___|  (____  /_______  / |____|_  /\_______  /
+//=            \/      \//_____/      \/     \/        \/         \/         \/
+//=                                                          RagnaERO Scripts
+//=                                                                       
+//--------------------------- http://rathena.org/board/ ----------------------------
+//==================================================================================
+//----- NOME DO SCRIPT -------------------------------------------------------------
+//= assasino.txt
+//----- POR: -----------------------------------------------------------------------
+//= Equipe de Desenvolvimento rAthena
+//----- VERSÃO ATUAL DO SCRIPT: ----------------------------------------------------
+//= v1.1.2
+//----- DESCRIÇÃO: -----------------------------------------------------------------
+//= NPC onde os jogadores compram ninjas para assassinar outros jogadores. 
+//----- COMENTÁRIOS ADICIONAIS: ----------------------------------------------------
+//= Projeto RagnaERO
+//= Cabeçalho e Tradução Pt-BR Por [ADM] Eragonat PK
+//================================================================================== 
+
+morocc,148,86,5	script	Mercenário Shifty	725,{
+	set .@ninja_price,250000;
+
+	// COMEÇA O MENU //
+M_Start:
+	mes "[Mercenário Shifty]";
+	mes "O que você deseja?";
+	next;
+	menu "Comprar Ninjas",M_Buy,"Assassinar Alguém",M_Kill,"Verificar Ninjas",M_Check, ( getgroupid() > 90 ? "Adicionar Ninjas" : "" ),-,"Cancelar",M_Exit;
+
+	// MENU DE GM PARA ADICIONAR NINJAS //
+	mes "[Mercenário Shifty]";
+	mes "Quantos ninjas você quer disponibilizar?";
+	next;
+	input .@add;
+	set $ninja_avail, $ninja_avail+.@add;
+	mes .@add + " ninjas adicionados.";
+	close;
+
+	// COMPRAR NINJAS //
+M_Buy:
+	mes "[Mercenário Shifty]";
+	mes "Quantos ninjas você quer comprar?";
+	mes "Há ^0000FF" + $ninja_avail + "^000000 ninjas disponíveis.";
+	mes "Eles custam ^0000FF" + .@ninja_price + " zeny(s) ^000000cada um.";
+
+	input .@buy;
+	next;
+	if ($ninja_avail < 1) goto NoNinjas;
+	if ($ninja_avail < .@buy) goto NotEnoughNinjas;
+	set .@price, .@buy*.@ninja_price;
+	if (Zeny < .@price) goto NoZeny;
+
+	mes "[Mercenário Shifty]";
+	mes "Isso vai te custar ^0000FF" + .@price + " zeny(s)^000000.";
+	next;
+	menu "Continuar",-,"Cancelar",M_Exit;
+
+	set Zeny, Zeny - .@price;
+	set #ninjas, #ninjas + .@buy;
+	set $ninja_avail, $ninja_avail - .@buy;
+
+	mes "[Mercenário Shifty]";
+	mes "Obrigado!";
+	close;
+
+	// ASSASSINAR ALGUÉM //
+M_Kill:
+	if (agitcheck()) goto M_Busy;
+	mes "[Mercenário Shifty]";
+	mes "Digite o nome do alvo.";
+	mes "^FF0000Digite o nome correto, caso contrário eu não serei capaz de encontrar a vítima.^000000";
+	next;
+	menu "Continuar",-,"Cancelar",M_Exit;
+	input .@name$;
+	if ( !getcharid( 3,.@name$ ) ) {
+		mes "[Mercenário Shifty]";
+		mes .@name$ +" não está online.";
+		close;
+	}
+	next;
+	mes "[Mercenário Shifty]";
+	mes "Ninjas Ativos: "+#ninjas;
+	mes "Ninjas Descansando: "+#ninjasr;
+	mes "Quantos você quer enviar?";
+	input .@number;
+	if (.@number < 1) goto NoNinjasSent;
+	if (.@number > #ninjas) goto NotEnoughNinjas1;
+	if (.@number > 10) goto TooManyNinjas;
+	set .@chance, rand(1,12);
+	set #ninjas,#ninjas-.@number;
+	set #ninjas,#ninjas+#ninjasr;
+	set #ninjasr,0;
+	if (.@number < .@chance) goto M_Failure;
+
+	// ATAQUE DE SUCESSO //
+	mes "Mandando ninjas agora.";
+	next;
+	mes "[Mercenário Shifty]";
+	set .@ninjasurvived, rand(1,.@number);
+	set #ninjasr,.@number-.@ninjasurvived;
+	mes "Seu ataque foi bem sucedido, mas apenas ^FF0000" + #ninjasr + "^000000 Ninjas sobreviveram.";
+	set .@acc_id, getcharid( 3,.@name$ );
+	if ( .@acc_id )
+		unitkill .@acc_id;
+	announce .@name$ +" foi assassinado pelos Ninjas de " + strcharinfo(0) +".",bc_npc;
+	close;
+
+	// ATAQUE COM FALHA //
+M_Failure:
+	mes "Mandando ninjas agora.";
+	next;
+	mes "[Mercenário Shifty]";
+	set .@ninjasurvived, rand(1,.@number);
+	set #ninjasr, .@number-.@ninjasurvived;
+	mes "Seu ataque falhou e apenas ^FF0000" + #ninjasr + "^000000 Ninjas sobreviveram.";
+
+	announce .@name$+" sobreviveu a os ataques dos Ninjas de " + strcharinfo(0) +".",8;
+	close;
+
+	// NINJAS OCUPADOS NA GUERRA DE EMPERIUM  //
+M_Busy:
+	mes "[Mercenário Shifty]";
+	mes "Desculpe, todos os meus ninjas estão ocupados na Guerra do Emperium.";
+	close;
+
+	// VERIFICA SEUS NINJAS //
+M_Check:
+	mes "[Mercenário Shifty]";
+	mes "Você tem:";
+	mes "^FF0000" + #ninjas + "^000000 Ninjas Ativos.";
+	mes "^0000FF" + #ninjasr + "^000000 Ninjas Descansando.";
+	next;
+	goto M_Start;
+
+
+	// LIMITE //
+NoNinjasSent:
+	mes "[Mercenário Shifty]";
+	mes "Você não pode matar ninguém sem ninjas.";
+	next;
+	goto M_Start;
+
+TooManyNinjas:
+	mes "[Mercenário Shifty]";
+	mes "Você só pode enviar no máximo 10 ninjas.";
+	next;
+	goto M_Start;
+
+NoZeny:
+	mes "[Mercenário Shifty]";
+	mes "Você não tem zeny suficiente.";
+	close;
+
+NotEnoughNinjas:
+	mes "[Mercenário Shifty]";
+	mes "Não há muitos ninjas para comprar no momento.";
+	next;
+	goto M_Start;
+
+NoNinjas:
+	mes "[Mercenário Shifty]";
+	mes "Não há ninjas para comprar.";
+	close;
+
+NotEnoughNinjas1:
+	mes "[Mercenário Shifty]";
+	mes "Você não tem muitos ninjas.";
+	next;
+	goto M_Start;
+
+M_Exit:
+	mes "[Mercenário Shifty]";
+	mes "Adeus!";
+	close;
+
+// TEMPO PARA ADICIONAR NINJAS //
+OnClock0600:
+OnClock1200:
+OnClock1500:
+OnClock1900:
+OnClock2000:
+OnClock0000:
+	set $ninja_avail,$ninja_avail+2;
+	end;
+OnClock1800:
+	set $ninja_avail,$ninja_avail+3;
+	end;
+OnInit:
+	set $ninja_avail,$ninja_avail+1;
+	end;
+}

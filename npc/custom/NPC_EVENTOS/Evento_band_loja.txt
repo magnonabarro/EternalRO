@@ -1,0 +1,31 @@
+sec_in01,163,173,4	script	Loja de Bandeiras	911,{	
+	mes "Ofereço Troca de Bandeiras brasileira e Bandeiras Coreanas Por itens<ITEM>Bandeira Nacional<INFO>7928</INFO></ITEM>.";
+	mes "<ITEM>Bandeira Coreana Dourada<INFO>7253</INFO></ITEM>.";
+	mes "------------------";
+	mes "Caso esteja interessado, eu ofereço equipamentos de todas as raridades";
+	mes "e encantamentos";
+	switch(select("Troca de Bandeiras Nacional:Troca de Bandeiras Coreanas")){
+		next;
+		case 1:
+		close2;
+		callshop "bandeira_brasileira",1;
+		break;	
+		next;
+		break;
+		case 2:
+		close2;
+		callshop "bandeira_coreana",1;
+		break;	
+		next;
+		break;
+	}
+OnInit:
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	showscript("Loja de Bandeiras");
+	setnpctimer 0;
+	end;
+}
+// Lojas localizadas no custom/barters.yml

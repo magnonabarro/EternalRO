@@ -1,0 +1,175 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ gm_npcs.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.0 ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= - Controle de npcs dos servidores oficiais.
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+// callfunc("F_GM_NPC"{,<senha>,<0:int | 1:for>{,<mín>,<máx>}})
+function	script	F_GM_NPC	{
+
+	// Para desabilitar todos os NPCs GM (Administração), descomente a linha abaixo.
+	//end;
+
+	// Para definir um nível de GM mínimo para acessar os NPCs, edite a linha abaixo.
+	if (getgroupid() < 99) {
+		// Log de evento.
+		getmapxy(.@map$,.@x,.@y,BL_NPC);
+		logmes strcharinfo(0)+" tentou acessar os NPCs de Administração "+strnpcinfo(0)+" ("+.@map$+","+.@x+","+.@y+").";
+		end;
+	}
+
+	if (!getargcount()) return;
+
+	// Para desativar as senhas, descomente a linha abaixo.
+	//return 1;
+
+	// Valores de retorno:
+	//  1: Senha correta
+	//  0: Senha incorreta
+	// -1: Zero/cancelado (somente inteiro)
+	// -2: Fora do limite (somente inteiro)
+	if (getarg(1) == 0) {
+		// Senha Numérica
+		if (getarg(3,0)) {
+			.@error = input(.@input,getarg(2),getarg(3));
+			if (.@error)
+				return -2;
+		} else
+			input .@input;
+		if (.@input == 0)
+			return -1;
+		else
+			return (.@input == getarg(0))?1:0;
+	} else {
+		// Senha da String
+		input .@inputstr$;
+		return (.@inputstr$ == getarg(0))?1:0;
+	}
+}
+
+/*
+Lista dos NPCs da Administração GM (incompleta)
+--------------------------
+[ Batalha Campal ]
+- Alavanca#batgnd
+- Release all#b01
+- Release all#b02
+- Release all#a01
+- Release all#a02
+
+[ Relacionado-Guilda ]
+- Event controller#aru_gd
+- Event controller#sch_gd
+- Festival Manager#gq_fes0
+- Festival Manager#gq_fes2
+- Godly Item Quests#god
+- Golbal var
+- Investment_total#fund00 (RE)
+
+[ Instâncias ]
+------ Torre Sem Fim -----
+- #102Modo Administrador
+- Pedra de Purificação#et2
+- #Modo Administrador1
+- #Modo Administrador2
+- #Modo Administrador3
+- #Modo Administrador4
+- #Modo Administrador5
+--------------------------
+- Nidhoggur Manager
+- Purification Admin#nyd2
+- Bakonawa's Rage (RE)
+- Bangungot Gate (RE)
+- Horror Toy Factory (RE)
+- Faceworm's Nest (RE)
+- Central Laboratory (RE)
+- Morse's Cave (RE)
+
+[ Job-related ]
+----- 3° Classes (RE) ----
+- control#arch
+- #GMhelper01_gc
+- #GMhelper02_gc
+- Worker#job_ranger
+- R.Knight Job Manager
+- #renshucheck
+- sorcereryal
+- Button Girl#wl
+- Button Girl#sura
+- Battle Test Control#ko
+- Guide#ko_helper
+- Admin1
+--------------------------
+- Soul Linker Var
+- 1st Job Quest Reset
+- Job Repair (RE)
+
+[ Missões ]
+-------- Renovação -------
+- 13.3 Related Reset
+- Scaraba Dungeon Entrance
+- Assistant#para_suvquest
+- Guidance for quest#ml
+- Initializing Mora Sanjo
+- Theore Set Guid
+- Field Bush Switch
+- Bakonawa Intro Helper
+- Pintados Manager#pin
+- #pa0829Reactor11
+- New Oz Image#1
+- Professor Aide#worm
+--------------------------
+- Allied Manager#gm
+- #timer_alba01
+- Translator Preparation#1
+- ep13_nd2f_mng
+- Factory Quest Test
+- boss::lght_boss_admin
+- #LyozienSwitch
+- Juperos Manager
+- Extra Story Patch
+- boss::boss_aru_monas
+- Koshei GlobalVar#admin
+- Morroc GlobalVar Admin::MorrocAdmin_sec
+- Morroc GlobalVar Admin::MorrocAdmin_moc
+- Morroc Invasion Manager (desativado)
+
+[ Outros ]
+-------- Casamento -------
+- O Reino de Rune-Midgard
+- Divorce Staff
+- Remarry Staff
+------ Arena de Izlude ---
+- log-on-aco#arena
+- acolink#arena
+- Arena Manager#arena
+- Reward Manager#arena
+- Picture Manager#arena
+- Live Broadcast#arena
+- #arenacontrol
+--------------------------
+- Monster Race Manager
+- Vote Globalvar Girl#yuno (desativado)
+- 2013questreset2#xmas (evento, desativado)
+--------------------------
+- Mercenary Switch#Lança
+- Mercenary Switch#Arco
+- Mercenary Switch#Espada
+*/

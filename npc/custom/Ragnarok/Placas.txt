@@ -1,0 +1,40 @@
+prontera,170,143,4	script	Salar de Evento	837,{
+	mes "[ ^0065DFNotícias^000000 ]";
+	mes "Salar de Evento";
+	mes "Aqui é aonde você pode participa de vários evento";
+	close;
+	
+OnInit:
+waitingroom "Salar de Evento",0;	
+end;
+}
+
+prontera,140,160,4	script	Salar de Exploradores	837,{
+	mes "[ ^0065DFNotícias^000000 ]";
+	mes "Salar de Exploradores para teste de dano";
+	close;
+	
+	OnInit:
+waitingroom "Salar de Exploradores",0;	
+end;
+}
+
+prontera,140,143,4	script	Salar de Quest	837,{
+	mes "[ ^0065DFNotícias^000000 ]";
+	mes "Salar de quest";
+	close;
+	
+	OnInit:
+waitingroom "Salar de Quest",0;	
+end;
+}
+
+prontera,170,159,4	script	Salar de Caça	837,{
+	mes "[ ^0065DFNotícias^000000 ]";
+	mes "Salar de Caça";
+	close;
+	
+	OnInit:
+waitingroom "Salar de Caça",0;	
+end;
+}

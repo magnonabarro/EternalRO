@@ -1,0 +1,36 @@
+sala_vip,95,108,5	script	Guild Up Premium	752,{
+
+mes "[^cc0000Upador de guild^000000]";
+mes "Olá "+strcharinfo(0)+", deseja upar sua guilda para o lvl 50?";
+menu "Sim",-,"Não",nao;
+
+if (getgroupid() < 1) {
+
+mes "Desculpe, somente usuários VIP podem entrar.";
+
+close;
+
+} else {
+
+next;
+mes "[^cc0000Upador de guild^000000]";
+mes "guilda upada com sucesso!";
+atcommand "@guildlvup 50";
+
+}
+
+close;
+
+nao:
+next;
+mes "[^cc0000Upador de guild^000000]";
+mes "Tudo bem  caso precise de meus  serviços estarei aqui!";
+
+close;
+
+OnInit:
+	waitingroom "[ Guild Premium ]",0;
+	end;
+
+
+}

@@ -1,0 +1,87 @@
+//
+//==================================================================================
+//-------------------------------- RagnaERO Script ---------------------------------
+//=    __________                              _____________________ ________
+//=    \______   \_____     ____   ____ _____  \_   _____/\______   \\_____  \
+//=     |       _/\__  \   / ___\ /    \\__  \  |    __)_  |       _/ /   |   \
+//=   	|    |   \ / __ \_/ /_/  >   |  \/ __ \_|        \ |    |   \/    |    \
+//=   	|____|_  /(____  /\___  /|___|  (____  /_______  / |____|_  /\_______  /
+//=            \/      \//_____/      \/     \/        \/         \/         \/
+//=                                                          RagnaERO Scripts
+//=                                                                       
+//--------------------------- http://rathena.org/board/ ----------------------------
+//==================================================================================
+//----- NOME DO SCRIPT -------------------------------------------------------------
+//= evento_cogumelo.txt
+//----- POR: -----------------------------------------------------------------------
+//= Equipe de Desenvolvimento rAthena
+//----- VERSÃO ATUAL DO SCRIPT: ----------------------------------------------------
+//= v3.6a
+//----- DESCRIÇÃO: -----------------------------------------------------------------
+//= Encontre o Cogumelo - Quantidades aleatória de Cogumelos aparece em 
+//  mapas aleatórios.
+//  Os jogadores precisam encontrar esses cogumelos e matá-los para ganharem prêmios!  
+//----- COMENTÁRIOS ADICIONAIS: ----------------------------------------------------
+//= Projeto RagnaERO
+//= Cabeçalho e Tradução Pt-BR Por [ADM] Eragonat PK
+//==================================================================================
+
+prontera,160,244,6	script	Encontre o Cogumelo	1084,{  //Novo local adicionado pelo [ADM] Eragonat PK.
+
+//prontera,142,228,6	script	Encontre o Cogumelo	1084,{  //Local Original.
+	mes "[ Encontre o Cogumelo ]";
+	if (.status == 1) {
+		.@count = mobcount( .event_map$, strnpcinfo(0) + "::OnMobKilled" );
+		if (.@count > 0) {
+		mes "Existem "+.@count+" Cogumelos que foram deixados em "+.event_map$+"!";
+		mes "Encontre e mate os cogumelos para ganhar "+getitemname(.prize)+"!";
+			close;
+		}
+		.event_map$ = "";
+		.status = 0;
+		mes "Todos os cogumelos foram mortos?";
+	}
+	mes "Não há nenhum evento no momento!";
+	if (.status || getgroupid() < .GM) close;
+	mes "Iniciar o evento?";
+	next;
+	if(select("- Não:- Sim") == 1) close;
+	donpcevent strnpcinfo(0)+"::OnMinute10";
+	mes "[ Encontre o Cogumelo ]";
+	mes "Evento iniciado!";
+	close;
+
+OnInit:
+	.prize = 512;	// O ID do item de Rrecompensa
+	.amount = 10;	// A quantidade do item de recompensa
+	.GM = 60;	// Nível de GM necessário para acessar o NPC
+	setarray .maps_list$[0],"izlude","geffen","morocc","prontera"; // Mapas onde os cogumelos serão invocados
+	end;
+
+OnMinute10:	// Hora de início (A cada hora)
+	if (.status) end;
+	.status = 1;
+	.@spawn = rand(1,10);	// Quantos cogumelos deve-se invocar?
+	.event_map$ = .maps_list$[ rand(getarraysize(.maps_list$)) ];
+	.@label$ = strnpcinfo(0) + "::OnMobKilled";
+	killmonster .event_map$, .@label$;
+	monster .event_map$,0,0,"Por favor, não me mate!",1084,.@spawn, .@label$;
+	announce "Encontre o Cogumelo : Um total de "+.@spawn+" cogumelos foram invocados em "+.event_map$+"!",0;
+	sleep 2500;
+	announce "Encontre o Cogumelo : Todo Cogumelo que você matar lhe dará "+getitemname(.prize)+"!",0;
+	end;
+
+OnMobKilled:
+	if (playerattached() == 0)
+		end;
+	getitem .prize, .amount;
+	.@spawn = mobcount( .event_map$, strnpcinfo(0) + "::OnMobKilled" );
+	if (.@spawn > 0)
+	announce "[ "+strcharinfo(0)+" ] matou um Cogumelo. Agora há "+.@spawn+" Cogumelo(s).",bc_map;
+	else {
+		announce "O Evento Encontre o Cogumelo acabou. Todos os Cogumelos foram Mortos.",0;
+		.status = 0;
+		.event_map$ = "";
+	}
+	end;
+}

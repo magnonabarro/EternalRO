@@ -1,0 +1,451 @@
+// =========================================================== //
+//             _      _____ _   _ _   _ ______                 //
+//            | |    |_   _| \ | | \ | |  ____|                // 
+//            | |      | | |  \| |  \| | |__                   //
+//            | |      | | | . ` | . ` |  __|                  //
+//            | |____ _| |_| |\  | |\  | |____                 //
+//            |______|_____|_| \_|_| \_|______|                //
+//              www.forum.cronus-emulator.com                  //
+//                                                             //
+// ===================== Licença ============================= //
+//     Esta script está protegida por uma licença Creative     //
+//          Commons Atribuido ao Uso-Não-Comercial             //
+//                      Compartilhado                          //
+// =========================================================== //
+// Nome:	Sistema de Mensagens Globais Completo              //
+// =========================================================== //
+// Autor:	Linne                                              //
+// =========================================================== //
+// Versão:	2.3                                                //
+// =========================================================== //
+// Descrição:	Nova versão de um antigo sistema meu de        //
+//              mensagens globais, agora mais limpo e          //
+//              completo.                                      //
+// =========================================================== //
+// Data: 19/07/2016 ~ 19H:26M                                  //
+// =========================================================== //
+// Comentários Adicionais:	Favor manter os créditos pois      //
+//                          da trabalho para fazer.            //
+// =========================================================== //
+// Change Log:	1.0 - Script criado.            [Linne]        //
+//		        1.1 - Adicionado condicional para barrar       //
+//		              o acesso a players não vips.   [Linne]   //
+//		        1.2 - Adicionado nova função.   [Linne]        //
+//		        2.0 - Script reescrito.		    [Linne]        //
+//		        2.0 - Adicionada configurações. [Linne]        //
+//		        2.1 - Corrigido menu.           [Linne]        //
+//		        2.2 - Corrigido um pequeno erro nas            //
+//                    variáveis.                [Linne]        //
+//              2.3 - Reestruturação do Sistema                //
+//                    em 2016.                  [Linne]        //
+// =========================================================== //
+sala_vip,95,92,5	script	Torpedo Vip Premium	888,{
+
+// === Configurações ========================================= //
+
+set $namenpc$, "[^ff0033 Torpedo Vip ^000000]";                  // Nome do NPC.
+set $server$, "^ff0033MidgardRO^000000";             // Nome do servidor.
+set $site$, "^F58F40http://ribamar.neoprovedor.com.br/fluxcp//^000000";   // Site do servidor.
+set @reqlevel, 5;                                          // Level da Conta (0= Player Comum, 1= VIP geralmente).
+set @Zeny, 0;                                        // Zeny necessário para enviar o global (500k Padrão).
+
+// === Cores ================================================ //
+
+set $cor1$,0xFFFF00;          // Amarelo
+set $cor2$,0x0000FF;          // Azul
+set $cor3$,0x00FFF0;          // Ciano
+set $cor4$,0xFFFFFF;          // Branco
+set $cor5$,0xF58F40;          // Laranja
+set $cor6$,0x00CC00;          // Verde
+set $cor7$,0xCC00FF;          // Roxo
+set $cor8$,0xFF0000;          // Vermelho
+
+// === Checagem VIP ========================================= //
+
+//cutin "linne.bmp",2;
+if (getgroupid() < @reqlevel) {
+mes $namenpc$;
+mes "Desculpe mas você não é um jogador vip, para se tornar um";
+mes "Acesse "+$site$+" e se informe sobre nossos pacotes vip.";
+next;
+//cutin "linne.bmp",255;
+close;
+end;
+}
+
+// === Começo da Script ===================================== //
+
+L_menu:
+mes $namenpc$;
+mes "Olá "+strcharinfo(0)+", seja bem vindo ao "+$server$+"";
+mes "Em que posso ajudar ?";
+next;
+switch(select("^CC00FFEnviar uma Mensagem Global:Informações Sobre Serviços^000000:Cancelar")) {
+
+	case 1:
+	if (Zeny < @Zeny){ mes $namenpc$; mes "Desculpe mais você não possui dinheiro suficiente para usar meus serviços."; next;  close; end; }
+	mes $namenpc$;
+	mes "Certo, prossiga:";
+	next;
+	switch(select("^CC00FFDigitar Mensagem^000000:^00CC00Mensagem de Compra^000000:^00CC00Mensagem de Venda^000000:^ff0033Mensagem de Busca^000000:Cancelar")) {
+	
+		case 1:
+		mes $namenpc$;
+		mes "Okey ~";
+		mes "Escolha uma Cor:";
+		next;
+		switch(select("^FFFF00Amarelo^000000:^0000FFAzul^000000:^00FFF0Ciano^000000:^FFFFFFBranco^000000:^F58F40Laranja^000000:^00CC00Verde^000000:^CC00FFRoxo^000000:^FF0000Vermelho^000000:Cancelar")){
+		
+			case 1:
+			mes $namenpc$;
+			mes "Prossiga, digite sua mensagem !";
+			input @msg$;
+			next;
+			mes $namenpc$;
+			mes "Você digitou ^ff0033"+@msg$+"^000000 está correto ?";
+			next;
+			switch(select("Está Correto:Não, desejo reescrever")){
+			
+				case 1:
+				mes $namenpc$;
+				mes "Perfeito, estarei enviando a sua mensagem agora !";
+				next;
+				set Zeny, Zeny - @Zeny;
+				announce "[VIP] ~> "+strcharinfo(0)+" : "+@msg$+"",bc_all,$cor1$;
+				mes $namenpc$;
+				mes "Obrigada por últilizar os meus serviços, volte sempre !";
+				next;
+				//cutin "linne.bmp",255;
+				close;
+				
+				case 2:
+				mes $namenpc$;
+				mes "Ok, retornarei ao último menu então !";
+				next;
+				goto L_menu;
+				close;
+				
+			}
+
+			case 2:
+			mes $namenpc$;
+			mes "Prossiga, digite sua mensagem !";
+			input @msg2$;
+			next;
+			mes $namenpc$;
+			mes "Você digitou ^ff0033"+@msg2$+"^000000 está correto ?";
+			next;
+			switch(select("Está Correto:Não, desejo reescrever")){
+			
+				case 1:
+				mes $namenpc$;
+				mes "Perfeito, estarei enviando a sua mensagem agora !";
+				next;
+				set Zeny, Zeny - @Zeny;
+				announce "[VIP] ~> "+strcharinfo(0)+" : "+@msg2$+"",bc_all,$cor2$;
+				mes $namenpc$;
+				mes "Obrigada por últilizar os meus serviços, volte sempre !";
+				next;
+				//cutin "linne.bmp",255;
+				close;
+				
+				case 2:
+				mes $namenpc$;
+				mes "Ok, retornarei ao último menu então !";
+				next;
+				goto L_menu;
+				close;
+				
+			}
+
+			case 3:
+			mes $namenpc$;
+			mes "Prossiga, digite sua mensagem !";
+			input @msg3$;
+			next;
+			mes $namenpc$;
+			mes "Você digitou ^ff0033"+@msg3$+"^000000 está correto ?";
+			next;
+			switch(select("Está Correto:Não, desejo reescrever")){
+			
+				case 1:
+				mes $namenpc$;
+				mes "Perfeito, estarei enviando a sua mensagem agora !";
+				next;
+				set Zeny, Zeny - @Zeny;
+				announce "[VIP] ~> "+strcharinfo(0)+" : "+@msg3$+"",bc_all,$cor3$;
+				mes $namenpc$;
+				mes "Obrigada por últilizar os meus serviços, volte sempre !";
+				next;
+				//cutin "linne.bmp",255;
+				close;
+				
+				case 2:
+				mes $namenpc$;
+				mes "Ok, retornarei ao último menu então !";
+				next;
+				goto L_menu;
+				close;
+				
+			}			
+
+			case 4:
+			mes $namenpc$;
+			mes "Prossiga, digite sua mensagem !";
+			input @msg4$;
+			next;
+			mes $namenpc$;
+			mes "Você digitou ^ff0033"+@msg4$+"^000000 está correto ?";
+			next;
+			switch(select("Está Correto:Não, desejo reescrever")){
+			
+				case 1:
+				mes $namenpc$;
+				mes "Perfeito, estarei enviando a sua mensagem agora !";
+				next;
+				set Zeny, Zeny - @Zeny;
+				announce "[VIP] ~> "+strcharinfo(0)+" : "+@msg4$+"",bc_all,$cor4$;
+				mes $namenpc$;
+				mes "Obrigada por últilizar os meus serviços, volte sempre !";
+				next;
+				//cutin "linne.bmp",255;
+				close;
+				
+				case 2:
+				mes $namenpc$;
+				mes "Ok, retornarei ao último menu então !";
+				next;
+				goto L_menu;
+				close;
+				
+			}
+
+			case 5:
+			mes $namenpc$;
+			mes "Prossiga, digite sua mensagem !";
+			input @msg5$;
+			next;
+			mes $namenpc$;
+			mes "Você digitou ^ff0033"+@msg5$+"^000000 está correto ?";
+			next;
+			switch(select("Está Correto:Não, desejo reescrever")){
+			
+				case 1:
+				mes $namenpc$;
+				mes "Perfeito, estarei enviando a sua mensagem agora !";
+				next;
+				set Zeny, Zeny - @Zeny;
+				announce "[VIP] ~> "+strcharinfo(0)+" : "+@msg5$+"",bc_all,$cor5$;
+				mes $namenpc$;
+				mes "Obrigada por últilizar os meus serviços, volte sempre !";
+				next;
+				//cutin "linne.bmp",255;
+				close;
+				
+				case 2:
+				mes $namenpc$;
+				mes "Ok, retornarei ao último menu então !";
+				next;
+				goto L_menu;
+				close;
+				
+			}
+			
+			case 6:
+			mes $namenpc$;
+			mes "Prossiga, digite sua mensagem !";
+			input @msg6$;
+			next;
+			mes $namenpc$;
+			mes "Você digitou ^ff0033"+@msg6$+"^000000 está correto ?";
+			next;
+			switch(select("Está Correto:Não, desejo reescrever")){
+			
+				case 1:
+				mes $namenpc$;
+				mes "Perfeito, estarei enviando a sua mensagem agora !";
+				next;
+				set Zeny, Zeny - @Zeny;
+				announce "[VIP] ~> "+strcharinfo(0)+" : "+@msg6$+"",bc_all,$cor6$;
+				mes $namenpc$;
+				mes "Obrigada por últilizar os meus serviços, volte sempre !";
+				next;
+				//cutin "linne.bmp",255;
+				close;
+				
+				case 2:
+				mes $namenpc$;
+				mes "Ok, retornarei ao último menu então !";
+				next;
+				goto L_menu;
+				close;
+				
+			}
+			
+			case 7:
+			mes $namenpc$;
+			mes "Prossiga, digite sua mensagem !";
+			input @msg7$;
+			next;
+			mes $namenpc$;
+			mes "Você digitou ^ff0033"+@msg7$+"^000000 está correto ?";
+			next;
+			switch(select("Está Correto:Não, desejo reescrever")){
+			
+				case 1:
+				mes $namenpc$;
+				mes "Perfeito, estarei enviando a sua mensagem agora !";
+				next;
+				set Zeny, Zeny - @Zeny;
+				announce "[VIP] ~> "+strcharinfo(0)+" : "+@msg7$+"",bc_all,$cor7$;
+				mes $namenpc$;
+				mes "Obrigada por últilizar os meus serviços, volte sempre !";
+				next;
+				//cutin "linne.bmp",255;
+				close;
+				
+				case 2:
+				mes $namenpc$;
+				mes "Ok, retornarei ao último menu então !";
+				next;
+				goto L_menu;
+				close;
+				
+			}
+			
+			case 8:
+			mes $namenpc$;
+			mes "Prossiga, digite sua mensagem !";
+			input @msg8$;
+			next;
+			mes $namenpc$;
+			mes "Você digitou ^ff0033"+@msg8$+"^000000 está correto ?";
+			next;
+			switch(select("Está Correto:Não, desejo reescrever")){
+			
+				case 1:
+				mes $namenpc$;
+				mes "Perfeito, estarei enviando a sua mensagem agora !";
+				next;
+				set Zeny, Zeny - @Zeny;
+				announce "[VIP] ~> "+strcharinfo(0)+" : "+@msg8$+"",bc_all,$cor8$;
+				mes $namenpc$;
+				mes "Obrigada por últilizar os meus serviços, volte sempre !";
+				next;
+				//cutin "linne.bmp",255;
+				close;
+				
+				case 2:
+				mes $namenpc$;
+				mes "Ok, retornarei ao último menu então !";
+				next;
+				goto L_menu;
+				close;
+				
+			}
+			
+			case 9:
+			mes $namenpc$;
+			mes "Ok, volte quando precisar de meus serviços !";
+			next;
+			//cutin "linne.bmp",255;
+			close;
+			
+		}
+		
+		case 2:
+			mes $namenpc$;
+			mes "Digite o ^ff0033Nome do Item^000000 que você quer comprar.";
+			input $venda1$;
+			next;
+			mes $namenpc$;
+			mes "Digite o ^ff0033Preço Médio^000000 que você quer pagar.";
+			input $venda2$;
+			next;
+			announce "[VIP] ~> "+strcharinfo(0)+" : Compro ["+$venda1$+"] pelo valor médio de ["+$venda2$+"] PM !",bc_all,$cor6$;
+			next;
+			//cutin "linne.bmp",255;
+			close;
+		
+		case 3:
+			mes $namenpc$;
+			mes "Digite o ^ff0033Nome do Item^000000 que você quer vender.";
+			input $compra1$;
+			next;
+			mes $namenpc$;
+			mes "Digite o ^ff0033Preço Médio^000000 que você quer pelo item.";
+			input $compra2$;
+			next;
+			announce "[VIP] ~> "+strcharinfo(0)+" : Vendo ["+$compra1$+"] pelo valor médio de ["+$compra2$+"] PM !",bc_all,$cor6$;
+			next;
+			//cutin "linne.bmp",255;
+			close;
+		
+		case 4:
+			mes $namenpc$;
+			mes "O que você procura ?";
+			next;
+			switch(select("^ff0033Procuro um Grupo^000000","^ff0033Procuro um Clã^000000","^ff0033Procuro Aliança^000000","Sair")){
+			
+				case 1:
+				mes $namenpc$;
+				mes "Ok, irei anunciar a sua procura por um ^ff0033grupo^000000.";
+				next;
+				announce "[VIP] ~> "+strcharinfo(0)+" : está procurando um Grupo.",bc_all,$cor8$;
+				//cutin "linne.bmp",255;
+				close;
+				
+				case 2:
+				mes $namenpc$;
+				mes "Ok, irei anunciar a sua procura por um ^ff0033clã^000000.";
+				next;
+				announce "[VIP] ~> "+strcharinfo(0)+" : está procurando um Clã.",bc_all,$cor8$;
+				//cutin "linne.bmp",255;
+				close;
+				
+				case 3:
+				mes $namenpc$;
+				mes "Ok, irei anunciar a sua procura por uma ^ff0033aliança^000000.";
+				next;
+				announce "[VIP] ~> "+strcharinfo(0)+" : está procurando uma Aliança para a WOE.",bc_all,$cor8$;
+				//cutin "linne.bmp",255;
+				close;
+				
+				}
+				
+		case 5:
+			mes $namenpc$;
+			mes "Ok, volte quando precisar de meus serviços.";
+			next;
+			//cutin "linne.bmp",255;
+			close;
+			
+			}
+			
+	case 2:
+	mes $namenpc$;
+	mes "Meus serviços são simples, eu vendo mensagens globais";
+	mes "aos jogadores VIP do "+$server$+".";
+	next;
+	mes $namenpc$;
+	mes "O Preço de cada mensagem para você que é vip Premiumnão custará nada!.";
+	next;
+	goto L_menu;
+	close;
+	
+	case 3:
+	mes $namenpc$;
+	mes "Certo, volte quando precisar de meus serviços.";
+	next;
+	//cutin "linne.bmp",255;
+	close;
+	}
+// == Waitroom ============================================== //
+
+OnInit:
+waitingroom "Torpedo Vip",0;
+end;
+}
+
+//========== DUPLICATA =============
+//sala_vip,104,115,4	duplicate(Anunciadora Global)	Anunciadora Global#01	4_F_JP_RINNE

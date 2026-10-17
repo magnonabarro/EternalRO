@@ -1,0 +1,43 @@
+-	script	DayNightCycle15Menit	-1,{
+    
+    OnInit:
+        set $is_night, 0;
+        initnpctimer;
+        end;
+
+    OnTimer1800000: // 30 menit
+        if ($is_night == 0) {
+            atcommand "@night";
+            set $is_night, 1;
+            announce "-.-.", bc_all;
+        } else {
+            atcommand "@day";
+            set $is_night, 0;
+            announce "-_-", bc_all;
+        }
+        initnpctimer;
+        end;
+}
+
+
+prontera,151,150,4	script	Sync Sticky Sea	4_F_KAFRA1,{
+	mes "[Sync Sticky Sea]";
+	mes "Current ep20_sidequest_1: " + ep20_sidequest_1;
+	mes "11945: " + isbegin_quest(11945);
+	mes "11946: " + isbegin_quest(11946);
+	next;
+
+	if (ep20_sidequest_1 == 18) {
+		if (isbegin_quest(11945) == 0) {
+			setquest 11945;
+			mes "Synced: quest 11945 has been added.";
+		} else {
+			mes "Quest 11945 is already active.";
+		}
+		close;
+	}
+
+	mes "No sync applied.";
+	mes "Your ep20_sidequest_1 is not 18.";
+	close;
+}

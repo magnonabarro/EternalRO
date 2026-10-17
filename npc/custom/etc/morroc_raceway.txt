@@ -1,0 +1,246 @@
+//
+//==================================================================================
+//-------------------------------- RagnaERO Script ---------------------------------
+//=    __________                              _____________________ ________
+//=    \______   \_____     ____   ____ _____  \_   _____/\______   \\_____  \
+//=     |       _/\__  \   / ___\ /    \\__  \  |    __)_  |       _/ /   |   \
+//=   	|    |   \ / __ \_/ /_/  >   |  \/ __ \_|        \ |    |   \/    |    \
+//=   	|____|_  /(____  /\___  /|___|  (____  /_______  / |____|_  /\_______  /
+//=            \/      \//_____/      \/     \/        \/         \/         \/
+//=                                                          RagnaERO Scripts
+//=                                                                       
+//--------------------------- http://rathena.org/board/ ----------------------------
+//==================================================================================
+//----- NOME DO SCRIPT -------------------------------------------------------------
+//= corrida_de_morroc.txt
+//----- POR: -----------------------------------------------------------------------
+//= Equipe de Desenvolvimento rAthena
+//----- VERSÃO ATUAL DO SCRIPT: ----------------------------------------------------
+//= v1.3
+//----- DESCRIÇÃO: -----------------------------------------------------------------
+//= Permite que os jogadores corram em volta de Morroc (pvp_y_1-5)
+//  Se houver mais de 3 jogadores, pelo menos 3 pessoas
+//  devem terminar antes que uma nova corrida possa ser iniciada.
+//  Se houver menos de 3 jogadores, pelo menos 1 pessoa
+//  devem terminar antes que uma nova corrida possa ser iniciada.    
+//----- COMENTÁRIOS ADICIONAIS: ----------------------------------------------------
+//= Projeto RagnaERO
+//= Cabeçalho e Tradução Pt-BR Por [ADM] Eragonat PK
+//================================================================================== 
+
+//Portal para entrar na corrida
+morocc,166,105,6	script	Garota da Corrida#01	116,{
+	mes "[Garota da Corrida]";
+	mes "Gostaria de visitar a ^0000FFCorrida de Morroc^000000?";
+	next;
+	menu "^0000ff•^000000 Sim",L_Warp,"Não",-;
+	mes "[Garota da Corrida]";
+	mes "Tudo bem, fale comigo de novo quando você quiser ir.";
+	close;
+L_Warp:
+	warp "pvp_y_1-5",165,256;
+	close;
+}
+
+//Portal para sair da corrida
+pvp_y_1-5,169,265,5	script	Garota da Corrida#02	116,{
+	mes "[Garota da Corrida]";
+	mes "Bem-vind"+(Sex?"o":"a")+"(a) a Corrida de Morroc!";
+	next;
+	menu "Informações",-,"Deixar a Corrida",L_Warp,"Cancelar",L_Cancel;
+	mes "[Garota da Corrida]";
+	mes "Alguém deve clicar no NPC Começar para iniciar a corrida.";
+	next;
+	mes "[Garota da Corrida]";
+	mes "Quando a corrida começar, corra em volta de Morroc no sentido anti-horário.";
+	next;
+	mes "[Garota da Corrida]";
+	mes "Você deve alcançar todos os pontos de checagem - Sem trapacear!";
+	close;
+L_Warp:
+	warp "morocc",165,101;
+L_Cancel:
+	mes "[Garota da Corrida]";
+	mes "Volte logo!";
+	close;
+}
+
+// Conta e Começa a Corrida
+pvp_y_1-5,145,269,5	script	Começar	733,{
+	if ($@race != 0) goto L_Started;
+	if ($@counting != 0) goto L_Started;
+	if ($@racecount == 1) goto L_Started;
+L_Menu:
+	mes "[Começar Corrida]";
+	mes "Por favor, fique do meu lado leste.";
+	menu "Começar Corrida",L_Count,"Cancelar",-;
+	close;
+L_Count:
+	set $@counting,1;
+	mes "Contagem regressiva...";
+	addtimer 1000, "Starter::OnCount1000";
+	addtimer 2000, "Starter::OnCount2000";
+	addtimer 3000, "Starter::OnCount3000";
+	addtimer 4000, "Starter::OnCount4000";
+	announce strcharinfo(0) + "Começou a contagem regressiva.",1;
+	announce "Prepare-se para correr!",1;
+	close;
+
+OnCount1000:
+	announce "[3]",1;
+	end;
+OnCount2000:
+	announce "[2]",1;
+	end;
+OnCount3000:
+	announce "[1]",1;
+	end;
+OnCount4000:
+	emotion ET_GO;
+	specialeffect EF_CHIMTO;
+	announce "[Vai!]",1;
+	set $@race,1;
+	set $@position,0;
+	set $@counting,0;
+	set $@raceid,rand(100000,999999);
+	end;
+
+L_Started:
+	if ((getmapusers("pvp_y_1-5") < 3) && ($@position > 0)) goto L_Menu;
+	if ($@position > 2) goto L_Menu;
+	mes "[Começar]";
+	mes "Corrida em progresso.";
+	close;
+
+OnInit:
+	set $@race,0;
+	set $@position,0;
+	set $@racecount,0;
+	end;
+}
+
+//Ponto de Checagem 1
+pvp_y_1-5,144,262,5	script	Ponto de Checagem 1	111,0,5,{
+	end;
+OnTouch:
+	if (@raceid != $@raceid) goto L_Started;
+	if (@race == 6) goto L_Finished;
+	if ($@race == 1) goto L_Started;
+	mes "A corrida não começou ainda, por favor, volte.";
+	close;
+L_Started:
+	set @race,1;
+	set @raceid,$@raceid;
+	end;
+L_Finished:
+	mes "Você já completou a corrida.";
+	close;
+}
+
+//Ponto de Checagem 2
+pvp_y_1-5,73,247,5	script	Ponto de Checagem 2	111,6,6,{
+	end;
+OnTouch:
+	if (@race != 1) goto L_Miss;
+	set @race,2;
+	announce "[" + strcharinfo(0) +"] alcançou o Ponto de Checagem [1].",1;
+	end;
+L_Miss:
+	mes "Você perdeu um Ponto de Checagem. Por favor, volte.";
+	close;
+}
+
+//Ponto de Checagem 3
+pvp_y_1-5,77,44,5	script	Ponto de Checagem 3	111,6,6,{
+	end;
+OnTouch:
+	if (@race != 2) goto L_Miss;
+	set @race,3;
+	announce "[" + strcharinfo(0) +"] alcançou o Ponto de Checagem [2].",1;
+	end;
+L_Miss:
+	mes "Você perdeu um Ponto de Checagem. Por favor, volte.";
+	close;
+}
+
+//Ponto de Checagem 3
+pvp_y_1-5,249,60,5	script	Ponto de Checagem 4	111,6,6,{
+	end;
+OnTouch:
+	if (@race != 3) goto L_Miss;
+	set @race,4;
+	announce "[" + strcharinfo(0) +"] alcançou o Ponto de Checagem [3].",1;
+	end;
+L_Miss:
+	mes "Você perdeu um Ponto de Checagem. Por favor, volte.";
+	close;
+}
+
+//Ponto de Checagem 4
+pvp_y_1-5,255,256,5	script	Ponto de Checagem 5	111,6,6,{
+	end;
+OnTouch:
+	if (@race != 4) goto L_Miss;
+	set @race,5;
+	announce "[" + strcharinfo(0) +"] alcançou o Ponto de Checagem [4].",1;
+	end;
+L_Miss:
+	mes "Você perdeu um Ponto de Checagem. Por favor, volte.";
+	close;
+}
+
+//Linha de Chegada
+pvp_y_1-5,174,244,5	script	Linha de Chegada	111,6,6,{
+	end;
+OnTouch:
+	if (@raceid != $@raceid) goto L_WrongRace;
+	if (@race != 5) goto L_Miss;
+	set @race,6;
+	set $@position,$@position+1;
+	announce "[" + strcharinfo(0) +"] alcançou a Linha de Chegada! [Posição: " + $@position + "].",1;
+	end;
+L_Miss:
+	mes "Você perdeu um Ponto de Checagem. Por favor, volte.";
+	close;
+L_WrongRace:
+	mes "Você não está nesta corrida.";
+	close;
+}
+
+// Bandeiras dos Pontos de Checagem
+pvp_y_1-5,144,267,4	script	Ponto de Checagem 1#01	722,{
+	end;
+}
+pvp_y_1-5,144,257,4	script	Ponto de Checagem 1#02	722,{
+	end;
+}
+pvp_y_1-5,70,252,3	script	Ponto de Checagem 2#01	722,{
+	end;
+}
+pvp_y_1-5,77,243,3	script	Ponto de Checagem 2#02	722,{
+	end;
+}
+pvp_y_1-5,81,48,1	script	Ponto de Checagem 3#01	722,{
+	end;
+}
+pvp_y_1-5,72,40,1	script	Ponto de Checagem 3#02	722,{
+	end;
+}
+pvp_y_1-5,244,65,7	script	Ponto de Checagem 4#01	722,{
+	end;
+}
+pvp_y_1-5,252,57,7	script	Ponto de Checagem 4#02	722,{
+	end;
+}
+pvp_y_1-5,259,260,5	script	Ponto de Checagem 5#01	722,{
+	end;
+}
+pvp_y_1-5,251,252,5	script	Ponto de Checagem 5#02	722,{
+	end;
+}
+pvp_y_1-5,174,249,4	script	Linha de Chegada#01	722,{
+	end;
+}
+pvp_y_1-5,174,238,4	script	Linha de Chegada#02	722,{
+	end;
+}

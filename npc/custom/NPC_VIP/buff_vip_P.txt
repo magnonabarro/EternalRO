@@ -1,0 +1,71 @@
+//======================Buff Premium===========================================
+
+-	script	Buffer_Premium	-1,{
+    OnInit:
+        bindatcmd("buffvip",strnpcinfo(0)+"::OnBuff",0,99);
+        end;
+
+	OnBuff:
+	if ( getmapflag( strcharinfo(3), mf_pvp ) || getmapflag( strcharinfo(3), mf_gvg ) || getmapflag( strcharinfo(3), mf_battleground ) ) {
+	dispbottom "[ @buff está desabilitado em mapas pvp & gvg ].";
+	end;
+	}
+    if (getgroupid()>=5 ){
+    set .@now, gettimetick(2);
+    if( .@now < bvipP_delay ) { dispbottom "Aguarde "+(bvipP_delay - .@now)+" segundos para se buffar novamente."; end; }
+		atcommand "@repairall";
+		sc_start 32,300000,10; skilleffect 34,0;
+		sc_start 30,300000,10; skilleffect 29,0;
+		sc_start 35,300000,5;
+		sc_start 41,300000,5;
+		percentheal 100,100;
+		skilleffect 75,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 29,0; sc_start 32, 600000, 10; // Increase Agi
+		skilleffect 34,0; sc_start 30, 600000, 10; // Blessing
+		skilleffect 75,0;
+		//sc_start 29, 300000, 10; skilleffect 29,0; // Angelus
+		sc_start 35, 300000, 5; skilleffect 66,0; // Impositio Manus
+		sc_start 39, 300000, 10; skilleffect 73,0; // Kyrie Eleison
+		sc_start 41, 300000, 5; skilleffect 75,0; // Gloria
+		sc_start SC_STRFood,360000,10;
+        sc_start SC_AGIFood,360000,10;
+        sc_start SC_VITFood,360000,10;
+        sc_start SC_INTFood,360000,10;
+        sc_start SC_DEXFood,360000,10;
+        sc_start SC_LUKFood,360000,10;
+        sc_start SC_HitFood,1200000,30;
+        sc_start SC_FleeFood,1200000,30;
+        sc_start SC_BATKFood,1200000,10;
+        sc_start SC_MATKFood,120000,10;
+		sc_start SC_ASSUMPTIO,300000,5; // Increase Assupition +5
+        sc_start SC_MATKPOTION,300000,16;// MATK + 16
+        sc_start SC_ATKPOTION,300000,16;// ATK + 16
+        sc_start SC_INCREASEAGI,300000,5; // Increase Agi +5
+        sc_start SC_BLESSING,300000,5; // Blessing +5
+        sc_start SC_ANGELUS,300000,5; // Angelus +5
+        sc_start SC_ENDURE,300000,5; // Endure
+        skilleffect 383,0; sc_start SC_WINDWALK,360000,5;
+        skilleffect 465,0; sc_start SC_KAITE,360000,7;
+        skilleffect 464,0; sc_start SC_KAUPE,360000,3;
+        skilleffect 463,0; sc_start SC_KAAHI,360000,7;
+        skilleffect 462,0; sc_start SC_KAIZEL,360000,7;
+        skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+        skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+        skilleffect 45,0; sc_start SC_CONCENTRATE,360000,10;
+        skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+        skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+        skilleffect 459,0; sc_start SC_ADRENALINE2,360000,1;
+        skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+        skilleffect 67,0; sc_start SC_SUFFRAGIUM,360000,3;
+        skilleffect 34,0; sc_start SC_BLESSING,360000,10;
+        skilleffect 29,0; sc_start SC_INCREASEAGI,360000,10;
+        skilleffect 112,0; sc_start SC_WEAPONPERFECTION,360000,10;
+        skilleffect 113,0; sc_start SC_OVERTHRUST,360000,5;
+        skilleffect 114,0; sc_start SC_MAXIMIZEPOWER,360000,5;
+        skilleffect 357,0; sc_start SC_CONCENTRATION,360000,5;
+        skilleffect 355,0; sc_start SC_AURABLADE,360000,5;
+        skilleffect 155,0; sc_start SC_LOUD,360000,1;
+        dispbottom "Prontinho, divirta-se";
+        set bvipP_delay, gettimetick(2) + 60;
+}
+}		

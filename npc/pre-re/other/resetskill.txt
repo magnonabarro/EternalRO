@@ -1,0 +1,151 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ resetar_habilidades.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.0 - Pré-Renovação ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= [ Primeiras classes, nível de base 40 ou menor, resete de habilidades.
+//= Primeiras classes ou classes expandidas apenas.
+//= Classes Minis e as primeiras transclasses não podem usar este serviço. ]
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+prontera,146,232,4	script	Hipnotizadora#2	124,{
+	mes "[Hipnotizadora]";
+	mes "Olá, aventureiro!";
+	mes "Sou um membro da Academia";
+	mes "de Hipnotismo enviado aqui para Prontera,";
+	mes "para fornecer serviços de Redefinição de Pontos de Habilidade,";
+	mes "para certos personagens de Primeira Classe por um preço realmente bom: grátis!";
+	next;
+	mes "[Hipnotizadora]";
+	mes "Embora eu ofereça o serviço de Redistribuição de Pontos de habilidade ilimitado,";
+	mes "por enquanto, eu só exijo";
+	mes "duas condições que devem ser";
+	mes "cumpridas. Primeiro, você deve ter";
+	mes "o nível menor que o ^FF0000Nível de Base 40^000000.";
+	next;
+	mes "[Hipnotizadora]";
+	mes "Segundo, você deverá ser uma dessas classes:";
+	mes "^FF0000Espadachim, Noviço, Mago,";
+	mes "Gatuno, Arqueiro, Mercador,";
+	mes "Taekwon, Justiceiro ou Ninja^000000";
+	mes "para está qualificado.";
+	mes "Agora, você tem alguma pergunta?";
+	next;
+	switch(select("Resetar Pontos de Habilidade?:^FF0000Quero Resetar meus Pontos^000000:Cancelar")) {
+
+	case 1:
+		mes "[Hipnotizadora]";
+		mes "A Redistribuição de Pontos de Habilidade"; 
+		mes "dá outra chance aos aventureiros de distribuir seus Pontos.";
+		mes "Se não estiver satisfeito com suas habilidades atuais,"; 
+		mes "então você pode usufruir do meu serviço.";
+		next;
+		mes "[Hipnotizadora]";
+		mes "Lembre-se que só é possível"; 
+		mes "redistribuir seus pontos de Habilidade"; 
+		mes "se não estiver carregando nenhum item com você.";
+		mes "Por favor, antes use o serviço"; 
+		mes "de Armazenagem Kafra para"; 
+		mes "reduzir seu peso.";
+		next;
+		mes "[Hipnotizadora]";
+		mes "Ah, e se por acaso você estiver"; 
+		mes "equipado com um ^FF0000Carrinho^000000,"; 
+		mes "livre-se deles antes.";
+		mes "Esse item costuma interferir na hipnose"; 
+		mes "por alguma razão estranha e inexplicável...";
+		close;
+
+	case 2:
+		mes "[Hipnotizadora]";
+		mes "Então, você já decidiu que quer"; 
+		mes "^FF0000Redistribuir os Pontos de Habilidade^000000.";
+		mes "Podemos continuar?";
+		next;
+		if (select("Sim:Cancelar") == 1) {
+			if (BaseLevel > 40) {
+				mes "[Hipnotizadora]";
+				mes "Lamento, mas personagens"; 
+				mes "com o Nível de Base maior"; 
+				mes "que 40 são inelegíveis para";
+				mes "que eu possa redistribuir os Pontos de Habilidades.";
+				close;
+			}
+			if ((Class > 0 && Class < 7 && Upper == 0) || (Class == Job_Gunslinger) || (Class == Job_Ninja) || (Class == Job_Taekwon)) {
+				if (checkcart()) {
+					mes "[Hipnotizadora]";
+					mes "Oh! Remova o seu carrinho"; 
+					mes "antes de restribuir os seus";
+					mes "pontos de habilidade.";
+					mes "Obrigado por colaborar!";
+					close;
+				}
+				if (Weight) {
+					mes "[Hipnotizadora]";
+					mes "Se você está aqui pelo meu serviço";
+					mes "de Resetar Pontos de Habilidade, por favor";
+					mes "lembre-se de que você não poderá";
+					mes "resetar suas habilidades até que o";
+					mes "^FF0000peso dos itens que você carrega em";
+					mes "seu Inventário seja reduzido para 0^000000.";
+					next;
+					mes "[Hipnotizadora]";
+					mes "Por que você não coloca suas";
+					mes "coisas no Armazém da Kafra";
+					mes "por enquanto? Dessa forma, você pode";
+					mes "guardar todos os seus bens com segurança.";
+					close;
+				}
+				mes "[Hipnotizadora]";
+				mes "Obrigado por você usar"; 
+				mes "os meus serviços de Redistribuição"; 
+				mes "de Pontos de Habilidade.";
+				mes "Oh, e muita sorte para você"; 
+				mes "em suas viagens, aventureiro.";
+				ResetSkill;
+				close;
+			}
+			mes "[Hipnotizadora]";
+			mes "Desculpe, mas sua"; 
+			mes "Classe não está apta para"; 
+			mes "o Serviço de Redistribuição"; 
+			mes "de Pontos de Habilidade.";
+			mes "Posso redistribuir os"; 
+			mes "pontos apenas para as classes...";
+			next;
+			mes "[Hipnotizadora]";
+			mes "^FF0000Espadachins, Noviços,"; 
+			mes "Magos, Gatunos, Arqueiros,"; 
+			mes "Mercadores, Taekwons,"; 
+			mes "Ninjas ou Justiceiros^000000.";
+			close;
+		}
+		mes "[Hipnotizadora]";
+		mes "Muito obrigado, e boa";
+		mes "sorte em suas aventuras.";
+		mes "Por favor, tome cuidado. Não seria nada bom se machucar por aí.";
+		close;
+
+	case 3:
+		mes "[Hipnotizadora]";
+		mes "Muito obrigado, e boa";
+		mes "sorte em suas aventuras.";
+		mes "Por favor, tome cuidado. Não seria nada bom se machucar por aí.";
+		close;
+	}
+}

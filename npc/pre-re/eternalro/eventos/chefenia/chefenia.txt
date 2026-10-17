@@ -1,0 +1,227 @@
+-	script	Chefenia_Core#PREMIUM	-1,{
+
+OnInit:
+	// Configuração
+	$CHEFENIA_ON = 0;
+	$CHEFENIA_ITEM = 7227;
+
+	// Pontos por MVP
+	$CHEFENIA_POINTS = 5;
+
+	// Horário (CONFIGURÁVEL)
+	$CHEFENIA_START = 13; // abre
+	$CHEFENIA_END   = 22; // fecha
+
+	// Limpa ranking
+	deletearray $@chef_name$;
+	deletearray $@chef_points;
+
+	initnpctimer;
+	end;
+
+OnTimer60000:
+
+	.@hour = gettime(3);
+
+	// ABRIR TODO DIA
+	if (.@hour >= $CHEFENIA_START && .@hour < $CHEFENIA_END) {
+
+		if (!$CHEFENIA_ON) {
+			$CHEFENIA_ON = 1;
+			announce "[Chefenia] Evento ATIVO!", bc_all;
+		}
+
+	} else {
+
+		if ($CHEFENIA_ON) {
+			$CHEFENIA_ON = 0;
+			announce "[Chefenia] Evento ENCERRADO!", bc_all;
+		}
+	}
+
+	initnpctimer;
+	end;
+
+}
+
+valkyrie,44,39,5	script	Porteiro Chefenia#PREMIUM	99,{
+
+	if (!$CHEFENIA_ON) {
+		mes "[Chefenia]";
+		mes "Evento não está ativo.";
+		close;
+	}
+
+	mes "[Chefenia]";
+	mes "Bem-vindo "+strcharinfo(0);
+	next;
+
+	if (countitem($CHEFENIA_ITEM) < 1) {
+		mes "Você precisa do passe.";
+		close;
+	}
+
+	delitem $CHEFENIA_ITEM,1;
+
+	.@i = select("Fácil","Médio","Difícil","Hardcore");
+
+	close2;
+	warp "bossnia_0"+.@i, rand(50,200), rand(50,200);
+	end;
+}
+-	script	Chefenia_System#PREMIUM	-1,{
+
+OnNPCKillEvent:
+
+	if (!$CHEFENIA_ON) end;
+
+	if (!(strcharinfo(3) == "bossnia_01" || strcharinfo(3) == "bossnia_02" || strcharinfo(3) == "bossnia_03" || strcharinfo(3) == "bossnia_04"))
+		end;
+
+	if (getmonsterinfo(killedrid, MOB_MVPEXP) <= 0)
+		end;
+
+	// Pontos
+	#chef_points += $CHEFENIA_POINTS;
+	#chef_kills++;
+
+	// HUD
+	dispbottom "[Chefenia] MVPs: "+#chef_kills+" | Pontos: "+#chef_points;
+
+	// Drop random
+	.@r = rand(100);
+
+	if (.@r < 5) {
+		getitem 12299,1;
+		announce "[Chefenia] "+strcharinfo(0)+" conseguiu item LENDÁRIO!", bc_all;
+	}
+	else if (.@r < 25) {
+		getitem 607,2;
+	}
+	else {
+		getitem 909,5;
+	}
+
+	// Atualiza ranking
+	callsub S_UpdateRanking;
+
+	end;
+
+// Ranking global
+S_UpdateRanking:
+
+	for (.@i = 0; .@i < 10; .@i++) {
+
+		if ($@chef_points[.@i] < #chef_points) {
+
+			// shift
+			for (.@j = 9; .@j > .@i; .@j--) {
+				$@chef_points[.@j] = $@chef_points[.@j-1];
+				$@chef_name$[.@j] = $@chef_name$[.@j-1];
+			}
+
+			$@chef_points[.@i] = #chef_points;
+			$@chef_name$[.@i] = strcharinfo(0);
+			break;
+		}
+	}
+
+	return;
+
+}
+prontera,150,180,5	script	Ranking Chefenia#PREMIUM	4_F_KAFRA1,{
+
+	mes "[TOP 10 Chefenia]";
+
+	for (.@i = 0; .@i < 10; .@i++) {
+		if ($@chef_name$[.@i] != "")
+			mes (.@i+1)+". "+$@chef_name$[.@i]+" - "+$@chef_points[.@i];
+	}
+
+	next;
+	mes "Seus pontos:";
+	mes "^FF0000"+#chef_points+"^000000";
+	close;
+}
+prontera,155,180,5	script	Loja Chefenia#PREMIUM	4_M_01,{
+
+	mes "[Loja Chefenia]";
+	mes "Seus pontos: "+#chef_points;
+	next;
+
+	switch(select(
+		"Ygg Berry (10 pts)",
+		"Ticket (30 pts)",
+		"Item raro (100 pts)")) {
+
+	case 1:
+		if (#chef_points < 10) end;
+		#chef_points -= 10;
+		getitem 607,1;
+		break;
+
+	case 2:
+		if (#chef_points < 30) end;
+		#chef_points -= 30;
+		getitem 7227,1;
+		break;
+
+	case 3:
+		if (#chef_points < 100) end;
+		#chef_points -= 100;
+		getitem 12299,1;
+		break;
+	}
+
+	mes "Compra realizada!";
+	close;
+}
+-	script	Chefenia_HUD	-1,{
+
+OnPCLoginEvent:
+	dispbottom "[Chefenia] MVPs: "+#chef_kills+" | Pontos: "+#chef_points;
+	end;
+}
+// bossnia_01
+bossnia_01,50,50,150,150	monster	Garm	1252,1,300000,0,1
+bossnia_01,50,50,150,150	monster	Dark Lord	1272,1,300000,0,1
+bossnia_01,50,50,150,150	monster	Dracula	1389,1,300000,0,1
+bossnia_01,50,50,150,150	monster	Drake	1112,1,300000,0,1
+bossnia_01,50,50,150,150	monster	Maya	1147,1,300000,0,1
+bossnia_01,50,50,150,150	monster	Mistress	1059,1,300000,0,1
+bossnia_01,50,50,150,150	monster	Baphomet	1039,1,300000,0,1
+bossnia_01,50,50,150,150	monster	Eddga	1115,1,300000,0,1
+bossnia_01,50,50,150,150	monster	Osiris	1038,1,300000,0,1
+bossnia_01,50,50,150,150	monster	Orc Hero	1087,1,300000,0,1
+bossnia_01,50,50,150,150	monster	Phreeoni	1159,1,300000,0,1
+bossnia_01,50,50,150,150	monster	Golden Thief Bug	1086,1,300000,0,1
+
+// bossnia_02
+bossnia_02,50,50,150,150	monster	Amon Ra	1511,1,240000,0,1
+bossnia_02,50,50,150,150	monster	Atroce	1785,1,240000,0,1
+bossnia_02,50,50,150,150	monster	Detale	1719,1,240000,0,1
+bossnia_02,50,50,150,150	monster	Vesper	1685,1,240000,0,1
+bossnia_02,50,50,150,150	monster	Ktullanux	1779,1,240000,0,1
+bossnia_02,50,50,150,150	monster	Kiel D-01	1734,1,240000,0,1
+bossnia_02,50,50,150,150	monster	Lady Tanee	1688,1,240000,0,1
+bossnia_02,50,50,150,150	monster	Turtle General	1312,1,240000,0,1
+bossnia_02,50,50,150,150	monster	Stormy Knight	1251,1,240000,0,1
+bossnia_02,50,50,150,150	monster	Evil Snake Lord	1418,1,240000,0,1
+
+// bossnia_03
+bossnia_03,50,50,150,150	monster	Ifrit	1832,1,180000,0,1
+bossnia_03,50,50,150,150	monster	Beelzebub	1873,1,180000,0,1
+bossnia_03,50,50,150,150	monster	Valkyrie Randgris	1751,1,180000,0,1
+bossnia_03,50,50,150,150	monster	Thanatos Phantom	1708,1,180000,0,1
+bossnia_03,50,50,150,150	monster	Tao Gunka	1583,1,180000,0,1
+bossnia_03,50,50,150,150	monster	Falling Bishop	1871,1,180000,0,1
+bossnia_03,50,50,150,150	monster	Gloom Under Night	1768,1,180000,0,1
+
+// bossnia_04
+bossnia_04,50,50,150,150	monster	Ifrit	1832,2,120000,0,1
+bossnia_04,50,50,150,150	monster	Beelzebub	1873,2,120000,0,1
+bossnia_04,50,50,150,150	monster	Valkyrie Randgris	1751,2,120000,0,1
+bossnia_04,50,50,150,150	monster	Thanatos Phantom	1708,2,120000,0,1
+bossnia_04,50,50,150,150	monster	Tao Gunka	1583,2,120000,0,1
+bossnia_04,50,50,150,150	monster	Falling Bishop	1871,2,120000,0,1
+bossnia_04,50,50,150,150	monster	Gloom Under Night	1768,2,120000,0,1

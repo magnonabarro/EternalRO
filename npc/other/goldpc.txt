@@ -1,0 +1,39 @@
+-	pointshop	hourly_shop	-1,Goldpc_Points,13534:-1.
+
+-	script	Loja de Presenca::GOLDPCCAFE	10380,{
+     OnEvent:
+    callshop("hourly_shop", 1);
+    npcshopattach("hourly_shop");
+    end;
+
+    OnBuyItem:
+        mes("[Loja de Presenca]");
+        if (!checkweight2(@bought_nameid, @bought_quantity)) {
+            mes("Desculpe mas você nao pode carregar todos estes itens");
+            close3;
+        }
+        
+        for (.@i = 0; .@i < getarraysize(@bought_nameid); .@i++){
+            .@itemIndex = inarray(.Shop, @bought_nameid[.@i]);
+            .@costs += (.Shop[.@itemIndex + 1] * @bought_quantity[.@i]);
+        }
+
+        if (.@costs > Goldpc_Points) {
+            mes("Você nao tem pontos suficientes.");
+            close3;
+        }
+
+        Goldpc_Points -= .@costs;
+        for(.@i = 0; .@i < getarraysize(@bought_nameid); .@i++) {
+            getitem(@bought_nameid[.@i], @bought_quantity[.@i]);
+            dispbottom("Purchased " + @bought_quantity[.@i] + " x " + getitemname(@bought_nameid[.@i]) + ".");
+        }
+
+        mes("Obrigado pela compra!");
+        mes("Você tem ^0000ff" +Goldpc_Points+ "^000000 pontos de presença.");
+        close3;
+
+    OnInit:
+        setarray(.Shop[0], 13534, 1, 13810, 1, 14533, 1, 14592, 1, 12211, 1, 7776, 25, 14232, 25, 30007, 24 );
+        npcshopitem("hourly_shop", 13534, 1, 13810, 1, 14533, 1, 14592, 1, 12211, 1, 7776, 25, 14232, 25, 30007, 24 );
+}

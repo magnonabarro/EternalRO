@@ -1,0 +1,1353 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ olho_de_hellion.txt ]
+//====== Versão Atual: ====================================================
+//= [ v2.1 ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= Missão para obter uma Rosa do Nilo.
+//= Existem duas versões desta missão.
+//= A versão 1(não implementada)foi usada no iRO como um evento
+//= para seu aniversário, enquanto a versão 2(esta versão)
+//= é aquela que permaneceu ativa nos servidores principais.
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================// 
+
+morocc_in,116,101,3	script	Velho Estudioso Tyus#hellion	735,3,3,{
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FFSegure aí mesmo!";
+		mes "Você está carregando muitos itens e não tem espaço no inventário suficiente para receber recompensas. Por favor, disponibilize mais espaço no inventário e volte para este desafio.";
+		close;
+	}
+	if (HELLIONQ < 36) {
+		mes "[Sr. Chilias'Tyus]";
+		mes "Saudações... Meu nome é Sr Chilias'Tyus. Eu vivi muito tempo aqui em Rune-Midgard e eu vim para ver e conhecer muitas coisas. Poder, ciosamente, dificuldades...";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Então o que exatamente te traz aqui para o meio de Morroc?";
+		next;
+		mes "[Sr. Chilias'Tyus]";
+		mes "Esta terra se tornou corrupta com as doenças da cobiça e do egoísmo. Onde quer que você vá, as pessoas não têm coração, mas eu ainda acredito que encontrarei a que é digna o suficiente para me ajudar...";
+		next;
+		mes "[Sr. Chilias'Tyus]";
+		mes "Não há escassez de bravos e fortes guerreiros nestes tempos perigosos. Mas para o que eu procuro, devo ter a ajuda de alguém que é verdadeiramente puro de coração...";
+		next;
+		if(select("O que você está procurando?:Puro de coração? Hah! Boa sorte!") == 1) {
+			if (BaseLevel < 60 ) {
+				mes "[Sr. Chilias'Tyus]";
+				mes "Heh heh~ Eu vejo seus olhos brilharem com entusiasmo, mas parece que essa tarefa pode ser um pouco demais para você. Sinto muito, mas essa é a realidade que vejo ' ignorar...";
+				next;
+				mes "[Sr. Chilias'Tyus]";
+				mes "Vá para o mundo e cresça em força Talvez depois que você se tornar mais capaz, eu descubra que posso confiar em sua ajuda.";
+				close;
+			}
+			mes "[Sr. Chilias'Tyus]";
+			mes "Acho que devo falar primeiro sobre meu avô, que já foi um aventureiro jovem e medroso, muito parecido com você. Sim, ele viajou pelo mundo com seus três amigos...";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Os quatro participaram de muitas expedições juntos e ganharam a reputação de serem uma equipe corajosa que trabalhou muito bem juntos depois de muitos anos.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Então, no que deveria ser uma jornada típica, eles encontraram uma caverna desconhecida. Curiosos, e precisando descansar, os quatro se aventuraram lá dentro. Eles encontraram a criatura mais horrível....";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Era uma fera fera com chifres tão grandes e afiados quanto suas armas, com olhos que ardiam com o fogo do inferno meu avô sabia que estava com sede de sangue.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Eles correram da fera o mais rápido que puderam, mas os quatro foram separados na escuridão da caverna. Foi tudo que eles puderam fazer para se esconder na escuridão da caverna...";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "De seu esconderijo, meu avô ouviu os gritos de seus amigos quando o monstro os massacrou, um por um. Os gritos e os grunhidos do monstro estavam se aproximando...";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Incapaz de suportar o sofrimento de seus companheiros de confiança, meu avô pulou para fora se escondendo e tentou salvar seus amigos. A besta o encontrou e eles lutaram.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Não adiantou. A besta era poderosa demais e meu avô foi eliminado Quando ele chegou, seus amigos estavam todos mortos e uma gema brilhante jazia em uma poça de sangue.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Meu avô enterrou seus amigos naquele dia. Ele pegou a gema como uma lembrança de sua expedição final, mas se perguntou por que a besta decidiu poupá-lo.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Não demorou muito para ele experimentar a maldição da gema em primeira mão. A gema inexplicavelmente atraiu as pessoas para ela, pegando a ganância em seus corações e torcendo suas mentes...";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "O avô acreditava que a besta o deixava viver para que a gema fosse solta no mundo exterior, livre para poluí-la com seu mal. Ele tinha que fazer alguma coisa...";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "No entanto, a gema provou ser formada por puro mal e não pode ser destruída por meios humanos. No final, meu avô escondeu a gema em algum lugar seguro...";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "No entanto, a ameaça da gema ainda existe. Meu avô e meu pai trabalharam durante anos para encontrar uma maneira de selar sua escuridão. Somente agora eu consegui criar uma pulseira para poder selar sua maldade.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Para que meu avô e seus amigos descanse verdadeiramente em paz, preciso encontrar um aventureiro de coração puro que possa encontrar a gema e trazê-la para que eu possa finalmente selar seu poder.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Eu acho que... Eu acho que você pode ser o herói pelo qual eu estive esperando. Você vai ajudar um homem velho em prol de tudo o que é bom?";
+			next;
+			if(select("Claro que vou.:Desculpa, mas não consigo.") == 1) {
+				mes "[Sr. Chilias'Tyus]";
+				mes "Bom, bom, mas primeiro eu preciso testar para ver se você é digno de segurar a gema de Hellion. Eu não posso te dizer exatamente onde está, mas vou dar você algumas pistas.";
+				next;
+				mes "[Sr. Chilias'Tyus]";
+				mes "Primeiro, fale com Clanux Heffron em Prontera. Ele se ofereceu para me ajudar a encontrar a jóia, mas eu não sei se posso confiar nele. Por favor me ajude a proteger este mundo da gema...";
+				set HELLIONQ,36;
+				close;
+			}
+			mes "[Sr. Chilias'Tyus]";
+			mes "Eu entendo... Eu sei que estou pedindo muito de você, e essa tarefa não é de encarar com leviandade. Entretanto, acredito que você é totalmente capaz de realizar isso.";
+			set HELLIONQ,37;
+			close;
+		}
+		mes "[Sr. Chilias'Tyus]";
+		mes "Os tempos estão ruins quando até os jovens estão cansados. Mas eu me recuso a acreditar que a esperança está verdadeiramente perdida nesta era...";
+		close;
+	}
+	else if (HELLIONQ == 36) {
+		mes "[Sr. Chilias'Tyus]";
+		mes "Por favor, procure por Clanux Heffron em Prontera. Ele pode ter informações sobre uma pista que leva à gema de Hellion. Boa sorte para você.";
+		close;
+	}
+	else if (HELLIONQ == 37) {
+		mes "[Sr. Chilias'Tyus]";
+		mes "Então você considerou minha proposta? Eu acredito que você pode ser o único que vai me ajudar a selar o mal da Hellion para sempre.";
+		next;
+		if(select("Eu vou te ajudar.:...Desculpe por isso.") == 1) {
+			mes "[Sr. Chilias'Tyus]";
+			mes "Bom, bom, mas primeiro eu preciso testar para ver se você é digno de segurar a gema de Hellion. Eu não posso te dizer exatamente onde está, mas eu vou te dar algumas pistas.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Primeiro, fale com Clanux Heffron em Prontera. Ele se ofereceu para me ajudar a encontrar a gema, mas eu não sei se posso confiar nele. Por favor me ajude a proteger este mundo da gema...";
+			set HELLIONQ,36;
+			close;
+		}
+		mes "[Sr. Chilias'Tyus]";
+		mes "Eu entendo... Eu sei que estou pedindo muito de você, e essa tarefa não é de encarar com leviandade. Entretanto, acredito que você é totalmente capaz de realizar isso.";
+		close;
+	}
+	else if (HELLIONQ > 37 && HELLIONQ < 45) {
+		mes "[Sr. Chilias'Tyus]";
+		mes "Tente ver o que você pode aprender com o Clanux Heffron. Eu não sei como ele será cooperativo, mas tenho certeza que ele lhe dirá algo de uma forma ou de outra.";
+		close;
+	}
+	else if (HELLIONQ == 45 || HELLIONQ == 46) {
+		mes "[Sr. Chilias'Tyus]";
+		mes "Ah, sim! Este é um pedaço da Tábula que te levará à gema de Hellion!";
+		mes "Esta gravura foi feita definitivamente pelo meu avô, e Christopher foi um dos seus amigos.";
+		next;
+		mes "[Sr. Chilias'Tyus]";
+		mes "Eu suponho que ele escondeu essas peças nos lugares que o lembraram de seus amigos. Agora, de acordo com a mensagem da Tábula, você deve encontrar a próxima peça na '' cidade mais densa da floresta ''";
+		next;
+		mes "[Sr. Chilias'Tyus]";
+		mes "Tenho certeza que o próximo pedaço da Tábula está em Payon, então vá até lá e veja se consegue encontrá-lo. Boa sorte para você, tipo aventureiro.";
+		set HELLIONQ,47;
+		close;
+	}
+	else if (HELLIONQ == 47) {
+		mes "[Sr. Chilias'Tyus]";
+		mes "Agora que eu penso sobre isso, há um cara em Payon que eu conheço chamado Grout'the Tuccok que sabia quem era meu avô. Ele poderia saber alguma coisa, mas ele é um pouco, bem... Hmm...";
+		close;
+	}
+	else if (HELLIONQ > 47 && HELLIONQ < 57) {
+		mes "[Sr. Chilias'Tyus]";
+		mes "Eu acho que você está fazendo um bom trabalho em encontrar essas pistas em Payon. Por favor, faça o seu melhor para encontrar o resto das partes da Tábula.";
+		close;
+	}
+	else if (HELLIONQ == 57) {
+		if (countitem(7333) > 0 && countitem(7334) > 0) {
+			mes "[Sr. Chilias'Tyus]";
+			mes "Enquanto você estava fora, eu me senti um pouco mal por você estar procurando por peças de comprimidos por conta própria, então eu consegui encontrar essa peça aqui em Morroc. Mas...";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Por que eles estão brilhando assim? De qualquer forma, temos esta peça que encontrei aqui em Morroc e as peças que você encontrou em Prontera e Payon. Há mais uma em Geffen.";
+			specialeffect2 EF_HEAL2;
+			specialeffect EF_HEAL2;
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "De qualquer forma, na Tábula que eu encontrei, ele diz que Hakim amava magia e sempre gostou de sua cidade maravilhosa, então eu tenho certeza que a última peça está em Geffen.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Por favor, pegue esta terceira Tábula e encontre a peça final para que possamos satisfazer o maior desejo do meu querido avô e selar para sempre a gema de Hellion.";
+			set HELLIONQ,58;
+			getitem 7335,1; //Tábula de Morroc
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Quando você chegar a Geffen, por favor fale com Welshyun, que tem me ajudado a criar um dispositivo para selar a escuridão da gema. Ele é digno de confiança e certamente nos ajudará.";
+			close;
+		}
+		mes "[Sr. Chilias'Tyus]";
+		mes "Onde estão as Tábulas?";
+		mes "Você os escondeu para roubar a gema de Hellion para você? Eu devo te ferir antes que você seja consumido por sua escuridão!";
+		close2;
+		percentheal -100,0;
+		end;
+	}
+	else if (HELLIONQ > 57 && HELLIONQ < 66) {
+		mes "[Sr. Chilias'Tyus]";
+		mes "Por favor, visite o sábio chamado Welshyun em Geffen. Somos bons amigos, então tenho certeza que você pode confiar nele.";
+		close;
+	}
+	else if (HELLIONQ == 66) {
+		if (countitem(7333) > 0 && countitem(7334) > 0 && countitem(7335) > 0 && countitem(7336) > 0) {
+			mes "[Sr. Chilias'Tyus]";
+			mes "Você tem todos as quatro Tábulas?";
+			mes "Isso é uma ótima notícia! Ah, e a gema está embutida em cada uma das Tábulas. Estamos tão perto de terminar!";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Ah, você voltaria para Welshyun? Eu sei que é um aborrecimento, mas ele é provavelmente o único que pode combinar as peças da Tábula na sua forma completa. Obrigado...";
+			set HELLIONQ,67;
+			close;
+		}
+		mes "[Sr. Chilias'Tyus]";
+		mes "Onde estão as Tábulas?";
+		mes "Você as escondeu para roubar a gema de Hellion para você? Eu devo te ferir antes que você seja consumido por sua escuridão!";
+		close2;
+		percentheal -100,0;
+		end;
+	}
+	else if (HELLIONQ == 67) {
+		mes "[Sr. Chilias'Tyus]";
+		mes "Ah, você voltaria a Welshyun? Eu sei que é um aborrecimento, mas ele é provavelmente o único que pode combinar as peças da Tábula na sua forma completa. Obrigado...";
+		close;
+	}
+	else if (HELLIONQ == 68) {
+		if (countitem(7332) > 0 && countitem(7337) > 0) {
+			mes "[Sr. Chilias'Tyus]";
+			mes "Finalmente. Nós temos tudo. A Tábula e a gema de Hellion. Agora eu posso finalmente usar este bracelete para selar seu poder para sempre...";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Mas seus olhos... Eles parecem tão cansados e eu posso sentir algum tipo de dor deles Aconteceu alguma coisa?";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "Eu aprendi o segredo da gema de Hellion. Isso... transforma pessoas em Espectro de Hellion. Foi o que aconteceu com seu avô...";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "O que você acabou de dizer?";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "A Tábula tinha um mapa que me levou para a câmara onde seu avô se trancou antes de completar a transformação para o Espectro de Hellion. Foi horrível...";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Na entrada, ele deixou uma mensagem dizendo que ele queria ser morto para que ele pudesse finalmente se juntar a seus amigos em vez de viver como um monstro. Então eu... Então eu..";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Tudo bem. Eu sei que você fez a coisa certa. É o que meu avô mais queria. Obrigado por finalmente libertar sua alma e dar-lhe paz.";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "Aqui, acho que você deveria ter este Olho de Hellion, caso queira uma lembrança do seu querido avô.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Eu apreciaria o olhar do meu avô... Está cheio das dolorosas experiências das pessoas que foram transformadas em Espectro de Hellion contra a sua vontade.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Mas... Agora não é a hora do sentimento. Pelo bem do meu avô, eu devo selar o poder da gema de Hellion agora!";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Trevas que se contorcem, almas perdidas no inferno, eu te ofereço conforto, te ofereço paz. Para os desesperados, para os desavergonhados, eu dou orientação para o céu...";
+			specialeffect EF_BEGINSPELL;
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Em vez de tristeza, que haja alegria. Em vez de raiva, que haja amor. Almas que estão perdidas agora encontrarão seu caminho...";
+			specialeffect EF_BEGINSPELL6;
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Luz e esperança. Céu e terra. Eliminei a escuridão.";
+			specialeffect EF_SANCTUARY;
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Eu fiz isso Depois de todos esses longos anos, eu finalmente consegui. Graças à sua ajuda.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Por favor, pegue esta Nile Rose, que manterá o poder da gema Soluço controle. Eu confio que você manterá seu segredo e o protegerá daqueles motivados pela ganância.";
+			delitem 7332,1; //Tábula Completa
+			delitem 7337,countitem(7337); //Olho de Hellion
+			set HELLIONQ,69;
+			getitem 2658,1; //Rosa do Nilo
+			getitem 603,1; //Velha Caixa Azul
+			getexp (checkre(3))?120000:1200000,0;
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Obrigado, tipo aventureiro, por trazer paz à alma de meu avô e por trabalhar para proteger a paz em nosso mundo. Você é o mais verdadeiro dos heróis.";
+			next;
+			mes "^3355FFVocê recebeu a Rosa do Nilo na qual a gema do Inferno está selada O Olho de Hellion lhe deu alguma experiência através de seus estranhos poderes.^000000";
+			close;
+		}
+		else if (countitem(7332) > 0) {
+			mes "[Sr. Chilias'Tyus]";
+			mes "Finalmente. Nós temos tudo. A Tábula e a gema de Hellion. Agora eu posso finalmente usar este bracelete para selar seu poder para sempre...";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Trevas que se contorcem, almas perdidas no inferno, eu te ofereço conforto, te ofereço paz. Para os desesperados, para os desavergonhados, eu dou orientação para o céu...";
+			specialeffect EF_BEGINSPELL;
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Em vez de tristeza, que haja alegria. Em vez de raiva, que haja amor. Almas que estão perdidas agora encontrarão seu caminho...";
+			specialeffect EF_BEGINSPELL6;
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Luz e esperança. Céu e terra. Eliminei a escuridão.";
+			specialeffect EF_SANCTUARY;
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Eu fiz isso Depois de todos esses longos anos, eu finalmente consegui. Graças à sua ajuda.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Por favor, pegue esta Nile Rose, que manterá o poder da gema Soluço controle. Eu confio que você manterá seu segredo e o protegerá daqueles motivados pela ganância.";
+			delitem 7332,1;// Ardósia
+			set HELLIONQ,70;
+			getitem 2658,1; //Rosa do Nilo
+			getexp (checkre(3))?100000:1000000,0;
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Obrigado, tipo aventureiro, por trazer paz à alma de meu avô e por trabalhar para proteger a paz em nosso mundo. Você é o mais verdadeiro dos heróis.";
+			close;
+		}
+		mes "[Sr. Chilias'Tyus]";
+		mes "Onde está o comprimido completo? Precisamos disso para extrair a gema de Hellion para selar seu poder!";
+		close;
+	}
+	else if (HELLIONQ > 68 && HELLIONQ < 71) {
+		if (countitem(7337) > 0) {
+			mes "[Sr. Chilias'Tyus]";
+			mes "Muito tempo sem ver. Então, você está indo bem para manter a promessa comigo?";
+			mes "Por favor, manuseie com cuidado para evitar que o poder maligno seja liberado.";
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Você ainda tem o Olho de Hellion Eu posso ver a dor em seus olhos Deixe-me aliviar seu fardo. Será melhor assim.";
+			delitem 7337,countitem(7337); //Olho de Hellion
+			next;
+			mes "[Sr. Chilias'Tyus]";
+			mes "Que Deus te abençoe";
+			close;
+		}
+		mes "[Sr. Chilias'Tyus]";
+		mes "Muito tempo sem ver. Então, você está indo bem para manter a promessa comigo?";
+		mes "Por favor, cuide disso com cuidado para evitar que o poder maligno de ser liberado.";
+		close;
+	}
+	mes "[Sr. Chilias'Tyus]";
+	mes "... ... ...";
+	close;
+
+OnTouch_:
+	if (HELLIONQ == 57 && countitem(7334) > 0) {
+		specialeffect2 EF_HEAL2; 
+		specialeffect EF_HEAL2;
+		mes "^3355FFUma das Tábulas que você tem está começando a brilhar com uma luz, como se estivesse respondendo a algo...^000000";
+		close;
+	}
+	end;
+}
+
+prontera,269,326,3	script	Clanux Heffron#hellion	50,{
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FFEspere aí mesmo!";
+		mes "Você está carregando muitos itens e não tem espaço no inventário suficiente para receber recompensas. Por favor, disponibilize mais espaço para inventário e volte para este desafio.";
+		close;
+	}
+	if (HELLIONQ < 36) {
+		mes "[Clanux Heffron]";
+		mes "O que há de errado com este mapa?! Não consigo encontrar uma coisa maldita! Como encontrar algo pode ser tão difícil?";
+		close;
+	}
+	else if (HELLIONQ == 36) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "Com licença, mas você é Clanux Heffron?";
+		next;
+		mes "[Clanux Heffron]";
+		mes "Por que, quem é você e o que diabos você quer? Oh... Enviado por Chilias, hein?";
+		mes "O que ele quer?";
+		next;
+		if(select("Ele quer que eu te ajude.:Ele quer que você me ajude.") == 1) {
+			mes "[Clanux Heffron]";
+			mes "Então ele me enviou um assistente, hein? Bem... Vendo como ele me deu essa pista e eu demorei tanto e ainda não tenho nada para mostrar, eu não o culpe.";
+			next;
+			mes "[Clanux Heffron]";
+			mes "Bem, se ele te mandou para me ajudar, eu acho que posso te contar tudo. Pelas pistas que ele me fez procurar, eu só encontrei duas até agora. Mas eu posso não os descubra...";
+			next;
+			mes "[Clanux Heffron]";
+			mes "Vamos ver, tem essa espada quebrada e essa Engrenagem estranha. O que essas pistas significam?!";
+			mes "O velho deu algumas dicas para me ajudar?";
+			next;
+			if(select("Onde você achou isso?:Não, me desculpe.") == 1) {
+				mes "[Clanux Heffron]";
+				mes "Oh, esses que eu encontrei em Prontera Aquele velho coot escondeu essas coisas boas. Mas sim, eu duvido que você encontraria alguma coisa, mas você tentaria verificar o velho Espadachim Training? Terreno para mais pistas?";
+				next;
+				mes "[Clanux Heffron]";
+				mes "Cara, essa gema de Hellion deve realmente valer um bom dinheiro se o velho tiver passado por tantos problemas até mesmo para esconder essas pistas. Oh cara, eu quero tanto...";
+				set HELLIONQ,39;
+				close;
+			}
+			mes "[Clanux Heffron]";
+			mes "Wha--? Então por que você está aqui para me ajudar? Huh. Esse velho coot não deve confiar em mim o suficiente, mas eu não posso culpá-lo exatamente. Tudo bem então...";
+			next;
+			mes "[Clanux Heffron]";
+			mes "Se você vai me ajudar, vá procurar o antigo Campo de Treino de Espadachim aqui em Prontera. Eu duvido, mas há uma chance de eu perder alguma coisa lá. Vá em frente!";
+			set HELLIONQ,39;
+			close;
+		}
+		mes "[Clanux Heffron]";
+		mes "Ajudar você...? O quê, com pistas sobre a localização da gema de Hellion? Dane-se, amigo! Por que eu deveria te ajudar se nós vamos competir pelo mesmo prêmio?!";
+		set HELLIONQ,38;
+		close;
+	}
+	else if (HELLIONQ == 38) {
+		mes "[Clanux Heffron]";
+		mes "Ei, por que você continua me incomodando?! Vá e encontre suas próprias pistas para a gema de Hellion por conta própria, idiota! Agora, saia daqui!";
+		next;
+		if(select("W-wait! Vamos trabalhar juntos!:Tudo bem. Eu não preciso da sua ajuda!") == 1) {
+			mes "[Clanux Heffron]";
+			mes "Trabalhe junto, hein? Você sabe, normalmente eu diria para você fazer como um moonwalker e apenas vencê-lo, mas eu tenho que admitir que eu não estou indo tão bem na minha possui isso...";
+			next;
+			mes "[Clanux Heffron]";
+			mes "Tudo bem, tudo bem Primeiro, olhe pelo antigo Campo de Treino de Espadachim aqui em Prontera. Pode haver algumas pistas para você encontrar...";
+			set HELLIONQ,39;
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "Tudo bem, eu não preciso da sua ajuda!";
+		next;
+		mes "[Clannux Heffron]";
+		mes "Sim, certo!";
+		mes "Você estará de volta!";
+		mes "...Eles sempre voltam.";
+		close;
+	}
+	else if (HELLIONQ == 39) {
+		mes "[Clanux Heffron]";
+		mes "Olha amigo, eu encontrei essa espada quebrada, uma pista genuína se eu já vi uma, no antigo Campo de Treino de Espadachim em Prontera. Você deve encontrar outra coisa lá... talvez.";
+		close;
+	}
+	else if (HELLIONQ == 40) {
+		mes "[Clanux Heffron]";
+		mes "Ei, você acabou de procurar? Conseguiu encontrar alguma coisa?";
+		next;
+		if(select("Nada...:De fato, eu encontrei isto.") == 1) {
+			mes "[" + strcharinfo(0) + "]";
+			mes "^333333(Esse cara é um verdadeiro punk!";
+			mes "É melhor eu não compartilhar nenhuma informação nova que encontrei, caso ele ainda não saiba disso.)^000000";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "Eu... eu não consegui encontrar nada que parecesse uma pista. Me desculpe, mas eu te decepcionei muito...";
+			next;
+			mes "[Clanux Heffron]";
+			mes "Aw nuts! Tudo bem, se você voltar ao velho, diga a ele que encontrei uma espada quebrada do antigo Campo de Treino de Espadachim e esta Engrenagem da Loja de Ferramentas.";
+			next;
+			mes "[Clanux Heffron]";
+			mes "As pistas que encontrei até agora não fazem qualquer sentido!";
+			mes "Então, se você puder, convença-o a me dar mais algumas dicas E dê isso ao velho para provar que eu encontrei, você vai?";
+			set HELLIONQ,41;
+			getitem 7093,1; //Engrenagem
+			next;
+			mes "[Clanux Heffron]";
+			mes "É tudo o que sei A essa altura, é melhor você procurar essas pistas por conta própria...";
+			close;
+		}
+		mes "[Clanux Heffron]";
+		mes "Então é isso que você encontrou? Huh. Estou ainda mais confuso. Tudo bem Bem, eu encontrei uma espada quebrada no Campo de Treinamento do Espadachim.";
+		next;
+		mes "[Clanux Heffron]";
+		mes "Ah, e eu também encontrei esta velha Engrenagem na Loja de ferramentas por aqui. Apenas pegue. Talvez você tenha mais sorte em descobrir o que isso significa.";
+		next;
+		mes "[Clanux Heffron]";
+		mes "Mas uma vez que você aprende algo novo, para mim e me avise!";
+		mes "Essa é uma ordem, entendeu?";
+		set HELLIONQ,41;
+		getitem 7093,1; //Engrenagem
+		close;
+	}
+	else if (HELLIONQ == 41) {
+		mes "[Clanux Heffron]";
+		mes "Ei... Eu não lhe disse para verificar a Loja de Ferramentas caso houvesse algo que eu perdesse?";
+		mes "Agora vá! Isso é uma ordem!";
+		close;
+	}
+	else if (HELLIONQ == 42) {
+		mes "[Clanux Heffron]";
+		mes "Wha--? Eu não tinha ideia que esse tipo de coisa poderia estar escondida naquele treinamento que eu perdi. Oh, então a Senhora Vegetariana lhe deu uma senha e tudo?";
+		next;
+		mes "[Clanux Heffron]";
+		mes "Huh, eu não posso fazer cara ou coroa dessa senha, eu acho que não tenho escolha a não ser te dar isso, a pista da Engrenagem que eu encontrei na Loja de Ferramentas.";
+		next;
+		mes "[Clanux Heffron]";
+		mes "Quero dizer, você teve sorte o suficiente até agora, então você provavelmente será capaz de se deparar com a resposta por trás desse enigma estranho e esquisito. Mas você precisa me dizer a resposta também!";
+		next;
+		mes "[Clanux Heffron]";
+		mes "Tudo bem, agora pegue sua Engrenagem e saia daqui. Quanto mais cedo você conseguir essa pista, mais cedo eu pegarei a gema de Hellion.";
+		set HELLIONQ,43;
+		getitem 7093,1; //Engrenagem
+		close;
+	}
+	else if (HELLIONQ == 43) {
+		mes "[Clanux Heffron]";
+		mes "Ei, apresse-se e confira a Loja de ferramentas e descubra o significado dessa senha! Talvez aquela máquina estranha tenha uma parte desse quebra-cabeça inteiro? Nah...";
+		close;
+	}
+	else if (HELLIONQ == 44) {
+		mes "[Clanux Heffron]";
+		mes "Ei... Didja achou algo novo na Loja de Ferramentas?";
+		next;
+		if(select("Finja que nada aconteceu.:Compartilhe o que você aprendeu.") == 1) {
+			mes "[" + strcharinfo(0) + "]";
+			mes "Não... Eu não consegui encontrar nenhuma pista nova. Eu acho que não tenho escolha a não ser voltar para Chilias'Tyus, a menos que você saiba de alguma coisa...";
+			next;
+			mes "[Clanux Heffron]";
+			mes "Bah!";
+			mes "Freakin 'inútil!";
+			mes "Que tipo de assistente você é de qualquer maneira, hein?";
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "Bem, eu coloquei a Engrenagem naquela máquina estranha na Loja de Ferramentas e algum tipo de teclado numérico saiu. Então... Eu não consegui descobrir qual era a senha. Eu sou preso!";
+		next;
+		mes "[Clanux Heffron]";
+		mes "Oh sim? Hah! Bem, agora que a parte fácil está feita, eu vou descobrir essa senha secreta eu mesmo! Hahaha! Essa gema de Hellion é tão boa quanto a minha!";
+		close;
+	}
+	else if (HELLIONQ == 45) {
+		mes "[Clanux Heffron]";
+		mes "Ei, então você tem algo novo para relatar?";
+		mes "Ah, e você aprendeu alguma coisa com aquela estranha máquina na Loja de Ferramentas?";
+		next;
+		if(select("Diga a ele um pouquinho.:Não diga a ele.") == 1) {
+			mes "[" + strcharinfo(0) + "]";
+			mes "Bem, eu coloquei a Engrenagem naquela máquina estranha na Loja de Ferramentas e algum tipo de teclado numérico saiu. Então...";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "^333333(Espere, eu não posso confiar nesse cara!)^000000. Eu coloquei cada senha que pude pensar, mas nada aconteceu!";
+			mes "Eu acho que estou preso...";
+			next;
+			mes "[Clanux Heffron]";
+			mes "Oh sim? Hah! Bem, agora que a parte fácil está feita, eu vou descobrir essa senha secreta eu mesmo! Hahaha! Essa gema de Hellion é tão boa quanto a minha!";
+			set HELLIONQ,46;
+			close;
+		}
+		mes "[Clanux Heffron]";
+		mes "Huh. Você deve conseguir um teclado numérico para sair dessa máquina Sim, eu fui capaz de chegar tão longe, mas não consegui descobrir a senha...";
+		set HELLIONQ,46;
+		close;
+	}
+	else if (HELLIONQ > 45 && HELLIONQ < 71) {
+		mes "[Clanux Heffron]";
+		mes "Oh Ei, é você. Ouça. Eu peguei este teclado numérico para sair daquela velha máquina na Loja de Ferramentas, eu ainda não sei qual a senha para ele.";
+		next;
+		mes "[Clanux Heffron]";
+		mes "Se eu não consegui descobrir, e eu entendo se você não pode descobrir isso, então esse quebra-cabeça deve ser impossível!";
+		close;
+	}
+	mes "[Clanux Heffron]";
+	mes "Oh homem, eu estou totalmente perdido. O que diabos eu deveria estar procurando?";
+	close;
+}
+
+prontera,223,82,0	script	#prt_key-1	111,{
+	if (HELLIONQ == 39) {
+		mes "^3355FFIsto é um boneco de treinamento com um corte em seu corpo que parece ter sido feito pelo golpe de uma espada afiada.^000000";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Clanux não mencionou que encontrou uma espada quebrada por aqui? Talvez tenha sido exatamente onde ele a encontrou. Vamos ver...";
+		next;
+		select("Inspecione o corte do manequim.");
+		mes "^3355FFDentro do corpo do boneco está um rolamento de aço com uma mensagem grosseiramente gravada que diz:^000000 ^4d4dff''Senhora Vegetariana N9 W3 BINGO.''^000000";
+		set HELLIONQ,40;
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "O que diabos isso significa? Uma Senhora Vegetariana?";
+		mes "O Clanux sabe alguma coisa sobre essa pista...?";
+		close;
+	}
+	mes "^3355FFIsto é um boneco de treinamento que foi usado para aprimorar as habilidades de novos Espadachins. Mas o Campo de Treino de Espadachim se mudou para Izlude.";
+	close;
+}
+
+prontera,45,67,0	script	 #prt_key-1-1	111,1,1,{
+OnTouch_:
+	if (HELLIONQ == 40 || HELLIONQ == 41) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "Bem, de acordo com a mensagem no velho boneco de treinamento, é para lá que eu devo ir. Nove passos para o norte, três passos para o oeste. E agora... Senhora Vegetariana. Ok, tudo bem...";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Huh. Isso é assustador. Há um ali olhando para mim. Mas depois das palavras da Senhora Vegetariana, tudo o que a mensagem diz é, hum, qual foi a última palavra de novo?";
+		next;
+		input .@input$;
+		if (.@input$ == "BINGO") {
+			mes "[" + strcharinfo(0) + "]";
+			mes "Claro!";
+			mes "'' BINGO! ''! Mas eu não vejo um salão cheio de gente velha por aqui, eu--";
+			next;
+			mes "[Senhora Vegetariana]";
+			mes "Finalmente, você diz Yeesh, eu pensei que ia esperar para sempre alguém dizer essa senha. Ok, aqui está o número do código que você quer...";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "número do código?";
+			mes "Espere, o que...?";
+			next;
+			mes "[Senhora Vegetariana]";
+			mes "Awww... eu não sei!";
+			mes "Eu só vou dizer agora:^4D4DFF 3847147298^000000. Mais uma vez, no caso de você não consegui-lo: ^4D4DFF 3847147298^000000 não se esqueça disso, aventureiro.";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Espere... O que isso tudo significa? Você não vai me dizer mais?";
+			next;
+			mes "[Senhora Vegetariana]";
+			mes "Não. Recebi instruções explícitas para não lhe dizer mais. Na verdade, eu odeio falar. É por isso que eu vendo vegetais.";
+			if (HELLIONQ == 40)
+				set HELLIONQ,42;
+			else if (HELLIONQ == 41)
+				set HELLIONQ,43;
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Vaca sagrada... Isso é realmente coisa de capa e adaga!";
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes ""+ .@input$ + "!";
+		mes "Hmmm. Não, não, não poderia ser isso. O que no mundo era essa palavra e por que eu não consigo me lembrar quando eu mais preciso?";
+		close;
+	}
+	end;
+}
+
+prt_in,128,79,0	script	Máquina Desconhecida#prt_key	111,{
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FFSegure aí mesmo!";
+		mes "Você está carregando muitos itens e não tem espaço no inventário suficiente para receber recompensas. Por favor, disponibilize mais espaço para inventário e volte para este desafio.";
+		close;
+	}
+	if (HELLIONQ == 43) {
+		mes "^3355FFIsto é uma máquina de aparência estranha que parece não ter sido usada há algum tempo. Parece que a Engrenagem que você tem se encaixaria perfeitamente nela...^000000";
+		next;
+		if (countitem(7093) > 0) {
+			if(select("Insirir Engrenagem.:Ignore.") == 1) {
+				mes "[" + strcharinfo(0) + "]";
+				mes "Eu sei que esta Engrenagem se encaixará nesta máquina!";
+				mes "O que eu não sei é o que acontecerá quando esta máquina funcionar...";
+				next;
+				mes "^3355FF*Clique...!* Uma vez que a Engrenagem esteja encaixada na máquina e girada, o dispositivo se anima e um painel se abre, revelando um teclado numérico. 000000";
+				delitem 7093,1;// Engrenagem
+				set HELLIONQ,44;
+				next;
+				mes "[" + strcharinfo(0) + "]";
+				mes "Eu acho que eu tenho que inserir algum tipo de senha numérica. Ah, certo, os números que a Senhora Vegetariana me deu!";
+				next;
+				input .@input$;
+				if (.@input$ == "3847147298") {
+					mes "^3355FFA máquina responde à senha com um toque agradável, confirmando que você digitou os números corretos. O teclado se abre para revelar um pedaço de uma Tábula.^000000";
+					next;
+					mes "^3355FFA mensagem gravada nesta Tábula diz: Isso é para Christopher, meu querido amigo que conheci em Prontera. Para quem acha isso, por favor procure a próxima peça desta Tábula na cidade da floresta mais densa.''^000000";
+					next;
+					mes "^3355FFA mensagem é assinada por alguém chamado Tyus. Seria melhor trazer isso de volta para Sr Chilia'Tyus e confirmar que isso foi feito pelo avô dele. .^000000";
+					set HELLIONQ,45;
+					getitem 7333,1; //Tábula de Prontera
+					close;
+				}
+				mes "A máquina responde à senha com um bipe abrupto e estridente e toda a máquina desliga. Você terá que tentar digitar a senha novamente.";
+				close;
+			}
+			mes "["+ strcharinfo(0) +"]";
+			mes "Eh... Esqueça isso.";
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "Uh oh... Onde eu coloquei a engrenagem que o Clanux Heffron me deu?";
+		close;
+	}
+	else if (HELLIONQ == 44) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "Ok, deixe-me ver se eu posso digitar o número certo desta vez...";
+		next;
+		input .@input$;
+		if (.@input$ == "3847147298") {
+			mes "^3355FFA máquina responde à senha com um sinal sonoro agradável, confirmando que você digitou os números corretos. O teclado se abre para revelar um pedaço de uma Tábula.^000000";
+			next;
+			mes "^3355FFA mensagem gravada nesta Tábula diz: ''Isto é para Christopher, meu querido amigo que eu conheci em Prontera. Para quem acha isso, por favor, procure o próximo pedaço desta Tábula na cidade da floresta mais densa.''^000000";
+			next;
+			mes "^3355FFA mensagem é assinada por alguém chamado Tyus Seria melhor trazer isso de volta para Sr. Chilia'Tyus e confirmar que isso foi feito pelo seu avô...^000000";
+			set HELLIONQ,45;
+			getitem 7333,1; //Tábula de Prontera
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "A máquina responde à senha com um bipe abrupto e estridente e toda a máquina desliga. Você terá que tentar digitar a senha novamente.";
+		close;
+	}
+	mes "^3355FFIsto é algum tipo de máquina de aparência estranha com um propósito misterioso.^000000";
+	close;
+}
+
+payon,182,132,3	script	Grout'he Tuccok#hellion	48,{
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FFSegure aí mesmo!";
+		mes "Você está carregando muitos itens e não tem espaço no inventário suficiente para receber recompensas. Por favor, disponibilize mais espaço para inventário e volte para este desafio.";
+		close;
+	}
+	if (HELLIONQ < 47) {
+		mes "[Grout'he]";
+		mes "Ei... Ei você!";
+		mes "O que você está olhando?!";
+		mes "Saia da minha frente, ya jerkwad.";
+		close;
+	}
+	else if (HELLIONQ == 47) {
+		mes "[Grout'he]";
+		mes "O que...?";
+		mes "Você tem algo para me dizer ou está apenas sendo um idiota mal-educado e me encarando como se este fosse seu território?!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Me desculpe, mas bem... Chilias'Tyus me disse que você poderia saber algo sobre um pedaço de uma Tábula--";
+		next;
+		mes "[Grout'he]";
+		mes "O quê? Oh, então Chilias'Tyus está procurando pela gema também, hein?";
+		mes "Ooh, isso mesmo. Ele quer selar seu mal ou algo assim. Sim, sim. Essa é uma boa causa. Real nobre e tudo...";
+		next;
+		mes "[Grout'he]";
+		mes "Diga-lhe o que. A única razão pela qual eu quero essa jóia é vendê-la para que eu possa pagar todas as minhas dívidas. Mas se eu vender as pistas que encontrei, eu vou pegar o zeny que eu preciso e a gema estará em boas mãos também.";
+		next;
+		mes "[Grout'he]";
+		mes "Então, o que você diz?";
+		mes "Não é um mau negócio se você pensar nisso e nós podemos matar dois coelhos com uma cajadada só...";
+		next;
+		if(select("Tudo bem, compro suas pistas.:Por que deveria pagar você?") == 1) {
+			mes "[Grout'he]";
+			mes "Oh cara, muito obrigado Tudo bem, tudo o que eu estou pedindo é 10.000 zeny. Você pega minhas pistas e eu vou deixar você saber onde eu as encontrei, caso você possa encontre algo novo.";
+			next;
+			if (Zeny > 9999) {
+				if ((MaxWeight-Weight) > 1000 ) {
+					mes "[Grout'he]";
+					mes "Lá vai você!";
+					mes "Obrigado pelo dinheiro~ (Agora eu não vou ter que ficar com os joelhos quebrados!). Oh, e deixe-me marcar seu Mini-mapa para você de verdade rápido...";
+					next;
+					mes "[Grout'he]";
+					mes "Você vê isso aqui?";
+					mes "É onde eu encontrei a Saia da Virgem que estou prestes a lhe dar. Então, verifique o local e veja se você encontra algo novo e interessante.";
+					viewpoint 1,101,190,1,0xFFFF00;
+					next;
+					mes "[Grout'he]";
+					mes "Aqui está, amigo... Um Coração de Pedra, Erva Verde, um Suco de Uva e uma Saia Limpa e pura da Virgem Se você tiver mais perguntas, eu acho que você pode me perguntar depois~";
+					set Zeny, Zeny-10000;
+					set HELLIONQ,48;
+					getitem 953,1; //Coração de Pedra
+					getitem 511,1; //Erva Verde
+					getitem 533,1; //Suco de Uva
+					getitem 1049,1; //Saia Virginal
+					close;
+				}
+				mes "[Grout'he]";
+				mes "Whoa whoa... Mas você não tem espaço no seu inventário para segurar o que eu quero dar a você. Provavelmente seria melhor guardar suas coisas no Armazem Kafra , sim?";
+				close;
+			}
+			mes "[Grout'he]";
+			mes "Oh Ei... Você não tem o zeny. Desculpe amigo, mas eu realmente tenho que pagar minhas dívidas de alguma forma. Eu não sei se estou autorizado a realmente falar sobre isto... ^333333*Soluço*^000000";
+			close;
+		}
+		mes "[Grout'he]";
+		mes "Por que diabos você deveria me pagar?! Ei, você não está procurando a joia para ajudar o mundo? Bem, acontece de eu ser uma pequena parte deste mundo, então por que não você me ajuda primeiro?";
+		next;
+		mes "[Grout'he]";
+		mes "Cara, você pode não saber, mas o dinheiro que você me dá vai salvar uma vida. Meu próprio! Cara, como você pode ser tão insensível?";
+		close;
+	}
+	else if (HELLIONQ == 48) {
+		mes "[Grout'he]";
+		mes "Você esqueceu onde eu te disse para procurar mais pistas?";
+		mes "Eh, eu vou deixar você saber mais uma vez, claro. Fique de olho no seu Mini-mapa, entendeu?";
+		viewpoint 1,101,190,1,0xFFFF00;
+		next;
+		mes "[Grout'he]";
+		mes "Tudo bem... Boa sorte lá fora, eu realmente espero que você possa manter a joia fora das mãos erradas. Claro, eu ia vender, mas...";
+		close;
+	}
+	else if (HELLIONQ == 49) {
+		mes "[Grout'he]";
+		mes "Você já esteve no primeiro local? Bom, tudo bem, olhe aqui Verifique seu Mini-mapa para ver onde encontrei o Coração de Pedra, entendeu?";
+		viewpoint 1,82,109,2,0xFFFF00;
+		close;
+	}
+	else if (HELLIONQ == 50) {
+		mes "[Grout'he]";
+		mes "Tudo bem, aqui é onde eu encontrei aquela erva verde. Você sabe que pode usar isso para combater o veneno, certo?";
+		mes "Verifique o local para ver se há alguma coisa que eu perdi.";
+		viewpoint 1,239,56,3,0xFFFF00;
+		close;
+	}
+	else if (HELLIONQ == 51) {
+		mes "[Grout'he]";
+		mes "Ok, aqui está o último lugar que você deve checar, o lugar onde eu peguei esse suco de uva. Boa sorte~";
+		viewpoint 1,243,160,4,0xFFFF00;
+		close;
+	}
+	else if (HELLIONQ == 52) {
+		mes "[Grout'he]";
+		mes "Ah, você precisa de ajuda para descobrir as pistas?";
+		mes "Heh. Tudo bem, vamos ver Você quer que eu ajude você a entender este enigma estranho?";
+		next;
+		if(select("Sim, por favor!:Não, obrigado~") == 1) {
+			mes "[Grout'he]";
+			mes "Tudo bem agora. Todas essas mensagens diziam coisas sobre roupas tamanho, um peixe seco e Ervas Verdes, vinho... Huh. Não faz sentido.";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "O que...?";
+			mes "Eu poderia ter dito isso!";
+			next;
+			mes "[Grout'he]";
+			mes "Espere, espere Vamos marcar todos os locais de dicas novamente em seu Mini-mapa. Ok, nós temos quatro pontos em torno de Payon.";
+			viewpoint 1,243,160,4,0xFFFF00;
+			viewpoint 1,239,56,3,0xFFFF00;
+			viewpoint 1,82,109,2,0xFFFF00;
+			viewpoint 1,101,190,1,0xFFFF00;
+			next;
+			mes "[Grout'he]";
+			mes "Tudo bem, agora se eu conectar e cruzar todas as linhas, há um ponto no meio. Por que você não verifica este ponto do meio, eh?";
+			viewpoint 1,159,129,5,0xFFFF00;
+			next;
+			mes "[Grout'he]";
+			mes "Agora, este local é uma casa, e eu sei que é bastante aleatório, mas é tudo o que temos. Heck, todas essas pistas fazem menos sentido do que isso!";
+			set HELLIONQ,53;
+			close;
+		}
+		mes "[Grout'he]";
+		mes "Ah sim?";
+		mes "Bem, escute, eu não sei, mas parece ser uma daquelas situações em que duas cabeças pensam melhor do que uma que eu acho que deveríamos unir~";
+		close;
+	}
+	else if (HELLIONQ > 52 && HELLIONQ < 55) {
+		mes "[Grout'he]";
+		mes "Ei, como é que está procurando aquele pedaço da Tábula?";
+		mes "É um monte de problemas, mas eu acho que é o caso de todo o tesouro.";
+		close;
+	}
+	else if (HELLIONQ == 55) {
+		mes "[Grout'he]";
+		mes "Ah, então todos esses itens vieram a calhar?";
+		mes "Eu não acredito! Então esse quebra-cabeça realmente faz sentido?! Então o que a laje disse?";
+		next;
+		mes "[Grout'he]";
+		mes "'Compassivo?' 'Oh, ei, há uma estátua gigante de pedra na Vila dos Arqueiros que se encaixa perfeitamente nessa descrição!";
+		mes "Você deveria dar uma olhada.";
+		set HELLIONQ,56;
+		close;
+	}
+	else if (HELLIONQ == 56) {
+		mes "[Grout'he]";
+		mes "Ei, você realmente deveria checar a enorme estátua de pedra na Vila dos Arqueiros. Agora que eu penso nisso, é o esconderijo perfeito!";
+		close;
+	}
+	else if (HELLIONQ == 57) {
+		mes "[Grout'he]";
+		mes "Ei, isso é ótimo!";
+		mes "Você encontrou o próximo pedaço da Tábula!";
+		mes "É melhor você levar isso de volta para Chilias'Tyus agora~";
+		next;
+		mes "[Grout'he]";
+		mes "Oh. E hum, obrigado por estar disposto a me pagar em dinheiro por todas essas pequenas dicas. Eu não vou esquecer sua ajuda, amigo.";
+		close;
+	}
+	else if (HELLIONQ > 57 && HELLIONQ < 71) {
+		mes "[Grout'he]";
+		mes "Ei, tome cuidado se você conseguir encontrar aquela pedra preciosa da Hellion. Eu não sei se é verdade, mas talvez velho Tyus estava certo. Talvez se sustenta um poder mau.....";
+		close;
+	}
+	else {
+		mes "[Grout'he]";
+		mes "A vida com certeza é muito menos tensa sem ter dívidas para se preocupar. Eu poderia me acostumar com isso...";
+		close;
+	}
+}
+
+payon,101,190,0	script	 #paypuzz1	-1,1,1,{
+OnTouch_:
+	if (HELLIONQ == 48) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "Bem, aqui é onde o Grout me disse para olhar Ooh, tem algo escrito no teto. Hum, vamos ver... ''Esta peça é de tamanho único.''";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "É isso aí...?";
+		mes "Espero que isso faça mais sentido quando eu encontrar mais pistas. Eu espero.";
+		set HELLIONQ,49;
+		close;
+	}
+	end;
+}
+
+payon,82,109,3	script	Pilha de Pedra#paypuzz2	111,{
+	if (HELLIONQ == 49) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "Bem, este é o lugar que Grout'he me contou sobre Vamos ver, há uma gravura aqui que diz: 'Eu costumava orar por dias de paz aqui'.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Cara... É melhor não ser um desses quebra-cabeças que parece fácil quando eu recebo a resposta. Bem, se eu conseguir, é isso.";
+		set HELLIONQ,50;
+		close;
+	}
+}
+
+payon,239,56,3	script	Peixes Secos#paypuzz3	111,{
+	if (HELLIONQ == 50) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "Então... Peixe seco ao meu redor. Isso está ficando sem sentido. Vamos ver, esta mensagem diz: 'As Ervas Verdes são muito úteis para se livrar dos cheiros de peixe'.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Eu entendi...";
+		mes "Quem inventou essas pistas deve ser algum tipo de homem louco!";
+		mes "É a única explicação!";
+		set HELLIONQ,51;
+		close;
+	}
+}
+
+payon,240,160,3	script	Vat#paypuzz4	111,{
+	if (HELLIONQ == 51) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "Tudo bem, o último lugar que eu tenho que checar. É um grande tanque velho com uma mensagem aqui também. Agora deixe-me ver, deveria haver uma mensagem aqui também. Ah--!";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Isso diz: O que será?";
+		mes "Vinho ou Suco de Uva? Oh, mas eu prefiro muito mais vinho. Ok, o que isso tem a ver com a gema de Hellion? Estranho...";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Estou sentindo falta de alguma coisa?";
+		mes "Eu acho que realmente preciso de ajuda para descobrir isso. Hmm...";
+		set HELLIONQ,52;
+		close;
+	}
+}
+
+payon,159,129,3	script	Chão de Madeira#paypuzz5	111,{
+	if (HELLIONQ == 53) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "Ei, o chão por aqui não parece muito sólido. Talvez haja algo embaixo?";
+		next;
+		if(select("Basta checar o chão.:Cavar através da poeira.") == 1) {
+			mes "^3355FFVocê examina o chão, mas não consegue encontrar nada que se pareça com uma pista da localização da gema de Hellion ou de uma Tábula.^000000";
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "Oh cara, há tanta poeira! O que eu posso fazer com toda essa sujeira desagradável no ar?";
+		next;
+		if (countitem(953) > 0 && countitem(533) > 0 && countitem(511) > 0 && countitem(1049) > 0) {
+			mes "[" + strcharinfo(0) + "]";
+			mes "Bem, há todas essas pistas que Grout encontrou. É uma porcaria, mas eu vou usar esse suco de uva para evitar que essa poeira chute. E se eu colocar minha moral ^FFFFFFa^000000 em espera, eu cobrirei meu rosto...";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "...Com essa Saia Virginal Oh, e eu posso usar este Coração de Pedra para sustentar qualquer tábua de chão. Eu inclino enquanto olho debaixo deste chão. Oh Ei! Eu encontrei!";
+			mes "É... é outra pista!";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "Espere, espere... Eu não posso ler a gravura nesta laje de pedra, é muito velha. Vamos ver...";
+			next;
+			mes "^3355FFVocê cobre a superfície da laje e começa a esfregar uma Erva Verde sobre ela. Felizmente, o suco da Erva Verde faz a gravura aparecer com mais clareza.^000000";
+			delitem 953,1; //Coração de Pedra
+			delitem 511,1; //Erva Verde
+			delitem 533,1; //Suco de Uva
+			delitem 1049,1; //Saia Virginal
+			set HELLIONQ,54;
+			next;
+			mes "[Gravura em Pedra]";
+			mes "^4D4DFF''Isso foi confiado ao cuidado do compassivo para que meus amigos possam encontrar a paz. Para aquele que encontra isso, lembre-se que a avareza não conhece limites. --Tyus .''^000000";
+			set HELLIONQ,55;
+			close;
+		}
+		mes "[" + strcharinfo(0) + "]";
+		mes "Onde eu deixei todas as coisas que eu peguei do Grout'he? Vamos ver, havia uma Erva Verde, um Coração de Pedra, um Suco de Uva e uma Saia Virginal...";
+		close;
+	}
+	else if (HELLIONQ == 54) {
+		mes "[Gravura em Pedra]";
+		mes "^4D4DFF''Isto foi confiado ao cuidado do compassivo para que meus amigos possam encontrar paz. Para aquele que encontra isso, lembre-se de que a avareza não conhece limites. --Tyus.^000000";
+		set HELLIONQ,55;
+		close;
+	}
+	else if (HELLIONQ > 54) {
+		mes "[Gravura em Pedra]";
+		mes "^4D4DFF''Isto foi confiado ao cuidado do compassivo para que meus amigos possam encontrar paz. Para aquele que encontra isso, lembre-se de que a avareza não conhece limites. --Tyus.^000000";
+		close;
+	}
+}
+
+pay_arche,142,28,0	script	Estátua de Buda#paypuzz6	111,5,5,{
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FFSegure aí mesmo!";
+		mes "Você está carregando muitos itens e não tem espaço no inventário suficiente para receber recompensas. Por favor, disponibilize mais espaço para inventário e volte para este desafio.";
+		close;
+	}
+	if (HELLIONQ == 56) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "Ei, aqui está uma enorme estátua de pedra. Isso deve ser o que Grout'he estava me dizendo.";
+		next;
+		mes "[Voz Ecoando]";
+		mes "^4d4dffVocê deve... Você deve ser...^000000";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "O que o--?";
+		mes "Há uma voz dentro da minha cabeça!";
+		mes "E nem é meu!";
+		next;
+		mes "[Voz Ecoando]";
+		mes "Você que veio pela Tábula de Payon, eu vou julgar se você é digno ou não. Responda a esta pergunta.";
+		next;
+		mes "[Voz Ecoando]";
+		mes "Você está em uma situação na qual você irá morrer, mas se você causar a morte de outra pessoa, você certamente irá se salvar. Então... O que você faz?";
+		next;
+		switch(select("Vu matar para sobreviver.:Não tenho escolha, mas posso morrer.:Não vou matar, mas vou viver!:Perguntar se há problema em matá-lo.")) {
+		case 1:
+			mes "[Voz Ecoando]";
+			mes "Há uma verdade primordial em sua resposta. No entanto... Você escolheu mal.";
+			close2;
+			percentheal -100,0;
+			end;
+		case 2:
+			mes "[Voz Ecoando]";
+			mes "Há uma bondade e compaixão em sua resposta que é realmente rara. No entanto, onde está o respeito pela sua própria vida? Se você está disposto a jogá-la fora, você não é um herói.";
+			close2;
+			percentheal -100,0;
+			end;
+		case 3:
+			mes "[Voz Ecoando]";
+			mes "Sim. O amor por toda a vida, incluindo a sua, é uma característica que todos os verdadeiros heróis devem ter. Você escolheu... Sabiamente. Por favor, leve isso para suas mãos capazes, aventureiro.";
+			next;
+			mes "^3355FFA laje de pedra ao pé da estátua se abre, revelando um pedaço da tabuinha que o levará à gema de Hellion.";
+			set HELLIONQ,57;
+			getitem 7334,1; //Tábula de Payon
+			close;
+		case 4:
+			mes "[Voz Ecoando]";
+			mes "O verniz de honestidade em sua resposta é superado por sua própria covardia. Você escolheu muito mal...";
+			close2;
+			percentheal -100,0;
+			end;
+		}
+	}
+
+OnTouch_:
+	if (HELLIONQ == 56 && countitem(7333) > 0) {
+		specialeffect2 EF_HEAL2;
+		specialeffect EF_HEAL2;
+		mes "^3355FFA Tábula que você tem está brilhando com a luz como se estivesse em resposta a algo na área.^000000";
+		close;
+	}
+	end;
+}
+
+geffen,110,200,3	script	Sábio Welshyun#hellion	754,3,3,{
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FFSegure aí mesmo!";
+		mes "Você está carregando muitos itens e não tem espaço no inventário suficiente para receber recompensas. Por favor, disponibilize mais espaço para inventário e volte para este desafio.";
+		close;
+	}
+	if (HELLIONQ < 58) {
+		mes "[Welshyun]";
+		mes "Hm? Oh, me perdoe por não ter notado você. Eu estava ocupado demais pensando em pensamentos importantes e profundos que sua pequena mente insignificante não poderia imaginar.";
+		close;
+	}
+	else if (HELLIONQ == 58) {
+		specialeffect2 EF_HEAL2;
+		specialeffect EF_HEAL2;
+		mes "[Welshyun]";
+		mes "Isso... Esse brilho misterioso...";
+		next;
+		mes "[Welshyun]";
+		mes "Você! Identifique-se e explique como você conseguiu essas Tábulas! Agora me responda!";
+		next;
+		mes "[Welshyun]";
+		mes "Ah, me perdoe. Você está ajudando Chilias, está?";
+		mes "Entendo. Então você deve estar aqui para buscar minha ajuda para encontrar a peça final, estou correto?";
+		next;
+		if(select("Cale-se, sei que você tem, então dê!:Sim, por favor me ajude.") == 1) {
+			mes "[Welshyun]";
+			mes "Tal insolência!";
+			mes "Huh. Suponho que Chilias possa tê-lo julgado mal quando ele lhe confiou esta importante missão. Huh, uma reavaliação está em ordem...";
+			set HELLIONQ,60;
+			close;
+		}
+		mes "[Welshyun]";
+		mes "Claro que, no interesse da humanidade, eu te ajudarei. Mas primeiro, eu tenho um favor para pedir a você.";
+		next;
+		mes "[Welshyun]";
+		mes "Meu aluno na Torre de Geffen não me informou sobre seu projeto de pesquisa, então eu gostaria que você o encontrasse e recuperasse o relatório para mim. Não é grande coisa, certo?";
+		next;
+		mes "[Welshyun]";
+		mes "O título do relatório dele deve ser ''^4D4DFFVida de Monstro na Área Geffen^000000'', então lembre-se que Ah, e o nome do meu aluno é Enoz.";
+		set HELLIONQ,59;
+		close;
+	}
+	else if (HELLIONQ == 59) {
+		mes "[Welshyun]";
+		mes "Por favor, traga-me o relatório intitulado ''^4D4DFFVida de Monstro na Área Geffen^000000'', do meu aluno Enoz na Torre de Geffen. Obrigado, agradeço sua ajuda.";
+		close;
+	}
+	else if (HELLIONQ == 60) {
+		mes "[Welshyun]";
+		mes "^333333*Hum*^000000 Oh, querida, eu... Estou com uma sede insaciável... Não há nenhuma maneira de pensar seriamente com uma garganta seca e ressecada...";
+		set HELLIONQ,61;
+		close;
+	}
+	else if (HELLIONQ == 61) {
+		if (countitem(504) > 0) {
+			mes "[Welshyun]";
+			mes "Ah, uma poção branca?";
+			mes "Sim, posso por favor ter um? Ahh, mais refrescante~ Você pode não ser uma pessoa tão ruim, afinal de contas! Agora eu vou ajudá-lo a encontrar aquele pedaço de tablet?";
+			next;
+			mes "[Welshyun]";
+			mes "Claro que, no interesse da humanidade, eu te ajudarei. Mas primeiro, eu tenho um favor para pedir a você.";
+			next;
+			mes "[Welshyun]";
+			mes "Meu aluno na Torre de Geffen não me informou sobre seu projeto de pesquisa, então eu gostaria que você o encontrasse e recuperasse o relatório para mim. Não é grande coisa, né?";
+			next;
+			mes "[Welshyun]";
+			mes "O título do relatório dele deve ser ''^4D4DFFVida de Monstro na Área Geffen^000000, então lembre-se que o nome do meu aluno é Enoz.";
+			delitem 504,1; //Poção Branca
+			set HELLIONQ,62;
+			close;
+		}
+		mes "[Welshyun]";
+		mes "Oh...! Ainda assim... Exasperantemente sedento!";
+		mes "Se eu tivesse algo legal, refrescante e com alto valor restaurativo para saciar essa sede!";
+		close;
+	}
+	else if (HELLIONQ == 62) {
+		mes "[Welshyun]";
+		mes "Por favor, traga-me o relatório intitulado ''^4D4DFFVida de Monstro na Área Geffen^000000'', do meu aluno Enoz na Torre de Geffen. Obrigado, agradeço sua ajuda.";
+		close;
+	}
+	else if (HELLIONQ == 63) {
+		mes "[Welshyun]";
+		mes "Hm? O que é essa expressão estranha no seu rosto?";
+		mes "Prank? Oh por favor. Tal chicanery está abaixo de mim... Mas mesmo se eu fizesse uma piada, acredite em mim. Ela constrói um personagem.";
+		next;
+		mes "[Welshyun]";
+		mes "Antes de mais nada, quero testá-lo para ver se você é digno deste pedaço de tablet. Eu quero ver por mim mesmo se você é uma pessoa de honra. Alguém de caráter.";
+		next;
+		mes "[Welshyun]";
+		mes "Ah sim, eu acidentalmente peguei este Livro de Referência de Mestrado de Enoz, então você poderia por favor devolvê-lo para ele para mim? Ah, e por favor traga de volta 1 Pedra Azul.";
+		next;
+		mes "^3355FFVocê recebeu o incrivelmente pesado volume, o Livro de Referência de Ciência Mestra.^000000";
+		set HELLIONQ,64;
+		close;
+	}
+	else if (HELLIONQ == 64) {
+		mes "[Welshyun]";
+		mes "Por favor, entregue o Livro de Referência de Ciência Mestra para Enoz, e volte para mim com 1 Gema Azul.";
+		close;
+	}
+	else if (HELLIONQ == 65) {
+		if (countitem(717) > 0) {
+			mes "[Welshyun]";
+			mes "Obrigado. Você trouxe o livro para Enoz e me entregou uma pedra preciosa como eu pedi. Agora, há um teste final...";
+			next;
+			mes "[Welshyun]";
+			mes "Responda esta pergunta Onde está a morada das almas que partiram com um telhado de prata brilhante que é mencionado na terceira parte da balada de Grimnir? Bem, aventureiro?";
+			next;
+			input .@input$;
+			if (.@input$ == "Valaskjalf") {
+				mes "[Welshyun]";
+				mes "Ah, bem conhecido, bem conhecido Você é tão instruído quanto você é corajoso. Como prometido, você pode ter este pedaço da Tábula, que eu já encontrei. As pistas eram simples demais...";
+				delitem 717,1; //Gema Azul
+				set HELLIONQ,66;
+				getitem 7336,1; //Tábula de Geffen
+				next;
+				mes "[Welshyun]";
+				mes "Por favor, envie meus cumprimentos a minha querida amiga, Chilias, que dedicou sua vida a selar o mal dentro da gema de Hellion.";
+				close;
+			}
+			mes "[Welshyun]";
+			mes "Bwahahaah! Apenas uma mente superior poderia saber a resposta para tal pergunta! Vá em frente e aprenda a resposta, senão não posso ajudá-lo, aventureiro~";
+			close;
+		}
+		mes "[Welshyun]";
+		mes "Ah, eu ouvi dizer que Enoz recebeu o Livro de Referência de Ciência Mestra de você. Mas você se lembrou de me trazer uma Gema Azul?";
+		close;
+	}
+	else if (HELLIONQ == 66) {
+		mes "[Welshyun]";
+		mes "Hum. Você deve visitar Chilias e determinar o seu próximo curso de ação, agora que você tem todas as quatro partes da Tábula completa.";
+		close;
+	}
+	else if (HELLIONQ == 67) {
+		if (countitem(7333) > 0 && countitem(7334) > 0 && countitem(7335) > 0 && countitem(7336) > 0) {
+			mes "[Welshyun]";
+			mes "Hm? Você precisa que eu combine todas as quatro partes da Tábula e faça tudo de novo? Oh Todo esse tempo eu pensei que você sabia como fazer isso. Certo.";
+			next;
+			mes "[Welshyun]";
+			mes "Na verdade, eu estava planejando usar a Gema Azul que você me deu para fazer isso. Mas como você nunca perguntou... De qualquer forma, deixe-me me concentrar.";
+			next;
+			mes "[Welshyun]";
+			mes "Sombras lembradas pelo tempo Ajude-me a recuperar as histórias esquecidas que foram espalhadas pelo vento. Aqui mesmo. Agora mesmo";
+			specialeffect EF_BEGINSPELL2;
+			next;
+			mes "[Welshyun]";
+			mes "... Ok... Isso foi difícil.";
+			specialeffect EF_SPELLBREAKER;
+			next;
+			mes "[Welshyun]";
+			mes "Isso foi um comprimido completo difícil Por favor, traga isso de volta para Chilias.";
+			delitem 7333,1; //Tábula de Prontera
+			delitem 7334,1; //Tábula de Payon
+			delitem 7335,1; //Tábula de Morroc
+			delitem 7336,1; //Tábula de Geffen
+			set HELLIONQ,68;
+			getitem 7332,1;// Ardósia
+			next;
+			mes "[Welshyun]";
+			mes "Espere, dê uma olhada!";
+			mes "Há um mapa na parte de trás da Tábula. Embora a gema já esteja embutida na Tábula, quem sabe onde esse mapa pode levar? Talvez Espectro de Hellion?";
+			next;
+			mes "[Welshyun]";
+			mes "Eu não sei se Chilias disse a você, mas o nome do monstro que guarda e segue esta gema é Espectro de Hellion. Mas por que marcar sua localização nesta Tábula?";
+			next;
+			mes "[Welshyun]";
+			mes "Bem, será perigoso, mas tenho certeza que você é forte o suficiente para confrontar esse monstro. Acredito que foi o desejo do criador desta Tábula que alguém derrotasse o Hellion Fantasma...";
+			next;
+			if(select("Tudo bem, farei isso!:É melhor eu pegar esta Tábula para Chilias...") == 1) {
+				mes "[Welshyun]";
+				mes "Bem, estou quase certo de que este mapa irá levá-lo a Espectro de Hellion. Deixe-me te mostrar o local marcado no mapa da Tábula...";
+				close2;
+				warp "gef_fild09",368,88;
+				end;
+			}
+			mes "[Welshyun]";
+			mes "Sim, é verdade que Chilias tem esperado toda a sua vida para selar esta jóia. Além disso, quem sabe o que pode acontecer enquanto estiver em sua posse?";
+			close;
+		}
+		mes "[Welshyun]";
+		mes "Então, você foi capaz de entregar o comprimido e a gema de Hellion para Chilias com segurança? Espero que sim...";
+		close;
+	}
+	else if (HELLIONQ > 67 && HELLIONQ < 71) {
+		mes "[Welshyun]";
+		mes "Então, você conseguiu entregar o comprimido e a gema de Hellion para Chilias com segurança? Ah, e como foi meu amigo?";
+		close;
+	}
+	else {
+		mes "[Welshyun]";
+		mes "Heh heh~ Enoz deve estar em pânico agora. Oh, os alunos são sempre bons para rir...";
+		close;
+	}
+
+OnTouch_:
+	if (HELLIONQ == 58 && countitem(7335) > 0) {
+		specialeffect2 EF_HEAL2;
+		specialeffect EF_HEAL2;
+		mes "^3355FFA Tábula que você tem está brilhando com a luz como se estivesse em resposta a algo na área.^000000";
+		close;
+	}
+	end;
+}
+
+gef_tower,116,37,0	script	Enoz#hellion	748,{
+	if (HELLIONQ == 59 || HELLIONQ == 62) {
+		mes "[Enoz]";
+		mes "Se foi, acabou!";
+		mes "Onde diabos foi?!";
+		mes "Oh cara, quem poderia ter pegado isso? Espere, foi isso... Você?!";
+		next;
+		if(select("Na verdade, Welshyun me enviou.:Não é assim homem, não enlouqueça.") == 1) {
+			mes "[Enoz]";
+			mes "Meu mentor, Welshyun?";
+			mes "Huh. Há algum relatório que eu não tenha enviado a ele ainda? Então, como se chama?";
+			next;
+			input .@input$;
+			if (.@input$ == "Vida de Monstro na Área de Geffen"){
+				mes "[Enoz]";
+				mes "'Vida de Monstro na Área de Geffen?' 'Oh não. Meu mentor tomou isso há três dias!";
+				mes "Ele ainda está com seus velhos truques de novo?";
+				next;
+				mes "[Enoz]";
+				mes "Awww louco!";
+				mes "Onde diabos está o meu Livro de Referência de Ciência Mestra? Foi aqui há três dias...";
+				set HELLIONQ,63;
+				close;
+			}
+			mes "[Enoz]";
+			mes "" + .@input$ + "?";
+			mes "Eu não completei nenhuma pesquisa relacionada a esse assunto. Ou eu fiz?";
+			mes "De qualquer forma, eu preciso do nome exato do relatório que você quer!";
+			close;
+		}
+		mes "[Enoz]";
+		mes "Nuts?! Oh, você quer ver loucura, é isso?! Você quer ver insaaaane?!";
+		mes "Porque eu vou enlouquecer medieval se você continuar me incomodando!!";
+		close;
+	}
+	else if (HELLIONQ == 63) {
+		mes "[Enoz]";
+		mes "Meu mentor Welshyun está brincando de novo, então é melhor você falar com ele Droga. Onde está o Livro de Referência de Mestrado?";
+		close;
+	}
+	else if (HELLIONQ == 64) {
+		mes "[Enoz]";
+		mes "Oh, ei, eu lembro de você~ Então meu mentor mandou você de novo por algum motivo?";
+		next;
+		mes "^3355FFVocê cuidadosamente entrega a Enoz o Livro de Referência de Ciência Mestra.^000000";
+		next;
+		mes "[Enoz]";
+		mes "Sim! Oh sim!";
+		mes "Este é o livro que eu perdi há três dias! Muito obrigado!";
+		mes "Agora eu posso finalmente terminar este projeto de pesquisa que--";
+		next;
+		mes "[Enoz]";
+		mes "Espere, a página que eu realmente preciso está faltando! E há algum tipo de nota... Umm... ^333333''Enoz, eu acho que esta página vale pelo menos um suco de maçã. Certo? - Welshyun.''^000000";
+		next;
+		mes "[Enoz]";
+		mes "NOooOOoOo!";
+		mes "Não agaaaaain!";
+		mes "Por que ele está sempre tocando essas pegadinhas?!";
+		mes "Suco de maçã! Eu preciso de um pouco de suco de maçã!";
+		set HELLIONQ,65;
+		next;
+		mes "^3355FFMe parece que é hora de pegar 1 Gema Azul, e depois levar de volta para o sábio Welshyun.^000000";
+		close;
+	}
+	mes "[Enoz]";
+	mes "Foi embora! Acabou!";
+	mes "Para onde o livro que eu preciso realmente vai?";
+	mes "Oh não oh não oh não oh não!";
+	mes "Waaaaaah, eu vou chorar!";
+	close;
+}
+
+gef_fild09,296,59,0	script	Caverna Oculta#hellion	111,3,3,{
+	if (HELLIONQ == 68) {
+		mes "^3355FFAentre os arbustos selvagens e a grama grande demais, você vê uma grande laje de pedra que se parece com uma porta. Ao se aproximar, você pode ver um sulco na superfície da rocha.^000000";
+		next;
+		if(select("Inserir a Tábula.:Ignorar.") == 1) {
+			mes "^3355FFVocê insere a Tábula na ranhura da rocha e a gema de Hellion começa a zumbir e brilhar. A rocha se abre, revelando uma mensagem gravada no chão para você ler.^000000";
+			next;
+			mes "^4D4DFF''Para vocês que encontraram este lugar, eu revelo a verdade sobre o Espectro de Hellion. Nunca foi um demônio, como nós acreditávamos, mas um ser humano, lentamente corrompido por a escuridão da gema de Hellion.''^000000";
+			next;
+			mes "^4D4DFF''Eu aprendi essa verdade horrível tarde demais. Eu já posso sentir a escuridão crescendo dentro de mim. É tudo o que posso fazer para me prender nesta câmara antes que eu perca tudo razão.''^000000";
+			next;
+			mes "^4D4DFF''Eu falhei e é tarde demais para mim, mas eu espero que alguém no futuro possa selar o poder sombrio da gema de Hellion. E eu espero que alguém me conceda o doce alívio. Eu anseio...''^000000";
+			next;
+			mes "^4D4DFF''Deus herói, eu te imploro. Por favor, me mate e traga salvação para minha alma. Por favor, me liberte para que eu possa finalmente me juntar aos meus amigos.";
+			mes "^FFFFFF_^000000";
+			mes "^FFFFFFOOOOOOOOOOO ^4D4DFF-Tyus''^000000";
+			close2;
+			warp "gef_dun03",140,119;
+			end;
+		}
+		mes "^3355FFVocê não faz nada E nada acontece.^000000";
+		close;
+	}
+
+OnTouch_:
+	if (HELLIONQ == 68 && countitem(7332) > 0) {
+		specialeffect2 EF_HEAL2;
+		specialeffect EF_HEAL2;
+		mes "^3355FFA Tábula em suas mãos começa a brilhar com a luz, respondendo a algo na área.^000000";
+		close;
+	}
+	end;
+}

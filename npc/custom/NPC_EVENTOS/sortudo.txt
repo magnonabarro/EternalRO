@@ -1,0 +1,202 @@
+sec_in01,175,166,4	script	Sortudo	715,{
+	if (getgmlevel() > 9 && getgmlevel() < 99) {
+		mes "[" + strnpcinfo(1) + "]";
+		mes "Você não pode participar!";
+		close;
+	}
+	mes "[" + strnpcinfo(1) + "]";
+	mes "Olá "+ strcharinfo(0) +"!";
+	mes "Bem-vindo ao evento Sortudo.";
+	mes "Deseja entrar?";
+	if (getgroupid() >= $@sortu_gmcontrol)
+		mes "^0000ff-Use @gmsortudo para controlar o evento.-^000000";
+	next;
+	switch(select("- Sim, entrar no evento.", "- Não, talvez depois.")) {
+	case 1:
+		if(.event_status != 1) {
+			mes "[" + strnpcinfo(1) + "]";
+			mes "O evento está fechado!";
+			close;
+		}
+		if (BaseLevel < $@sortu_minlevel) {
+			mes "[" + strnpcinfo(1) + "]";
+			mes "Desculpe, o nível mínimo para entrar é " + $@sortu_minlevel + ".";
+			close;
+		}
+		if (Zeny < $@sortu_zcost) {
+			mes "[" + strnpcinfo(1) + "]";
+			mes "Desculpe, a taxa de entrada é de " + $@sortu_zcost + "z.";
+			close;
+		}
+		mes "[" + strnpcinfo(1) + "]";
+		mes "Boa sorte durante o evento!";
+		close2;
+		if(.event_status != 1) end;
+		Zeny -= $@sortu_zcost;
+		.@rand_sortudo = rand(1,4);
+		dispbottom "Você está dentro do Evento Sortudo! Boa Sorte!";
+		if(.@rand_sortudo == 1) warp "quiz_02",37,52;
+		if(.@rand_sortudo == 2) warp "quiz_02",49,52;
+		if(.@rand_sortudo == 3) warp "quiz_02",60,52;
+		if(.@rand_sortudo == 4) warp "quiz_02",73,52;
+		end;
+	case 2:
+		mes "[" + strnpcinfo(1) + "]";
+		mes "Até mais.";
+		close;
+	}
+
+OnInit:
+//===== CONFIGURAÇÕES ========================================================
+
+	$@sortu_gmcontrol = 99;	//GroupID necessário para acessar o comando de controle
+	$@sortu_minlevel = 99;	//Nível base mínimo para entrar (0=Ignorar)
+	$@sortu_zcost = 5000;	//Custo de Zeny necessário para entrar (0=Ignorar)
+	$@sortu_minplayer = 2;	//Minimo de jogadores para o evento iniciar
+
+	end;
+
+//= HORÁRIOS
+OnClock0200:
+OnClock0800:
+OnClock1230:
+OnClock2030:
+
+
+
+//=======================================================================
+
+OnGateOpen:
+	if (.event_status != 0) end;
+	.event_status = 0;
+	mapwarp "quiz_02","prontera", 150,150;
+	setmapflag "quiz_02", mf_noskill;
+	donpcevent strnpcinfo(0)+"::OnSignON";
+	.event_status = 1;
+	for ( .@i = 3; .@i > 0; .@i-- ) {
+		announce "Sortudo : O evento começa em "+ .@i + " minuto" + (.@i>1?"s":"") + "! digite @evento para entrar!.", 0;
+		sleep 60000;
+		if (.event_status != 1)
+			end;
+	}
+	donpcevent strnpcinfo(0)+"::OnSignOFF";
+	.event_status = 2;
+	announce "Sortudo : Os portões para o evento foram fechados!", 0;
+	sleep 5000;
+	if (.event_status != 2)
+			end;
+	mapannounce "quiz_02","Sortudo : Em 10 segundos o PvP será ativado, 1 minuto de PVP o sobrevivente será o vencedor!",bc_map;
+	sleep 10000;
+	if (.event_status != 2)
+			end;
+	if (getmapusers("quiz_02") < $@sortu_minplayer) {
+		mapannounce "quiz_02","Sortudo : Número de competidores insuficiente.",bc_map;
+		sleep 1000;
+		donpcevent strnpcinfo(0) + "::OnEnd";
+	}
+	else {
+		removemapflag "quiz_02", mf_noskill;
+		pvpon "quiz_02";
+		initnpctimer;
+	}
+	end;
+
+OnTimer60000:
+	if (.event_status != 2)
+		end;
+	stopnpctimer;
+	pvpoff "quiz_02";
+	setmapflag "quiz_02", mf_noskill;
+	monster "quiz_02",37,73, "Tesouro",35055,1, strnpcinfo(0)+"::OnTreasureDie";
+	monster "quiz_02",49,73, "Tesouro",35055,1, strnpcinfo(0)+"::OnTreasureDie";
+	monster "quiz_02",61,73, "Tesouro",35055,1, strnpcinfo(0)+"::OnTreasureDie";
+	monster "quiz_02",73,73, "Tesouro",35055,1, strnpcinfo(0)+"::OnTreasureDie";
+	sleep 60000;
+	if (.event_status != 2)
+		end;
+	donpcevent strnpcinfo(0)+"::OnEnd";
+	end;
+
+OnTreasureDie:
+	.@r = rand(1,2);
+	if (.@r == 1) {
+		specialeffect2 68;
+		getitem 35004,1;
+		announce "Sortudo : " + strcharinfo(0) + " abriu um Baú. O prêmio é : Ganhou 1 Prêmio!",bc_yellow; 
+		sleep2 1500;
+		warp "prontera",150,150;
+	}
+	else {
+		specialeffect2 106;
+		percentheal -100,0;
+		announce "Sortudo : " + strcharinfo(0)+" abriu um Baú. Não ganhou nada e ainda morreu! Mwahahaha",bc_yellow;
+		sleep2 1500;
+		warp "prontera",150,150;
+	}
+	end;
+
+OnGMEnd:
+	if (.event_status == 1)
+		announce "Sortudo : O GM fechou o portal!", 0;
+	else
+		mapannounce "quiz_02","Sortudo : O GM terminou o evento!", 0;
+OnEnd:
+	if (.event_status == 1)
+		donpcevent strnpcinfo(0)+"::OnSignOFF";
+	pvpoff "quiz_02";
+	stopnpctimer;
+	mapwarp "quiz_02","prontera",150,150;
+	killmonsterall "quiz_02";
+	.event_status = 0;
+	end;
+
+OnSignON:
+	waitingroom "Evento aberto!", 0;
+	end;
+
+OnSignOFF:
+	delwaitingroom;
+	end;
+}
+
+-	script	control#sortudo_gm	HIDDEN_WARP_NPC,{
+OnAtcommand:
+	if(getgroupid() < $@sortu_gmcontrol) end;
+	switch(select("Iniciar evento.:Terminar evento.:Ir para o mapa.")) {
+		case 1:
+			if (getvariableofnpc(.event_status,"Sortudo") == 0) {
+				donpcevent "Sortudo::OnGateOpen";
+				mes "Evento iniciado!";
+				close;
+			}
+			mes "O evento já está em andamento.";
+			close;
+		case 2:
+			if (getvariableofnpc(.event_status,"Sortudo") != 0) {
+				donpcevent "Sortudo::OnGMEnd";
+				mes "Evento terminado!";
+				close;
+			}
+			mes "O evento não está em andamento.";
+			close;
+		case 3:
+			warp "quiz_02", 55, 80;
+			end;
+	}
+
+OnInit:
+	bindatcmd "gmsortudo", strnpcinfo(3)+"::OnAtcommand", $@sortu_gmcontrol;
+	end;
+}
+
+quiz_02	mapflag	nomemo
+quiz_02	mapflag	nowarp
+quiz_02	mapflag	nowarpto
+quiz_02	mapflag	noicewall
+quiz_02	mapflag	nosave
+quiz_02	mapflag	noreturn
+quiz_02	mapflag	nocommand	99
+quiz_02	mapflag	noteleport
+quiz_02	mapflag	pvp_noguild
+quiz_02	mapflag	pvp_noparty
+quiz_02	mapflag	restricted	3

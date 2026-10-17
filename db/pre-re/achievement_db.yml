@@ -1,0 +1,4552 @@
+# Bestiário - conquistas automáticas geradas a partir do mob_db.yml enviado.
+# Contém apenas monstros Class: Normal com uma carta própria na lista Drops.
+# Monstros Class: Boss, MVPs e minibosses estão excluídos.
+# Cada conquista exige 2000 abates e concede 1 carta correspondente.
+Header:
+  Type: ACHIEVEMENT_DB
+  Version: 2
+
+Body:
+  - Id: 230204
+    Group: Battle
+    Name: "Caça Poring"
+    Targets:
+      - Id: 0
+        Mob: PORING
+        Count: 2000
+    Rewards:
+      Item: Poring_Card
+      Amount: 1
+    Score: 10
+  - Id: 230205
+    Group: Battle
+    Name: "Caça Scorpion"
+    Targets:
+      - Id: 0
+        Mob: SCORPION
+        Count: 2000
+    Rewards:
+      Item: Scorpion_Card
+      Amount: 1
+    Score: 10
+  - Id: 230206
+    Group: Battle
+    Name: "Caça Hornet"
+    Targets:
+      - Id: 0
+        Mob: HORNET
+        Count: 2000
+    Rewards:
+      Item: Hornet_Card
+      Amount: 1
+    Score: 10
+  - Id: 230207
+    Group: Battle
+    Name: "Caça Familiar"
+    Targets:
+      - Id: 0
+        Mob: FARMILIAR
+        Count: 2000
+    Rewards:
+      Item: Farmiliar_Card
+      Amount: 1
+    Score: 10
+  - Id: 230208
+    Group: Battle
+    Name: "Caça Fabre"
+    Targets:
+      - Id: 0
+        Mob: FABRE
+        Count: 2000
+    Rewards:
+      Item: Fabre_Card
+      Amount: 1
+    Score: 10
+  - Id: 230209
+    Group: Battle
+    Name: "Caça Pupa"
+    Targets:
+      - Id: 0
+        Mob: PUPA
+        Count: 2000
+    Rewards:
+      Item: Pupa_Card
+      Amount: 1
+    Score: 10
+  - Id: 230210
+    Group: Battle
+    Name: "Caça Condor"
+    Targets:
+      - Id: 0
+        Mob: CONDOR
+        Count: 2000
+    Rewards:
+      Item: Condor_Card
+      Amount: 1
+    Score: 10
+  - Id: 230211
+    Group: Battle
+    Name: "Caça Willow"
+    Targets:
+      - Id: 0
+        Mob: WILOW
+        Count: 2000
+    Rewards:
+      Item: Wilow_Card
+      Amount: 1
+    Score: 10
+  - Id: 230212
+    Group: Battle
+    Name: "Caça Chonchon"
+    Targets:
+      - Id: 0
+        Mob: CHONCHON
+        Count: 2000
+    Rewards:
+      Item: Chonchon_Card
+      Amount: 1
+    Score: 10
+  - Id: 230213
+    Group: Battle
+    Name: "Caça Roda Frog"
+    Targets:
+      - Id: 0
+        Mob: RODA_FROG
+        Count: 2000
+    Rewards:
+      Item: Roda_Frog_Card
+      Amount: 1
+    Score: 10
+  - Id: 230214
+    Group: Battle
+    Name: "Caça Wolf"
+    Targets:
+      - Id: 0
+        Mob: WOLF
+        Count: 2000
+    Rewards:
+      Item: Wolf_Card
+      Amount: 1
+    Score: 10
+  - Id: 230215
+    Group: Battle
+    Name: "Caça Spore"
+    Targets:
+      - Id: 0
+        Mob: SPORE
+        Count: 2000
+    Rewards:
+      Item: Spore_Card
+      Amount: 1
+    Score: 10
+  - Id: 230216
+    Group: Battle
+    Name: "Caça Zombie"
+    Targets:
+      - Id: 0
+        Mob: ZOMBIE
+        Count: 2000
+    Rewards:
+      Item: Zombie_Card
+      Amount: 1
+    Score: 10
+  - Id: 230217
+    Group: Battle
+    Name: "Caça Archer Skeleton"
+    Targets:
+      - Id: 0
+        Mob: ARCHER_SKELETON
+        Count: 2000
+    Rewards:
+      Item: Archer_Skeleton_Card
+      Amount: 1
+    Score: 10
+  - Id: 230218
+    Group: Battle
+    Name: "Caça Creamy"
+    Targets:
+      - Id: 0
+        Mob: CREAMY
+        Count: 2000
+    Rewards:
+      Item: Creamy_Card
+      Amount: 1
+    Score: 10
+  - Id: 230219
+    Group: Battle
+    Name: "Caça Peco Peco"
+    Targets:
+      - Id: 0
+        Mob: PECOPECO
+        Count: 2000
+    Rewards:
+      Item: Pecopeco_Card
+      Amount: 1
+    Score: 10
+  - Id: 230220
+    Group: Battle
+    Name: "Caça Mandragora"
+    Targets:
+      - Id: 0
+        Mob: MANDRAGORA
+        Count: 2000
+    Rewards:
+      Item: Mandragora_Card
+      Amount: 1
+    Score: 10
+  - Id: 230221
+    Group: Battle
+    Name: "Caça Orc Warrior"
+    Targets:
+      - Id: 0
+        Mob: ORK_WARRIOR
+        Count: 2000
+    Rewards:
+      Item: Orc_Warrior_Card
+      Amount: 1
+    Score: 10
+  - Id: 230222
+    Group: Battle
+    Name: "Caça Wormtail"
+    Targets:
+      - Id: 0
+        Mob: WORM_TAIL
+        Count: 2000
+    Rewards:
+      Item: Worm_Tail_Card
+      Amount: 1
+    Score: 10
+  - Id: 230223
+    Group: Battle
+    Name: "Caça Boa"
+    Targets:
+      - Id: 0
+        Mob: SNAKE
+        Count: 2000
+    Rewards:
+      Item: Snake_Card
+      Amount: 1
+    Score: 10
+  - Id: 230224
+    Group: Battle
+    Name: "Caça Munak"
+    Targets:
+      - Id: 0
+        Mob: MUNAK
+        Count: 2000
+    Rewards:
+      Item: Munak_Card
+      Amount: 1
+    Score: 10
+  - Id: 230225
+    Group: Battle
+    Name: "Caça Soldier Skeleton"
+    Targets:
+      - Id: 0
+        Mob: SOLDIER_SKELETON
+        Count: 2000
+    Rewards:
+      Item: Soldier_Skeleton_Card
+      Amount: 1
+    Score: 10
+  - Id: 230226
+    Group: Battle
+    Name: "Caça Isis"
+    Targets:
+      - Id: 0
+        Mob: ISIS
+        Count: 2000
+    Rewards:
+      Item: Isis_Card
+      Amount: 1
+    Score: 10
+  - Id: 230227
+    Group: Battle
+    Name: "Caça Anacondaq"
+    Targets:
+      - Id: 0
+        Mob: ANACONDAQ
+        Count: 2000
+    Rewards:
+      Item: Anacondaq_Card
+      Amount: 1
+    Score: 10
+  - Id: 230228
+    Group: Battle
+    Name: "Caça Poporing"
+    Targets:
+      - Id: 0
+        Mob: POPORING
+        Count: 2000
+    Rewards:
+      Item: Poporing_Card
+      Amount: 1
+    Score: 10
+  - Id: 230229
+    Group: Battle
+    Name: "Caça Verit"
+    Targets:
+      - Id: 0
+        Mob: VERIT
+        Count: 2000
+    Rewards:
+      Item: Verit_Card
+      Amount: 1
+    Score: 10
+  - Id: 230230
+    Group: Battle
+    Name: "Caça Elder Willow"
+    Targets:
+      - Id: 0
+        Mob: ELDER_WILOW
+        Count: 2000
+    Rewards:
+      Item: Elder_Wilow_Card
+      Amount: 1
+    Score: 10
+  - Id: 230231
+    Group: Battle
+    Name: "Caça Thara Frog"
+    Targets:
+      - Id: 0
+        Mob: THARA_FROG
+        Count: 2000
+    Rewards:
+      Item: Thara_Frog_Card
+      Amount: 1
+    Score: 10
+  - Id: 230232
+    Group: Battle
+    Name: "Caça Hunter Fly"
+    Targets:
+      - Id: 0
+        Mob: HUNTER_FLY
+        Count: 2000
+    Rewards:
+      Item: Hunter_Fly_Card
+      Amount: 1
+    Score: 10
+  - Id: 230233
+    Group: Battle
+    Name: "Caça Ghoul"
+    Targets:
+      - Id: 0
+        Mob: GHOUL
+        Count: 2000
+    Rewards:
+      Item: Ghoul_Card
+      Amount: 1
+    Score: 10
+  - Id: 230234
+    Group: Battle
+    Name: "Caça Side Winder"
+    Targets:
+      - Id: 0
+        Mob: SIDE_WINDER
+        Count: 2000
+    Rewards:
+      Item: Side_Winder_Card
+      Amount: 1
+    Score: 10
+  - Id: 230235
+    Group: Battle
+    Name: "Caça Golem"
+    Targets:
+      - Id: 0
+        Mob: GOLEM
+        Count: 2000
+    Rewards:
+      Item: Golem_Card
+      Amount: 1
+    Score: 10
+  - Id: 230236
+    Group: Battle
+    Name: "Caça Mummy"
+    Targets:
+      - Id: 0
+        Mob: MUMMY
+        Count: 2000
+    Rewards:
+      Item: Mummy_Card
+      Amount: 1
+    Score: 10
+  - Id: 230237
+    Group: Battle
+    Name: "Caça Steel Chonchon"
+    Targets:
+      - Id: 0
+        Mob: STEEL_CHONCHON
+        Count: 2000
+    Rewards:
+      Item: Steel_Chonchon_Card
+      Amount: 1
+    Score: 10
+  - Id: 230238
+    Group: Battle
+    Name: "Caça Obeaune"
+    Targets:
+      - Id: 0
+        Mob: OBEAUNE
+        Count: 2000
+    Rewards:
+      Item: Obeaune_Card
+      Amount: 1
+    Score: 10
+  - Id: 230239
+    Group: Battle
+    Name: "Caça Marc"
+    Targets:
+      - Id: 0
+        Mob: MARC
+        Count: 2000
+    Rewards:
+      Item: Marc_Card
+      Amount: 1
+    Score: 10
+  - Id: 230240
+    Group: Battle
+    Name: "Caça Peco Peco Egg"
+    Targets:
+      - Id: 0
+        Mob: PECOPECO_EGG
+        Count: 2000
+    Rewards:
+      Item: Pecopeco_Egg_Card
+      Amount: 1
+    Score: 10
+  - Id: 230241
+    Group: Battle
+    Name: "Caça Thief Bug Egg"
+    Targets:
+      - Id: 0
+        Mob: THIEF_BUG_EGG
+        Count: 2000
+    Rewards:
+      Item: Thief_Bug_Egg_Card
+      Amount: 1
+    Score: 10
+  - Id: 230242
+    Group: Battle
+    Name: "Caça Picky"
+    Targets:
+      - Id: 0
+        Mob: PICKY
+        Count: 2000
+    Rewards:
+      Item: Picky_Card
+      Amount: 1
+    Score: 10
+  - Id: 230243
+    Group: Battle
+    Name: "Caça Picky"
+    Targets:
+      - Id: 0
+        Mob: PICKY_
+        Count: 2000
+    Rewards:
+      Item: Picky__Card
+      Amount: 1
+    Score: 10
+  - Id: 230244
+    Group: Battle
+    Name: "Caça Thief Bug"
+    Targets:
+      - Id: 0
+        Mob: THIEF_BUG
+        Count: 2000
+    Rewards:
+      Item: Thief_Bug_Card
+      Amount: 1
+    Score: 10
+  - Id: 230245
+    Group: Battle
+    Name: "Caça Rocker"
+    Targets:
+      - Id: 0
+        Mob: ROCKER
+        Count: 2000
+    Rewards:
+      Item: Rocker_Card
+      Amount: 1
+    Score: 10
+  - Id: 230246
+    Group: Battle
+    Name: "Caça Thief Bug Female"
+    Targets:
+      - Id: 0
+        Mob: THIEF_BUG_
+        Count: 2000
+    Rewards:
+      Item: Thief_Bug_Female_Card
+      Amount: 1
+    Score: 10
+  - Id: 230247
+    Group: Battle
+    Name: "Caça Thief Bug Male"
+    Targets:
+      - Id: 0
+        Mob: THIEF_BUG__
+        Count: 2000
+    Rewards:
+      Item: Thief_Bug_Male_Card
+      Amount: 1
+    Score: 10
+  - Id: 230248
+    Group: Battle
+    Name: "Caça Muka"
+    Targets:
+      - Id: 0
+        Mob: MUKA
+        Count: 2000
+    Rewards:
+      Item: Muka_Card
+      Amount: 1
+    Score: 10
+  - Id: 230249
+    Group: Battle
+    Name: "Caça Smokie"
+    Targets:
+      - Id: 0
+        Mob: SMOKIE
+        Count: 2000
+    Rewards:
+      Item: Smokie_Card
+      Amount: 1
+    Score: 10
+  - Id: 230250
+    Group: Battle
+    Name: "Caça Yoyo"
+    Targets:
+      - Id: 0
+        Mob: YOYO
+        Count: 2000
+    Rewards:
+      Item: Yoyo_Card
+      Amount: 1
+    Score: 10
+  - Id: 230251
+    Group: Battle
+    Name: "Caça Metaller"
+    Targets:
+      - Id: 0
+        Mob: METALLER
+        Count: 2000
+    Rewards:
+      Item: Metaller_Card
+      Amount: 1
+    Score: 10
+  - Id: 230252
+    Group: Battle
+    Name: "Caça Bigfoot"
+    Targets:
+      - Id: 0
+        Mob: BIGFOOT
+        Count: 2000
+    Rewards:
+      Item: BigFoot_Card
+      Amount: 1
+    Score: 10
+  - Id: 230253
+    Group: Battle
+    Name: "Caça Nightmare"
+    Targets:
+      - Id: 0
+        Mob: NIGHTMARE
+        Count: 2000
+    Rewards:
+      Item: Nightmare_Card
+      Amount: 1
+    Score: 10
+  - Id: 230254
+    Group: Battle
+    Name: "Caça Santa Poring"
+    Targets:
+      - Id: 0
+        Mob: PORING_
+        Count: 2000
+    Rewards:
+      Item: Poring__Card
+      Amount: 1
+    Score: 10
+  - Id: 230255
+    Group: Battle
+    Name: "Caça Lunatic"
+    Targets:
+      - Id: 0
+        Mob: LUNATIC
+        Count: 2000
+    Rewards:
+      Item: Lunatic_Card
+      Amount: 1
+    Score: 10
+  - Id: 230256
+    Group: Battle
+    Name: "Caça Megalodon"
+    Targets:
+      - Id: 0
+        Mob: MEGALODON
+        Count: 2000
+    Rewards:
+      Item: Megalodon_Card
+      Amount: 1
+    Score: 10
+  - Id: 230257
+    Group: Battle
+    Name: "Caça Strouf"
+    Targets:
+      - Id: 0
+        Mob: STROUF
+        Count: 2000
+    Rewards:
+      Item: Strouf_Card
+      Amount: 1
+    Score: 10
+  - Id: 230258
+    Group: Battle
+    Name: "Caça Vadon"
+    Targets:
+      - Id: 0
+        Mob: VADON
+        Count: 2000
+    Rewards:
+      Item: Vadon_Card
+      Amount: 1
+    Score: 10
+  - Id: 230259
+    Group: Battle
+    Name: "Caça Cornutus"
+    Targets:
+      - Id: 0
+        Mob: CORNUTUS
+        Count: 2000
+    Rewards:
+      Item: Cornutus_Card
+      Amount: 1
+    Score: 10
+  - Id: 230260
+    Group: Battle
+    Name: "Caça Hydra"
+    Targets:
+      - Id: 0
+        Mob: HYDRA
+        Count: 2000
+    Rewards:
+      Item: Hydra_Card
+      Amount: 1
+    Score: 10
+  - Id: 230261
+    Group: Battle
+    Name: "Caça Swordfish"
+    Targets:
+      - Id: 0
+        Mob: SWORD_FISH
+        Count: 2000
+    Rewards:
+      Item: Sword_Fish_Card
+      Amount: 1
+    Score: 10
+  - Id: 230262
+    Group: Battle
+    Name: "Caça Kukre"
+    Targets:
+      - Id: 0
+        Mob: KUKRE
+        Count: 2000
+    Rewards:
+      Item: Kukre_Card
+      Amount: 1
+    Score: 10
+  - Id: 230263
+    Group: Battle
+    Name: "Caça Pirate Skeleton"
+    Targets:
+      - Id: 0
+        Mob: PIRATE_SKEL
+        Count: 2000
+    Rewards:
+      Item: Pirate_Skel_Card
+      Amount: 1
+    Score: 10
+  - Id: 230264
+    Group: Battle
+    Name: "Caça Kaho"
+    Targets:
+      - Id: 0
+        Mob: KAHO
+        Count: 2000
+    Rewards:
+      Item: Kaho_Card
+      Amount: 1
+    Score: 10
+  - Id: 230265
+    Group: Battle
+    Name: "Caça Crab"
+    Targets:
+      - Id: 0
+        Mob: CRAB
+        Count: 2000
+    Rewards:
+      Item: Crab_Card
+      Amount: 1
+    Score: 10
+  - Id: 230266
+    Group: Battle
+    Name: "Caça Shellfish"
+    Targets:
+      - Id: 0
+        Mob: SHELLFISH
+        Count: 2000
+    Rewards:
+      Item: Shellfish_Card
+      Amount: 1
+    Score: 10
+  - Id: 230267
+    Group: Battle
+    Name: "Caça Skeleton"
+    Targets:
+      - Id: 0
+        Mob: SKELETON
+        Count: 2000
+    Rewards:
+      Item: Skeleton_Card
+      Amount: 1
+    Score: 10
+  - Id: 230268
+    Group: Battle
+    Name: "Caça Poison Spore"
+    Targets:
+      - Id: 0
+        Mob: POISON_SPORE
+        Count: 2000
+    Rewards:
+      Item: Poison_Spore_Card
+      Amount: 1
+    Score: 10
+  - Id: 230269
+    Group: Battle
+    Name: "Caça Vocal"
+    Targets:
+      - Id: 0
+        Mob: VOCAL
+        Count: 2000
+    Rewards:
+      Item: Vocal_Card
+      Amount: 1
+    Score: 10
+  - Id: 230270
+    Group: Battle
+    Name: "Caça Ambernite"
+    Targets:
+      - Id: 0
+        Mob: AMBERNITE
+        Count: 2000
+    Rewards:
+      Item: Ambernite_Card
+      Amount: 1
+    Score: 10
+  - Id: 230271
+    Group: Battle
+    Name: "Caça Andre"
+    Targets:
+      - Id: 0
+        Mob: ANDRE
+        Count: 2000
+    Rewards:
+      Item: Andre_Card
+      Amount: 1
+    Score: 10
+  - Id: 230272
+    Group: Battle
+    Name: "Caça Ant Egg"
+    Targets:
+      - Id: 0
+        Mob: ANT_EGG
+        Count: 2000
+    Rewards:
+      Item: Andre_Egg_Card
+      Amount: 1
+    Score: 10
+  - Id: 230273
+    Group: Battle
+    Name: "Caça Anubis"
+    Targets:
+      - Id: 0
+        Mob: ANUBIS
+        Count: 2000
+    Rewards:
+      Item: Anubis_Card
+      Amount: 1
+    Score: 10
+  - Id: 230274
+    Group: Battle
+    Name: "Caça Argiope"
+    Targets:
+      - Id: 0
+        Mob: ARGIOPE
+        Count: 2000
+    Rewards:
+      Item: Argiope_Card
+      Amount: 1
+    Score: 10
+  - Id: 230275
+    Group: Battle
+    Name: "Caça Argos"
+    Targets:
+      - Id: 0
+        Mob: ARGOS
+        Count: 2000
+    Rewards:
+      Item: Argos_Card
+      Amount: 1
+    Score: 10
+  - Id: 230276
+    Group: Battle
+    Name: "Caça Baphomet Jr."
+    Targets:
+      - Id: 0
+        Mob: BAPHOMET_
+        Count: 2000
+    Rewards:
+      Item: Baphomet__Card
+      Amount: 1
+    Score: 10
+  - Id: 230277
+    Group: Battle
+    Name: "Caça Bathory"
+    Targets:
+      - Id: 0
+        Mob: BATHORY
+        Count: 2000
+    Rewards:
+      Item: Bathory_Card
+      Amount: 1
+    Score: 10
+  - Id: 230278
+    Group: Battle
+    Name: "Caça Caramel"
+    Targets:
+      - Id: 0
+        Mob: CARAMEL
+        Count: 2000
+    Rewards:
+      Item: Caramel_Card
+      Amount: 1
+    Score: 10
+  - Id: 230279
+    Group: Battle
+    Name: "Caça Coco"
+    Targets:
+      - Id: 0
+        Mob: COCO
+        Count: 2000
+    Rewards:
+      Item: Coco_Card
+      Amount: 1
+    Score: 10
+  - Id: 230280
+    Group: Battle
+    Name: "Caça Deniro"
+    Targets:
+      - Id: 0
+        Mob: DENIRO
+        Count: 2000
+    Rewards:
+      Item: Andre_Card
+      Amount: 1
+    Score: 10
+  - Id: 230281
+    Group: Battle
+    Name: "Caça Desert Wolf"
+    Targets:
+      - Id: 0
+        Mob: DESERT_WOLF
+        Count: 2000
+    Rewards:
+      Item: Desert_Wolf_Card
+      Amount: 1
+    Score: 10
+  - Id: 230282
+    Group: Battle
+    Name: "Caça Baby Desert Wolf"
+    Targets:
+      - Id: 0
+        Mob: DESERT_WOLF_B
+        Count: 2000
+    Rewards:
+      Item: Desert_Wolf_Babe_Card
+      Amount: 1
+    Score: 10
+  - Id: 230283
+    Group: Battle
+    Name: "Caça Deviace"
+    Targets:
+      - Id: 0
+        Mob: DEVIACE
+        Count: 2000
+    Rewards:
+      Item: Deviace_Card
+      Amount: 1
+    Score: 10
+  - Id: 230284
+    Group: Battle
+    Name: "Caça Deviruchi"
+    Targets:
+      - Id: 0
+        Mob: DEVIRUCHI
+        Count: 2000
+    Rewards:
+      Item: Deviruchi_Card
+      Amount: 1
+    Score: 10
+  - Id: 230285
+    Group: Battle
+    Name: "Caça Dokebi"
+    Targets:
+      - Id: 0
+        Mob: DOKEBI
+        Count: 2000
+    Rewards:
+      Item: Dokebi_Card
+      Amount: 1
+    Score: 10
+  - Id: 230286
+    Group: Battle
+    Name: "Caça Drainliar"
+    Targets:
+      - Id: 0
+        Mob: DRAINLIAR
+        Count: 2000
+    Rewards:
+      Item: Drainliar_Card
+      Amount: 1
+    Score: 10
+  - Id: 230287
+    Group: Battle
+    Name: "Caça Drops"
+    Targets:
+      - Id: 0
+        Mob: DROPS
+        Count: 2000
+    Rewards:
+      Item: Drops_Card
+      Amount: 1
+    Score: 10
+  - Id: 230288
+    Group: Battle
+    Name: "Caça Dustiness"
+    Targets:
+      - Id: 0
+        Mob: DUSTINESS
+        Count: 2000
+    Rewards:
+      Item: Dustiness_Card
+      Amount: 1
+    Score: 10
+  - Id: 230289
+    Group: Battle
+    Name: "Caça Eggyra"
+    Targets:
+      - Id: 0
+        Mob: EGGYRA
+        Count: 2000
+    Rewards:
+      Item: Eggyra_Card
+      Amount: 1
+    Score: 10
+  - Id: 230290
+    Group: Battle
+    Name: "Caça Evil Druid"
+    Targets:
+      - Id: 0
+        Mob: EVIL_DRUID
+        Count: 2000
+    Rewards:
+      Item: Evil_Druid_Card
+      Amount: 1
+    Score: 10
+  - Id: 230291
+    Group: Battle
+    Name: "Caça Flora"
+    Targets:
+      - Id: 0
+        Mob: FLORA
+        Count: 2000
+    Rewards:
+      Item: Flora_Card
+      Amount: 1
+    Score: 10
+  - Id: 230292
+    Group: Battle
+    Name: "Caça Frilldora"
+    Targets:
+      - Id: 0
+        Mob: FRILLDORA
+        Count: 2000
+    Rewards:
+      Item: Frilldora_Card
+      Amount: 1
+    Score: 10
+  - Id: 230293
+    Group: Battle
+    Name: "Caça Giearth"
+    Targets:
+      - Id: 0
+        Mob: GIEARTH
+        Count: 2000
+    Rewards:
+      Item: Giearth_Card
+      Amount: 1
+    Score: 10
+  - Id: 230294
+    Group: Battle
+    Name: "Caça Goblin"
+    Targets:
+      - Id: 0
+        Mob: GOBLIN_1
+        Count: 2000
+    Rewards:
+      Item: Goblin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230295
+    Group: Battle
+    Name: "Caça Goblin"
+    Targets:
+      - Id: 0
+        Mob: GOBLIN_2
+        Count: 2000
+    Rewards:
+      Item: Goblin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230296
+    Group: Battle
+    Name: "Caça Goblin"
+    Targets:
+      - Id: 0
+        Mob: GOBLIN_3
+        Count: 2000
+    Rewards:
+      Item: Goblin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230297
+    Group: Battle
+    Name: "Caça Goblin"
+    Targets:
+      - Id: 0
+        Mob: GOBLIN_4
+        Count: 2000
+    Rewards:
+      Item: Goblin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230298
+    Group: Battle
+    Name: "Caça Goblin"
+    Targets:
+      - Id: 0
+        Mob: GOBLIN_5
+        Count: 2000
+    Rewards:
+      Item: Goblin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230299
+    Group: Battle
+    Name: "Caça Hode"
+    Targets:
+      - Id: 0
+        Mob: HODE
+        Count: 2000
+    Rewards:
+      Item: Hode_Card
+      Amount: 1
+    Score: 10
+  - Id: 230300
+    Group: Battle
+    Name: "Caça Horn"
+    Targets:
+      - Id: 0
+        Mob: HORN
+        Count: 2000
+    Rewards:
+      Item: Horn_Card
+      Amount: 1
+    Score: 10
+  - Id: 230301
+    Group: Battle
+    Name: "Caça Horong"
+    Targets:
+      - Id: 0
+        Mob: HORONG
+        Count: 2000
+    Rewards:
+      Item: Horong_Card
+      Amount: 1
+    Score: 10
+  - Id: 230302
+    Group: Battle
+    Name: "Caça Jakk"
+    Targets:
+      - Id: 0
+        Mob: JAKK
+        Count: 2000
+    Rewards:
+      Item: Jakk_Card
+      Amount: 1
+    Score: 10
+  - Id: 230303
+    Group: Battle
+    Name: "Caça Joker"
+    Targets:
+      - Id: 0
+        Mob: JOKER
+        Count: 2000
+    Rewards:
+      Item: Joker_Card
+      Amount: 1
+    Score: 10
+  - Id: 230304
+    Group: Battle
+    Name: "Caça Khalitzburg"
+    Targets:
+      - Id: 0
+        Mob: KHALITZBURG
+        Count: 2000
+    Rewards:
+      Item: Khalitzburg_Card
+      Amount: 1
+    Score: 10
+  - Id: 230305
+    Group: Battle
+    Name: "Caça Kobold"
+    Targets:
+      - Id: 0
+        Mob: KOBOLD_1
+        Count: 2000
+    Rewards:
+      Item: Kobold_Card
+      Amount: 1
+    Score: 10
+  - Id: 230306
+    Group: Battle
+    Name: "Caça Kobold"
+    Targets:
+      - Id: 0
+        Mob: KOBOLD_2
+        Count: 2000
+    Rewards:
+      Item: Kobold_Card
+      Amount: 1
+    Score: 10
+  - Id: 230307
+    Group: Battle
+    Name: "Caça Kobold"
+    Targets:
+      - Id: 0
+        Mob: KOBOLD_3
+        Count: 2000
+    Rewards:
+      Item: Kobold_Card
+      Amount: 1
+    Score: 10
+  - Id: 230308
+    Group: Battle
+    Name: "Caça Magnolia"
+    Targets:
+      - Id: 0
+        Mob: MAGNOLIA
+        Count: 2000
+    Rewards:
+      Item: Magnolia_Card
+      Amount: 1
+    Score: 10
+  - Id: 230309
+    Group: Battle
+    Name: "Caça Mantis"
+    Targets:
+      - Id: 0
+        Mob: MANTIS
+        Count: 2000
+    Rewards:
+      Item: Mantis_Card
+      Amount: 1
+    Score: 10
+  - Id: 230310
+    Group: Battle
+    Name: "Caça Marduk"
+    Targets:
+      - Id: 0
+        Mob: MARDUK
+        Count: 2000
+    Rewards:
+      Item: Marduk_Card
+      Amount: 1
+    Score: 10
+  - Id: 230311
+    Group: Battle
+    Name: "Caça Marina"
+    Targets:
+      - Id: 0
+        Mob: MARINA
+        Count: 2000
+    Rewards:
+      Item: Marina_Card
+      Amount: 1
+    Score: 10
+  - Id: 230312
+    Group: Battle
+    Name: "Caça Marine Sphere"
+    Targets:
+      - Id: 0
+        Mob: MARINE_SPHERE
+        Count: 2000
+    Rewards:
+      Item: Marine_Sphere_Card
+      Amount: 1
+    Score: 10
+  - Id: 230313
+    Group: Battle
+    Name: "Caça Marionette"
+    Targets:
+      - Id: 0
+        Mob: MARIONETTE
+        Count: 2000
+    Rewards:
+      Item: Marionette_Card
+      Amount: 1
+    Score: 10
+  - Id: 230314
+    Group: Battle
+    Name: "Caça Marse"
+    Targets:
+      - Id: 0
+        Mob: MARSE
+        Count: 2000
+    Rewards:
+      Item: Marse_Card
+      Amount: 1
+    Score: 10
+  - Id: 230315
+    Group: Battle
+    Name: "Caça Martin"
+    Targets:
+      - Id: 0
+        Mob: MARTIN
+        Count: 2000
+    Rewards:
+      Item: Martin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230316
+    Group: Battle
+    Name: "Caça Matyr"
+    Targets:
+      - Id: 0
+        Mob: MATYR
+        Count: 2000
+    Rewards:
+      Item: Matyr_Card
+      Amount: 1
+    Score: 10
+  - Id: 230317
+    Group: Battle
+    Name: "Caça Medusa"
+    Targets:
+      - Id: 0
+        Mob: MEDUSA
+        Count: 2000
+    Rewards:
+      Item: Medusa_Card
+      Amount: 1
+    Score: 10
+  - Id: 230318
+    Group: Battle
+    Name: "Caça Minorous"
+    Targets:
+      - Id: 0
+        Mob: MINOROUS
+        Count: 2000
+    Rewards:
+      Item: Minorous_Card
+      Amount: 1
+    Score: 10
+  - Id: 230319
+    Group: Battle
+    Name: "Caça Myst"
+    Targets:
+      - Id: 0
+        Mob: MYST
+        Count: 2000
+    Rewards:
+      Item: Myst_Card
+      Amount: 1
+    Score: 10
+  - Id: 230320
+    Group: Battle
+    Name: "Caça Orc Skeleton"
+    Targets:
+      - Id: 0
+        Mob: ORC_SKELETON
+        Count: 2000
+    Rewards:
+      Item: Orc_Skeleton_Card
+      Amount: 1
+    Score: 10
+  - Id: 230321
+    Group: Battle
+    Name: "Caça Orc Zombie"
+    Targets:
+      - Id: 0
+        Mob: ORC_ZOMBIE
+        Count: 2000
+    Rewards:
+      Item: Orc_Zombie_Card
+      Amount: 1
+    Score: 10
+  - Id: 230322
+    Group: Battle
+    Name: "Caça Pasana"
+    Targets:
+      - Id: 0
+        Mob: PASANA
+        Count: 2000
+    Rewards:
+      Item: Pasana_Card
+      Amount: 1
+    Score: 10
+  - Id: 230323
+    Group: Battle
+    Name: "Caça Petite"
+    Targets:
+      - Id: 0
+        Mob: PETIT
+        Count: 2000
+    Rewards:
+      Item: Petit_Card
+      Amount: 1
+    Score: 10
+  - Id: 230324
+    Group: Battle
+    Name: "Caça Petite"
+    Targets:
+      - Id: 0
+        Mob: PETIT_
+        Count: 2000
+    Rewards:
+      Item: Petit__Card
+      Amount: 1
+    Score: 10
+  - Id: 230325
+    Group: Battle
+    Name: "Caça Phen"
+    Targets:
+      - Id: 0
+        Mob: PHEN
+        Count: 2000
+    Rewards:
+      Item: Phen_Card
+      Amount: 1
+    Score: 10
+  - Id: 230326
+    Group: Battle
+    Name: "Caça Piere"
+    Targets:
+      - Id: 0
+        Mob: PIERE
+        Count: 2000
+    Rewards:
+      Item: Andre_Card
+      Amount: 1
+    Score: 10
+  - Id: 230327
+    Group: Battle
+    Name: "Caça Plankton"
+    Targets:
+      - Id: 0
+        Mob: PLANKTON
+        Count: 2000
+    Rewards:
+      Item: Plankton_Card
+      Amount: 1
+    Score: 10
+  - Id: 230328
+    Group: Battle
+    Name: "Caça Rafflesia"
+    Targets:
+      - Id: 0
+        Mob: RAFFLESIA
+        Count: 2000
+    Rewards:
+      Item: Rafflesia_Card
+      Amount: 1
+    Score: 10
+  - Id: 230329
+    Group: Battle
+    Name: "Caça Raydric"
+    Targets:
+      - Id: 0
+        Mob: RAYDRIC
+        Count: 2000
+    Rewards:
+      Item: Daydric_Card
+      Amount: 1
+    Score: 10
+  - Id: 230330
+    Group: Battle
+    Name: "Caça Requiem"
+    Targets:
+      - Id: 0
+        Mob: REQUIEM
+        Count: 2000
+    Rewards:
+      Item: Requiem_Card
+      Amount: 1
+    Score: 10
+  - Id: 230331
+    Group: Battle
+    Name: "Caça Sandman"
+    Targets:
+      - Id: 0
+        Mob: SAND_MAN
+        Count: 2000
+    Rewards:
+      Item: Sand_Man_Card
+      Amount: 1
+    Score: 10
+  - Id: 230332
+    Group: Battle
+    Name: "Caça Savage"
+    Targets:
+      - Id: 0
+        Mob: SAVAGE
+        Count: 2000
+    Rewards:
+      Item: Savage_Card
+      Amount: 1
+    Score: 10
+  - Id: 230333
+    Group: Battle
+    Name: "Caça Savage Babe"
+    Targets:
+      - Id: 0
+        Mob: SAVAGE_BABE
+        Count: 2000
+    Rewards:
+      Item: Savage_Babe_Card
+      Amount: 1
+    Score: 10
+  - Id: 230334
+    Group: Battle
+    Name: "Caça Skeleton Worker"
+    Targets:
+      - Id: 0
+        Mob: SKEL_WORKER
+        Count: 2000
+    Rewards:
+      Item: Skel_Worker_Card
+      Amount: 1
+    Score: 10
+  - Id: 230335
+    Group: Battle
+    Name: "Caça Sohee"
+    Targets:
+      - Id: 0
+        Mob: SOHEE
+        Count: 2000
+    Rewards:
+      Item: Sohee_Card
+      Amount: 1
+    Score: 10
+  - Id: 230336
+    Group: Battle
+    Name: "Caça Stainer"
+    Targets:
+      - Id: 0
+        Mob: STAINER
+        Count: 2000
+    Rewards:
+      Item: Stainer_Card
+      Amount: 1
+    Score: 10
+  - Id: 230337
+    Group: Battle
+    Name: "Caça Tarou"
+    Targets:
+      - Id: 0
+        Mob: TAROU
+        Count: 2000
+    Rewards:
+      Item: Tarou_Card
+      Amount: 1
+    Score: 10
+  - Id: 230338
+    Group: Battle
+    Name: "Caça Vitata"
+    Targets:
+      - Id: 0
+        Mob: VITATA
+        Count: 2000
+    Rewards:
+      Item: Vitata_Card
+      Amount: 1
+    Score: 10
+  - Id: 230339
+    Group: Battle
+    Name: "Caça Zenorc"
+    Targets:
+      - Id: 0
+        Mob: ZENORC
+        Count: 2000
+    Rewards:
+      Item: Zenorc_Card
+      Amount: 1
+    Score: 10
+  - Id: 230340
+    Group: Battle
+    Name: "Caça Zerom"
+    Targets:
+      - Id: 0
+        Mob: ZEROM
+        Count: 2000
+    Rewards:
+      Item: Zerom_Card
+      Amount: 1
+    Score: 10
+  - Id: 230341
+    Group: Battle
+    Name: "Caça Whisper"
+    Targets:
+      - Id: 0
+        Mob: WHISPER
+        Count: 2000
+    Rewards:
+      Item: Whisper_Card
+      Amount: 1
+    Score: 10
+  - Id: 230342
+    Group: Battle
+    Name: "Caça Nine Tail"
+    Targets:
+      - Id: 0
+        Mob: NINE_TAIL
+        Count: 2000
+    Rewards:
+      Item: Nine_Tail_Card
+      Amount: 1
+    Score: 10
+  - Id: 230343
+    Group: Battle
+    Name: "Caça Chonchon"
+    Targets:
+      - Id: 0
+        Mob: CHONCHON_
+        Count: 2000
+    Rewards:
+      Item: Chonchon_Card
+      Amount: 1
+    Score: 10
+  - Id: 230344
+    Group: Battle
+    Name: "Caça Giant Whisper"
+    Targets:
+      - Id: 0
+        Mob: WHISPER_BOSS
+        Count: 2000
+    Rewards:
+      Item: Whisper_Boss_Card
+      Amount: 1
+    Score: 10
+  - Id: 230345
+    Group: Battle
+    Name: "Caça Bongun"
+    Targets:
+      - Id: 0
+        Mob: BON_GUN
+        Count: 2000
+    Rewards:
+      Item: Bon_Gun_Card
+      Amount: 1
+    Score: 10
+  - Id: 230346
+    Group: Battle
+    Name: "Caça Orc Archer"
+    Targets:
+      - Id: 0
+        Mob: ORC_ARCHER
+        Count: 2000
+    Rewards:
+      Item: Orc_Archer_Card
+      Amount: 1
+    Score: 10
+  - Id: 230347
+    Group: Battle
+    Name: "Caça Mimic"
+    Targets:
+      - Id: 0
+        Mob: MIMIC
+        Count: 2000
+    Rewards:
+      Item: Mimic_Card
+      Amount: 1
+    Score: 10
+  - Id: 230348
+    Group: Battle
+    Name: "Caça Wraith"
+    Targets:
+      - Id: 0
+        Mob: WRAITH
+        Count: 2000
+    Rewards:
+      Item: Wraith_Card
+      Amount: 1
+    Score: 10
+  - Id: 230349
+    Group: Battle
+    Name: "Caça Alarm"
+    Targets:
+      - Id: 0
+        Mob: ALARM
+        Count: 2000
+    Rewards:
+      Item: Alarm_Card
+      Amount: 1
+    Score: 10
+  - Id: 230350
+    Group: Battle
+    Name: "Caça Arclouze"
+    Targets:
+      - Id: 0
+        Mob: ARCLOUSE
+        Count: 2000
+    Rewards:
+      Item: Arclouse_Card
+      Amount: 1
+    Score: 10
+  - Id: 230351
+    Group: Battle
+    Name: "Caça Rideword"
+    Targets:
+      - Id: 0
+        Mob: RIDEWORD
+        Count: 2000
+    Rewards:
+      Item: Rideword_Card
+      Amount: 1
+    Score: 10
+  - Id: 230352
+    Group: Battle
+    Name: "Caça Skeleton Prisoner"
+    Targets:
+      - Id: 0
+        Mob: SKEL_PRISONER
+        Count: 2000
+    Rewards:
+      Item: Skel_Prisoner_Card
+      Amount: 1
+    Score: 10
+  - Id: 230353
+    Group: Battle
+    Name: "Caça Zombie Prisoner"
+    Targets:
+      - Id: 0
+        Mob: ZOMBIE_PRISONER
+        Count: 2000
+    Rewards:
+      Item: Zombie_Prisoner_Card
+      Amount: 1
+    Score: 10
+  - Id: 230354
+    Group: Battle
+    Name: "Caça Punk"
+    Targets:
+      - Id: 0
+        Mob: PUNK
+        Count: 2000
+    Rewards:
+      Item: Punk_Card
+      Amount: 1
+    Score: 10
+  - Id: 230355
+    Group: Battle
+    Name: "Caça Zealotus"
+    Targets:
+      - Id: 0
+        Mob: ZHERLTHSH
+        Count: 2000
+    Rewards:
+      Item: Zherlthsh_Card
+      Amount: 1
+    Score: 10
+  - Id: 230356
+    Group: Battle
+    Name: "Caça Rybio"
+    Targets:
+      - Id: 0
+        Mob: RYBIO
+        Count: 2000
+    Rewards:
+      Item: Rybio_Card
+      Amount: 1
+    Score: 10
+  - Id: 230357
+    Group: Battle
+    Name: "Caça Phendark"
+    Targets:
+      - Id: 0
+        Mob: PHENDARK
+        Count: 2000
+    Rewards:
+      Item: Phendark_Card
+      Amount: 1
+    Score: 10
+  - Id: 230358
+    Group: Battle
+    Name: "Caça Anolian"
+    Targets:
+      - Id: 0
+        Mob: ANOLIAN
+        Count: 2000
+    Rewards:
+      Item: Anolian_Card
+      Amount: 1
+    Score: 10
+  - Id: 230359
+    Group: Battle
+    Name: "Caça Sting"
+    Targets:
+      - Id: 0
+        Mob: STING
+        Count: 2000
+    Rewards:
+      Item: Sting_Card
+      Amount: 1
+    Score: 10
+  - Id: 230360
+    Group: Battle
+    Name: "Caça Wanderer"
+    Targets:
+      - Id: 0
+        Mob: WANDER_MAN
+        Count: 2000
+    Rewards:
+      Item: Wander_Man_Card
+      Amount: 1
+    Score: 10
+  - Id: 230361
+    Group: Battle
+    Name: "Caça Cramp"
+    Targets:
+      - Id: 0
+        Mob: CRAMP
+        Count: 2000
+    Rewards:
+      Item: Cramp_Card
+      Amount: 1
+    Score: 10
+  - Id: 230362
+    Group: Battle
+    Name: "Caça Brilight"
+    Targets:
+      - Id: 0
+        Mob: BRILIGHT
+        Count: 2000
+    Rewards:
+      Item: Brilight_Card
+      Amount: 1
+    Score: 10
+  - Id: 230363
+    Group: Battle
+    Name: "Caça Iron Fist"
+    Targets:
+      - Id: 0
+        Mob: IRON_FIST
+        Count: 2000
+    Rewards:
+      Item: Iron_Fist_Card
+      Amount: 1
+    Score: 10
+  - Id: 230364
+    Group: Battle
+    Name: "Caça High Orc"
+    Targets:
+      - Id: 0
+        Mob: HIGH_ORC
+        Count: 2000
+    Rewards:
+      Item: High_Orc_Card
+      Amount: 1
+    Score: 10
+  - Id: 230365
+    Group: Battle
+    Name: "Caça Choco"
+    Targets:
+      - Id: 0
+        Mob: CHOCO
+        Count: 2000
+    Rewards:
+      Item: Choco_Card
+      Amount: 1
+    Score: 10
+  - Id: 230366
+    Group: Battle
+    Name: "Caça Stem Worm"
+    Targets:
+      - Id: 0
+        Mob: STEM_WORM
+        Count: 2000
+    Rewards:
+      Item: Stem_Worm_Card
+      Amount: 1
+    Score: 10
+  - Id: 230367
+    Group: Battle
+    Name: "Caça Penomena"
+    Targets:
+      - Id: 0
+        Mob: PENOMENA
+        Count: 2000
+    Rewards:
+      Item: Penomena_Card
+      Amount: 1
+    Score: 10
+  - Id: 230368
+    Group: Battle
+    Name: "Caça Abysmal Knight"
+    Targets:
+      - Id: 0
+        Mob: KNIGHT_OF_ABYSS
+        Count: 2000
+    Rewards:
+      Item: Knight_Of_Abyss_Card
+      Amount: 1
+    Score: 10
+  - Id: 230369
+    Group: Battle
+    Name: "Caça Desert Wolf"
+    Targets:
+      - Id: 0
+        Mob: M_DESERT_WOLF
+        Count: 2000
+    Rewards:
+      Item: Desert_Wolf_Card
+      Amount: 1
+    Score: 10
+  - Id: 230370
+    Group: Battle
+    Name: "Caça Savage"
+    Targets:
+      - Id: 0
+        Mob: M_SAVAGE
+        Count: 2000
+    Rewards:
+      Item: Savage_Card
+      Amount: 1
+    Score: 10
+  - Id: 230371
+    Group: Battle
+    Name: "Caça Fabre"
+    Targets:
+      - Id: 0
+        Mob: META_FABRE
+        Count: 2000
+    Rewards:
+      Item: Fabre_Card
+      Amount: 1
+    Score: 10
+  - Id: 230372
+    Group: Battle
+    Name: "Caça Pupa"
+    Targets:
+      - Id: 0
+        Mob: META_PUPA
+        Count: 2000
+    Rewards:
+      Item: Pupa_Card
+      Amount: 1
+    Score: 10
+  - Id: 230373
+    Group: Battle
+    Name: "Caça Creamy"
+    Targets:
+      - Id: 0
+        Mob: META_CREAMY
+        Count: 2000
+    Rewards:
+      Item: Creamy_Card
+      Amount: 1
+    Score: 10
+  - Id: 230374
+    Group: Battle
+    Name: "Caça Peco Peco Egg"
+    Targets:
+      - Id: 0
+        Mob: META_PECOPECO_EGG
+        Count: 2000
+    Rewards:
+      Item: Pecopeco_Egg_Card
+      Amount: 1
+    Score: 10
+  - Id: 230375
+    Group: Battle
+    Name: "Caça Yoyo"
+    Targets:
+      - Id: 0
+        Mob: PROVOKE_YOYO
+        Count: 2000
+    Rewards:
+      Item: Yoyo_Card
+      Amount: 1
+    Score: 10
+  - Id: 230376
+    Group: Battle
+    Name: "Caça Smoking Orc"
+    Targets:
+      - Id: 0
+        Mob: SMOKING_ORC
+        Count: 2000
+    Rewards:
+      Item: Orc_Warrior_Card
+      Amount: 1
+    Score: 10
+  - Id: 230377
+    Group: Battle
+    Name: "Caça Ant Egg"
+    Targets:
+      - Id: 0
+        Mob: META_ANT_EGG
+        Count: 2000
+    Rewards:
+      Item: Andre_Egg_Card
+      Amount: 1
+    Score: 10
+  - Id: 230378
+    Group: Battle
+    Name: "Caça Andre"
+    Targets:
+      - Id: 0
+        Mob: META_ANDRE
+        Count: 2000
+    Rewards:
+      Item: Andre_Card
+      Amount: 1
+    Score: 10
+  - Id: 230379
+    Group: Battle
+    Name: "Caça Piere"
+    Targets:
+      - Id: 0
+        Mob: META_PIERE
+        Count: 2000
+    Rewards:
+      Item: Andre_Card
+      Amount: 1
+    Score: 10
+  - Id: 230380
+    Group: Battle
+    Name: "Caça Deniro"
+    Targets:
+      - Id: 0
+        Mob: META_DENIRO
+        Count: 2000
+    Rewards:
+      Item: Andre_Card
+      Amount: 1
+    Score: 10
+  - Id: 230381
+    Group: Battle
+    Name: "Caça Picky"
+    Targets:
+      - Id: 0
+        Mob: META_PICKY
+        Count: 2000
+    Rewards:
+      Item: Picky_Card
+      Amount: 1
+    Score: 10
+  - Id: 230382
+    Group: Battle
+    Name: "Caça Picky"
+    Targets:
+      - Id: 0
+        Mob: META_PICKY_
+        Count: 2000
+    Rewards:
+      Item: Picky__Card
+      Amount: 1
+    Score: 10
+  - Id: 230383
+    Group: Battle
+    Name: "Caça Marin"
+    Targets:
+      - Id: 0
+        Mob: MARIN
+        Count: 2000
+    Rewards:
+      Item: Marin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230384
+    Group: Battle
+    Name: "Caça Sasquatch"
+    Targets:
+      - Id: 0
+        Mob: SASQUATCH
+        Count: 2000
+    Rewards:
+      Item: Sasquatch_Card
+      Amount: 1
+    Score: 10
+  - Id: 230385
+    Group: Battle
+    Name: "Caça Christmas Jakk"
+    Targets:
+      - Id: 0
+        Mob: JAKK_XMAS
+        Count: 2000
+    Rewards:
+      Item: Jakk_Card
+      Amount: 1
+    Score: 10
+  - Id: 230386
+    Group: Battle
+    Name: "Caça Christmas Goblin"
+    Targets:
+      - Id: 0
+        Mob: GOBLINE_XMAS
+        Count: 2000
+    Rewards:
+      Item: Goblin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230387
+    Group: Battle
+    Name: "Caça Christmas Cookie"
+    Targets:
+      - Id: 0
+        Mob: COOKIE_XMAS
+        Count: 2000
+    Rewards:
+      Item: Cookie_XMAS_Card
+      Amount: 1
+    Score: 10
+  - Id: 230388
+    Group: Battle
+    Name: "Caça Antonio"
+    Targets:
+      - Id: 0
+        Mob: ANTONIO
+        Count: 2000
+    Rewards:
+      Item: Antonio_Card
+      Amount: 1
+    Score: 10
+  - Id: 230389
+    Group: Battle
+    Name: "Caça Cruiser"
+    Targets:
+      - Id: 0
+        Mob: CRUISER
+        Count: 2000
+    Rewards:
+      Item: Cruiser_Card
+      Amount: 1
+    Score: 10
+  - Id: 230390
+    Group: Battle
+    Name: "Caça Myst Case"
+    Targets:
+      - Id: 0
+        Mob: MYSTCASE
+        Count: 2000
+    Rewards:
+      Item: Mystcase_Card
+      Amount: 1
+    Score: 10
+  - Id: 230391
+    Group: Battle
+    Name: "Caça Chepet"
+    Targets:
+      - Id: 0
+        Mob: CHEPET
+        Count: 2000
+    Rewards:
+      Item: Chepet_Card
+      Amount: 1
+    Score: 10
+  - Id: 230392
+    Group: Battle
+    Name: "Caça Gargoyle"
+    Targets:
+      - Id: 0
+        Mob: GARGOYLE
+        Count: 2000
+    Rewards:
+      Item: Gargoyle_Card
+      Amount: 1
+    Score: 10
+  - Id: 230393
+    Group: Battle
+    Name: "Caça Raggler"
+    Targets:
+      - Id: 0
+        Mob: RAGGLER
+        Count: 2000
+    Rewards:
+      Item: Raggler_Card
+      Amount: 1
+    Score: 10
+  - Id: 230394
+    Group: Battle
+    Name: "Caça Nereid"
+    Targets:
+      - Id: 0
+        Mob: NERAID
+        Count: 2000
+    Rewards:
+      Item: Neraid_Card
+      Amount: 1
+    Score: 10
+  - Id: 230395
+    Group: Battle
+    Name: "Caça Pest"
+    Targets:
+      - Id: 0
+        Mob: PEST
+        Count: 2000
+    Rewards:
+      Item: Pest_Card
+      Amount: 1
+    Score: 10
+  - Id: 230396
+    Group: Battle
+    Name: "Caça Injustice"
+    Targets:
+      - Id: 0
+        Mob: INJUSTICE
+        Count: 2000
+    Rewards:
+      Item: Injustice_Card
+      Amount: 1
+    Score: 10
+  - Id: 230397
+    Group: Battle
+    Name: "Caça Goblin Archer"
+    Targets:
+      - Id: 0
+        Mob: GOBLIN_ARCHER
+        Count: 2000
+    Rewards:
+      Item: Goblin_Archer_Card
+      Amount: 1
+    Score: 10
+  - Id: 230398
+    Group: Battle
+    Name: "Caça Dark Frame"
+    Targets:
+      - Id: 0
+        Mob: DARK_FRAME
+        Count: 2000
+    Rewards:
+      Item: Dark_Frame_Card
+      Amount: 1
+    Score: 10
+  - Id: 230399
+    Group: Battle
+    Name: "Caça Wild Rose"
+    Targets:
+      - Id: 0
+        Mob: WILD_ROSE
+        Count: 2000
+    Rewards:
+      Item: Wild_Rose_Card
+      Amount: 1
+    Score: 10
+  - Id: 230400
+    Group: Battle
+    Name: "Caça Wind Ghost"
+    Targets:
+      - Id: 0
+        Mob: WIND_GHOST
+        Count: 2000
+    Rewards:
+      Item: Wind_Ghost_Card
+      Amount: 1
+    Score: 10
+  - Id: 230401
+    Group: Battle
+    Name: "Caça Merman"
+    Targets:
+      - Id: 0
+        Mob: MERMAN
+        Count: 2000
+    Rewards:
+      Item: Merman_Card
+      Amount: 1
+    Score: 10
+  - Id: 230402
+    Group: Battle
+    Name: "Caça Cookie"
+    Targets:
+      - Id: 0
+        Mob: COOKIE
+        Count: 2000
+    Rewards:
+      Item: Cookie_Card
+      Amount: 1
+    Score: 10
+  - Id: 230403
+    Group: Battle
+    Name: "Caça Aster"
+    Targets:
+      - Id: 0
+        Mob: ASTER
+        Count: 2000
+    Rewards:
+      Item: Aster_Card
+      Amount: 1
+    Score: 10
+  - Id: 230404
+    Group: Battle
+    Name: "Caça Carat"
+    Targets:
+      - Id: 0
+        Mob: CARAT
+        Count: 2000
+    Rewards:
+      Item: Carat_Card
+      Amount: 1
+    Score: 10
+  - Id: 230405
+    Group: Battle
+    Name: "Caça Bloody Knight"
+    Targets:
+      - Id: 0
+        Mob: BLOODY_KNIGHT
+        Count: 2000
+    Rewards:
+      Item: Bloody_Knight_Card
+      Amount: 1
+    Score: 10
+  - Id: 230406
+    Group: Battle
+    Name: "Caça Clock"
+    Targets:
+      - Id: 0
+        Mob: CLOCK
+        Count: 2000
+    Rewards:
+      Item: Clock_Card
+      Amount: 1
+    Score: 10
+  - Id: 230407
+    Group: Battle
+    Name: "Caça Clock Tower Manager"
+    Targets:
+      - Id: 0
+        Mob: C_TOWER_MANAGER
+        Count: 2000
+    Rewards:
+      Item: C_Tower_Manager_Card
+      Amount: 1
+    Score: 10
+  - Id: 230408
+    Group: Battle
+    Name: "Caça Alligator"
+    Targets:
+      - Id: 0
+        Mob: ALLIGATOR
+        Count: 2000
+    Rewards:
+      Item: Alligator_Card
+      Amount: 1
+    Score: 10
+  - Id: 230409
+    Group: Battle
+    Name: "Caça Orc Lady"
+    Targets:
+      - Id: 0
+        Mob: ORC_LADY
+        Count: 2000
+    Rewards:
+      Item: Orc_Lady_Card
+      Amount: 1
+    Score: 10
+  - Id: 230410
+    Group: Battle
+    Name: "Caça Megalith"
+    Targets:
+      - Id: 0
+        Mob: MEGALITH
+        Count: 2000
+    Rewards:
+      Item: Megalith_Card
+      Amount: 1
+    Score: 10
+  - Id: 230411
+    Group: Battle
+    Name: "Caça Alice"
+    Targets:
+      - Id: 0
+        Mob: ALICE
+        Count: 2000
+    Rewards:
+      Item: Alice_Card
+      Amount: 1
+    Score: 10
+  - Id: 230412
+    Group: Battle
+    Name: "Caça Raydric Archer"
+    Targets:
+      - Id: 0
+        Mob: RAYDRIC_ARCHER
+        Count: 2000
+    Rewards:
+      Item: Raydric_Archer_Card
+      Amount: 1
+    Score: 10
+  - Id: 230413
+    Group: Battle
+    Name: "Caça Greatest General"
+    Targets:
+      - Id: 0
+        Mob: GREATEST_GENERAL
+        Count: 2000
+    Rewards:
+      Item: Greatest_General_Card
+      Amount: 1
+    Score: 10
+  - Id: 230414
+    Group: Battle
+    Name: "Caça Stalactic Golem"
+    Targets:
+      - Id: 0
+        Mob: STALACTIC_GOLEM
+        Count: 2000
+    Rewards:
+      Item: Stalactic_Golem_Card
+      Amount: 1
+    Score: 10
+  - Id: 230415
+    Group: Battle
+    Name: "Caça Tri Joint"
+    Targets:
+      - Id: 0
+        Mob: TRI_JOINT
+        Count: 2000
+    Rewards:
+      Item: Tri_Joint_Card
+      Amount: 1
+    Score: 10
+  - Id: 230416
+    Group: Battle
+    Name: "Caça Goblin Steamrider"
+    Targets:
+      - Id: 0
+        Mob: STEAM_GOBLIN
+        Count: 2000
+    Rewards:
+      Item: Steam_Goblin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230417
+    Group: Battle
+    Name: "Caça Sage Worm"
+    Targets:
+      - Id: 0
+        Mob: SAGEWORM
+        Count: 2000
+    Rewards:
+      Item: Sageworm_Card
+      Amount: 1
+    Score: 10
+  - Id: 230418
+    Group: Battle
+    Name: "Caça Kobold Archer"
+    Targets:
+      - Id: 0
+        Mob: KOBOLD_ARCHER
+        Count: 2000
+    Rewards:
+      Item: Kobold_Archer_Card
+      Amount: 1
+    Score: 10
+  - Id: 230419
+    Group: Battle
+    Name: "Caça Skeleton General"
+    Targets:
+      - Id: 0
+        Mob: SKELETON_GENERAL
+        Count: 2000
+    Rewards:
+      Item: Skeleton_General_Card
+      Amount: 1
+    Score: 10
+  - Id: 230420
+    Group: Battle
+    Name: "Caça Wraith Dead"
+    Targets:
+      - Id: 0
+        Mob: WRAITH_DEAD
+        Count: 2000
+    Rewards:
+      Item: Wraith_Dead_Card
+      Amount: 1
+    Score: 10
+  - Id: 230421
+    Group: Battle
+    Name: "Caça Mini Demon"
+    Targets:
+      - Id: 0
+        Mob: MINI_DEMON
+        Count: 2000
+    Rewards:
+      Item: Mini_Demon_Card
+      Amount: 1
+    Score: 10
+  - Id: 230422
+    Group: Battle
+    Name: "Caça Creamy Fear"
+    Targets:
+      - Id: 0
+        Mob: CREMY_FEAR
+        Count: 2000
+    Rewards:
+      Item: Cremy_Fear_Card
+      Amount: 1
+    Score: 10
+  - Id: 230423
+    Group: Battle
+    Name: "Caça Killer Mantis"
+    Targets:
+      - Id: 0
+        Mob: KILLER_MANTIS
+        Count: 2000
+    Rewards:
+      Item: Killer_Mantis_Card
+      Amount: 1
+    Score: 10
+  - Id: 230424
+    Group: Battle
+    Name: "Caça Kobold Leader"
+    Targets:
+      - Id: 0
+        Mob: KOBOLD_LEADER
+        Count: 2000
+    Rewards:
+      Item: Kobold_Leader_Card
+      Amount: 1
+    Score: 10
+  - Id: 230425
+    Group: Battle
+    Name: "Caça Ancient Mummy"
+    Targets:
+      - Id: 0
+        Mob: ANCIENT_MUMMY
+        Count: 2000
+    Rewards:
+      Item: Ancient_Mummy_Card
+      Amount: 1
+    Score: 10
+  - Id: 230426
+    Group: Battle
+    Name: "Caça Zombie Master"
+    Targets:
+      - Id: 0
+        Mob: ZOMBIE_MASTER
+        Count: 2000
+    Rewards:
+      Item: Zombie_Master_Card
+      Amount: 1
+    Score: 10
+  - Id: 230427
+    Group: Battle
+    Name: "Caça Goblin Leader"
+    Targets:
+      - Id: 0
+        Mob: GOBLIN_LEADER
+        Count: 2000
+    Rewards:
+      Item: Goblin_Leader_Card
+      Amount: 1
+    Score: 10
+  - Id: 230428
+    Group: Battle
+    Name: "Caça Caterpillar"
+    Targets:
+      - Id: 0
+        Mob: CATERPILLAR
+        Count: 2000
+    Rewards:
+      Item: Caterpillar_Card
+      Amount: 1
+    Score: 10
+  - Id: 230429
+    Group: Battle
+    Name: "Caça Am Mut"
+    Targets:
+      - Id: 0
+        Mob: AM_MUT
+        Count: 2000
+    Rewards:
+      Item: Am_Mut_Card
+      Amount: 1
+    Score: 10
+  - Id: 230430
+    Group: Battle
+    Name: "Caça Giant Hornet"
+    Targets:
+      - Id: 0
+        Mob: GIANT_HONET
+        Count: 2000
+    Rewards:
+      Item: Giant_Honet_Card
+      Amount: 1
+    Score: 10
+  - Id: 230431
+    Group: Battle
+    Name: "Caça Giant Spider"
+    Targets:
+      - Id: 0
+        Mob: GIANT_SPIDER
+        Count: 2000
+    Rewards:
+      Item: Giant_Spider_Card
+      Amount: 1
+    Score: 10
+  - Id: 230432
+    Group: Battle
+    Name: "Caça Ancient Worm"
+    Targets:
+      - Id: 0
+        Mob: ANCIENT_WORM
+        Count: 2000
+    Rewards:
+      Item: Ancient_Worm_Card
+      Amount: 1
+    Score: 10
+  - Id: 230433
+    Group: Battle
+    Name: "Caça Leib Olmai"
+    Targets:
+      - Id: 0
+        Mob: LEIB_OLMAI
+        Count: 2000
+    Rewards:
+      Item: Leib_Olmai_Card
+      Amount: 1
+    Score: 10
+  - Id: 230434
+    Group: Battle
+    Name: "Caça Panzer Goblin"
+    Targets:
+      - Id: 0
+        Mob: PANZER_GOBLIN
+        Count: 2000
+    Rewards:
+      Item: Panzer_Goblin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230435
+    Group: Battle
+    Name: "Caça Gajomart"
+    Targets:
+      - Id: 0
+        Mob: GAJOMART
+        Count: 2000
+    Rewards:
+      Item: Gajomart_Card
+      Amount: 1
+    Score: 10
+  - Id: 230436
+    Group: Battle
+    Name: "Caça Majoruros"
+    Targets:
+      - Id: 0
+        Mob: MAJORUROS
+        Count: 2000
+    Rewards:
+      Item: Majoruros_Card
+      Amount: 1
+    Score: 10
+  - Id: 230437
+    Group: Battle
+    Name: "Caça Gullinbursti"
+    Targets:
+      - Id: 0
+        Mob: GULLINBURSTI
+        Count: 2000
+    Rewards:
+      Item: Gullinbursti_Card
+      Amount: 1
+    Score: 10
+  - Id: 230438
+    Group: Battle
+    Name: "Caça Mobster"
+    Targets:
+      - Id: 0
+        Mob: MOBSTER
+        Count: 2000
+    Rewards:
+      Item: Mobster_Card
+      Amount: 1
+    Score: 10
+  - Id: 230439
+    Group: Battle
+    Name: "Caça Permeter"
+    Targets:
+      - Id: 0
+        Mob: PERMETER
+        Count: 2000
+    Rewards:
+      Item: Permeter_Card
+      Amount: 1
+    Score: 10
+  - Id: 230440
+    Group: Battle
+    Name: "Caça Assaulter"
+    Targets:
+      - Id: 0
+        Mob: ASSULTER
+        Count: 2000
+    Rewards:
+      Item: Assulter_Card
+      Amount: 1
+    Score: 10
+  - Id: 230441
+    Group: Battle
+    Name: "Caça Solider"
+    Targets:
+      - Id: 0
+        Mob: SOLIDER
+        Count: 2000
+    Rewards:
+      Item: Solider_Card
+      Amount: 1
+    Score: 10
+  - Id: 230442
+    Group: Battle
+    Name: "Caça Seal"
+    Targets:
+      - Id: 0
+        Mob: FUR_SEAL
+        Count: 2000
+    Rewards:
+      Item: Fur_Seal_Card
+      Amount: 1
+    Score: 10
+  - Id: 230443
+    Group: Battle
+    Name: "Caça Heater"
+    Targets:
+      - Id: 0
+        Mob: HEATER
+        Count: 2000
+    Rewards:
+      Item: Heater_Card
+      Amount: 1
+    Score: 10
+  - Id: 230444
+    Group: Battle
+    Name: "Caça Freezer"
+    Targets:
+      - Id: 0
+        Mob: FREEZER
+        Count: 2000
+    Rewards:
+      Item: Freezer_Card
+      Amount: 1
+    Score: 10
+  - Id: 230445
+    Group: Battle
+    Name: "Caça Dragon Tail"
+    Targets:
+      - Id: 0
+        Mob: DRAGON_TAIL
+        Count: 2000
+    Rewards:
+      Item: Dragon_Tail_Card
+      Amount: 1
+    Score: 10
+  - Id: 230446
+    Group: Battle
+    Name: "Caça Spring Rabbit"
+    Targets:
+      - Id: 0
+        Mob: SPRING_RABBIT
+        Count: 2000
+    Rewards:
+      Item: Spring_Rabbit_Card
+      Amount: 1
+    Score: 10
+  - Id: 230447
+    Group: Battle
+    Name: "Caça Sea Otter"
+    Targets:
+      - Id: 0
+        Mob: SEE_OTTER
+        Count: 2000
+    Rewards:
+      Item: See_Otter_Card
+      Amount: 1
+    Score: 10
+  - Id: 230448
+    Group: Battle
+    Name: "Caça Apocalypse"
+    Targets:
+      - Id: 0
+        Mob: APOCALIPS
+        Count: 2000
+    Rewards:
+      Item: Apocalips_Card
+      Amount: 1
+    Score: 10
+  - Id: 230449
+    Group: Battle
+    Name: "Caça Lava Golem"
+    Targets:
+      - Id: 0
+        Mob: LAVA_GOLEM
+        Count: 2000
+    Rewards:
+      Item: Lava_Golem_Card
+      Amount: 1
+    Score: 10
+  - Id: 230450
+    Group: Battle
+    Name: "Caça Blazer"
+    Targets:
+      - Id: 0
+        Mob: BLAZZER
+        Count: 2000
+    Rewards:
+      Item: Blazzer_Card
+      Amount: 1
+    Score: 10
+  - Id: 230451
+    Group: Battle
+    Name: "Caça Geographer"
+    Targets:
+      - Id: 0
+        Mob: GEOGRAPHER
+        Count: 2000
+    Rewards:
+      Item: Geographer_Card
+      Amount: 1
+    Score: 10
+  - Id: 230452
+    Group: Battle
+    Name: "Caça Grand Peco"
+    Targets:
+      - Id: 0
+        Mob: GRAND_PECO
+        Count: 2000
+    Rewards:
+      Item: Grand_Peco_Card
+      Amount: 1
+    Score: 10
+  - Id: 230453
+    Group: Battle
+    Name: "Caça Succubus"
+    Targets:
+      - Id: 0
+        Mob: SUCCUBUS
+        Count: 2000
+    Rewards:
+      Item: Succubus_Card
+      Amount: 1
+    Score: 10
+  - Id: 230454
+    Group: Battle
+    Name: "Caça False Angel"
+    Targets:
+      - Id: 0
+        Mob: FAKE_ANGEL
+        Count: 2000
+    Rewards:
+      Item: Fake_Angel_Card
+      Amount: 1
+    Score: 10
+  - Id: 230455
+    Group: Battle
+    Name: "Caça Goat"
+    Targets:
+      - Id: 0
+        Mob: GOAT
+        Count: 2000
+    Rewards:
+      Item: Goat_Card
+      Amount: 1
+    Score: 10
+  - Id: 230456
+    Group: Battle
+    Name: "Caça Incubus"
+    Targets:
+      - Id: 0
+        Mob: INCUBUS
+        Count: 2000
+    Rewards:
+      Item: Incubus_Card
+      Amount: 1
+    Score: 10
+  - Id: 230457
+    Group: Battle
+    Name: "Caça The Paper"
+    Targets:
+      - Id: 0
+        Mob: THE_PAPER
+        Count: 2000
+    Rewards:
+      Item: The_Paper_Card
+      Amount: 1
+    Score: 10
+  - Id: 230458
+    Group: Battle
+    Name: "Caça Harpy"
+    Targets:
+      - Id: 0
+        Mob: HARPY
+        Count: 2000
+    Rewards:
+      Item: Harpy_Card
+      Amount: 1
+    Score: 10
+  - Id: 230459
+    Group: Battle
+    Name: "Caça Elder"
+    Targets:
+      - Id: 0
+        Mob: ELDER
+        Count: 2000
+    Rewards:
+      Item: Elder_Card
+      Amount: 1
+    Score: 10
+  - Id: 230460
+    Group: Battle
+    Name: "Caça Demon Pungus"
+    Targets:
+      - Id: 0
+        Mob: DEMON_PUNGUS
+        Count: 2000
+    Rewards:
+      Item: Demon_Pungus_Card
+      Amount: 1
+    Score: 10
+  - Id: 230461
+    Group: Battle
+    Name: "Caça Nightmare Terror"
+    Targets:
+      - Id: 0
+        Mob: NIGHTMARE_TERROR
+        Count: 2000
+    Rewards:
+      Item: Nightmare_Terror_Card
+      Amount: 1
+    Score: 10
+  - Id: 230462
+    Group: Battle
+    Name: "Caça Driller"
+    Targets:
+      - Id: 0
+        Mob: DRILLER
+        Count: 2000
+    Rewards:
+      Item: Driller_Card
+      Amount: 1
+    Score: 10
+  - Id: 230463
+    Group: Battle
+    Name: "Caça Grizzly"
+    Targets:
+      - Id: 0
+        Mob: GRIZZLY
+        Count: 2000
+    Rewards:
+      Item: Grizzly_Card
+      Amount: 1
+    Score: 10
+  - Id: 230464
+    Group: Battle
+    Name: "Caça Diabolic"
+    Targets:
+      - Id: 0
+        Mob: DIABOLIC
+        Count: 2000
+    Rewards:
+      Item: Diabolic_Card
+      Amount: 1
+    Score: 10
+  - Id: 230465
+    Group: Battle
+    Name: "Caça Explosion"
+    Targets:
+      - Id: 0
+        Mob: EXPLOSION
+        Count: 2000
+    Rewards:
+      Item: Explosion_Card
+      Amount: 1
+    Score: 10
+  - Id: 230466
+    Group: Battle
+    Name: "Caça Deleter"
+    Targets:
+      - Id: 0
+        Mob: DELETER
+        Count: 2000
+    Rewards:
+      Item: Flying_Deleter_Card
+      Amount: 1
+    Score: 10
+  - Id: 230467
+    Group: Battle
+    Name: "Caça Deleter"
+    Targets:
+      - Id: 0
+        Mob: DELETER_
+        Count: 2000
+    Rewards:
+      Item: Deleter_Card
+      Amount: 1
+    Score: 10
+  - Id: 230468
+    Group: Battle
+    Name: "Caça Sleeper"
+    Targets:
+      - Id: 0
+        Mob: SLEEPER
+        Count: 2000
+    Rewards:
+      Item: Sleeper_Card
+      Amount: 1
+    Score: 10
+  - Id: 230469
+    Group: Battle
+    Name: "Caça Gig"
+    Targets:
+      - Id: 0
+        Mob: GIG
+        Count: 2000
+    Rewards:
+      Item: Gig_Card
+      Amount: 1
+    Score: 10
+  - Id: 230470
+    Group: Battle
+    Name: "Caça Violy"
+    Targets:
+      - Id: 0
+        Mob: VIOLY
+        Count: 2000
+    Rewards:
+      Item: Violy_Card
+      Amount: 1
+    Score: 10
+  - Id: 230471
+    Group: Battle
+    Name: "Caça Galapago"
+    Targets:
+      - Id: 0
+        Mob: GALAPAGO
+        Count: 2000
+    Rewards:
+      Item: Galapago_Card
+      Amount: 1
+    Score: 10
+  - Id: 230472
+    Group: Battle
+    Name: "Caça Rotar Zairo"
+    Targets:
+      - Id: 0
+        Mob: ROTAR_ZAIRO
+        Count: 2000
+    Rewards:
+      Item: Rotar_Zairo_Card
+      Amount: 1
+    Score: 10
+  - Id: 230473
+    Group: Battle
+    Name: "Caça Karakasa"
+    Targets:
+      - Id: 0
+        Mob: KARAKASA
+        Count: 2000
+    Rewards:
+      Item: Karakasa_Card
+      Amount: 1
+    Score: 10
+  - Id: 230474
+    Group: Battle
+    Name: "Caça Shinobi"
+    Targets:
+      - Id: 0
+        Mob: SHINOBI
+        Count: 2000
+    Rewards:
+      Item: Shinobi_Card
+      Amount: 1
+    Score: 10
+  - Id: 230475
+    Group: Battle
+    Name: "Caça Poison Toad"
+    Targets:
+      - Id: 0
+        Mob: POISON_TOAD
+        Count: 2000
+    Rewards:
+      Item: Poison_Toad_Card
+      Amount: 1
+    Score: 10
+  - Id: 230476
+    Group: Battle
+    Name: "Caça Firelock Soldier"
+    Targets:
+      - Id: 0
+        Mob: ANTIQUE_FIRELOCK
+        Count: 2000
+    Rewards:
+      Item: Antique_Firelock_Card
+      Amount: 1
+    Score: 10
+  - Id: 230477
+    Group: Battle
+    Name: "Caça Miyabi Doll"
+    Targets:
+      - Id: 0
+        Mob: MIYABI_NINGYO
+        Count: 2000
+    Rewards:
+      Item: Miyabi_Ningyo_Card
+      Amount: 1
+    Score: 10
+  - Id: 230478
+    Group: Battle
+    Name: "Caça Tengu"
+    Targets:
+      - Id: 0
+        Mob: TENGU
+        Count: 2000
+    Rewards:
+      Item: Tengu_Card
+      Amount: 1
+    Score: 10
+  - Id: 230479
+    Group: Battle
+    Name: "Caça Kapha"
+    Targets:
+      - Id: 0
+        Mob: KAPHA
+        Count: 2000
+    Rewards:
+      Item: Kapha_Card
+      Amount: 1
+    Score: 10
+  - Id: 230480
+    Group: Battle
+    Name: "Caça Bloody Butterfly"
+    Targets:
+      - Id: 0
+        Mob: BLOOD_BUTTERFLY
+        Count: 2000
+    Rewards:
+      Item: Blood_Butterfly_Card
+      Amount: 1
+    Score: 10
+  - Id: 230481
+    Group: Battle
+    Name: "Caça Dumpling Child"
+    Targets:
+      - Id: 0
+        Mob: RICE_CAKE_BOY
+        Count: 2000
+    Rewards:
+      Item: Rice_Cake_Boy_Card
+      Amount: 1
+    Score: 10
+  - Id: 230482
+    Group: Battle
+    Name: "Caça Enchanted Peach Tree"
+    Targets:
+      - Id: 0
+        Mob: LIVE_PEACH_TREE
+        Count: 2000
+    Rewards:
+      Item: Live_Peach_Tree_Card
+      Amount: 1
+    Score: 10
+  - Id: 230483
+    Group: Battle
+    Name: "Caça Taoist Hermit"
+    Targets:
+      - Id: 0
+        Mob: EVIL_CLOUD_HERMIT
+        Count: 2000
+    Rewards:
+      Item: Evil_Cloud_Hermit_Card
+      Amount: 1
+    Score: 10
+  - Id: 230484
+    Group: Battle
+    Name: "Caça Hermit Plant"
+    Targets:
+      - Id: 0
+        Mob: WILD_GINSENG
+        Count: 2000
+    Rewards:
+      Item: Wild_Ginseng_Card
+      Amount: 1
+    Score: 10
+  - Id: 230485
+    Group: Battle
+    Name: "Caça Baby Leopard"
+    Targets:
+      - Id: 0
+        Mob: BABY_LEOPARD
+        Count: 2000
+    Rewards:
+      Item: Baby_Leopard_Card
+      Amount: 1
+    Score: 10
+  - Id: 230486
+    Group: Battle
+    Name: "Caça Evil Nymph"
+    Targets:
+      - Id: 0
+        Mob: WICKED_NYMPH
+        Count: 2000
+    Rewards:
+      Item: Wicked_Nymph_Card
+      Amount: 1
+    Score: 10
+  - Id: 230487
+    Group: Battle
+    Name: "Caça Zipper Bear"
+    Targets:
+      - Id: 0
+        Mob: ZIPPER_BEAR
+        Count: 2000
+    Rewards:
+      Item: Zipper_Bear_Card
+      Amount: 1
+    Score: 10
+  - Id: 230488
+    Group: Battle
+    Name: "Caça Dryad"
+    Targets:
+      - Id: 0
+        Mob: DRYAD
+        Count: 2000
+    Rewards:
+      Item: Dryad_Card
+      Amount: 1
+    Score: 10
+  - Id: 230489
+    Group: Battle
+    Name: "Caça Beetle King"
+    Targets:
+      - Id: 0
+        Mob: KIND_OF_BEETLE
+        Count: 2000
+    Rewards:
+      Item: Kind_Of_Beetle_Card
+      Amount: 1
+    Score: 10
+  - Id: 230490
+    Group: Battle
+    Name: "Caça Stone Shooter"
+    Targets:
+      - Id: 0
+        Mob: STONE_SHOOTER
+        Count: 2000
+    Rewards:
+      Item: Stone_Shooter_Card
+      Amount: 1
+    Score: 10
+  - Id: 230491
+    Group: Battle
+    Name: "Caça Wooden Golem"
+    Targets:
+      - Id: 0
+        Mob: WOODEN_GOLEM
+        Count: 2000
+    Rewards:
+      Item: Wooden_Golem_Card
+      Amount: 1
+    Score: 10
+  - Id: 230492
+    Group: Battle
+    Name: "Caça Wootan Shooter"
+    Targets:
+      - Id: 0
+        Mob: WOOTAN_SHOOTER
+        Count: 2000
+    Rewards:
+      Item: Wootan_Shooter_Card
+      Amount: 1
+    Score: 10
+  - Id: 230493
+    Group: Battle
+    Name: "Caça Wootan Fighter"
+    Targets:
+      - Id: 0
+        Mob: WOOTAN_FIGHTER
+        Count: 2000
+    Rewards:
+      Item: Wootan_Fighter_Card
+      Amount: 1
+    Score: 10
+  - Id: 230494
+    Group: Battle
+    Name: "Caça Parasite"
+    Targets:
+      - Id: 0
+        Mob: PARASITE
+        Count: 2000
+    Rewards:
+      Item: Parasite_Card
+      Amount: 1
+    Score: 10
+  - Id: 230495
+    Group: Battle
+    Name: "Caça Gibbet"
+    Targets:
+      - Id: 0
+        Mob: GIBBET
+        Count: 2000
+    Rewards:
+      Item: Gibbet_Card
+      Amount: 1
+    Score: 10
+  - Id: 230496
+    Group: Battle
+    Name: "Caça Dullahan"
+    Targets:
+      - Id: 0
+        Mob: DULLAHAN
+        Count: 2000
+    Rewards:
+      Item: Dullahan_Card
+      Amount: 1
+    Score: 10
+  - Id: 230497
+    Group: Battle
+    Name: "Caça Loli Ruri"
+    Targets:
+      - Id: 0
+        Mob: LOLI_RURI
+        Count: 2000
+    Rewards:
+      Item: Loli_Ruri_Card
+      Amount: 1
+    Score: 10
+  - Id: 230498
+    Group: Battle
+    Name: "Caça Disguise"
+    Targets:
+      - Id: 0
+        Mob: DISGUISE
+        Count: 2000
+    Rewards:
+      Item: Disguise_Card
+      Amount: 1
+    Score: 10
+  - Id: 230499
+    Group: Battle
+    Name: "Caça Bloody Murderer"
+    Targets:
+      - Id: 0
+        Mob: BLOODY_MURDERER
+        Count: 2000
+    Rewards:
+      Item: Bloody_Murderer_Card
+      Amount: 1
+    Score: 10
+  - Id: 230500
+    Group: Battle
+    Name: "Caça Quve"
+    Targets:
+      - Id: 0
+        Mob: QUVE
+        Count: 2000
+    Rewards:
+      Item: Quve_Card
+      Amount: 1
+    Score: 10
+  - Id: 230501
+    Group: Battle
+    Name: "Caça Lude"
+    Targets:
+      - Id: 0
+        Mob: LUDE
+        Count: 2000
+    Rewards:
+      Item: Lude_Card
+      Amount: 1
+    Score: 10
+  - Id: 230502
+    Group: Battle
+    Name: "Caça Heirozoist"
+    Targets:
+      - Id: 0
+        Mob: HYLOZOIST
+        Count: 2000
+    Rewards:
+      Item: Hylozoist_Card
+      Amount: 1
+    Score: 10
+  - Id: 230503
+    Group: Battle
+    Name: "Caça Yao Jun"
+    Targets:
+      - Id: 0
+        Mob: HYEGUN
+        Count: 2000
+    Rewards:
+      Item: Hyegun_Card
+      Amount: 1
+    Score: 10
+  - Id: 230504
+    Group: Battle
+    Name: "Caça Mao Guai"
+    Targets:
+      - Id: 0
+        Mob: CIVIL_SERVANT
+        Count: 2000
+    Rewards:
+      Item: Civil_Servant_Card
+      Amount: 1
+    Score: 10
+  - Id: 230505
+    Group: Battle
+    Name: "Caça Zhu Po Long"
+    Targets:
+      - Id: 0
+        Mob: DANCING_DRAGON
+        Count: 2000
+    Rewards:
+      Item: Dancing_Dragon_Card
+      Amount: 1
+    Score: 10
+  - Id: 230506
+    Group: Battle
+    Name: "Caça Baby Hatii"
+    Targets:
+      - Id: 0
+        Mob: GARM_BABY
+        Count: 2000
+    Rewards:
+      Item: Garm_Baby_Card
+      Amount: 1
+    Score: 10
+  - Id: 230507
+    Group: Battle
+    Name: "Caça Mi Gao"
+    Targets:
+      - Id: 0
+        Mob: INCREASE_SOIL
+        Count: 2000
+    Rewards:
+      Item: Increase_Soil_Card
+      Amount: 1
+    Score: 10
+  - Id: 230508
+    Group: Battle
+    Name: "Caça Jing Guai"
+    Targets:
+      - Id: 0
+        Mob: LI_ME_MANG_RYANG
+        Count: 2000
+    Rewards:
+      Item: Li_Me_Mang_Ryang_Card
+      Amount: 1
+    Score: 10
+  - Id: 230509
+    Group: Battle
+    Name: "Caça Tamruan"
+    Targets:
+      - Id: 0
+        Mob: TAMRUAN
+        Count: 2000
+    Rewards:
+      Item: Tamruan_Card
+      Amount: 1
+    Score: 10
+  - Id: 230510
+    Group: Battle
+    Name: "Caça Leaf Cat"
+    Targets:
+      - Id: 0
+        Mob: LEAF_CAT
+        Count: 2000
+    Rewards:
+      Item: Leaf_Cat_Card
+      Amount: 1
+    Score: 10
+  - Id: 230511
+    Group: Battle
+    Name: "Caça Kraben"
+    Targets:
+      - Id: 0
+        Mob: KRABEN
+        Count: 2000
+    Rewards:
+      Item: Kraben_Card
+      Amount: 1
+    Score: 10
+  - Id: 230512
+    Group: Battle
+    Name: "Caça Christmas Orc"
+    Targets:
+      - Id: 0
+        Mob: ORC_XMAS
+        Count: 2000
+    Rewards:
+      Item: Orc_Warrior_Card
+      Amount: 1
+    Score: 10
+  - Id: 230513
+    Group: Battle
+    Name: "Caça Metaling"
+    Targets:
+      - Id: 0
+        Mob: METALING
+        Count: 2000
+    Rewards:
+      Item: Metaling_Card
+      Amount: 1
+    Score: 10
+  - Id: 230514
+    Group: Battle
+    Name: "Caça Mineral"
+    Targets:
+      - Id: 0
+        Mob: MINERAL
+        Count: 2000
+    Rewards:
+      Item: Mineral_Card
+      Amount: 1
+    Score: 10
+  - Id: 230515
+    Group: Battle
+    Name: "Caça Obsidian"
+    Targets:
+      - Id: 0
+        Mob: OBSIDIAN
+        Count: 2000
+    Rewards:
+      Item: Obsidian_Card
+      Amount: 1
+    Score: 10
+  - Id: 230516
+    Group: Battle
+    Name: "Caça Pitman"
+    Targets:
+      - Id: 0
+        Mob: PITMAN
+        Count: 2000
+    Rewards:
+      Item: Pitman_Card
+      Amount: 1
+    Score: 10
+  - Id: 230517
+    Group: Battle
+    Name: "Caça Old Stove"
+    Targets:
+      - Id: 0
+        Mob: WASTE_STOVE
+        Count: 2000
+    Rewards:
+      Item: Waste_Stove_Card
+      Amount: 1
+    Score: 10
+  - Id: 230518
+    Group: Battle
+    Name: "Caça Ungoliant"
+    Targets:
+      - Id: 0
+        Mob: UNGOLIANT
+        Count: 2000
+    Rewards:
+      Item: Ungoliant_Card
+      Amount: 1
+    Score: 10
+  - Id: 230519
+    Group: Battle
+    Name: "Caça Porcellio"
+    Targets:
+      - Id: 0
+        Mob: PORCELLIO
+        Count: 2000
+    Rewards:
+      Item: Porcellio_Card
+      Amount: 1
+    Score: 10
+  - Id: 230520
+    Group: Battle
+    Name: "Caça Noxious"
+    Targets:
+      - Id: 0
+        Mob: NOXIOUS
+        Count: 2000
+    Rewards:
+      Item: Noxious_Card
+      Amount: 1
+    Score: 10
+  - Id: 230521
+    Group: Battle
+    Name: "Caça Venomous"
+    Targets:
+      - Id: 0
+        Mob: VENOMOUS
+        Count: 2000
+    Rewards:
+      Item: Venomous_Card
+      Amount: 1
+    Score: 10
+  - Id: 230522
+    Group: Battle
+    Name: "Caça Teddy Bear"
+    Targets:
+      - Id: 0
+        Mob: TEDDY_BEAR
+        Count: 2000
+    Rewards:
+      Item: Teddy_Bear_Card
+      Amount: 1
+    Score: 10
+  - Id: 230523
+    Group: Battle
+    Name: "Caça Anopheles"
+    Targets:
+      - Id: 0
+        Mob: ANOPHELES
+        Count: 2000
+    Rewards:
+      Item: Anopheles_Card
+      Amount: 1
+    Score: 10
+  - Id: 230524
+    Group: Battle
+    Name: "Caça Holden"
+    Targets:
+      - Id: 0
+        Mob: MOLE
+        Count: 2000
+    Rewards:
+      Item: Mole_Card
+      Amount: 1
+    Score: 10
+  - Id: 230525
+    Group: Battle
+    Name: "Caça Hill Wind"
+    Targets:
+      - Id: 0
+        Mob: HILL_WIND
+        Count: 2000
+    Rewards:
+      Item: Hill_Wind_Card
+      Amount: 1
+    Score: 10
+  - Id: 230526
+    Group: Battle
+    Name: "Caça Green Maiden"
+    Targets:
+      - Id: 0
+        Mob: CHUNG_E_
+        Count: 2000
+    Rewards:
+      Item: Chung_E_Card
+      Amount: 1
+    Score: 10
+  - Id: 230527
+    Group: Battle
+    Name: "Caça Gremlin"
+    Targets:
+      - Id: 0
+        Mob: GREMLIN
+        Count: 2000
+    Rewards:
+      Item: Gremlin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230528
+    Group: Battle
+    Name: "Caça Beholder"
+    Targets:
+      - Id: 0
+        Mob: BEHOLDER
+        Count: 2000
+    Rewards:
+      Item: Beholder_Card
+      Amount: 1
+    Score: 10
+  - Id: 230529
+    Group: Battle
+    Name: "Caça Seyren Windsor"
+    Targets:
+      - Id: 0
+        Mob: SEYREN
+        Count: 2000
+    Rewards:
+      Item: Seyren_Card
+      Amount: 1
+    Score: 10
+  - Id: 230530
+    Group: Battle
+    Name: "Caça Eremes Guile"
+    Targets:
+      - Id: 0
+        Mob: EREMES
+        Count: 2000
+    Rewards:
+      Item: Eremes_Card
+      Amount: 1
+    Score: 10
+  - Id: 230531
+    Group: Battle
+    Name: "Caça Howard Alt-Eisen"
+    Targets:
+      - Id: 0
+        Mob: HARWORD
+        Count: 2000
+    Rewards:
+      Item: Harword_Card
+      Amount: 1
+    Score: 10
+  - Id: 230532
+    Group: Battle
+    Name: "Caça Margaretha Sorin"
+    Targets:
+      - Id: 0
+        Mob: MAGALETA
+        Count: 2000
+    Rewards:
+      Item: Magaleta_Card
+      Amount: 1
+    Score: 10
+  - Id: 230533
+    Group: Battle
+    Name: "Caça Cecil Damon"
+    Targets:
+      - Id: 0
+        Mob: SHECIL
+        Count: 2000
+    Rewards:
+      Item: Shecil_Card
+      Amount: 1
+    Score: 10
+  - Id: 230534
+    Group: Battle
+    Name: "Caça Kathryne Keyron"
+    Targets:
+      - Id: 0
+        Mob: KATRINN
+        Count: 2000
+    Rewards:
+      Item: Katrinn_Card
+      Amount: 1
+    Score: 10
+  - Id: 230535
+    Group: Battle
+    Name: "Caça Egnigem Cenia"
+    Targets:
+      - Id: 0
+        Mob: YGNIZEM
+        Count: 2000
+    Rewards:
+      Item: Ygnizem_Card
+      Amount: 1
+    Score: 10
+  - Id: 230536
+    Group: Battle
+    Name: "Caça Wickebine Tres"
+    Targets:
+      - Id: 0
+        Mob: WHIKEBAIN
+        Count: 2000
+    Rewards:
+      Item: Whikebain_Card
+      Amount: 1
+    Score: 10
+  - Id: 230537
+    Group: Battle
+    Name: "Caça Armeyer Dinze"
+    Targets:
+      - Id: 0
+        Mob: ARMAIA
+        Count: 2000
+    Rewards:
+      Item: Armaia_Card
+      Amount: 1
+    Score: 10
+  - Id: 230538
+    Group: Battle
+    Name: "Caça Errende Ebecee"
+    Targets:
+      - Id: 0
+        Mob: EREND
+        Count: 2000
+    Rewards:
+      Item: Erend_Card
+      Amount: 1
+    Score: 10
+  - Id: 230539
+    Group: Battle
+    Name: "Caça Kavach Icarus"
+    Targets:
+      - Id: 0
+        Mob: KAVAC
+        Count: 2000
+    Rewards:
+      Item: Kavac_Card
+      Amount: 1
+    Score: 10
+  - Id: 230540
+    Group: Battle
+    Name: "Caça Laurell Weinder"
+    Targets:
+      - Id: 0
+        Mob: RAWREL
+        Count: 2000
+    Rewards:
+      Item: Rawrel_Card
+      Amount: 1
+    Score: 10
+  - Id: 230541
+    Group: Battle
+    Name: "Caça Archdam"
+    Targets:
+      - Id: 0
+        Mob: ARCHDAM
+        Count: 2000
+    Rewards:
+      Item: Archdam_Card
+      Amount: 1
+    Score: 10
+  - Id: 230542
+    Group: Battle
+    Name: "Caça Dimik"
+    Targets:
+      - Id: 0
+        Mob: DIMIK
+        Count: 2000
+    Rewards:
+      Item: Dimik_Card
+      Amount: 1
+    Score: 10
+  - Id: 230543
+    Group: Battle
+    Name: "Caça Dimik"
+    Targets:
+      - Id: 0
+        Mob: DIMIK_1
+        Count: 2000
+    Rewards:
+      Item: Dimik_Card
+      Amount: 1
+    Score: 10
+  - Id: 230544
+    Group: Battle
+    Name: "Caça Dimik"
+    Targets:
+      - Id: 0
+        Mob: DIMIK_2
+        Count: 2000
+    Rewards:
+      Item: Dimik_Card
+      Amount: 1
+    Score: 10
+  - Id: 230545
+    Group: Battle
+    Name: "Caça Dimik"
+    Targets:
+      - Id: 0
+        Mob: DIMIK_3
+        Count: 2000
+    Rewards:
+      Item: Dimik_Card
+      Amount: 1
+    Score: 10
+  - Id: 230546
+    Group: Battle
+    Name: "Caça Dimik"
+    Targets:
+      - Id: 0
+        Mob: DIMIK_4
+        Count: 2000
+    Rewards:
+      Item: Dimik_Card
+      Amount: 1
+    Score: 10
+  - Id: 230547
+    Group: Battle
+    Name: "Caça Venatu"
+    Targets:
+      - Id: 0
+        Mob: VENATU
+        Count: 2000
+    Rewards:
+      Item: Venatu_Card
+      Amount: 1
+    Score: 10
+  - Id: 230548
+    Group: Battle
+    Name: "Caça Venatu"
+    Targets:
+      - Id: 0
+        Mob: VENATU_1
+        Count: 2000
+    Rewards:
+      Item: Venatu_Card
+      Amount: 1
+    Score: 10
+  - Id: 230549
+    Group: Battle
+    Name: "Caça Venatu"
+    Targets:
+      - Id: 0
+        Mob: VENATU_2
+        Count: 2000
+    Rewards:
+      Item: Venatu_Card
+      Amount: 1
+    Score: 10
+  - Id: 230550
+    Group: Battle
+    Name: "Caça Venatu"
+    Targets:
+      - Id: 0
+        Mob: VENATU_3
+        Count: 2000
+    Rewards:
+      Item: Venatu_Card
+      Amount: 1
+    Score: 10
+  - Id: 230551
+    Group: Battle
+    Name: "Caça Venatu"
+    Targets:
+      - Id: 0
+        Mob: VENATU_4
+        Count: 2000
+    Rewards:
+      Item: Venatu_Card
+      Amount: 1
+    Score: 10
+  - Id: 230552
+    Group: Battle
+    Name: "Caça Hill Wind"
+    Targets:
+      - Id: 0
+        Mob: HILL_WIND_1
+        Count: 2000
+    Rewards:
+      Item: Hill_Wind_Card
+      Amount: 1
+    Score: 10
+  - Id: 230553
+    Group: Battle
+    Name: "Caça Remover"
+    Targets:
+      - Id: 0
+        Mob: REMOVAL
+        Count: 2000
+    Rewards:
+      Item: Removal_Card
+      Amount: 1
+    Score: 10
+  - Id: 230554
+    Group: Battle
+    Name: "Caça Orc Baby"
+    Targets:
+      - Id: 0
+        Mob: ORC_BABY
+        Count: 2000
+    Rewards:
+      Item: Orc_Baby_Card
+      Amount: 1
+    Score: 10
+  - Id: 230555
+    Group: Battle
+    Name: "Caça Grove"
+    Targets:
+      - Id: 0
+        Mob: GREEN_IGUANA
+        Count: 2000
+    Rewards:
+      Item: Green_Iguana_Card
+      Amount: 1
+    Score: 10
+  - Id: 230556
+    Group: Battle
+    Name: "Caça Breeze"
+    Targets:
+      - Id: 0
+        Mob: BREEZE
+        Count: 2000
+    Rewards:
+      Item: Breeze_Card
+      Amount: 1
+    Score: 10
+  - Id: 230557
+    Group: Battle
+    Name: "Caça Plasma"
+    Targets:
+      - Id: 0
+        Mob: PLASMA_Y
+        Count: 2000
+    Rewards:
+      Item: Plasma_Card
+      Amount: 1
+    Score: 10
+  - Id: 230558
+    Group: Battle
+    Name: "Caça Plasma"
+    Targets:
+      - Id: 0
+        Mob: PLASMA_R
+        Count: 2000
+    Rewards:
+      Item: Plasma_Card
+      Amount: 1
+    Score: 10
+  - Id: 230559
+    Group: Battle
+    Name: "Caça Plasma"
+    Targets:
+      - Id: 0
+        Mob: PLASMA_G
+        Count: 2000
+    Rewards:
+      Item: Plasma_Card
+      Amount: 1
+    Score: 10
+  - Id: 230560
+    Group: Battle
+    Name: "Caça Plasma"
+    Targets:
+      - Id: 0
+        Mob: PLASMA_P
+        Count: 2000
+    Rewards:
+      Item: Plasma_Card
+      Amount: 1
+    Score: 10
+  - Id: 230561
+    Group: Battle
+    Name: "Caça Plasma"
+    Targets:
+      - Id: 0
+        Mob: PLASMA_B
+        Count: 2000
+    Rewards:
+      Item: Plasma_Card
+      Amount: 1
+    Score: 10
+  - Id: 230562
+    Group: Battle
+    Name: "Caça Death Word"
+    Targets:
+      - Id: 0
+        Mob: DEATHWORD
+        Count: 2000
+    Rewards:
+      Item: Deathword_Card
+      Amount: 1
+    Score: 10
+  - Id: 230563
+    Group: Battle
+    Name: "Caça Ancient Mimic"
+    Targets:
+      - Id: 0
+        Mob: ANCIENT_MIMIC
+        Count: 2000
+    Rewards:
+      Item: Ancient_Mimic_Card
+      Amount: 1
+    Score: 10
+  - Id: 230564
+    Group: Battle
+    Name: "Caça Acidus"
+    Targets:
+      - Id: 0
+        Mob: ACIDUS
+        Count: 2000
+    Rewards:
+      Item: Acidus_Card
+      Amount: 1
+    Score: 10
+  - Id: 230565
+    Group: Battle
+    Name: "Caça Ferus"
+    Targets:
+      - Id: 0
+        Mob: FERUS
+        Count: 2000
+    Rewards:
+      Item: Ferus_Card
+      Amount: 1
+    Score: 10
+  - Id: 230566
+    Group: Battle
+    Name: "Caça Novus"
+    Targets:
+      - Id: 0
+        Mob: NOVUS
+        Count: 2000
+    Rewards:
+      Item: Novus_Card
+      Amount: 1
+    Score: 10
+  - Id: 230567
+    Group: Battle
+    Name: "Caça Acidus"
+    Targets:
+      - Id: 0
+        Mob: ACIDUS_
+        Count: 2000
+    Rewards:
+      Item: Acidus__Card
+      Amount: 1
+    Score: 10
+  - Id: 230568
+    Group: Battle
+    Name: "Caça Ferus"
+    Targets:
+      - Id: 0
+        Mob: FERUS_
+        Count: 2000
+    Rewards:
+      Item: Ferus__Card
+      Amount: 1
+    Score: 10
+  - Id: 230569
+    Group: Battle
+    Name: "Caça Novus"
+    Targets:
+      - Id: 0
+        Mob: NOVUS_
+        Count: 2000
+    Rewards:
+      Item: Novus__Card
+      Amount: 1
+    Score: 10
+  - Id: 230570
+    Group: Battle
+    Name: "Caça Dragon Egg"
+    Targets:
+      - Id: 0
+        Mob: DRAGON_EGG
+        Count: 2000
+    Rewards:
+      Item: Dragon_Egg_Card
+      Amount: 1
+    Score: 10
+  - Id: 230571
+    Group: Battle
+    Name: "Caça Alicel"
+    Targets:
+      - Id: 0
+        Mob: ALICEL
+        Count: 2000
+    Rewards:
+      Item: Alicel_Card
+      Amount: 1
+    Score: 10
+  - Id: 230572
+    Group: Battle
+    Name: "Caça Aliot"
+    Targets:
+      - Id: 0
+        Mob: ALIOT
+        Count: 2000
+    Rewards:
+      Item: Aliot_Card
+      Amount: 1
+    Score: 10
+  - Id: 230573
+    Group: Battle
+    Name: "Caça Aliza"
+    Targets:
+      - Id: 0
+        Mob: ALIZA
+        Count: 2000
+    Rewards:
+      Item: Aliza_Card
+      Amount: 1
+    Score: 10
+  - Id: 230574
+    Group: Battle
+    Name: "Caça Skogul"
+    Targets:
+      - Id: 0
+        Mob: SKOGUL
+        Count: 2000
+    Rewards:
+      Item: Skogul_Card
+      Amount: 1
+    Score: 10
+  - Id: 230575
+    Group: Battle
+    Name: "Caça Frus"
+    Targets:
+      - Id: 0
+        Mob: FRUS
+        Count: 2000
+    Rewards:
+      Item: Frus_Card
+      Amount: 1
+    Score: 10
+  - Id: 230576
+    Group: Battle
+    Name: "Caça Agav"
+    Targets:
+      - Id: 0
+        Mob: AGAV
+        Count: 2000
+    Rewards:
+      Item: Agav_Card
+      Amount: 1
+    Score: 10
+  - Id: 230577
+    Group: Battle
+    Name: "Caça Echio"
+    Targets:
+      - Id: 0
+        Mob: ECHIO
+        Count: 2000
+    Rewards:
+      Item: Echio_Card
+      Amount: 1
+    Score: 10
+  - Id: 230578
+    Group: Battle
+    Name: "Caça Vanberk"
+    Targets:
+      - Id: 0
+        Mob: VANBERK
+        Count: 2000
+    Rewards:
+      Item: Vanberk_Card
+      Amount: 1
+    Score: 10
+  - Id: 230579
+    Group: Battle
+    Name: "Caça Isilla"
+    Targets:
+      - Id: 0
+        Mob: ISILLA
+        Count: 2000
+    Rewards:
+      Item: Isilla_Card
+      Amount: 1
+    Score: 10
+  - Id: 230580
+    Group: Battle
+    Name: "Caça Hodremlin"
+    Targets:
+      - Id: 0
+        Mob: HODREMLIN
+        Count: 2000
+    Rewards:
+      Item: Hodremlin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230581
+    Group: Battle
+    Name: "Caça Seeker"
+    Targets:
+      - Id: 0
+        Mob: SEEKER
+        Count: 2000
+    Rewards:
+      Item: Seeker_Card
+      Amount: 1
+    Score: 10
+  - Id: 230582
+    Group: Battle
+    Name: "Caça Snowier"
+    Targets:
+      - Id: 0
+        Mob: SNOWIER
+        Count: 2000
+    Rewards:
+      Item: Snowier_Card
+      Amount: 1
+    Score: 10
+  - Id: 230583
+    Group: Battle
+    Name: "Caça Siroma"
+    Targets:
+      - Id: 0
+        Mob: SIROMA
+        Count: 2000
+    Rewards:
+      Item: Siroma_Card
+      Amount: 1
+    Score: 10
+  - Id: 230584
+    Group: Battle
+    Name: "Caça Ice Titan"
+    Targets:
+      - Id: 0
+        Mob: ICE_TITAN
+        Count: 2000
+    Rewards:
+      Item: Ice_Titan_Card
+      Amount: 1
+    Score: 10
+  - Id: 230585
+    Group: Battle
+    Name: "Caça Gazeti"
+    Targets:
+      - Id: 0
+        Mob: GAZETI
+        Count: 2000
+    Rewards:
+      Item: Gazeti_Card
+      Amount: 1
+    Score: 10
+  - Id: 230586
+    Group: Battle
+    Name: "Caça Muscipular"
+    Targets:
+      - Id: 0
+        Mob: MUSCIPULAR
+        Count: 2000
+    Rewards:
+      Item: Muscipular_Card
+      Amount: 1
+    Score: 10
+  - Id: 230587
+    Group: Battle
+    Name: "Caça Drosera"
+    Targets:
+      - Id: 0
+        Mob: DROSERA
+        Count: 2000
+    Rewards:
+      Item: Drosera_Card
+      Amount: 1
+    Score: 10
+  - Id: 230588
+    Group: Battle
+    Name: "Caça Roween"
+    Targets:
+      - Id: 0
+        Mob: ROWEEN
+        Count: 2000
+    Rewards:
+      Item: Roween_Card
+      Amount: 1
+    Score: 10
+  - Id: 230589
+    Group: Battle
+    Name: "Caça Stapo"
+    Targets:
+      - Id: 0
+        Mob: STAPO
+        Count: 2000
+    Rewards:
+      Item: Stapo_Card
+      Amount: 1
+    Score: 10
+  - Id: 230590
+    Group: Battle
+    Name: "Caça Magmaring"
+    Targets:
+      - Id: 0
+        Mob: MAGMARING
+        Count: 2000
+    Rewards:
+      Item: Magmaring_Card
+      Amount: 1
+    Score: 10
+  - Id: 230591
+    Group: Battle
+    Name: "Caça Fire Imp"
+    Targets:
+      - Id: 0
+        Mob: IMP
+        Count: 2000
+    Rewards:
+      Item: Imp_Card
+      Amount: 1
+    Score: 10
+  - Id: 230592
+    Group: Battle
+    Name: "Caça Knocker"
+    Targets:
+      - Id: 0
+        Mob: KNOCKER
+        Count: 2000
+    Rewards:
+      Item: Knocker_Card
+      Amount: 1
+    Score: 10
+  - Id: 230593
+    Group: Battle
+    Name: "Caça Muka"
+    Targets:
+      - Id: 0
+        Mob: E_MUKA
+        Count: 2000
+    Rewards:
+      Item: Muka_Card
+      Amount: 1
+    Score: 10
+  - Id: 230594
+    Group: Battle
+    Name: "Caça Poison Spore"
+    Targets:
+      - Id: 0
+        Mob: E_POISONSPORE
+        Count: 2000
+    Rewards:
+      Item: Poison_Spore_Card
+      Amount: 1
+    Score: 10
+  - Id: 230595
+    Group: Battle
+    Name: "Caça Magnolia"
+    Targets:
+      - Id: 0
+        Mob: E_MAGNOLIA
+        Count: 2000
+    Rewards:
+      Item: Magnolia_Card
+      Amount: 1
+    Score: 10
+  - Id: 230596
+    Group: Battle
+    Name: "Caça Marin"
+    Targets:
+      - Id: 0
+        Mob: E_MARIN
+        Count: 2000
+    Rewards:
+      Item: Marin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230597
+    Group: Battle
+    Name: "Caça Plankton"
+    Targets:
+      - Id: 0
+        Mob: E_PLANKTON
+        Count: 2000
+    Rewards:
+      Item: Plankton_Card
+      Amount: 1
+    Score: 10
+  - Id: 230598
+    Group: Battle
+    Name: "Caça Mandragora"
+    Targets:
+      - Id: 0
+        Mob: E_MANDRAGORA
+        Count: 2000
+    Rewards:
+      Item: Mandragora_Card
+      Amount: 1
+    Score: 10
+  - Id: 230599
+    Group: Battle
+    Name: "Caça Coco"
+    Targets:
+      - Id: 0
+        Mob: E_COCO
+        Count: 2000
+    Rewards:
+      Item: Coco_Card
+      Amount: 1
+    Score: 10
+  - Id: 230600
+    Group: Battle
+    Name: "Caça Choco"
+    Targets:
+      - Id: 0
+        Mob: E_CHOCO
+        Count: 2000
+    Rewards:
+      Item: Choco_Card
+      Amount: 1
+    Score: 10
+  - Id: 230601
+    Group: Battle
+    Name: "Caça Martin"
+    Targets:
+      - Id: 0
+        Mob: E_MARTIN
+        Count: 2000
+    Rewards:
+      Item: Martin_Card
+      Amount: 1
+    Score: 10
+  - Id: 230602
+    Group: Battle
+    Name: "Caça Zombie Slaughter"
+    Targets:
+      - Id: 0
+        Mob: ZOMBIE_SLAUGHTER
+        Count: 2000
+    Rewards:
+      Item: Zombie_Slaughter_Card
+      Amount: 1
+    Score: 10
+  - Id: 230603
+    Group: Battle
+    Name: "Caça Ragged Zombie"
+    Targets:
+      - Id: 0
+        Mob: RAGGED_ZOMBIE
+        Count: 2000
+    Rewards:
+      Item: Ragged_Zombie_Card
+      Amount: 1
+    Score: 10
+  - Id: 230604
+    Group: Battle
+    Name: "Caça Hell Poodle"
+    Targets:
+      - Id: 0
+        Mob: HELL_POODLE
+        Count: 2000
+    Rewards:
+      Item: Hell_Poodle_Card
+      Amount: 1
+    Score: 10
+  - Id: 230605
+    Group: Battle
+    Name: "Caça Banshee"
+    Targets:
+      - Id: 0
+        Mob: BANSHEE
+        Count: 2000
+    Rewards:
+      Item: Banshee_Card
+      Amount: 1
+    Score: 10
+  - Id: 230606
+    Group: Battle
+    Name: "Caça Flame Skull"
+    Targets:
+      - Id: 0
+        Mob: FLAME_SKULL
+        Count: 2000
+    Rewards:
+      Item: Flame_Skull_Card
+      Amount: 1
+    Score: 10
+  - Id: 230607
+    Group: Battle
+    Name: "Caça Banshee Master"
+    Targets:
+      - Id: 0
+        Mob: BANSHEE_MASTER
+        Count: 2000
+    Rewards:
+      Item: Banshee_Master_Card
+      Amount: 1
+    Score: 10
+  - Id: 230608
+    Group: Battle
+    Name: "Caça Tatacho"
+    Targets:
+      - Id: 0
+        Mob: TATACHO
+        Count: 2000
+    Rewards:
+      Item: Tatacho_Card
+      Amount: 1
+    Score: 10
+  - Id: 230609
+    Group: Battle
+    Name: "Caça Centipede"
+    Targets:
+      - Id: 0
+        Mob: CENTIPEDE
+        Count: 2000
+    Rewards:
+      Item: Centipede_Card
+      Amount: 1
+    Score: 10
+  - Id: 230610
+    Group: Battle
+    Name: "Caça Hillslion"
+    Targets:
+      - Id: 0
+        Mob: HILLSRION
+        Count: 2000
+    Rewards:
+      Item: Hilsrion_Card
+      Amount: 1
+    Score: 10
+  - Id: 230611
+    Group: Battle
+    Name: "Caça Cornus"
+    Targets:
+      - Id: 0
+        Mob: CORNUS
+        Count: 2000
+    Rewards:
+      Item: Cornus_Card
+      Amount: 1
+    Score: 10
+  - Id: 230612
+    Group: Battle
+    Name: "Caça Luciola Vespa"
+    Targets:
+      - Id: 0
+        Mob: LUCIOLA_VESPA
+        Count: 2000
+    Rewards:
+      Item: Luciola_Vespa_Card
+      Amount: 1
+    Score: 10
+  - Id: 230613
+    Group: Battle
+    Name: "Caça Centipede Larva"
+    Targets:
+      - Id: 0
+        Mob: CENTIPEDE_LARVA
+        Count: 2000
+    Rewards:
+      Item: Centipede_Larva_Card
+      Amount: 1
+    Score: 10
+  - Id: 230614
+    Group: Battle
+    Name: "Caça Draco"
+    Targets:
+      - Id: 0
+        Mob: DRACO
+        Count: 2000
+    Rewards:
+      Item: Draco_Card
+      Amount: 1
+    Score: 10
+  - Id: 230615
+    Group: Battle
+    Name: "Caça Aqua Elemental"
+    Targets:
+      - Id: 0
+        Mob: AQUA_ELEMENTAL
+        Count: 2000
+    Rewards:
+      Item: Aqua_Elemental_Card
+      Amount: 1
+    Score: 10
+  - Id: 230616
+    Group: Battle
+    Name: "Caça Dark Shadow"
+    Targets:
+      - Id: 0
+        Mob: DARK_SHADOW
+        Count: 2000
+    Rewards:
+      Item: Dark_Shadow_Card
+      Amount: 1
+    Score: 10

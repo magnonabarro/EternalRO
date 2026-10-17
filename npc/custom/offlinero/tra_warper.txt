@@ -1,0 +1,55 @@
+//===== Custom Script =======================================
+//= Hector: Tra Fild02 Warper (Two-Way: Prontera ↔ Training Ground)
+//= Warp ke tra_fild02 (scarecrow lv100 test) & balik Prontera tengah
+//= NPC1: Prontera (155,185) | NPC2: tra_fild02 (207,114)
+//============================================================
+
+prontera,168,177,2	script	Hector	1_m_knightmaster,{
+	mes "[Hector]";
+	mes "I can teleport you to the special training area";
+	next;
+	switch(select("Yes, warp me!:Info")) {
+		case 1:
+			mes "[Hector]";
+			mes "Good luck, find my brother if you want comeback~";
+			close2;
+			warp "tra_fild02",110,96;
+			end;
+		case 2:
+			mes "[Hector]";
+			mes "Very safe area, lv. 100 dummies.";
+			close;
+	}
+}
+
+tra_fild02,202,114,4	script	Hecator	4_M_EDEN_GUARDER,{
+	mes "[Hecator]";
+	mes "Done training? Wanna rest?";
+	next;
+	switch(select("Yes, warp me!:Nah, I am still training my skill")) {
+		case 1:
+			mes "[Hecator]";
+			mes "Great! Bye~";
+			close2;
+			warp "prontera",155,185;
+			end;
+		case 2:
+			close;
+	}
+}
+
+tra_fild02,17,114,5	script	Heciator	4_M_EDEN_GUARDER,{
+	mes "[Heciator]";
+	mes "Done training? Wanna rest?";
+	next;
+	switch(select("Yes, warp me!:Nah, I am still training my skill")) {
+		case 1:
+			mes "[Heciator]";
+			mes "Great! Bye~";
+			close2;
+			warp "prontera",155,185;
+			end;
+		case 2:
+			close;
+	}
+}

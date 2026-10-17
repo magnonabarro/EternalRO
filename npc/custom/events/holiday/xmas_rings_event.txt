@@ -1,0 +1,205 @@
+//
+//==================================================================================
+//-------------------------------- RagnaERO Script ---------------------------------
+//=    __________                              _____________________ ________
+//=    \______   \_____     ____   ____ _____  \_   _____/\______   \\_____  \
+//=     |       _/\__  \   / ___\ /    \\__  \  |    __)_  |       _/ /   |   \
+//=   	|    |   \ / __ \_/ /_/  >   |  \/ __ \_|        \ |    |   \/    |    \
+//=   	|____|_  /(____  /\___  /|___|  (____  /_______  / |____|_  /\_______  /
+//=            \/      \//_____/      \/     \/        \/         \/         \/
+//=                                                          RagnaERO Scripts
+//=                                                                       
+//--------------------------- http://rathena.org/board/ ----------------------------
+//==================================================================================
+//----- NOME DO SCRIPT -------------------------------------------------------------
+//= evento_aneis_de_natal.txt
+//----- POR: -----------------------------------------------------------------------
+//= Equipe de Desenvolvimento rAthena
+//----- VERSÃO ATUAL DO SCRIPT: ----------------------------------------------------
+//= v1.0
+//----- DESCRIÇÃO: -----------------------------------------------------------------
+//= Evento da quest dos anéis de Natal.   
+//----- COMENTÁRIOS ADICIONAIS: ----------------------------------------------------
+//= Projeto RagnaERO
+//= Cabeçalho e Tradução Pt-BR Por [ADM] Eragonat PK
+//==================================================================================
+
+prontera,160,252,4	script	Snower	713,{  //Novo local adicionado pelo [ADM] Eragonat PK.
+
+//prontera,156,174,4	script	Snower	713,{  //Local Original.
+	mes "[Snower]";
+	if(Q_XMSRINGS==2){
+		mes "Oh.. é verdade? Você ajudou minha irmã Sneewy? Obrigado.";
+	}else if(Q_XMSRINGS==3){
+		mes "Snoowy me enviou um pássaro com uma mensagem. Ela me contou sobre sua ajuda...";
+		mes "Eu vou te contar um segredo dos anéis mágicos.";
+		emotion ET_BEST;
+		next;
+		mes "[Snower]";
+		mes "Eles só têm poder mágico de 08 de dezembro até 08 de janeiro.";
+		next;
+		mes "[Snower]";
+		mes "A propósito, coloque o Gorro de Natal se você quiser descobrir seu verdadeiro poder.";
+		next;
+		mes "[Snower]";
+		mes "Se você colocar os dois anéis, o poder deles será dobrado.";
+		mes "Tenha um bom dia!";
+		close;
+	}else{
+		mes "Olá! Minhas duas irmãs e eu estamos preparando vários presentes para os 3 feriados!";
+	}
+	emotion ET_CRY;
+	next;
+	menu "Onde estão suas irmãs?",-, "Que feriados?",M_PR,"Quais presentes?",M_WRAP,"Posso ajudá-lo?",M_QUEST;
+
+	mes "[Snower]";
+	mes "Minha irmã mais nova, Sneewy, partiu para uma terra distante para preparar presentes para seus pobres filhos... Eu não sei onde. Você deve perguntar à minha irmã mais velha e aos seus passarinhos.";
+	next;
+	mes "[Snower]";
+	mes "Minha irmã mais velha? O nome dela é Snoowy. Ela navegou para alguma ilha verde... Ela sempre fala sobre alguns presentes para golfinhos ou algo assim...";
+	close;
+
+M_PR:
+	mes "[Snower]";
+	mes "Os três feriados inteiros? Bem, eles vêm um após o outro!";
+	mes "^000080O Natal^000000, ^FF0000Karachun^000000 e ^008000Véspera de Ano Novo^000000!";
+	next;
+	mes "[Snower]";
+	mes "^FF0000Karachun^000000? Heh... Este é um antigo festival de pagãos. Eles costumavam celebrá-lo antes do aparecimento de HNY e XMas, você sabe.";
+	next;
+	goto M_QUEST;
+
+M_WRAP:
+	mes "[Snower]";
+	mes "Minhas irmãs dizem que todos os presentes devem estar embrulhados da mesma maneira. Ou então algumas crianças podem brigar umas com as outras por presentes mais bonitos!";
+	next;
+	mes "[Snower]";
+	mes "Você gostaria que eu embrulhe suas caixinhas de presente com papel cinza?";
+	next;
+	menu "Embrulhe-os, por favor!",-, "Não, obrigado.",M_QUEST;
+
+	set @prizes, countitem(664)+countitem(665)+countitem(666)+countitem(667);
+	if( @prizes == 0){
+		mes "[Snower]";
+		mes "Eu não vejo nenhum presente em caixas fantasticas com você...";
+		if(countitem(644))mes "Você só tem caixas cinzas.";
+		close;
+	}
+	delitem 664,countitem(664);
+	delitem 665,countitem(665);
+	delitem 666,countitem(666);
+	delitem 667,countitem(667);
+	getitem 644,@prizes;
+
+	mes "[Snower]";
+	mes "*shuffle* Aqui vai você.";
+	next;
+
+M_QUEST:
+	mes "[Snower]";
+	mes "Eu espero que você encontre minhas irmãs o mais rápido possível... Elas precisam de ajuda.";
+	if(Q_XMSRINGS==0) set Q_XMSRINGS,1;
+	close;
+
+OnInit:
+//Gorro de Natal
+	setitemscript 2236,"{ bonus bMdef,1; bonus bLuk,1; if(isequipped(2636,2637)){if(@xmr == gettime(DT_MINUTE))end; set @xmr,gettime(DT_MINUTE); misceffect EF_RAINBOW; end;} if(isequipped(2636)){if(@xmr == gettime(DT_MINUTE))end; set @xmr,gettime(DT_MINUTE); misceffect EF_SPHERE;} if(isequipped(2637)){if(@xmr == gettime(DT_MINUTE))end; set @xmr,gettime(DT_MINUTE); misceffect EF_ANGEL2;}}";
+//Anel de Natal de Ouro
+	setitemscript 2636,"{ bonus bLoseSPWhenUnequip,30; if(isequipped(2236)==0)end; if(getskilllv(\"AL_HEAL\")){skill \"TF_HIDING\",4+isequipped(2637);}else{skill \"AL_HEAL\",1+4*isequipped(2637);} }";
+//Anel de Natal de Prata
+	setitemscript 2637,"{ bonus bDamageWhenUnequip,40; if(isequipped(2236)==0)end; if(getskilllv(\"AL_TELEPORT\")){skill \"MC_IDENTIFY\",1;}else{skill \"AL_TELEPORT\",1+isequipped(2636);} }";
+	end;
+}
+
+louyang,224,249,4	script	Sneewy	717,{
+	mes "[Sneewy]";
+	if(Q_XMSRINGS==0){
+		mes "Oi! Eu estou esperando uma correspondência da minha irmã...";
+		emotion ET_CRY;
+		close;
+	}
+	if(Q_XMSRINGS==1){
+		mes "Eu gostaria de ter mais 4 caixas de presente cinza para algumas crianças nativas...";
+		emotion ET_CRY;
+		next;
+		mes "[Sneewy]";
+		mes "Oh, olá. Meu irmão Snower te contou tudo?";
+		next;
+		menu "Aqui estão suas 4 caixas de presente.",-, "Eu não conheço nenhum Snower...",M_END;
+
+		mes "[Sneewy]";
+		if(countitem(644)<4){
+			mes "Me dê 4 presentes para as pobres crianças... Espere, você não tem os 4 presentes!";
+			emotion ET_SORRY;
+			close;
+		}
+		set Q_XMSRINGS,2;
+		delitem 644,4;
+		getnameditem 2637,strcharinfo(0);
+		emotion ET_CHUPCHUP;
+		mes "Obrigado! Aqui está o meu presente para você!";
+		next;
+		mes "[Sneewy]";
+		mes "A propósito, se você colocar 2 anéis diferentes, o aproveitamento dos seus feriados será melhor!";
+		close;
+	}
+	emotion ET_THANKS;
+	mes "Obrigado de novo! Nenhuma criança iria aproveitar os feriados sem os presentes!";
+	close;
+
+M_END:
+	mes "[Sneewy]";
+	mes "Piedade... Eu tenho um anel mágico de Papai Noel... Eu trocaria por 4 caixas de presente...";
+	emotion ET_SWEAT;
+	close;
+}
+
+izlu2dun,133,160,2	script	Snoowy	714,{
+	mes "[Snoowy]";
+	if(Q_XMSRINGS==0){
+		mes "Helloooou! Você conhece meu irmão e irmã? Como assim? Meu irmão Snower é bem conhecido em Prontera!! Apenas pergunte a qualquer criança lá.";
+		emotion ET_SCRATCH;
+		close;
+	}
+	if(Q_XMSRINGS==1){
+		mes "Darn... Como as crianças pobres podem ser mais importantes que os marinheiros... Estou errado?";
+		next;
+		mes "[Snoowy]";
+		mes "Errr. Olá, ai. Minha irmã Sneewy me enviou um passaro com uma mensagem. A carta estava molhada e eu não consegui ler nada além de algumas letras finais do endereço dela...";
+		next;
+		mes "[Snoowy]";
+		mes "Olha, é algo como 'yang' no final... Hmm... Ela deve estar errada 'Al Doo Boryang'...";
+		close;
+	}
+	if(Q_XMSRINGS==2){
+		mes "Você ajudou minha irmã? É ótimo!";
+		next;
+		mes "[Snoowy]";
+		mes "Mas eu também preciso de mais 3 presentes para meus amigos do povo marinho...";
+		next;
+		menu "Tenho esses presentes!",-, "Eu preciso de algo em troca.",M_END;
+
+		mes "[Snoowy]";
+		if(countitem(644)<3){
+			mes "Oops!! Você não tem as 3 caixas de presente cinza com você.";
+			emotion ET_SORRY;
+			close;
+		}
+		set Q_XMSRINGS,3;
+		delitem 644,3;
+		getnameditem 2636,strcharinfo(0);
+		emotion ET_CHUP;
+		mes "Obridadoooo! Pegue este anel mágico!";
+		close;
+	}
+	emotion ET_THANKS;
+	mes "Oh... todo o povo marinho manda seus agradecimentos! Eles amam tanto presentes!!!";
+	if(rand(2))mes "Você não sabia que o Gorro de Natal revela o verdadeiro poder dos anéis?";
+	close;
+
+M_END:
+	mes "[Snoowy]";
+	mes "Eu trocaria um anel mágico de OURO por 3 caixas de presente...";
+	emotion ET_SWEAT;
+	close;
+}

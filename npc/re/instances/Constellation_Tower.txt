@@ -1,0 +1,2115 @@
+//===== rAthena script ===========================================|
+//= Constellation Tower                                          =|
+//===== By: ======================================================|
+//= crazyarashi                                                  =|
+//===== Current Version: =========================================|
+//= 1.0 Initial Version                                          =|
+//= 1.1 Added 300/400/600% Bonus Drops                           =|
+//================================================================|
+
+-	script	ctower_init	-1,{
+	end;
+
+OnInit:
+    disablenpc("Constellation Tower");
+//	disablenpc "Tower Protection Stone";
+	disablenpc "Huge Vortex";
+end;
+}
+
+alberta,215,80,6	script	Constellation Tower	709,{
+	if(checkweight(1201,1) == 0){
+		mes "[ Constellation Tower ]";
+		mes "^008800Wait here!!";
+		mes "You're carrying too much stuff. Why don't you put some of it away, and then come back.^000000";
+		close;
+	}
+	if(BaseLevel < 240){
+		mes "[ Constellation Tower ]";
+		mes "I'm sorry adventurer, but those who are below level 240 won't be allowed to enter the Misty Island anymore. It was a measure decided by the Fisherman Union because of the meteor that fell the other day.";
+		next;
+		if(select("I see.:What's happening.") == 1){
+			mes "[ Constellation Tower ]";
+			mes "You're a pretty good lad, aren't you? You'd better be careful and save your life.";
+			close;
+		}
+		mes "[ Constellation Tower ]";
+		mes "Oh. Is this your first time? The Misty Island used to have an old tower called the ^0000CDEndless Tower^000000.";
+		next;
+		mes "[ Constellation Tower ]";
+		mes "But a new owner has of the tower has appeared, the name seems to have changed also. I didn't have the courage to go inside the island by myself.";
+		next;
+		mes "[ Constellation Tower ]";
+		mes "With your ability now, it will be hard to come back alive if you go there. I don't want to see young adventurer die because of a useless bravado.";
+		close;
+	}
+	mes "[ Constellation Tower ]";
+	mes "Oh, you seem capable. Do you want to go to the Misty Island?";
+	mes "It would be 10,000 Zeny. Are you ready to go?";
+	next;
+	if(select("Misty Island?:Let's go.") == 1){
+		mes "[ Constellation Tower ]";
+		mes "Oh. Is this your first time? The Misty Island used to have an old tower called the ^0000CDEndless Tower^000000.";
+		next;
+		mes "[ Constellation Tower ]";
+		mes "But a new owner has of the tower has appeared, the name seems to have changed also. I didn't have the courage to go inside the island by myself.";
+		next;
+		mes "[ Constellation Tower ]";
+		mes "With your ability now, you would be fine... I think.";
+		close;
+	}
+	if(Zeny < 10000){
+		mes "[ Constellation Tower ]";
+		mes "I'm sorry, you don't have enough Zeny for the payment. I need you to atleast bring me that for the supply and the danger that I'm heading into.";
+		close;
+	}
+	mes "[ Constellation Tower ]";
+	mes "Alright! Then, we are prepared to soil. Let's go!";
+	Zeny -= 10000;
+	close2;
+	warp "e_tower",70,114;
+	end;
+}
+
+e_tower,70,114,0	script	#ctower_ev	HIDDEN_WARP_NPC,4,4,{
+	end;
+
+OnTouch:
+	cloaknpc("Oscar#ctower",false);
+	specialeffect 1145,AREA,"Oscar#ctower";
+	if(isbegin_quest(12513) == 2){
+		cloaknpc("OSC0007#ctower",false);
+		cloaknpc("OSC0008#ctower",false);
+	}
+end;
+}
+
+e_tower,78,112,5	script	OSC0007#ctower	2_DROP_MACHINE,{
+	mes "Ofereço equipamentos do Nebula em troca de <ITEM>Pó de Meteorito<INFO>1000372</INFO></ITEM>.";
+	mes "------------------";
+	mes "Caso esteja interessado, eu ofereço equipamentos de todas as raridades";
+	mes "e encantamentos";
+	switch(select("Equipamentos Nebula:Upgrande Nebula:Troca de Pedra  Nebula:Acessório Nebula")){
+		next;
+		case 1:
+		close2;
+		callshop "Equipamentos_Nebula",1;
+		break;
+		case 2:
+		close2;
+		callshop "Equipamentos_Nebula_upgrande",1;
+		break;
+		case 3:
+		close2;
+		callshop "fragmento_nebula",1;
+		break;
+		next;
+		case 4:
+		close2;
+		callshop "Equipamentos_Nebula_Acessio",1;
+		break;
+	}
+	
+	initnpctimer;
+OnInit:
+	cloaknpc(strnpcinfo(0),true);
+end;
+}
+
+e_tower,80,110,5	script	OSC0008#ctower	2_SLOT_MACHINE,{
+	mes "^0000CDEsta máquina pode reforçar os seus equipamentos de estrela.^000000";
+	next;
+	.@s = select("Cancelar:Poder:Estamina:Concentração:Criativo:Feitiço:Sabedoria") - 1;
+	switch(.@s){
+		case 0:
+			end;
+
+		default:
+			.@id = 6 + .@s;
+			break;
+	}
+	item_enchant(.@id);
+	end;
+
+OnInit:
+	cloaknpc(strnpcinfo(0),true);
+end;
+}
+
+e_tower,30,30,2	script	Huge	602,{
+	if(select("Voltar a Alberta:Cancelar") == 1)
+		warp "alberta",223,36;
+	end;
+}
+
+e_tower,68,116,6	duplicate(dummynpc)	Leticia#ctower	4_4JOB_LETICIA
+
+e_tower,72,116,2	script	Oscar#ctower	4_ED_OSCAR,{
+	emotion ET_THROB;
+	if(isbegin_quest(12513) == 0){
+		mes "^0000CDOscar está a falar com alguém.^000000";
+		next;
+		if(select("Afastem-se.:Ouçam-no em segredo.") == 1){
+			mes "^0000CDBem, escutar não é uma coisa boa de se fazer.^000000";
+			close;
+		}
+		cutin "OSCAR03",0;
+		mes "[ Oscar ]";
+		mes "Então esta confusão não é trabalho seu, correto??";
+		next;
+		cloaknpc("Leticia#ctower",false,getcharid(0));
+		cutin "4job_leticia_02.png",2;
+		mes "[ Leticia ]";
+		mes "Que tipo de constelação achas que eu sou? Esses preconceitos não ajudam muito a melhorar as relações!";
+		next;
+		cutin "OSCAR05",0;
+		mes "[ Oscar ]";
+		mes "Pensei que tinhas destruído este sítio para te aqueceres. Nunca pensei que fosses assim tão violento. Mas acho que és um miúdo bastante agressivo.";
+		next;
+		cutin "4job_leticia_05.png",2;
+		mes "[ Leticia ]";
+		mes "Por muito irritado que esteja, não sou suficientemente corajoso para fazer uma coisa dessas numa área que tu geres, Óscar.";
+		next;
+		cutin "OSCAR05",0;
+		mes "[ Oscar ]";
+		mes "Bem, isso é verdade, eras certamente uma miúda que, pelo menos, conhecia os seus limites.";
+		next;
+		emotion ET_THROB;
+		cutin "4job_leticia_04.png",2;
+		mes "[ Leticia ]";
+		mes "Claro que sim! E o resto é história. Não sei quem o fez, mas partiu aquela torre feia ao meio, se calhar devia parti-la completamente...";
+		next;
+		cutin "OSCAR03",0;
+		mes "[ Oscar ]";
+		mes "Como era de esperar, queria destruir este sítio, não é? Obrigado pela honestidade e por confessar as suas preferências.";
+		next;
+		cutin "4job_leticia_02.png",2;
+		mes "[ Leticia ]";
+		mes "O que é que quer dizer com preferência? É um mal-entendido!";
+		next;
+		select("(Eu não devia ter assistido a esta cena.)");
+		cutin "OSCAR01",0;
+		mes "[ Oscar ]";
+		mes "Oh, " + strcharinfo(0) + ". Finalmente chegaste. Eu tinha a certeza de que virias com toda esta confusão.";
+		next;
+		select("Estavas à minha espera?");
+		cutin "4job_leticia_02.png",2;
+		mes "[ Leticia ]";
+		mes "Óscar, quem é essa criatura? Porque estás a falar com o Óscar como se estivesses ao mesmo nível que ele?";
+		next;
+		cutin "OSCAR03",0;
+		mes "[ Oscar ]";
+		mes "Deves falar com educação, Letícia. Já pedi muitas vezes a ajuda deste aventureiro.";
+		next;
+		select("(Ele mudou de tom de repente?)");
+		cutin "OSCAR04",0;
+		mes "[ ^88AA66A voz do Óscar^000000 ]";
+		mes "[^88AA66Leticia! Eu disse-te que devias ter cuidado com o que dizias quando estavas neste lugar. O meu sermão não foi suficiente?^000000]";
+		next;
+		cutin "4job_leticia_05.png",2;
+		mes "[ Leticia ]";
+		mes "Ah... Ah!!! É o aventureiro de que estão a falar, não é? Eu sei. Estou familiarizado com as histórias.";
+		next;
+		select("Prazer em conhecer-vos.");
+		emotion ET_THROB;
+		next;
+		cutin "4job_leticia_04.png",2;
+		mes "[ ^88AA66Leticia^000000 ]";
+		mes "[^88AA66Estou à frente do Óscar, por isso vou mostrar-te alguma cortesia. Mas não esperes que seja a mesma coisa quando estivermos sozinhos.^000000]";
+		next;
+		cutin "OSCAR01",0;
+		mes "[ Oscar ]";
+		mes "Sinto algo diferente e familiar no local onde a torre foi destruída. Tenho de a ir ver com os meus próprios olhos. Leticia, estás disponível agora??";
+		next;
+		cutin "4job_leticia_01.png",2;
+		mes "[ Leticia ]";
+		mes "Claro que sim! Devo destruir o resto da torre?";
+		next;
+		cutin "OSCAR04",0;
+		mes "[ Oscar ]";
+		mes "Não estou a pedir que a destruam. Letícia, por agora, vamos explorar a parte da torre que reina. Eu levo o aventureiro até à entrada e dou uma vista de olhos lá dentro.";
+		next;
+		select("Posso entrar também?");
+		cutin "OSCAR03",0;
+		mes "[ Oscar ]";
+		mes "Claro que sim. " + strcharinfo(0) + " é a única pessoa que conheço que pode ultrapassar esta situação. Não há outra opção.";
+		next;
+		cutin "4job_leticia_01.png",2;
+		mes "[ Leticia ]";
+		mes "Então, eu vou entrar primeiro!";
+		next;
+		cloaknpc("Leticia#ctower",true,getcharid(0));
+		sleep2 300;
+		cutin "OSCAR03",0;
+		mes "[ Oscar ]";
+		mes "Vou libertar a entrada selada. Entretanto, devem preparar-se para entrar nela.";	
+		close2;
+		cutin "",255;
+		setquest 12513;
+		end;
+	}
+	switch(checkquest(12514,PLAYTIME)){
+		case -1: 
+			break;
+		
+		case 0:
+		case 1:
+			cutin "OSCAR03",2;
+			mes "[ Oscar ]";
+			mes "^0000CDJá tinha tido tempo suficiente para viajar por hoje.^000000 Precisas de descansar o teu corpo para fazeres outra viagem dimensional. Volta quando tiveres descansado o teu corpo o suficiente.";
+			close3;	
+			
+		case 2:
+			erasequest 12514;
+			break;
+	}
+	.@party_id = getcharid(1);
+	if(!.@party_id){
+		cutin "OSCAR01",2;
+		mes "[ Oscar ]";
+		mes "Só posso activá-lo para ti, aventureiro. Por favor, crie o seu próprio grupo e volte a falar comigo.";
+		close3;
+	}
+	cutin "OSCAR01",0;
+	mes "[ Oscar ]";
+	mes "Estás pronto para entrar na torre? Então, por favor, segura a minha mão e concentra-te.";
+	next;
+	.@md_name$ = "Constellation Tower";
+	if(select("Enter.",(is_party_leader() ? "Create Constellation Tower." : "")) == 1){
+		if(instance_enter(.@md_name$) == IE_OK){
+			.@party_name$ = getpartyname(.@party_id);
+			setquest 12514;
+			mapannounce "e_tower", strcharinfo(0) + " Do Grupo, "+ .@party_name$ +", está a entrar no " + .@md_name$ + ".", bc_map, "0x00FF99";
+		} else
+			mes "^0000FFA masmorra memorial ainda não foi criada ou está a entrar numa masmorra memorial diferente da que foi criada.^000000";
+	} else {
+		if(instance_create(.@md_name$) == -3)
+			instance_warning(2,.@md_name$);
+	}
+	cutin "",255;
+	end;
+
+OnInit:
+	cloaknpc(strnpcinfo(0),true);
+end;
+}
+
+1@ch_t,1,1,0	script	#ctower_control	-1,{
+    end;
+
+OnInstanceInit:
+    instance_enable("#oscar_ctower_1",true);
+	instance_hide("#ctower_jump",true);
+	instance_enable("#ctower_fountain",false);
+    instance_event(strnpcinfo(0),"OnCreateFloor",false);
+	instance_enable("#ctower_button",false);
+	for(.@i = 1; .@i < 4; .@i++)
+		instance_enable("#ctower_betel_" + .@i,false);
+	for(.@i = 1; .@i < 13; .@i++)
+		instance_enable("#ctower_treasure_" + .@i,false);
+	for(.@i = 0; .@i < 10; .@i++)
+		instance_enable("#ctower_trap_" + .@i,false);
+	for(.@i = 0; .@i < 16; .@i++)
+		instance_enable("#ctower_trap2_" + .@i,false);
+	instance_enable("#ctower_exit",false);
+end;
+
+OnCreateFloor:
+	freeloop(true);
+    for(.@i = 1; .@i < 51; .@i++){
+        .@mvp_id = 0;
+        .@mob_id = 0;
+        .@type = rand(2,6);
+        .@amount = rand(.@type,.@type + 8);
+		deletearray .@mob_list[0];
+		deletearray .@floor$[0];
+        for(.@x = 0; .@x < .@type; .@x++){
+            .@mob_id = rand(20998,21046);
+            while(inarray(.@mob_list,.@mob_id) != -1)
+               .@mob_id = rand(20998,21046);
+            .@mob_list[.@x] = .@mob_id; 
+        }
+        for(.@x = 0; .@x < .@amount; .@x++){
+            if(.@x <= (.@type - 1))
+                .@floor$[.@x] = .@mob_list[.@x];
+            else
+                .@floor$[.@x] = .@mob_list[rand(getarraysize(.@mob_list))];
+        }
+        if(.@i % 5 == 0){
+            .@mvp_id = rand(21325,21358);
+            while(inarray(.@mvp_list,.@mvp_id) != -1)
+                .@mvp_id = rand(21325,21358);
+            .@mvp_list[getarraysize(.@mvp_list)] = .@mvp_id;
+			set_instance_var("floor_" + .@i + "_mvp",.@mvp_id);
+        }
+        set_instance_var("floor_" + .@i + "$",implode(.@floor$,":"));
+    }
+	freeloop(false);
+end;
+}
+
+1@ch_t,1,1,0	script	#ctower_mob	HIDDEN_WARP_NPC,{
+	end;
+
+OnSummon:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnMobKill";
+	.@event2$ = instance_npcname(strnpcinfo(0)) + "::OnBossKill";
+	.@floor = get_instance_var("floor");
+	killmonster .@map$,.@event$;
+	killmonster .@map$,.@event2$;
+	cleanmap get_instance_var("map$");
+	explode(.@T$,get_instance_var("floor_" + .@floor + "$"),":");
+	set_instance_var("unlocked_" + get_instance_var("area"),0);
+	switch(get_instance_var("area")){
+		case 1:	.@x1 = 7; .@y1 = 177; .@x2 = 18; .@y2 = 217; break;
+		case 2: .@x1 = 92; .@y1 = 177; .@x2 = 100; .@y2 = 217; break;
+		case 3: .@x1 = 180; .@y1 = 177; .@x2 = 188; .@y2 = 217; break;
+		case 4: .@x1 = 266; .@y1 = 177; .@x2 = 275; .@y2 = 217; break;
+		case 5: .@x1 = 350; .@y1 = 177; .@x2 = 360; .@y2 = 217; break;
+	}
+	for(.@i = 0; .@i < getarraysize(.@T$); .@i++){
+		areamonster .@map$,.@x1,.@y1,.@x2,.@y2,"--ja--",atoi(.@T$[.@i]),1,.@event$;
+		unitskilluseid $@mobid[0],"NPC_RELIEVE_ON",9;
+	}
+	if(.@floor % 5 == 0){
+		areamonster .@map$,365,207,375,218,"--ja--",get_instance_var("floor_" + .@floor + "_mvp"),1,.@event2$;
+		unitskilluseid $@mobid[0],"NPC_RELIEVE_ON",9;
+	}
+end;
+
+OnMobKill:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnMobKill";
+	if(!mobcount(.@map$,.@event$))
+		set_instance_var("unlocked_" + get_instance_var("area"),1);
+end;
+
+OnBossKill: //Nothing happens when you kill the boss, you can unlock the floor without killing it
+end;
+}
+
+1@ch_t,46,188,6	script	#oscar_ctower_1	4_ED_OSCAR,{
+	cutin "OSCAR01",2;
+	mes "[ Oscar ]";
+    if(!is_party_leader()){	
+		mes "O líder do vosso partido veio aqui convosco? Não temos muito tempo para ter uma conversa de lazer.";
+		close3;
+    }
+	mes "Estão prontos? Se estiverem prontos, começaremos imediatamente a subir a torre, sim?";
+	next;
+	if(select("Aguarde um minuto!:Começar imediatamente.") == 1){
+		mes "[ Oscar ]";
+		mes "Não temos muito tempo. Por favor, despachem-se.";
+		close3;
+	}
+	close2;
+	cutin "",255;
+	disablenpc instance_npcname(strnpcinfo(0));
+	set_instance_var("map$",instance_mapname("1@ch_t"));
+	instance_hide("#ctower_jump",false);
+	set_instance_var("area",1);
+	set_instance_var("floor",1);
+	.@party_id = getcharid(1);
+	getpartymember .@party_id,0;
+	getpartymember .@party_id,1;
+	getpartymember .@party_id,2;
+	set_instance_var("party_id",.@party_id);
+	.@count = $@partymembercount;
+	if(.@count > 0){
+		.@map$ = get_instance_var("map$");
+		for(.@i = 0; .@i < $@partymembercount; .@i++){
+			if(!isloggedin($@partymemberaid[.@i],$@partymembercid[.@i])) continue;
+			if(strcharinfo(3,$@partymembercid[.@i]) != .@map$) continue;
+			.@cid[.@x] = $@partymembercid[.@i];
+			.@aid[.@x] = $@partymemberaid[.@i];
+			.@name$[.@x] = $@partymembername$[.@i];
+			.@x++;
+		}
+	}
+	set_instance_var("count",.@x);
+	for(.@i = 0; .@i < .@x; .@i++){
+		set_instance_var("cid_" + .@i,.@cid[.@i]);
+		set_instance_var("aid_" + .@i,.@aid[.@i]);
+		set_instance_var("name_" + .@i + "$",.@name$[.@i]);
+	}
+	instance_event("#ctower_mob","OnSummon",false);
+	mapannounce get_instance_var("map$"),"Oscar : A maioria dos monstros dos pisos inferiores está morta. À medida que se sobe, eles parecem conservar a sua força original.",bc_map,0xCCFF99;
+	sleep 2000;
+	mapannounce get_instance_var("map$"),"Oscar : Tenho medo que alguém do último andar o ataque e o expulse daqui.",bc_map,0xCCFF99;
+	sleep 2000;
+	mapannounce get_instance_var("map$"),"Oscar : Seja como for, tem cuidado. Vou levantar os vedantes que estão a bloquear o chão.",bc_map,0xCCFF99;
+	end;
+}
+
+1@ch_t,50,188,0	script	#ctower_jump	CLEAR_NPC,{
+	if(!is_party_leader()) end;
+	.@floor = get_instance_var("floor") + 4;
+	.@used = get_instance_var("jump");
+	.@required = 50 + ( .@used * 25 );
+	mes "^0000CDOs braseiros desejam um tributo.^000000";
+	next;
+	if(select("Cancelar.","Passar para o " + .@floor + "andar com " + .@required + " " + getitemname(1000372) + ".") == 1) end;
+	if(countitem(1000372) < .@required){
+		mes "^FF0000Não tem o suficiente " + getitemname(1000372) + " que os braseiros desejam.";
+		end;
+	}
+	delitem 1000372,.@required;
+	set_instance_var("floor",.@floor);
+	set_instance_var("area",5);
+	set_instance_var("jump",.@used + 1);
+	instance_event("#ctower_mob","OnSummon",false);
+	instance_warpall get_instance_var("map$"),390,183,instance_id();
+	end;
+}
+
+1@ch_t,13,221,1	script	#ctower_warp_1	PORTAL,{
+	if(!is_party_leader()) end; //Members can't talk to it
+	if(get_instance_var("floor") == 25){
+		mes "Parece haver um fosso entre estas dimensões. Vais parar de subir a torre e entrar no fosso??";
+		next;
+		switch(select("Cancelar.:Ir para a brecha.:^0000CDContinuar a escalar^000000")){
+			case 1:
+				mes "Esta é uma decisão importante a tomar, por favor pense bem.";
+				end;
+
+			case 2:
+				mes "Quando se entra numa outra dimensão, não se pode regressar a esta. Queres mesmo entrar nela?";
+				next;
+				if(select("Cancelar:Sim!") == 1){
+					mes "Esta é uma decisão importante a tomar, por favor pense bem.";
+					end;
+				}
+				instance_warpall instance_mapname("3@ch_t"),32,17,instance_id();
+				set_instance_var("mode",1);
+				end;
+
+			case 3:
+				break;
+		}
+	}
+	if(get_instance_var("floor") == 50){
+		instance_warpall instance_mapname("3@ch_t"),32,17,instance_id();
+		end;
+	}
+	if(!get_instance_var("unlocked_" + get_instance_var("area"))) end;
+    .@id = atoi(replacestr(strnpcinfo(2),"ctower_warp_",""));
+    switch(.@id){
+    	case 1:
+            .@x = 132; 
+			.@y = 183;
+			break;
+
+        case 2:
+            .@x = 220; 
+			.@y = 183; 
+			break;
+
+        case 3: 
+            .@x = 306; 
+			.@y = 183; 
+			break;
+
+		case 4:
+            .@x = 390;
+			.@y = 183; 
+			break;
+
+		case 5:
+			.@x = 48; 
+			.@y = 183; 
+			break;
+    }	
+	if(get_instance_var("area") == 5)
+		set_instance_var("area",1);
+	else
+		set_instance_var("area",get_instance_var("area") + 1);
+	set_instance_var("floor",get_instance_var("floor") + 1);
+	instance_warpall get_instance_var("map$"),.@x,.@y,instance_id();
+	instance_event("#ctower_mob","OnSummon",false);
+    end;
+}
+
+1@ch_t,97,221,1	duplicate(#ctower_warp_1)	#ctower_warp_2	PORTAL
+1@ch_t,185,221,1	duplicate(#ctower_warp_1)	#ctower_warp_3	PORTAL
+1@ch_t,271,221,1	duplicate(#ctower_warp_1)	#ctower_warp_4	PORTAL
+1@ch_t,355,221,1	duplicate(#ctower_warp_1)	#ctower_warp_5	PORTAL
+
+//Easy Boss
+2@ch_t,91,95,7	script	#ctower_leticia2	4_4JOB_LETICIA,{
+	.@var = get_instance_var("easy_boss");
+	if(!.@var){
+		cutin "4job_leticia_03.png",2;
+		mes "[ Leticia ]";
+		mes "É estranho que ele, sozinho, tenha conseguido estragar esta torre. É ridículo para mim tratar de tal coisa sozinho, por isso vou pedir-vos que tratem disso.";
+		if(!is_party_leader()) close3;
+		next;
+		if(select("Não consigo lidar com isto com as minhas capacidades. Vamos a isto!") == 1){
+			cutin "4job_leticia_02.png",2;
+			mes "[ Leticia ]";
+			mes "O quê? Depois do que o Óscar disse, eu tinha algumas expectativas em relação a ti.";
+			close3;
+		}
+		mes "[ Leticia ]";
+		mes "Tens muita coragem. Eu gosto disso.";
+		npctalk "Tens muita coragem. Eu gosto disso.";
+		close2;
+		set_instance_var("easy_boss",1);
+		mapannounce instance_mapname("2@ch_t"),"Preto... constelação... A constelação... lagarto vermelho... tu... constelação. isto... coisas más... a minha terra... a minha mulher perdida... que patético... és tu.",bc_map,0xFFCCCC;
+		sleep 2000;
+		npctalk "Lagarto? Nem sequer consegues ver bem porque estás a segurar essa espada enorme.";
+		sleep 2000;
+		mapannounce instance_mapname("2@ch_t"),"Tu... Eu... eu vou... fazer-te pagar... pelos meus camaradas.",bc_map,0xFFCCCC;
+		instance_event("#ctower_naght","OnWalk",false);
+		end;
+	}
+	if(.@var == 2){
+		if(isbegin_quest(12519) == 1){
+			cutin "4job_leticia_05.png",2;
+			mes "[ Leticia ]";
+			mes "Tenho estado a observar, és muito bom. Prometo-te que não me vou zangar, aconteça o que acontecer, mesmo que me apresentes como um conhecido.";
+			next;
+			cutin "4job_leticia_02.png",2;
+			mes "[ Leticia ]";
+			mes "Já agora, aquela coisa que derrotaste, é o governante original deste lugar?";
+			next;
+			select("Costumava ser a régua do último andar... Não tenho a certeza.");
+			cutin "4job_leticia_04.png",2;
+			mes "[ Leticia ]";
+			mes "Ah! Já estou a imaginar a situação.";
+			next;
+			mes "[ Leticia ]";
+			mes "A julgar pela situação, aquela coisa fugiu como um coelho do seu ninho depois de uma fera ter aparecido lá dentro, foi empurrado por um ser muito forte e correu até aqui.";
+			next;
+			cutin "OSCAR01",0;
+			mes "[ ^88AA66A voz do Óscar^000000 ]";
+			mes "[[^88AA66" + strcharinfo(0) + ", did you find anything?^000000]]";
+			next;
+			select("Óscar? De onde é que estás a falar?");
+			cutin "OSCAR01",0;
+			mes "[ ^88AA66A voz do Óscar^000000 ]";
+			mes "[[^88AA66Oh, estou no melhor sítio da torre, estou no topo. Não te preocupes com isso, estou a transmitir-te isto telepaticamente.^000000]]";
+			next;
+			cutin "OSCAR01",0;
+			mes "[ ^88AA66A voz do Óscar^000000 ]";	
+			mes "[[^88AA66Sinto muita energia no último andar, acho que nos devíamos preparar mais." + strcharinfo(0) + ", não se esqueça de limpar tudo antes de sair.^000000]]";	
+			next;
+			cutin "4job_leticia_05.png",2;
+			mes "[ Leticia ]";
+			mes "Este sítio já é ótimo, o que é que precisamos de limpar??";
+			completequest 12519;
+			next;			
+		}
+		if(isbegin_quest(12518) == 1){
+			cutin "4job_leticia_04.png",2;
+			mes "[ Leticia ]";
+			mes "Alguma coisa saiu do corpo daquela coisa";
+			mes "Não preciso dele, por isso vou dar-to.";
+			erasequest 12518;
+			getitem 1000373,rand(1,2);
+			getitem 1000396,1;
+			close3;
+		}
+		cutin "4job_leticia_02.png",2;
+		mes "[ Leticia ]";
+		mes "Já acabaste aqui? Como não consegues sair daqui da maneira normal, vou levar-te lá para fora.";
+		next;
+		if(select("Sair: esperar um pouco.") == 2){
+			mes "[ Leticia ]";
+			mes "O que é que falta fazer aqui? Despacha-te, está bem??";
+			close3;
+		}
+		warp "e_tower",70,114;
+	}
+	end;
+}
+
+2@ch_t,71,74,0	script	#ctower_ev_2	HIDDEN_WARP_NPC,2,2,{
+	end;
+
+OnTouch:
+	if(isbegin_quest(12518) == 0)
+		setquest 12518;
+end;
+}
+
+2@ch_t,103,107,3	script	#ctower_naght	20996,{
+	end;
+
+OnWalk:
+	npcspeed 200;
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),93,97,instance_npcname("#ctower_boss_easy") + "::OnSummon";
+end;
+}
+
+2@ch_t,1,1,0	script	#ctower_boss_easy	HIDDEN_WARP_NPC,{
+	end;
+
+OnSummon:
+	instance_enable("#ctower_ev_2",false);
+	instance_hide("#ctower_naght",true);
+	instance_enable("#ctower_leticia2",false);
+	instance_enable("#ctower_naght",false);
+	monster instance_mapname("2@ch_t"),93,97,"--ja--",20996,1,instance_npcname(strnpcinfo(0)) + "::OnBossKill";
+	set_instance_var("boss_id",$@mobid[0]);
+	unitskilluseid $@mobid[0],"NPC_RELIEVE_ON",10;
+	while(true){
+		sleep 1000;
+		getunitdata get_instance_var("boss_id"),.@data;
+		if(.@data[UMOB_HP] <=  (.@data[UMOB_MAXHP]/10) * 9){
+			instance_event(strnpcinfo(0),"OnBossSkill",false);
+			break;
+		}
+	}
+end;
+
+OnBossSkill:
+	.@map$ = instance_mapname("2@ch_t");
+	.@gid = get_instance_var("boss_id");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnSlaveDead";
+	getunitdata get_instance_var("boss_id"),.@data;
+	.@x = .@data[UMOB_X];
+	.@y = .@data[UMOB_Y];
+	if(!unitexists(.@gid)){
+		stopnpctimer;
+		end;
+	}
+	monster .@map$,.@x,.@y + 3,"--ja--",20997,1,.@event$;
+	monster .@map$,.@x,.@y - 3,"--ja--",20997,1,.@event$;
+	monster .@map$,.@x + 3,.@y,"--ja--",20997,1,.@event$;
+	monster .@map$,.@x - 3,.@y,"--ja--",20997,1,.@event$;
+	initnpctimer;
+OnSlaveDead:
+end;
+
+OnTimer15000:
+	stopnpctimer;
+	.@map$ = instance_mapname("2@ch_t");
+	killmonster .@map$,instance_npcname(strnpcinfo(0)) + "::OnSlaveDead";
+	if(unitexists(get_instance_var("boss_id")))
+		instance_event(strnpcinfo(0),"OnBossSkill",false);
+end;
+
+OnBossKill:
+	.@map$ = instance_mapname("2@ch_t");
+	killmonster .@map$,instance_npcname(strnpcinfo(0)) + "::OnSlaveDead";
+	set_instance_var("easy_boss",2);
+	instance_enable("#ctower_leticia2",true);
+end;
+}
+
+//Top Floor
+3@ch_t,32,17,0	script	#ctower_ev_0	HIDDEN_WARP_NPC,2,2,{
+	end;
+
+OnTouch:
+	if(get_instance_var("mode")){
+		if(isbegin_quest(12519) == 0)
+			setquest 12519;
+	}
+end;
+}
+
+3@ch_t,32,81,0	script	#ctower_ev_1	HIDDEN_WARP_NPC,2,2,{
+	end;
+
+OnTouch:
+	if(!is_party_leader()) end;
+	if(!get_instance_var("fountain_active")){
+		set_instance_var("fountain_active",1);
+		instance_enable("#ctower_fountain",true);
+		instance_enable(strnpcinfo(0),false);
+		sleep 100;
+		specialeffect EF_NC_ANAL,AREA,instance_npcname("#ctower_fountain");
+		npctalk "Este é o altar da deusa, vou dar uma olhadela para ver se funciona.",instance_npcname("#oscar_ctower_2");
+	}
+end;
+}
+
+3@ch_t,40,93,6	script	#oscar_ctower_2	4_ED_OSCAR,{
+	if(!is_party_leader()){
+		cutin "OSCAR01",2;
+		mes "[ Oscar ]";
+		mes "Onde está o vosso líder? Não achas estranho que este altar ainda esteja de pé?";
+		close3;
+	}
+	if(!get_instance_var("talk")){
+		cutin "OSCAR02",2;
+		mes "[ Oscar ]";
+		mes "O altar da deusa não foi quebrado.";
+		next;
+		select("Usei esse altar como uma fonte de cura...");
+		cutin "OSCAR03",2;
+		mes "[ Oscar ]";
+		mes "Ah. Fonte de Cura. Também tinha essa capacidade. Talvez essa fosse a única função porque os selos dos altares não foram libertados.";
+		next;
+		select("Tem outras capacidades??");
+		cutin "OSCAR01",2;
+		mes "[ Oscar ]";
+		mes "Os altares das deusas estão escondidos sob várias formas em todo o mundo. Este altar controla várias citações e leis sob a proteção das deusas.";
+		next;
+		mes "[ Oscar ]";
+		mes "Por exemplo, é possível selar as capacidades da pessoa que tomou conta desta torre.";
+		next;
+		select("Selar as capacidades?");
+		cutin "OSCAR03",2;
+		mes "[ Oscar ]";
+		mes "Haha, " + strcharinfo(0) + ". Achas que esta torre estará segura se uma pessoa com poder suficiente para tomar a torre fizer tudo?";
+		next;
+		cutin "OSCAR01",2;
+		mes "[ Oscar ]";
+		mes "A pessoa que tomou conta desta torre é provavelmente cem vezes mais fraca do que o seu poder original. Isto é por causa do altar de proteção da deusa";
+		next;
+		mes "[ Oscar ]";
+		mes "Mas... é possível oferecer um tributo à deusa e desmarcá-lo até certo ponto. O efeito varia consoante a quantidade e a forma como é oferecido.";
+		next;
+		select("Uma Deusa.... Será Freya??");
+		mes "[ Oscar ]";
+		mes "Não sei dizer o nome, mas não é a deusa que mencionou, " + strcharinfo(0) + ".";
+		next;
+		mes "[ Oscar ]";
+		mes "De qualquer forma, estou aliviado por o altar estar a salvo. Acho que nem eu consigo tocar na pessoa que tomou conta desta torre.";
+		next;
+		if(get_instance_var("mode")){
+			cutin "OSCAR05",2;
+			mes "[ Oscar ]";
+			mes "No entanto, como este é um piso muito baixo, o poder da deusa não parece funcionar muito bem. Só pode ser usado como uma simples fonte para recuperar.";
+			close2;
+			instance_warpall instance_mapname("2@ch_t"),71,74,instance_id();
+			end;
+		} else {
+			cutin "OSCAR02",2;
+			mes "[ Oscar ]";
+			mes "Consigo sentir o poder avassalador da pessoa que está para além deste lugar.";
+			mes "Podes usar o altar da deusa livremente para alterar as suas habilidades seladas.";
+			next;
+			cutin "OSCAR01",2;
+			mes "[ Oscar ]";
+			mes "Eu liberto o selo que está a ligar esta dimensão ao local onde a pessoa que tomou conta da torre está.";
+			set_instance_var("talk",1);
+			
+			close3;	
+		}
+	}
+	if(!get_instance_var("switch_active")){
+		if(isbegin_quest(12513) == 2){
+			cutin "OSCAR02",2;
+			mes "[ Oscar ]";
+			mes "Terminei todos os preparativos, podemos encontrar-nos com aquele que destruiu esta torre.";
+			next;
+			mes "[ Oscar ]";
+			mes "Está pronto??";
+			next;
+			if(select("Sim.:Ainda não.") == 2){
+				cutin "OSCAR01",2;
+				mes "[ Oscar ]";
+				mes "Leve todo o tempo que precisar para se preparar.";
+				close3;
+			}
+		} else {
+			cutin "OSCAR02",2;
+			mes "[ Oscar ]";
+			mes "Está aqui para desafiar o Betelguese?";
+			next;
+			if(select("Nem por isso...:Fight Betelguese.") == 1){
+				cutin "OSCAR03",2;
+				mes "[ Oscar ]";
+				mes "Então, porque é que estão aqui? Vocês, aventureiros, são muito interessantes.";
+				close3;
+			}
+		}
+		mes "[ Oscar ]";
+		mes "Depois, abri a entrada para o piso superior, usem-na quando estiverem prontos.";
+		instance_enable("#ctower_button",true);
+		set_instance_var("switch_active",true);
+		close3;
+	}
+	cutin "OSCAR02",2;
+	mes "[ Oscar ]";
+	mes "Já abri a entrada para o último andar, usa-a quando estiveres pronto.";
+	close3;
+}
+
+3@ch_t,32,102,1	script	#ctower_button	CLEAR_NPC,{
+	if(get_instance_var("mode") || !is_party_leader()) end;
+	instance_warpall instance_mapname("3@ch_t"),156,73;
+	end;
+}
+
+3@ch_t,156,73,0	script	#ctower_ev_3	HIDDEN_WARP_NPC,2,2,{
+	end;
+
+OnTouch:
+	if(isbegin_quest(12515) == 0) setquest 12515;
+	if(isbegin_quest(12516)) erasequest 12516;
+	if(isbegin_quest(12517)) erasequest 12517;
+	if(isbegin_quest(12518)) erasequest 12518;
+	setquest 12518;
+	if(get_instance_var("total") >= 300)
+		setquest 12516;
+	else if(get_instance_var("total") >= 600)
+		setquest 12517;
+end;
+}
+
+3@ch_t,45,89,1	script	#ctower_fountain	CLEAR_NPC,{
+	if(get_instance_var("mode")){
+		specialeffect EF_BUBBLE;
+		percentheal 100,100;
+		end;
+	}
+	.@HP = get_instance_var("HP");
+	.@ATK = get_instance_var("ATK");
+	.@RECO = get_instance_var("RECO");
+	.@RES = get_instance_var("RES");
+	.@TRAP = get_instance_var("TRAP");
+	.@star0$ = "Sealed";
+	.@star1$ = "?";
+	.@star2$ = "??";
+	.@star3$ = "???";
+	switch(.@HP){
+		case 1: .@TOTAL += 15; break;
+		case 2: .@TOTAL += 30; break;
+		case 3: .@TOTAL += 45; break;
+	}
+	switch(.@ATK){
+		case 1: .@TOTAL += 20; break;
+		case 2: .@TOTAL += 40; break;
+		case 3: .@TOTAL += 60; break;
+	}
+	switch(.@RECO){
+		case 1: .@TOTAL += 30; break;
+		case 2: .@TOTAL += 60; break;
+		case 3: .@TOTAL += 90; break;
+	}
+	switch(.@RES){
+		case 1: .@TOTAL += 50; break;
+		case 2: .@TOTAL += 100; break;
+		case 3: .@TOTAL += 150; break;
+	}
+	switch(.@TRAP){
+		case 1: .@TOTAL += 85; break;
+		case 2: .@TOTAL += 170; break;
+		case 3: .@TOTAL += 255; break;
+	}
+	mes "[ Current Constellation Abilities ]";
+	mes "HP - ^0000CD" + getd(".@star" + .@HP + "$") + "^000000";
+	mes "ATK - ^0000CD" + getd(".@star" + .@ATK + "$") + "^000000";
+	mes "RECUPERAÇÃO - ^0000CD" + getd(".@star" + .@RECO + "$") + "^000000";
+	mes "RESISTÊNCIA - ^0000CD" + getd(".@star" + .@RES + "$") + "^000000";
+	mes "ARMADILHA - ^0000CD" + getd(".@star" + .@TRAP + "$") + "^000000";
+	next;
+	if(!.@TOTAL)
+		mes "As capacidades da constelação atual estão completamente vedadas.";
+	else {
+		mes "As capacidades da constelação atual são aumentadas a partir do seu estado selado.";
+		mes "Atualmente, é aumentado em ^FF0000" + .@total + "%^000000";
+	}
+	mes "----------------------";
+	if(.@TOTAL < 400)
+		mes "^FF0000Não haverá hipótese de entrega de fatos extra.^000000";
+	if(.@TOTAL >= 400)
+		mes "<ITEM>[Recompensa adicional 1]<INFO>400147</INFO></ITEM>";
+	if(.@TOTAL >= 500)
+		mes "<ITEM>[Recompensa adicional 2]<INFO>400148</INFO></ITEM>";
+	if(.@TOTAL == 600)
+		mes "<ITEM>[Recompensa adicional 3]<INFO>400149</INFO></ITEM>";
+	if(!is_party_leader()) end;
+	next;
+	switch(select("Sair:Randomizar Habilidades:Maximizar Habilidades")){
+		case 1:
+			break;
+
+		case 2:
+			mes "- Para aleatorizar as capacidades da constelação, terá de oferecer ^0000CD 1 " + getitemname(1000372) + "^000000.";
+			mes "----------------------";
+			mes "^FF0000As capacidades da constelação atual não se mantêm.^000000";
+			next;
+			if(select("Quit.:Proceed.") == 1) end;
+			if(countitem(1000372) < 1){
+				mes "- Não tem a quantidade necessária de ^FF0000" + getitemname(1000372) + "^000000 para a oferta.";
+				end;
+			}
+			delitem 1000372,1;
+			.@HP = rand(0,3);
+			.@ATK = rand(0,3);
+			.@RECO = rand(0,3);
+			.@RES = rand(0,3);
+			.@TRAP = rand(0,3);
+			set_instance_var("HP",.@HP);
+			set_instance_var("ATK",.@ATK);
+			set_instance_var("RECO",.@RECO);
+			set_instance_var("RES",.@RES);
+			set_instance_var("TRAP",.@TRAP);
+			mes "As capacidades da constelação mudaram.";
+			break;
+
+		case 3:
+			mes "- Para maximizar as capacidades da constelação, terá de oferecer ^0000CD 20 " + getitemname(1000372) + "^000000.";
+			next;
+			if(select("Quit.:Proceed.") == 1) end;
+			if(countitem(1000372) < 20){
+				mes "- Não tem a quantidade necessária de ^FF0000" + getitemname(1000372) + "^000000 para a oferta.";
+				end;
+			}
+			delitem 1000372,20;
+			.@HP = 3;
+			.@ATK = 3;
+			.@RECO = 3;
+			.@RES = 3;
+			.@TRAP = 3;
+			set_instance_var("HP",.@HP);
+			set_instance_var("ATK",.@ATK);
+			set_instance_var("RECO",.@RECO);
+			set_instance_var("RES",.@RES);
+			set_instance_var("TRAP",.@TRAP);
+			mes "As capacidades da constelação mudaram.";
+			break;
+	}
+	switch(.@HP){
+		case 1: .@TOTAL += 15; break;
+		case 2: .@TOTAL += 30; break;
+		case 3: .@TOTAL += 45; break;
+	}
+	switch(.@ATK){
+		case 1: .@TOTAL += 20; break;
+		case 2: .@TOTAL += 40; break;
+		case 3: .@TOTAL += 60; break;
+	}
+	switch(.@RECO){
+		case 1: .@TOTAL += 30; break;
+		case 2: .@TOTAL += 60; break;
+		case 3: .@TOTAL += 90; break;
+	}
+	switch(.@RES){
+		case 1: .@TOTAL += 50; break;
+		case 2: .@TOTAL += 100; break;
+		case 3: .@TOTAL += 150; break;
+	}
+	switch(.@TRAP){
+		case 1: .@TOTAL += 85; break;
+		case 2: .@TOTAL += 170; break;
+		case 3: .@TOTAL += 255; break;
+	}
+	set_instance_var("TOTAL",.@TOTAL);
+	next;
+	mes "[ Capacidades actuais da Constelação ]";
+	mes "HP - ^0000CD" + getd(".@star" + .@HP + "$") + "^000000";
+	mes "ATK - ^0000CD" + getd(".@star" + .@ATK + "$") + "^000000";
+	mes "RECUPERAÇÃO - ^0000CD" + getd(".@star" + .@RECO + "$") + "^000000";
+	mes "RESISTÊNCIA - ^0000CD" + getd(".@star" + .@RES + "$") + "^000000";
+	mes "ARMADILHA - ^0000CD" + getd(".@star" + .@TRAP + "$") + "^000000";
+	end;
+}
+
+3@ch_t,156,86,5	script	#ctower_betel_0	20994,{
+	if(!is_party_leader()){
+		cutin "betelgeuse04.png",2;
+		mes "[ Betelgeuse ]";
+		mes "Onde está o vosso líder? Não é do meu agrado ter uma conversa de lazer com seres como vós.";
+		close3;
+	}
+	if(!get_instance_var("phase")){
+		if(isbegin_quest(12513) == 2){
+			cutin "betelgeuse03.png",2;
+			mes "Enquanto pensava, quem poderia ter sido senão vocês, humanos, a virem aqui desafiar-me. Nunca se cansam, pois não??";
+			npctalk "Enquanto pensava, quem poderia ter sido senão vocês, humanos, a virem aqui desafiar-me. Nunca se cansam, pois não??";
+			if(select("Correr: lutar.") == 1){
+				next;
+				mes "[ Betelgeuse ]";
+				mes "Escolha sábia criatura tola.";
+				close3;
+			}
+			close2;
+			cutin "",255;
+		}
+		set_instance_var("phase",1);
+		if(isbegin_quest(12513) == 1){
+			npctalk "O que é que é isto? Ah... Mais um inseto a bisbilhotar, estão à espera de alguma coisa?";
+			sleep 3000;
+			specialeffect EF_MAGIC_FLOOR;
+			npctalk "A maior parte das minhas capacidades estão seladas, por isso vale a pena tentar desafiar-me, não é? Mesmo que não tenhas a mínima ideia do que estás a enfrentar.";
+			sleep 3000;
+			npctalk "Espero que sejas melhor do que os humanos que te visitaram antes.";
+			sleep 3000;
+		} else {
+			npctalk "A maior parte das minhas capacidades ainda estão seladas, mas penso que o teu poder ainda não é suficiente para me deter..";
+			sleep 3000;
+			specialeffect EF_MAGIC_FLOOR;
+			sleep 3000;
+		}
+		removespecialeffect EF_MAGIC_FLOOR,AREA,instance_npcname(strnpcinfo(0));
+		instance_hide(strnpcinfo(0),true);
+		instance_enable(strnpcinfo(0),false);
+		instance_event("#ctower_boss_hard","OnFirstPhase",false);
+		end;
+	}
+	end;
+}
+
+3@ch_t,156,86,5	duplicate(dummynpc2)	#ctower_betel_1	20994
+3@ch_t,156,86,5	duplicate(dummynpc2)	#ctower_betel_2	20994
+
+3@ch_t,156,86,5	script	#ctower_betel_3	20994,{
+	if(get_instance_var("phase") == 4){
+		if(isbegin_quest(12513) == 1){
+			cutin "4job_leticia_03.png",0;
+			mes "[ Leticia ]";
+			mes "Estava a pensar quem seria, para pensar que eras tu, seu rapaz negligente.";
+			next;
+			cutin "betelgeuse01.png",2;
+			mes "[ Betelguese ]";
+			mes "Ah, quem diria, Letícia, ainda não corrigiste o teu hábito de apareceres sempre que estou chateada.";
+			next;
+			cutin "4job_leticia_03.png",0;
+			mes "[ Leticia ]";
+			mes "Ho~ Estou curioso, pergunto-me porque é que a pessoa que não vejo há tanto tempo está chateada.";
+			next;
+			cutin "betelgeuse06.png",2;
+			mes "[ Betelguese ]";
+			mes "Só espero que tu, o vermelho, deixes de me prestar atenção e te vás embora calmamente~";
+			next;
+			cutin "4job_leticia_03.png",0;
+			mes "[ Leticia ]";
+			mes "Sim, acho que deve ser isso. Tu lutaste contra ^0000CDhumanos^000000, e perdeu. Deves estar muito aborrecido.";
+			next;
+			cutin "betelgeuse04.png",2;
+			mes "[ Betelgeuse ]";
+			mes "Estou um pouco cansado de fazer deste sítio a minha raridade, claro que deixei as coisas correr um pouco. Isso deve ser uma piada, certo??";
+			next;
+			cutin "4job_leticia_02.png",0;
+			mes "[ Leticia ]";
+			mes "Será que ouvi bem? Disseste que vais criar uma rara?";
+			next;
+			cutin "betelgeuse06.png",2;
+			mes "[ Betelguese ]";
+			mes "Ouviste bem. Ainda bem que os teus ouvidos são maus como eram.";
+			next;
+			cutin "4job_leticia_02.png",0;
+			mes "[ Leticia ]";
+			mes "Este tema, penso que ninguém o deixaria passar se ouvisse falar dele.";
+			mes "Não sabes quem é que está neste continente agora?";
+			next;
+			cutin "betelgeuse07.png",2;
+			mes "[ Betelguese ]";
+			mes "Isso é algo que eu precise de saber? Sabes que não gosto de ser incomodado.";
+			next;
+			cutin "OSCAR04",0;
+			mes "[ Oscar ]";
+			mes "Estou a ver. O nosso Betel detestava ser incomodado. Foi por isso que não o alcançou durante 400 anos. E tu começaste a fazer birras, um miúdo tão irritante.";
+			next;
+			cutin "betelgeuse07.png",2;
+			mes "[ Betelguese ]";
+			mes "Quem és tu? Uma pessoa que se atreve a chamar o meu nome sem medo... Esta é a primeira vez que enfrento tal embaraço em cem anos.";
+			next;
+			cutin "OSCAR01",0;
+			mes "[ Oscar ]";
+			mes "É isso que eu quero dizer. Já passou tanto tempo, mas ainda não me esqueci do teu nome.";
+			mes "Tenho a certeza de que se lembrará, apesar de estarmos separados por muitos anos sem qualquer forma de contacto";
+			next;
+			cutin "betelgeuse07.png",2;
+			mes "[ Betelguese ]";
+			mes "^88AA66O que é isto? Esta voz familiar, o meu corpo está a sentir o medo instintivamente, o pavor, o que se passa? Será que não esqueci o sentimento de medo ao longo dos incontáveis anos?^000000";
+			next;
+			cutin "4job_leticia_02.png",2;
+			mes "[ Leticia ]";
+			mes "Está a dizer o que pensa neste momento.";
+			next;
+			cutin "OSCAR01",0;
+			mes "[ Oscar ]";
+			mes "Betel, é melhor adiarmos as saudações, vou pedir-te que me digas em pormenor porque é que partiste esta torre.";
+			mes "Não devemos tocar o reino humano de forma imprudente.";
+			next;
+			cutin "betelgeuse05.png",2;
+			mes "[ Betelguese ]";
+			mes "O... Oscar? Sir Oscar, porque é que está aqui?";
+			next;
+			cutin "OSCAR01",0;
+			mes "[ Oscar ]";
+			mes "Achas que eu teria ignorado isso depois de toda a comoção? Porque é que fez isso??";
+			next;
+			cutin "4job_leticia_02.png",2;
+			mes "[ Leticia ]";
+			mes "Óscar... Não fiques muito zangado e ouve aqui. Aqui o Betelguese quer fazer um novo raro aqui, haha... Não há nada que possamos fazer??";
+			next;
+			cutin "OSCAR01",0;
+			mes "[ Oscar ]";
+			mes "O quê? Um raro, aqui? Estás a falar a sério, Betelguês??";
+			next;
+			cutin "betelgeuse07.png",2;
+			mes "[ Betelguese ]";
+			mes "^88AA66Estou condenado. O olhar do Óscar é muito furioso: serei castigado com o retrocesso da minha idade em quê, 3000 anos? 4000 anos??^000000";
+			next;
+			cutin "4job_leticia_02.png",2;
+			mes "[ Leticia ]";
+			mes "Estás enganado, se ele está assim tão zangado. Pode demorar pelo menos 6000 anos.";
+			next;
+			cutin "OSCAR01",0;
+			mes "[ Oscar ]";
+			mes "Pensando bem, não é assim tão mau. Não é este o sítio onde o monstro foi originalmente criado?";
+			next;
+			select("Esta era uma masmorra de monstros: não sei.");
+			cutin "4job_leticia_01.png",2;
+			mes "[ Leticia ]";
+			mes "Óscar, vais simplesmente perdoar o Betelguese pelo que ele fez?";
+			next;
+			cutin "OSCAR02",0;
+			mes "[ Oscar ]";
+			mes "Se aceitarem algumas condições, fecharei os olhos a esta, o que me dizem? Betelguês?";
+			next;
+			cutin "betelgeuse07.png",2;
+			mes "[ Betelguese ]";
+			mes "Está a falar a sério? Digam apenas as vossas condições. A minha idade... desde que não me devolvam a idade, faço qualquer coisa!";
+			next;
+			cutin "OSCAR02",0;
+			mes "[ Oscar ]";
+			mes "Muito bem. Por isso, deixo-te fazer deste lugar a tua raridade, mas certifica-te de que os monstros daqui não saem a correr pelo continente humano.";
+			next;
+			cutin "betelgeuse06.png",2;
+			mes "[ Betelguese ]";
+			mes "Se for só esse valor, eu faço-o!";
+			next;
+			cutin "OSCAR02",0;
+			mes "[ Oscar ]";
+			mes "Originalmente, este lugar era um local de caça para os aventureiros, certifica-te de que os deixas entrar e que os fazes caçar como antigamente, e isso é o fim das minhas condições.";
+			next;
+			cutin "betelgeuse07.png",2;
+			mes "[ Betelguese ]";
+			mes "Isso... Isso. Nada, eu aceito as vossas condições.";
+			mes "Óscar, tenho um pedido.";
+			next;
+			cutin "OSCAR02",0;
+			mes "[ Oscar ]";
+			mes "Está bem, diz-me qualquer coisa, desde que não me irrite.";
+			next;
+			cutin "betelgeuse07.png",2;
+			mes "[ Betelguese ]";
+			mes "Permitir-me-íeis lutar contra os aventureiros que ocasionalmente visitam aqui?";
+			mes "É muito importante para mim...";
+			next;
+			cutin "OSCAR02",0;
+			mes "[ Oscar ]";
+			mes "Penso que não me cabe a mim decidir.";
+			mes "Felizmente, há aqui um representante, por isso vamos perguntar ao aventureiro. O que é que acha?";
+			next;
+			select("Parece-me bem: desde que nos recompense por o termos vencido.");
+			cutin "betelgeuse02.png",2;
+			mes "[ Betelguese ]";
+			mes "É claro que farei uma recompensa digna do divertimento que me vão dar, humanos.";
+			mes "Isto é, se conseguires ganhar. Haha";
+			next;
+			cutin "OSCAR02",0;
+			mes "[ Oscar ]";
+			mes "Claro que, quando os aventureiros vos visitarem, Betelguese. Eu estarei lá para vos observar e impedir que se tornem selvagens.";
+			next;
+			cutin "betelgeuse05.png",2;
+			mes "[ Betelguese ]";
+			mes "Suspiro, bem... não é preciso vir pessoalmente.";
+			next;
+			cutin "OSCAR02",0;
+			mes "[ Oscar ]";
+			mes "Bem, acho que está tudo resolvido, por isso vou regressar à cidade e acalmar-me. Até à próxima aventureira.";
+			next;
+			cutin "4job_leticia_01.png",2;
+			mes "[ Leticia ]";
+			mes "Gosto de vocês, humanos, são muito bons.";
+			mes "Até à próxima.";
+			completequest 12513;
+			next;
+		}
+		if(isbegin_quest(12518) == 1){
+			.@amount = 2 + (2*(get_instance_var("TOTAL")/50)); 
+			.@amount2 = 5 + (get_instance_var("TOTAL")/100);
+			if(get_instance_var("TOTAL") >= 200)
+				.@amount3 = 1;
+			cutin "betelgeuse03.png",2;
+			mes "[ Betelguese ]";
+			mes "Aqui está uma recompensa do que fizeste no meu desafio, preparei tanto quanto digno da provação que superaste, por isso aceita-a sem hesitar.";
+			if(isbegin_quest(12516) == 1){
+				.@amount += 4;
+				.@amount2 += 3;
+				.@amount3 += 1;
+				erasequest 12516;
+			}
+			if(isbegin_quest(12517) == 2){
+				.@amount += 9;
+				.@amount2 += 8;
+				.@amount3 += 2;
+				erasequest 12517;
+			}
+			erasequest 12518;
+			getitem 1000397,.@amount3;
+			getitem 1000373,.@amount2;
+			getitem 1000372,.@amount;
+		} else {
+			cutin "betelgeuse05.png",2;
+			mes "[ Betelguese ]";
+			mes "Não é meu hobby passar o tempo a conversar com seres como o vosso. Se já acabaram, abri o portal para saírem da torre.";
+		}
+		close3;
+	}
+	end;
+}
+
+//= Betelguese Bosss Fight/Rewards
+function	script	ctower_cacl_stats	{
+	.@gid = getarg(0);
+	getunitdata .@gid,.@data;
+	if(unitexists(.@gid)){   
+		.@HP = get_instance_var("HP");
+		.@ATK = get_instance_var("ATK");
+		.@RES = get_instance_var("RES");
+		if(.@HP){
+			.@MOB_HP = .@data[UMOB_MAXHP] + (300000000 * .@HP);
+			setunitdata .@gid,UMOB_MAXHP,.@MOB_HP;
+			setunitdata .@gid,UMOB_HP,.@MOB_HP;
+			set_instance_var("BOSS_HP",.@MOB_HP);
+		}
+		if(.@ATK){
+			.@MOB_ATK = getmonsterinfo(20994,MOB_ATKMIN) + (5000 * .@ATK);
+			.@MOB_ATK2 = getmonsterinfo(20994,MOB_ATKMAX) + (7000 * .@ATK);
+			.@STR = getmonsterinfo(20994,MOB_STR) + (100 * .@ATK);
+			.@INT = getmonsterinfo(20994,MOB_INT) + (100 * .@ATK);
+			setunitdata .@gid,UMOB_ATKMIN,.@MOB_ATK;
+			setunitdata .@gid,UMOB_ATKMAX,.@MOB_ATK2;
+			setunitdata .@gid,UMOB_STR,.@STR;
+			setunitdata .@gid,UMOB_INT,.@INT;
+			set_instance_var("BOSS_ATK",.@MOB_ATK);
+			set_instance_var("BOSS_ATK2",.@MOB_ATK2);
+			set_instance_var("BOSS_STR",.@STR);
+			set_instance_var("BOSS_INT",.@INT);
+		}
+		if(.@RES){
+			.@RES = .@data[UMOB_RES] + (100 * .@RES);
+			.@MRES = .@data[UMOB_MRES] + (100 * .@MRES);
+			setunitdata .@gid,UMOB_RES,.@RES;
+			setunitdata .@gid,UMOB_MRES,.@MRES;
+			set_instance_var("BOSS_RES",.@RES);
+			set_instance_var("BOSS_MRES",.@MRES);
+		}
+	}
+	return;
+}
+
+function	script	ctower_revert_stats	{
+	.@gid = getarg(0);
+	if(unitexists(.@gid)){
+		setunitdata .@gid,UMOB_ATKMIN,get_instance_var("BOSS_ATK");
+		setunitdata .@gid,UMOB_ATKMAX,get_instance_var("BOSS_ATK2");
+		setunitdata .@gid,UMOB_STR,get_instance_var("BOSS_STR");
+		setunitdata .@gid,UMOB_INT,get_instance_var("BOSS_INT");
+	}
+	return;
+}
+
+function	script	ctower_recalc_stats	{
+    .@gid = getarg(0);
+    .@value = getarg(1);
+    ctower_revert_stats(.@gid);
+    if(unitexists(.@gid)){
+        .@MOB_ATK = get_instance_var("BOSS_ATK") + (5000 * .@value);
+        .@MOB_ATK2 = get_instance_var("BOSS_ATK2") + (7000 * .@value);
+		.@MOB_MATK = get_instance_var("BOSS_MATK") + (2000 * .@value);;
+		.@MOB_MATK2 = get_instance_var("BOSS_MATK2") + (4000 * .@value);;
+        .@STR = get_instance_var("BOSS_STR") + (100 * .@value);
+        .@INT = get_instance_var("BOSS_INT") + (100 * .@value);
+        setunitdata .@gid,UMOB_ATKMIN,.@MOB_ATK;
+        setunitdata .@gid,UMOB_ATKMAX,.@MOB_ATK2;
+        setunitdata .@gid,UMOB_STR,.@STR;
+        setunitdata .@gid,UMOB_INT,.@INT;
+    }
+    return;
+}
+
+3@ch_t,1,1,0	script	#ctower_boss_hard	HIDDEN_WARP_NPC,{
+	end;
+
+OnFirstPhase:
+	instance_enable("#ctower_ev_3",false);
+	set_instance_var("map$",instance_mapname("3@ch_t"));
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnBossKill";
+	monster .@map$,156,85,"Betelguese",20994,1,.@event$;
+	set_instance_var("gid",$@mobid[0]);
+    unitskilluseid $@mobid[0],"NPC_RELIEVE_ON",10;
+    ctower_cacl_stats($@mobid[0]);
+	instance_event("#ctower_party_check","OnCheck",false);
+	instance_event("#ctower_check_area","OnCheck",false);
+	instance_event("#ctower_check_dead","OnCheck",false);
+    instance_event(strnpcinfo(0),"OnFirstPhaseCheck",false);
+	sleep 1000;
+	instance_event("#ctower_skill_heal","OnSkill",false);
+	instance_event("#ctower_skill_meteor","OnSkill",false);
+end;
+
+OnFirstPhaseCheck:
+    .@gid = get_instance_var("gid");
+    freeloop(true);
+    while(unitexists(.@gid)){
+        getunitdata .@gid,.@data;
+        if(.@data[UMOB_HP] <= (.@data[UMOB_MAXHP]/10) * 9){
+        	instance_event(strnpcinfo(0),"OnSecondPhase",false);
+        	break;
+        }
+        sleep 1000;
+    }
+	freeloop(false);
+end;
+
+OnSecondPhase:
+	.@map$ = get_instance_var("map$");
+	set_instance_var("phase_check",1);
+	set_instance_var("trap_active",false);
+	unitkill get_instance_var("gid");
+    instance_warpall .@map$,156,79,instance_id();
+	set_instance_var("phase_check",0);
+    instance_enable("#ctower_betel_1",true);
+    sleep 2000;
+    npctalk "I'm a little bored, let's add some life to this banquet, humans.",instance_npcname("#ctower_betel_1");
+    unitwalk getnpcid(0,instance_npcname("#ctower_betel_1")),156,80,instance_npcname(strnpcinfo(0)) + "::OnSecondPhaseTalk";
+end;
+
+OnSecondPhaseTalk:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnBossKill";
+	sleep 2000;
+    npctalk "Should we start with something light? I hope you'll like it.",instance_npcname("#ctower_betel_1");
+    sleep 2000;
+    specialeffect EF_MAGIC_FLOOR,AREA,instance_npcname("#ctower_betel_1");
+	sleep 2000;
+	if(get_instance_var("TRAP") < 2){
+		for(.@i = 0; .@i < 10; .@i++)
+			instance_enable("#ctower_trap_" + .@i,true);
+		for(.@i = 0; .@i < 10; .@i++)
+			instance_event("#ctower_trap_" + .@i,"OnMove",false);
+	} else if(get_instance_var("TRAP") == 2){
+		for(.@i = 0; .@i < 16; .@i++)
+			instance_enable("#ctower_trap2_" + .@i,true);
+		for(.@i = 0; .@i < 16; .@i++)
+			instance_event("#ctower_trap2_" + .@i,"OnMove",false);
+	} else {
+		for(.@i = 0; .@i < 16; .@i++){
+			if(.@i < 10)
+				instance_enable("#ctower_trap_" + .@i,true);
+			instance_enable("#ctower_trap2_" + .@i,true);
+		}
+		for(.@i = 0; .@i < 16; .@i++){
+			if(.@i < 10)
+				instance_event("#ctower_trap_" + .@i,"OnMove",false);
+			instance_event("#ctower_trap2_" + .@i,"OnMove",false);
+		}
+	}
+	sleep 2000;
+	set_instance_var("phase",2);
+	set_instance_var("trap_active",true);
+	instance_enable("#ctower_betel_1",false);
+	monster .@map$,156,80,"Betelguese",20994,1,.@event$;
+	set_instance_var("gid",$@mobid[0]);
+    unitskilluseid $@mobid[0],"NPC_RELIEVE_ON",10;
+    ctower_cacl_stats($@mobid[0]);
+	ctower_recalc_stats($@mobid[0],1);
+	instance_event(strnpcinfo(0),"OnSecondPhaseCheck",false);
+	stopnpctimer instance_npcname("#ctower_skill_meteor");
+	instance_event("#ctower_skill_meteor","OnSkill",false);
+	instance_event("#ctower_skill_soul","OnSkill",false);
+	sleep 1000;
+	instance_event("#ctower_skill_ganbantein","OnSkill",false);
+end;
+
+OnSecondPhaseCheck:
+    .@gid = get_instance_var("gid");
+    freeloop(true);
+    while(unitexists(.@gid)){
+        getunitdata .@gid,.@data;
+        if(.@data[UMOB_HP] <= (.@data[UMOB_MAXHP]/10) * 6){
+        	instance_event(strnpcinfo(0),"OnThirdPhase",false);
+        	break;
+        }
+        sleep 1000;
+    }
+	freeloop(false);
+end;
+
+OnThirdPhase:
+	.@map$ = get_instance_var("map$");
+	set_instance_var("trap_active",false);
+	set_instance_var("phase_check",1);
+	unitkill get_instance_var("gid");
+    instance_warpall .@map$,156,79,instance_id();
+	set_instance_var("phase_check",0);
+    instance_enable("#ctower_betel_2",true);
+	killmonster .@map$,instance_npcname("#ctower_skill_soul") + "::OnSkillDead";
+    sleep 2000;
+    npctalk "This banquet is getting a little boring.",instance_npcname("#ctower_betel_2");
+    unitwalk getnpcid(0,instance_npcname("#ctower_betel_2")),156,80,instance_npcname(strnpcinfo(0)) + "::OnThirdPhaseTalk";
+end;
+
+OnThirdPhaseTalk:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnBossKill";
+	sleep 2000;
+    npctalk "Now, let's change to something heavier shall we.",instance_npcname("#ctower_betel_1");
+    sleep 2000;
+    specialeffect EF_MAGIC_FLOOR,AREA,instance_npcname("#ctower_betel_2");
+	sleep 2000;
+	if(get_instance_var("TRAP") < 2){
+		for(.@i = 0; .@i < 10; .@i++)
+			setnpcdisplay instance_npcname("#ctower_trap_" + .@i),20351;
+	} else if(get_instance_var("TRAP") == 2){
+		for(.@i = 0; .@i < 16; .@i++)
+			setnpcdisplay instance_npcname("#ctower_trap2_" + .@i),20351;
+	} else {
+		for(.@i = 0; .@i < 16; .@i++){
+			if(.@i < 10)
+				setnpcdisplay instance_npcname("#ctower_trap_" + .@i),20351;
+			setnpcdisplay instance_npcname("#ctower_trap2_" + .@i),20351;
+		}
+	}
+	sleep 2000;
+	set_instance_var("phase",3);
+	set_instance_var("trap_active",true);
+	instance_enable("#ctower_betel_2",false);
+	monster .@map$,156,80,"Betelguese",20994,1,.@event$;
+	set_instance_var("gid",$@mobid[0]);
+    unitskilluseid $@mobid[0],"NPC_RELIEVE_ON",10;
+    ctower_cacl_stats($@mobid[0]);
+	ctower_recalc_stats($@mobid[0],2);
+end;
+
+OnBossKill:
+    if(get_instance_var("phase_check")) end;
+	.@map$ = get_instance_var("map$");
+	for(.@i = 0; .@i < 10; .@i++)
+		instance_enable("#ctower_trap_" + .@i,false);
+	for(.@i = 0; .@i < 16; .@i++)
+		instance_enable("#ctower_trap2_" + .@i,false);
+	stopnpctimer instance_npcname("#ctower_skill_meteor");
+	stopnpctimer instance_npcname("#ctower_skill_ganbantein");
+	stopnpctimer instance_npcname("#ctower_skill_soul");
+	stopnpctimer instance_npcname("#ctower_skill_heal");
+	killmonster .@map$,instance_npcname("#ctower_skill_soul") + "::OnSkillDead";
+	set_instance_var("boss_dead",1); //Extra Check
+	set_instance_var("phase",4);
+	instance_warpall .@map$,156,79,instance_id();
+	instance_enable("#ctower_betel_3",true);
+	instance_enable("#ctower_exit",true);
+	if(get_instance_var("TOTAL") > 0){
+		.@TOTAL = get_instance_var("TOTAL");
+		.@AMOUNT = .@TOTAL/50;
+	}
+	if(.@AMOUNT){
+		if(.@AMOUNT >= 5){
+			for(.@i = 1; .@i < 6; .@i++)
+				instance_enable("#ctower_treasure_" + .@i,true);
+		} else {
+			while(.@Z < .@AMOUNT){
+				.@var = rand(1,5);
+				while(inarray(.@T,.@var) != -1)
+					.@var = rand(1,5);
+				.@T[getarraysize(.@T)] = .@var;
+				instance_enable("#ctower_treasure_" + .@var,true);
+				.@Z++;
+			}
+		}
+		if(.@TOTAL >= 400)
+			instance_enable("#ctower_treasure_11",true);
+		deletearray .@T[0];
+		.@Z = 0;
+		.@AMOUNT -= 6;
+		if(.@AMOUNT >= 6){
+			for(.@i = 6; .@i < 11; .@i++)
+				instance_enable("#ctower_treasure_" + .@i,true);
+		} else {
+			while(.@Z < .@AMOUNT){
+				.@var = rand(6,10);
+				while(inarray(.@T,.@var) != -1)
+					.@var = rand(6,10);
+				.@T[getarraysize(.@T)] = .@var;
+				instance_enable("#ctower_treasure_" + .@var,true);
+				.@Z++;
+			}
+		}
+		if(.@TOTAL >= 600)
+			instance_enable("#ctower_treasure_12",true);
+	}
+end;
+}
+
+3@ch_t,147,76,3	script	#ctower_treasure_1	4_M_ROYALGUARD,{
+	.@id = atoi(replacestr(strnpcinfo(2),"ctower_treasure_",""));
+	switch(.@id){
+		case 1: .@item_id = 1000398; .@amount = rand(5,9); break;
+		case 2: .@item_id = 1000399; .@amount = rand(5,9); break;
+		case 3: .@item_id = 1000402; .@amount = rand(5,9); break;
+		case 4: .@item_id = 1000400; .@amount = rand(5,9); break;
+		case 5: .@item_id = 1000403; .@amount = rand(5,9); break;
+		case 6: .@item_id = 1000442; .@amount = rand(2,5); break;
+		case 7: .@item_id = 1000443; .@amount = rand(2,5); break;
+		case 8: .@item_id = 1000446; .@amount = rand(2,5); break;
+		case 9: .@item_id = 1000444; .@amount = rand(2,5); break;
+		case 10: .@item_id = 1000447; .@amount = rand(2,5); break;
+		case 11: .@item_id = 1000401; .@amount = rand(5,9); break;
+		case 12: .@item_id = 1000445; .@amount = rand(2,5); break; 
+	}
+	instance_hide(strnpcinfo(0),true);
+	instance_enable(strnpcinfo(0),false);
+	getmapxy(.@map$,.@x,.@y,BL_NPC);
+	for(.@i = 0; .@i < .@amount; .@i++)
+		makeitem .@item_id,1,.@map$,.@x + rand(-1,1),.@y + rand(-1,1);
+	if(.@id == 11){
+		.@chance = 5;
+		if(get_instance_var("TOTAL") >= 400)
+			if(rand(1,100) <= .@chance) makeitem 400147,1,.@map$,.@x + rand(-1,1),.@y + rand(-1,1);
+		if(get_instance_var("TOTAL") >= 500)
+			if(rand(1,100) <= .@chance) makeitem 400148,1,.@map$,.@x + rand(-1,1),.@y + rand(-1,1);
+	}
+	if(.@id == 12){
+		if(get_instance_var("TOTAL") >= 600)
+			if(rand(1,100) <= .@chance) makeitem 400149,1,.@map$,.@x + rand(-1,1),.@y + rand(-1,1);
+	}
+	end;
+}
+
+3@ch_t,151,76,3	duplicate(#ctower_treasure_1)	#ctower_treasure_2	2_SLOT_MACHINE
+3@ch_t,155,76,3	duplicate(#ctower_treasure_1)	#ctower_treasure_3	2_SLOT_MACHINE
+3@ch_t,159,76,3	duplicate(#ctower_treasure_1)	#ctower_treasure_4	2_SLOT_MACHINE
+3@ch_t,163,76,3	duplicate(#ctower_treasure_1)	#ctower_treasure_5	2_SLOT_MACHINE
+
+3@ch_t,147,72,3	duplicate(#ctower_treasure_1)	#ctower_treasure_6	2_DROP_MACHINE
+3@ch_t,151,72,3	duplicate(#ctower_treasure_1)	#ctower_treasure_7	2_DROP_MACHINE
+3@ch_t,155,72,3	duplicate(#ctower_treasure_1)	#ctower_treasure_8	2_DROP_MACHINE
+3@ch_t,159,72,3	duplicate(#ctower_treasure_1)	#ctower_treasure_9	2_DROP_MACHINE
+3@ch_t,163,72,3	duplicate(#ctower_treasure_1)	#ctower_treasure_10	2_DROP_MACHINE
+
+3@ch_t,159,80,3	duplicate(#ctower_treasure_1)	#ctower_treasure_11	2_VENDING_MACHINE1
+3@ch_t,155,80,3	duplicate(#ctower_treasure_1)	#ctower_treasure_12	2_VENDING_MACHINE1
+
+
+
+3@ch_t,1,1,0	script	#ctower_skill_meteor	HIDDEN_WARP_NPC,{
+	end;
+
+OnSkill:
+	initnpctimer;
+end;
+
+OnTimer5000:
+	if(get_instance_var("phase") < 3) end;
+	stopnpctimer;
+	if(get_instance_var("boss_dead")) end;
+	if(!unitexists(get_instance_var("gid"))) initnpctimer;
+	function SafeSkill;
+	SafeSkill;
+	initnpctimer;
+end;
+
+OnTimer10000:
+	stopnpctimer;
+	if(get_instance_var("boss_dead")) end;
+	if(!unitexists(get_instance_var("gid"))) initnpctimer;
+	function SafeSkill;
+	SafeSkill;
+	initnpctimer;
+end;
+
+function	SafeSkill	{
+	if(get_instance_var("boss_dead")) end;
+	.@gid = get_instance_var("gid");
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnSkillDead";
+	setarray .@x[1],
+	-10,0,10,
+	-10,0,10,
+	-10,0,10;
+	setarray .@y[1],
+	10,10,10,
+	0,0,0,
+	-10,-10,-10;
+	if(unitexists(.@gid)){
+		getunitdata .@gid,.@data;
+		.@x2 = .@data[UMOB_X];
+		.@y2 = .@data[UMOB_Y];
+		for(.@i = 1; .@i < getarraysize(.@x); .@i++){
+			if(!unitexists(.@gid))
+				break;
+			monster .@map$,.@x2 + .@x[.@i],.@y2 + .@y[.@i],"",20562,1,.@event$;
+			setunitdata $@mobid[0],UMOB_DMGIMMUNE,true;
+			ctower_cacl_stats($@mobid[0]); //COPY STATS OF BETEL TO HIDDEN MOB
+			getunitdata $@mobid[0],.@data;
+			unitskillusepos $@mobid[0],"WZ_METEOR",10,.@x2 + .@x[.@i],.@y2 + .@y[.@i],-10000;
+			sleep 1000;
+		}
+	}
+	sleep 5000;
+	killmonster .@map$,.@event$;
+	return;
+}
+
+OnSkillDead:
+end;
+}
+
+3@ch_t,1,1,0	script	#ctower_skill_ganbantein	HIDDEN_WARP_NPC,{
+	end;
+
+OnSkill:
+	initnpctimer;
+end;
+
+OnTimer10000:
+	if(get_instance_var("phase") < 3) end;
+	stopnpctimer;
+	if(get_instance_var("boss_dead")) end;
+	if(!unitexists(get_instance_var("gid"))) initnpctimer;
+	function SafeSkill;
+	SafeSkill;
+	initnpctimer;
+end;
+
+OnTimer15000:
+	stopnpctimer;
+	if(get_instance_var("boss_dead")) end;
+	.@gid = get_instance_var("gid");
+	if(!unitexists(get_instance_var("gid"))) initnpctimer;
+	function SafeSkill;
+	SafeSkill;
+	initnpctimer;
+end;
+
+function	SafeSkill	{
+	if(get_instance_var("boss_dead")) end;
+	.@gid = get_instance_var("gid");
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnSkillDead";
+	setarray .@x[1],
+	-10,-5,0,5,10,
+	-10,-5,0,5,10,
+	-10,-5,0,5,10,
+	-10,-5,0,5,10,
+	-10,-5,0,5,10;
+	setarray .@y[1],
+	10,10,10,10,10,
+	5,5,5,5,5,
+	0,0,0,0,0,
+	-5,-5,-5,-5,-5,
+	-10,-10,-10,-10,-10;
+	if(unitexists(.@gid)){
+		getunitdata .@gid,.@data;
+		.@x2 = .@data[UMOB_X];
+		.@y2 = .@data[UMOB_Y];
+		for(.@i = 1; .@i < getarraysize(.@x); .@i++){
+			if(!unitexists(.@gid))
+				break;
+			monster .@map$,.@x2 + .@x[.@i],.@y2 + .@y[.@i],"",20562,1,.@event$;
+			setunitdata $@mobid[0],UMOB_DMGIMMUNE,true;
+			unitskillusepos $@mobid[0],"HW_GANBANTEIN",1,.@x2 + .@x[.@i],.@y2 + .@y[.@i],-10000;
+			if(.@i % 5 == 0)
+				sleep 200;
+		}
+		sleep 1000;
+		killmonster .@map$,.@event$;
+	}
+	return;
+}
+
+OnSkillDead:
+end;
+}
+
+3@ch_t,1,1,0	script	#ctower_skill_soul	HIDDEN_WARP_NPC,{
+	end;
+
+OnSkill:
+	initnpctimer;
+end;
+
+OnTimer10000:
+	if(get_instance_var("phase") < 3) end;
+	stopnpctimer;
+	if(get_instance_var("boss_dead")) end;
+	if(!unitexists(get_instance_var("gid"))) initnpctimer;
+	function SafeSkill;
+	SafeSkill;
+	initnpctimer;
+end;
+
+OnTimer15000:
+	stopnpctimer;
+	if(get_instance_var("boss_dead")) end;
+	if(!unitexists(get_instance_var("gid"))) initnpctimer;
+	function SafeSkill;
+	SafeSkill;
+	initnpctimer;
+end;
+
+function	SafeSkill	{
+	if(get_instance_var("boss_dead")) end;
+	.@gid = get_instance_var("gid");
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnSkillDead";
+	monster .@map$,rand(148,163),rand(74,101),"Betelguese's Soul",20995,2,.@event$;
+	getunitdata .@gid,.@data;
+	setunitdata .@gid,UMOB_RES,.@data[UMOB_RES] + 100;
+	setunitdata .@gid,UMOB_MRES,.@data[UMOB_MRES] + 100;
+	mapannounce .@map$,"O Betelguês reproduziu a sua alma e espalhou-a por todo o lado. A resistência do Betelguese aumenta tanto quanto o número de almas na área.",bc_blue;
+	return;
+}
+
+OnSkillDead:
+	.@gid = get_instance_var("gid");
+	getunitdata .@gid,.@data;
+	setunitdata .@gid,UMOB_RES,.@data[UMOB_RES] - 50;
+	setunitdata .@gid,UMOB_MRES,.@data[UMOB_MRES] - 50;
+end;
+}
+
+3@ch_t,1,1,0	script	#ctower_skill_heal	HIDDEN_WARP_NPC,{
+	end;
+
+OnSkill:
+	initnpctimer;
+end;
+
+OnTimer5000:
+	stopnpctimer;
+	if(get_instance_var("boss_dead")) end;
+	.@gid = get_instance_var("gid");
+	if(!unitexists(.@gid)){
+		initnpctimer;
+		end;
+	}
+	getunitdata .@gid,.@data;
+	//RECO * 1% (MAX_HP)
+	.@HEAL = (.@data[UMOB_MAXHP]/100) * get_instance_var("RECO");
+	setunitdata .@gid,UMOB_HP,.@data[UMOB_HP] + .@HEAL;
+	initnpctimer;
+end;
+}
+
+3@ch_t,1,1,0	script	#ctower_check_area	HIDDEN_WARP_NPC,{
+	end;
+
+OnCheck:
+	initnpctimer;
+end;
+
+OnTimer1000:
+	stopnpctimer;
+    .@map$ = get_instance_var("map$");
+	.@count = get_instance_var("count");
+	.@map$ = get_instance_var("map$");
+	.@gid = get_instance_var("gid");
+	if(!.@gid){	
+		initnpctimer;
+		end;
+	}
+	if(unitexists(.@gid)){
+		getunitdata .@gid,.@data;
+        .@x = .@data[UMOB_X];
+        .@y = .@data[UMOB_Y];
+        if(.@x < 148 || .@x > 163 || .@y < 74 || .@y > 101){
+            sleep 5000;
+            if(.@x < 148 || .@x > 163 || .@y < 74 || .@y > 101){
+                ctower_recalc_stats(.@gid,10);
+				unitwarp .@gid,.@map$,156,81;
+                instance_warpall .@map$,156,79,instance_id();
+                sleep 3000;
+                unitskilluseid .@gid,"NPC_HELLJUDGEMENT2",10;
+				sleep 2000;
+				 unitskilluseid .@gid,"NPC_EARTHQUAKE",10;
+                sleep 1000;
+                ctower_revert_stats(.@gid);
+            } else
+                initnpctimer;
+        }
+    }
+	initnpctimer;
+end;
+}
+
+3@ch_t,1,1,0	script	#ctower_check_dead	HIDDEN_WARP_NPC,{
+	end;
+
+OnCheck:
+	initnpctimer;
+end;
+
+OnTimer1000:
+	if(get_instance_var("boss_dead")) end;
+	stopnpctimer;
+	.@count = get_instance_var("count");
+	.@map$ = get_instance_var("map$");
+	.@gid = get_instance_var("gid");
+	if(!.@gid){	
+		initnpctimer;
+		end;
+	}
+	if(unitexists(.@gid))
+		getunitdata .@gid,.@data;
+	else
+		initnpctimer;
+	.@mode = .@data[UMOB_MODE];
+	for(.@i = 0; .@i < .@count; .@i++){
+		if(attachrid(get_instance_var("aid_" + .@i))){
+			if(Hp < 1){
+				.@gid = get_instance_var("gid");
+				if(!.@gid){
+					initnpctimer;
+					end;
+				}
+				if(unitexists(.@gid))
+					setunitdata .@gid,UMOB_MODE,(.@mode|MD_IGNOREMELEE|MD_IGNOREMAGIC|MD_IGNORERANGED|MD_IGNOREMISC);
+				else
+					initnpctimer;
+				while(Hp < 1)
+					sleep2 1000;
+				setunitdata .@gid,UMOB_MODE,.@mode;
+			}
+			detachrid;
+		}
+	}
+	initnpctimer;
+end;
+}
+	
+3@ch_t,1,1,0	script	#ctower_party_check	HIDDEN_WARP_NPC,{
+	end;
+	
+OnCheck:
+	initnpctimer;
+end;
+
+OnTimer1000:
+	stopnpctimer;
+	.@count = get_instance_var("count");
+	.@map$ = get_instance_var("map$");
+	.@gid = get_instance_var("gid");
+	if(getmapunits(BL_PC,.@map$) == .@count)
+		initnpctimer;
+	else {
+		while(getmapunits(BL_PC,.@map$) != .@count){
+			if(unitexists(.@gid))
+					setunitdata .@gid,UMOB_DMGIMMUNE,true;
+				else
+					break;
+			sleep 100;
+		}
+		if(unitexists(get_instance_var("gid")))
+			setunitdata .@gid,UMOB_DMGIMMUNE,false;
+		initnpctimer;
+	}
+	end;
+end;
+}
+
+3@ch_t,142,85,3	script	#ctower_trap_0	20112,1,1,{
+    end;
+
+OnTouch:
+	if(!get_instance_var("trap_active")) end;
+    if(get_instance_var("phase") == 2){
+		.@DAMAGE = (MaxHp / 10) * (1 + get_instance_var("TRAP"));
+		specialeffect2 EF_HYOUSYOURAKU;
+	} else {
+		.@DAMAGE = (MaxHp / 10) * (2 + get_instance_var("TRAP"));
+		specialeffect2 EF_FIREHIT;
+		pushpc rand(1,7),rand(1,2);
+    }
+	if(.@DAMAGE > Hp && get_instance_var("phase") > 2)
+		unitkill getcharid(3);
+	else
+		Hp -= .@DAMAGE;
+end;
+
+OnMove:
+	.@id = atoi(replacestr(strnpcinfo(2),"ctower_trap_",""));
+	getunitdata getnpcid(0,instance_npcname(strnpcinfo(0))),.@data;
+	set_instance_var("x_" + strnpcinfo(2),.@data[UNPC_X]);
+	switch(.@id){
+		case 0: npcspeed 161; break;
+		case 1: npcspeed 159; break;
+		case 2: npcspeed 179; break;
+		case 3: npcspeed 170; break;
+		case 4: npcspeed 166; break;
+		case 5: npcspeed 172; break;
+		case 6: npcspeed 160; break;
+		case 7: npcspeed 164; break;
+		case 8: npcspeed 154; break;
+		case 9: npcspeed 156; break;
+	}
+	switch(.@id){
+		case 0:
+			instance_event(strnpcinfo(0),"OnWalk",false);
+			break;
+
+		case 1:
+			instance_event(strnpcinfo(0),"OnWalk5",false);
+			break;
+			
+		default:
+			if(.@id % 2 == 0)
+				instance_event(strnpcinfo(0),"OnWalk",false);
+			else
+				instance_event(strnpcinfo(0),"OnWalk5",false);
+			break;
+	}
+end;
+
+OnWalk:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),get_instance_var("x_" + strnpcinfo(2)),110,instance_npcname(strnpcinfo(0)) + "::OnWalk2";
+end;
+
+OnWalk2:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),get_instance_var("x_" + strnpcinfo(2)),85,instance_npcname(strnpcinfo(0)) + "::OnWalk3";
+end;
+
+OnWalk3:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),get_instance_var("x_" + strnpcinfo(2)),64,instance_npcname(strnpcinfo(0)) + "::OnWalk4";
+end;
+
+OnWalk4:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),get_instance_var("x_" + strnpcinfo(2)),85,instance_npcname(strnpcinfo(0)) + "::OnWalk";
+end;
+
+OnWalk5:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),get_instance_var("x_" + strnpcinfo(2)),64,instance_npcname(strnpcinfo(0)) + "::OnWalk6";
+end;
+
+OnWalk6:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),get_instance_var("x_" + strnpcinfo(2)),85,instance_npcname(strnpcinfo(0)) + "::OnWalk7";
+end;
+
+OnWalk7:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),get_instance_var("x_" + strnpcinfo(2)),110,instance_npcname(strnpcinfo(0)) + "::OnWalk8";
+end;
+
+OnWalk8:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),get_instance_var("x_" + strnpcinfo(2)),85,instance_npcname(strnpcinfo(0)) + "::OnWalk5";
+end;
+}
+
+3@ch_t,145,85,3	duplicate(#ctower_trap_0)	#ctower_trap_1	20112,1,1
+3@ch_t,148,85,3	duplicate(#ctower_trap_0)	#ctower_trap_2	20112,1,1
+3@ch_t,151,85,3	duplicate(#ctower_trap_0)	#ctower_trap_3	20112,1,1
+3@ch_t,154,85,3	duplicate(#ctower_trap_0)	#ctower_trap_4	20112,1,1
+3@ch_t,157,85,3	duplicate(#ctower_trap_0)	#ctower_trap_5	20112,1,1
+3@ch_t,160,85,3	duplicate(#ctower_trap_0)	#ctower_trap_6	20112,1,1
+3@ch_t,163,85,3	duplicate(#ctower_trap_0)	#ctower_trap_7	20112,1,1
+3@ch_t,166,85,3	duplicate(#ctower_trap_0)	#ctower_trap_8	20112,1,1
+3@ch_t,169,85,3	duplicate(#ctower_trap_0)	#ctower_trap_9	20112,1,1
+
+3@ch_t,156,64,3	script	#ctower_trap2_0	20112,1,1,{
+    end;
+
+OnTouch:
+	if(!get_instance_var("trap_active")) end;
+    if(get_instance_var("phase") == 2){
+		.@DAMAGE = (MaxHp / 10) * (1 + get_instance_var("TRAP"));
+		specialeffect2 EF_HYOUSYOURAKU;
+	} else {
+		.@DAMAGE = (MaxHp / 10) * (2 + get_instance_var("TRAP"));
+		specialeffect2 EF_FIREHIT;
+		pushpc rand(1,7),rand(1,2);
+    }
+	if(.@DAMAGE > Hp && get_instance_var("phase") > 2)
+		unitkill getcharid(3);
+	else
+		Hp -= .@DAMAGE;
+end;
+
+OnMove:
+	.@id = atoi(replacestr(strnpcinfo(2),"ctower_trap2_",""));
+	getunitdata getnpcid(0,instance_npcname(strnpcinfo(0))),.@data;
+	set_instance_var("y_" + strnpcinfo(2),.@data[UNPC_Y]);
+	switch(.@id){
+		case 0: npcspeed 158; break;
+		case 1: npcspeed 161; break;
+		case 2: npcspeed 163; break;
+		case 3: npcspeed 154; break;
+		case 4: npcspeed 163; break;
+		case 5: npcspeed 168; break;
+		case 6: npcspeed 162; break;
+		case 7: npcspeed 154; break;
+		case 8: npcspeed 157; break;
+		case 9: npcspeed 174; break;
+		case 10: npcspeed 163; break;
+		case 11: npcspeed 154; break;
+		case 12: npcspeed 172; break;
+		case 13: npcspeed 168; break;
+		case 14: npcspeed 165; break;
+		case 15: npcspeed 171; break;
+	}
+	switch(.@id){
+		case 0:
+			instance_event(strnpcinfo(0),"OnWalk",false);
+			break;
+
+		case 1:
+			instance_event(strnpcinfo(0),"OnWalk5",false);
+			break;
+			
+		default:
+			if(.@id % 2 == 0)
+				instance_event(strnpcinfo(0),"OnWalk",false);
+			else
+				instance_event(strnpcinfo(0),"OnWalk5",false);
+			break;
+	}
+end;
+
+OnWalk:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),142,get_instance_var("y_" + strnpcinfo(2)),instance_npcname(strnpcinfo(0)) + "::OnWalk2";
+end;
+
+OnWalk2:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),156,get_instance_var("y_" + strnpcinfo(2)),instance_npcname(strnpcinfo(0)) + "::OnWalk3";
+end;
+
+OnWalk3:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),169,get_instance_var("y_" + strnpcinfo(2)),instance_npcname(strnpcinfo(0)) + "::OnWalk4";
+end;
+
+OnWalk4:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),156,get_instance_var("y_" + strnpcinfo(2)),instance_npcname(strnpcinfo(0)) + "::OnWalk";
+end;
+
+OnWalk5:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),169,get_instance_var("y_" + strnpcinfo(2)),instance_npcname(strnpcinfo(0)) + "::OnWalk6";
+end;
+
+OnWalk6:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),156,get_instance_var("y_" + strnpcinfo(2)),instance_npcname(strnpcinfo(0)) + "::OnWalk7";
+end;
+
+OnWalk7:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),142,get_instance_var("y_" + strnpcinfo(2)),instance_npcname(strnpcinfo(0)) + "::OnWalk8";
+end;
+
+OnWalk8:
+	unitwalk getnpcid(0,instance_npcname(strnpcinfo(0))),156,get_instance_var("y_" + strnpcinfo(2)),instance_npcname(strnpcinfo(0)) + "::OnWalk5";
+end;
+}
+
+3@ch_t,156,67,3	duplicate(#ctower_trap2_0)	#ctower_trap2_1	20112,1,1
+3@ch_t,156,70,3	duplicate(#ctower_trap2_0)	#ctower_trap2_2	20112,1,1
+3@ch_t,156,73,3	duplicate(#ctower_trap2_0)	#ctower_trap2_3	20112,1,1
+3@ch_t,156,76,3	duplicate(#ctower_trap2_0)	#ctower_trap2_4	20112,1,1
+3@ch_t,156,79,3	duplicate(#ctower_trap2_0)	#ctower_trap2_5	20112,1,1
+3@ch_t,156,82,3	duplicate(#ctower_trap2_0)	#ctower_trap2_6	20112,1,1
+3@ch_t,156,85,3	duplicate(#ctower_trap2_0)	#ctower_trap2_7	20112,1,1
+3@ch_t,156,88,3	duplicate(#ctower_trap2_0)	#ctower_trap2_8	20112,1,1
+3@ch_t,156,91,3	duplicate(#ctower_trap2_0)	#ctower_trap2_9	20112,1,1
+3@ch_t,156,94,3	duplicate(#ctower_trap2_0)	#ctower_trap2_10	20112,1,1
+3@ch_t,156,97,3	duplicate(#ctower_trap2_0)	#ctower_trap2_11	20112,1,1
+3@ch_t,156,100,3	duplicate(#ctower_trap2_0)	#ctower_trap2_12	20112,1,1
+3@ch_t,156,103,3	duplicate(#ctower_trap2_0)	#ctower_trap2_13	20112,1,1
+3@ch_t,156,106,3	duplicate(#ctower_trap2_0)	#ctower_trap2_14	20112,1,1
+3@ch_t,156,109,3	duplicate(#ctower_trap2_0)	#ctower_trap2_15	20112,1,1
+
+3@ch_t,156,96,1	script	#ctower_exit	PORTAL,{
+	mes "^0000CDQueres deixar a torre??^000000";
+	next;
+	if(select("Cancelar: sair.") == 1) end;
+	warp "e_tower",70,114;
+	end;
+}

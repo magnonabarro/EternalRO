@@ -1,0 +1,58 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ selo_status.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.3 ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= - Missão para quebrar o Selo da Sleipnir.
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================// 
+
+prontera,113,294,3	script	Quadro de Avisos#god	837,{
+	mes "======== Status dos Selos Divinos ========";
+	setarray .@seal$[1], "Sleipnir","Megingjard","Brisingamen","Mjolnir";
+	for(set .@i,1; .@i<=4; set .@i,.@i+1) {
+		set .@val, getd("$God"+.@i);
+		if (.@val == 0)
+			set .@status$,"Invisível";
+		else if (.@val < $@god_check1)
+			set .@status$,"Apareceu";
+		else if (.@val < $@god_check2)
+			set .@status$,"Apareceu";
+		else
+			set .@status$,"Liberado";
+		mes .@seal$[.@i]+" Selo: "+.@status$;
+	}
+	mes " ";
+	mes "======= Status dos Selos ========";
+	if (god_sl_1 < 51)
+		mes "^ff0000Selo Sleipnir: Não Completado^000000";
+	else
+		mes "^00ff00Selo Sleipnir: Completado^000000";
+	if (god_eremes < 28)
+		mes "^ff0000Selo Megingjard: Não Completado^000000";
+	else
+		mes "^00ff00Selo Megingjard: Completado^000000";
+	if (god_brising < 50)
+		mes "^ff0000Selo Brisingamen: Não Completado^000000";
+	else
+		mes "^00ff00Selo Brisingamen: Completado^000000";
+	if (god_mjo_0 < 11)
+		mes "^ff0000Selo Mjolnir: Não Completado^000000";
+	else
+		mes "^00ff00Selo Mjolnir: Completado^000000";
+	close;
+}

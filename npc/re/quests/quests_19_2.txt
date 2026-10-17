@@ -1,0 +1,3704 @@
+//===== rAthena Script =======================================
+//= ilha do conto de fada
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//--- Ques do Episode 19.2
+//===== Changelogs: ==========================================
+//= traduzido por Ribamar Costa
+//============================================================
+
+// jor_tail
+//-------------------------------------
+
+jor_tail,221,57,3	script	Soldado Arwyn#ep19iwin01	EP19_NPC_IWIN_SY,{
+	if (ep19_main == 8) {
+		cutin "ep19_iwin11.png",2;
+		mes "[O soldado Arwyn]";
+		mes "E uma lingua comprida para um castelo de gelo.";
+		mes "Siga os marcadores de guinada.";
+		close3;
+	}
+	cutin "ep19_iwin11.png",2;
+	mes "[O soldado Arwyn]";
+	mes "Podeis ir sem vos preocupardes com este lugar.";
+	mes "Esta injustica foi resolvida por Uther.";
+	close3;
+}
+
+jor_tail,223,54,3	script	Soldado Arwyn#ep19iwin02	EP19_NPC_IWIN_SY,{
+	cutin "ep19_iwin04.png",2;
+	mes "[O soldado Arwyn]";
+	mes "Ele nao tem penas, uchano.";
+	mes "Esta frio?";
+	close3;
+}
+
+jor_tail,239,40,5	script	Aneis#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[toque]";
+	mes "Tudo livre em servico!";
+	close;
+}
+
+jor_tail,291,91,5	script	Hamur#e19c00	4_EP19_IWIN,{
+	npctalk "Este deve ser o fim do oceano?", "", bc_self;
+	end;
+}
+
+jor_tail,285,94,5	script	Doraro#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[Doraro]";
+	mes "Em servico... Ja nao te via ha algum tempo.";
+	mes "Cuidado para nao apanhar uma constipacao.";
+	mes "Nem uma unica pena... Tsk tsk.";
+	close;
+}
+
+jor_tail,216,79,3	script	Lahore#e19c00	4_EP19_IWIN,{
+	npctalk "Sabem o que acontece quando se trabalha arduamente para limpar a neve? Volta a nevar! Wahahahahahahaha!!!", "", bc_self;
+	end;
+}
+
+jor_tail,209,72,5	script	Despesas#e19c02	EP19_NPC_IWIN_SG,{
+	npctalk "Alerta! Tudo limpo! Bem-vindos a Ishgard!!", "", bc_self;
+	end;
+}
+
+jor_tail,168,86,3	script	GORR#e19c00	4_EP19_IWIN,{
+	npctalk "Estou a testar o meu novo produto de tratamento de penas para as tornar impermeaveis e a prova de frio..", "", bc_self;
+	end;
+}
+
+jor_tail,153,76,3	script	Nodor#e19c00	4_EP19_IWIN,{
+	npctalk "Quando e que este cesto vai ficar cheio?", "", bc_self;
+	end;
+}
+
+jor_tail,150,81,5	script	Bazar#e19c00	4_EP19_IWIN,{
+	npctalk "Bem, quando acabares, porque e que nao vais trabalhar um pouco?", "", bc_self;
+	end;
+}
+
+jor_tail,181,158,5	script	Hochho#e19c00	4_EP19_IWIN,{
+	npctalk "Veem aquelas pegadas ali em cima? Sao sagradas. Estao por todo o lado. Procurem-nas..", "", bc_self;
+	end;
+}
+
+jor_tail,216,269,5	script	Hahahahaha#e19c00	4_EP19_IWIN,{
+	npctalk "O caminho e estreito, por isso tem cuidado. Se caires, vai demorar muito tempo para te tirar de la. ...nao confio em ti.?", "", bc_self;
+	end;
+}
+
+jor_tail,250,273,7	script	Zorolong#e19c00	4_EP19_IWIN,{
+	npctalk "Ha uma escultura de gelo na parte de tras do Castelo de Gelo, e um deles tem algo que se parece exatamente com isto na cabeca. Estranho..", "", bc_self;
+	end;
+}
+
+jor_tail,56,196,3	script	Poryo#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[poryo]";
+	mes "Shhh... Nao facas barulho.";
+	mes "Nao perturbem a pesca.";
+	mes "Vai para outro local de pesca.";
+	close;
+}
+
+
+// jor_back1
+//-------------------------------------
+
+jor_back1,376,247,5	script	Ver#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[Ver]";
+	mes "Tudo limpo em servico, ah.";
+	close;
+}
+
+jor_back1,81,266,5	script	Khoruro#ep19in	EP19_NPC_IWIN_SB,{
+	mes "[koruro]";
+	mes "Esta tudo bem no servico, ahhhhhhhhhhhhhhh!";
+	close;
+}
+
+jor_back1,95,256,5	script	Tambem com#ep19in	EP19_NPC_IWIN_SY,{
+	mes "[de novo]";
+	mes "Homem, nao subas para cima desses cristais de gelo.";
+	mes "Esta a afundar-se. Tens de ter cuidado.";
+	close;
+}
+
+
+// jor_nest
+//-------------------------------------
+
+function	script	F_ep19_checkTransform	{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {	// custom text (copy from another npc)
+		mes "[" + getarg(0) + "]";
+		mes "Humanos?! Estao a vir atras de mim..";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	return;
+}
+
+jor_nest,24,251,0	script	#whl_warp	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	removespecialeffect( EF_ITEM_LIGHT, AREA, "#whl_effect" );
+	specialeffect( EF_ITEM_LIGHT, AREA, "#whl_effect" );
+	end;
+}
+jor_nest,21,258,1	duplicate(dummy_npc)	#whl_effect	CLEAR_NPC
+
+jor_nest,108,79,0	script	#e19ms100	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_108_79");
+		end;
+	}
+	end;
+}
+jor_nest,108,79,5	script	Leghan Priest#e19ms100::ep19_jor_nest_108_79	4_EP19_RGAN_R2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "Faz com que funcione para mim... Sou so eu....", "", bc_self;
+	end;
+}
+
+jor_nest,29,251,5	script	Leghan Priest#e19ms91	4_EP19_RGAN_R1,5,5,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "......", "", bc_self;
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself();
+		cloakonnpcself("ep19_jor_nest_23_247");
+		end;
+	}
+	end;
+}
+jor_nest,23,247,5	script	Leghan Priest#e19ms92::ep19_jor_nest_23_247	4_EP19_RGAN_R2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "......", "", bc_self;
+	end;
+}
+
+jor_nest,37,257,0	script	#e19ms92	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_35_270");
+		cloakonnpcself("ep19_jor_nest_41_270");
+		end;
+	}
+	end;
+}
+jor_nest,35,270,5	script	Gazirgan#e19ms94::ep19_jor_nest_35_270	4_EP19_RGAN_SR2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "......", "", bc_self;
+	end;
+}
+jor_nest,41,270,3	script	Gazirgan#e19ms93::ep19_jor_nest_41_270	4_EP19_RGAN_SR1,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[guardiao legan]";
+		mes "Humano?! Estao a vir atras de mim";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	npctalk "......", "", bc_self;
+	end;
+}
+
+
+jor_nest,115,212,0	script	#e19ms101	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_115_212");
+		end;
+	}
+	end;
+}
+jor_nest,115,212,3	script	Leghan Priest#e19ms101::ep19_jor_nest_115_212	4_EP19_RGAN_R1,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "Sacerdote Leghan";
+		mes "Os humanos nao deviam estar aqui. Saiam daqui.";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 33) {
+		npctalk "A crianca nasceu hoje? Para onde e que vai?", "", bc_self;
+		end;
+	}
+	npctalk "Ja estas habituado a andar?", "", bc_self;
+	end;
+}
+
+jor_nest,109,184,0	script	#e19ms107	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_109_184");
+		end;
+	}
+	end;
+}
+jor_nest,109,184,5	script	Cacador de coracoes#e19ms107::ep19_jor_nest_109_184	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		npctalk "Nao fiques por aqui. O teu lugar nao e aqui..", "", bc_self;
+		end;
+	}
+	npctalk "또 너냐?", "", bc_self;
+	end;
+}
+
+jor_nest,80,150,0	script	#e19ms108	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_80_180");
+		end;
+	}
+	end;
+}
+jor_nest,80,150,1	script	Cacador de coracoes#e19ms108::ep19_jor_nest_80_180	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		npctalk "Sabes o que diz aqui? Da meia volta e segue o teu caminho. Diz aqui.", "", bc_self;
+		end;
+	}
+	npctalk "Acho que nao e aqui que tens de estar.?", "", bc_self;
+	end;
+}
+
+jor_nest,24,169,0	script	#e19ms109	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_24_169");
+		end;
+	}
+	end;
+}
+jor_nest,24,169,5	script	Cacador de coracoes#e19ms109::ep19_jor_nest_24_169	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		npctalk "Estas envolvido? Nao. Entao nao devias estar aqui..", "", bc_self;
+		end;
+	}
+	npctalk "Se vais vir para aqui, nao venhas..", "", bc_self;
+	end;
+}
+
+jor_nest,186,173,0	script	#e19ms103	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 33) {
+		cloakonnpcself("ep19_jor_nest_186_173");
+		end;
+	}
+	end;
+}
+jor_nest,186,173,3	script	Leghan Priest#e19ms102::ep19_jor_nest_186_173	4_EP19_RGAN_R3,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	npctalk "O grito de Pamela: Estou a comprar o Sam Rookie Beginner Expert Adventurous Shadow.", "", bc_self;
+	end;
+}
+
+jor_nest,219,38,0	script	#e19ms106	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 21) {
+		cloakonnpcself("ep19_jor_nest_219_38");
+		end;
+	}
+	end;
+}
+jor_nest,219,38,5	script	Leghan Priest#e19ms104::ep19_jor_nest_219_38	4_EP19_RGAN_R3,{
+	if (getstatus(SC_MONSTER_TRANSFORM,1) != 21530) {
+		mes "[Leghan priest]";
+		mes "Porque estas aqui, um humano que deveria estar nos sectores inferiores?";
+		close2;
+		warp "jor_back3",65,321;
+		end;
+	}
+	if (ep19_main < 21) {
+		npctalk "Nao vi isso...? Ah, o recem-nascido??", "", bc_self;
+		end;
+	}
+	npctalk "Se alguem estiver a intimidar-te, diz-me. Esta bem.?", "", bc_self;
+	end;
+}
+
+jor_nest,76,22,0	script	#e19ms102	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 21) {
+		cloakonnpcself("ep19_jor_nest_76_22");
+		cloakonnpcself("ep19_jor_nest_123_132");
+		end;
+	}
+	setpcblock PCBLOCK_NPC, true;
+	npctalk "Oh, entao es o novo miudo do bairro?", "ep19_jor_nest_76_22", bc_self;
+	sleep2 1000;
+	npctalk "Esta decidido a seguir uma carreira.?", "ep19_jor_nest_73_17", bc_self;
+	sleep2 1500;
+	npctalk "Nao, nao ha nada que nao se possa dizer a um bebe nascido hoje. Nao se pode dizer isso hoje em dia..", "ep19_jor_nest_76_22", bc_self;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+}
+jor_nest,76,22,3	script	Bispo Leghan#e19ms100::ep19_jor_nest_76_22	4_EP19_RGAN_SR1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "Se nao souberes alguma coisa, estas a vontade para perguntar, esta bem?", "", bc_self;
+		end;
+	}
+	npctalk "Quer um lanche??", "", bc_self;
+	end;
+}
+jor_nest,73,17,7	script	Bispo Leghan#e19ms101::ep19_jor_nest_73_17	4_EP19_RGAN_SR2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "As criancas sao sempre bem-vindas.", "", bc_self;
+		end;
+	}
+	npctalk "Tens fome?", "", bc_self;
+	end;
+}
+
+jor_nest,123,132,0	script	#e19ms105	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 21) {
+		cloakonnpcself("ep19_jor_nest_123_132");
+		end;
+	}
+	end;
+}
+jor_nest,123,132,5	script	Leghan Priest#e19ms103::ep19_jor_nest_123_132	4_EP19_RGAN_R1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "Es um recem-nascido, nao es? Espero que crescas para trabalhar comigo.", "", bc_self;
+		end;
+	}
+	npctalk "Ja se instalou um pouco.?", "", bc_self;
+	end;
+}
+
+jor_nest,179,144,0	script	#e19ms104	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep19_main >= 21) {
+		cloakonnpcself("ep19_jor_nest_179_144");
+		end;
+	}
+	end;
+}
+jor_nest,179,144,3	script	Bispo Leghan#e19ms102::ep19_jor_nest_179_144	4_EP19_RGAN_SR2,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "Nao o reconheco. Oh, nao, nao reconheco. Desculpe, nao sou bom a memorizar caras..", "", bc_self;
+		end;
+	}
+	npctalk "Es um bebe novo! Estas a ir muito bem!?", "", bc_self;
+	end;
+}
+
+jor_nest,224,207,3	script	Cacador de coracoes#e19ms100	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21)
+		end;
+	npctalk "Quero estar no centro, nao quero estar aqui a guardar as instalacoes..", "", bc_self;
+	end;
+}
+
+jor_nest,231,186,5	script	Cacador de coracoes#e19ms102	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21)
+		end;
+	npctalk "E suposto eu estar aqui para ganhar ou defender?", "", bc_self;
+	end;
+}
+
+jor_nest,190,203,5	script	Cacador de coracoes#e19ms106	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		npctalk "Esta e uma instalacao muito importante, e o que acontece se ela se avariar por vossa causa? Por isso, nao venham.!", "", bc_self;
+		end;
+	}
+	npctalk "Porque e que e tao importante que sejamos os unicos a ter um...?", "", bc_self;
+	end;
+}
+
+jor_nest,253,75,7	script	Mirarasimigand#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Mirarasimigand]";
+	mes "...";
+	mes "Fixe.";
+	mes "Trabalhaste muito hoje. Faz uma pausa...";
+	mes "Jormungand perdoar-te-a.";
+	mes "Kulkul...";
+	next;
+	mes "Ele esta a dormir encostado a parede com um ar de exaustao no rosto que ate um nao-Legan reconheceria";
+	close;
+}
+
+jor_nest,152,108,5	script	Biranimalgand#1	4_EP19_RGAN_R1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 33) {
+		mes "[Biranimalgand]";
+		mes "Hoje voltei a trabalhar no duro para o Rasgandh, hoo hoo";
+		close;
+	}
+	mes "[Biranimalgand]";
+	mes "O que e que se passa, se nao andam a minha procura, deixem-me descansar";
+	close;
+}
+
+
+jor_nest,23,91,1	script	Ernagus Dagand#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Ernagusdagand]";
+	mes "...";
+	mes "do. Trabalhar.";
+	mes "trabalhe duro. Expiacao.";
+	close;
+}
+
+jor_nest,24,97,3	script	Handymarigand#1	4_EP19_RGAN_R1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Handymarigand]";
+	mes "E um discurso amavel que e facil de ouvir";
+	close;
+}
+
+jor_nest,272,196,5	script	Miredyamilgand#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Mirediyamilgand]";
+	mes "para trabalhar. Eu sou um bom trabalhador";
+	close;
+}
+
+jor_nest,243,223,3	script	Rakrusgand#1	4_EP19_RGAN_R3,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Lacrusgand]";
+	mes "Porque nao te divertes um pouco. Deus nos livre";
+	next;
+	mes "[Lacrusgand]";
+	mes "Mas e muito dificil de dizer.";
+	close;
+}
+
+jor_nest,241,223,5	script	Arredondado#1	4_EP19_RGAN_R1,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[nesting]";
+	mes "Acho que ha um par de criancas que estao a brincar, mas nao consigo perceber";
+	close;
+}
+
+jor_nest,261,233,3	script	이Iga rasgand#1	4_EP19_RGAN_R3,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		mes "[Iga rasgand]";
+		mes "Um padre que nunca viste antes?";
+		mes "Que a graca de Deus esteja convosco nos dias que virao";
+		close;
+	}
+	mes "[Iga rasgand]";
+	mes "Como e que sabemos o que significa Rasgand";
+	close;
+}
+
+jor_nest,278,219,5	script	Wayunalgoslgand#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Wayunalgoslgand]";
+	mes "para trabalhar. Sou um trabalhador fixe";
+	mes "Nao sei o que e fixe, mas sou";
+	close;
+}
+
+jor_nest,272,257,7	script	Hanukkorimagandh#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Hanukorimagand]";
+	mes "para trabalhar. Eu sou um grande trabalhador";
+	close;
+}
+
+jor_nest,251,279,7	script	Casbiramigand#1	EP19_RGAN_D,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	mes "[Casbiramigand]";
+	mes "trabalho. Dizem que tenho cabeca para trabalhar em todo o lado";
+	close;
+}
+
+jor_nest,231,253,5	script	Cacador de coracoes#e19ms101	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "Miudo, afasta-te.", "", bc_self;
+		end;
+	}
+	npctalk "Estou um pouco assustado por estar aqui..", "", bc_self;
+	end;
+}
+
+jor_nest,232,161,3	script	Cacador de coracoes#e19ms103	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "Porque? Tens de fazer xixi?", "", bc_self;
+		end;
+	}
+	npctalk "Quem e que vai guardar isto para mim?", "", bc_self;
+	end;
+}
+
+jor_nest,217,144,5	script	Cacador de coracoes#e19ms104	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "Oh, nao podes estar aqui. Nao te ouvi.?", "", bc_self;
+		end;
+	}
+	npctalk "Vais mudar...? Eu nao quero ficar aqui..", "", bc_self;
+	end;
+}
+
+jor_nest,239,143,3	script	Cacador de coracoes#e19ms105	EP19_MD_HEARTHUNTER_AT,{
+	F_ep19_checkTransform( strnpcinfo(1) );
+	if (ep19_main < 21) {
+		npctalk "Nao gostas quando me aproximo?", "", bc_self;
+		end;
+	}
+	npctalk "Prefiro estar aqui do que no centro... Melhor.?", "", bc_self;
+	end;
+}
+
+jor_nest,273,23,3	script	Shhhhhhhhhhhh#ep19iwin07	EP19_RGAN_D,{
+	if (ep19_main < 21) {
+		mes "[Sharayararagandh]";
+		mes "As coisas estao a chegar... Sharararararararar~";
+		close;
+	}
+	mes "[Sharyara]";
+	mes "Ei! Sou eu, Sharayla";
+	mes "Vais voltar para o castelo de gelo?";
+	mes "Queres vir comigo?";
+	next;
+	switch( select( "Ainda temos trabalho a fazer.", "Vamos voltar para o castelo de gelo!" ) ) {
+	case 1:
+		mes "[Sharyara]";
+		mes "Porque eu sou a Arwyn mais rapida do castelo de gelo!";
+		mes "Eu ajudo-te a nao caires no gelo, por isso vamos depressa!";
+		close;
+	case 2:
+		mes "[Sharyara]";
+		mes "Porque eu sou a Arwyn mais rapida do castelo de gelo!";
+		mes "Eu ajudo-te a nao caires no gelo, por isso vamos depressa!";
+		close2;
+		warp "icecastle",55,120;
+		if (ep19_main == 44)
+			navigateto("icas_in",245,197);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "ep19_main >= 21" );
+	end;
+}
+
+
+// icecastle
+//------------------------------------------------
+
+icecastle,101,216,5	script	goryurooi#ep19in	4_EP19_IWIN,{
+	mes "[Goryuro]";
+	mes "Ha? Tens muitos amigos com nomes parecidos?";
+	mes "E completamente diferente.";
+	mes "Tu simplesmente nao entendes.";
+	close;
+}
+
+icecastle,103,216,3	script	goryuroo#ep19in	4_EP19_IWIN,{
+	mes "Cuidar de si em silencio.";
+	close;
+}
+
+icecastle,99,119,3	script	Gohyar#e19c00	4_EP19_IWIN,{
+	npctalk "Cacarejar!", "", bc_self;
+	end;
+}
+
+icecastle,130,136,5	script	Soro Ryo#ep19in	EP19_NPC_IWIN_SN,{
+	mes "[Sororidade]";
+	mes "Nao te aproximes mais, humano.";
+	mes "Estou a treinar a minha habilidade com a lanca para nao escorregar no gelo";
+	mes "Podes magoar-te.";
+	close;
+}
+
+icecastle,129,121,3	script	dragao de hora#1	4_EP19_IWIN,{
+	mes "As criancas Awin estao a olhar para o mar com olhos cintilantes";
+	mes "Eles parecem estar a observar os peixes";
+	close;
+}
+
+icecastle,131,121,3	script	doryalung#ep19in	4_EP19_IWIN,{
+	mes "As criancas Awin estao a olhar para o mar com olhos cintilantes";
+	mes "Eles parecem estar a observar os peixes";
+	close;
+}
+
+icecastle,62,229,6	script	com aura#icecastle	EP19_NPC_IWIN,{
+	npctalk "" + strnpcinfo(1) + ": O que?! Forasteiro!!", "", bc_self;
+	mes "[Estalagem Pena Orang]";
+	mes "Bem-vindo. Esta e a Pousada da Pena";
+	mes "Diz-se aos forasteiros para levarem a Jenny, e sao 5.000Z para uma pausa!!!";
+	next;
+	switch( select( "Guardar.", "Fazer uma pausa - 5000z", "Sair" ) ) {
+	case 1:
+		emotion ET_HNG;
+		mes "[Pousada das Penas Orarang]";
+		mes "O castelo de gelo e a minha casa. Pensa e relaxa~";
+		savepoint "icas_in",87,114,1,1;
+		close;
+	case 2:
+		if (Zeny < 5000) {
+			emotion ET_FRET;
+			mes "[Pena Minbak Orarang]";
+            mes "E dificil fazer isso sem o dinheiro do cliente.";
+			close;
+		}
+		mes "[Pena Minbak Orarang]";
+        mes "Calorosamente orgulhoso~";
+		close2;
+		Zeny -= 5000;
+		warp "icas_in",87,114;
+		end;
+	case 3:
+		emotion ET_HNG;
+		mes "[Pena Minbak Orarang]";
+        mes "Ei~ Nao me odeie!";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<cama de penas e cafe da manha>" );
+	end;
+}
+
+icecastle,118,270,3	script	Homero#e19c00	4_EP19_IWIN,{
+	npctalk "Eu sei que? Ha uma lenda sobre esta cachoeira. Mas ninguem conhece a lenda", "", bc_self;
+	end;
+}
+
+icecastle,172,153,3	script	Noriri#ep19in	4_EP19_IWIN,{
+	mes "Olhar para um lugar muito distante com um olhar vago.";
+    mes "Qual e o problema...";
+    mes "Nao parece existir";
+	close;
+}
+
+icecastle,25,113,4	script	Anuncio#iwp_1::ep19_icecastle_25_113	4_BOARD3,{
+	mes "[Anuncio]";
+    mes "[Eagle Patrol] esta procurando por aventureiros responsaveis ??para se juntar a patrulha.";
+    next;
+    mes "[requisitos]";
+    mes "Todas as racas que sao capazes de se comunicar e estao fisicamente aptas, exceto Legan";
+    next;
+    mes "[pedido de assinatura]";
+    mes "<Patrulha Aguia>";
+    mes "<NAVI>[Capita de Patrulha Marsha Gigi Happy Rev Eve<INFO>castelo de gelo,23,115,0,101,0</INFO></NAVI>";
+    mes "<NAVI>Alice Lloyd de mente aberta<INFO>castelo de gelo,23,115,0,101,0</INFO></NAVI>";
+    mes "<NAVI>Tess Vortex]<INFO>castelo de gelo,23,115,0,101,0</INFO></NAVI>";
+    mes "Obrigado por seu apoio.";
+	close;
+}
+icecastle,178,229,4	duplicate(ep19_icecastle_25_113)	공고#iwp_2	4_BOARD3
+
+icecastle,43,104,5	script	Dragao Choru#1::ep19_260	4_EP19_IWIN,{
+	donpcevent strnpcinfo(3) + "::OnTalk";
+	mes "[Choru Dragao]";
+    mes "Os humanos nao sao adultos?";
+    mes "Adultos patrulham de verdade. Nao nos bisbilhote.";
+	close;
+OnTalk:
+	npctalk "Zororo: dois!", "ep19_257";
+	sleep 500;
+	npctalk "Nororu: dois!", "ep19_258";
+	sleep 500;
+	npctalk "Doryaro: Tres!", "ep19_259";
+	sleep 500;
+	npctalk "Choruryong: Quatro!", "ep19_260";
+	end;
+}
+
+icecastle,45,102,5	script	doryaro#1::ep19_259	4_EP19_IWIN,{
+	donpcevent strnpcinfo(3) + "::OnTalk";
+	mes "[Doryaro]";
+    mes "Os humanos nao sao adultos?";
+    mes "Adultos fazem patrulhas de verdade. Nao interfira em nossos exercicios.";
+	close;
+OnTalk:
+	npctalk "Zororo: Estou desapontado com voces.!", "ep19_257";
+	sleep 500;
+	npctalk "Nororu: eu fiquei cego!", "ep19_258";
+	sleep 500;
+	npctalk "Doryaro: E um nome de peixe!", "ep19_259";
+	sleep 500;
+	npctalk "Choruryong: E uma invencao!", "ep19_260";
+	end;
+}
+
+icecastle,47,100,5	script	nororu#1::ep19_258	4_EP19_IWIN,{
+	donpcevent strnpcinfo(3) + "::OnTalk";
+	mes "[Nororu]";
+    mes "Os humanos nao sao adultos?";
+    mes "Adultos fazem uma verdadeira patrulha. Estamos no comando deste patio.";
+	close;
+OnTalk:
+	npctalk "Zororo: Pe!", "ep19_257";
+	sleep 500;
+	npctalk "Nororu: Fundo!", "ep19_258";
+	sleep 500;
+	npctalk "Doryaro: Joe!", "ep19_259";
+	sleep 500;
+	npctalk "Dragao Choru: Sim!", "ep19_260";
+	end;
+}
+
+icecastle,49,98,5	script	zororo#1::ep19_257	4_EP19_IWIN,{
+	donpcevent strnpcinfo(3) + "::OnTalk";
+	mes"[Zororo]";
+    mes "Os humanos nao sao adultos?";
+    mes "Adultos podem jogar patrulhas reais, entao nao podemos nos juntar a eles em nosso jogo de patrulha.";
+	close;
+OnTalk:
+	npctalk "Zororo: Pe!", "ep19_257";
+	sleep 500;
+	npctalk "Nororu: Fundo!", "ep19_258";
+	sleep 500;
+	npctalk "Doryaro: Joe!", "ep19_259";
+	sleep 500;
+	npctalk "Dragao Choru: Sim!", "ep19_260";
+	end;
+}
+
+icecastle,73,101,7	script	jjoralung#ep19in::ep19_262	4_EP19_IWIN,{
+	mes "Observando a habilidade de Mororyo com olhos brilhantes.";
+	npctalk "Mororyo: Eu vou te ensinar quando voce for um pouco mais velho..", "ep19_261", bc_self;
+	npctalk "Jjolarung: Sim!", "ep19_262", bc_self;
+	close;
+}
+
+icecastle,77,106,3	script	morroyo#ep19in::ep19_261	4_EP19_IWIN,{
+	mes "[Morroyo]";
+    mes "Para os peixes que nao sao frescos, cabe a voce limpa-los.";
+    mes "Existe uma tecnica passada de geracao em geracao.";
+    mes "Voce quer que eu te ensine?";
+	next;
+	if (select( "Sim", "Nao" ) == 2) {
+		mes "[Morroyo]";
+        mes "E uma pena.";
+		close;
+	}
+	mes "[Morroyo]";
+    mes "Ok. Agora, com as branquias no bico...";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "...";
+	next;
+	mes "[morroyo]";
+	mes "...";
+	next;
+	mes"[Morroyo]";
+    mes "Humanos nao tem bicos.";
+    mes "eu esqueci";
+	close;
+}
+
+icecastle,89,94,3	script	orir#ep19in::ep19_266	4_EP19_IWIN,{
+	mes "[Orir]";
+    mes "Humanos, se voce for um adulto, voce pode beber.";
+    mes "Voce nao pode beber agua fora de casa. Beba dentro de casa depois de derreter o gelo.";
+	close;
+}
+
+icecastle,85,95,5	script	tori#ep19in	4_EP19_IWIN,{
+	mes "[para Tori]";
+    mes "Eu nao vou dar a voce!";
+    mes "Se voce quer comer humanos, moa um pouco de gelo ali.";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "O que?";
+	next;
+	mes "[para Tori]";
+    mes "lama de neve!";
+    mes "Esmague o gelo com o bico e polvilhe com calamares picados...";
+    mes "Funciona...";
+	next;
+	mes "[Tororo]";
+	mes "Os humanos nao tem bicos.";
+	mes "Isso seria desconfortavel.";
+	npctalk "Porara : Oh, meu Deus... Nao tem bico?...", "ep19_264", bc_self;
+	npctalk "Orir: Isso...", "ep19_266", bc_self;
+	npctalk "Nuroron: Soluco.", "ep19_263", bc_self;
+	close;
+}
+
+icecastle,86,100,5	script	Porara#ep19in::ep19_264	4_EP19_IWIN,{
+	mes "[porara]";
+	mes "Humano, voce bebe bem?";
+	mes "Beba isso, vai aquece-lo.";
+	mes "Esta ensopado com talos de wakame, e bom para comer";
+	next;
+	MES "O cheiro muito forte de alcool se mistura com os dreadlocks do fundo do mar.";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "...Nao, obrigado";
+	next;
+	mes "[Porara]";
+	mes "Esse wakame tambem e delicioso quando seco e comido separadamente.";
+	mes "E uma pena.";
+	close;
+}
+
+icecastle,90,100,3	script	Nororyong#ep19in::ep19_263	4_EP19_IWIN,{
+	mes "[Nololong]";
+	mes "Os humanos tambem vao tomar um drinque?";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "O que e isso?";
+	next;
+	mes "[Nuroron]";
+	mes "Adkarane. Estou ficando com calor.";
+	next;
+	mes "O cheiro de alcool e muito forte.";
+	mes "Tenho a sensacao de que o rosto de Arwyn, sem ser visto por sua pele, esta vermelho ruborizado.";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "Nao, obrigado";
+	next;
+	mes "[Nololong]";
+	mes "Delicioso.";
+	close;
+}
+
+icecastle,82,111,3	script	Shashasha#e19c00	4_EP19_IWIN,{
+	npctalk "Quem sacar essa lanca ganhara o mundo inteiro, foi o que meu tio disse.", "", bc_self;
+	end;
+}
+
+icecastle,84,129,3	script	ringar#e19c00	4_EP19_IWIN,{
+	npctalk "E bonito, nao e? Achei tao bonito que o trouxe para todos verem..", "", bc_self;
+	end;
+}
+
+icecastle,55,124,3	script	Sharyara#ep19iwin06	EP19_NPC_IWIN_SY,{
+	if (ep19_main < 21) {
+		cutin "ep19_iwin04.png",2;
+		mes "[Sharyara]";
+		mes "Voce tem cuidado com o gelo?";
+		mes "It's really slippery~?";
+		close3;
+	}
+	cutin "ep19_iwin04.png",2;
+	mes "[Sharyara]";
+	mes "Voce tem trabalhado muito ultimamente, se infiltrando no ninho de Leghan.";
+	mes "Voce vai se infiltrar novamente hoje?";
+	mes "Esta gelado e dificil de andar, posso ajuda-la?";
+	next;
+	switch( select( "Voce pode me mandar para o ninho da cobra?", "Esta tudo bem, esta tudo bem.." ) ) {
+	case 1:
+		mes "[Sharyara]";
+		mes "Nos nao fomos ate la da ultima vez que voce se transformou em Legan?";
+		mes "Foi divertido, tenho a rota memorizada";
+		mes "Vou explodir voce bem na entrada do ninho. Ok?";
+		close2;
+		cutin "",255;
+		warp "jor_nest",275,19;
+		end;
+	case 2:
+		mes "[Sharyara]";
+		mes "Avise-me se achar que vai tropecar no caminho";
+		mes "Eu sou Arwyn, a mensageira do castelo de gelo.";
+		mes "Enviar um humano voando nao e pouca coisa.";
+		close3;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "ep19_main >= 21" );
+	end;
+}
+
+icecastle,59,123,6	script	Coleiras#icecastle	EP19_NPC_IWIN,{
+	mes "[kolareo]";
+	mes "Neve aqui, gelo ali, em toda parte";
+	mes "Em um castelo gelado cheio de neve e gelo";
+	mes "Bem-vindo, forasteiro!";
+	mes "Este e ^B47096Silky Well-Balanced Thomas Joy^000000";
+	mes "Eu sou o guia do castelo, portanto, faca-me todas as perguntas que tiver";
+	next;
+	mes "[colateral]";
+	mes "Se tiver curiosidade sobre ^B9062F[nome do local], clique em^000000 e nos o orientaremos gentilmente para ^B9062FNavegacao^000000..";
+	while(1) {
+		next;
+		switch( select( "[     Castelo de gelo    ]", "[    quartel   ]", "[  Laboratorios Belgund  ]", "[     Acucar dietetico    ]", "[     Min Park    ]", "Limpar a tela do minimapa", "sair." ) ) {
+		case 1:
+			mes "[Collateral]";
+			mes "<NAVI>[Ice Castle]<INFO>icecastle,213,174,0,101,0</INFO></NAVI>";
+			mes "↑Pressione isto e eu lhe darei instrucoes. Tambem mostrarei o minimapa, caso voce esteja se perguntando para onde esta indo!";
+			mes "Voce precisa de instrucoes em algum outro lugar?";
+			viewpoint 0,213,174,1,0x0A82FF;
+			break;
+		case 2:
+			mes "[Collateral]";
+			mes "<NAVI>[Barracks]<INFO>icecastle,186,222,0,101,0</INFO></NAVI>";
+			mes "↑Pressione isto e eu lhe darei instrucoes. Tambem mostrarei o minimapa, caso voce esteja se perguntando para onde esta indo!";
+			mes "Voce precisa de instrucoes em algum outro lugar?";
+			viewpoint 1,186,222,1,0xAAFF00;
+			break;
+		case 3:
+			mes "[Collateral]";
+			mes "<NAVI>[Belgund Lab]<INFO>icas_in,167,61,0,101,0</INFO></NAVI>";
+			mes "↑Pressione isto e eu lhe darei instrucoes. Ouvi dizer que ha um homem chamado Maram no laboratorio de Belgund que vende muitas das coisas de que os aventureiros precisam.";
+			mes "Voce precisa de instrucoes em algum outro lugar?";
+			viewpoint 2,186,222,1,0x008080;
+			break;
+		case 4:
+			mes "[Collateral]";
+			mes "<NAVI>[Restaurante]<INFO>icecastle,124,171,0,101,0</INFO></NAVI>";
+			mes "↑Pressione isto e eu lhe mostrarei o local. O restaurante tambem administra uma creche para Awin, que trabalha la. Se voce achar que eles sao bonitinhos, pode leva-los para la!!!";
+			mes "Voce precisa de instrucoes em algum outro lugar?";
+			viewpoint 3,124,171,1,0xFF1493;
+			break;
+		case 5:
+			mes "[Collateral]";
+			mes "<NAVI>[민박]<INFO>icecastle,64,224,0,101,0</INFO></NAVI>";
+			mes "↑Pressione isto para obter instrucoes. Ah, e se voce quiser passar a noite, pergunte ao proprietario da casa no telhado se voce pode passar a noite.";
+			mes "Voce precisa de instrucoes em algum outro lugar?";
+			viewpoint 4,64,224,1,0x8B4513;
+			break;
+		case 6:
+			mes "[Collateral]";
+			mes "Voce nao esta marcado!";
+			mes "Voce precisa de alguma outra ajuda??";
+			viewpoint 0,1,1,2,0xFFFFFF;
+			viewpoint 1,1,1,2,0xFFFFFF;
+			viewpoint 2,1,1,2,0xFFFFFF;
+			viewpoint 3,1,1,2,0xFFFFFF;
+			viewpoint 4,1,1,2,0xFFFFFF;
+			break;
+		case 7:
+			mes "[Coleiras]";
+			mes "Voce provavelmente esta com frio porque nao tem muito cabelo, portanto, nao ande por ai e pegue um resfriado. Fique dentro do predio aquecido..";
+			close;
+		}
+	}
+	end;
+OnInit:
+	setunittitle( getnpcid(0), "<Guia para o Castelo de Gelo>" );
+	end;
+}
+
+icecastle,35,224,7	script	Borara#ep19in	EP19_NPC_IWIN_SB,{
+	if (ep19_main < 11) {
+		mes "[Observe]";
+		mes "Nao ha anormalidades em servico... Etch.";
+		close;
+	}
+	mes "[Observe]";
+	mes "Tudo limpo em servico, ah.";
+	close;
+}
+
+icecastle,71,255,5	script	Ayar#e19c00	4_EP19_IWIN,{
+	npctalk "Pare!!! Nao apague. Essas pegadas sao sagradas..", "", bc_self;
+	end;
+}
+
+icecastle,103,227,5	script	Zoriru#ep19in	4_EP19_IWIN,{
+	mes "[choriru]";
+	mes "O que voce come no jantar...";
+	close;
+}
+
+icecastle,105,227,3	script	Touro#ep19in	4_EP19_IWIN,{
+	mes "[dorura]";
+	mes "Eu quero comer algo diferente do que eu comi ontem...";
+	close;
+}
+
+icecastle,149,216,3	script	borragem#ep19in	EP19_NPC_IWIN_SB,{
+	mes "[Boriri]";
+	mes "Nao ha anormalidades no plantao, ah.";
+	close;
+}
+
+icecastle,118,245,5	script	ghar#e19c00	EP19_NPC_IWIN_SN,{
+	npctalk "Fique quieto. Vou pegar todos os peixes daqui hoje..", "", bc_self;
+	end;
+}
+
+icecastle,190,217,3	script	Soldado Arwyn#ep19iwin03	EP19_NPC_IWIN_SY,{
+	cutin "ep19_iwin04.png",2;
+	mes "[Soldado Awin]";
+	mes "Voce precisa ver alguma coisa no quartel?";
+	mes "A sala a esquerda do quartel e para a patrulha, e Belgund esta na sala a direita";
+	mes "Ha um homem chamado Maram que dirige um negocio";
+	mes "Havia muitas coisas interessantes.";
+	close3;
+}
+
+icecastle,180,206,3	script	Soldado Arwyn#ep19iwin04	EP19_NPC_IWIN_SY,{
+	cutin "ep19_iwin09.png",2;
+	mes "[Soldado Awin]";
+	mes "Nao... Nao importa o quanto esse lugar seja um campo de treinamento...";
+	mes "Ha alguma razao para limpar a neve, nao e?";
+	next;
+	cutin "ep19_iwin10.png",2;
+	mes "[Soldado Awin]";
+	mes "Ah... Entao, voce a limpou antes que ela se acumulasse?";
+	mes "Isso e verdade.";
+	mes "Nao... mas...";
+	close3;
+}
+
+icecastle,248,211,1	script	도루리#ep19in	4_EP19_IWIN,{
+	mes "[도루리]";
+	mes "이 작품은 동물의 이름이 적혀 있지 않아.";
+	mes "우리 선조는 이렇게 생겼었다는 뜻일까?";
+	close;
+}
+
+icecastle,261,179,7	script	Paleocorrentes#ep19in	4_EP19_IWIN,{
+	mes "[archosaur]";
+	mes "Depois de...";
+	next;
+	mes "[archosaur]";
+	mes "Sou muito grato por dias como este, quando nada acontece.";
+	mes "Em momentos como esse, ate mesmo esse oceano frio parece quente.";
+	close;
+}
+
+icecastle,241,146,7	script	Chorari#ep19in	4_EP19_IWIN,{
+	mes "[Chorari]";
+	mes "Nao ha criaturas parecidas com essa por aqui";
+	mes "Voce acha que as criaturas reais que seus ancestrais viram eram parecidas com essas?";
+	close;
+}
+
+icecastle,195,170,3	script	guarda#e19c00	EP19_NPC_IWIN_SG,{
+	npctalk "Alerta.", "", bc_self;
+	end;
+}
+
+icecastle,209,156,3	script	Despesas#e19c01	EP19_NPC_IWIN_SG,{
+	npctalk "Sem anormalidades.", "", bc_self;
+	end;
+}
+
+icecastle,241,115,5	script	Bora Bora#ep19in	EP19_NPC_IWIN_SY,{
+	if (ep19_main < 11) {
+		mes "[Borah]";
+		mes "Tudo limpo em servico, ah.";
+		close;
+	}
+	mes "[Borah]";
+	mes "Tudo limpo no plantao ahhhhhhhhhhhhhhhhhh!";
+	close;
+}
+
+icecastle,170,142,3	script	Chorirong#ep19in	4_EP19_IWIN,{
+	mes "[choli long]";
+	mes "As vezes, tenho amigos que tem marcas de pressao em suas penas, e parece que algum outro animal teve um caso";
+	next;
+	mes "[chorirong]";
+	mes "Mas eu nunca vi um animal que nao tivesse medo de uma gaiola desse tamanho, voce ja viu?";
+	mes "Onde esta o gato ou o cachorro de que ouvimos falar nos boatos?";
+	close;
+}
+
+icecastle,133,165,5	script	Harrr#e19c00	4_EP19_IWIN,{
+	npctalk "Viu? Eu me esforcei muito para montar isso..", "", bc_self;
+	end;
+}
+
+icecastle,116,147,5	script	Sunyari#e19c00	EP19_NPC_IWIN_SN,{
+	npctalk "Voce viu aquele idiota pescando na cachoeira la em cima? Os peixes estao todos aqui..", "", bc_self;
+	end;
+}
+
+
+// icas_in
+//-------------------------------------
+
+icas_in,235,65,7	script	Leitura longa#2	HIDDEN_NPC,{
+	npctalk "Zhao Liao: Humanos, e o segredo de mil anos de Kalamaring, mas os humanos nao podem come-lo. Que pena..", "ep19_icas_in_241_66", bc_self;
+	end;
+}
+
+icas_in,237,66,7	script	Leitura longa#1	HIDDEN_NPC,{
+	npctalk "Zorya : Esse e um molho de soja com sementes de mil anos. Nao toque nele.", "ep19_icas_in_241_66", bc_self;
+	end;
+}
+
+icas_in,251,60,3	script	Horari#ep19in	4_EP19_IWIN,{
+	mes "[Horari]";
+	mes "Como a mamae esta se saindo em sua patrulha?";
+	close;
+}
+
+icas_in,245,53,5	script	Coro#ep19in	4_EP19_IWIN,{
+	mes "[chorori]";
+	mes "O que vamos fazer hoje?";
+	mes "Vamos brincar de buscar";
+	close;
+}
+
+icas_in,119,62,3	script	Laboratorios Belgund	4_BULLETIN_BOARD2,{
+	npctalk "Laboratorios Belgund", "", bc_self;
+	end;
+}
+
+icas_in,95,57,6	script	Patrulha Eagle#iwp1	4_BULLETIN_BOARD2,{
+	npctalk "[Patrulha da Aguia]", "", bc_self;
+	end;
+}
+
+icas_in,95,62,6	script	Patrulha da Aguia#iwp2	4_BULLETIN_BOARD2,{
+	npctalk "[Patrulha da Aguia]", "", bc_self;
+	end;
+}
+
+icas_in,42,53,8	script	Recrutar Porolong#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	sleep2 500;
+	npctalk "Z.....z....z...", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Voce esta dormindo profundamente. Voce estava cansado.?", bc_self;
+	sleep2 500;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Patrulha da Aguia>" );
+	end;
+}
+
+icas_in,51,53,8	script	Recrutar Horurung#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	npctalk "z Z z Z z", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Acho que estou dormindo.", bc_self;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Patrulha da Aguia>" );
+	end;
+}
+
+icas_in,33,68,4	script	???? Gorori#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	sleep2 500;
+	npctalk "zzzz..ZZ..zzz", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Dormir?", bc_self;
+	sleep2 500;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Patrulha da Aguia>" );
+	end;
+}
+
+icas_in,42,68,4	script	Torari Privado#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	sleep2 500;
+	npctalk "zz zZz zz zZz", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Voce esta dormindo profundamente. Voce estava cansado.?", bc_self;
+	sleep2 500;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Patrulha da Aguia>" );
+	end;
+}
+
+icas_in,51,68,4	script	Lee Byung Dararong#s_iw	EP19_NPC_IWIN,{
+	setpcblock PCBLOCK_NPC, true;
+	cutin "ep19_iwin05.png",2;
+	sleep2 500;
+	npctalk "...z ....Z ...Z ...z", "", bc_self;
+	sleep2 500;
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Voce esta dormindo profundamente. Voce estava cansado.?", bc_self;
+	sleep2 500;
+	cutin "",255;
+	setpcblock PCBLOCK_NPC, false;
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Patrulha da Aguia>" );
+	end;
+}
+
+// Exchange npc - Snow Flower Magic Stone
+icas_in,175,63,3	script	Hoyoyo#ep19trader	4_EP19_IWIN,{
+	if (ep19_main < 11) {
+		cutin "ep19_iwin02.png",2;
+		mes "[Hoyoyo]";
+		mes "Voce deve ser o aventureiro que veio ao Castelo de Gelo desta vez";
+		mes "O verdadeiro nome deste corpo e Hoyoyo, Hoyoyo, Hoyoyoyo (Royal Signature Bergamot)";
+		next;
+		select( "Hoyo? Hoyo?" );
+		mes "[Hoyoyo]";
+		mes "Sim, estou vendo. Mesmo que voce de a ele um nome sofisticado, ele soa como Hoyoyoyo para o ouvido humano";
+		mes "Sinta-se a vontade para me chamar de Hoyoyo.";
+		close3;
+	}
+	cutin "ep19_iwin02.png",2;
+	mes "[Hoyoyo]";
+	mes "Estou trabalhando com Belgund para estudar a magia de Jormungand";
+	mes "Ha momentos em que Belgund precisa de gemas magicas, e se voce, Aventureiro, precisar delas tambem, eu posso fornece-las.";
+	next;
+	switch( select( "Trocas por varias gemas narrativas", "Trocas por petalas narrativas", "Originalmente chamado de Hoyoyoyoya?" ) ) {
+	case 1:
+		mes "[Hoyoyo]";
+		mes "Eu troco uma pedra preciosa de alquimia por uma pedra de alquimia, e uma pedra de alquimia por uma pedra de alquimia brilhante";
+		mes "Para que? Belgund fara algo legal com elas, certo?";
+		close2;
+		cutin "",255;
+		callshop( "barter_ep19_snow_stone" );
+		end;
+	case 2:
+		if (get_reputation_points(3) < 1000) {
+			mes "[hoyoyo]";
+			mes "Hmph, voce quer fazer algo com as petalas do floco de neve?";
+			MES "Belgund tem trabalhado muito em algo ultimamente.";
+			next;
+			mes "[hoyoyo]";
+			mes "Nao seria bom se voce se esforcasse um pouco mais pelo castelo de gelo?";
+			mes "Ho, ho, ho, ho, ho, ho, ho, ho, ho, ho";
+			close3;
+		}
+		mes "[hoyoyo]";
+		mes "Venha ca, amigo humano~";
+		mes "O que voce precisa?";
+		close2;
+		cutin "",255;
+		if (get_reputation_points(3) == 1000)
+			callshop( "barter_ep19_repu_1" );
+		else
+			callshop( "barter_ep19_repu_2" );
+		end;
+	case 3:
+		mes "[hoyoyo]";
+		mes "O verdadeiro nome desse corpo e Hoyoyo Hoyoyo Hoyoyo (Royal Signature Bergamot).";
+		next;
+		select( "Hoyo? Hoyo?" );
+		mes "[Hoyoyo]";
+		mes "Ok, entao mesmo que voce de a ele um nome sofisticado, ele soa como Hoyoyoyo para os ouvidos humanos.";
+		mes "Sinta-se a vontade para chama-lo de Hoyoyo.";
+		close3;
+	}
+}
+
+-	shop	ep19_basic_supply	-1,611:-1,602:-1,601:-1,23280:-1,23288:-1,645:-1,656:-1,657:-1,501:-1,502:-1,503:-1,504:-1,506:-1,610:-1,713:-1,717:-1,1771:-1
+-	shop	ep19_glacier_melee	-1,600027:150000,630018:150000,500049:150000,500050:150000,530025:150000,620017:150000,520017:150000,590038:150000,590039:150000,510061:150000,510062:150000,700052:150000,560032:150000,540049:150000,610037:150000,570029:150000,580030:150000
+-	shop	ep19_glacier_range	-1,550069:150000,640033:150000,550070:150000,650025:150000,800014:150000,810010:150000,820008:150000,830013:150000,840009:150000
+
+icas_in,180,61,5	script	Maram#ep19trader	4_EP18_MARAM,{
+	if (ep19_main < 11) {
+		cutin "ep18_maram_01.png",2;
+		mes "[maram]";
+		mes "Meu trabalho aqui e um so.";
+		mes "Transportar suprimentos por via aerea para seu uso.";
+		mes "Tenho certeza de que voce se sentira mais confortavel com coisas do continente.";
+		close3;
+	}
+	cutin "ep18_maram_01.png",2;
+	mes "[maram]";
+	mes "Voce precisa de alguma coisa?";
+	mes "Os aventureiros transportaram por via aerea alguns de seus suprimentos habituais";
+	next;
+	switch( select( "Ver ferramentas e artigos diversos.", "Ver armadura.", "Ver armas.", "Descartar pertences.", "O que e isso?" ) ) {
+	case 1:
+		mes "[maram]";
+		mes "Eu preparei uma quantidade generosa, entao pegue o quanto voce precisar";
+		close2;
+		cutin "",255;
+		callshop( "ep19_basic_supply", 1 );
+		end;
+	case 2:
+		mes "[maram]";
+		mes "Essas armaduras foram criadas por Belgund.";
+		mes "Elas foram criadas com a magia do conto, portanto, estamos trocando-as pelas petalas do conto.";
+		close2;
+		cutin "",255;
+		callshop( "ep19_snow_armor" );	// barter
+		end;
+	case 3:
+		mes "[maram]";
+		mes "Eu forneci os materiais basicos e Belgund terminou as armas";
+		mes "Precisarei de uma pequena quantidade de jennies para pagar pelos materiais basicos";
+		next;
+		switch( select( "See melee weapons and bows.", "See shurikens, guns, and staves." ) ) {
+		case 1:
+			mes "[Maram]";
+			mes "As armas estao funcionando muito bem";
+			close2;
+			cutin "",255;
+			callshop( "ep19_glacier_melee", 1 );
+			end;
+		case 2:
+			mes "[Maram]";
+			mes "As armas estao funcionando muito bem";
+			close2;
+			cutin "",255;
+			callshop( "ep19_glacier_range", 1 );
+			end;
+		}
+		end;
+	case 4:
+		mes "[Maram]";
+		mes "Se voce nao precisar de nada, eu comprarei para voce";
+		close2;
+		cutin "",255;
+		callshop( "ep19_basic_supply", 2 );
+		end;
+	case 5:
+		mes "[Maram]";
+		mes "Estive pensando no que posso fazer aqui, e estive pensando em....";
+		mes "Aparentemente, so me envolvi em compras logisticas";
+		next;
+		mes "[Maram]";
+		mes "Este e um lugar que esta ficando com poucos suprimentos, entao conversei com Ginger e decidimos fazer entregas regulares e nao oficiais";
+		next;
+		cutin "ep18_maram_02.png",2;
+		mes "[Maram]";
+		mes "Eu tambem ajudei com o modificador, Belgund, e abri uma loja";
+		mes "Estou recebendo um jenny basico porque tenho uma loja";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[maram]";
+		mes "Vou me certificar de que voce tenha todos os suprimentos de que precisa, entao nao se preocupe e faca o que quiser!";
+		close3;
+	}
+}
+
+icas_in,142,201,3	script	orrr#ep19iwin05	EP19_NPC_IWIN,{
+	cutin "ep19_iwin03.png",2;
+	mes "[ronronar]";
+	mes "Antigamente, quando Varmund costumava vir me visitar.";
+	mes "Ha um alojamento humano e uma sala de jantar que construi naquela epoca.";
+	next;
+	mes "[ronronar]";
+	mes "A sala de jantar fica a esquerda, As listagens estao localizadas a direita.";
+	mes "알겠어?";
+	close3;
+}
+
+icas_in,109,242,5	script	Gyurur#ep19iwin05	EP19_NPC_IWIN,{
+	cutin "ep19_iwin04.png",2;
+	mes "[Gyurur]";
+	mes "E bom ver tantos humanos hoje em dia.";
+	mes "Antes de voces chegarem, eu nem percebi que o tempo estava passando.";
+	mes "Leon e Aureli estavam quase dormindo e...";
+	next;
+	select( "Tudo o que eu fiz foi dormir?" );
+	mes "[Gyurur]";
+	mes "Mas ele acorda quando algo acontece, como um fantasma";
+	mes "Ele ve tudo em seus sonhos";
+	mes "Interessante, nao e?";
+	close3;
+}
+
+icas_in,251,46,7	script	Sorarang#ep19in::ep19_227	4_EP19_IWIN,{
+	mes "[com Sora]";
+	mes "Eu vou ser um guarda florestal quando crescer!";
+	mes "Um chapeu de patrulheiro? Eu gosto de amarelo, vermelho e brega";
+	npctalk "Koriri: Voce tem razao, vermelho e brega..", "ep19_226", bc_self;
+	close;
+}
+
+icas_in,252,50,5	script	Koriri#ep19in::ep19_226	4_EP19_IWIN,{
+	mes "[Koriri]";
+	mes "Eu vou ser um guarda florestal quando crescer!";
+	mes "O chapeu de patrulheiro, eu gosto da cor verde, verde tsurrah.";
+	npctalk "Sora-lang: amarelo e mais legal.!", "ep19_227", bc_self;
+	npctalk "Koriri : Verde e mais legal!", "ep19_226", bc_self;
+	close;
+}
+
+icas_in,248,47,3	script	Som#ep19in	4_EP19_IWIN,{
+	mes "[som]";
+	mes "Espere um pouco, eu vou alimenta-lo e brincar com voce...";
+	mes "Nao, voce nao e uma crianca, se tiver tempo, por que nao brinca com meus filhos?";
+	mes "Tenho certeza de que eles adorariam ouvir um ser humano de fora";
+	close;
+}
+
+icas_in,241,49,3	script	Zorro#ep19in	4_EP19_IWIN,{
+	mes "[chororu]";
+	mes "Estou com sono depois de comer...";
+	close;
+}
+
+icas_in,236,45,5	script	Goryar#ep19in	4_EP19_IWIN,{
+	mes "[Goryar]";
+	mes "Eu quero comer um pouco mais de wakame.";
+	close;
+}
+
+icas_in,234,49,3	script	Fururu#ep19in	4_EP19_IWIN,{
+	mes "Estou ocupado comendo.";
+	close;
+}
+
+icas_in,251,59,7	script	dharira#ep19in	4_EP19_IWIN,{
+	mes "[It shall be]";
+	mes "Eu serei um grande adulto como meu pai";
+	close;
+}
+
+icas_in,244,63,1	script	Zorroo#ep19in	4_EP19_IWIN,{
+	mes "[zororo]";
+	mes "Eu sou um cursor~";
+	mes "Vou ajudar a Zorya!";
+	npctalk "Zorya: Voce pode me ajudar agora....", "ep19_219", bc_self;
+	close;
+}
+
+// Storage
+icas_in,81,121,4	script	Chaaango#Armazem	HIDDEN_NPC,{
+	.@total_storage = 1;	// by default rAthena just open the basic storage (but 3 on kRO)
+
+	unittalk getcharid(3), "" + strcharinfo(0) + " : Chaaango?", bc_self;
+	mes "Um frasco com um nome estranho. Tem pilhas de moedas soltas e um bilhete do proprietario da pousada anexado.";
+	mes "Armazenamento^389DD4 500 제니^000000당. Se voce o deixar de lado, ele sera recolhido mais tarde~";
+	mes "Feather Guest House Orang";
+	next;
+	for ( .@i = 0; .@i < .@total_storage; .@i++ )
+		.@menu$ += (.@i+1) + "Armazem de Queimados" + ":";
+	.@s = select( .@menu$ ) - 2;
+
+	if (Zeny < 500) {
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Nao tenho troco suficiente..", bc_self;
+		end;
+	}
+	Zeny -= 500;
+	if (.@s == -1)	// basic storage
+		openstorage;
+	else	// "premium" storage starting from index 0
+		openstorage2 .@s, STOR_MODE_GET|STOR_MODE_PUT;	// note: opened before close button
+	end;
+}
+
+
+/*
+// unknown npcs (hidden)
+icas_in,42,57,6	duplicate(dummy_npc)	신병 뽀로롱#m_iw	EP19_NPC_IWIN_SN
+icas_in,42,65,6	duplicate(dummy_npc)	이병 토라리#m_iw	EP19_NPC_IWIN_SY
+icas_in,49,65,6	duplicate(dummy_npc)	이병 또라롱#m_iw	EP19_NPC_IWIN_SY
+icas_in,52,57,6	duplicate(dummy_npc)	신병 호루룽#m_iw	EP19_NPC_IWIN_SN
+icas_in,56,60,2	duplicate(dummy_npc)	신입간부 오리료#c_iw	EP19_NPC_IWIN_SR
+icecastle,123,173,4	duplicate(dummy_npc)	조랴라의 정찬#식당	HIDDEN_NPC
+icecastle,177,221,4	duplicate(dummy_npc)	병영#좌	HIDDEN_NPC
+icecastle,194,221,4	duplicate(dummy_npc)	병영#우	HIDDEN_NPC
+icecastle,199,148,4	duplicate(dummy_npc)	얼음의 성#좌	HIDDEN_NPC
+icecastle,213,148,4	duplicate(dummy_npc)	얼음의 성#우	HIDDEN_NPC
+icecastle,243,147,7	duplicate(dummy_npc)	얼음 조각상#1	HIDDEN_NPC
+icecastle,244,213,7	duplicate(dummy_npc)	얼음 조각상#2	HIDDEN_NPC
+*/
+
+// Side Quest: Purification Saint - Step 1, 4
+icas_in,163,226,3	duplicate(dummy_cloaked_npc)	Vorklind#ep19::ep19_icas_in_163_226	4_EP19_VOGLINDE
+icas_in,162,228,5	duplicate(dummy_cloaked_npc)	Lehar#ep19_2::ep19_icas_in_163_228	4_EP19_LEHAR
+
+icas_in,162,224,0	script	#Fazer recados	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch:
+	if (ep19_main < 10)
+		end;
+	if (ep19_side_saint == 1) {
+		if (checkweight(12322,1) == 0) {
+			mes "- Espere um minuto !!! -";
+			mes "- Atualmente, voce esta carregando -";
+			mes "- muitos itens com voce. -";
+			mes "- Por favor, tente novamente -";
+			mes "- depois que voce perder algum peso. -";
+			close;
+		}
+		mes "[Vorklind]";
+		mes "Oh meu bebe~!";
+		mes "O que esta acontecendo?";
+		mes "Lehar?";
+		cloakoffnpcself( "ep19_icas_in_163_226" );
+		npctalk "Voklind: Voce viu o Rehar??", "ep19_icas_in_163_226", bc_self;
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[Voklind]";
+		mes "Lehar lhe disse para ir em frente, ele tinha outras coisas para fazer?";
+		mes "Ele esta muito ocupado mesmo";
+		npctalk "Vorklind : Uhhhhhhhhhh", "ep19_icas_in_163_226", bc_self;
+		next;
+		mes "[Voklind]";
+		MES "Nao tenho tempo para esperar por uma crianca que pode chegar a qualquer momento, e minha tia precisa lhe perguntar algo, voce esta livre?";
+		npctalk "Voklind: Voce esta ocupado??", "ep19_icas_in_163_226", bc_self;
+		next;
+		switch( select( "Estou bem.", "Estou ocupado.." ) ) {
+		case 1:
+			mes "[Voklind]";
+			mes "Serio?";
+			mes "Isso e bom.";
+			mes "Bem, voce viajou muito e provavelmente esta com fome, entao coma isso";
+			ep19_side_saint = 2;
+			erasequest 18128;
+			setquest 11794;
+			getitem 12322,1;	// Chocolate_Pie
+			cutin "ep19_voglinde04.png",0;
+			next;
+			mes "[Voklind]";
+			mes "Nao e nada demais, e apenas uma daquelas viagens injustas";
+			MES "Nenhuma das pessoas com quem voce andou tinha ^e5555ehair tao longo e um cardeal^000000 com uma bolsa ruim?";
+			npctalk "Vauclinde: sua bolsa e um pouco exagerada..", "ep19_icas_in_163_226", bc_self;
+			cutin "ep19_voglinde01.png",0;
+			next;
+			mes "[Voklind]";
+			mes "Seu cabelo e tao comprido assim... ou e mais ou menos assim?";
+			mes "Nao sei porque so nos correspondemos desde que estou aqui, mas nao o vi";
+			cutin "ep19_voglinde02.png",0;
+			next;
+			mes "[Voklind]";
+			mes "Isso... ha um garoto que Lehar deveria ter trazido de ^e5555eFrontera^000000";
+			mes "E ele nao esta sendo visto em lugar nenhum?";
+			mes "Nao ha relatos de sua chegada...";
+			cutin "ep19_voglinde01.png",0;
+			next;
+			mes "[Voklind]";
+			mes "Ela nao e o tipo de garota que fica perambulando nesse frio, e ela chama a atencao, quer esteja perambulando ou nao, entao e impossivel que outras pessoas nao a tenham visto";
+			npctalk "Vauclinde: nao e possivel que ela tenha feito isso..", "ep19_icas_in_163_226", bc_self;
+			cutin "ep19_voglinde04.png",0;
+			next;
+			select( "Nao vi." );
+			mes "[Voklind]";
+			mes "Ugh...";
+			mes "Que chato.";
+			mes "Eu estava conseguindo aprovar minha solicitacao e entao ela desapareceu.";
+			NPCTALK "Vauclinde: Depois de todo o trabalho que tive para obter a permissao, prefiro apenas!!!", "ep19_icas_in_163_226", bc_self;
+			cutin "ep19_voglinde03.png",0;
+			next;
+			mes "[Voklind]";
+			mes "Assim que Lejardo terminou de falar, ele desapareceu, e eu nao consegui ver para onde ele foi...";
+			mes "Este nao e o momento de fazer isso...";
+			mes "Ugh...";
+			npctalk "Voklind: Talvez Goodham?", "ep19_icas_in_163_226", bc_self;
+			next;
+			mes "[Voklind]";
+			mes "Baby.";
+			mes "Voce pode me fazer um favor?";
+			mes "Sua tia esta muito ocupada agora, ela nao pode se ausentar.";
+			cutin "ep19_voglinde01.png",0;
+			next;
+			mes "[Voklind]";
+			mes "Nao e nada demais, ^e5555voce sabe aquelas criancas com quem eu andei na chuva^000000?";
+			mes "Voce pode perguntar a eles se viram algum cardeal com roupas azuis, cabelos longos e um veu como esse?";
+			next;
+			mes "[Voklind]";
+			mes "Infelizmente nao posso lhe dar os detalhes no momento, mas e muito importante para ela";
+			mes "Eu definitivamente pedirei um favor";
+			close2;
+			cloakonnpcself( "ep19_icas_in_163_226" );
+			cutin "",255;
+			end;
+		case 2:
+			mes "[Voklind]";
+			mes "E dai?";
+			mes "Bem, acho que nao posso evitar.";
+			mes "Voce deve estar ocupado, comece a trabalhar.";
+			cutin "ep19_voglinde02.png",0;
+			close2;
+			cloakonnpcself( "ep19_icas_in_163_226" );
+			cutin "",255;
+			end;
+		}
+	}
+	if (ep19_side_saint == 2 || ep19_side_saint == 3) {
+		cloakoffnpcself( "ep19_icas_in_130_201" );
+		if (ep19_side_saint == 3)
+			cloakoffnpcself( "ep19_icas_in_136_197" );
+		mes "[Voklind]";
+		mes "Nao e nada demais, ^e5555voce sabe aquelas criancas com quem eu andei na chuva^000000?";
+		mes "Voce pode perguntar a eles se viram algum cardeal com roupas azuis, cabelos longos e um veu como esse?";
+		cutin "ep19_voglinde01.png",0;
+		cloakoffnpcself( "ep19_icas_in_163_226" );
+		next;
+		mes "[Voklind]";
+		mes "Infelizmente, nao posso lhe dar os detalhes no momento, mas e muito importante para ela";
+		mes "Eu definitivamente pedirei um favor";
+		close2;
+		cloakonnpcself( "ep19_icas_in_163_226" );
+		cutin "",255;
+		end;
+	}
+	if (ep19_side_saint == 4) {
+		mes "[Voklind]";
+		mes "Uh-oh.";
+		mes "" + strcharinfo(0) + " Voce esta aqui?";
+		mes "Esta frio e eu me esforcei";
+		npctalk "Voklind: Esta muito frio la fora, nao esta?", "ep19_icas_in_163_226", bc_self;
+		cloakoffnpcself( "ep19_icas_in_163_226" );
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[Voklind]";
+		mes "Entao voce a encontrou?";
+		next;
+		select( "Seja honesto." );
+		mes "[Vorklind]";
+		mes "<FONT SIZE = 16><B>Ops!!!</FONT></B>";
+		mes "<FONT SIZE = 16><B>Nao consigo viver comigo mesmo..</FONT></B>";
+		npctalk "Vorklind: Ugh, estou explodindo pelas costuras!", "ep19_icas_in_163_226", bc_self;
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[lehar]";
+		mes "Nao!";
+		mes "Tia, isso nao!";
+		cloakoffnpcself( "ep19_icas_in_163_228" );
+		npctalk "Rehar : Tia, acalme-se!!", "ep19_icas_in_163_228", bc_self;
+		cutin "ep19_lehar05.png",2;
+		next;
+		mes "[Vorklind]";
+		mes "<FONT SIZE = 16><B>Por que nao?!</FONT></B>";
+		cutin "ep19_voglinde01.png",0;
+		next;
+		mes "[Voklind]";
+		mes "Isso e o que eu disse para voce cuidar!";
+		next;
+		mes "[Voklind]";
+		mes "Ugh...";
+		mes "…";
+		mes "Querida.";
+		mes "Sua tia pode lhe fazer mais um favor?";
+		next;
+		mes "[Voklind]";
+		mes "Sinto muito que voce tenha vindo ate aqui, mas por que nao volta para ^e5555eMidgard^000000 e a encontra?";
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[Voklind]";
+		mes "E porque ele e muito importante.";
+		next;
+		mes "[Voklind]";
+		mes "E voce nao pode contar a <B>ninguem</B> sobre isso agora.</B>";
+		mes "Ok?";
+		npctalk "Voklind: Isso e ultrassecreto, tenha cuidado..", "ep19_icas_in_163_226", bc_self;
+		cutin "ep19_voglinde04.png",0;
+		next;
+		mes "[Voklind]";
+		MES "Vou me certificar de que ^e5555eHelloc^000000 saiba como leva-lo a Midgard.";
+		MES "Talvez eu possa leva-lo ate ^E5555EAldevaran^000000.";
+		mes "Voce pode chegar a ^e5555eFrontera^000000 por conta propria, certo?";
+		cutin "ep19_voglinde03.png",0;
+		next;
+		mes "[Voklind]";
+		mes "^e5555eHa uma garota em Frontera chamada Elise que e uma agente de copias^000000.?";
+		MES "Ela provavelmente esta em ^e5555eFrontera, perto da catedral^000000";
+		mes "Diga a ele que eu a enviei para voce <B>Santo</B>e voce sabera.";
+		npctalk "Voklind : Nao posso lhe dar nenhum detalhe..", "ep19_icas_in_163_226", bc_self;
+		next;
+		mes "[Lehar]";
+		mes "<FONT SIZE = 14>Tia, se for esse o caso, vou voltar para!</FONT>";
+		npctalk "Rehar: tia!!!", "ep19_icas_in_163_228", bc_self;
+		cutin "ep19_lehar07.png",2;
+		next;
+		mes "[Voklind]";
+		mes "Voce... deixe-me ve-lo por um segundo.";
+		mes "Follow me.";
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[lehar]";
+		mes "Tia!!!";
+		mes "Eu me sinto tao injusticado!";
+		mes "Voce nem sequer me disse quem era!!!";
+		npctalk "Rehar: Nao sei o rosto nem o nome dela, como posso checa-la?!", "ep19_icas_in_163_228", bc_self;
+		cutin "ep19_lehar05.png",2;
+		next;
+		mes "[Voklind]";
+		mes "Por que voce nao sabe quem ele e!!!";
+		mes "Voce ja o viu antes!!!";
+		cutin "ep19_voglinde01.png",0;
+		npctalk "Voklind : Isso e o que eles dizem sem nunca ter conhecido voce.!", "ep19_icas_in_163_226", bc_self;
+		next;
+		mes "[lehar]";
+		mes "Isso foi ha anos!!!";
+		cutin "ep19_lehar05.png",2;
+		npctalk "Rehar : Nao o vejo desde que voce era crianca.!", "ep19_icas_in_163_228", bc_self;
+		next;
+		mes "[Voklind]";
+		mes "Vou cuidar bem dela, entao.";
+		mes "^e5555eHelloc^000000 foi onde voce se deu mal, nao foi?";
+		mes "Ha uma cabana ^e5555eaparencia estranha^000000 la?";
+		MES "Ele provavelmente esta descansando la";
+		npctalk "Vorklind: Noisy, siga-me ate a sala de oracao..", "ep19_icas_in_163_226", bc_self;
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[lehar]";
+		mes "Tia!!!";
+		mes "Evil!!!";
+		mes "Wait!!!!";
+		mes "" + strcharinfo(0) + "senhor!";
+		mes "Me ajude!";
+		npctalk "Lehar: Estou morrendo.!!!!!!", "ep19_icas_in_163_228", bc_self;
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[Voklind]";
+		mes "Quem esta comendo voce?";
+		mes "Come on, Siga-me!";
+		cutin "ep19_voglinde02.png",0;
+		ep19_side_saint = 5;
+		erasequest 11796;
+		setquest 11797;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_icas_in_163_226" );
+		cloakonnpcself( "ep19_icas_in_163_228" );
+		navigateto("jor_tail",211,63);
+		end;
+	}
+	if (ep19_side_saint == 5) {
+		cloakoffnpcself( "ep19_icas_in_163_226" );
+		cloakoffnpcself( "ep19_icas_in_163_228" );
+		mes "[Voklind]";
+		mes "Vou cuidar bem dela, entao.";
+		mes "^e5555eOlac^000000 foi onde voce se deu mal, nao foi?";
+		mes "Ha uma cabana ^e5555eaparencia estranha^000000 la?";
+		MES "Ele provavelmente esta descansando la";
+		npctalk "Vorklind: Noisy, siga-me ate a sala de oracao..", "ep19_icas_in_163_226", bc_self;
+		cutin "ep19_voglinde02.png",0;
+		next;
+		mes "[lehar]";
+		mes "Tia!!!";
+		mes "Evil!!!";
+		mes "Wait!!!!";
+		mes "" + strcharinfo(0) + "mes!";
+		mes "Me ajude!";
+		npctalk "Lehar: Estou morrendo.!!!!!!", "ep19_icas_in_163_228", bc_self;
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[Voklind]";
+		mes "Quem esta comendo voce?";
+		mes "Come on, follow me!";
+		cutin "ep19_voglinde02.png",0;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_icas_in_163_226" );
+		cloakonnpcself( "ep19_icas_in_163_228" );
+		navigateto("jor_tail",211,63);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(18128) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11796) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 2
+icas_in,130,201,5	script	Maram#ep19::ep19_icas_in_130_201	4_EP18_MARAM,{
+	if (ep19_side_saint == 2) {
+		mes "[Maram]";
+		mes "Rachel... Tenho sentimentos contraditorios quanto a deixar o continente de Midgard para vir para um lugar como este";
+		npctalk "Maram: Esta tao frio aqui que nem se compara a Vila Greywolf..", "ep19_icas_in_130_201", bc_self;
+		cutin "ep18_maram_03.png",2;
+		next;
+		mes "[Maram]";
+		mes "E emocionante porque nao ha nada alem de gelo, mas tambem e estressante porque ha mais e mais coisas pelas quais sou responsavel...";
+		next;
+		mes "[Maram]";
+		mes "Oh... nao e como se eu estivesse lamentando ou algo assim, eu so estou com um humor estranho, nao se importe comigo";
+		cutin "ep18_maram_02.png",2;
+		next;
+		mes "[maram]";
+		mes "Mais do que isso, voce esta aqui para alguma coisa, nao e?";
+		mes "O que e?";
+		cutin "ep18_maram_01.png",2;
+		next;
+		select( "Pergunta sobre o cardeal." );
+		mes "[maram]";
+		mes "Bem?";
+		mes "Havia alguem assim?";
+		next;
+		mes "[maram]";
+		mes "Se estivessemos no mesmo trem, nao teriamos como nao ver...";
+		mes "Nao era como se houvesse muitas pessoas.";
+		npctalk "Maram: havia mais pessoas alem de nos?", "ep19_icas_in_130_201", bc_self;
+		next;
+		mes "[maram]";
+		mes "Embora, se voce estivesse na cabine, talvez nao o tivesse visto";
+		mes "Acho que nao o vi quando entrei ou sai do barco.";
+		next;
+		mes "[maram]";
+		MES "Honestamente, como temos tao poucas informacoes e nunca o conhecemos, nao acho que conversar entre nos produzira respostas, e acho que seria melhor perguntar diretamente a ^e5555eLehar^000000";
+		cutin "ep18_maram_03.png",2;
+		next;
+		select( "Perguntando sobre Lehar." );
+		mes "[Maram]";
+		mes "Se for o Rehar, achei que voce estava saindo ha pouco tempo...";
+		next;
+		mes "[Maram]";
+		mes "La vem ele.";
+		mes "Leharnim!!!";
+		cutin "ep18_maram_02.png",2;
+		ep19_side_saint = 3;
+		erasequest 11794;
+		setquest 11795;
+		close2;
+		cutin "",255;
+		navigateto("icas_in",136,197);
+		cloakoffnpcself( "ep19_icas_in_136_197" );
+		end;
+	}
+	if (ep19_side_saint == 3) {
+		mes "[Maram]";
+		mes "Se for o Rehar, achei que voce estava saindo ha pouco tempo...";
+		next;
+		cutin "ep18_maram_01.png",2;
+		mes "[Maram]";
+		mes "La vem ele.";
+		mes "Leharnim!!!";
+		close2;
+		cutin "",255;
+		navigateto("icas_in",136,197);
+		cloakoffnpcself( "ep19_icas_in_136_197" );
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11794) == 1" );
+	end;
+}
+
+icas_in,132,201,3	duplicate(dummy_cloaked_npc)	Miriam#ep19::ep19_icas_in_132_201	4_EP18_MIRIAM
+
+// Side Quest: Purification Saint - Step 3
+icas_in,136,197,3	script	Lehar#ep19::ep19_icas_in_136_197	4_EP19_LEHAR,{
+	if (ep19_side_saint == 3) {
+		mes "[lehar]";
+		mes "O que e?";
+		mes "Estou um pouco sobrecarregado no momento, a menos que seja urgente, podemos conversar mais tarde";
+		cutin "ep19_lehar01.png",2;
+		next;
+		select( "Pergunta sobre o cardeal." );
+		mes "[lehar]";
+		mes "^e5555eO cardeal^000000 com o cabelo comprido, roupas azuis e veu?";
+		mes "Voce o cumprimentou na nao feira.";
+		npctalk "Lehar: Voce estava conosco, mas por que eles estao assim?.", "ep19_icas_in_136_197", bc_self;
+		cutin "ep19_lehar02.png",2;
+		next;
+		mes "[maram]";
+		mes "Voces estavam juntos?";
+		cutin "ep18_maram_03.png",2;
+		next;
+		mes "[lehar]";
+		mes "Yes.";
+		mes "Voce sabe disso, nao sabe?";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[Miriam]";
+		mes "Maram!";
+		mes "O que voce esta fazendo aqui!";
+		mes "Este nao e o momento para ser preguicoso!";
+		cutin "ep18_miriam_01.png",0;
+		cloakoffnpcself( "ep19_icas_in_132_201" );
+		next;
+		mes "[Miriam]";
+		mes "Vamos em frente e marcar nosso proximo compromisso";
+		mes "Tambem quero revisar o que o Voklind disse antes";
+		next;
+		mes "[Maram]";
+		mes "Acalme-se, Miriam.";
+		mes "Preciso falar com os outros primeiro.";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[lehar]";
+		mes "Voce chegou bem na hora.";
+		mes "^e5555eCardinal com cabelos longos, roupas azuis e um veu! ^000000.";
+		cutin "ep19_lehar02.png",2;
+		next;
+		mes "[maram]";
+		mes "O que...?";
+		cutin "ep18_maram_01.png",2;
+		next;
+		mes "[Miriam]";
+		mes "O que?";
+		mes "Nao estou... Cardeal?";
+		cutin "ep18_miriam_03.png",0;
+		next;
+		mes "[lehar]";
+		mes "...et?";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "- O suor comecou a escorrer da testa de Rehar em chuviscos.. -";
+		next;
+		mes "[Miriam]";
+		mes "Rehar, o que ha de errado com voce de repente?";
+		mes "Sua pele esta tao ruim, ha algo errado com voce?";
+		cutin "ep18_miriam_03.png",0;
+		npctalk "Miriam: Suor!!!!!", "ep19_icas_in_132_201", bc_self;
+		next;
+		mes "[lehar]";
+		mes "Agora... so um momento, Miriam, como uma introducao aquela... aquela... Ellis da Catedral de Frontera...";
+		cutin "ep19_lehar03.png",2;
+		npctalk "Lehar: Esse segredo…", "ep19_icas_in_136_197", bc_self;
+		next;
+		mes "[Miriam]";
+		mes "Eu vim de Raquel com Maram";
+		cutin "ep18_miriam_03.png",0;
+		next;
+		mes "[lehar]";
+		mes "Alas...";
+		cutin "ep19_lehar04.png",2;
+		next;
+		mes "[lehar]";
+		mes "Acho que devo estar enganado...";
+		mes "Oh, isso e tao foda...";
+		mes "…";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[maram]";
+		mes "Hmm...";
+		mes "Nao tenho certeza do que esta acontecendo, mas ja que Rehar esta tao agitado, talvez devessemos falar com ^e5555eVorklind^000000 primeiro?";
+		cutin "ep18_maram_03.png",2;
+		next;
+		select( "Isso seria otimo." );
+		mes "[Lehar]";
+		mes "<FONT SIZE = 16><B>Nao!!! Por que isso esta acontecendo?!</FONT></B>";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[Lehar]";
+		mes "<FONT SIZE = 16><B>Estou realmente morrendo!</FONT></B>";
+		mes "" + strcharinfo(0) + "님!!!!";
+		cutin "ep19_lehar04.png",2;
+		npctalk "Rehar : Nao.!!!!!!!", "ep19_icas_in_136_197", bc_self;
+		ep19_side_saint = 4;
+		erasequest 11795;
+		setquest 11796;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_icas_in_130_201" );
+		cloakonnpcself( "ep19_icas_in_132_201" );
+		cloakonnpcself( "ep19_icas_in_136_197" );
+		navigateto("icas_in",164,228);
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_NONE, "isbegin_quest(11795) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 5
+jor_tail,211,63,5	script	Inferno#ep19::ep19_jor_tail_211_63	4_EP19_HEALROCK,{
+	if (ep19_side_saint == 5) {
+		mes "[Inferno]";
+		mes "OU~";
+		mes "<FONT SIZE = 16><B>Bom dia.</FONT></B>";
+		mes "" + strcharinfo(0) + "Senhor!";
+		mes "Eu ouvi a historia de Voklind";
+		mes "Voce esta indo para ^e5555eMidgard^000000?";
+		cutin "ep19_healrock01.png",2;
+		next;
+		mes "[Inferno]";
+		mes "" + strcharinfo(0) + "Voce e o unico que vai?";
+		mes "E muito leve... devo carregar alguns sacos de areia ou algo assim...";
+		npctalk "Hellock: So o fato de correr ja causa perda muscular.…", "", bc_self;
+		next;
+		mes "[Helloc]";
+		mes "De qualquer forma, vamos continuar!";
+		next;
+		select( "Um nao-processo e um?" );
+		mes "[Helloc]";
+		mes "Os nao-oficiais so podem ir ate certo ponto em direcao a mansao Varmund.";
+		mes "Isso nao e algo que podemos decidir deste lado...";
+		next;
+		mes "[Inferno]";
+		mes "Nao se preocupe, estou viajando para ^e5555eAldebaran^000000 com meu proprio treno";
+		MES "Meus ombros largos o segurarao firmemente no lugar";
+		mes "Quente, quente, quente!!!";
+		npctalk "Hellock: Exercicio e diversao! Isso e que e dois coelhos com uma cajadada so, nao e?!", "", bc_self;
+		next;
+		switch( select( "Partida", "Aguarde" ) ) {
+		case 1:
+			mes "[Inferno]";
+			mes "Entao vamos embora.";
+			mes "Segure firme!";
+			erasequest 11797;
+			setquest 11798;
+			ep19_side_saint = 6;
+			close2;
+			cutin "",255;
+			warp "aldebaran",104,105;
+			end;
+		case 2:
+			mes "[Inferno]";
+			mes "Isso e verdade??";
+			mes "Entao me avise quando estiver pronto";
+			close3;
+		}
+	}
+	if (ep19_side_saint >= 6 && ep19_side_saint <= 17) {
+		mes "[Inferno]";
+		mes "Ughhhhh...";
+		mes "Ahhhhhhhhhh...!!!";
+		cutin "ep19_healrock03.png",2;
+		close3;
+	}
+	if (ep19_side_saint == 20) {
+		mes "[Helloc]";
+		mes "Hello!!!!";
+		mes "Voce esta viajando para Aldebaran novamente hoje?";
+		cutin "ep19_healrock01.png",2;
+		next;
+		switch( select( "Partida", "Aguarde" ) ) {
+		case 1:
+			mes "[Helloc]";
+			mes "Entao vamos embora.";
+			mes "Segure firme!";
+			close2;
+			cutin "",255;
+			warp "aldebaran",104,105;
+			end;
+		case 2:
+			mes "[Helloc]";
+			mes "Isso e verdade??";
+			mes "Entao me avise quando estiver pronto";
+			close3;
+		}
+	}
+	mes "[Helloc]";
+	mes "Mmmmmmmmmmmmmmmm!!!!";
+	mes "Entao vamos trabalhar nossos deltoides com forca hoje!";
+	cutin "ep19_healrock01.png",2;
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11797) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 6, 16
+aldebaran,102,103,5	script	Inferno#ep19_a	4_EP19_HEALROCK,{
+	if (ep19_side_saint == 6) {
+		mes "[Inferno]";
+		mes "ah! " + strcharinfo(0) + "Senhor.";
+		mes "Voce finalmente acordou!";
+		mes "Aqui e Aldebaran.";
+		cutin "ep19_healrock01.png",2;
+		next;
+		mes "[Helloc]";
+		mes "Nao posso ir a Frontera devido a varios acordos, portanto, esperarei por voce aqui.";
+		mes "Venha para ^e5555eAldevaran^000000 quando terminar suas tarefas.";
+		npctalk "Helloc: Bem, deveriamos ir comprar a nova proteina de soja em po enquanto estivermos em Midgard.!", "", bc_self;
+		erasequest 11798;
+		setquest 11799;
+		ep19_side_saint = 7;
+		close2;
+		cutin "",255;
+		navigateto("prontera",254,309);
+		end;
+	}
+	if (ep19_side_saint == 7) {
+		mes "[Helloc]";
+		mes "Nao posso ir a Frontera devido a varios acordos, portanto, esperarei por voce aqui.";
+		mes "Venha para ^e5555eAldevaran^000000 quando terminar suas tarefas.";
+		cutin "ep19_healrock01.png",2;
+		npctalk "Helloc : Entao teremos que comprar a nova proteina de soja em po em Midgard.!", "", bc_self;
+		close2;
+		cutin "",255;
+		navigateto("prontera",254,309);
+		end;
+	}
+	if (ep19_side_saint == 8) {
+		mes "[Helloc]";
+		mes "Voce terminou seu trabalho em Frontera?";
+		mes "Venha para ^E5555EAldevaran^000000 quando voce terminar.";
+		cutin "ep19_healrock01.png",2;
+		close3;
+	}
+	if (ep19_side_saint == 16) {
+		mes "[Helloc]";
+		mes "Ai esta voce.";
+		mes "Entao vamos apenas... esperar... acho que temos mais pessoas do que Voklind disse...";
+		mes "Pensei que voce estava vindo com um cardeal?";
+		cutin "ep19_healrock01.png",2;
+		next;
+		mes "[Helloc]";
+		mes "O que todos tem em suas maos?";
+		mes "Voce tem alguma bagagem?";
+		mes "Eu tenho uma mala... duas... nao, espere...";
+		mes "Nao, nao e que eu nao possa carrega-la, mas eu tenho bagagem...";
+		cutin "ep19_healrock02.png",2;
+		next;
+		if (select( "Partida", "Aguarde" ) == 2)
+			end;
+		mes "[du]";
+		mes "Huh???";
+		cutin "ep18_dew_02.png",2;
+		next;
+		mes "[Helloc]";
+		mes "Aqui vamos nos entao...";
+		mes "Mmmmmmmmmmmm!!!!";
+		cutin "ep19_healrock02.png",2;
+		next;
+		mes "[Hellock]";
+		mes "Hmph...";
+		mes "Meu... meu hurr";
+		cutin "ep19_healrock03.png",2;
+		erasequest 11808;
+		setquest 11809;
+		ep19_side_saint = 17;
+		close2;
+		cutin "",255;
+		warp "jor_tail",212,60;
+		end;
+	}
+	if (ep19_side_saint == 17) {
+		mes "[Helloc]";
+		mes "Ai esta voce.";
+		mes "Entao vamos apenas... esperar... acho que temos mais pessoas do que Voklind disse...";
+		mes "Pensei que voce estava vindo com um cardeal?";
+		cutin "ep19_healrock01.png",2;
+		next;
+		mes "[Helloc]";
+		mes "O que todos tem em suas maos?";
+		mes "Voce tem alguma bagagem?";
+		mes "Eu tenho uma mala... duas... nao, espere...";
+		mes "Nao, nao e que eu nao possa carrega-la, mas eu tenho bagagem...";
+		cutin "ep19_healrock02.png",2;
+		next;
+		if (select( "Partida", "Aguarde" ) == 2)
+			end;
+		mes "[du]";
+		mes "Huh???";
+		cutin "ep18_dew_02.png",2;
+		next;
+		mes "[Helloc]";
+		mes "Aqui vamos nos entao...";		
+		mes "Mmmmmmmmmmmm!!!!";
+		cutin "ep19_healrock02.png",2;
+		next;
+		mes "[Hellock]";
+		mes "Hmph...";
+		mes "Meu... meu hurr...";
+		cutin "ep19_healrock03.png",2;
+		close2;
+		cutin "",255;
+		warp "jor_tail",212,60;
+		end;
+	}
+	mes "[hello]";
+	mes "Hello.";
+	mes "Aventureiro, o tempo esta ficando bem frio, nao e?";
+	cutin "ep19_healrock01.png",2;
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11798) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11808) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 7
+prontera,254,309,3	script	Oficial de copias#ep19	4_F_ACOLYTE,{
+	if (ep19_side_saint == 7) {
+		mes "[Ellis, o funcionario da copiadora]";
+		mes "Oh, meu Deus!";
+		mes "Ola";
+		mes "O que posso fazer por voce?";
+		npctalk "Ellis: Nao acho que voce queira ser uma copia.…", "", bc_self;
+		cutin "acact_01.bmp",2;
+		next;
+		select( "Os afazeres de Voklind" );
+		mes "[Oficial de Copia Ellis]";
+		mes "Sr. Voklind?";
+		mes "…";
+		cutin "acact_03.bmp",2;
+		next;
+		select( "santo" );
+		mes "[Oficial de Copia Ellis]";
+		mes "Se voce sabe tanto assim, nao faz sentido esconder";
+		cutin "acact_01.bmp",2;
+		next;
+		mes "[Oficial de Copia Ellis]";
+		mes "Eu a enviei para a consulta porque Lehar queria ve-la, ha mais alguma coisa?";
+		cutin "acact_03.bmp",2;
+		next;
+		select( "Desaparecido." );
+		mes "[Elise, auxiliar de copiadora]";
+		mes "<FONT SIZE = 16><B>Sim?!</FONT></B>";
+		mes "Nao...";
+		mes "Este nao e um caso que vai acabar com a morte dele!!!";
+		cutin "acact_04.bmp",2;
+		npctalk "Ellis: Nao!!!!!!!!!!!!!", "", bc_self;
+		next;
+		mes "[Ellis, o funcionario da copiadora]";
+		mes "Se eu for a algum lugar com ela, preciso ficar de olho nela ate chegar la...";
+		mes "Nao... substituir Reharnim...";
+		mes "...nao...";
+		next;
+		mes "[Ellis, o funcionario da copiadora]";
+		mes "Vamos primeiro ao alojamento dela ^e5555eacomodacao^000000";
+		mes "Ela nao e o tipo de garota que sai vagando por ai, entao talvez tenha voltado.";
+		mes "Se nao estiver, isso e... realmente... grande.";
+		erasequest 11799;
+		setquest 11800;
+		ep19_side_saint = 8;
+		close2;
+		cutin "",255;
+		navigateto("prt_cas",20,32);
+		end;
+	}
+	if (ep19_side_saint == 8) {
+		mes "[Ellis, o funcionario da copiadora]";
+		mes "Se eu for a algum lugar com ela, preciso ficar de olho nela ate chegar la...";
+		mes "Nao... substituir Reharnim...";
+		mes "...nao...";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[Ellis, o funcionario da copiadora]";
+		mes "Vamos primeiro ao alojamento dela ^e5555eacomodacao^000000";
+		mes "Ela nao e o tipo de garota que sai vagando por ai, entao talvez tenha voltado.";
+		mes "Se nao estiver, isso e... realmente... grande.";
+		close3;
+	}
+	if (ep19_side_saint == 9 || ep19_side_saint == 10) {
+		mes "[Ellis, o funcionario da copiadora]";
+		mes "Voce nao deveria estar aqui, deveria estar se preparando para partir para ^e5555eIsgard^000000, certo?";
+		cutin "acact_01.bmp",2;
+		close2;
+		cutin "",255;
+		navigateto("prt_cas",20,32);
+		end;
+	}
+	mes "[Ellis, o funcionario da copiadora]";
+	mes "Bem-vindo a Catedral de Ptera.";
+	mes "O Reitor, ha sempre duas boas-vindas distintas.";
+	cutin "acact_02.bmp",2;
+	close3;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11799) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 8
+prt_cas,22,33,3	duplicate(dummy_cloaked_npc)	Marcas#ep19_cas::ep19_prt_cas_22_33	4_EP18_MARK
+prt_cas,23,32,3	duplicate(dummy_cloaked_npc)	Orvalho#ep19_cas::ep19_prt_cas_23_32	4_EP18_DEW
+prt_cas,24,31,3	duplicate(dummy_cloaked_npc)	Margie#ep19_cas::ep19_prt_cas_24_31	4_4JOB_MAGGI
+prt_cas,25,31,5	duplicate(dummy_cloaked_npc)	Apl#ep19_cas::ep19_prt_cas_25_31	4_EP18_ALF
+
+prt_cas,20,32,3	script	Malas#ep19_1	4_EP19_SUITCASE,{
+	if (ep19_side_saint == 8) {
+		mes "[Ellis, o funcionario da copiadora]";
+		mes "Oh, meu Deus!";
+		mes "Vejo que voce tem uma bolsa, entao acho que voce esta aqui?";
+		cloakoffnpcself( "ep19_prt_cas_21_31" );
+		npctalk "Ellis : Ufa... estou uma decada atrasado.", "ep19_prt_cas_21_31", bc_self;
+		cutin "acact_03.bmp",2;
+		next;
+		cloakoffnpcself( "ep19_prt_cas_18_32" );
+		mes "[santo]";
+		mes "Sua irma esta aqui?";
+		mes "Isso e otimo";
+		mes "Qual deles e mais bonito, o casaco branco ou o manteau rosa?";
+		mes "Os dois sao bonitos, nao consigo escolher";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "Por que voce esta aqui?";
+		mes "O Lehar nao veio busca-lo?";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[saint]";
+		mes "Rehar?";
+		mes "Uh... eu fui a consulta e nao havia lehar, mas alguem me deu uma carta";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Copia do Oficial Ellis]";
+		mes "lado... nao...?";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[Friedericke]";
+		mes "Ele disse para ir a mansao Barmund";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "Entao por que voce esta aqui?";
+		mes "Voce nao foi embora?";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "Entao por que voce esta aqui?";
+		mes "Voce nao foi embora?";
+		next;
+		mes "[santo]";
+		mes "Eu fui la, mas...";
+		mes "Eu estava entediado porque ninguem estava la, entao fui dar uma olhada na mansao Barmund...";
+		mes "Esperei por muito tempo, mas ninguem veio, entao voltei para casa.";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Oficial de Copia Ellis]";
+		mes "Por que voce nao apareceu quando disse que apareceria!";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[Elise, auxiliar de copiadora]";
+		mes "…";
+		next;
+		mes "[Oficial de Copia Ellis]";
+		mes "De qualquer forma, eu nao deveria estar fazendo isso...";
+		mes "" + strcharinfo(0) + "Ele esta aqui para busca-lo, portanto, siga-o";
+		mes "Voklind esta esperando por voce..";
+		cutin "acact_01.bmp",2;
+		next;
+		mes "[Saint]";
+		mes "Voklind?";
+		mes "Estou indo para Voklind?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[saint]";
+		mes "Entao e melhor eu comecar a fazer as malas para a viagem.!";
+		next;
+		mes "[Ellis, o oficial de copias]";
+		mes "Jim?????";
+		mes "Bem, vou deixar voce arrumando as coisas por um tempo.";
+		mes "Vou chamar um carregador.";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[Elise, auxiliar de copiadora]";
+		mes "" + strcharinfo(0) + "Desculpe-me, senhor, mas pode cuidar da mala dele por um minuto?";
+		mes "Eu ja volto";
+		cutin "acact_01.bmp",2;
+		erasequest 11800;
+		setquest 11801;
+		ep19_side_saint = 9;
+		close2;
+		cutin "",255;
+		cloakoffnpcself( "ep19_prt_cas_21_31" );
+		end;
+	}
+	if (ep19_side_saint == 9) {
+		cloakoffnpcself( "ep19_prt_cas_18_32" );
+		mes "- Converse com o Saint enquanto espera por Elise. -";
+		close;
+	}
+	if (ep19_side_saint >= 10 || ep19_side_saint <= 15) {
+		cloakoffnpcself( "ep19_prt_cas_21_31" );
+		cloakoffnpcself( "ep19_prt_cas_18_32" );
+		cloakoffnpcself( "ep19_prt_cas_15_31" );
+		cloakoffnpcself( "ep19_prt_cas_16_27" );
+		cloakoffnpcself( "ep19_prt_cas_26_27" );
+		cloakoffnpcself( "ep19_prt_cas_23_36" );
+		cloakoffnpcself( "ep19_prt_cas_22_30" );
+		cloakoffnpcself( "ep19_prt_cas_22_33" );
+		mes "[Ellis, o funcionario da fotocopia]";
+		mes "Nao, por que ha mais sacolas...";
+		mes "Voce nao vai levar tudo o que esta aqui, vai?";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[Friedericke]";
+		mes "Nao?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "Claro que nao!";
+		mes "Leve apenas o que voce precisa!";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[Friedericke]";
+		mes "Todas as coisas que voce precisa";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Elise, auxiliar de copiadora]";
+		mes "" + strcharinfo(0) + "Por favor, nao me olhe assim";
+		mes "Voce pode parecer assim, mas voce e muito bom...";
+		mes "Suas habilidades sao...";
+		mes "Really...";
+		mes "Really...";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "Nao posso fazer isso.";
+		mes "Se voce nao abrir e verificar, voce realmente vai acabar em Ishgard com todas essas coisas";
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "Vamos ver o que ha na bolsa e reduzir o que pudermos";
+		cutin "acact_01.bmp",2;
+		close3;
+	}
+	mes "- Eu tenho uma mala. -";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11800) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 9
+prt_cas,18,32,5	script	Santo#ep19::ep19_prt_cas_18_32	4_EP19_FRIEDERIKE,{
+	if (ep19_side_saint == 9) {
+		mes "[Friedericke]";
+		mes "Hello";
+		mes "" + strcharinfo(0) + "mes.";
+		mes "Eu sou Friederike.";
+		mes "Estou feliz em conhece-lo.";
+		cutin "ep19_friederike03.png",2;
+		cloakoffnpcself( "ep19_prt_cas_15_31" );
+		next;
+		mes "[Friederike]";
+		mes "No entanto " + strcharinfo(0) + "Voce esta aqui porque Voklind o enviou, certo?";
+		mes "Esta muito frio em Isgard?";
+		cutin "ep19_friederike02.png",2;
+		cloakoffnpcself( "ep19_prt_cas_16_27" );
+		next;
+		select( "Frio." );
+		mes "[Friederike]";
+		mes "Nao gosto de sentir frio";
+		mes "Eu pensei que as casas la fossem feitas de gelo?";
+		mes "Voce deveria levar um edredom de plumas!";
+		cloakoffnpcself( "ep19_prt_cas_26_27" );
+		next;
+		select( "Alguns castelos sao feitos de gelo." );
+		mes "[Friederike]";
+		mes "Uau!";
+		mes "Isso seria muito bom!";
+		mes "Entao, qual desses vestidos azuis claros ou o branco combina com ele?";
+		cutin "ep19_friederike03.png",2;
+		cloakoffnpcself( "ep19_prt_cas_23_36" );
+		next;
+		mes "[Friederike]";
+		mes "Ah!";
+		mes "Vou ter que comprar sapatos para combinar com o vestido!";
+		cutin "ep19_friederike01.png",2;
+		cloakoffnpcself( "ep19_prt_cas_22_30" );
+		next;
+		mes "[Mark]";
+		mes "O que voce esta fazendo, aumentando a carga!";
+		cloakoffnpcself( "ep19_prt_cas_22_33" );
+		cutin "ep18_mark_03.png",0;
+		next;
+		mes "[Mark]";
+		mes "Ouch!";
+		mes "" + strcharinfo(0) + "님 안녕하세요.";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[Ellis, o funcionario da fotocopia]";
+		mes "Nao, por que ha mais sacolas...";
+		mes "Voce nao vai levar tudo o que esta aqui, vai?";
+		cloakoffnpcself( "ep19_prt_cas_21_31" );
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[Friederike]";
+		mes "Nao?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "Claro que nao!";
+		mes "Leve apenas o que voce precisa!";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[Friederike]";
+		mes "E tudo o que voce precisa";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Elise, auxiliar de copiadora]";
+		mes "" + strcharinfo(0) + "Por favor, nao me olhe assim";
+		mes "Voce pode parecer assim, mas voce e muito bom...";
+		mes "Suas habilidades sao...";
+		mes "Realmente...";
+		mes "Realmente...";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[Copiar Oficial Ellis]";
+		mes "Nao posso fazer isso";
+		mes "Se voce nao abrir e verificar, voce realmente vai acabar em Ishgard com todas essas coisas";
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "Vamos ver o que ha na bolsa e reduzir o que pudermos";
+		cutin "acact_01.bmp",2;
+		erasequest 11801;
+		setquest 11802;
+		ep19_side_saint = 10;
+		close3;
+	}
+	// default text
+	mes "[Entendido, Oficial Ellis]";
+	mes "Nao, por que ha mais sacolas...";
+	mes "Voce nao vai levar tudo o que esta aqui, vai?";
+	cutin "acact_04.bmp",2;
+	next;
+	mes "[Friedericke]";
+	mes "Nao?";
+	cutin "ep19_friederike02.png",2;
+	next;
+	mes "[Entendido, Oficial Ellis]";
+	mes "Claro que nao!";
+	mes "Leve apenas o que voce precisa!";
+	cutin "acact_04.bmp",2;
+	next;
+	mes "[Friedericke]";
+	mes "Todas as coisas que voce precisa";
+	cutin "ep19_friederike02.png",2;
+	next;
+	mes "[Elise, auxiliar de copiadora]";
+	mes "" + strcharinfo(0) + "Por favor, nao me olhe assim";
+	mes "Voce pode parecer assim, mas voce e muito bom...";
+	mes "Suas habilidades sao...";
+	mes "Realmente...";
+	mes "Realmente...";
+	cutin "acact_04.bmp",2;
+	next;
+	mes "[Oficial de Copia Ellis]";
+	mes "Nao posso fazer isso.";
+	mes "Se voce nao abrir e verificar, vai acabar em Ishgard com todas essas coisas";
+	next;
+	mes "[Entendido, Oficial Ellis]";
+	mes "Vamos ver o que ha na bolsa e reduzir o que pudermos";
+	cutin "acact_01.bmp",2;
+	close3;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11801) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 10
+prt_cas,15,31,5	script	Malas#ep19_2::ep19_prt_cas_15_31	4_EP19_SUITCASE,{
+	if (ep19_side_saint == 10) {
+		mes "- Sua bolsa esta cheia de casacos grossos. -";
+		next;
+		mes "[Friederike]";
+		mes "Esta frio em Ishgard, voce deveria ter um casaco de inverno";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Oficial de Copia Ellis]";
+		mes "Isso mesmo.";
+		mes "Entao, o proximo!";
+		cutin "acact_01.bmp",2;
+		erasequest 11802;
+		setquest 11803;
+		ep19_side_saint = 11;
+		close3;
+	}
+	mes "- Eu tenho uma mala. -";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11802) == 1" );
+	cloakonnpc();
+	end;
+}
+
+// Side Quest: Purification Saint - Step 11
+prt_cas,16,27,3	script	Malas#ep19_3::ep19_prt_cas_16_27	4_EP19_SUITCASE,{
+	if (ep19_side_saint == 11) {
+		mes "- Sua bolsa esta cheia de casacos grossos. -";
+		next;
+		mes "[Friederike]";
+		mes "Porque esta frio em Ishgard...";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[Ellis, o funcionario da copiadora]";
+		mes "Voce tinha um casaco na outra bolsa";
+		cutin "acact_01.bmp",2;
+		next;
+		mes "[Friedericke]";
+		mes "Mas...";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Ellis, o funcionario da copiadora]";
+		mes "Voce nao vai sair porque esta frio mesmo";
+		mes "Apenas pegue essa bolsa!";
+		mes "Then next!";
+		cutin "acact_01.bmp",2;
+		erasequest 11803;
+		setquest 11804;
+		ep19_side_saint = 12;
+		close3;
+	}
+	mes "- Eu tenho uma mala. -";
+	close;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11803) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 12
+prt_cas,26,27,3	script	Malas#ep19_4::ep19_prt_cas_26_27	4_EP19_SUITCASE,{
+	if (ep19_side_saint == 12) {
+		mes "- A bolsa contem um ursinho de pelucia.-";
+		next;
+		mes "[Elise, auxiliar de copiadora]";
+		mes "…";
+		cutin "acact_01.bmp",2;
+		next;
+		mes "[Friedericke]";
+		mes "Nao~~!";
+		mes "Nao consigo dormir sem a Angelica!";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Ellis, o funcionario da copiadora]";
+		mes "Entao ha apenas uma boneca";
+		cutin "acact_01.bmp",2;
+		next;
+		mes "[Friedericke]";
+		mes "Sim.";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[Copiar Oficial Ellis]";
+		mes "Entao, o proximo!";
+		cutin "acact_01.bmp",2;
+		erasequest 11804;
+		setquest 11805;
+		ep19_side_saint = 13;
+		close3;
+	}
+	mes "- Eu tenho uma mala. -";
+	close;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11804) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 13
+prt_cas,23,36,3	script	Malas#ep19_5::ep19_prt_cas_23_36	4_EP19_SUITCASE,{
+	if (ep19_side_saint == 13) {
+		mes "- A sacola contem doces. -";
+		next;
+		mes "[Ellis, o oficial de copias]";
+		mes "Voce pode levar isso com voce, pois pode ser dificil de encontrar em Ishgard.";
+		mes "Entao, o proximo!";
+		cutin "acact_01.bmp",2;
+		erasequest 11805;
+		setquest 11806;
+		ep19_side_saint = 14;
+		close3;
+	}
+	mes "- 여행용 가방이 있다. -";
+	close;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11805) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 14
+prt_cas,22,30,5	script	Malas#ep19_6::ep19_prt_cas_22_30	4_EP19_SUITCASE,{
+	if (ep19_side_saint == 14) {
+		mes "- Na bolsa, ha um boneco do fantoche de Barmund. -";
+		next;
+		mes "[Oficial de Copia Ellis]";
+		mes "Onde diabos voce conseguiu isso?";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[Friedericke]";
+		mes "Alpha me deu de presente quando fui a mansao desta vez";
+		cutin "ep19_friederike03.png",2;
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "De qualquer forma, de uma olhada nisso quando voltar de Ishgard";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[Friedericke]";
+		mes "Hing...";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Ellis, o funcionario da copiadora]";
+		mes "Ja chega de bagagem!";
+		cutin "acact_01.bmp",2;
+		erasequest 11806;
+		setquest 11807;
+		ep19_side_saint = 15;
+		close3;
+	}
+	mes "- Eu tenho uma mala. -";
+	close;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11806) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 15
+prt_cas,21,31,3	script	Ellis#ep19::ep19_prt_cas_21_31	4_F_ACOLYTE,{
+	if (ep19_side_saint == 15) {
+		mes "[Ellis, o funcionario da copiadora]";
+		mes "Phew!";
+		mes "Eu cortei e cortei e ainda assim e isso.";
+		mes "Nos vamos ficar sem carregadores...";
+		cutin "acact_04.bmp",2;
+		next;
+		mes "[du]";
+		mes "mulher~!";
+		mes "O Mark esta aqui!";
+		mes "Oh!";
+		mes "" + strcharinfo(0) + "e?";
+		mes "Voce quer ir ao novo restaurante de frituras no shopping center??";
+		cloakoffnpcself( "ep19_prt_cas_23_32" );
+		cloakoffnpcself( "ep19_prt_cas_24_31" );
+		cloakoffnpcself( "ep19_prt_cas_25_31" );
+		cutin "ep18_dew_01.png",2;
+		next;
+		mes "[Friedericke]";
+		mes "Eu tambem quero comer!";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "Uh-oh!";
+		mes "Dew!";
+		mes "Margie!";
+		mes "Mr Alf!";
+		cutin "acact_03.bmp",2;
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "Voce chegou bem na hora!";
+		mes "Por que voce nao me ajuda a carregar essas coisas enquanto sua irma compra aneis de porco fritos para voce?";
+		cutin "acact_02.bmp",2;
+		next;
+		mes "[du]";
+		mes "O que?";
+		mes "Realmente?";
+		mes "Sua irma esta viva?";
+		cutin "ep18_dew_05.png",2;
+		next;
+		mes "[Mark]";
+		mes "Irma!";
+		mes "Isso e...";
+		mes "Ugh...";
+		cutin "ep18_mark_04.png",0;
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "Fique quieto...";
+		cutin "acact_02.bmp",2;
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "Claro!";
+		mes "Comprarei quantos voce quiser";
+		next;
+		mes "[du]";
+		mes "Bom!";
+		mes "Eu estarei viajando como o vento, entao certifique-se de ter uma carteira grande!";
+		cutin "ep18_dew_01.png",2;
+		next;
+		mes "[Copiar Oficial Ellis]";
+		mes "Entao " + strcharinfo(0) + "Eu o enviarei para Aldebaran";
+		mes "Por favor, tenha cuidado em sua viagem.";
+		mes "E cuide de Friederike.";
+		cutin "acact_01.bmp",2;
+		next;
+		if (select( "Ir.", "Sair.." ) == 2)
+			end;
+		mes "[Friederike]";
+		mes "Mana, eu voltarei~";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[du]";
+		mes "Huh? Aldebaran???";
+		cutin "ep18_dew_02.png",2;
+		next;
+		mes "[Entendido, Oficial Ellis]";
+		mes "Tenha cuidado la fora~";
+		mes "Ouca atentamente o Sr. Voklind";
+		cutin "acact_03.bmp",2;
+		erasequest 11807;
+		setquest 11808;
+		ep19_side_saint = 16;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_prt_cas_22_33" );
+		cloakonnpcself( "ep19_prt_cas_21_31" );
+		cloakonnpcself( "ep19_prt_cas_18_32" );
+		cloakonnpcself( "ep19_prt_cas_15_31" );
+		cloakonnpcself( "ep19_prt_cas_16_27" );
+		cloakonnpcself( "ep19_prt_cas_26_27" );
+		cloakonnpcself( "ep19_prt_cas_23_36" );
+		cloakonnpcself( "ep19_prt_cas_22_30" );
+		cloakonnpcself( "ep19_prt_cas_23_32" );
+		cloakonnpcself( "ep19_prt_cas_24_31" );
+		cloakonnpcself( "ep19_prt_cas_25_31" );
+		warp "aldebaran",104,105;
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11807) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 17
+icecastle,27,123,3	duplicate(dummy_cloaked_npc)	Lehar#ep19_3::ep19_icecastle_27_123	4_EP19_LEHAR
+icecastle,25,121,5	duplicate(dummy_cloaked_npc)	Friederike#ep19입구::ep19_icecastle_25_121	4_EP19_FRIEDERIKE
+icecastle,20,126,5	duplicate(dummy_cloaked_npc)	Orvalho#ep19입구::ep19_icecastle_20_126	4_EP18_DEW
+icecastle,21,127,5	duplicate(dummy_cloaked_npc)	Marcas#ep19입구::ep19_icecastle_21_127	4_EP18_MARK
+icecastle,21,128,5	duplicate(dummy_cloaked_npc)	Margie#ep19입구::ep19_icecastle_21_128	4_4JOB_MAGGI
+icecastle,22,129,5	duplicate(dummy_cloaked_npc)	Opl#ep19입구::ep19_icecastle_22_129	4_EP18_ALF
+
+icecastle,23,123,0	script	#EntradaLehar	HIDDEN_WARP_NPC,3,3,{
+	end;
+OnTouch:
+	if (ep19_side_saint == 17) {
+		mes "[lehar]";
+		mes "Ah!";
+		mes "" + strcharinfo(0) + "Finalmente voce esta aqui!";
+		mes "O santo e...";
+		cutin "ep19_lehar01.png",2;
+		cloakoffnpcself( "ep19_icecastle_27_123" );
+		cloakoffnpcself( "ep19_icecastle_25_121" );
+		cloakoffnpcself( "ep19_icecastle_20_126" );
+		cloakoffnpcself( "ep19_icecastle_21_127" );
+		cloakoffnpcself( "ep19_icecastle_21_128" );
+		cloakoffnpcself( "ep19_icecastle_22_129" );
+		next;
+		mes "[Friederike]";
+		mes "E Friedericke.";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[lehar]";
+		mes "Hello.";
+		mes "Friederike.";
+		mes "E os outros...";
+		mes "Voce viajou muito para chegar ao Castelo de Gelo.";
+		cutin "ep19_lehar07.png",2;
+		next;
+		mes "[lehar]";
+		mes "Desculpe-me por te-lo deixado na mansao Barmund";
+		cutin "ep19_lehar04.png",2;
+		next;
+		mes "[Friedericke]";
+		mes "Esta tudo bem.";
+		mes "Voce foi muito repreendido por Voklind?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[lehar]";
+		mes "?.";
+		mes "Eu me lembro bem...";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[du]";
+		mes "Huh???";
+		mes "Onde estou!!!";
+		mes "Esta frio";
+		mes "Meu potling bokkeum!!!";
+		cutin "ep18_dew_02.png",2;
+		next;
+		mes "[mark]";
+		mes "Esta mais frio aqui do que eu pensava.";
+		mes "E melhor irmos andando.";
+		cutin "ep18_mark_01.png",0;
+		next;
+		mes "[lehar]";
+		mes "Ah!!! estou vendo.";
+		mes "Nao vamos fazer isso aqui, apenas me siga por aqui.";
+		mes "Voce pegara um resfriado se ficar muito tempo do lado de fora.";
+		npctalk "lehar: Eu nao gosto mais da sala de oracao.…", "ep19_icecastle_27_123", bc_self;
+		cutin "ep19_lehar05.png",2;
+		erasequest 11809;
+		setquest 11810;
+		ep19_side_saint = 18;
+		close2;
+		cutin "",255;
+		cloakonnpcself( "ep19_icecastle_27_123" );
+		cloakonnpcself( "ep19_icecastle_25_121" );
+		cloakonnpcself( "ep19_icecastle_20_126" );
+		cloakonnpcself( "ep19_icecastle_21_127" );
+		cloakonnpcself( "ep19_icecastle_21_128" );
+		cloakonnpcself( "ep19_icecastle_22_129" );
+		navigateto("icecastle",59,213);
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11809) == 1" );
+	end;
+}
+
+// Side Quest: Purification Saint - Step 18
+icas_in,33,112,0	script	#Limite da populacao interna	HIDDEN_WARP_NPC,1,1,{
+	end;
+OnTouch:
+	if (ep19_side_saint < 19)
+		end;
+	if (ep19_side_saint == 19) {
+		cloakoffnpcself( "ep19_healrock_5" );
+		cloakoffnpcself( "ep19_healrock_7" );
+		cloakoffnpcself( "ep19_healrock_8" );
+		end;
+	}
+	cloakoffnpcself( "ep19_healrock_1" );
+
+	if (ep19_side_sea < 2) {
+		cloakonnpcself( "ep19_healrock_2" );	// force cloaked
+		end;
+	}
+	if (ep19_side_sea == 2) {
+		cloakoffnpcself( "ep19_healrock_2" );
+		cloakoffnpcself( "ep19_healrock_4" );
+		cloakoffnpcself( "ep19_healrock_5" );
+		cloakoffnpcself( "ep19_healrock_8" );
+		end;
+	}
+	cloakoffnpcself( "ep19_healrock_2" );
+	end;
+}
+
+icas_in,34,121,3	duplicate(dummy_cloaked_npc)	Vorklind#ep19_room::ep19_healrock_3	4_EP19_VOGLINDE
+icas_in,27,119,5	duplicate(dummy_cloaked_npc)	Du#ep19_room::ep19_healrock_4	4_EP18_DEW
+icas_in,30,121,5	duplicate(dummy_cloaked_npc)	Marca#ep19_room::ep19_healrock_5	4_EP18_MARK
+icas_in,29,120,5	duplicate(dummy_cloaked_npc)	Magi#ep19_room::ep19_healrock_6	4_4JOB_MAGGI
+icas_in,26,119,5	duplicate(dummy_cloaked_npc)	Alf#ep19_room::ep19_healrock_7	4_EP18_ALF
+
+// Part of the daily quest "Friederike's Day"
+// icas_in,32,123,5	script	프리데리케#ep19_room	4_EP19_FRIEDERIKE,{
+
+// Side Quest: Purification Saint - Step 19
+icas_in,35,118,3	script	Lehar#ep19_room::ep19_healrock_8	4_EP19_LEHAR,{
+	if (ep19_side_saint == 19) {
+		if (checkweight("Ep19_Snow_Flower",30) == 0) {	// Ep19_Snow_Flower
+			mes "- Espere um minuto !!! -";
+			mes "- Atualmente, voce esta carregando -";
+			mes "- muitos itens com voce. -";
+			mes "- Por favor, tente novamente -";
+			mes "- depois que voce perder algum peso. -";
+			close;
+		}
+		mes "[lehar]";
+		mes "Entao voce, Friederike, pode ficar neste quarto.";
+		mes "Se precisar de alguma coisa, pode me ligar e...";
+		mes "Esta tudo bem para as pessoas que vieram com voce ficarem com voce tambem?";
+		mes "Friederike?";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[Friedericke]";
+		mes "Sim";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[lehar]";
+		mes "Mais tarde, quando eu...";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[???]";
+		mes "<FONT SIZE = 16><B>Lehar!</FONT></B>";
+		mes "<FONT SIZE = 16><B>Aqui esta?</FONT></B>";
+		cutin "ep19_iwin03.png",2;
+		cloakoffnpcself( "ep19_healrock_1" );
+		next;
+		mes "[???]";
+		mes "Ah!";
+		mes "Esses convidados sao de Midgard?";
+		mes "Desculpe-me por entrar tao de repente";
+		mes "E urgente...";
+		next;
+		mes "[lehar]";
+		mes "Shurrrr, o que esta acontecendo?";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[shrurr]";
+		mes "Ah! Isso e...";
+		mes "Por acaso voce tem algum nucleo magico ^e5555epurificado^000000 sobrando?";
+		mes "Meu companheiro caiu em um ^e5555epit^000000 enquanto cacava ha pouco tempo, mas havia agua la dentro e ele nao conseguiu acordar.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[shrurr]";
+		mes "Pobre coitado, ele nao tem penas, entao esta com frio, embora seus outros amigos as tenham coletado e o tenham vestido.";
+		mes "^E5555EI Se voce usar o Nucleo Magico Purificado^000000, voce deve ser capaz de se recuperar rapidamente.";
+		next;
+		mes "[shrurr]";
+		mes "^e5555eSe for um nucleo magico de baixo grau^000000 de Legane, eu tenho algo...";
+		mes "^E5555eSe voce nao o purificar, ele sera apenas um pedaco de pedra inutil^000000...";
+		next;
+		mes "[lehar]";
+		mes "Isso!";
+		mes "Espero que seu amigo esteja bem...";
+		mes "Isso e muito importante";
+		cutin "ep19_lehar05.png",2;
+		next;
+		mes "[lehar]";
+		mes "Acho que um nucleo magico vai resolver o problema, entao traga seu amigo aqui primeiro";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[shhhh]";
+		mes "Voce esta bem?";
+		MES "^e5555eNem Leon nem Aureli^000000 pareciam ter condicoes de pagar por isso no momento.";
+		cutin "ep19_iwin03.png",2;
+		next;
+		mes "[lehar]";
+		mes "Nao se preocupe com isso!";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[Shurrrr]";
+		mes "<FONT SIZE = 16><B>Agradecimentos</FONT></B>";
+		mes "Retornarei em seguida!";
+		cutin "ep19_iwin03.png",2;
+		cloakonnpcself( "ep19_healrock_1" );
+		next;
+		mes "[lehar]";
+		mes "Entao, Friederike.";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[Friedericke]";
+		mes "Huh?";
+		mes "Por que?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[lehar]";
+		mes "Agora!";
+		mes "Purifique este nucleo magico";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[Friedericke]";
+		MES "O que e essa coisa suja?";
+		mes "Tenho que limpa-la?";
+		mes "Eu nao quero tocar nisso...";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[lehar]";
+		mes "Minha tia me pediu para fazer isso";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[friederike]";
+		mes "Hmm...";
+		mes "Eu so preciso me limpar, certo?";
+		cutin "ep19_friederike02.png",2;
+		next;
+		mes "[lehar]";
+		mes "Friederike, voce nao se suja de jeito nenhum";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[Friedericke]";
+		mes "Mas e ruim quando voce toca nele...";
+		cutin "ep19_friederike04.png",2;
+		next;
+		mes "[Friedericke]";
+		mes "Aqui esta.";
+		mes "E assim que deve ser?";
+		cutin "ep19_friederike05.png",2;
+		next;
+		mes "[lehar]";
+		mes "Ha...";
+		mes "Eu estava esperando isso, mas voce faz parecer tao simples que chega a ser ridiculo";
+		cutin "ep19_lehar04.png",2;
+		next;
+		mes "[lehar]";
+		mes "A purificacao do nucleo magico poderia ser feita por Leon ou Aureli, mas eles nao sao especializados em purificacao, entao so poderiam fazer pequenas mudancas quando fosse realmente necessario.";
+		next;
+		mes "[lehar]";
+		mes "Porque e terrivelmente ineficiente quando voce pensa em todas as outras coisas que voce poderia fazer com a mesma quantidade de potencia";
+		next;
+		mes "[lehar]";
+		mes "Isso certamente explica por que sua tia estava tao desesperada para encontrar Friederike";
+		cutin "ep19_lehar03.png",2;
+		next;
+		mes "[Friedericke]";
+		mes "Serio?";
+		mes "Voklind tem me procurado muito?";
+		cutin "ep19_friederike01.png",2;
+		next;
+		mes "[lehar]";
+		mes "Sua tia ficara mais feliz se voce continuar a trabalhar na purificacao do nucleo magico";
+		cutin "ep19_lehar01.png",2;
+		next;
+		mes "[Friedericke]";
+		mes "Heehee...";
+		cutin "ep19_friederike03.png",2;
+		ep19_side_saint = 20;
+		ep19_side_sea = 1;	// // Side quest : Frozen Sea
+		completequest 11811;
+		set_reputation_points(3, (get_reputation_points(3) + 50));
+		getitem 1000608,30;	// Ep19_Snow_Flower
+		cloakoffnpcself( "ep19_healrock_1" );
+		close3;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(11811) == 1" );
+	end;
+}
+//
+
+
+
+// Side quest : Preaching Doctrine
+jor_nest,17,97,5	script	Bernagand#1	4_EP19_RGAN_SR2,{
+	if (ep19_main < 21) {
+		mes "Nao quero ser pego falando com Amurgan da maneira errada";
+		mes "Terei de tomar um pouco de cuidado com minhas costas";
+		close;
+	}
+	if (checkweight("Ep19_Snow_Flower",10) == 0) {
+		mes "- Voce tem muitos itens em sua posse para prosseguir com a missao. -";
+		close;
+	}
+	switch( isbegin_quest(8795) ) {
+	case 0:
+		mes "Um grupo de pessoas esta sentado ouvindo um leghan superlativo dizer algo de maneira calma.";
+		next;
+		if (select( "Vamos ouvir juntos.", "Passando por." ) == 2) {
+			mes "Vamos procurar em outro lugar por enquanto";
+			close;
+		}
+		mes "[Bernagand]";
+		mes "...mas este Bernagand pensa um pouco diferente.";
+		mes "Como todos os fieis aqui sabem, existe apenas um Deus, Jormungand";
+		next;
+		mes "[Bernagand]";
+		mes "Estamos todos aqui pela bencao de Deus";
+		mes "Nao somos como as outras racas, nao temos pais, nao temos filhos, mas estamos aqui em comunidade pela vontade de Deus";
+		npctalk "Voce e um membro recem-nascido da tribo? Estou pregando, entao ouca com atencao..", "ep19_jor_nest_24_97", bc_self;
+		next;
+		mes "A legana superlativa, que se autodenominava Bernagand, olhou para o lado e acenou com a cabeca..";
+		next;
+		mes "[Bernagand]";
+		mes "Outro novo crente, vamos lhe dar as boas-vindas";
+		npctalk "Bem-vindo!", "ep19_jor_nest_24_97", bc_self;
+		npctalk "Sentar-se aproximadamente.", "ep19_jor_nest_18_92", bc_self;
+		npctalk "...", "ep19_jor_nest_23_91", bc_self;
+		next;
+		mes "[Bernagand]";
+		mes "Agora, agora. Silencio novamente.";
+		mes "Eu ia encerrar meu sermao de hoje, mas como temos um padre aqui, vamos conversar um pouco mais.";
+		next;
+		mes "[Bernagand]";
+		mes "Ja faz algum tempo... Vamos falar sobre Rasgand";
+		next;
+		mes "[Bernagand]";
+		mes "Embora esteja ocupado e raramente seja visto, Rasgand viajou por toda a extensao desta terra fria para reconstruir nossa Ordem de Jormungand";
+		mes "Onde quer que tenha restado o menor traco de favor divino, ele nao poupou despesas e derramou sangue para criar uma nova raca";
+		next;
+		mes "[Bernagand]";
+		mes "A magia no sangue de Rasgand, o ultimo de nossos ancestrais, misturou-se com a magia desta terra abencoada por Deus, e uma nova vida comecou a se estabelecer";
+		mes "Mas nem tudo foi como deveria ser, pois aqueles que emergiram do ovo...";
+		next;
+		mes "[Bernagand]";
+		mes "porque eles eram leghans primitivos que nao foram escolhidos por Deus";
+		npctalk "Expiar...", "ep19_jor_nest_23_91", bc_self;
+		next;
+		mes "[Bernagand]";
+		mes "Rasgand sentiu pena deles e os transformou em nucleos magicos, um a um";
+		mes "E assim se passaram muitos anos... Nesse meio tempo, eu me juntei a Rasgand...";
+		next;
+		mes "[Bernagand]";
+		mes "Depois de tantos anos semeando sangue e colhendo novos parentes, passei a pensar desta forma";
+		next;
+		mes "[Bernagand]";
+		mes "Todos nos, leghans, agora, independentemente da posicao, somos parte integrante de Rasgand";
+		mes "Embora nao tenham pais nem filhos.";
+		next;
+		mes "[Bernagand]";
+		mes "Mas por que temos resultados tao diferentes?";
+		mes "E... Depende de ate onde voce quer chegar, eu acho";
+		next;
+		mes "[Bernagand]";
+		mes "Nao podemos saber o que Rasgand sofreu";
+		mes "E nao podemos saber as coisas antigas pelas quais passei, por exemplo, o padre que chegou agora";
+		next;
+		mes "[Bernagand]";
+		mes "Rasgand foi imortalizado pela maldicao que o envolveu com os humanos, mas...";
+		mes "Se a forca de Rasgand falhar antes que ele possa concluir sua vinganca contra os humanos, nossa raca estara condenada.";
+		next;
+		mes "[Bernagand]";
+		mes "...vinganca contra os humanos!";
+		npctalk "Vida longa a Jormungand!", "ep19_jor_nest_24_97", bc_self;
+		npctalk "Vida longa a Jormungand!", "ep19_jor_nest_23_91", bc_self;
+		next;
+		mes "[Bernagand]";
+		mes "Rancor dos ancestrais!";
+		npctalk "Vida longa a Jormungand!", "ep19_jor_nest_24_97", bc_self;
+		npctalk "Vida longa a Jormungand!", "ep19_jor_nest_23_91", bc_self;
+		next;
+		mes "[Bernagand]";
+		mes "Voce nao acha que precisamos... reorganizar nossas forcas antes que seja tarde demais?";
+		next;
+		mes "[Bernagand]";
+		mes "Antes que seja tarde demais...";
+		mes "Vamos nos preparar";
+		next;
+		mes "[Bernagand]";
+		mes "Isso conclui minha palestra de hoje.";
+		mes "Tenham um tempo relaxante, pessoal.";
+		npctalk "Tenho que ir para o trabalho....", "ep19_jor_nest_23_91", bc_self;
+		npctalk "...", "ep19_jor_nest_18_92", bc_self;
+		next;
+		mes "[Yuramigand]";
+		mes "Pode olhar para mim por um segundo?";
+		npctalk "Shhh. Nao olhe para este lado.", "ep19_jor_nest_18_92", bc_self;
+		setquest 8795;
+		close;
+	case 1:
+		mes "[Bernagand]";
+		mes "O sermao de hoje acabou.";
+		mes "Ate a proxima vez, novo padre";
+		close;
+	case 2:
+		mes "[Bernagand]";
+		mes "O sermao de hoje acabou.";
+		mes "Ate a proxima vez, novo padre";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 21 && isbegin_quest(8795) == 0" );
+	end;
+}
+
+jor_nest,18,92,7	script	Euramiganda#1::ep19_jor_nest_18_92	4_EP19_RGAN_SR1,{
+	if (checkweight("Ep19_Snow_Flower",10) == 0) {
+		mes "- Espere um minuto !!! -";
+		mes "- Atualmente, voce esta carregando -";
+		mes "- muitos itens com voce. -";
+		mes "- Por favor, tente novamente -";
+		mes "- depois que voce perder algum peso. -";
+		close;
+	}
+	switch( isbegin_quest(8795) ) {
+	case 0:
+		mes "Nao quero ser pego falando com Amurgan da maneira errada";
+		mes "Terei de tomar um pouco de cuidado com minhas costas";
+		close;
+	case 1:
+		mes "[Yuramigand]";
+		mes "Pode olhar para mim por um segundo?";
+		npctalk "Shhh. Nao olhe para este lado..", "", bc_self;
+		next;
+		select( "Sim?", "Posso ajuda-lo??" );
+		mes "[Euramiganda]";
+		mes "...";
+		mes "Isso lhe foi dito assim que voce nasceu, entao voce sabe que e altamente estimulante.";
+		mes "Voce nao precisa ouvir isso";
+		next;
+		mes "[Euramigand]";
+		mes "Nao sabemos o que Bernagand esta tramando.";
+		mes "Ele diz que esta fazendo isso, mas nao tenho certeza se ele esta realmente agindo em nome de Rasgand.";
+		next;
+		mes "[Euramigand]";
+		mes "Voce entende?";
+		next;
+		select( "Sim", "Nao sei" );
+		mes "[Euramigand]";
+		mes "...embora o tempo dira.";
+		mes "Nao fique muito amigo de Bernagand.";
+		mes "Rasgand nao gosta disso.";
+		next;
+		select( "Tem certeza?", "Sim" );
+		mes "[Euramiganda]";
+		mes "...";
+		mes "...";
+		next;
+		mes "[Euramigand]";
+		mes "Bernagand's, embora sua lealdade a Rasgand seja genuina";
+		next;
+		mes "[Euramigand]";
+		mes "...Isso e curioso. Como Alaygand disse, por que voces sao tao diferentes se todos nasceram do sangue de Rasgand?";
+		completequest 8795;
+		getitem 1000608,10;	// Ep19_Snow_Flower
+		close;
+	case 2:
+		mes "[Euramigand]";
+		MES "Tenha cuidado para nao se tornar o alvo de alguem";
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8795) == 1" );
+	end;
+}
+
+jor_nest,21,99,3	script	Rakanorgand#1	4_EP19_RGAN_R2,{
+	mes "[Rakanorgand]";
+	mes "Siga os ensinamentos dos deuses...";
+	close;
+}
+
+jor_nest,24,97,3	script	Handymarigand#1::ep19_jor_nest_24_97	4_EP19_RGAN_R1,{
+	mes "[Handymarigand]";
+	mes "E um discurso gentil que e facil de ouvir";
+	close;
+}
+
+jor_nest,23,91,1	script	Ernagus Dagand#1::ep19_jor_nest_23_91	EP19_RGAN_D,{
+	mes "[Ernagusdagand]";
+	mes "...";
+	mes "do. Trabalho.";
+	mes "trabalhe duro. Expiacao.";
+	close;
+}
+//
+
+
+// Side quest : Curious Things
+jor_nest,239,239,3	script	Delfanagand#1	4_EP19_RGAN_SR1,{
+	if (checkweight("Ep19_Snow_Flower",10) == 0) {
+		mes "- Voce tem muitos itens em sua posse para concluir a missao. -";
+		close;
+	}
+	if (ep19_main < 21) {
+		mes "Nao quero ser pego falando com Amurgan da maneira errada";
+		mes "Terei de tomar um pouco de cuidado com minhas costas";
+		close;
+	}
+	switch( isbegin_quest(8793) ) {
+	case 0:
+		mes "[Delfanagand]";
+		mes "Nao, eu nunca vi um padre neste lugar antes, de onde voce veio, como voce veio parar aqui?";
+		mes "Quem o deixou sair do incubatorio e ficar rastejando por ai?";
+		mes "Quem esta no comando?";
+		next;
+		mes "[Delfanagand]";
+		mes "...huh?";
+		mes "Infelizmente, voce nao e do incubatorio, e?";
+		mes "Ora, ora, ora, por que ninguem me contou?";
+		next;
+		mes "Um leghan superlativo de repente pegou um transeunte e comecou a tagarelar consigo mesmo";
+		next;
+		mes "[Delfanagand]";
+		mes "Eu sou, Delfanagand";
+		mes "Todo Legan que pode falar conhece meu rosto";
+		next;
+		mes "[Delfanagand]";
+		mes "O que voce quer saber?";
+		next;
+		select( "Sim", "Nao" );
+		mes "[Delfanagand]";
+		mes "Voce e uma crianca franca.";
+		mes "Mas agora que voce esta aqui, ouca minha historia.";
+		next;
+		mes "[Delfanagand]";
+		mes "Hmmm...";
+		mes "Normalmente, eu teria um monte deles e os ensinaria todos de uma vez, mas e um pouco estranho ter apenas um e tentar explica-lo.";
+		next;
+		mes "[Delfanagand]";
+		mes "Somos uma raca de pessoas que guardam esta terra sob a protecao da grande serpente Jormungand. Nos despertamos de ovos, mas nao temos pais, e e a magia da terra que os nutre.";
+		mes "Embora todas as criaturas do mundo tenham pais, nos surgimos pela vontade de Rasgand, o Sobrevivente, e recebemos a forma pelo poder de Jormungand, a Grande Serpente.";
+		next;
+		mes "[Delfanagand]";
+		mes "Louvado seja voce, Jormungand, a Grande Serpente.";
+		mes "Salve, Rasgand, o sobrevivente.";
+		mes "E tambem pela graca de Rasgand que voce emergiu do ovo com tanta inteligencia";
+		mes "O sangue do forte faz um ovo forte.";
+		next;
+		mes "[Delfanagand]";
+		mes "Todos nos, legans, somos descendentes do sangue de Rasgand";
+		mes "Nao temos um conceito de pai-filho, mas voce e eu, com nossos olhos abertos, sabemos que o sangue de Rasgand, que herdou toda a vontade de seus ancestrais, fez de todos nos esses cristais de magia.";
+		next;
+		mes "[Delfanagand]";
+		mes "O unico leghan supremo e um Rasgand.";
+		mes "Abaixo dele, um leghan superlativo como eu sera chamado de bispo";
+		next;
+		mes "[Delfanagand]";
+		mes "Voce nasceu um sacerdote, escolhido pelos deuses.";
+		mes "Aqueles que estao cuidando dos ovos ali sao leigos.";
+		mes "Os que acordaram incapazes de absorver ate mesmo um minimo da magia dos deuses seriam uteis se pudessem fazer o trabalho...";
+		next;
+		mes "[Delfanagand]";
+		mes "Se nao, eles sao um recurso.";
+		mes "Use essa sua sabedoria para ajudar Rasgand e para ajudar a Ordem de Jormungand a expandir sua presenca no continente.";
+		mes "E a pergunta e?";
+		next;
+		select( "Sim", "Nao" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "Nenhum.";
+		next;
+		mes "[Delfanagand]";
+		mes "Hmmm...";
+		mes "Voce nao e tao inteligente quanto parece";
+		mes "Ou eu lhe ensinei algo errado?";
+		next;
+		mes "[Delfanagand]";
+		mes "Quando eles se reuniram e perguntaram uns aos outros se tinham alguma pergunta...";
+		next;
+		mes "[Delfanagand]";
+		mes "Nao seja timido, pergunte";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "...";
+		next;
+		mes "Considerando a historia de Delfanagand, parece que os leghans de um certo nivel de inteligencia emergem do ovo com algum conhecimento desde o inicio, incluindo a capacidade de dialogar.";
+		next;
+		mes "Fico feliz em saber que voce esta disposto a ignorar uma certa quantidade de girias.";
+		next;
+		mes "Mas por que precisamos ouvir sobre a Ordem de Jormungand?";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Depois, ha o...";
+		next;
+		mes "[Delfanagand]";
+		mes "Sim, sim.";
+		mes "Somos uma raca excepcional, por isso e natural nos perguntarmos";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Por que nascemos aprendendo a falar, mas temos que aprender essas coisas uma a uma??";
+		next;
+		mes "[Delfanagand]";
+		mes "Ai de mim, ai de mim, que pergunta dificil!";
+		mes "Mas ha um pequeno mal-entendido.";
+		mes "Nos nao nascemos para aprender a falar.";
+		next;
+		mes "[Delfanagand]";
+		mes "Cada um de nos e uma entidade separada de Rasgand, mas temos algo em comum: somos R'gan, do sangue de Rasgand";
+		mes "Entao, as coisas que voce sabe sao naturais para voce como um Legan";
+		mes "Diga-me o que voce sabe.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "...";
+		next;
+		select( "Leghans comem leghans" );
+		mes "[" + strcharinfo(0) + "]";
+		mes "Leghans comem leghans...";
+		next;
+		mes "[Delfanagand]";
+		mes "Sim. Coisas que sabemos sem sermos ensinados. Nascemos sabendo tudo o que e natural para Rasgand.";
+		mes "Mas a doutrina da Ordem e algo que pode mudar a medida que nosso poder cresce e nosso numero aumenta.";
+		next;
+		mes "[Delphanagand]";
+		mes "Hmm, suponho que voce ja tenha ouvido a longa historia de Bernagand?";
+		next;
+		setquest 8793;
+		mes "[Delphanagand]";
+		mes "Entao vou lhe dar um teste";
+		mes "Quero que voce de uma volta aqui no incubatorio e converse com os leigos que o guardam.";
+		mes "<NAVI>[Bom ouvinte]<INFO>maior_ninho,277,257,0,101,0</INFO></NAVI>,";
+		mes "<NAVI>[Preguicoso]<INFO>maior_ninho,220,279,0,101,0</INFO></NAVI>,";
+		mes "<NAVI>[Nao e um bom ouvinte]<INFO>jor_nest,274,199,0,101,0</INFO></NAVI>,";
+		close;
+	case 1:
+		if (isbegin_quest(8801) == 1) {
+			mes "[Delfanagand]";
+			mes "Como foi? Como voce... Voce tinha uma crianca que se perguntava sobre alguma coisa?";
+			mes "Voce ja deve ter percebido, voce faz o que pode.";
+			mes "Voce deve continuar a se maravilhar e a trabalhar para a Ordem";
+			completequest 8801;
+			completequest 8793;
+			getitem 1000608,10;	// Ep19_Snow_Flower
+			next;
+			mes "[Delfanagand]";
+			mes "Faca o que voce puder";
+			close;
+		}
+		mes "[Delfanagand]";
+		mes "De uma volta no incubatorio e converse com os leigos.";
+		mes "<NAVI>[Bom ouvinte]<INFO>jor_nest,277,257,0,101,0</INFO></NAVI>,";
+		mes "<NAVI>[Preguicoso]<INFO>maior_ninho,220,279,0,101,0</INFO></NAVI>,";
+		mes "<NAVI>[Nao e um bom ouvinte]<INFO>jor_nest,274,199,0,101,0</INFO></NAVI>,";
+		close;
+	case 2:
+		mes "[Delfanagand]";
+		mes "Voce deve continuar a se maravilhar e a trabalhar para a Ordem";
+		close;
+	}
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep19_main >= 21 && isbegin_quest(8793) == 0" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(8801) == 1" );
+	end;
+}
+
+jor_nest,277,257,1	script	Yamurisnigand#1	EP19_RGAN_D,{
+	if (checkweight("Ep19_Snow_Flower",10) == 0) {
+		mes "- Voce tem muitos itens em sua posse para concluir a missao. -";
+		close;
+	}
+	if (ep19_main < 21) {
+		mes "Nao quero ser pego falando com Amurgan da maneira errada";
+		mes "Terei de tomar um pouco de cuidado com minhas costas";
+		close;
+	}
+	if (isbegin_quest(8793) == 1) {
+		switch( isbegin_quest(8802) ) {
+		case 0:
+			mes "[Yamurisnigand]";
+			mes "Delfanagand?";
+			mes "Pergunte a ele o que ele sabe?";
+			next;
+			mes "[Yamurisnigand]";
+			mes "...Nao sei, voce.";
+			next;
+			select( "좋아하는 것" );
+			mes "[Yamurisnigand]";
+			mes "Do que voce gosta?";
+			mes "Um lugar quente...";
+			mes "Nao gosto de ficar do lado de fora.";
+			next;
+			mes "Acho que nao vou conseguir ouvir nada importante.";
+			if (isbegin_quest(8800) == 1)
+				changequest 8800,8801;
+			else if (isbegin_quest(8799) == 1)
+				changequest 8799,8800;
+			else
+				setquest 8799;
+			setquest 8802;
+			completequest 8802;
+			mes "Terei que encontrar outro trabalhador, Legan..";
+			close;
+		case 1:
+		case 2:
+			mes "[Yamurisnigand]";
+			mes "Do que voce nao gosta?";
+			mes "Lugares frios...";
+			mes "Nao gosto de ficar do lado de fora.";
+			close;
+		}
+		end;
+	}
+	mes "[Yamurisnigand]";
+	mes "Do que voce nao gosta?";
+	mes "Lugares frios...";
+	mes "Nao gosto de ficar do lado de fora.";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8793) == 1 && isbegin_quest(8802) == 0" );
+	end;
+}
+
+jor_nest,274,199,5	script	Gibedi Usagand#1	EP19_RGAN_D,{
+	if (checkweight("Ep19_Snow_Flower",10) == 0) {
+		mes "- Voce tem muitos itens em sua posse para concluir a missao. -";
+		close;
+	}
+	if (ep19_main < 21) {
+		mes "Nao quero ser pego falando com Amurgan da maneira errada";
+		mes "Terei de tomar um pouco de cuidado com minhas costas";
+		close;
+	}
+	if (isbegin_quest(8793) == 1) {
+		switch( isbegin_quest(8804) ) {
+		case 0:
+			mes "[Gibedi Usagand]";
+			mes "Surpresa!";
+			mes "Estou surpreso... Da, yo.";
+			mes "O padre que eu nao vi.";
+			mes "Yo.";
+			mes "Eu nao joguei.";
+			next;
+			mes "[Gibedi Usagand]";
+			mes "...Al, eu estava cuidando de voce.";
+			next;
+			select( "Reclamacoes" );
+			mes "[Gibedi Usagand]";
+			mes "Uma reclamacao?";
+			mes "...nenhum padre jamais me disse algo assim";
+			next;
+			mes "[Gibedi Usagand]";
+			mes "Nos somos... seguidores de Deus, Yo.";
+			mes "...";
+			mes "Trabalho e trabalho, nao e?";
+			mes "Eu gostaria de jogar, mas...";
+			mes "Nos temos que trabalhar.";
+			next;
+			mes "Nao acho que vamos ouvir muita historia..";
+			if (isbegin_quest(8800) == 1)
+				changequest 8800,8801;
+			else if (isbegin_quest(8799) == 1)
+				changequest 8799,8800;
+			else
+				setquest 8799;
+			setquest 8804;
+			completequest 8804;
+			mes "Terei que encontrar outro trabalhador, Legan..";
+			close;
+		case 1:
+		case 2:
+			end;
+		}
+		end;
+	}
+	mes "[Gibediusagand]";
+	mes "...nao fez mais nada, ne?";
+	mes "Nao fez mais nada, ne?";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8793) == 1 && isbegin_quest(8804) == 0" );
+	end;
+}
+
+jor_nest,220,279,1	script	Tagimi Rodrigand#1	EP19_RGAN_D,{
+	if (checkweight("Ep19_Snow_Flower",10) == 0) {
+		mes "- Voce tem muitos itens em sua posse para concluir a missao. -";
+		close;
+	}
+	if (ep19_main < 21) {
+		mes "Nao quero ser pego falando com Amurgan da maneira errada";
+		mes "Terei de tomar um pouco de cuidado com minhas costas";
+		close;
+	}
+	if (isbegin_quest(8793) == 1) {
+		switch( isbegin_quest(8803) ) {
+		case 0:
+			mes "[Tagimi Rodrigand]";
+			mes "Delfanagand?";
+			mes "Pergunte a ele o que ele sabe";
+			next;
+			mes "[Tagimi Rodrigand]";
+			mes "Nao quero trabalhar....";
+			next;
+			select( "O que voce deseja fazer" );
+			mes "[Tagimi Rodrigand]";
+			mes "O que voce quer fazer?";
+			mes "Lie on the floor... onde a magia e quente...";
+			mes "Eu quero dormir, Yo.";
+			MES "Mas eu trabalho para o renascimento do Jormungandanismo.";
+			next;
+			mes "Parece que nao tenho pensamentos profundos.";
+			if (isbegin_quest(8800) == 1)
+				changequest 8800,8801;
+			else if (isbegin_quest(8799) == 1)
+				changequest 8799,8800;
+			else
+				setquest 8799;
+			setquest 8803;
+			completequest 8803;
+			mes "Vou me reportar a Delfanagand..";
+			close;
+		case 1:
+		case 2:
+			end;
+		}
+		end;
+	}
+	mes "[Tagimirodigand]";
+	mes "Em algum lugar quente... Quero dormir";
+	close;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "isbegin_quest(8793) == 1 && isbegin_quest(8803) == 0" );
+	end;
+}

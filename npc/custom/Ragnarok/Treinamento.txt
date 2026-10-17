@@ -1,0 +1,37 @@
+sec_in01,81,91,0	script	Boneco de Treino#0	844,{
+	end;
+	
+OnMyMobDead:
+OnInit:
+	getunitdata(getnpcid(0), .@d);
+	monster strnpcinfo(4),.@d[UNPC_X],.@d[UNPC_Y],"Boneco de Treino",1721,1,strnpcinfo(0)+"::OnMyMobDead";
+	.@dupid = atoi(strnpcinfo(2));
+	.gid[.@dupid] = $@mobid[0];
+	.mhp[.@dupid] = strmobinfo(4,1721);
+	setunitdata .gid[.@dupid],UMOB_MODE,.@d[UMOB_MODE]|0x4000000|0x0200000; // Set MD_STATUS_IMMUNE (0x4000000) because EDP/burn/%MHP based status can skew the DPS counter so much.
+	initnpctimer;
+	end;
+	
+OnTimer5000:
+	.@dupid = atoi(strnpcinfo(2));
+	if(unitexists(.gid[.@dupid])){
+		getunitdata(.gid[.@dupid],.@d);
+		.@diff = (.mhp[.@dupid] - .@d[UMOB_HP]);
+		if(.@diff > 0){
+			npctalk "Punching Bag : I've taken " + (.@diff/5) + " DPS in last 5 seconds.";
+			setunitdata .gid[.@dupid],UMOB_HP,.mhp[.@dupid];
+			specialeffect EF_HEAL;
+		}
+	}
+	initnpctimer;
+}
+
+sec_in01,76,91,0	duplicate(Boneco de Treino#0)	Boneco de Treino#1	844
+sec_in01,71,91,0	duplicate(Boneco de Treino#0)	Boneco de Treino#2	844
+sec_in01,71,91,0	duplicate(Boneco de Treino#0)	Boneco de Treino#3	844
+sec_in01,71,87,0	duplicate(Boneco de Treino#0)	Boneco de Treino#4	844
+sec_in01,76,87,0	duplicate(Boneco de Treino#0)	Boneco de Treino#5	844
+sec_in01,81,87,0	duplicate(Boneco de Treino#0)	Boneco de Treino#6	844
+sec_in01,81,83,0	duplicate(Boneco de Treino#0)	Boneco de Treino#7	844
+sec_in01,76,83,0	duplicate(Boneco de Treino#0)	Boneco de Treino#8	844
+sec_in01,71,83,0	duplicate(Boneco de Treino#0)	Boneco de Treino#9	844

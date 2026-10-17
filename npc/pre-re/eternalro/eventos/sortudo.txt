@@ -1,0 +1,74 @@
+que_temsky,36,142,5	script	Sortudo#warper	869,{
+	Mes "[Sortudo]";
+	Mes "Olá "+StrCharInfo(0)+", o que você deseja?";
+	Next;
+	If (Select ("Entrar no evento:"+((getgroupid() < 90) ? "":"Modificar drops")+"") == 1) {
+		Mes "[Sortudo]";
+		If (!$portao_sortudo) { Mes "O evento está fechado... Horário do Evento: 10:30, 14:30, 18:30, 21:00HRS 1 Baú por Sala!"; Close; }
+		Mes "Boa sorte no evento!";
+		Close2;
+		Set .@rs, Rand (1,8);
+		SetArray $@_wx[0], 73, 72, 61, 60, 48, 49, 36, 37;
+		SetArray $@_wy[0], 52, 51, 52, 52, 52, 52, 52, 52;
+		For (Set .@_w, 0; .@_w < 9; Set .@_w, .@_w + 1)
+			If (.@rs == .@_w+1) { Warp "quiz_02", $@_wx[.@_w], $@_wy[.@_w]; End; }
+	}
+	Mes "[Sortudo]\rColoque o ID do primeiro item:";
+	Input .@in1;
+	Next;
+	Mes "[Sortudo]\rColoque o ID do segundo item:";
+	Input .@in2;
+	Next;
+	Mes "[Sortudo]\rColoque a quantidade de zeny:";
+	Input .@in3;
+	Next;
+	Mes "[Sortudo]";
+	Mes "Você escolheu como prêmios:";
+	Mes "1 "+getitemname(.@in1);
+	Mes "1 "+getitemname(.@in2);
+	Mes .@in3+"z";
+	Close2;
+	Set $sortudo0, .@in1;
+	Set $sortudo1, .@in2;
+	Set $sortudo2, .@in3;
+	End;
+}
+
+quiz_02,0,0,0	script	Sortudo#core	-1,{
+End;
+	OnClock1455: OnClock1830: OnClock2100: OnClock1030: OnClock2330: OnClock0230:
+		AtCommand "@killmonster2"; Set $portao_sortudo, 1; announce "[Sortudo]: O evento irá começar, vocês só tem 5 minutos!",0,0x00FF80; End;
+	OnClock1431: OnClock1831: OnClock2101: OnClock1031: OnClock2331: OnClock0231:
+		AtCommand "@skillon"; Set $portao_sortudo, 1;  announce "[Sortudo]: O evento irá começar, vocês só tem 4 minutos!",0,0xC0C0C0; End;
+	OnClock1432: OnClock1832: OnClock2102: OnClock1032: OnClock2332: OnClock0232:
+		AtCommand "@time"; Set $portao_sortudo, 1;  announce "[Sortudo]: O evento irá começar, vocês só tem 3 minutos!",0,0x8080C0; End;
+	OnClock1433: OnClock1833: OnClock2103: OnClock1033: OnClock2333: OnClock0233:
+		AtCommand "@time"; Set $portao_sortudo, 1;  announce "[Sortudo]: O evento irá começar, vocês só tem 2 minutos!",0,0xFF9B00; End;
+	OnClock1434: OnClock1834: OnClock2104: OnClock1034: OnClock2334: OnClock0234:
+		AtCommand "@time"; Set $portao_sortudo, 1;  announce "[Sortudo]: O evento irá começar, vocês só tem 1 minuto!",0,0xC0C0C0; End;
+	OnClock1435: OnClock1835: OnClock2105: OnClock1035: OnClock2335: OnClock0235:
+		AtCommand "@pvpon"; Set $portao_sortudo, 0;  announce "[Sortudo]: O evento começou! Tente novamente na proxima vez...",0,0xFF0000; End;
+	OnClock1445: OnClock1845: OnClock2115: OnClock1045: OnClock2345: OnClock0245:
+		AtCommand "@pvpoff";
+		Monster	"quiz_02",73,52,"Tesouro",1732,1,"Sortudo#prize::OnDie";
+		Monster	"quiz_02",61,52,"Tesouro",1732,1,"Sortudo#prize::OnDie";
+		Monster	"quiz_02",49,52,"Tesouro",1732,1,"Sortudo#prize::OnDie";
+		Monster	"quiz_02",37,52,"Tesouro",1732,1,"Sortudo#prize::OnDie";
+		End;
+	OnInit:
+		SetArray $@_z[0], 0, 1, 2, 3, 13, 22, 33, 34, 41;
+		For (Set .@_n, 0; .@_n < GetArraySize($@_z); Set .@_n, .@_n + 1) SetMapFlag "quiz_02", $@_z[.@_n];
+		End;
+}
+
+-	script	Sortudo#prize	-1,{
+End;
+	OnDie:
+		Switch (Rand(1,4)) {
+			Case 1: GetItem $sortudo0, 1; Announce "[Sortudo]: " + StrCharInfo(0) + " abriu um Baú do Tesouro. Prêmio: "+getitemname($sortudo0), BC_All; Break;
+			Case 2: Set Zeny, Zeny + $sortudo2; Announce "[Sortudo]: " + StrCharInfo(0) + " abriu um Baú do Tesouro. Prêmio: "+$sortudo2+"z", BC_All; Break;
+			Case 3: AtCommand "@die"; Announce "[Sortudo]: " + StrCharInfo(0) + " abriu um Baú do Tesouro. Prêmio: Morte (Muahahahahahaha) !", BC_All; Break;
+			Case 4: GetItem $sortudo1, 1; Announce "[Sortudo]: " + StrCharInfo(0) + " abriu um Baú do Tesouro. Prêmio: "+getitemname($sortudo1), BC_All; Break;
+}
+		Sleep2 1275; Warp "prontera", 155, 185; End;
+}

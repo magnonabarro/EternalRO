@@ -1,0 +1,142 @@
+//
+//========================================================================
+//---------------------------- rAthena Script ----------------------------
+//=                      ___   __  __                                     
+//=                _____/   | / /_/ /_   ___   ____   _____               
+//=               / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `//             
+//=              / /  / ___ / /_/ / / /  __/ / / / // /_/ //              
+//=             /_/  /_/  |_\\_/_/ /_/\\____/_/ /_/\\__,_//               
+//=                                      RagnaERO Scripts                 
+//=                                                                       
+//---------------------- http://rathena.org/board/ -----------------------
+//========================================================================
+//----- NOME DO SCRIPT ---------------------------------------------------
+//= bg_emp.txt
+//----- POR: -------------------------------------------------------------
+//= Equipe de Desenvolvimento rAthena
+//----- VERSÃO ATUAL DO SCRIPT: ------------------------------------------
+//= v1.2
+//----- DESCRIÇÃO: -------------------------------------------------------
+//= Batalha Campal - Emperium.
+//----- COMENTÁRIOS ADICIONAIS: ------------------------------------------
+//= Projeto rAthena Pt-BR
+//= Tradução e Revisão Pt-Br Por [ADM] Eragonat PK
+//========================================================================
+
+-	script	bg_emp#control	-1,{
+OnInit:
+	.minplayer2start = 1;      // mínimo de jogadores para começar (por exemplo, se 3vs3, defina para 3)
+	.eventlasting    = 20*60;  // duração do evento antes da reinicialização automática (20 minutos * segundos)
+	setarray .rewarditem[0],   // recompensas para a equipe vencedora: <item>,<quantidade>,...
+		501, 10;
+	end;
+OnStart:
+	if ( getwaitingroomstate( 0, .rednpcname$ ) < .minplayer2start || getwaitingroomstate( 0, .bluenpcname$ ) < .minplayer2start )
+		end;
+
+	// cria batalha campal e equipes
+	.red = waitingroom2bg( "-", 0,0, strnpcinfo(0)+"::OnRedQuit", strnpcinfo(0)+"::OnRedDead", .rednpcname$ );
+	.blue = waitingroom2bg( "-", 0,0, strnpcinfo(0)+"::OnBlueQuit", strnpcinfo(0)+"::OnBlueDead", .bluenpcname$ );
+	delwaitingroom .rednpcname$;
+	delwaitingroom .bluenpcname$;
+	setwall "bat_a01", 164,347, 6, 4, 0, "bg_emp_town_red";
+	setwall "bat_a01", 154,51, 6, 4, 0, "bg_emp_town_blue";
+	bg_warp .red, "bat_a01", 171,346;
+	bg_warp .blue, "bat_a01", 162,50;
+
+	// tempo de espera antes do jogo começar
+	sleep 6000;
+	mapannounce "bat_a01", "As regras são simples. A primeira equipe a quebrar o Emperium adversário vence!", bc_map;
+	sleep 3000;
+	for ( .@i = 5; .@i > 0; --.@i ) {
+		mapannounce "bat_a01", "["+ .@i +"]", bc_map;
+		sleep 1000;
+	}
+	mapannounce "bat_a01", "Início!", bc_map;
+
+	// invocar Emperiums
+	bg_monster .red,"bat_a01",171,346, "--já--",1915, strnpcinfo(3)+"::OnRedDown";
+	bg_monster .blue,"bat_a01",162,50, "--já--",1914, strnpcinfo(3)+"::OnBlueDown";
+	delwall "bg_emp_town_red";
+	delwall "bg_emp_town_blue";
+
+	// duração da partida
+	sleep .eventlasting * 1000;
+
+	// termina a partida, destrói a batalha campal e redefini os NPCs
+	killmonster "bat_a01", strnpcinfo(3)+"::OnRedDown";
+	killmonster "bat_a01", strnpcinfo(3)+"::OnBlueDown";
+	if ( .winside ) {
+		mapannounce "bat_a01", "- A Equipe "+( (.winside == .red)? "Vermelha" : "Azul" )+" é a vitoriosa! -", bc_map;
+		bg_get_data .winside, 1;
+		for ( .@i = 0; .@i < $@arenamemberscount; ++.@i )
+			getitem .rewarditem[0], .rewarditem[1], $@arenamembers[.@i];
+	} else
+		mapannounce "bat_a01", "- A partida terminou empatada! -", bc_map;
+	sleep 5000;
+	bg_warp .red, "prontera", 155,182;
+	bg_warp .blue, "prontera", 158,182;
+	bg_destroy .red;
+	bg_destroy .blue;
+	.winside = 0;
+	donpcevent .rednpcname$ +"::OnStart";
+	donpcevent .bluenpcname$ +"::OnStart";
+	end;
+
+// Emperium destruído
+OnRedDown:  callsub L_EmpDown, "Vermelha", .blue;
+OnBlueDown: callsub L_EmpDown, "Azul", .red;
+L_EmpDown:
+	mapannounce "bat_a01", strcharinfo(0) +" destruiu o Emperium da Equipe "+ getarg(0) +".", bc_map;
+	.winside = getarg(1);
+	awake strnpcinfo(0);
+	end;
+
+// evento "OnDeath"
+OnRedDead:  callsub L_Dead, 157,347;
+OnBlueDead: callsub L_Dead, 142,51;
+L_Dead:
+	warp "bat_a01", getarg(0), getarg(1);
+	percentheal 100,100;
+	end;
+
+// evento "OnQuit"
+OnRedQuit:  callsub L_Quit, .red, "Vermelha";
+OnBlueQuit: callsub L_Quit, .blue, "Azul";
+L_Quit:
+	percentheal 100, 100;
+	if ( !bg_get_data( getarg(0), 0 ) )
+		mapannounce "bat_a01", "Todos os membros da Equipe "+ getarg(1) +" desistiram!", bc_map, 0xff3333;
+	end;
+}
+
+prontera,155,182,5	script	Equipe Vermelha#bg_emp	733,{
+	end;
+OnInit:
+	sleep 1;
+	set getvariableofnpc( .rednpcname$, "bg_emp#control" ), strnpcinfo(0);
+OnStart:
+	waitingroom "Equipe Vermelha", getvariableofnpc( .minplayer2start, "bg_emp#control" ) +1, "bg_emp#control::OnStart", getvariableofnpc( .minplayer2start, "bg_emp#control" );
+	end;
+}
+
+prontera,158,182,5	script	Equipe Azul#bg_emp	734,{
+	end;
+OnInit:
+	sleep 1;
+	set getvariableofnpc( .bluenpcname$, "bg_emp#control" ), strnpcinfo(0);
+OnStart:
+	waitingroom "Equipe Azul", getvariableofnpc( .minplayer2start, "bg_emp#control" ) +1, "bg_emp#control::OnStart", getvariableofnpc( .minplayer2start, "bg_emp#control" );
+	end;
+}
+
+bat_a01	mapflag	battleground
+bat_a01	mapflag	nosave	SavePoint
+bat_a01	mapflag	nowarp
+bat_a01	mapflag	nowarpto
+bat_a01	mapflag	noteleport
+bat_a01	mapflag	nomemo
+bat_a01	mapflag	nopenalty
+bat_a01	mapflag	nobranch
+bat_a01	mapflag	noicewall
+bat_a01	mapflag	hidemobhpbar

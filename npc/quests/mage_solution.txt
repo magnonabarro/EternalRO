@@ -1,0 +1,65 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ solucoes_de_mago.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.0 ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= Comerciantes de Soluções de Morroc e Payon, usados nas missões de
+//= habilidades do Sábio e na missão de classe do Mago da Pré-Renovação.
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================// 
+
+pay_arche,122,100,0	script	Dollshoi	88,{
+	mes "[Feiticeiro dos Magos]";
+	mes "Você quer uma Solução de Payon? Hmm, me dê 50 Zenys e pelo menos 1 Tubo de Ensaio vazio.";
+	next;
+	if (select("Tudo bem, vamos negóciar.:Nah, esqueça.") == 1) {
+		mes "[Feiticeiro dos Magos]";
+		if (Zeny < 50) {
+			mes "Ei! Você não tem dinheiro suficiente para cobrir minha taxa de 50 Zenys.";
+			close;
+		}
+		if (countitem(1092) == 0) {
+			mes "Você não pode adquirir a solução sem a garrafa! Traga-me um Tubo de Ensaio Vazio.";
+			close;
+		}
+		delitem 1092,1; //Tubo de Ensaio Vazio
+		set Zeny, Zeny-50;
+		getitem 1089,1; //Solução de Payon
+	}
+	close;
+}
+
+moc_ruins,91,150,0	script	Ponka-Hontas	93,{
+	mes "[Feiticeiro dos Magos]";
+	mes "Você gostaria de uma Solução de Morroc? Então por favor me dê 50 Zenys e pelo menos 1 Tubo de Ensaio Vazio.";
+	next;
+	if (select("Tudo bem, vamos ao negócio.:Nah, esqueça.") == 1) {
+		mes "[Feiticeiro dos Magos]";
+		if (Zeny < 50) {
+			mes "Sinto muito, mas você não tem dinheiro suficiente para cobrir a taxa de 50 Zenys.";
+			close;
+		}
+		if (countitem(1092) == 0) {
+			mes "Você não pode carregar líquidos sem usar uma garrafa. Traga-me um Tubo de Ensaio Vazio na próxima vez que você vir me ver.";
+			close;
+		}
+		delitem 1092,1; //Tubo de Ensaio Vazio
+		set Zeny, Zeny-50;
+		getitem 1088,1; //Solução de Morroc
+	}
+	close;
+}

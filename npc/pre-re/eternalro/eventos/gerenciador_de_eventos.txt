@@ -1,0 +1,19 @@
+-	script	ComandoEvento	-1,{
+OnInit:
+bindatcmd("evento","ComandoEvento::OnAtcommand",1,10);
+end;
+
+OnAtcommand:
+warp "que_temsky", 49, 136; // Teleporta o jogador para que_temsky nas coordenadas (100,100)
+dispbottom "[Eternal Ragnarok Online] : Você foi teleportado para o evento!";
+end;
+}
+
+prontera,164,172,4	script	Eventos	715,{
+doevent "ComandoEvento::OnAtcommand";
+end;
+
+OnInit:
+waitingroom "Eventos!",0;
+end;
+}

@@ -1,0 +1,729 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ museu_de_monstros.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.4 ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= Museu de Monstros em Juno - Locais dos NPCs.
+//= Informações sobre vários monstros.
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+yuno_in03,32,15,3	script	Guia do Museu	67,{
+	mes "[Cenia]";
+	mes "Bem-vind"+(Sex?"o":"a")+" ao Museu de Monstros.";
+	next;
+	switch(select("Museu de Monstros?:Dicas")) {
+	case 1:
+		mes "[Cenia]";
+		mes "O Museu de Monstros foi fundado pelos";
+		mes "Sábios da Academia de Magia de Schweicherbil,";
+		mes "depois de toda a pesquisa realizada";
+		mes "sobre as criaturas que habitam o";
+		mes "continente de Rune-Midgard.";
+		next;
+		mes "[Cenia]";
+		mes "Neste museu, você poderá ver todas as";
+		mes "criaturas que habitam o reino de Rune-Midgard,";
+		mes "até mesmo aquelas que você dificilmente encontra.";
+		next;
+		mes "[Cenia]";
+		mes "Os tubos de vidro contendo os monstros";
+		mes "foram desenvolvidos com a mais recente";
+		mes "tecnologia como parte do";
+		mes "Projeto Schwartz. Fique tranqüilo,";
+		mes "você estará bem protegido.";
+		next;
+		break;
+	case 2:
+		mes "[Cenia]";
+		mes "Por favor, verifique a opção transparente";
+		mes "na sua Janela de Opções";
+		mes "pressionando ALT + O, se você quiser";
+		mes "visualizar melhor os monstros.";
+		next;
+		break;
+	}
+	mes "[Cenia]";
+	mes "Sinta-se à vontade para falar comigo a qualquer momento.";
+	close;
+}
+	
+yuno_in03,36,21,3	script	Deviace#yuno	1108,{
+	end;
+}
+yuno_in03,33,21,1	script	#DEVIACE	111,{
+	mes " ";
+	mes "Nome Científico : Deviace";
+	mes "Tamanho : Médio";
+	mes "Elemento : Água";
+	next;
+	mes "Explicação :";
+	mes "Este monstro habita no profundo mar";
+	mes "e tem um corpo redondo, com um";
+	mes "acetábulo do lado dorsal.";
+	mes "Apesar de seus dentes";
+	mes "afiados intimidarem, ele é muito";
+	mes "pacífico.";
+	next;
+	mes "Portanto, ele nunca inicia";
+	mes "um ataque ou ataca alguém a";
+	mes "menos que ele seja atacado primeiro.";
+	mes "No entando, se ele se irritar,";
+	mes "poderá utilizar magias de grande nível.";
+	mes "Então é melhor ter cuidado com esse monstro.";
+	close;
+}
+
+yuno_in03,36,27,3	script	Foca#yuno	1317,{ 
+	end; 
+}
+yuno_in03,33,27,1	script	#FUR_SEAL	111,{
+	mes " ";
+	mes "Nome Científico : Foca";
+	mes "Tamanho : Médio";
+	mes "Elemento : Água";
+	next;
+	mes "Explicação :";
+	mes "Quando olhar atenciosamente para esse";
+	mes "monstro, você perceberá que";
+	mes "ele não é apenas uma foca.";
+	mes "Existe um monstro não";
+	mes "indentificado dentro";
+	mes "da pele de uma foca.";
+	next;
+	mes "Existem rumores de que o monstro";
+	mes "se disfarça com a pele de foca";
+	mes "para proteger sua delicada pele do";
+	mes "clima. A pele de foca é um material";
+	mes "muito resistente e necessária para pessoas";
+	mes "que produzem casacos de inverno.";
+	close;
+}
+
+yuno_in03,36,33,3	script	Verme Sábio#yuno	1281,{ 
+	end;
+}
+yuno_in03,33,33,1	script	#SAGEWORM	111,{
+	mes " ";
+	mes "Nome Científico : Verme Sábio";
+	mes "Tamanho : Pequeno";
+	mes "Elemento : Neutro";
+	next;
+	mes "Explicação :";
+	mes "Um estranho monstro que possui";
+	mes "a cabeça de um antigo professor"; 
+	mes "com uma cauda de verme.";
+	mes "Embora seja fisicamente fraco,";
+	mes "ele possui uma inteligência que o ajuda";
+	mes "e ajuda seus companheiros com habilidades mágicas.";
+	next;
+	mes "Sua aparência acadêmica indica";
+	mes "que ele é visto geralmente próximo a livros e prateleiras de livros.";
+	close;
+}
+
+yuno_in03,39,39,3	script	Penomena#yuno	1216,{ 
+	end; 
+}
+yuno_in03,38,39,1	script	#PENOMANA	111,{
+	mes " ";
+	mes "Nome Científico : Penomena";
+	mes "Tamanho : Médio";
+	mes "Elemento : Veneno";
+	next;
+	mes "Explicação :";
+	mes "Esse monstro vive dentro das";
+	mes "mais profundas cavernas onde";
+	mes "exista bastante umidade para";
+	mes "evitar que fique seco.";
+	next;
+	mes "Possui uma aparência semelhante";
+	mes "a da criatura Hidra.";
+	mes "Porém ela pode se mover para próximo";
+	mes "de seu inimigo usando pequenos ganchos existentes no seu acetábulo.";
+	next;
+	mes "Os tentáculos longos e finos";
+	mes "de seu corpo lançam um veneno mortal,"; 
+	mes "que é o suficiente para derrotar de uma vez seu inimigo.";
+	close;
+}
+
+yuno_in03,39,44,3	script	Galapago#yuno	1391,{ 
+	end; 
+}
+yuno_in03,37,44,3	script	#GALAPAGO	111,{
+	mes " ";
+	mes "Nome Científico : Galapago";
+	mes "Tamanho : Pequeno";
+	mes "Elemento : Terra";
+	next;
+	mes "Explicação :";
+	mes "É um tipo de ave, mas infelizmente seu corpo é muito pesado para voar.";
+	mes "É muito sensível á luz solar por isso carrega uma garrafa de água e usa óculos escuros o tempo inteiro.";
+	next;
+	mes "Embora ambicioso, está sempre";
+	mes "colaborando em ataques contra";
+	mes "suas presas, assim como também";
+	mes "seus predadores.";
+	mes "Fora isso, Galapago geralmente é um monstro calmo.";
+	close;
+}
+
+yuno_in03,15,21,5	script	Raydric#yuno	1163,{ 
+	end; 
+}
+yuno_in03,19,21,1	script	#RAYDRIC	111,{
+	mes " ";
+	mes "Nome Científico : Raydric";
+	mes "Tamanho : Grande";
+	mes "Elemento : Sombrio";
+	next;
+	mes "Explicação :";
+	mes "É uma 'armadura' controlada por um";
+	mes "espírito guardião do castelo.";
+	mes "O está vinculado a esta armadura";
+	mes "através de uma poderosa maldição.";
+	next;
+	mes "Desde que o Raydric passou a ser usado pelo";
+	mes "guardião do castelo, ele possui rápidos";
+	mes "movimentos e um grande poder de ataque.";
+	close;
+}
+
+yuno_in03,15,27,5	script	Chepet#yuno	1250,{ 
+	end; 
+}
+yuno_in03,19,27,1	script	#CHEPET	111,{
+	mes " ";
+	mes " Nome Científico : Chepet";
+	mes " Tamanho : Médio";
+	mes " Elemento : Fogo";
+	next;
+	mes "Explicação :";
+	mes "Uma criatura do mal por trás";
+	mes "de uma linda marionete.";
+	mes "Ela ataca com sua varinha que";
+	mes "está localizada na mão da marionete.";
+	mes "Um monstro muito raro que";
+	mes "habita em poucos lugares.";
+	close;
+}
+
+yuno_in03,15,33,5	script	Violinista#yuno	1390,{ 
+	end;
+}
+yuno_in03,19,33,1	script	#VIOLINISTA	111,{
+	mes " ";
+	mes " Nome Científico : Violinista";
+	mes " Tamanho : Médio";
+	mes " Elemento : Neutro";
+	next;
+	mes "Explicação :";
+	mes "Uma linda criatura parecida com uma boneca, com lindos cabelos dourados.";
+	mes "Como ela está frequentemente tocando seu violino e com seu rosto encoberto. As pessoas não percebem de início que ela é um monstro.";
+	next;
+	mes "Tenha cuidado ao se deparar com uma Violinista. Caso contrário, ela irá arrancar sua alma com seu canto encantador.";
+	close;
+}
+
+yuno_in03,10,39,5	script	Alice#yuno	1275,{ 
+	end; 
+}
+yuno_in03,12,39,1	script	#ALICE	111,{
+	mes " ";
+	mes " Nome Científico : Alice";
+	mes " Tamanho : Médio";
+	mes " Elemento : Neutro";
+	next;
+	mes "Explicação :";
+	mes "Alice é um robô criado para";
+	mes "ser uma empregada doméstica.";
+	mes "Ela é conhecida por permanecer";
+	mes "trabalhar árduamente e de ter";
+	mes "continuado com suas tarefas mesmo com o castelo sendo abandonado.";
+	next;
+	mes "Sem grande poder aparente,";
+	mes "o fato dela se mover e operar";
+	mes "é um mistério científico.";
+	close;
+}
+
+yuno_in03,10,45,5	script	Agressor#yuno	1315,{ 
+	end; 
+}
+yuno_in03,12,45,1	script	#ASSULTER	111,{
+	mes " ";
+	mes " Nome Científico : Agressor";
+	mes " Tamanho : Médio";
+	mes " Elemento : Vento";
+	next;
+	mes "Explicação :";
+	mes "Ao contrário de outras tartarugas";
+	mes "da Ilha das Tartarugas.";
+	mes "Esta tartaruga caminha sobre duas";
+	mes "pernas e também as utiliza em ataques,";
+	mes "empunhando uma grande shuriken a sua volta.";
+	next;
+	mes "Curiosamente, ele cria um clone";
+	mes "para causar mais danos a seus";
+	mes "perigosos inimigos.";
+	mes "Ele causa um dano muito poderoso";
+	mes "utilizando essa shuriken, mas seu";
+	mes "ataque de Unha é mais ameaçador.";
+	close;
+}
+
+yuno_in03,38,50,3	script	Ovo de Peco Peco#yuno	1047,{ 
+	end; 
+}
+yuno_in03,34,54,3	script	Ovo de Besouro-Ladrão#yuno	1048,{ 
+	end; 
+}
+yuno_in03,12,50,3	script	Ovo de Andre#yuno	1097,{ 
+	end; 
+}
+yuno_in03,18,96,5	script	Andarilho#yuno	1208,{ 
+	end; 
+}
+yuno_in03,20,96,1	script	#WANDER_MAN	111,{
+	mes " ";
+	mes " Nome Científico : Andarilho";
+	mes " Tamanho : Médio";
+	mes " Elemento : Vento";
+	next;
+	mes "Explicação :";
+	mes "Guerreiro morto-vivo que voltou";
+	mes "a vida através de uma maldição.";
+	mes "Considerando sua habilidade";
+	mes "técnica em esgrima, ele deve ter";
+	mes "sido um honrado guerreiro enquanto vivia como humano.";
+	next;
+	mes "O Andarilho pode se mover surpreendentemente";
+	mes "rápido e pode matar inímigos com um único";
+	mes "golpe de sua espada quebrada.";
+	close;
+}
+
+yuno_in03,16,100,5	script	Lagarta#yuno	1300,{ 
+	end; 
+}
+yuno_in03,18,100,1	script	#CATERPILLAR	111,{
+	mes " ";
+	mes " Nome Científico : Lagarta";
+	mes " Tamanho : Pequeno";
+	mes " Elemento : Terra";
+	next;
+	mes "Explicação :";
+	mes "Embora os olhos desta criatura";
+	mes "tenham atrofiado pelo fato dela";
+	mes "viver sob a terra.";
+	mes "Ele usa um tentáculo e um gancho em";
+	mes "seu corpo para sentir os objetos em seu ambiente escuro.";
+	next;
+	mes "Há rumores de que a larva é a";
+	mes "antecessora da Creamy Ameaçadora,"; 
+	mes "a Creamy Avançada.";
+	close;
+}
+
+yuno_in03,16,104,5	script	Besouro-Ladrão Macho#yuno	1054,{ 
+	end; 
+}
+yuno_in03,18,104,1	script	#THIEF_BUG__	111,{
+	mes " ";
+	mes " Nome Científico : Besouro-Ladrão";
+	mes " Tamanho : Médio";
+	mes " Elemento : Sombrio";
+	next;
+	mes "Explicação :";
+	mes "Embora tenha um corpo azul,";
+	mes "é rápido e voraz assim como os outros Besouros-Ladrões.";
+	next;
+	mes "No entanto, ele é mais forte do que outros Besouros-Ladrões porque foi criado para proteger as fêmeas e os filhotes dos perigos.";
+	close;
+}
+
+yuno_in03,16,108,5	script	Trilobita#yuno	1279,{ 
+	end; 
+}
+yuno_in03,18,108,1	script	#TRI_JOINT	111,{
+	mes " ";
+	mes " Nome Científico : Trilobita";
+	mes " Tamanho : Pequeno";
+	mes " Elemento : Terra";
+	next;
+	mes "Explicação :";
+	mes "Trilobita é um monstro pré-histórico";
+	mes "que é coberto por uma casca dura,"; 
+	mes "e utiliza um apalpador em vez"; 
+	mes "de olhos assim ele pode viver em";
+	mes "lugares sombrios.";
+	next;
+	mes "Recentemente, foram descobertas muitas Trilobitas descobertas dentro de cavernas. Sábios gostam muito de estudar e aprender sobre a evolução de monstros em Rune-Midgard.";
+	close;
+}
+
+yuno_in03,16,111,5	script	Arclouse#yuno	1194,{ 
+	end; 
+}
+yuno_in03,18,111,1	script	#ARCLOUSE	111,{
+	mes " ";
+	mes " Nome Científico : Arclouse";
+	mes " Tamanho : Médio";
+	mes " Elemento : Terra";
+	next;
+	mes "Explicação :";
+	mes "É um monstro de casca dura";
+	mes "que utiliza seu corpo para";
+	mes "atacar seus oponentes.";
+	mes "Arclouse tende a andar em grupos";
+	mes "e elas são criaturas muito agressivas.";
+	next;
+	mes "Eles possuem uma velocidade";
+	mes "de locomoção incrivelmente rápida.";
+	mes "Ao contrário de outras criaturas parecidas,";
+	mes "e muitas vezes sua velocidade é comparada a dos PecoPecos.";
+	close;
+}
+
+yuno_in03,16,117,5	script	Lavadeira#yuno	1321,{ 
+	end; 
+}
+yuno_in03,18,116,1	script	#DRAGON_TAIL	111,{
+	mes " ";
+	mes " Nome Científico : Lavadeira";
+	mes " Tamanho : Médio";
+	mes " Elemento : Vento";
+	next;
+	mes "Explicação :";
+	mes "Um inseto considerado";
+	mes "como Libélula, ou Lavadeira.";
+	mes "Ela usa sua poderosa cauda para";
+	mes "sugar o sangue de seus inimigos,"; 
+	mes "ou para puxá-los e adormecê-los"; 
+	mes "com um veneno sonífero.";
+	close;
+}
+
+yuno_in03,46,96,3	script	Duque Coruja#yuno	1320,{ 
+	end; 
+}
+yuno_in03,44,96,1	script	#OWL_DUKE	111,{
+	mes " ";
+	mes " Nome Científico : Duque Coruja";
+	mes " Tamanho : Grande";
+	mes " Elemento : Neutro";
+	next;
+	mes "Explicação:";
+	mes "Uma coruja que veste um traje elegante.";
+	mes "Seu olhar é tão intimidante"; 
+	mes "como a sombra, sua aparência é suave.";
+	mes "O Duque Coruja não é exatamente";
+	mes "uma coruja, mas sim um demônio com"; 
+	mes "garras muito afiadas em seus grandes pés.";
+	next;
+	mes "É hábil em utilizar várias";
+	mes "magias de luz.";
+	mes "Quando vê-lo atacando um inimigo,"; 
+	mes "você conhecerá o aristocráta"; 
+	mes "Duque Coruja.";
+	close;
+}
+
+yuno_in03,48,100,3	script	Esfera Marinha#yuno	1142,{ 
+	end; 
+}
+yuno_in03,46,101,1	script	#MARINE_SPHERE	111,{
+	mes " ";
+	mes " Nome Científico : Esfera Marinha";
+	mes " Tamanho : Pequeno";
+	mes " Elemento : Água";
+	next;
+	mes "Explicação :";
+	mes "Uma estranha criatura que"; 
+	mes "habita em mares profundos.";
+	mes "Ela pode explodir e causar"; 
+	mes "uma grande explosão quando tocada,";
+	mes "ganhando o nome de 'A Bomba do Mar.'";
+	next;
+	mes "Se uma Esfera Marinha"; 
+	mes "for atingida por uma outra explosão,"; 
+	mes "uma explosão em cadeia será ocasionada,"; 
+	mes "e pode levar a uma perigosa"; 
+	mes "reação em cadeia.";
+	close;
+}
+
+yuno_in03,48,104,3	script	Mandrágora#yuno	1020,{ 
+	end; 
+}
+yuno_in03,46,105,1	script	#MANDRAGORA	111,{
+	mes " ";
+	mes " Nome Científico : Mandrágora";
+	mes " Tamanho : Médio";
+	mes " Elemento : Terra";
+	next;
+	mes "Explicação :";
+	mes "Um insetívoro que engole"; 
+	mes "qualquer coisa que vive.";
+	mes "Quando encontra sua presa,"; 
+	mes "ela sempre ataca primeiro com"; 
+	mes "seus longos tentáculos para paralizá-la.";
+	next;
+	mes "Uma vez paralizada, essa presa é"; 
+	mes "presa pelos longos tentáculos e"; 
+	mes "após é digerida lentamente.";
+	mes "Embobra este tubo possua a marca"; 
+	mes "de uma caveira, Mandrágora não"; 
+	mes "possui nenhum veneno.";
+	next;
+	mes "Seu aparelho digestivo também"; 
+	mes "é muito original, mas o seu"; 
+	mes "cheiro irritante está longe"; 
+	mes "de ser atrativo as presas.";
+	close;
+}
+
+yuno_in03,48,108,3	script	Planta Carnívora#yuno	1368,{ 
+	end; 
+}
+yuno_in03,46,108,1	script	#GEOGRAPHER	111,{
+	mes " ";
+	mes " Nome Científico : Planta Carnívora";
+	mes " Tamanho : Médio";
+	mes " Elemento : Terra";
+	next;
+	mes "Explicação :";
+	mes "Um insetívoro que aparenta";
+	mes "ser um girassol.";
+	mes "Ela a usa a sua pétala como";
+	mes "tentáculo em torno de sua";
+	mes "boca para atrair e prender sua presa.";
+	next;
+	mes "Ao contrário da Mandrágora, a Planta Carnívora"; 
+	mes "não possui um aparelho digestível para";
+	mes "guardar sua presa. Então, lentamente come"; 
+	mes "sua presa, pouco a pouco.";
+	next;
+	mes "Embora a Planta Carnívora seja pequena"; 
+	mes "e com raízes curtas. As raízes são";
+	mes "resistentes e fortes o suficiente para"; 
+	mes "suportar o peso da parte superior de seu corpo.";
+	next;
+	mes "O nome Planta Carnívora";
+	mes "surgiu após a planta"; 
+	mes "alimentar-se de seu criador,"; 
+	mes "por isso nunca tome sempre"; 
+	mes "cuidado e nunca se esqueça...";
+	close;
+}
+
+yuno_in03,48,112,3	script	Rafflesia#yuno	1162,{ 
+	end; 
+}
+yuno_in03,46,112,1	script	#RAFFLESIA	111,{
+	mes " ";
+	mes " Nome Científico : Rafflesia";
+	mes " Tamanho : Pequeno";
+	mes " Elemento : Terra";
+	next;
+	mes "Explicação :";
+	mes "Um monstro que está"; 
+	mes "em extinção.";
+	mes "Rafflesia é um monstro";
+	mes "raro de Rune-Midgard e";
+	mes "é protegido por lei.";
+	next;
+	mes "Devido a esta situação, a maioria"; 
+	mes "dos Sábios estão tendo dificuldade"; 
+	mes "a pesquisar a respeito desse monstro.";
+	mes "Porém, alguns sábios atualmente"; 
+	mes "encontraram métodos de cultivar"; 
+	mes "e salvar as Rafflesias.";
+	close;
+}
+
+yuno_in03,48,116,3	script	Talo de Verme#yuno	1215,{ 
+	end; 
+}
+yuno_in03,45,116,1	script	#STEM_WORM	111,{
+	mes " ";
+	mes " Nome Científico : Talo de Verme";
+	mes " Tamanho : Médio";
+	mes " Elemento : Vento";
+	next;
+	mes "Explicação :";
+	mes "Um Rabo-de-Verme mutado,"; 
+	mes "possui corpo cinza acastanhado,"; 
+	mes "com uma pequena cabeça.";
+	mes "É coberta com escamas e tem"; 
+	mes "uma longa cauda que utiliza"; 
+	mes "como chicote em ataques.";
+	close;
+}
+
+yuno_in03,24,124,3	script	Labareda#yuno	1367,{ 
+	end; 
+}
+yuno_in03,24,122,1	script	#BLAZZER	111,{
+	mes " ";
+	mes " Nome Científico : Labareda";
+	mes " Tamanho : Médio";
+	mes " Elemento : Fogo";
+	next;
+	mes "Explicação :";
+	mes "É uma bola de fogo que"; 
+	mes "surge em zonas vulcânicas.";
+	mes "A causa repentina desse"; 
+	mes "monstro é desconhecida.";
+	mes "Sábios acreditam que eles surgiram"; 
+	mes "após atividades vulcânicas ao redor de Juno.";
+	next;
+	mes "Labaredas expelem um gás"; 
+	mes "tóxico que é prejudicial.";
+	mes "Desconhece-se e não a forma"; 
+	mes "de ataque e comunicação que"; 
+	mes "as Labaredas utilizam.";
+	close;
+}
+
+yuno_in03,28,124,5	script	Rideword#yuno	1195,{ 
+	end; 
+}
+yuno_in03,28,122,1	script	#RIDEWORD	111,{
+	mes " ";
+	mes " Nome Científico : Rideword";
+	mes " Tamanho : Pequeno";
+	mes " Elemento : Neutro";
+	next;
+	mes "Explicação :";
+	mes "É um livro amaldiçoado com dentes afiados.";
+	mes "Ele ataca qualquer coisa viva ao redor.";
+	close;
+}
+
+yuno_in03,31,124,3	script	Megalodon#yuno	1064,{ 
+	end; 
+}
+yuno_in03,31,122,1	script	#MEGALODON	111,{
+	mes " ";
+	mes " Nome Científico : Megalodon";
+	mes " Tamanho : Médio";
+	mes " Elemento : Morto-Vivo";
+	next;
+	mes "Explicação :";
+	mes "Um peixe-esqueleto que renasceu";
+	mes "através de uma maldição.";
+	mes "Embora pareça muito ameaçadora"; 
+	mes "é benigna e não ataca viajantes"; 
+	mes "submarinos sem antes ser atacado.";
+	close;
+}
+
+yuno_in03,35,124,3	script	Rochoso#yuno	1386,{ 
+	end; 
+}
+yuno_in03,35,122,1	script	#SLEEPER	111,{
+	mes " ";
+	mes " Nome Científico : Rochoso";
+	mes " Tamanho : Médio";
+	mes " Elemento : Sombrio";
+	next;
+	mes "Explicação :";
+	mes "Uma criatura da areia não identificada.";
+	mes "Normalmente, ela permanece sob a terra,";
+	mes "mas quando os viajantes pisam";
+	mes "sob a areia, ele pode abruptamente";
+	mes "aparecer para atacar.";
+	next;
+	mes "É menor do que o Arenoso e causa"; 
+	mes "ataques indiretos, ocasionando uma tempestade de areia.";
+	close;
+}
+
+yuno_in03,39,124,3	script	Múmia Anciã#yuno	1297,{ 
+	end; 
+}
+yuno_in03,39,122,1	script	#ANCIENT_MUMMY	111,{
+	mes " ";
+	mes " Nome Científico : Múmia Anciã";
+	mes " Tamanho : Médio";
+	mes " Elemento : Morto-Vivo";
+	next;
+	mes "Explicação :";
+	mes "Uma Múmia amaldiçoada com a vida eterna.";
+	mes "Embora envolvida por faixas em"; 
+	mes "decomposição, a Múmia Anciã também"; 
+	mes "usa um enfeite de cabelo esplêndido"; 
+	mes "preso com uma cobra.";
+	next;
+	mes "Este tipo de ornamento";
+	mes "de cabeça indica que a Múmia"; 
+	mes "Anciã era uma pessoa muito"; 
+	mes "importante enquanto estava viva.";
+	next;
+	mes "A Múmia Anciã tem vagado";
+	mes "pelo submundo faz bastante"; 
+	mes "tempo, ela não tem qualquer"; 
+	mes "consciência e vontade"; 
+	mes "de atacar.";
+	close;
+}
+
+yuno_in03,18,122,5	script	Incubus#yuno	1374,{ 
+	end; 
+}
+yuno_in03,19,120,1	script	#INCUBUS	111,{
+	mes " ";
+	mes " Nome Científico : Incubus";
+	mes " Tamanho : Médio";
+	mes " Elemento : Sombrio";
+	next;
+	mes "Explicação :";
+	mes "Este demônio atrai humanos"; 
+	mes "com sua belíssima aparência.";
+	mes "Quando se depara com um homem";
+	mes "humano, é chamado de Incubus.";
+	mes "E com mulher, é chamada de Succubus.";
+	next;
+	mes "Esse demônio atinge seus alvos que";
+	mes "possuem vulnerabilidade mental";
+	mes "e quem podem eventualmente serem levados ao inferno.";
+	close;
+}
+
+yuno_in03,44,120,3	script	Succubus#yuno	1370,{ 
+	end; 
+}
+yuno_in03,42,120,1	script	#SUCCUBUS	111,{
+	mes " ";
+	mes " Nome Científico : Succubus";
+	mes " Tamanho : Médio";
+	mes " Elemento : Sombrio";
+	next;
+	mes "Explicação :";
+	mes "Este demônio atrai humanos";
+	mes "com sua belíssima aparência.";
+	mes "Quando se depara com uma mulher";
+	mes "humana, é chamada de Succubus.";
+	mes "E com homens, é chamado de Incubus.";
+	next;
+	mes "Esse demônio atinge seus alvos";
+	mes "que possuem vulnerabilidade mental e";
+	mes "quem podem eventualmente serem levados ao inferno.";
+	close;
+}

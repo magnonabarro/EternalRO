@@ -1,0 +1,1939 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ tu_arqueiro.txt ]
+//====== Versão Atual: ====================================================
+//= [ v3.1 ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= Missões de treinamentos do Arqueiro.
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================// 
+
+// Bardo Jet
+//============================================================
+payon_in02,67,65,3	script	Bardo Jet#tu	1_M_BARD,{
+	mes "[Jet]";
+	mes "Todo deus nunca envelhece";
+	mes "Por causa da bela";
+	mes "Deusa, Idun.";
+	mes "Guardião das maçãs da juventude";
+	mes "Deusa da imortalidade.";
+	next;
+	mes "[Jet]";
+	if (BaseJob == Job_Archer){
+		mes "Ooh, você é um Arqueiro?";
+		mes "Houve um tempo em que eu também";
+		mes "fui um Arqueiro. Mas mudei de classe, e agora entretenho as massas com minhas músicas e meu humor.";
+		next;
+		mes "[Jet]";
+		mes "Falando nisso...";
+		mes "Deixe-me contar uma piada!";
+		mes "Confie em mim, é hilária~";
+		mes "^333333*Ahem*^000000";
+		emotion ET_SURPRISE;
+		next;
+		mes "[Jet]";
+		mes "Uma cupim entra";
+		mes "em um bar e diz:";
+		mes "'O dono do bar está aqui?'";
+		mes "Hahahahaha!";
+		mes "Bwehehehehe!";
+		emotion ET_THROB;
+		next;
+		mes "[Jet]";
+		mes "Hahaha~!";
+		mes "Meu Deus,";
+		mes "eu sou engraçado!";
+		mes "Agora é sua vez!";
+		mes "Vamos lá, invente";
+		mes "uma piada~!";
+		emotion ET_KIK;
+		next;
+		if (Sex == SEX_MALE) {
+			select("Uma piada, é?");
+			specialeffect2 EF_TALK_FROSTJOKE;
+			mes "[Jet]";
+			mes "Oh...";
+			mes "Meu...";
+			mes "Deus...";
+			next;
+			mes "[Jet]";
+			mes "Essa foi a melhor";
+			mes "piada que eu ouvi em toda";
+			mes "minha vida! Você tem um talento natural";
+			mes "para o show! Você";
+			mes "simplesmente precisa virar um Bardo!";
+		} else {
+			select("Gritar!");
+			specialeffect2 EF_TALK_SCREAM;
+			mes "[Jet]";
+			mes "U-Uau...";
+			mes "Eu não sei por quê, mas isso foi realmente incrível. Você deve ter";
+			mes "o que é preciso para virar uma Odalisca...";
+		}
+		emotion ET_BEST;
+		next;
+		mes "[Jet]";
+		mes "Mas antes de qualquer coisa, você precisa se livrar desse visual de Arqueiro, não?";
+		next;
+		mes "[Jet]";
+		mes "Na verdade, eu sou membro da";
+		mes "^3131FFGuilda dos Arqueiros^000000 'Ícarus', que fica ^3131FFà esquerda da sala de troca de classe^000000. Você com certeza vai";
+		mes "aprender muito por lá.";
+		next;
+		mes "[Jet]";
+		mes "Agora agora, vá aprender";
+		mes "tudo e mude de classe";
+		mes "pra que a gente possa";
+		mes "brincar juntos!";
+	} else if (BaseJob == Job_Bard){
+		mes "Ooh...!";
+		mes "Você...!";
+		next;
+		specialeffect2 EF_TALK_FROSTJOKE;
+		//specialeffect EF_TALK_FROSTJOKE,AREA,"Bardo Jet#tu";
+		emotion ET_BEST;
+		mes "[Jet]";
+		mes "Vamos ver...";
+		mes "Eu estava trabalhando";
+		mes "em uma piada nova aqui,";
+		mes "mas preciso de um";
+		mes "feedback. Pronto?";
+		next;
+		mes "[Jet]";
+		mes "O que o Mercador";
+		mes "disse para a";
+		mes "Isis dançarina? Desiste?";
+		next;
+		mes "[Jet]";
+		mes "'Mammonita!'";
+		mes "Entendeu? Porque ele";
+		mes "joga dinheiro nela";
+		mes "e a palavra Mammonita";
+		mes "soa-- espera. Não é engraçado";
+		mes "se eu tiver que explicar, né?";
+	} else if (BaseJob == Job_Dancer){
+		mes "Ooh...!";
+		mes "Olá, olá!";
+		mes "Não seria ótimo";
+		mes "se a gente pudesse";
+		mes "se apresentar juntos";
+		mes "um dia desses?";
+	} else {
+		mes "Você parece entediado...";
+		mes "A vida está mesmo tão";
+		mes "monótona e cansativa?";
+		mes "Então... vou te fazer";
+		mes "rir...";
+		next;
+		mes "[Jet]";
+		mes "^333333*Hum*^000000";
+		mes "Estas são as";
+		mes "famosas últimas palavras";
+		mes "de um matador da máfia...";
+		next;
+		mes "[Jet]";
+		mes "'Quem colocou o";
+		mes "violino neste";
+		mes "estojo de violino?!'";
+		mes "Bwahahahahahahah!";
+		mes "Entendeu a piada?";
+	}
+	close;
+}
+
+// Placa
+//============================================================
+pay_arche,127,154,4	script	Placa#arc	2_BOARD1,{
+	mes " ";
+	mes " Escritório de Troca de Classe do Arqueiro ---> ";
+	mes " <--- Ícarus ";
+	mes " ";
+	close;
+}
+
+// Mestre Kavaruk
+//============================================================
+payon_in02,54,13,3	script	Mestre Kavaruk	1_M_JOBTESTER,{
+	mes "[Mestre Kavaruk]";
+	mes "Olá, jovem.";
+	mes "Sou o Mestre Kavaruk";
+	mes "da Guilda dos Arqueiros Ícarus.";
+	mes "Seja bem-vindo.";
+	next;
+	switch(select("Perguntar sobre 'Ícarus.':Perguntar sobre notícias.:Falar sobre Arqueiros.")) {
+	case 1:
+		mes "[Mestre Kavaruk]";
+		mes "Você já ouviu";
+		mes "a história";
+		mes "de Ícarus antes?";
+		next;
+		mes "[Mestre Kavaruk]";
+		mes "Ícarus foi um jovem corajoso que voou pelo céu usando asas presas com cera de abelha. Por curiosidade, ele voou muito perto do sol, suas asas derreteram e ele caiu para a morte.";
+		next;
+		mes "[Mestre Kavaruk]";
+		mes "Embora sua história seja trágica, Ícarus tinha um coração corajoso";
+		mes "que devemos tomar como exemplo";
+		mes "e inspiração.";
+		next;
+		mes "[Mestre Kavaruk]";
+		mes "Os membros da nossa Guilda são aqueles que não apenas desejam ser corajosos, mas também almejam alcançar seus sonhos como Ícarus fez. Nossos membros são Arqueiros aspirantes, ex-Arqueiros e Arqueiros atuais.";
+		next;
+		mes "[Mestre Kavaruk]";
+		if (Class == Job_Novice){
+			mes "Se você quer se tornar um Arqueiro, por que não anda por aí e aprende";
+			mes "um pouco sobre a profissão? Tenho certeza de que vai ouvir várias histórias por aqui.";
+		}
+		else if(Class == Job_Archer){
+			mes "Já que você é um Arqueiro, talvez";
+			mes "seja bom andar por aí ouvindo as experiências de batalha dos outros. Conhecer diferentes cenários de combate vai te ajudar no futuro.";
+		}
+		else if (BaseJob == Job_Hunter){
+			mes "[Mestre Kavaruk]";
+			mes "Arpesto está esperando";
+			mes "lá fora. Como ele é um";
+			mes "caçador veterano, pode";
+			mes "ser de grande ajuda para você.";
+		}
+		else if (BaseJob == Job_Dancer){
+			mes "Na verdade, alguns dos nossos";
+			mes "membros se especializam em";
+			mes "encantar o público com suas";
+			mes "danças graciosas,"; 
+			mes "assim como você.";
+			next;
+			mes "[Mestre Kavaruk]";
+			mes "...Mas não vejo nenhum deles";
+			mes "por aqui agora. Eles nunca ficam em um só lugar por muito tempo."; 
+			mes "Mas tenho certeza de que algum deles vai aparecer";
+			mes "por aqui algum dia.";
+		}
+		else if (BaseJob == Job_Bard){
+			mes "Na verdade, alguns dos nossos membros";
+			mes "são muito habilidosos em cantar e entreter seus aliados, assim como você.";
+			next;
+			mes "[Mestre Kavaruk]";
+			mes "...Mas não vejo nenhum deles por aqui agora. Eles sempre seguem onde o vento os leva, mas tenho certeza de que algum deles vai voltar para cá";
+			mes "um dia desses.";
+		}
+		else {
+			mes "Eles sabem muito sobre profissões relacionadas a Arqueiros. Por que não conversa com eles para aprender mais sobre";
+			mes "essas outras classes?";
+		}
+		close;
+	case 2:
+		mes "[Mestre Kavaruk]";
+		if (BaseJob == Job_Archer) {
+			if(tu_archer02 == 0){
+				mes "Ah, que bom que você";
+				mes "veio, "+strcharinfo(0)+".";
+				mes "Acabei de receber um pedido de ajuda da Guilda dos Alquimistas";
+				mes "em Al De Baran.";
+				next;
+				mes "[Mestre Kavaruk]";
+				mes "Eles estavam cuidando";
+				mes "de um campo de Floras como forma de financiar suas atividades, mas recentemente alguns gatos vadios têm destruído as plantas.";
+				next;
+				mes "[Mestre Kavaruk]";
+				mes "Apesar de os Alquimistas estarem usando Alquimia para invocar novas Floras e manter o campo, isso está desgastando seus recursos.";
+				next;
+				mes "[Mestre Kavaruk]";
+				mes "Eles estão dispostos a recompensar por trazer materiais como ^3131FFFlores Carnívoras^000000 e ^3131FFCaules^000000, que vão ajudá-los a restaurar";
+				mes "as Floras.";
+				next;
+				mes "[Mestre Kavaruk]";
+				mes "Se estiver interessado, o ideal seria falar com o membro da Guilda dos Alquimistas que está esperando por nós ^3131FFna loja ao lado da estrada ao sul de Ícarus^000000.";
+				tu_archer02 = 1;
+				close;
+			} else if(tu_archer02 == 1){
+				mes "Hmmm...";
+				mes "..........";
+				next;
+				select("Há algo errado?");
+				mes "[Mestre Kavaruk]";
+				mes "Na verdade, temos um problema.";
+				mes "A posição de mestre parece ter muito poder, mas eu sempre preciso permanecer aqui. Não tenho o luxo de deixar meu posto.";
+				next;
+				mes "[Mestre Kavaruk]";
+				mes "Pedi a um membro do Ícarus para";
+				mes "vagar pelo Reino de Rune-Midgarts e reunir notícias e informações sobre o que tem acontecido recentemente.";
+				next;
+				mes "[Mestre Kavaruk]";
+				mes "Ele vinha me enviando cartas com informações detalhadas, mas de repente, perdi contato com ele. Estou preocupado com o que pode ter acontecido.";
+				next;
+				mes "[Mestre Kavaruk]";
+				mes "Você poderia, por favor, procurar por";
+				mes "^3131FFArthail dos Ventos^000000 para mim? Embora ele não goste de pessoas, eu ordenei que ele vagasse entre as multidões para coletar informações.";
+				next;
+				mes "[Mestre Kavaruk]";
+				mes "Por favor, descubra se ele está bem e ajude-o com o que";
+				mes "ele precisar. Enquanto isso, estarei esperando notícias suas. Muito obrigado.";
+				tu_archer02 = 2;
+				close;
+			} else if(tu_archer02 == 2){
+				mes "Encontre Arthail";
+				mes "dos Ventos para mim.";
+				mes "Ele deve estar em algum lugar";
+				mes "em Prontera...";
+				close;
+			} else if(tu_archer02 == 9){
+				mes "Hmm, entendo. Obrigado";
+				mes "por me trazer as notícias. Como Arthail disse, esperarei até que ele tenha mais novidades para mim.";
+				mes "Você também deve treinar e se preparar para o futuro.";
+				tu_archer02 = 10;
+				if (checkre(3))
+					getexp 1000,1000;
+				else
+					getexp 2000,1000;
+				close;
+			}
+		}
+		mes "Eu não sei...";
+		mes "Recentemente, não ouvi nenhuma notícia digna de nota. Por enquanto, o calor do sol parece estar protegendo a paz por aqui.";
+		next;
+		mes "[Mestre Kavaruk]";
+		mes "Mas se eu ouvir";
+		mes "algum boato interessante,";
+		mes "eu te avisarei.";
+		close;
+	case 3:
+		mes "[Mestre Kavaruk]";
+		if(tu_archer01 < 1){
+			if(Class == Job_Novice || Class == Job_Baby){
+				mes "Ah...";
+				mes "Então você está";
+				mes "interessado em";
+				mes "se tornar um Arqueiro?";
+			} else if (Class == Job_Archer_High || BaseJob == Job_Dancer || BaseJob == Job_Bard){
+				mes "Embora eu não possa negar que você é um especialista, acredito que é sempre uma boa ideia revisar os fundamentos da arqueiria de tempos em tempos. Gostaria de fazer um treinamento de reciclagem?";
+			} else if (BaseJob == Job_Hunter){
+				mes "[Mestre Kavaruk]";
+				mes "Arpesto está esperando";
+				mes "lá fora. Como ele é um";
+				mes "caçador veterano, pode ser";
+				mes "de grande ajuda para você.";
+				close;
+			} else if(Class == Job_Archer || Class == Job_Baby_Archer){
+				mes "Como Arqueiro, vejo que você quer garantir um bom domínio dos fundamentos";
+				mes "do nosso trabalho. Gostaria de uma instrução especializada?";
+			} else {
+				mes "Embora você talvez não possa aplicar diretamente o conhecimento relacionado à arqueiria,"; 
+				mes "é uma boa ideia entender as capacidades dos";
+				mes "seus aliados Arqueiros.";
+				next;
+				mes "[Mestre Kavaruk]";
+				mes "O que acha de receber";
+				mes "uma instrução especializada para aprender mais sobre a classe Arqueiro?";
+			}
+			next;
+			switch(select("Sim:Não")){
+			case 1:
+				tu_archer01 = 1;
+				mes "[Mestre Kavaruk]";
+				mes "Ah sim. Então, por favor";
+				mes "leve esta mensagem até a ^3131FFSeisner^000000 que está no Campo de Treinamento a oeste de Ícarus.";
+				next;
+				mes "^3355FFVocê recebeu";
+				mes "a mensagem de Kavaruk";
+				mes "para Seisner.^000000";
+				next;
+				mes "[Mestre Kavaruk]";
+				mes "Seisner é muito diligente,";
+				mes "centrada, inteligente e";
+				mes "extremamente capaz. Acredito";
+				mes "que você pode aprender muito com ela.";
+				close;
+			case 2:
+				mes "[Mestre Kavaruk]";
+				mes "Ah, entendo. Bem,";
+				mes "Ícarus sempre o receberá";
+				mes "de braços abertos. Se você";
+				mes "mudar de ideia, sinta-se";
+				mes "à vontade para voltar.";
+				close;
+			}
+		} else if(tu_archer01 == 1 || tu_archer01 == 2){
+			mes "Hmm...?";
+			mes "O que você ainda está";
+			mes "fazendo aqui? Vá para as";
+			mes "colinas a oeste de Ícarus e";
+			mes "fale com a ^3131FFSeisner^000000 para iniciar seu treinamento especial.";
+			close;
+		} else if(tu_archer01 == 3){
+			mes "Então "+strcharinfo(0)+",";
+			mes "Teve uma boa experiência? Aprender apenas a teoria nunca é muito divertido, mas é necessário.";
+			next;
+			mes "[Mestre Kavaruk]";
+			if (BaseJob == Job_Archer){
+				mes "Agora é hora de vivenciar os princípios que acabou de aprender na prática. Vá falar com ^3131FFReidin Corse^000000, que está logo fora deste prédio, e ele te explicará sobre as diferentes habilidades.";
+				tu_archer01 = 4;
+			} else {
+				mes "Mesmo assim, não há necessidade de você fazer nenhum treinamento de campo, já que apenas Arqueiros podem participar";
+				mes "disso.";
+			}
+			close;
+		} else if(tu_archer01 == 4 && BaseJob == Job_Archer) {
+			mes "Reidin Corse está logo fora deste prédio. Você não o viu quando entrou?";
+			close;
+		}
+	}
+	mes "Você está ótimo";
+	mes "do jeito que está agora.";
+	mes "Mesmo assim, se sentir que precisa de algo, fale com qualquer membro da Guilda e ouça suas experiências de vida.";
+	close;
+}
+
+// Reidin Corse
+//============================================================
+pay_arche,103,165,5	script	Reidin Corse#tu	4_M_REIDIN_KURS,{
+	mes "[Reidin Corse]";
+	if (checkweight(1201,1) == 0) {
+		mes "[Reidin Corse]";
+		mes "Por que você está carregando";
+		mes "tantas coisas? É melhor colocar tudo que não precisa no Armazém da Kafra.";
+		close;
+	}
+	if(MaxWeight - Weight < 2000){
+		mes "Ei, você está carregando";
+		mes "coisas demais. Você devia";
+		mes "guardar algumas no Armazém";
+		mes "da Kafra...";
+		close;
+	}
+	if(tu_archer01 > 0 && (BaseJob != Job_Hunter && BaseJob != Job_Bard && BaseJob != Job_Dancer || Upper == 2)){
+		if(tu_archer01 == 4){
+			mes "Ah, o que foi?";
+			mes "Posso te ajudar";
+			mes "com alguma coisa?";
+			next;
+			switch(select("Me fale sobre habilidades.:Ah, na verdade não...")) {
+			case 1:
+				mes "[Reidin Corse]";
+				mes "Hã. Então o Mestre";
+				mes "Kavaruk mandou você";
+				mes "vir até mim, hein?";
+				mes "Certo. Beleza.";
+				emotion ET_KIK;
+				next;
+				break;
+			case 2:
+				mes "[Reidin Corse]";
+				mes "Hã...?";
+				mes "Certo. Tem certeza";
+				mes "de que não quer me";
+				mes "perguntar nada? Você tinha";
+				mes "aquele olhar, sabe?";
+				close;
+			}
+			mes "[Reidin Corse]";
+			mes "Tudo bem. Sou um cara";
+			mes "incrivelmente ocupado, mas vou arranjar um tempo pra você. Vou te ensinar o que sei sobre as habilidades dos Arqueiros... Com uma condição!";
+			next;
+			mes "[Reidin Corse]";
+			mes "Daqui pra frente, você tem que";
+			mes "me chamar de ^3131FFChefe^000000, entendeu? Fique comigo e você vai se tornar o segundo melhor arqueiro do mundo! Que";
+			mes "tal, garoto?";
+			next;
+			switch(select("Entendido, Chefe!:Aff, tô fora~!")) {
+			case 1:
+				mes "[Reidin Corse]";
+				mes "Ho ho!";
+				mes "Assim que se fala!";
+				mes "Muito bem~ Me chame de Chefe";
+				mes "daqui pra frente, ouviu?";
+				next;
+				break;
+			case 2:
+				mes "[Reidin Corse]";
+				mes "Hã? Que tipo de atitude";
+				mes "é essa? Ah, entendi. Você não é maduro o bastante pra reconhecer a grandeza quando ela está bem";
+				mes "na sua frente.";
+				next;
+				mes "[Reidin Corse]";
+				mes "Não se preocupe...";
+				mes "Quando você voltar";
+				mes "de joelhos, eu posso considerar";
+				mes "te ensinar.";
+				close;
+			}
+			mes "[Reidin Corse]";
+			mes "Vamos ver...";
+			mes "Quanto você sabe?";
+			mes "Mmmmmmmmmm...";
+			next;
+			mes "^3355FFReidin Corse estreita os olhos experientes e te avalia cuidadosamente.^000000";
+			next;
+			mes "[Reidin Corse]";
+			if(JobLevel > 39)
+				mes "Ei! Você já está pronto para mudar de classe, não está? Não perca tempo aqui e vá trocar de classe logo! Ou, se preferir, pode pedir algo para fazer ao Mestre Kavaruk.";
+			else if(JobLevel < 5){
+				mes "Beleza! Temos um Arqueiro novato aqui! Você deu sorte de ter vindo a mim, sou o melhor instrutor que você vai encontrar!"; 
+				mes "Mas vou te avisar, ensino num ritmo bem rápido, então tente acompanhar, beleza?";
+				next;
+				tu_archer01 = 5;
+				mes "[Reidin Corse]";
+				mes "Certo, estou pronto para começar as lições! Volte aqui quando estiver com seu arco, flechas e tudo mais preparado, entendeu?";
+			} else {
+				mes "Certo. Parece que você já sabe";
+				mes "alguma coisa. Mas mesmo com";
+				mes "um pouco de experiência, ainda tem espaço pra aprender. Então tente acompanhar, beleza?";
+				next;
+				tu_archer01 = 5;
+				mes "[Reidin Corse]";
+				mes "Bom, estou pronto pra ensinar assim que você estiver pronto pra aprender. Volte quando seu arco, flechas e tudo mais estiver pronto, certo?";
+			}
+			close;
+		} else if(tu_archer01 == 5){
+			mes "Preparado? Acho justo te lembrar que não vou tolerar reclamações! Apenas faça o que";
+			mes "eu mandar e você será o segundo melhor Arqueiro do mundo! Depois de mim, é claro~";
+			next;
+			mes "[Reidin Corse]";
+			mes "Se não gostar, pode simplesmente desistir! Não tem motivo pra continuar";
+			mes "se não conseguir acompanhar o Chefe.";
+			next;
+			switch(select("Por favor, me ensine... Chefe!:Quero desistir.")) {
+			case 1:
+				mes "[Reidin Corse]";
+				mes "É disso que eu tô falando! Isso aí! Confie em mim e você vai aprender quase tudo sobre as habilidades dos Arqueiros! Vamos começar!";
+				next;
+				select("Sim, Chefe!");
+				emotion ET_OK;
+				mes "[Reidin Corse]";
+				mes "Excelente...!";
+				mes "Gosto do seu estilo!";
+				next;
+				mes "[Reidin Corse]";
+				mes "Agora, abra sua Janela de Habilidades (Alt+S). Você deve ver duas habilidades: ^FF0000Olhos de Coruja^000000 e ^FF0000Rajada de Flechas^000000. Primeiro, vou falar sobre Olhos de Coruja.";
+				next;
+				mes "[Reidin Corse]";
+				mes "Nós Arqueiros precisamos ser capazes de perceber os movimentos dos nossos alvos à distância. Mesmo à noite, nada escapa aos olhos de uma coruja.";
+				next;
+				mes "[Reidin Corse]";
+				mes "Então temos que treinar nossa visão para enxergar como as corujas. Agora,";
+				mes "se você não consegue mirar nos alvos, será um péssimo arqueiro, certo? Você precisa de Precisão!";
+				next;
+				mes "[Reidin Corse]";
+				.@skill_owl = getskilllv("AC_OWL");
+				if(.@skill_owl < 3){
+					tu_archer01 = 6;
+					mes "Agora, sua primeira tarefa";
+					mes "é aprender ^3131FFOlhos de Coruja Nível 3^000000!";
+					if (checkre(0))
+						mes "De Morroc, se você viajar para o sul, pode enfrentar Condores para seu treinamento.";
+					else
+						mes "De Prontera, se você viajar sul, sul e depois oeste, poderá enfrentar Condores para seu treinamento.";
+					next;
+					mes "[Reidin Corse]";
+					mes "Você pode ir para outro lugar";
+					mes "se quiser, mas se não conhece áreas de treinamento, então";
+					mes "siga meu excelente conselho.";
+					next;
+					switch(select("Vou seguir seu conselho, Chefe!:Vou caçar em outro lugar...")) {
+					case 1:
+						mes "[Reidin Corse]";
+						if (checkre(0)) {
+						mes "Vou te mandar para";
+						mes "Morroc por enquanto,";
+						mes "então não se esqueça das";
+						mes "instruções que te dei.";
+						mes "Viaje para o ^3131FFsul^000000.";
+					} else {
+						mes "Vou te mandar para";
+						mes "Prontera por enquanto,";
+						mes "então não se esqueça das";
+						mes "instruções que te dei.";
+						mes "Viaje para o ^3131FFsul^000000, ^3131FFsul^000000,";
+						mes "e depois para o ^3131FFoeste^000000.";
+					}
+					next;
+					switch(select("Partir agora~:E-ei, deixa eu me preparar!")) {
+					case 1:
+						mes "[Reidin Corse]";
+						mes "Quando estiver lutando";
+						mes "com as dificuldades";
+						mes "do treinamento, apenas pense";
+						mes "em tentar ser tão bom quanto";
+						mes "o maior Arqueiro de todos os tempos:";
+						mes "eu.";
+						emotion ET_THINK;
+						next;
+						mes "[Reidin Corse]";
+						mes "Beleza...!";
+						mes "Lá vai você!";
+						if (checkre(0)) {
+							mes "Para Morroc!";
+							close2;
+							warp "morocc",156,46;
+						} else {
+							mes "Para Prontera!";
+							close2;
+							warp "prontera",116,72;
+						}
+						end;
+					case 2:
+						mes "[Reidin Corse]";
+						mes "Hm...?";
+						mes "O que exatamente";
+						mes "você precisa preparar? Tudo bem,";
+						mes "faça o que precisar";
+						mes "fazer então...";
+						close;
+					}
+				case 2:
+					emotion ET_FRET;
+					mes "[Reidin Corse]";
+					mes "Como é que é...?";
+					mes "Tá bom então.";
+					mes "Mas da próxima vez";
+					mes "que vier aqui, é melhor";
+					mes "saber Olhos de Coruja Nível 3!";
+					close;
+				}
+			} else {
+				emotion ET_ANGER;
+				mes "Hã. Então você já conhece um pouco sobre Olhos de Coruja, hein? Bom, então acho que vou falar de algo que você ainda não sabe!";
+				tu_archer01 = 7;
+				getexp 500,0;
+				close;
+			}
+			break;
+		case 2:
+			mes "[Reidin Corse]";
+			mes "Hã. Beleza.";
+			mes "E eu aqui";
+			mes "todo pronto pra";
+			mes "te ensinar todos os";
+			mes "meus segredos de arqueiria!";
+			close;
+		}
+	} else if(tu_archer01 == 6){
+		.@owl = getskilllv(43);
+		if(.@owl > 2){
+			mes "Ah, você";
+			mes "finalmente voltou.";
+			mes "Você me deixou";
+			mes "esperando por um tempo!";
+			next;
+			emotion ET_SURPRISE;
+			mes "[Reidin Corse]";
+			mes "Ah, mas seus olhos parecem bem mais afiados do que antes.";
+			mes "Aqui, esta é uma pequena recompensa especial pra você.";
+			specialeffect2 EF_WIND;
+			tu_archer01 = 7;
+			getexp 500,0;
+			next;
+			emotion ET_HNG;
+			mes "[Reidin Corse]";
+			mes "Nada mal, mas você realmente deveria dominar Olhos de Coruja. Isso significa";
+			mes "aprender até o Nível 10!";
+			next;
+			mes "[Reidin Corse]";
+			mes "Agora, acho que na minha próxima";
+			mes "aula eu vou falar sobre outra";
+			mes "habilidade, certo?";
+			mes "Volte quando estiver pronto";
+			mes "pra aprender algo novo~";
+			close;
+		} else {
+			mes "Ei! Eu te disse";
+			mes "pra aprender";
+			mes "Olhos de Coruja Nível 3!";
+			mes "Tente não aprender outra coisa";
+			mes "por engano, beleza?";
+			close;
+		}
+	} else if(tu_archer01 == 7){
+		mes "Certo, abra";
+		mes "sua Janela de Habilidades.";
+		mes "Já que você tem Olhos de Coruja Nível 3, agora você deve ser capaz de ver";
+		mes "a habilidade Olhos de Águia";
+		mes "na lista também.";
+		next;
+		mes "[Reidin Corse]";
+		mes "Agora quando você pensa";
+		mes "em Águias, o que";
+		mes "exatamente vem à mente?";
+		next;
+		switch(select("Olhos afiados e precisos.:Você, Chefe.")) {
+		case 1:
+			mes "[Reidin Corse]";
+			mes "Exatamente!";
+			break;
+		case 2:
+			emotion ET_BIGTHROB;
+			mes "[Reidin Corse]";
+			mes "Hahahaha!";
+			mes "Bom, eu sou famoso";
+			mes "pela minha incrível";
+			mes "visão e precisão!";
+			mes "^333333*Cof cof*^000000 Enfim...";
+			break;
+			}
+			next;
+			mes "[Reidin Corse]";
+			mes "Águias circulam o céu, encontram um alvo no chão e então rapidamente mergulham para agarrar a presa com suas garras.";
+			next;
+			emotion ET_THROB;
+			mes "[Reidin Corse]";
+			mes "Sem dúvidas.";
+			mes "Águias são incríveis!";
+			next;
+			mes "[Reidin Corse]";
+			mes "A habilidade ^3131FFOlhos de Águia^000000 permite";
+			mes "que você treine sua visão como a de um abutre. Você aumentará sua Precisão de Ataque e poderá atingir inimigos de distâncias maiores.";
+			next;
+			emotion ET_STARE_ABOUT;
+			mes "[Reidin Corse]";
+			mes "Eu sei que você já consegue atacar";
+			mes "à distância, mas não fique";
+			mes "satisfeito com o alcance atual. Aprenda Olhos de Águia para atacar de ainda mais longe.";
+			next;
+			mes "[Reidin Corse]";
+			mes "Agora vem sua";
+			mes "segunda missão!";
+			mes "Vá caçar Mandrágora!";
+			mes "Mandrágoras não se movem,";
+			mes "então são perfeitas para treino";
+			mes "de mira à distância!";
+			next;
+			.@eagle = getskilllv("AC_VULTURE");
+			if(.@eagle < 3){
+				if (checkre(0))
+					mes "Certo, Mandrágoras geralmente vivem perto de Geffen. Posso te mandar para lá, então viaje para o norte para encontrar";
+				else
+					mes "Certo, Mandrágoras geralmente vivem ao redor do Monte Mjolnir. Posso te mandar para Prontera, então vá ao norte e depois para o leste para encontrar";
+				mes "algumas delas.";
+				next;
+				mes "[Reidin Corse]";
+				mes "Lembre-se, o mais";
+				mes "importante é aumentar o nível da habilidade Olhos de Águia e testar o alcance do seu ataque.";
+				if(MaxWeight - Weight < 1000){
+					mes "Você já tem flechas";
+					mes "suficientes, então vá em frente!";
+					tu_archer01 = 8;
+				} else {
+					next;
+					mes "[Reidin Corse]";
+					mes "Aqui está algo para te incentivar. Como as Mandrágoras são monstros de propriedade Terra, estas Flechas de Fogo serão muito eficazes.";
+					tu_archer01 = 8;
+					getitem 1752,300; //Flecha de Fogo
+				}
+				next;
+				mes "[Reidin Corse]";
+				mes "Certo~";
+				mes "Pronto para ir?";
+				next;
+				switch(select("Vamos nessa!:E-ei, espera um pouco!")) {
+				case 1:
+					mes "[Reidin Corse]";
+					mes "Tudo bem...!";
+					mes "Em frente!";
+					close2;
+					if (checkre(0))
+						warp "geffen",120,39;
+					else
+						warp "prontera",116,72;
+					end;
+				case 2:
+					mes "[Reidin Corse]";
+					mes "Ainda precisa";
+					mes "se preparar?";
+					mes "Se apresse!";
+					close;
+				}
+			} else {
+				mes "Hã?";
+				mes "Espera aí...";
+				emotion ET_QUESTION;
+				next;
+				mes "[Reidin Corse]";
+				mes "Você já aprendeu";
+				mes "Olhos de Águia!";
+				mes "Por que eu gastei tanto tempo explicando sobre isso? Bom, acho que já podemos seguir para a próxima lição...";
+				tu_archer01 = 9;
+				getitem 1752,500; //Flecha de Fogo
+				close;
+			}
+		} else if(tu_archer01 == 8){
+			.@eagle = getskilllv("AC_VULTURE");
+			if(.@eagle < 3){
+				if (checkre(0))
+					mes "Mandrágoras vivem na área ao norte de Geffen. Aprenda Olhos de Águia até o Nível 3 e familiarize-se com seu alcance de ataque.";
+				else
+					mes "Mandrágoras vivem na área ao norte e leste de Prontera. Aprenda Olhos de Águia até o Nível 3 e familiarize-se com seu alcance de ataque.";
+				next;
+				mes "[Reidin Corse]";
+				mes "Beleza...";
+				mes "Você está";
+				mes "pronto para ir?";
+				next;
+				switch(select("Vamos.:Espere um momento.")) {
+				case 1:
+					mes "[Reidin Corse]";
+					mes "Tudo certo...!";
+					mes "Em frente!";
+					close2;
+					if (checkre(0))
+						warp "geffen",120,39;
+					else
+						warp "prontera",116,72;
+					end;
+				case 2:
+					mes "[Reidin Corse]";
+					mes "Ainda precisa";
+					mes "se preparar?";
+					mes "Se apresse!";
+					close;
+				}
+			} else {
+				mes "Ah, então você aprendeu";
+				mes "um pouco sobre Olhos de Águia! O que acha dela agora? Ah, e aqui está uma pequena recompensa antes de começarmos a próxima lição~";
+				tu_archer01 = 9;
+				getitem 1752,500; //Flecha de Fogo
+				close;
+			}
+		} else if(tu_archer01 == 9){
+			mes "Certo...";
+			mes "Até agora nós";
+			mes "estudamos Habilidades Passivas.";
+			mes "Você sabe, Olhos de Coruja";
+			mes "e Olhos de Águia.";
+			next;
+			mes "[Reidin Corse]";
+			mes "Mesmo que você não esteja fazendo nada, Habilidades Passivas estão sempre ativas. Agora, é hora de eu te ensinar uma Habilidade Ativa";
+			mes "dos Arqueiros. Pronto?";
+			next;
+			mes "[Reidin Corse]";
+			mes "Hoje eu vou te falar";
+			mes "tudo sobre";
+			mes "^3131FFRajada de Flechas^000000!";
+			mes "O que acha?";
+			mes "Empolgante, né?";
+			next;
+			.@eagle = getskilllv("AC_DOUBLE");
+			if(.@eagle > 2){
+				mes "["+strcharinfo(0)+"]";
+				mes "Eu...";
+				mes "Eu já conheço";
+				mes "Rajada de Flechas.";
+				next;
+				mes "[Reidin Corse]";
+				mes "...";
+				mes "......";
+				next;
+				mes "[Reidin Corse]";
+				mes "^333333*Suspiro*^000000";
+				mes "Próxima lição...";
+				tu_archer01 = 10;
+				close;
+			} else {
+				mes "[Reidin Corse]";
+				mes "Como o nome diz, Rajada de Flechas permite atacar os inimigos com duas flechas seguidas! Boo-ya~";
+				next;
+				mes "[Reidin Corse]";
+				mes "À medida que o nível da habilidade aumenta, a força do ataque também aumenta. Se dominar essa habilidade, você poderá causar um grande dano aos inimigos!";
+				next;
+				mes "[Reidin Corse]";
+				mes "Segure seu arco e flechas";
+				mes "assim, concentre-se, mire,";
+				mes "e então dispare duas vezes com toda";
+				mes "sua força! Com prática suficiente,"; 
+				mes "você se acostuma com a Rajada de Flechas!";
+				next;
+				tu_archer01 = 10;
+				if(.@eagle == 0){
+					specialeffect2 EF_WIND;
+				// tu_archer01 = 10;
+					getexp 0,500;
+				}
+				emotion ET_BEST;
+				next;
+				mes "[Reidin Corse]";
+				mes "Agora, há outra habilidade conhecida como ^FF0000Chuva de Flechas^000000. Enquanto a Rajada de Flechas usa 2 flechas, a Chuva de Flechas dispara várias de uma vez.";
+				next;
+				mes "[Reidin Corse]";
+				mes "Nem mesmo eu consigo usar";
+				mes "Chuva de Flechas tão bem, já que é bem difícil. Ainda assim, se você treinar bastante, talvez consiga dominar!";
+				emotion ET_SMILE;
+				close;
+			}
+		} else if(tu_archer01 == 10){
+			if (checkre(0)) {
+				mes "Agora, eu te ensinei muita coisa e quero garantir que você se lembre de tudo. Por isso, quero que faça uma prova. Sua missão: ^FF0000Ataque os Rockers^000000!";
+				emotion ET_BEST;
+				next;
+				mes "[Reidin Corse]";
+				mes "Rockers vivem a sudoeste de Prontera.";
+				next;
+				mes "[Reidin Corse]";
+				mes "Lembre-se de que Rockers são monstros de propriedade Terra!! ^3131FFEntão são fracos contra Fogo^000000.";
+				next;
+				mes "[Reidin Corse]";
+				mes "Agora vá e traga ^3131FF10 Pernas de Gafanhoto^000000 ao caçar Rockers.";
+				mes "Trazendo tudo isso, você passa~";
+				next;
+				mes "[Reidin Corse]";
+				mes "É mais fácil encontrá-los saindo pelo portão sul de Prontera e depois seguindo para oeste. Agora vá, " + strcharinfo(0) + "~";
+			} else {
+				mes "Agora, eu te ensinei muita coisa e quero garantir que você se lembre de tudo. Por isso, quero que faça uma prova. Sua missão: ^FF0000Ataque as Hidras^000000!";
+				emotion ET_BEST;
+				next;
+				mes "[Reidin Corse]";
+				mes "Há um navio que leva para a Ilha de Byalan,"; 
+				mes "em Izlude, a cidade satélite de Prontera. Pegue esse navio até a Ilha de Byalan.";
+				next;
+				mes "[Reidin Corse]";
+				mes "No centro da ilha há a entrada para uma masmorra cheia de Hidras. Lembre-se de que é uma masmorra de água, e que ^3131FFÁgua resiste Fogo^000000, ^3131FFmas é fraca contra Vento^000000.";
+				next;
+				mes "[Reidin Corse]";
+				mes "Agora vá e traga ^3131FF10 Tentáculos^000000";
+				mes "das Hidras e ^3131FF1 Cristal Azul^000000, que você pode conseguir ao caçar Cogumelos por lá.";
+				mes "Trazendo tudo isso, você passa~";
+				next;
+				mes "[Reidin Corse]";
+				mes "É mais fácil encontrar Izlude se você passar por Prontera, então vá para os campos próximos a Prontera. Agora vá, " + strcharinfo(0) + "~";
+			}
+			tu_archer01 = 11;
+			close;
+		} else if(tu_archer01 == 11){// Perna de Gafanhoto
+			if (checkre(0) && countitem(940) < 10) {
+				mes "Ei...";
+				mes "Você precisa trazer";
+				mes "^3131FF10 Pernas de Gafanhoto^000000 para passar na minha prova! Volte para a região sudoeste de Prontera e consiga elas!";
+				close;
+			} else if (!checkre(0) && (countitem(962) < 10 || countitem(991) == 0)) {
+				mes "Ei...";
+				mes "Você precisa trazer";
+				mes "^3131FF10 Tentáculos^000000 e";
+				mes "^3131FF1 Cristal Azul^000000 para passar na minha prova! Volte para a masmorra na Ilha de Byalan e consiga eles!";
+				close;
+			}
+			if(MaxWeight - Weight < 1000){
+				mes "Por que está carregando";
+				mes "tanta coisa? É melhor colocar tudo que não precisa no Armazém da Kafra.";
+				close;
+			} else {
+				mes "Ei, você voltou!";
+				mes "Vamos ver...";
+				next;
+				emotion ET_BEST;
+				mes "[Reidin Corse]";
+				mes "Muito bem! Você passou.";
+				mes "Não se esqueça de continuar treinando e melhorando suas habilidades. Quando perceber, será quase tão bom quanto eu!";
+				specialeffect2 EF_WIND;
+				tu_archer01 = 12;
+				if (checkre(0))
+					delitem 940,10; //Perna de Gafanhoto
+				getexp 1000,1000;
+				getitem 1707,1; //Arco Grande
+				close;
+			}
+		} else if(tu_archer01 == 12){
+			mes "Certo, agora só falta";
+			mes "mais uma habilidade que você precisa conhecer. Pessoalmente, acho essa essencial para todo Arqueiro...";
+			next;
+			mes "[Reidin Corse]";
+			mes "Abra sua Janela de Habilidades.";
+			mes "Certifique-se de aprender";
+			mes "^FF0000Concentração^000000.";
+			mes "Agora, como posso descrever";
+			mes "como usá-la?";
+			next;
+			mes "[Reidin Corse]";
+			mes "Acho que primeiro, você precisa acalmar sua mente e entrar em um estado de concentração total. Puxe a corda do arco com firmeza. Se houver desequilíbrio, mesmo por um milésimo de segundo, você errará.";
+			next;
+			mes "[Reidin Corse]";
+			mes "Usamos Concentração";
+			mes "para manter a calma e o foco, a fim de ^3131FFmaximizar certos atributos e habilidades^000000. Essa habilidade melhora imensamente nosso desempenho como Arqueiros!";
+			next;
+			mes "[Reidin Corse]";
+			mes "Talvez você ainda não consiga";
+			mes "ver isso agora, mas conforme se tornar mais habilidoso, vai perceber todos os benefícios dessa habilidade.";
+			tu_archer01 = 13;
+			close;
+		} else if(tu_archer01 == 13){
+			mes "^333333*Suspiro*^000000";
+			mes "Foi um saco, mas finalmente";
+			mes "terminamos todas"; 
+			mes "as suas lições.";
+			emotion ET_HNG;
+			next;
+			mes "[Reidin Corse]";
+			mes "Ah, mas ainda não é hora de";
+			mes "relaxar! Já que eu te dei uma prova intermediária, é justo que eu também te aplique uma final!";
+			next;
+			mes "[Reidin Corse]";
+			mes "Surpreso, hein?";
+			mes "Bem, essa prova é um pouco mais difícil, mas eu vou te ajudar, então";
+			mes "não precisa se preocupar.";
+			next;
+			mes "[Reidin Corse]";
+			if (checkre(0)) {
+				mes "Agora, vá até a floresta a leste de Payon e cace Esporos e Caudas de Minhoca. Sua prova será trazer ^3131FF10 Esporos de Cogumelo^000000 e";
+				mes "^3131FF10 Escamas Afiadas^000000.";
+			} else {
+				mes "Agora, vá até o Monte Mjolnir e cace Floras. Sua prova será trazer ^3131FF5 Flores de Planta Carnívora^000000 e";
+				mes "^3131FF20 Caules^000000.";
+			}
+			next;
+			mes "[Reidin Corse]";
+			mes "Eu sei que é um pouco perigoso,";
+			mes "mas tenho uma amiga que vai estar lá pra te ajudar. Claro, ela ainda está em treinamento, mas...";
+			next;
+			mes "[Reidin Corse]";
+			mes "Ah...";
+			mes "E mais uma coisa.";
+			mes "Pegue isto aqui.";
+			next;
+			mes "[Reidin Corse]";
+			if(MaxWeight - Weight < 2100){
+				mes "E-ei!";
+				mes "Por que você está carregando";
+				mes "tanta coisa? É melhor guardar tudo que não precisa no Armazém da Kafra.";
+				close;
+			} else {
+				mes "Esses itens são apenas um incentivo, então não entenda errado! Agora vá logo, traga o que pedi,";
+				mes "e volte!";
+				tu_archer01 = 14;
+				getitem 601,10; //Asas de Mosca
+				getitem 501,10; //Poção Vermelha
+				getitem 602,1; //Asa de Borboleta
+				close;
+			}
+		} else if((tu_archer01 == 14) || (tu_archer01 == 15)){
+			if (checkre(0) && (countitem(906) < 10 || countitem(921) < 10)) {// Escama Afiada, Esporos de Cogumelo
+				mes "Lembre-se, você";
+				mes "precisa ir até a";
+				mes "floresta a leste de Payon e trazer";
+				mes "^3131FF10 Esporos de Cogumelo^000000";
+				mes "e ^3131FF10 Escamas Afiadas^000000.";
+				close;
+			} else if (!checkre(0) && (countitem(1032) < 5 || countitem(905) < 20)) {
+				mes "Lembre-se, você";
+				mes "precisa ir até o";
+				mes "Monte Mjolnir e trazer";
+				mes "^3131FF5 Flores de Planta Carnívora^000000";
+				mes "e ^3131FF20 Caules^000000.";
+				next;
+				mes "[Reidin Corse]";
+				mes "De Prontera, você chega ao Monte Mjolnir viajando ^3131FFnorte^000000, ^3131FFnorte^000000 e depois ^3131FFleste^000000. Mas se quiser,";
+				mes "posso te enviar direto pra lá.";
+				next;
+				switch(select("Vamos!:E-Espere!")) {
+				case 1:
+					mes "[Reidin Corse]";
+					mes "Beleza!";
+					mes "Ah, e se tiver";
+					mes "a chance, mande um oi para minha amiga Noviça que está lá~";
+					emotion ET_SMILE;
+					close2;
+					warp "mjolnir_11",25,221;
+					end;
+				case 2:
+					mes "[Reidin Corse]";
+					mes "Hã?";
+					mes "Hmm, tudo bem. Mas";
+					mes "não tem por que ficar tão nervoso,"; 
+					mes "mesmo sendo";
+					mes "a prova final.";
+					close;
+				}
+			}
+			mes "Ha-ha~!";
+			mes "Você já parece mais um";
+			mes "veterano do que um novato!";
+			mes "É, dá pra ver isso";
+			mes "no seu olhar.";
+			next;
+			mes "[Reidin Corse]";
+			mes "Certo, você chegou a conhecer minha amiga Noviça, Mafra? Ela é bem tímida, mas espero que vocês tenham se dado bem.";
+			next;
+			mes "[Reidin Corse]";
+			mes "Fico feliz em dizer";
+			mes "que você passou na minha prova final!";
+			mes "Aqui, pegue essa"; 
+			mes "pequena recompensa!";
+			specialeffect2 EF_WIND;
+			tu_archer01 = 16;
+			if (checkre(3))
+				getexp 1000,1000;
+			else
+				getexp 3000,3000;
+			getitem 1770,500; //Flecha de Ferro
+			next;
+			mes "[Reidin Corse]";
+			mes "Bom, parece que agora você é um Arqueiro completo. Para ser sincero,";
+			mes "não tenho mais nada para te ensinar. Bem, pelo menos sobre arqueiria.";
+			emotion ET_SMILE;
+			next;
+			mes "[Reidin Corse]";
+			mes "Bom, se falar com ele, o Mestre Kavaruk pode ter algo pra você fazer. Ele vive me mandando pra lá e pra cá também.";
+			mes "Aquele chato!";
+			emotion ET_HNG;
+			next;
+			mes "[Reidin Corse]";
+			mes "Bom, "+ strcharinfo(0) +",";
+			mes "Eu ficaria muito feliz se você chegasse ao ponto de desenvolver um amor verdadeiro pela arte da arqueiria. Até qualquer hora, beleza?";
+			emotion ET_BEST;
+			close;
+		} else if(tu_archer01 == 16){
+			mes "Eu realmente gosto dessa cidade.";
+			mes "Tem tanta vegetação e verde por todos os lados";
+			mes "e os pássaros estão sempre cantando. Payon é realmente um lugar pacífico.";
+			next;
+			mes "[Reidin Corse]";
+			mes "Claro, também tenho amigos aqui em quem confio de olhos fechados. A gente sempre discute, mas no fim todos querem o melhor uns para os outros.";
+			emotion ET_HNG;
+			next;
+			mes "[Reidin Corse]";
+			mes "Você não acha";
+			mes "que é muito"; 
+			mes "maravilhoso ter";
+			mes "bons amigos?";
+			close;
+		} else {
+			mes "Eu realmente gosto dessa cidade.";
+			mes "Tudo é verde e os pássaros cantam por todo lado... Payon é um lugar tão pacífico.";
+			next;
+			mes "[Reidin Corse]";
+			mes "Eu me sinto tão feliz deitado na grama, olhando para o céu.";
+			next;
+			mes "[Reidin Corse]";
+			mes "Talvez também seja porque tenho amigos de confiança comigo aqui. Haha.";
+			mes "A gente sempre discute, mas no fundo se importa muito um com o outro.";
+			emotion ET_HNG;
+			next;
+			mes "[Reidin Corse]";
+			mes "... 'Amigo' é uma palavra maravilhosa. Você não acha?";
+			close;
+		}
+	}
+	mes "Permita-me me apresentar. Eu sou o Arqueiro dos Arqueiros, ^3131FFReidin Corse^000000, Mestre da Guilda Ícarus!";
+	next;
+	emotion ET_BEST;
+	mes "[Reidin Corse]";
+	mes "Agora mesmo estamos com um evento especial! A taxa de inscrição para a Guilda Ícarus está com ^3131FF50% de desconto^000000! Entre agora e não haverá taxas anuais!";
+	next;
+	emotion ET_THROB;
+	mes "[Reidin Corse]";
+	mes "Durante o evento especial, não haverá restrição de classe!";
+	mes "E de bônus, todos os novos membros homens serão apresentados a lindas dançarinas!";
+	next;
+	emotion ET_SMILE;
+	mes "[Reidin Corse]";
+	mes "E as novas membros mulheres terão a oportunidade especial de sair em um encontro comigo! Não perca!";
+	next;
+	emotion ET_MONEY;
+	mes "[Reidin Corse]";
+	mes "Entre agora mesmo";
+	mes "por apenas ^3131FF1.000.000 zeny^000000! Corra e junte-se à Guilda Ícarus enquanto";
+	mes "a oferta durar!";
+	next;
+	emotion ET_HNG, getnpcid(0, "Arpesto");
+	mes "[Arpesto]";
+	mes "Reidin...";
+	mes "Pare com essa palhaçada.";
+	mes "Ei, garoto. O verdadeiro";
+	mes "mestre da Guilda Ícarus";
+	mes "está naquele prédio ali.";
+	next;
+	emotion ET_HUK;
+	mes "[Reidin Corse]";
+	mes "Arpesto...!";
+	mes "Por que você fez isso...?!";
+	next;
+	emotion ET_ANGER;
+	mes "[Reidin Corse]";
+	mes "^333333*Suspiro*^000000";
+	mes "Tá bom, tá bom.";
+	mes "Não tem taxa de inscrição.";
+	mes "Mas eu ainda vou sair com";
+	mes "todas aquelas garotas bonitas...";
+	close;
+}
+
+// Seisner
+//============================================================
+pay_arche,84,139,3	script	Seisner	4_F_JOB_HUNTER,{
+	specialeffect EF_HIT2,AREA,"#Target";
+	mes "[Seisner]";
+	mes "Aaaah!";
+	mes "Rajada de Flechas!";
+	specialeffect EF_HIT2,AREA,"#Target";
+	next;
+	mes "[Seisner]";
+	mes "Eu consegui!";
+	mes "Só um Arqueiro";
+	mes "poderia fazer aquele disparo!";
+	next;
+	mes "[Seisner]";
+	mes "Agora, existem algumas";
+	mes "pessoas da classe Gatuno que também usam flechas, mas elas são mais indicadas para usar Adagas. Nós, Arqueiros, somos";
+	mes "os verdadeiros especialistas em flechas!";
+	if(tu_archer01 == 1 || tu_archer01 > 2){
+		next;
+		mes "^3355FFVocê mostra a Seisner";
+		mes "a carta que o Mestre";
+		mes "Kavaruk escreveu";
+		mes "pra ela em seu nome.^000000";
+		next;
+		mes "[Seisner]";
+		mes "Então o Mestre Kavaruk";
+		mes "quer que eu te ensine";
+		mes "sobre Arqueiros e Arqueiria? Certo, sobre o que você quer saber mais?";
+		while(1){
+			next;
+			switch(select("Sobre os Arqueiros.:Atributos para Arqueiros:Encerrar conversa.")){
+			case 1:
+				mes "[Seisner]";
+				mes "Arqueiros são especializados";
+				mes "em disparar ^3131FFflechas^000000. Normalmente atacamos à distância, mas até aumentarmos nossa Esquiva, somos bem fracos em batalhas um contra um.";
+				next;
+				mes "[Seisner]";
+				mes "Por isso, Arqueiros tendem a atacar antes que o inimigo se aproxime demais.";
+				mes "Também gostamos de formar grupos com pessoas que possam oferecer";
+				mes "proteção corpo a corpo.";
+				next;
+				mes "[Seisner]";
+				mes "Apenas Aprendizes podem";
+				mes "se tornar Arqueiros depois de atingir";
+				mes "o Nível de Classe 10 e aprender todas as Habilidades Básicas.";
+				next;
+				mes "[Seisner]";
+				mes "Arqueiros experientes podem avançar e mudar para a Segunda Classe, tornando-se ^3131FFCaçadores^000000, ^3131FFBardos^000000 se forem homens, ou ^3131FFMusas^000000 se forem mulheres.";
+				next;
+				mes "[Seisner]";
+				mes "Se você alcançar o Nível 99";
+				mes "como uma Segunda Classe, poderá mudar para uma Classe Transcendente com a ajuda da Valquíria.";
+				next;
+				mes "[Seisner]";
+				mes "Caçadores podem transcender para ^3131FFAtiradores de Elite^000000, Bardos em ^3131FFMenestréis^000000 e Musas em ^3131FFCiganas^000000. Eu sei, é um pouco complexo.";
+			if(tu_archer01 == 1) tu_archer01 = 2;
+				break;
+		case 2:
+			mes "[Seisner]";
+			mes "Então você quer saber";
+			mes "mais sobre os Atributos";
+			mes "e como eles afetam as habilidades do Arqueiro? Vou fazer o meu melhor para explicar.";
+			next;
+			while(1) {
+				switch(select("FOR:^3131FFAGI^000000:VIT:^FF9900INT^000000:^FF3131DES^000000:SOR:Encerrar conversa.")) {
+				case 1:
+					mes "[Seisner]";
+					mes "FOR normalmente aumenta o dano dos ataques. No entanto, os Arqueiros usam armas que dependem de ^FF3131DES^000000 para aumentar o dano.";
+					next;
+					mes "[Seisner]";
+					mes "De certo modo, FOR pode não ser necessária para Arqueiros, embora eu tenha certeza que há habilidades ou situações onde ela será útil.";
+					next;
+					mes "[Seisner]";
+					mes "Por exemplo, se você ficar sem flechas (o pesadelo de todo Arqueiro) e precisar usar uma Adaga, ter FOR";
+					mes "pode ajudar.";
+					next;
+					mes "[Seisner]";
+					mes "Aumentar FOR também";
+					mes "aumenta o peso que";
+					mes "qualquer personagem pode carregar. Então, com mais FOR, você pode levar mais flechas.";
+					next;
+					if(tu_archer01 == 1) tu_archer01 = 2;
+					continue;
+				case 2:
+					mes "[Seisner]";
+					mes "^FF3131AGI^000000, como você sabe, ";
+					mes "^3131FFaumenta a Velocidade de Ataque (ASPD)^000000";
+					mes "e afeta a ^3131FFTaxa de Esquiva^000000.";
+					next;
+					mes "[Seisner]";
+					mes "Uma das desvantagens dos Arqueiros é ter força baixa e pouca esquiva. Porém, essa desvantagem na Esquiva é compensada ao aumentar sua ^FF3131AGI^000000.";
+					next;
+					if(tu_archer01 == 1) tu_archer01 = 2;
+					continue;
+				case 3:
+					mes "[Seisner]";
+					mes "^3131FFVIT^000000 aumenta";
+					mes "seus Pontos de Vida Máximos (HP)";
+					mes "e sua resistência a danos.";
+					next;
+					mes "[Seisner]";
+					mes "Embora Arqueiros não";
+					mes "se destaquem em defesa, ter VIT pode ajudar a amenizar essa fraqueza da classe.";
+					next;
+					mes "[Seisner]";
+					mes "VIT pode ser útil";
+					mes "dependendo da sua estratégia. Mas não recomendo investir demais nesse atributo se for um Arqueiro.";
+					next;
+					if(tu_archer01 == 1) tu_archer01 = 2;
+					continue;
+				case 4:
+					mes "[Seisner]";
+					mes "^FF0000INT^000000 é mais";
+					mes "importante para a classe Arqueiro";
+					mes "do que você imagina~";
+					next;
+					mes "[Seisner]";
+					mes "Ao aumentar a ^FF0000INT^000000, você aumenta seu SP Máximo, o que permite usar habilidades especiais com mais frequência.";
+					next;
+					mes "[Seisner]";
+					mes "Para Caçadores, uma das Segundas Classes dos Arqueiros, ter mais INT aumenta o dano causado pelos ^3131FFFalcões^000000.";
+					next;
+					if(tu_archer01 == 1) tu_archer01 = 2;
+					continue;
+				case 5:
+					mes "[Seisner]";
+					mes "Agora, sem dúvida alguma,";
+					mes "DES é o atributo"; 
+					mes "mais importante";
+					mes "para qualquer Arqueiro.";
+					next;
+					mes "[Seisner]";
+					mes "^FF3131DES^000000 ^3131FFaumenta o dano^000000";
+					mes "das armas usadas pelos Arqueiros, como ^3131FFArcos^000000, ^3131FFInstrumentos^000000 e ^3131FFChicotes^000000.";
+					next;
+					mes "[Seisner]";
+					mes "Destreza melhora a capacidade de um Arqueiro atingir pontos fracos e causar mais dano, por isso essas armas não dependem de FOR como as de outras classes.";
+					next;
+					mes "[Seisner]";
+					mes "Assim como em outras classes, ^FF3131DES^000000 aumenta a ^3131FFPrecisão (HIT)^000000 e também melhora um pouco a Velocidade de Ataque (ASPD).";
+					next;
+					if(tu_archer01 == 1) tu_archer01 = 2;
+					continue;
+				case 6:
+					mes "[Seisner]";
+					mes "^FF0000SOR^000000 afeta sua";
+					mes "Taxa de Esquiva Perfeita";
+					mes "e a Taxa de Crítico.";
+					next;
+					mes "[Seisner]";
+					mes "Para Caçadores, uma das Segundas Classes do Arqueiro, SOR aumenta a chance de ativação automática do ^3131FFAtaque Aéreo^000000. Então, Caçadores que dependem dos seus Falcões podem querer investir em SOR.";
+					next;
+					if(tu_archer01 == 1) tu_archer01 = 2;
+					continue;
+				case 7:
+					mes "[Seisner]";
+					mes "Então, tem mais alguma coisa";
+					mes "que você gostaria"; 
+					mes "de me perguntar?";
+					break;
+				}
+				break;
+			}
+			break;
+			case 3:
+				mes "[Seisner]";
+				mes "Uma vez que um Arqueiro dispara uma flecha,";
+				mes "ele não pode parar seu voo ou mudar o alvo. É por isso que Arqueiros precisam ser racionais e muito cuidadosos em batalha.";
+				next;
+				mes "[Seisner]";
+				mes "Algum dia, eu gostaria de me tornar um grande Arqueiro e usar minhas habilidades para o bem de Rune-Midgard.";
+				close;
+			}
+		}
+	} else if(tu_archer01 == 2){
+		next;
+		mes "[Seisner]";
+		mes "Obrigado por ouvir.";
+		mes "Eu sei que te passei muitas informações, mas acho importante que todos";
+		mes "entendam sobre arquearia.";
+		next;
+		mes "[Seisner]";
+		mes "Se você se sentir confiante com o que te ensinei, deve voltar para o Mestre Kavaruk. Mas se ainda tiver dúvidas, pode sempre vir e me perguntar.";
+		close2;
+		specialeffect2 EF_WIND;
+		tu_archer01 = 3;
+		if(JobLevel == 1){
+			getexp 0,30;
+		} else if((JobLevel > 1) && (JobLevel < 11)){
+			getexp 0,80;
+		} else if((JobLevel > 10) && (JobLevel < 21)){
+			getexp 0,100;
+		} else {
+			getexp 0,120;
+		}
+		end;
+	}
+	close;
+}
+
+// Alvo
+//============================================================
+pay_arche,76,135,3	script	#Target	HIDDEN_NPC,{ end; }
+
+// Noviça
+//============================================================
+-	script	::Acolyte_Tu	-1,{
+	mes "[Noviça]";
+	if(tu_archer01 == 14){
+		if(gettime(DT_HOUR) >= 18 && gettime(DT_HOUR) < 22){
+			mes "O-o-olá!";
+			mes "Uhm, uhm...";
+			mes "Você é a-a-amigo do R-Reidin Corse";
+			mes "também?";
+			next;
+			mes "[Noviça]";
+			mes "M-meu nome é Mafra.";
+			mes "Desde que ele salvou minha vida, Reidin sempre foi um b-bom amigo para mim. Ele é um grande Arqueiro";
+			mes "e uma pessoa muito legal!";
+			next;
+			mes "[Noviça]";
+			mes "Ah, e...";
+			mes "Uuh... Ai não~";
+			mes "O que eu devia";
+			mes "t-te dizer mesmo...?";
+			emotion ET_PROFUSELY_SWEAT;
+			next;
+			mes "[Noviça]";
+			mes "Ah, como estou treinando para ser uma Noviça, devo ajudar as pessoas que ele está ensinando. Então...";
+			mes "V-vamos nos ajudar no treinamento!";
+			mes "Uhm, tudo bem?";
+			next;
+			switch(select("Claro.:Não, obrigado.:Reidin Corse é meu amigo!")) {
+			case 1:
+				mes "[Noviça]";
+				mes "Uau!";
+				mes "Obrigada, obrigada!";
+				mes "Eu vou me esforçar ao máximo!";
+				tu_archer01 = 15;
+				close;
+			case 2:
+				mes "[Noviça]";
+				mes "Ah... Ah.";
+				mes "Me desculpe.";
+				mes "Se você não precisa";
+				mes "da minha ajuda,";
+				mes "tudo bem então...";
+				emotion ET_CRY;
+				close;
+			case 3:
+				mes "[Noviça]";
+				mes "Hein?!";
+				mes "S-sério?";
+				mes "Acho que ele não precisa";
+				mes "me contar se já";
+				mes "tem uma namorada...";
+				next;
+				mes "[Noviça]";
+				if(Sex == SEX_MALE){
+					mes "E-e-espera!";
+					mes "V-você é um homem!";
+					mes "N-n-n-não brinca";
+					mes "comigo assim! Estou falando sério!";
+				} else {
+					mes "E ele é tão corajoso,";
+					mes "engraçado e inteligente.";
+					mes "V-você tem sorte de ter ele.";
+					mes "^333333*Sniff*^000000 E-eu...";
+					next;
+					mes "[Noviça]";
+					mes "^333333*Sniffle*^000000";
+					mes "V-vou fazer o meu melhor para te ajudar!";
+					mes "Desejo felicidade a vocês dois! (Waaaaaah~!)";
+				}
+				tu_archer01 = 15;
+				close;
+			}
+		}
+		else {
+			mes "^666666Zzzzz...^000000";
+			mes "Q-quê...?";
+			mes "Quem é você?";
+			specialeffect EF_SLEEPATTACK;
+			next;
+			mes "[Noviça]";
+			mes "Espere, eu sei...";
+			mes "V-você é... ^666666*Bocejo*^000000";
+			mes "Tão sonolenta. Pegue isso por agora...";
+			switch(rand(4)) {
+				case 0: npcskill "AL_HEAL",3,90,62; break;
+				case 1: npcskill "AL_HEAL",9,90,62; break;
+				case 2: npcskill "AL_HEAL",8,90,62; break;
+			}
+			switch(rand(3)) {
+				case 0: npcskill "AL_INCAGI",1,0,0; break;
+				case 1: npcskill "AL_INCAGI",5,0,0; break;
+				case 2: npcskill "AL_INCAGI",10,0,0; break;
+			}
+			switch(rand(3)) {
+				case 0: npcskill "AL_BLESSING",1,0,0; break;
+				case 1: npcskill "AL_BLESSING",5,0,0; break;
+				case 2: npcskill "AL_BLESSING",10,0,0; break;
+			}
+			close;
+		}
+	}
+	else if(tu_archer01 == 15){
+		if((gettime(DT_HOUR) >= 18) && (gettime(DT_HOUR) < 22)){
+			mes "^666666Zzzzz...^000000";
+			mes "Q-quê...?";
+			mes "Quem é você?";
+			specialeffect EF_SLEEPATTACK;
+			next;
+			mes "[Noviça]";
+			mes "Reidin Corse?";
+			mes "Não acredito que";
+			mes "eu adormeci enq--";
+			mes "^666666Zzzzzzz...^000000";
+			next;
+			mes "[Noviça]";
+			mes "^666666Zzzz^000000--Oooh!";
+			mes "S-só aceite isso antes que";
+			mes "eu adormeça de novo~! ^666666*Bocejo*^000000";
+		} else {
+			mes "Tá bom~!";
+			mes "Deixe-me tentar";
+			mes "lançar um feitiço";
+			mes "pra te ajudar! Yaa~p!";
+		}
+		switch(rand(4)) {
+			case 0: npcskill "AL_HEAL",3,90,62; break;
+			case 1: npcskill "AL_HEAL",10,90,62; break;
+			case 2: npcskill "AL_HEAL",8,90,62; break;
+		}
+		switch(rand(3)) {
+			case 0: npcskill "AL_INCAGI",1,0,0; break;
+			case 1: npcskill "AL_INCAGI",5,0,0; break;
+			case 2: npcskill "AL_INCAGI",10,0,0; break;
+		}
+		switch(rand(3)) {
+			case 0: npcskill "AL_BLESSING",1,0,0; break;
+			case 1: npcskill "AL_BLESSING",5,0,0; break;
+			case 2: npcskill "AL_BLESSING",10,0,0; break;
+		}
+		close;
+	}
+	mes "...";
+	mes "P-por que será que";
+	mes "viajar me deixa";
+	mes "tããão sonolenta...?"; 
+	mes "^666666Zzzzzzzz...^000000";
+	specialeffect EF_SLEEPATTACK;
+	close;
+}
+
+// Membro da Guilda dos Alquimistas
+//============================================================
+pay_arche,130,113,3	script	Membro da Guilda#tu	2_M_ALCHE,{
+	mes "[Membro da Guilda dos Alquimistas]";
+	if(tu_archer02 > 0){
+		if((countitem(1032) > 0) || (countitem(905) > 0 )){	// Flor de Planta Carnívora & Caule
+			mes "Ótimo...!";
+			mes "Estive esperando";
+			mes "a Guilda Ícarus"; 
+			mes "enviar alguém para";
+			mes "nos ajudar! Finalmente!";
+			emotion ET_CRY;
+			next;
+			mes "[Membro da Guilda dos Alquimistas]";
+			mes "Você gostaria de vender ^3131FFCaule(s)^000000";
+			mes "e ^3131FFFlor(es) de Planta Carnívora^000000 para";
+			mes "a Guilda dos Alquimistas? Nós pagaremos";
+			mes "^3131FF30 Zeny^000000 por cada Caule e";
+			mes "^3131FF130 Zeny^000000 por cada Flor de Planta Carnívora.";
+			next;
+			switch(select("Vender todos os Caules e Flores.:Não vender nada.")) {
+			case 1:
+				mes "[Membro da Guilda dos Alquimistas]";
+				mes "Muito obrigado!";
+				mes "Isso vai realmente";
+				mes "ajudar a manter nosso"; 
+				mes "Campo de Flora!";
+				mes "Agradeço muito sua ajuda~";
+
+				.@alche_f = countitem(1032); // Flor de Planta Carnívora
+				.@alche_s = countitem(905); // Caule
+				.@total_zeny = .@alche_f * 130 + .@alche_s * 30;
+				if (countitem(1032))
+					delitem 1032, .@alche_f; // Flor de Planta Carnívora
+				if (countitem(905))
+					delitem 905, .@alche_s; // Caule
+				Zeny = Zeny+.@total_zeny;
+				close;
+			case 2:
+				mes "[Membro da Guilda dos Alquimistas]";
+				mes "Sério mesmo...";
+				mes "Estou quase implorando!";
+				mes "A Guilda dos Alquimistas realmente precisa de muitos suprimentos novos para manter nosso Campo de Flora funcionando!";
+				emotion ET_CRY;
+				close;
+			}
+		} else {
+			mes "Não sei se você ouviu";
+			mes "pelo Kavaruk, mas nosso Campo de Flora está sendo destruído por gatos de rua.";
+			emotion ET_CRY;
+			next;
+			mes "[Membro da Guilda dos Alquimistas]";
+			mes "Não importa quantas vezes os expulsamos,"; 
+			mes "eles sempre conseguem voltar. Não temos escolha a não ser substituir o que eles destroem.";
+			next;
+			mes "[Membro da Guilda dos Alquimistas]";
+			mes "Vamos te recompensar se puder nos trazer ^3131FFCaule(s)^000000 e ^3131FFFlor(es) de Planta Carnívora^000000";
+			mes "para ajudar na manutenção do nosso campo. Essas Floras são cruciais, pois garantem fundos para nossa Guilda. Sem elas...";
+			close;
+		}
+	}
+	mes "^666666*Suspiro...*^000000";
+	mes "Será que ninguém vai vir";
+	mes "nos ajudar? Estamos enfrentando";
+	mes "uma grande crise por aqui!";
+	close;
+}
+
+// Arthail
+//============================================================
+prontera,126,335,5	script	Arthail	1_M_BARD,{
+	mes "[Arthail]";
+	if(tu_archer02 < 3){
+		mes "Eu sou o Bardo";
+		mes "que canta apenas para";
+		mes "si mesmo. A brisa suave";
+		mes "é a única plateia";
+		mes "que tenho.";
+		next;
+		mes "[Arthail]";
+		mes "Eu sou Arthail";
+		mes "do Vento.";
+		mes "Não canto para ninguém,";
+		mes "então é melhor seguir";
+		mes "seu caminho. Sinto muito, mas";
+		mes "não tenho canções para compartilhar.";
+		if(tu_archer02 == 2) {
+			next;
+			select("O Mestre Kavaruk mandou eu te encontrar!");
+			mes "[Arthail]";
+			mes "Sério?";
+			mes "Suponho que";
+			mes "não tem jeito.";
+			mes "Eu realmente deveria";
+			mes "ter entrado em contato com ele.";
+			next;
+			mes "[Arthail]";
+			mes "No entanto, estou muito cansado da longa viagem. Estou exausto com a agitação dessa cidade e as centenas de pessoas falando ao mesmo tempo.";
+			mes "Não consigo lidar com tudo isso...";
+			next;
+			mes "[Arthail]";
+			mes "Por que não consigo ser como todo mundo? Parece que quanto mais me aproximo das pessoas, mais meu coração se afasta delas. Por que será?";
+			next;
+			mes "[Arthail]";
+			mes "Tornei-me um Bardo tentando resolver esse meu complexo social, mas não";
+			mes "tive sucesso. Ainda assim, me sinto muito mais tranquilo quando canto. Ah, mas já falei demais.";
+			next;
+			mes "[Arthail]";
+			mes "O Mestre Kavaruk";
+			mes "pediu para você me ajudar?";
+			mes "Então, tenho um";
+			mes "favor a te pedir.";
+			next;
+			mes "[Arthail]";
+			mes "Aqui na capital do";
+			mes "Reino de Rune-Midgard, dizem que há uma fonte na praça central. Todos parecem parar ali para conversar.";
+			next;
+			mes "[Arthail]";
+			mes "No entanto, tenho medo de outras pessoas e não consigo me aproximar da multidão. É constrangedor admitir isso sendo um Bardo...";
+			next;
+			mes "[Arthail]";
+			mes "Você poderia ir até lá e ver se há alguma notícia circulando por aquela área para mim?";
+			tu_archer02 = 3;
+		}
+	}
+	else if(tu_archer02 == 3){
+		mes "Me envergonha pedir,";
+		mes "mas você poderia ir até a fonte na praça central de Prontera e ver";
+		mes "se há alguma novidade?";
+	}
+	else if(tu_archer02 == 4){
+		mes "Entendo...";
+		mes "Nada demais.";
+		mes "Alguém";
+		mes "encontrou um Emperium";
+		mes "e está fundando uma";
+		mes "nova Guilda...";
+		next;
+		mes "[Arthail]";
+		mes "^3131FFEmperium^000000...";
+		mes "Há muitas pessoas ambiciosas em Morroc que desejam um desses. Mesmo na minha cidade natal, Payon,";
+		mes "há gente disputando para conseguir um...";
+		next;
+		mes "[Arthail]";
+		mes "Dizem que ter um Emperium";
+		mes "te dá o poder de mudar o mundo. É natural que as pessoas se atraiam por isso.";
+		next;
+		mes "[Arthail]";
+		mes "Hmm...?";
+		mes "Sinto algo";
+		mes "sombrio e ameaçador...";
+		mes "O que será que é?";
+		emotion ET_SCRATCH;
+		next;
+		mes "[Arthail]";
+		mes "Provavelmente estou só estressado e exausto. Vou me sentir melhor depois";
+		mes "de descansar um pouco. Gostaria de se sentar comigo e ouvir o som da água corrente?";
+		next;
+		mes "[Arthail]";
+		mes "Não é a melhor sensação ficar aqui por muito tempo, mas o som dessa água me lembra de casa. Você viu o lago perto da Guilda Ícarus? Essas águas me lembram aquele lugar.";
+		next;
+		mes "[Arthail]";
+		mes "^333333*Bocejo...*^000000";
+		mes "Não falo assim com alguém";
+		mes "há muito tempo.";
+		mes "Estou tão cansado, acho que";
+		mes "vou descansar um pouco...";
+		next;
+		mes "[Arthail]";
+		mes "..........";
+		next;
+		mes "^3355FFArthail do Vento";
+		mes "adormeceu profundamente.^000000";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Ah...";
+		mes "Tão tranquilo~";
+		next;
+		mes "^3355FFA cadência das águas que se chocam suavemente te leva a um estado de perfeita tranquilidade. A água fria e cristalina seria tão refrescante se você mergulhasse os pés nela...^000000";
+		//sound "se_subterranean_waterwave.wav" 1 0 0
+		next;
+		mes "[???]";
+		mes "...";
+		soundeffectall "se_littlewaves02.wav",0;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Hã?";
+		mes "Que barulho";
+		mes "foi esse?";
+		next;
+		mes "[????]";
+		mes "AAAAAAAAAAAAAAAHHHHHHHHHHH!!!!!";
+		emotion ET_HUK;
+		soundeffectall "se_scream_w01.wav",0;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Mas o quê--?!";
+		mes "Parece um grito";
+		mes "vindo de dentro";
+		mes "do Castelo de Prontera!";
+		next;
+		mes "^3355FFVocê tenta acordar Arthail";
+		mes "mas ele está dormindo profundamente";
+		mes "e não se mexe nem um pouco.^000000";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Não tem jeito então.";
+		mes "É melhor eu ir verificar";
+		mes "isso sozinho.";
+		tu_archer02 = 5;
+	}
+	else if(tu_archer02 > 4 && tu_archer02 < 7)
+		mes "^333333Zzzzz...^000000";
+	else if(tu_archer02 == 8){
+		mes "Onde você foi?";
+		mes "Pensei que pudesse ter sido sequestrado, já que não estava";
+		mes "aqui quando acordei.";
+		next;
+		mes "[Arthail]";
+		mes "Então todos disseram que nada";
+		mes "aconteceu quando você perguntou";
+		mes "sobre os gritos que ouviu?";
+		mes "Isso é bem estranho...";
+		next;
+		mes "[Arthail]";
+		mes "Até o Emperium que você mencionou antes. Achei que fosse um item raro, mas por que parece tão fácil tantas pessoas conseguirem";
+		mes "um? É muito estranho...";
+		next;
+		mes "[Arthail]";
+		mes "Hmm. É melhor eu investigar isso";
+		mes "mais a fundo, então vou ficar por aqui reunindo mais informações. Por enquanto, você deve voltar para Payon e avisar o Mestre Kavaruk que estou bem.";
+		next;
+		mes "[Arthail]";
+		mes "E um dia...";
+		mes "Acho que finalmente terei";
+		mes "uma canção que";
+		mes "possa compartilhar com você.";
+		tu_archer02 = 9;
+	}
+	else {
+		mes "...";
+		mes "......";
+	}
+	close;
+}
+
+// Novo Mestre da Guilda
+//============================================================
+prontera,167,281,3	script	Novo Mestre da Guilda#tu	4_M_MONK,{
+	mes "[Novo Mestre da Guilda]";
+	mes "Ouçam, todos vocês";
+	mes "que buscam fama";
+	mes "e glória!";
+	next;
+	mes "[Novo Mestre da Guilda]";
+	mes "Empunho em minha mão este ^3131FFEmperium^000000, sinal de que sou favorecido pelo destino! Bravos guerreiros, eu vos peço, emprestem-me";
+	mes "seu poder!";
+	next;
+	mes "[Novo Mestre da Guilda]";
+	mes "Nada pode nos parar!";
+	mes "Enquanto esta joia";
+	mes "estiver em minha posse,";
+	mes "aqueles que se chamam";
+	mes "meus camaradas jamais";
+	mes "provarão o gosto da derrota!";
+	if(tu_archer02 == 3) tu_archer02 = 4;
+	close;
+}
+
+// Maga
+//============================================================
+prontera,144,301,5	script	Maga#tu	2_F_MAGICMASTER,{
+	mes "[Maga]";
+	mes "Você viu aquele";
+	mes "Novo Mestre da Guilda?";
+	mes "Falando como se estivesse";
+	mes "em um palanque!";
+	next;
+	emotion ET_HNG;
+	mes "[Maga]";
+	mes "Ele não sabe que hoje em dia";
+	mes "existem muitas guildas famosas? Por que alguém iria querer";
+	mes "entrar numa guilda pequena e desconhecida como a dele?";
+	next;
+	mes "[Maga]";
+	mes "Agora, quando eu me tornar uma Feiticeira,";
+	mes "vou entrar na melhor guilda que existir. Lançar magias para ajudar os Cavaleiros mais fortes e os Sacerdotes mais poderosos vai me deixar";
+	mes "muito estilosa!";
+	next;
+	mes "[Maga]";
+	mes "Bwahahaha!";
+	mes "Só de pensar";
+	mes "nisso já fico";
+	mes "empolgada!";
+	close;
+}
+
+// Ministro
+//============================================================
+-	script	Minister#tu_	-1,{
+	mes "[Ministro]";
+	mes "A família real";
+	mes "está extremamente ocupada";
+	mes "no momento, lidando com";
+	mes "a administração do reino.";
+	if(tu_archer02 == 5){
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Ouvi gritos";
+		mes "lá fora! Aconteceu";
+		mes "alguma coisa?";
+		next;
+		mes "[Ministro]";
+		mes "...";
+		mes "......";
+		next;
+		mes "[Ministro]";
+		mes "Ah, foram apenas alguns gatos de rua correndo por aí, aquelas Rosas Selvagens, então os barulhos que você ouviu devem ter sido eles. Está tudo bem aqui no palácio.";
+		tu_archer02 = 6;
+	}
+	else if(tu_archer02 == 7){
+		next;
+		mes "^3355FFA urgência que o Ministro demonstrava antes foi";
+		mes "substituída por uma frieza severa. Provavelmente ele não te contará mais nada,";
+		mes "por mais que você insista.^000000";
+	}
+	else if(tu_acolyte01 == 25){
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Hm...";
+		mes "Ouvi dizer que";
+		mes "a família real pode";
+		mes "estar com algum tipo de";
+		mes "problema. Há algo";
+		mes "que eu possa fazer?";
+		next;
+		mes "[Ministro]";
+		mes "...";
+		mes "......";
+		next;
+		mes "[Ministro]";
+		mes "Você deve estar enganado.";
+		mes "A família real está bem,";
+		mes "ainda mais com nosso";
+		mes "reino em paz.";
+		next;
+		mes "[Ministro]";
+		mes "Talvez tenha pensado nisso porque é muito difícil encontrar algum membro da família real. Entenda que todos estão";
+		mes "muito ocupados tentando servir";
+		mes "ao povo.";
+		next;
+		mes "[Ministro]";
+		mes "Como um servo da fé, tenho certeza de que encontrará muitas outras pessoas que precisam da sua ajuda e habilidades fora do palácio.";
+	}
+	close;
+}
+
+// NPC de Alcance
+//============================================================
+-	script	#sound_tu_	-1,{
+	end;
+OnTouch_:
+	if(tu_archer02 == 6) {
+		mes "[Ministro]";
+		mes "Contate a";
+		mes "Igreja de Prontera.";
+		mes "Rápido, isso é urgente!";
+		tu_archer02 = 7;
+		close;
+	}
+	end;
+}
+
+// Bispo Maugins
+//============================================================
+monk_in,19,43,1	script	Bispo Maugins	1_M_PASTOR,{
+	mes "[Bispo Maugins]";
+	if(tu_archer02 == 7){
+		mes "Saudações.";
+		mes "Duvido que esteja aqui para mudar para a classe Monge, mas posso ajudar com algo? Talvez tenha vindo";
+		mes "para uma confissão?";
+		next;
+		mes "[Bispo Maugins]";
+		mes "Hm? Trabalho relacionado ao";
+		mes "Palácio? Sim, estou encarregado";
+		mes "dessa área. Então,";
+		mes "como posso te ajudar?";
+		next;
+		if (select("Aconteceu algo com o Reino?:Nada.") == 1) {
+			mes "[Bispo Maugins]";
+			mes "...!!";
+			next;
+			mes "[Bispo Maugins]";
+			mes "...";
+			mes "......";
+			next;
+			mes "[Bispo Maugins]";
+			mes "Ho ho~";
+			mes "Claro que não!";
+			mes "O rei e eu trocamos cartas regularmente, mas não ouvi nada em especial. Por favor, não se preocupe.";
+			next;
+			tu_archer02 = 8;
+		}
+		mes "[Bispo Maugins]";
+		mes "Boa sorte em";
+		mes "suas jornadas,";
+		mes "bravo aventureiro.";
+		npcskill "AL_INCAGI",10,0,0;
+		npcskill "AL_BLESSING",10,0,0;
+		close;
+	}
+	mes "Me desculpe, mas";
+	mes "estou com algo"; 
+	mes "urgente para pensar.";
+	mes "Poderia voltar mais tarde?";
+	close;
+}

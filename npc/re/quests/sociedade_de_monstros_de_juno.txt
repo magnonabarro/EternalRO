@@ -1,0 +1,3860 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ sociedade_de_monstros_de_juno.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.0 ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= NPCs que oferecem missões de caça em troca de experiência.
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+-	marketshop	market_soda	-1,1000374:50000:-1
+
+rachel,142,155,3	script	Venda de Água com Gás#ra	4_VENDING_MACHINE2,{
+	.@item_name$ = getitemname(1000374);
+
+	mes "[Venda de Água com Gás]";
+	mes "<font color = 2ECCFA>Limpe</font> seu estômago <font color = DF0101>apertado</font> com um copo <i>refrescante</i> de <b>" + .@item_name$ + "</b>!";
+	mes "Ela tem um <b>excelente efeito</b> contra urgência, excesso de comida e indigestão.";
+	next;
+	mes "[Venda de Água com Gás]";
+	mes "<font size = 10, color = DF0101>Cuidado: Há relatos de que o consumo excessivo do produto em um estado de fadiga acumulada, devido ao seu forte efeito gaseificado, pode causar perda temporária de memória.</font>";
+	next;
+	callshop "market_soda";
+	end;
+}
+prontera,170,125,3	duplicate(Venda de Água com Gás#ra)	Venda de Água com Gás#prt	4_VENDING_MACHINE2
+alberta,127,59,3	duplicate(Venda de Água com Gás#ra)	Venda de Água com Gás#alb	4_VENDING_MACHINE2
+einbroch,249,186,3	duplicate(Venda de Água com Gás#ra)	Venda de Água com Gás#ein	4_VENDING_MACHINE2
+geffen,153,70,3	duplicate(Venda de Água com Gás#ra)	Venda de Água com Gás#gef	4_VENDING_MACHINE2
+yuno,177,182,3	duplicate(Venda de Água com Gás#ra)	Venda de Água com Gás#yu	4_VENDING_MACHINE2
+veins,218,122,3	duplicate(Venda de Água com Gás#ra)	Venda de Água com Gás#ve	4_VENDING_MACHINE2
+lighthalzen,173,108,3	duplicate(Venda de Água com Gás#ra)	Venda de Água com Gás#lig	4_VENDING_MACHINE2
+
+
+function	script	F_Brilliant_Soda	{
+	next;
+	switch( select( "Nível 70-79", "Nível 80-89", "Nível 90+", "Cancelar" ) ) {
+	case 1:
+		callsub( S_Menu,
+			70, "Campo Nordeste de Einbroch", "ein_fild06", 253,351,
+			71, "Campo Noroeste de Geffen", "gef_fild06",214,31,
+			71, "Campo Norte de Lighthalzen", "lhz_fild01", 240,103,
+			75, "Ilha da Tartaruga", "tur_dun01",155,46,
+			75, "Em frente à Torre de Thanatos", "hu_fild01", 137,157,
+			75, "Zona de Coral Estrelado", "mal_dun01",146,126,
+			76, "Campo Noroeste de Einbroch", "ein_fild03",135,50,
+			77, "Campo Leste de Lighthalzen", "lhz_fild03", 167,340
+		);
+		return;
+	case 2:
+		// O texto do menu oficial parece estar incorreto.
+		callsub( S_Menu,
+			// 80, "Calabouço da Ilha da Tartaruga", "ra_fild08",164,47,
+			80, "Nordeste de Rachel", "ra_fild08",164,47,
+			80, "Caverna de Gelo", "ice_dun01",158,18,
+			// 80, "Leste da Planície de Ida - Rachel", "ra_fild03",363,183,
+			80, "Norte da Planície de Ida - Rachel", "ra_fild03",363,183,
+			85, "Nordeste da planície de Ida - Rachel", "ra_fild04", 269,69,
+			// 85, "Caverna de Gelo 1° Andar - Rachel", "ve_fild07",158,350,
+			85, "Sul de Veins", "ve_fild07",158,350,
+			86, "Norte da Planície Ida - Rachel", "ra_fild05", 53,356,
+			86, "Norte de Rachel - Pradaria de Audumrah", "ra_fild01", 229,319,
+			// 86, "Campo Sul de Veins", "ra_fild12", 54,219,
+			86, "Campo Leste de Rachel", "ra_fild12", 54,219,
+			// 87, "Norte de Rachel - Nordeste da Pradaria de Audumrah", "tur_dun03", 130,186,
+			// 88, "Norte de Rachel - Nordesre da Pradaria de Audumrah", "tur_dun02", 146,256
+			87, "Calabouço da Ilha Tartaruga 2", "tur_dun03", 130,186,
+			88, "Calabouço da Ilha Tartaruga 3", "tur_dun02", 146,256
+		);
+		return;
+	case 3:
+		callsub( S_Menu,
+			// 90, "Campo Sudoeste de Rachel", "ve_fild01", 354,276,
+			90, "Campo Norte-Norte de Veins", "ve_fild01", 354,276,
+			90, "Campo Norte de Veins", "ve_fild04", 52,247,
+			93, "Portus Luna Norte de Lighthalzen", "ra_fild06", 287,39,
+			95, "Em frente ao Vulcão de Thor", "ve_fild03", 348,226
+		);
+		return;
+	case 4:
+		return;
+	}
+	end;
+
+S_Menu:
+	.@count = getargcount();
+	.@cancel_index = .@count / 5;
+
+	for ( .@i = 0; .@i < .@count; .@i += 5 )
+		.@menu$ += "[" + getarg(.@i) + "] " + getarg(.@i+1) + ":";
+	.@menu$ += "Cancelar";
+
+	.@s = select(.@menu$) - 1;
+	if (.@s == .@cancel_index)	// cancelar
+		return;
+	.@s = .@s * 5;
+	if (BaseLevel < getarg(.@s)) {
+		mes " - Disponível apenas para níveis acima de " + getarg(.@s) + " - ";
+		close;
+	}
+	delitem 1000374,1;	// Água com Gás
+	warp getarg(.@s+2), getarg(.@s+3),getarg(.@s+4);
+	end;
+}
+
+rachel,142,152,5	script	Assistente Mumuz#ra	4_M_CRU_HEAD,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (isbegin_quest(16547) == 0) {
+		mes .@npc_name$;
+		mes "Você gostaria de participar do evento de subjugação de monstros organizado pela Sociedade de Monstros de Juno?";
+		mes "Nós levaremos você diretamente ao local desejado!";
+		next;
+		mes .@npc_name$;
+		mes "Eu sou Mumuz, Assistente de Supervisão da Sociedade de Monstros de Juno.";
+		mes "Estou aqui para divulgar o evento de subjugação de monstros para você.";
+		next;
+		select( "Subjugação de monstros?", "Sociedade de Monstros de Juno?" );	// nota: mesmo texto
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma conferência que pesquisa e estuda monstros tendo Juno como base.";
+		mes "Ultimamente, alguns monstros locais ficaram excessivamente ferozes ou aumentaram em grande número.";
+		next;
+		mes .@npc_name$;
+		mes "Por isso estamos enviando Examinadores de Mapas para vários lugares para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "Fui encarregado de ajudar os Examinadores de Mapas divulgando a Sociedade de Monstros na cidade e gerenciando máquinas de venda de " + .@item_name$ + ".";
+		mes "Sim, eu posso te levar até o local do examinador.";
+		setquest 16547;
+		completequest 16547;
+		next;
+	}
+	mes .@npc_name$;
+	mes "Ei, eu sou Mumuz, assistente da Sociedade de Monstros de Juno.";
+	mes "Como posso ajudar?";
+	next;
+	if (select( "Guia até o Examinador de Mapas.", "Sobre a Sociedade de Monstros de Juno." ) == 2) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma instituição de pesquisa de monstros em Juno.";
+		next;
+		mes .@npc_name$;
+		mes "A Sociedade determinou recentemente que alguns monstros regionais ficaram excessivamente ferozes ou aumentaram em número.";
+		mes "Por isso estamos enviando Examinadores de Mapas para vários lugares para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "Eu divulgo o trabalho da Sociedade de Monstros na cidade para ajudar os Examinadores de Mapas...";
+		mes "Sou responsável por gerenciar a Venda de Água com Gás ou te guiar até o local onde o examinador está.";
+		close;
+	}
+	mes .@npc_name$;
+	mes "Bem, isso é só um pouco difícil...";
+	mes "Sim, se você me comprar uma garrafa de " + .@item_name$ + ", eu vou te teleportar de um jeito bem gelado e refrescante.";
+	next;
+	if (select( "Dar Garrafa de " + .@item_name$ + ".", "Eu recuso." ) == 2) {
+		mes .@npc_name$;
+		mes "Você não vai? Poxa, me desculpe..";
+		close;
+	}
+	if (countitem(1000374) < 1) {
+		mes .@npc_name$;
+		mes "Parece que você já terminou de beber a " + .@item_name$ + "?";
+		mes "Jaja, você pode comprar mais " + .@item_name$ + " usando essa máquina de venda bem ao meu lado.";
+		close;
+	}
+	mes .@npc_name$;
+	mes "Rooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo fresco!";
+	mes "Agora, para onde devemos te levar?";
+	callfunc( "F_Brilliant_Soda" );
+	mes .@npc_name$;
+	mes "Você não vai? Heuk, eu vou te devolver a " + .@item_name$ + ". Você ainda não bebeu.";
+	close;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+	end;
+}
+
+alberta,124,59,5	script	Assistente Dunea#alb	4_M_CRU_HEAD,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (isbegin_quest(16547) == 0) {
+		mes .@npc_name$;
+		mes "Você gostaria de participar do evento de subjugação de monstros organizado pela Sociedade de Monstros de Juno?";
+		mes "Nós levaremos você diretamente ao local desejado!";
+		next;
+		mes .@npc_name$;
+		mes "Eu sou Dunea, Assistente de Supervisão da Sociedade de Monstros de Juno.";
+		mes "Estou aqui para divulgar o evento de subjugação de monstros para você.";
+		next;
+		select( "Subjugação de monstros?", "Sociedade de Monstros de Juno?" );	// nota: mesmo texto
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma conferência que pesquisa e estuda monstros tendo Juno como base.";
+		mes "Ultimamente, alguns monstros locais ficaram excessivamente ferozes ou aumentaram em grande número.";
+		next;
+		mes .@npc_name$;
+		mes "Por isso estamos enviando Examinadores de Mapas para vários lugares para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "Fui encarregado de ajudar os Examinadores de Mapas divulgando a Sociedade de Monstros na cidade e gerenciando máquinas de venda de " + .@item_name$ + ".";
+		mes "Sim, eu posso te levar até o local do examinador.";
+		setquest 16547;
+		completequest 16547;
+		next;
+	}
+	mes .@npc_name$;
+	mes "Eu, Dunea, assistente da Sociedade de Monstros de Juno!";
+	mes "Eu ajudarei aventureiros pelo bem do mundo.";
+	next;
+	if (select( "Guia até o Examinador de Mapas.", "Sobre a Sociedade de Monstros de Juno." ) == 2) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma conferência que pesquisa e estuda monstros tendo Juno como base.";
+		mes "Ultimamente, alguns monstros locais ficaram excessivamente ferozes ou aumentaram em grande número.";
+		next;
+		mes .@npc_name$;
+		mes "Por isso estamos enviando Examinadores de Mapas para vários lugares para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "Fui encarregado de ajudar os Examinadores de Mapas divulgando a Sociedade de Monstros na cidade e gerenciando máquinas de venda de " + .@item_name$ + ".";
+		mes "Sim, eu posso te levar até o local do examinador.";
+		close;
+	}
+	mes .@npc_name$;
+	mes "Hum, eu gostaria de te levar agora mesmo, mas estou um pouco desanimada.";
+	mes "Posso beber uma garrafa de " + .@item_name$ + "?";
+	next;
+	if (select( "Dar Garrafa de " + .@item_name$ + ".", "Eu recuso." ) == 2) {
+		mes .@npc_name$;
+		mes "É pelo bem do mundo, você não vai?";
+		close;
+	}
+	if (countitem(1000374) < 1) {
+		mes .@npc_name$;
+		mes "Você não tem " + .@item_name$ + ".";
+		mes "Aqui tem uma Venda de Água com Gás! Você pode reabastecer aqui!";
+		close;
+	}
+	mes .@npc_name$;
+	mes "Eu me sinto refrescada só de receber a " + .@item_name$ + ".";
+	mes "Para onde posso te levar?";
+	callfunc( "F_Brilliant_Soda" );
+	mes .@npc_name$;
+	mes "É pelo bem do mundo, você não vai?";
+	mes "Não tem jeito. Vou devolver a " + .@item_name$ + " aqui.";
+	close;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+	end;
+}
+
+einbroch,246,186,5	script	Assistente Remain#ein	4_M_CRU_HEAD,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (isbegin_quest(16547) == 0) {
+		mes .@npc_name$;
+		mes "Você gostaria de participar do evento de subjugação de monstros organizado pela Sociedade de Monstros de Juno?";
+		mes "Nós levaremos você diretamente ao local desejado!";
+		next;
+		mes .@npc_name$;
+		mes "Eu sou Remain, Assistente de Supervisão da Sociedade de Monstros de Juno.";
+		mes "Estou aqui para divulgar o evento de subjugação de monstros para você.";
+		next;
+		select( "Subjugação de monstros?", "Sociedade de Monstros de Juno?" );	// nota: mesmo texto
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma conferência que pesquisa e estuda monstros tendo Juno como base.";
+		mes "Ultimamente, alguns monstros locais ficaram excessivamente ferozes ou aumentaram em grande número.";
+		next;
+		mes .@npc_name$;
+		mes "Por isso estamos enviando Examinadores de Mapas para vários lugares para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "Fui encarregado de ajudar os Examinadores de Mapas divulgando a Sociedade de Monstros na cidade e gerenciando máquinas de venda de " + .@item_name$ + ".";
+		mes "Sim, eu posso te levar até o local do examinador.";
+		setquest 16547;
+		completequest 16547;
+		next;
+	}
+	mes .@npc_name$;
+	mes "Aqui é o Remain, assistente da Sociedade de Monstros de Juno!";
+	mes "Como posso ajudar?";
+	next;
+	if (select( "Guia até o Examinador de Mapas.", "Sobre a Associação de Monstros de Juno." ) == 2) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma instituição de pesquisa de monstros em Juno.";
+		mes "De acordo com investigações recentes, foi descoberto que alguns monstros regionais ficaram excessivamente ferozes ou aumentaram em número.";
+		next;
+		mes .@npc_name$;
+		mes "Por isso estamos enviando Examinadores de Mapas para essas áreas para subjugar monstros.";
+		mes "Eu sou Lemaine, assistente dos Examinadores de Mapas!";
+		next;
+		mes .@npc_name$;
+		mes "Divulgando o trabalho da Sociedade de Monstros de Juno para pessoas justas como você na cidade...";
+		mes "Eu irei promover a Máquina de Venda de Água com Gás ou te guiar até o local onde o examinador está!";
+		close;
+	}
+	mes .@npc_name$;
+	mes "É um pouco difícil simplesmente mandar... Eu não ganho dinheiro nenhum.";
+	mes "Sim, me dê uma garrafa de " + .@item_name$ + " e eu vou te oferecer um serviço de teleporte!";
+	next;
+	if (select( "Dar Garrafa de " + .@item_name$ + ".", "Eu recuso." ) == 2) {
+		mes .@npc_name$;
+		mes "Hã, você não vai agora? Então você não vai estar servindo " + .@item_name$ + ". Me desculpe.";
+		close;
+	}
+	if (countitem(1000374) < 1) {
+		mes .@npc_name$;
+		mes "" + .@item_name$ + " é vendido nessa máquina de venda que parece gelada e refrescante.";
+		mes "Você só precisa comprar uma " + .@item_name$ + " bem gelada e me entregar.";
+		close;
+	}
+	mes .@npc_name$;
+	mes "Uau! Obrigado. Uma garrafa dessa " + .@item_name$ + " vai tirar todo o seu cansaço.";
+	mes "Então, para onde devemos te levar?";
+	callfunc( "F_Brilliant_Soda" );
+	mes .@npc_name$;
+	mes "Oh, você não vai agora? Então eu vou devolver a " + .@item_name$ + ".";
+	close;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+	end;
+}
+
+geffen,151,68,5	script	Assistente Kihana#gef	4_M_CRU_HEAD,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (isbegin_quest(16547) == 0) {
+		mes .@npc_name$;
+		mes "Você gostaria de participar do evento de subjugação de monstros organizado pela Sociedade de Monstros de Juno?";
+		mes "Nós levaremos você diretamente ao local desejado!";
+		next;
+		mes .@npc_name$;
+		mes "Eu sou Kihana, Assistente de Supervisão da Sociedade de Monstros de Juno.";
+		mes "Estou aqui para divulgar o evento de subjugação de monstros para você.";
+		next;
+		select( "Subjugação de monstros?", "Sociedade de Monstros de Juno?" );	// nota: mesmo texto
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma conferência que pesquisa e estuda monstros tendo Juno como base.";
+		mes "Ultimamente, alguns monstros locais ficaram excessivamente ferozes ou aumentaram em grande número.";
+		next;
+		mes .@npc_name$;
+		mes "Por isso estamos enviando Examinadores de Mapas para vários lugares para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "Fui encarregado de ajudar os Examinadores de Mapas divulgando a Sociedade de Monstros na cidade e gerenciando máquinas de venda de " + .@item_name$ + ".";
+		mes "Sim, eu posso te levar até o local do examinador.";
+		setquest 16547;
+		completequest 16547;
+		next;
+	}
+	mes .@npc_name$;
+	mes "Eu, Kihana, assistente da Sociedade de Monstros de Juno!";
+	mes "Prazer em conhecê-lo. Como posso ajudar?";
+	next;
+	if (select( "Guia até o Examinador de Mapas.", "Sobre a Associação de Monstros de Juno." ) == 2) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma conferência que pesquisa e estuda monstros tendo Juno como base.";
+		mes "Ultimamente, alguns monstros locais ficaram excessivamente ferozes ou aumentaram em grande número.";
+		next;
+		mes .@npc_name$;
+		mes "Por isso estamos enviando Examinadores de Mapas para vários lugares para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "Fui encarregado de ajudar os Examinadores de Mapas divulgando a Sociedade de Monstros na cidade e gerenciando máquinas de venda de " + .@item_name$ + ".";
+		mes "Sim, eu posso te levar até o local do examinador.";
+		close;
+	}
+	mes .@npc_name$;
+	mes "Puxa, eu simplesmente não posso mandar você assim!";
+	mes "Se você me der uma garrafa de " + .@item_name$ + ", eu vou te oferecer um teleporte!";
+	next;
+	if (select( "Dar Garrafa de " + .@item_name$ + ".", "Eu recuso." ) == 2) {
+		mes .@npc_name$;
+		mes "Quer dizer que você não vai? Hmm, então não tem o que fazer!";
+		close;
+	}
+	if (countitem(1000374) < 1) {
+		mes .@npc_name$;
+		mes "Você não tem " + .@item_name$ + " na sua bag!";
+		mes "Por favor, use a Máquina de Venda de Água com Gás ao meu lado!";
+		close;
+	}
+	mes .@npc_name$;
+	mes "Ahaha, uma garrafa de " + .@item_name$ + ", muito bem recebida!";
+	mes "Para onde posso te levar?";
+	callfunc( "F_Brilliant_Soda" );
+	mes .@npc_name$;
+	mes "Você está dizendo que não vai sem me dar " + .@item_name$ + "?";
+	mes "Hmm, então você não pode levar isso!";
+	close;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+	end;
+}
+
+yuno,177,179,3	script	Assistente Avery#yu	4_M_CRU_HEAD,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (isbegin_quest(16547) == 0) {
+		mes .@npc_name$;
+		mes "Você gostaria de participar do evento de subjugação de monstros organizado pela Sociedade de Monstros de Juno?";
+		mes "Nós levaremos você diretamente ao local desejado!";
+		next;
+		mes .@npc_name$;
+		mes "Eu sou Avery, Assistente de Supervisão da Sociedade de Monstros de Juno.";
+		mes "Estou aqui para divulgar o evento de subjugação de monstros para você.";
+		next;
+		select( "Subjugação de monstros?", "Sociedade de Monstros de Juno?" );	// nota: mesmo texto
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma conferência que pesquisa e estuda monstros tendo Juno como base.";
+		mes "Ultimamente, alguns monstros locais ficaram excessivamente ferozes ou aumentaram em grande número.";
+		next;
+		mes .@npc_name$;
+		mes "Por isso estamos enviando Examinadores de Mapas para vários lugares para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "Fui encarregado de ajudar os Examinadores de Mapas divulgando a Sociedade de Monstros na cidade e gerenciando máquinas de venda de " + .@item_name$ + ".";
+		mes "Sim, eu posso te levar até o local do examinador.";
+		setquest 16547;
+		completequest 16547;
+		next;
+	}
+	mes .@npc_name$;
+	mes "Aqui é o Avery, assistente da Sociedade de Monstros de Juno!";
+	mes "Ei, como posso ajudar?";
+	next;
+	if (select( "Guia até o Examinador de Mapas.", "Sobre a Associação de Monstros de Juno." ) == 2) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma conferência que pesquisa e estuda monstros tendo Juno como base.";
+		mes "Ultimamente, alguns monstros locais ficaram excessivamente ferozes ou aumentaram em grande número.";
+		next;
+		mes .@npc_name$;
+		mes "Por isso estamos enviando Examinadores de Mapas para vários lugares para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "Fui encarregado de ajudar os Examinadores de Mapas divulgando a Sociedade de Monstros na cidade e gerenciando máquinas de venda de " + .@item_name$ + ".";
+		mes "Sim, eu posso te levar até o local do examinador.";
+		close;
+	}
+	mes .@npc_name$;
+	mes "Ah, desculpe. Não é de graça...";
+	mes "Certo, você pode me dar uma garrafa de " + .@item_name$ + "? Aí eu te teleporto!";
+	next;
+	if (select( "Dar Garrafa de " + .@item_name$ + ".", "Eu recuso." ) == 2) {
+		mes .@npc_name$;
+		mes "Você não vai? É pelo bem público!";
+		close;
+	}
+	if (countitem(1000374) < 1) {
+		mes .@npc_name$;
+		mes "Você não tem " + .@item_name$ + " na sua bag.";
+		mes "Se precisar de mais, por favor use a refrescante Máquina de Venda de Água com Gás daqui.";
+		close;
+	}
+	mes .@npc_name$;
+	mes "Ah! " + .@item_name$ + " geladinha e refrescante!";
+	mes "Você deveria beber com moderação... Hã, para onde devo te levar?";
+	callfunc( "F_Brilliant_Soda" );
+	mes .@npc_name$;
+	mes "Você não vai? É pelo bem público!";
+	mes "Ugh... Eu vou devolver a " + .@item_name$ + "...";
+	close;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+	end;
+}
+
+veins,215,122,5	script	Assistente Eureka#ve	4_M_CRU_HEAD,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (isbegin_quest(16547) == 0) {
+		mes .@npc_name$;
+		mes "Você gostaria de participar do evento de subjugação de monstros organizado pela Sociedade de Monstros de Juno?";
+		mes "Nós levaremos você diretamente ao local desejado!";
+		next;
+		mes .@npc_name$;
+		mes "Eu sou Eureka, Assistente de Supervisão da Sociedade de Monstros de Juno.";
+		mes "Estou aqui para divulgar o evento de subjugação de monstros para você.";
+		next;
+		select( "Subjugação de monstros?", "Sociedade de Monstros de Juno?" );	// nota: mesmo texto
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma conferência que pesquisa e estuda monstros tendo Juno como base.";
+		mes "Ultimamente, alguns monstros locais ficaram excessivamente ferozes ou aumentaram em grande número.";
+		next;
+		mes .@npc_name$;
+		mes "Por isso estamos enviando Examinadores de Mapas para vários lugares para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "Fui encarregado de ajudar os Examinadores de Mapas divulgando a Sociedade de Monstros na cidade e gerenciando máquinas de venda de " + .@item_name$ + ".";
+		mes "Sim, eu posso te levar até o local do examinador.";
+		setquest 16547;
+		completequest 16547;
+		next;
+	}
+	mes .@npc_name$;
+	mes "Aqui é a Eureka, assistente da Sociedade de Monstros de Juno.";
+	mes "Como posso ajudar?";
+	next;
+	if (select( "Guia até o Examinador de Mapas.", "Sobre a Associação de Monstros de Juno." ) == 2) {
+		mes .@npc_name$;
+		mes "Ultimamente, alguns monstros locais ficaram excessivamente ferozes ou aumentaram em número.";
+		mes "Então viemos à Sociedade de Monstros de Juno para coordenar isso.";
+		next;
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é uma instituição de pesquisa de monstros com base em Juno.";
+		mes "Nós estamos enviando Examinadores de Mapas para vários lugares para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "E então? Você está interessado?";
+		mes "Eu sou responsável por divulgar o trabalho da Sociedade de Monstros de Juno, gerenciar as máquinas de venda de " + .@item_name$ + " e te guiar até os lugares onde os Examinadores de Mapas estão conectados.";
+		close;
+	}
+	mes .@npc_name$;
+	mes "É difícil simplesmente te mandar, mas eu nem consigo dinheiro...";
+	mes "Certo, você pode me dar um copo de " + .@item_name$ + "? Eu te teleporto na hora.";
+	next;
+	if (select( "Dar Garrafa de " + .@item_name$ + ".", "Eu recuso." ) == 2) {
+		mes .@npc_name$;
+		mes "Você não vai?";
+		close;
+	}
+	if (countitem(1000374) < 1) {
+		mes .@npc_name$;
+		mes "Eu gerencio a máquina de venda de " + .@item_name$ + ".";
+		mes "WKi, você pode comprar quantas quiser usando a Máquina de Venda de Água com Gás ao meu lado.";
+		close;
+	}
+	mes .@npc_name$;
+	mes "Ah, é refrescante, gelada e realmente muito boa.";
+	mes "Agora, para onde devo te levar?";
+	callfunc( "F_Brilliant_Soda" );
+	mes .@npc_name$;
+	mes "Você não vai? Então, a " + .@item_name$ + "... Aqui, eu vou devolver.";
+	close;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+	end;
+}
+
+lighthalzen,171,106,5	script	Assistente Staff#lig	4_M_CRU_HEAD,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (isbegin_quest(16547) == 0) {
+		mes .@npc_name$;
+		mes "Você gostaria de participar do evento de subjugação de monstros promovido pela Sociedade de Monstros de Juno?";
+		mes "Nós levaremos você diretamente ao local desejado!";
+		next;
+		mes .@npc_name$;
+		mes "Eu sou Staff, Assistente do Superintendente da Sociedade de Monstros de Juno.";
+		mes "Estou aqui para divulgar para você o evento de subjugação de monstros.";
+		next;
+		select( "Subjugação de monstros?", "Sociedade de Monstros de Juno?" );	// nota: mesmo texto
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma conferência que pesquisa e estuda monstros tendo Juno como base.";
+		mes "Ultimamente, alguns monstros locais ficaram extremamente ferozes ou aumentaram muito em quantidade.";
+		next;
+		mes .@npc_name$;
+		mes "Por isso estamos enviando Examinadores de Mapa para vários locais para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "Fui encarregado de auxiliar os Examinadores de Mapa na divulgação da Sociedade de Monstros na cidade e também gerenciar as máquinas de venda de " + .@item_name$ + ".";
+		mes "Sim, eu posso levar você até o local do examinador.";
+		setquest 16547;
+		completequest 16547;
+		next;
+	}
+	mes .@npc_name$;
+	mes "Staff, o assistente da Sociedade de Monstros de Juno!!!";
+	mes "Você precisa da minha ajuda!!!";
+	next;
+	if (select( "Guia até o Examinador de Mapa.", "Sobre a Sociedade de Monstros de Juno." ) == 2) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma conferência que estuda monstros!!!";
+		mes "...e fica em Juno.";
+		next;
+		mes "Recentemente, alguns monstros locais ficaram excessivamente ferozes ou aumentaram muito em quantidade!!!";
+		mes "Por isso, os Examinadores de Mapa enviados para diferentes lugares estão dando aos aventureiros uma missão para subjugar monstros!!!";
+		next;
+		mes .@npc_name$;
+		mes "Eu sou o assistente, Staff!!";
+		next;
+		mes .@npc_name$;
+		mes "Divulgando o trabalho da Sociedade de Monstros na cidade, reunindo aventureiros...";
+		mes "E também teleportamos os aventureiros que vieram até o local onde está o Examinador de Mapa!!!";
+		close;
+	}
+	mes .@npc_name$;
+	mes "Certo!!! O preço é uma garrafa de " + .@item_name$ + "!!!";
+	mes "Você não achou que eu te teleportaria de graça!!!";
+	next;
+	if (select( "Dar Garrafa de " + .@item_name$ + ".", "Eu recuso." ) == 2) {
+		mes .@npc_name$;
+		mes "O quê...? Eu não vou subjugar!!!";
+		close;
+	}
+	if (countitem(1000374) < 1) {
+		mes .@npc_name$;
+		mes "Se você precisa de " + .@item_name$ + ", use esta máquina de venda automática que eu administro!!!";
+		mes "Pague o preço e tente a sorte!!!";
+		close;
+	}
+	mes .@npc_name$;
+	mes "Sua " + .@item_name$ + ", eu recebo com prazer!!!";
+	mes "Agora, para onde você quer ir para a subjugação de monstros!!!";
+	callfunc( "F_Brilliant_Soda" );
+	mes .@npc_name$;
+	mes "O quê...? Eu não vou subjugar!!!";
+	mes "Não fale duas coisas com a mesma boca!!! ...Vou devolver a " + .@item_name$ + " para você.";
+	close;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+	end;
+}
+
+prontera,168,125,5	script	Assistente Alonzo#prt	4_M_CRU_HEAD,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (isbegin_quest(16547) == 0) {
+		mes .@npc_name$;
+		mes "Você gostaria de participar do evento de subjugação de monstros promovido pela Sociedade de Monstros de Juno?";
+		mes "Nós levaremos você diretamente ao local desejado!";
+		next;
+		mes .@npc_name$;
+		mes "Eu sou Alonzo, Assistente do Superintendente da Sociedade de Monstros de Juno.";
+		mes "Estou aqui para divulgar para você o evento de subjugação de monstros.";
+		next;
+		select( "Subjugação de monstros?", "Sociedade de Monstros de Juno?" );	// nota: mesmo texto
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma conferência que pesquisa e estuda monstros tendo Juno como base.";
+		mes "Ultimamente, alguns monstros locais ficaram extremamente ferozes ou aumentaram muito em quantidade.";
+		next;
+		mes .@npc_name$;
+		mes "Por isso estamos enviando Examinadores de Mapa para vários locais para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "Fui encarregado de auxiliar os Examinadores de Mapa na divulgação da Sociedade de Monstros na cidade e também gerenciar as máquinas de venda de " + .@item_name$ + ".";
+		mes "Sim, eu posso levar você até o local do examinador.";
+		setquest 16547;
+		completequest 16547;
+		next;
+	}
+	mes .@npc_name$;
+	mes "Aqui é Alonzo, assistente da Sociedade de Monstros de Juno!";
+	mes "Como posso ajudar você?";
+	next;
+	if (select( "Guia até o Examinador de Mapa.", "Sobre a Sociedade de Monstros de Juno." ) == 2) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno é literalmente uma conferência que pesquisa e estuda monstros tendo Juno como base.";
+		mes "Ultimamente, alguns monstros locais ficaram extremamente ferozes ou aumentaram muito em quantidade.";
+		next;
+		mes .@npc_name$;
+		mes "Por isso estamos enviando Examinadores de Mapa para vários locais para subjugar monstros.";
+		next;
+		mes .@npc_name$;
+		mes "Fui encarregado de auxiliar os Examinadores de Mapa na divulgação da Sociedade de Monstros na cidade e também gerenciar as máquinas de venda de " + .@item_name$ + " vending machines.";
+		mes "Sim, eu posso levar você até o local do examinador.";
+		close;
+	}
+	mes .@npc_name$;
+	mes "É um pouco difícil simplesmente te enviar. Eu também estou cansado.";
+	mes "Você pode me dar uma garrafa de " + .@item_name$ + "? Isso vai me dar energia.";
+	next;
+	if (select( "Dar Garrafa de " + .@item_name$ + ".", "Eu recuso." ) == 2) {
+		mes .@npc_name$;
+		mes "Ah, você não vai?";
+		close;
+	}
+	if (countitem(1000374) < 1) {
+		mes .@npc_name$;
+		mes "Se você não tiver " + .@item_name$ + ", você pode comprá-la.";
+		mes "Por favor, use a Máquina de Venda Automática de Água com Gás aqui.";
+		close;
+	}
+	mes .@npc_name$;
+	mes "Certo, " + .@item_name$ + " com certeza vai te dar energia.";
+	mes "Para onde devo te levar?";
+	callfunc( "F_Brilliant_Soda" );
+	mes .@npc_name$;
+	mes "Ah, você não vai?";
+	mes "Então eu vou devolver a " + .@item_name$ + ".";
+	close;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+	end;
+}
+
+
+// Missões
+
+ein_fild06,257,351,4	script	Examinadora de Mapa Bast#yma	4_F_CHNDRESS1,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 70) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está conduzindo missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(5917,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "A BNP está cansada por excesso de trabalho, então por favor volte amanhã. As missões de subjugação só podem ser feitas uma vez por dia.";
+		next;
+		switch( select( "Parece cansada. Gostaria de uma bebida?", "Ir para uma cidade próxima." ) ) {
+		case 1:
+			if (countitem(1000374) < 3) {
+				mes .@npc_name$;
+				mes "Cadê a " + .@item_name$ + "? Hmng- É boa. Achei que conseguiria umas três.";
+				close;
+			}
+			delitem 1000374,3;	// Água com Gás
+			erasequest 5917;
+			mes .@npc_name$;
+			mes "Obrigada. Eu estava cansada, mas isso ajudou.";
+			next;
+			npctalk "gulp-gulp-", "", bc_self;
+			sleep2 500;
+			specialeffect EF_FLASHER;
+			mes .@npc_name$;
+			mes "Hã? Acho que eu acabei dormindo. Eu te falei sobre a missão de subjugação, hã? Pode falar comigo de novo depois que eu acordar um pouco melhor?";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Posso te levar para Einbroch? Me dê uma " + mesitemlink( 1000374 ) + " e eu posso te teleportar.";
+			next;
+			select( "Dar 1 " + .@item_name$ + "." );
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Você não tem " + .@item_name$ + ", mas por que a Sociedade de Monstros de Juno pediu para você pegar isso? É só uma bebida.";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Tchau-tchau~ Até a próxima.";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "einbroch",239,197;
+			end;
+		}
+		end;
+	case 2:
+		erasequest 5917;
+		mes .@npc_name$;
+		mes "Você pode prosseguir com a missão de subjugação novamente.";
+		close;
+	}
+	switch( checkquest(5916,HUNTING) ) {
+	case -1:
+		mes .@npc_name$;
+		mes "Olá~ Aventureiro~ Eu sou uma INPU da Sociedade de Monstros de Juno.";
+		next;
+		switch( select( "Receber missão de subjugação.", "Missão de subjugação?", "Ir para uma cidade próxima.", "Saudações." ) ) {
+		case 1:
+			setquest 5916;
+			mes .@npc_name$;
+			mes "Uau! Sério? A missão é simples. É sobre caçar 80 monstros aqui no Campo de Einbroch.";
+			next;
+			mes .@npc_name$;
+			mes "Se você é um aventureiro, pode resolver facilmente e voltar, certo? Estou ansiosa por isso.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Recentemente, detectamos uma expansão da colônia de monstros.";
+			next;
+			mes .@npc_name$;
+			mes "Acho que é porque o número de monstros aumentou, mas também acho que é porque eles não estão sendo subjugados como antes.";
+			next;
+			mes .@npc_name$;
+			mes "Para evitar uma expansão ainda maior da colônia de monstros, a Sociedade de Monstros de Juno está planejando uma subjugação em massa.";
+			next;
+			mes .@npc_name$;
+			mes "Se colônias com população aumentada entrarem em conflito, isso pode causar danos aos moradores próximos.";
+			close;
+		case 3:
+			mes .@npc_name$;
+			mes "Posso te levar para Einbroch? Me dê uma " + mesitemlink( 1000374 ) + " e eu poderei te teleportar.";
+			next;
+			select( "Dar 1 " + .@item_name$ + "." );
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Você não tem " + .@item_name$ + ", mas por que a Sociedade de Monstros de Juno pediu para você pegar isso? É só uma bebida.";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Tchau-tchau~ Até a próxima.";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "einbroch",239,197;
+			end;
+		case 4:
+			mes .@npc_name$;
+			mes "Prazer em conhecê-lo. Você não acha que seria mais agradável se você aceitasse a missão de subjugação?";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Tudo o que você precisa fazer é caçar 80 monstros aqui no Campo de Einbroch. Depois de caçar todos, volte até mim e receba sua recompensa.";
+		close;
+	case 2:
+		getexp 121320,110520;
+		erasequest 5916;
+		setquest 5917;
+		mes .@npc_name$;
+		mes "Obrigada e bom trabalho.";
+		mes "Ultimamente, me criticam por eu não conseguir desempenhar bem. É cansativo e difícil sair deste lugar desolado.";
+		next;
+		mes .@npc_name$;
+		mes "Desculpe. Muito obrigada, eu acabei reclamando um pouco. Se você me ajudar amanhã, serei duas vezes mais grata, por favor conte comigo.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5917,PLAYTIME) == 0 || checkquest(5917,PLAYTIME) == 1) && countitem(1000374) > 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 70 && checkquest(5916,HUNTING) == -1 && checkquest(5917,PLAYTIME) == -1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(5916,HUNTING) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(5917,PLAYTIME) == 2" );
+	end;
+}
+
+gef_fild06,209,31,6	script	Examinador de Mapa Gefil#yma	4_M_MIDDLE,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 71) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está conduzindo missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(5921,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Você pode realizar a missão de subjugação novamente amanhã. Você deve estar cansado, então volte para a cidade e descanse.";
+		next;
+		switch( select( "Parece cansado. Gostaria de uma bebida?", "Ir para uma cidade próxima." ) ) {
+		case 1:
+			if (countitem(1000374) < 3) {
+				mes .@npc_name$;
+				mes "Você não tem " + .@item_name$ + ". Apenas três bebidas.";
+				close;
+			}
+			delitem 1000374,3;	// Água com Gás
+			erasequest 5921;
+			mes .@npc_name$;
+			mes "Ah! Essa " + .@item_name$ + " é popular hoje em dia? Vou beber bem.";
+			next;
+			npctalk "gulp-gulp-", "", bc_self;
+			specialeffect EF_FLASHER;
+			mes .@npc_name$;
+			mes "Hã?! Onde estou? Ah! Eu acabei dormindo? Você tem uma visita.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Me dê 1 " + mesitemlink( 1000374 ) + " e eu posso te teleportar para Geffen.";
+			next;
+			select( "Dar 1 " + .@item_name$ + "." );
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Você não tem " + .@item_name$ + ". É só uma bebida.";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Te vejo na próxima. Boa viagem..";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "geffen",119,37;
+			end;
+		}
+	case 2:
+		erasequest 5921;
+		mes .@npc_name$;
+		mes "Você pode prosseguir com a missão de subjugação novamente.";
+		close;
+	}
+	switch( checkquest(5920,HUNTING) ) {
+	case -1:
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está procurando pessoas para realizar missões de subjugação.";
+		next;
+		switch( select( "Receber Missão de subjugação.", "Missão de subjugação?", "Ir para uma cidade próxima.", "Você parece estar conseguindo lidar bem?" ) ) {
+		case 1:
+			setquest 5920;
+			mes .@npc_name$;
+			mes "Obrigado. Tudo o que você precisa fazer é caçar 80 monstros aqui no Campo de Geffen. Se você caçar todos, por favor venha e me reporte.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Recentemente, o número de monstros está aumentando.";
+			next;
+			mes .@npc_name$;
+			mes "Conforme o número de monstros aumenta, a colônia se expande, e se os monstros entrarem em conflito por poder, os humanos podem ser afetados.";
+			next;
+			mes .@npc_name$;
+			mes "É um nível de prevenção antecipada.";
+			close;
+		case 3:
+			mes .@npc_name$;
+			mes "Me dê 1 " + mesitemlink( 1000374 ) + " e eu poderei te teleportar para Geffen.";
+			next;
+			select( "Dar 1 " + .@item_name$ + "." );
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Você não tem " + .@item_name$ + ". É só uma bebida.";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Te vejo na próxima. Boa viagem..";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "geffen",119,37;
+			end;
+		case 4:
+			mes .@npc_name$;
+			mes "Ah! Está vendo isso? Você é o tipo de pessoa que está sempre cansada. Talvez seja porque você largou tudo e aceitou seu cansaço? Que diabos eu estou falando?";
+			next;
+			mes .@npc_name$;
+			mes "Eu estou cansado, então acabo falando tudo.";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Cace 80 monstros aqui no Campo de Geffen e depois volte para me reportar.";
+		close;
+	case 2:
+		getexp 64133,57253;
+		erasequest 5920;
+		setquest 5921;
+		mes .@npc_name$;
+		mes "Você trabalhou duro. Estou aliviado por mais um tempo. Agora posso descansar. As missões de subjugação estarão disponíveis novamente amanhã, então se tiver tempo, por favor passe aqui novamente.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5921,PLAYTIME) == 0 || checkquest(5921,PLAYTIME) == 1) && countitem(1000374) > 2" );
+questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 71 && checkquest(5920,HUNTING) == -1 && checkquest(5921,PLAYTIME) == -1" );
+questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(5920,HUNTING) == 2" );
+questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(5921,PLAYTIME) == 2" );
+end;
+}
+
+lhz_fild01,240,107,4	script	Examinador de Mapa Lipiri#yma	4_M_HUBOY,{
+.@npc_name$ = "[" + strnpcinfo(1) + "]";
+.@item_name$ = getitemname(1000374);
+
+if (BaseLevel < 71) {
+	mes .@npc_name$;
+	mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para cumprir essas missões.";
+	close;
+}
+switch( checkquest(5919,PLAYTIME) ) {
+case -1:
+	break;
+case 0:
+case 1:
+	mes .@npc_name$;
+	mes "Você pode fazer a missão de subjugação do Campo de Lighthalzen novamente amanhã. Você deve estar cansado, volte e descanse. Eu também estou um pouco cansado.";
+	next;
+	switch( select( "Você parece cansado. Quer tomar alguma coisa?", "Ir para uma cidade próxima." ) ) {
+	case 1:
+		if (countitem(1000374) < 3) {
+			mes .@npc_name$;
+			mes "Poxa... eu ainda estou cansado, então não tire sarro de mim. Acho que vou ficar menos cansado se eu beber três.";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 5919;
+		mes .@npc_name$;
+		mes "Sério?! Eu só ouvi falar, nunca experimentei, mas disseram que isso funciona muito bem.";
+		next;
+		npctalk "Gulp- ??- Kyaa~", "", bc_self;
+		sleep2 500;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "Hã?! Ah, é verdade. Você estava fazendo um bico? Ah! É a Sociedade de Monstros de Juno. Bem-vindo!";
+		close;
+	case 2:
+		mes .@npc_name$;
+		mes "Se for uma cidade próxima, é Lighthalzen. Me dê uma " + mesitemlink( 1000374 ) + " e eu poderei te teleportar.";
+		next;
+		select( "Dar 1 " + .@item_name$ + "." );
+		if (countitem(1000374) < 1) {
+			mes .@npc_name$;
+			mes "Ué? Cadê a " + .@item_name$ + "?";
+			close;
+		}
+		mes .@npc_name$;
+		mes "Até a próxima~";
+		close2;
+		delitem 1000374,1;	// Água com Gás
+		warp "lighthalzen",192,314;
+		end;
+	}
+	end;
+case 2:
+	erasequest 5919;
+	mes .@npc_name$;
+	mes "Você já pode prosseguir com a missão de subjugação novamente.";
+	close;
+}
+switch( checkquest(5918,HUNTING) ) {
+case -1:
+	mes .@npc_name$;
+	mes "Aqui é a Sociedade de Monstros de Juno.";
+	next;
+	switch( select( "Receber missão de subjugação.", "Missão de subjugação?", "Ir para uma cidade próxima.", "Por que você é tão grosso?" ) ) {
+	case 1:
+		setquest 5918;
+		mes .@npc_name$;
+		mes "Você só precisa caçar 80 monstros aqui no Campo de Lighthalzen.";
+		next;
+		mes .@npc_name$;
+		mes "Obrigado, obrigado. Está funcionando.";
+		close;
+	case 2:
+		mes .@npc_name$;
+		mes "Eu também estou fazendo um bico. Não sei os detalhes.";
+		next;
+		mes .@npc_name$;
+		mes "Eu ouvi isso quando começaram a explicar sobre as colônias de monstros e o número de indivíduos...";
+		next;
+		mes .@npc_name$;
+		mes "Eu fico com um pouco de sono ouvindo essa explicação. É difícil demais explicar.";
+		next;
+		mes .@npc_name$;
+		mes "Não é importante caçar monstros no Campo de Lighthalzen e receber recompensas?";
+		close;
+	case 3:
+		mes .@npc_name$;
+		mes "Se for uma cidade próxima, é Lighthalzen. Me dê uma " + mesitemlink( 1000374 ) + " e eu poderei te teleportar.";
+		next;
+		select( "Dar 1 " + .@item_name$ + "." );
+		if (countitem(1000374) < 1) {
+			mes .@npc_name$;
+			mes "Ué? Cadê a " + .@item_name$ + "?";
+			close;
+		}
+		mes .@npc_name$;
+		mes "Até a próxima~";
+		close2;
+		delitem 1000374,1;	// Água com Gás
+		warp "lighthalzen",192,314;
+		end;
+	case 4:
+		mes .@npc_name$;
+		mes "Desculpe. Eu estou com muito sono. Peguei esse bico porque pagava bem.";
+		next;
+		mes .@npc_name$;
+		mes "Sem ninguém pra me substituir.. vou ter que aguentar o dia inteiro.. primeiro vou trabalhar direitinho e depois vou processar eles quando eu pedir demissão.";
+		close;
+	}
+	end;
+case 0:
+case 1:
+	mes .@npc_name$;
+	mes "Você só precisa caçar 80 monstros no Campo de Lighthalzen. Depois que caçar todos, peça para eu confirmar e receba sua recompensa.";
+	close;
+case 2:
+	getexp 81120,74560;
+	erasequest 5918;
+	setquest 5919;
+	mes .@npc_name$;
+	mes "Bom trabalho. Hã.. devido ao problema do número de indivíduos, você só pode fazer a missão de subjugação uma vez por dia, então poderá fazer novamente amanhã.";
+	next;
+	mes .@npc_name$;
+	mes "Ah, eu estou tão cansado. Queria que aparecessem alguns substitutos...";
+	close;
+}
+end;
+
+OnInit:
+setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5919,PLAYTIME) == 0 || checkquest(5919,PLAYTIME) == 1) && countitem(1000374) > 2" );
+questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 71 && checkquest(5920,HUNTING) == -1 && checkquest(5921,PLAYTIME) == -1" );
+questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(5918,HUNTING) == 2" );
+questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(5919,PLAYTIME) == 2" );
+end;
+}
+
+mal_dun01,141,126,4	script	Examinadora de Mapas Mãe#yma	4_F_TAEKWON,{
+.@npc_name$ = "[" + strnpcinfo(1) + "]";
+.@item_name$ = getitemname(1000374);
+
+if (BaseLevel < 75) {
+	mes .@npc_name$;
+	mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para cumprir essas missões.";
+	close;
+}
+switch( checkquest(5927,PLAYTIME) ) {
+case -1:
+	break;
+case 0:
+case 1:
+	mes .@npc_name$;
+	mes "Você pode fazer a missão de subjugação amanhã? Eu estou cansado, então por favor não fale comigo?";
+	next;
+	switch( select( "Você parece cansado. Quer tomar alguma coisa?", "Ir para uma cidade próxima." ) ) {
+	case 1:
+		if (countitem(1000374) < 3) {
+			mes .@npc_name$;
+			mes "O quê? Pra onde foram as minhas 3 " + .@item_name$ + "?";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 5927;
+		mes .@npc_name$;
+		mes "Sério? Não tem mais nada pra dizer depois?";
+		next;
+		npctalk "Ugh~ Empolgante..", "", bc_self;
+		sleep2 500;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "Ah! Ela... ela disse de novo. Ei, do que você está falando?";
+		close;
+	case 2:
+		mes .@npc_name$;
+		mes "Malangdo? Se você quiser ir, me dê uma " + .@item_name$ + ". Mas não é melhor ir andando daqui?";
+		next;
+		select( "Dar 1 " + .@item_name$ + "." );
+		if (countitem(1000374) < 1) {
+			mes .@npc_name$;
+			mes "Uma " + .@item_name$ + ". Mas eu recomendo ir andando mesmo.";
+			close;
+		}
+		mes .@npc_name$;
+		mes "Ótimo! Tchau~ Até a próxima~";
+		close2;
+		delitem 1000374,1;	// Água com Gás
+		warp "malangdo",141,118;
+		end;
+	}
+case 2:
+	erasequest 5927;
+	mes .@npc_name$;
+	mes "Ah! Eu posso fazer a missão de subjugação novamente. Já está na hora de eu trabalhar?";
+	close;
+}
+switch( checkquest(5926,HUNTING) ) {
+case -1:
+	mes .@npc_name$;
+	mes "Porque eu estou ocupado agora. Só fale comigo quem quiser fazer uma missão de subjugação.";
+	next;
+	switch( select( "Receber missão de subjugação.", "Missão de subjugação?", "Ir para uma cidade próxima.", "O que você está fazendo?" ) ) {
+	case 1:
+		setquest 5926;
+		mes .@npc_name$;
+		mes "Você é um visitante? Então deveria ser educado.";
+		mes "Você só precisa caçar 80 monstros na Zona de Coral Estrelado, porque mesmo que você mate Moluscos, Caranguejos e Estrelas do Mar, eles não contam! Não precisa matar eles. Então, bom trabalho!!";
+		close;
+	case 2:
+		mes .@npc_name$;
+		mes "Ah?! Você está me incomodando de novo assim. Mesmo sendo visitante, seja educado.";
+		next;
+		mes .@npc_name$;
+		mes "Essa é uma missão para caçar monstros no Coral Estrelado para controlar o número de indivíduos.";
+		next;
+		mes .@npc_name$;
+		mes "Moluscos, caranguejos e Esther não precisam ser caçados porque não há necessidade de controlar a população deles.";
+		next;
+		mes .@npc_name$;
+		mes "Não pergunte o porquê. Eu não sei, porque só estou fazendo um bico. Cliente!";
+		close;
+	case 3:
+		mes .@npc_name$;
+		mes "Malangdo? Se você quiser ir, me dê uma " + .@item_name$ + ". Mas não é melhor ir andando daqui?";
+		next;
+		select( "Dar 1 " + .@item_name$ + "." );
+		if (countitem(1000374) < 1) {
+			mes .@npc_name$;
+			mes "Uma " + .@item_name$ + ". Mas eu recomendo ir andando mesmo.";
+			close;
+		}
+		mes .@npc_name$;
+		mes "Certo! Tchau~ Até a próxima~";
+		close2;
+		delitem 1000374,1;	// Água com Gás
+		warp "malangdo",141,118;
+		end;
+	case 4:
+		mes .@npc_name$;
+		mes "Ahhh?! Sério!! Eles são muito irritantes. Está vendo a Esther ali? Você deve saber falar, mas quando eu falo com você, você não responde?";
+		next;
+		mes .@npc_name$;
+		mes "Obviamente, quando vê aventureiros passando, parece que você está conversando. Você é tímida? Por que não fala comigo?";
+		close;
+	}
+	end;
+case 0:
+case 1:
+	mes .@npc_name$;
+	mes "Se você caçar 80 monstros na Zona do Coral Estrelado, fale comigo.";
+	next;
+	mes .@npc_name$;
+	mes "Moluscos, caranguejos e Esther não contam mesmo que você mate eles, então não venha reclamar depois.";
+	close;
+case 2:
+	getexp 90880,85440;
+	erasequest 5926;
+	setquest 5927;
+	mes .@npc_name$;
+	mes "Oh! Você fez um ótimo trabalho. As missões de subjugação também podem ser feitas amanhã. Se vier ou não, quando estiver livre.";
+	close;
+}
+end;
+
+OnInit:
+setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5927,PLAYTIME) == 0 || checkquest(5927,PLAYTIME) == 1) && countitem(1000374) > 2" );
+questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 75 && checkquest(5926,HUNTING) == -1 && checkquest(5927,PLAYTIME) == -1" );
+questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(5926,HUNTING) == 2" );
+questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(5927,PLAYTIME) == 2" );
+end;
+}
+
+hu_fild01,133,157,6	script	Examinador de Mapas Huf#yma	4_MAL_CAPTAIN,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 75) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(5925,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Estou parado aqui sozinho há alguns dias, e espero que alguém venha me substituir amanhã.";
+		next;
+		switch( select( "Você parece cansado. Gostaria de uma bebida?", "Ir para uma cidade próxima." ) ) {
+		case 1:
+			if (countitem(1000374) < 3) {
+				mes .@npc_name$;
+				mes "Você não vai me dar 3 " + .@item_name$ + "?";
+				close;
+			}
+			delitem 1000374,3;	// Água com Gás
+			erasequest 5925;
+			mes .@npc_name$;
+			mes "É a sua primeira bebida? Sempre é divertido experimentar novos sabores. Obrigado.";
+			next;
+			npctalk "Uau- oh! É bem gostoso..", "", bc_self;
+			sleep2 500;
+			specialeffect EF_FLASHER;
+			mes .@npc_name$;
+			mes "Hã?! Um visitante apareceu num piscar de olhos.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Você vai voltar para casa? Hugel é a cidade mais próxima. Eu preciso de 1 unidade de " + mesitemlink( 1000374 ) + ".";
+			next;
+			select( "Dar 1 " + .@item_name$ + "." );
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Para ir até uma cidade próxima, é necessário 1 " + .@item_name$ + ".";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Tenha uma boa viagem.";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "hugel",97,154;
+			end;
+		}
+		end;
+	case 2:
+		erasequest 5925;
+		mes .@npc_name$;
+		mes "Você pode fazer a missão de subjugação novamente.";
+		close;
+	}
+	switch( checkquest(5924,HUNTING) ) {
+	case -1:
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando uma missão de subjugação.";
+		next;
+		switch( select( "Receber missão de subjugação.", "Missão de subjugação?", "Ir para uma cidade próxima.", "Você é de Porto Malaya?" ) ) {
+		case 1:
+			setquest 5924;
+			mes .@npc_name$;
+			mes "Você pode derrotar 80 monstros no campo em frente à Torre de Thanatos neste lugar. Depois de derrotar todos, reporte-se a mim.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Esta é uma missão de subjugação para reduzir o número de monstros em frente a Thanatos.";
+			next;
+			mes .@npc_name$;
+			mes "O número de monstros pode aumentar e causar danos, então parece que a intenção é reduzir a quantidade deles antecipadamente.";
+			next;
+			mes .@npc_name$;
+			mes "Antes desse trabalho temporário, eu achava que a Sociedade de Monstros era só uma brincadeira, mas parece que eles trabalham de verdade.";
+			close;
+		case 3:
+			mes .@npc_name$;
+			mes "Você vai voltar para casa? Hugel é a cidade mais próxima. Eu preciso de 1 unidade de " + mesitemlink( 1000374 ) + ".";
+			next;
+			select( "Dar 1 " + .@item_name$ + "." );
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Para ir até uma cidade próxima, é necessário 1 " + .@item_name$ + ".";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Tenha uma boa viagem.";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "hugel",97,154;
+			end;
+		case 4:
+			mes .@npc_name$;
+			mes "Hahaha.. Você conhece Porto Malaya? É um lugar ótimo.";
+			next;
+			mes .@npc_name$;
+			mes "Caso tenha entendido errado, eu não sou o capitão do porto de Malaya.";
+			next;
+			mes .@npc_name$;
+			mes "Esse uniforme de capitão é tão legal que eu quis usar, mas se eu usasse lá seria falsidade ideológica. Eu só saí da minha cidade natal e estou usando ele.";
+			next;
+			mes .@npc_name$;
+			mes "Ah.. De repente eu quero voltar para casa. Quando minha mãe saiu de casa, ela disse que seria difícil, e realmente é.";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Derrote 80 monstros em frente à Torre de Thanatos e reporte-se a mim.";
+		close;
+	case 2:
+		getexp 110760,104040;
+		erasequest 5924;
+		setquest 5925;
+		mes .@npc_name$;
+		mes "Você trabalhou duro. As missões de subjugação estão disponíveis todos os dias, então se tiver tempo, por favor venha novamente.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5925,PLAYTIME) == 0 || checkquest(5925,PLAYTIME) == 1) && countitem(1000374) > 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 75 && checkquest(5924,HUNTING) == -1 && checkquest(5925,PLAYTIME) == -1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(5924,HUNTING) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(5925,PLAYTIME) == 2" );
+	end;
+}
+
+tur_dun01,159,46,4	script	Examinador de Mapas Tural#yma	4_M_BRZ_MAN1,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 75) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(5923,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Você poderá fazer a missão de subjugação da Ilha das Tartarugas novamente amanhã. Quando será que vou poder voltar a ser cozinheiro?";
+		next;
+		switch( select( "Você parece cansado. Gostaria de uma bebida?", "Ir para uma cidade próxima." ) ) {
+		case 1:
+			if (countitem(1000374) < 3) {
+				mes .@npc_name$;
+				mes "Você não tem " + .@item_name$ + ". Você terá que me dar três para aliviar o cansaço.";
+				close;
+			}
+			delitem 1000374,3;	// Água com Gás
+			erasequest 5923;
+			mes .@npc_name$;
+			mes "Oh! " + .@item_name$ + "?! Ouvi dizer que a pessoa que fez isso ficou muito rica, vou beber com gosto.";
+			next;
+			npctalk "Uau.. é emocionante.", "", bc_self;
+			specialeffect EF_FLASHER;
+			mes .@npc_name$;
+			mes "Heh heh.. Achei que fosse um monstro. Por que você está aí parado sem dar sinal?";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Dar uma " + mesitemlink( 1000374 ) + " e eu posso te teleportar para Alberta.";
+			next;
+			select( "Dar 1 " + .@item_name$ + "." );
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Se você me der " + .@item_name$ + ", eu vou te teleportar para Alberta.";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Eu queria ir também. Então até mais.";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "alberta",117,55;
+			end;
+		}
+	case 2:
+		erasequest 5923;
+		mes .@npc_name$;
+		mes "Você pode fazer a missão de subjugação da Ilha das Tartarugas novamente.";
+		close;
+	}
+	switch( checkquest(5922,HUNTING) ) {
+	case -1:
+		mes .@npc_name$;
+		mes "Heh heh.. Achei que fosse um monstro. Você veio receber uma missão de subjugação?";
+		next;
+		switch( select( "Receber missão de subjugação.", "Missão de subjugação?", "Ir para uma cidade próxima.", "Você não é um cozinheiro?" ) ) {
+		case 1:
+			setquest 5922;
+			mes .@npc_name$;
+			mes "Exceto o Sapo de Thara, você pode derrotar 80 monstros na Ilha das Tartarugas. Se derrotar todos, venha até mim e receba uma recompensa.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Esta é uma missão que exige que você derrote 80 monstros na Ilha das Tartarugas.";
+			next;
+			mes .@npc_name$;
+			mes "Ah! Aliás, mesmo que você derrote o Sapo de Thara, não vai contar. Se você não mexer com ela, é um monstro dócil, então pode evitá-la.";
+			close;
+		case 3:
+			mes .@npc_name$;
+			mes "Dar uma " + mesitemlink( 1000374 ) + " e eu posso te teleportar para Alberta.";
+			next;
+			select( "Dar 1 " + .@item_name$ + "." );
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Se você me der " + .@item_name$ + ", eu vou te teleportar para Alberta.";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Eu queria ir também. Então até mais.";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "alberta",117,55;
+			end;
+		case 4:
+			mes .@npc_name$;
+			mes "Sim, eu sou. Eu sou cozinheiro. Estou cansado desse trabalho que não estou acostumado, então nem consigo lembrar direito.";
+			next;
+			mes .@npc_name$;
+			mes "Eu tenho a sensação de que escrevi no documento que estava procurando um trabalho temporário como assistente de cozinha. Quando acordei, de alguma forma eu estava trabalhando aqui como Examinador de Mapa para subjugação.";
+			next;
+			mes .@npc_name$;
+			mes "Sério, por quê? Eu não consigo fazer isso de qualquer jeito, isso me deixa nervoso.";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Exceto o Sapo de Thara, derrote 80 monstros na Ilha das Tartarugas e venha até mim para receber uma recompensa.";
+		close;
+	case 2:
+		getexp 86920,80660;
+		erasequest 5922;
+		setquest 5923;
+		mes .@npc_name$;
+		mes "Aqui está a recompensa prometida. A missão de subjugação pode ser retomada amanhã, então se tiver tempo, por favor venha.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5925,PLAYTIME) == 0 || checkquest(5925,PLAYTIME) == 1) && countitem(1000374) > 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 75 && checkquest(5922,HUNTING) == -1 && checkquest(5923,PLAYTIME) == -1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(5922,HUNTING) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(5923,PLAYTIME) == 2" );
+	end;
+}
+
+//nota: todos os monstros aumentam a contagem de caçadas.
+ein_fild03,135,46,5	script	Examinador de Mapas Tailing#tailing	1_M_YOUNGKNIGHT,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 76) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(3472,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Ah, isso já é o suficiente de subjugação por hoje!";
+		next;
+		mes .@npc_name$;
+		mes "Eu agradeceria se você viesse novamente amanhã e ajudasse a subjugar os monstros!!";
+		next;
+		if (select( "Entregar " + .@item_name$ + ".", "Não entregar." ) == 2)
+			end;
+		if (countitem(1000374) < 3) {
+			mes " - São necessárias 3 " + .@item_name$ + ". - ";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 3472;
+		mes .@npc_name$;
+		mes "Ah~!! Muito obrigado~ Eu estava com muita sede naquele momento~";
+		next;
+		mes .@npc_name$;
+		mes "gulp~ gulp~~~";
+		next;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "Hã... esse sabor intenso...!";
+		next;
+		mes .@npc_name$;
+		mes "Eh.. você é novo pra mim, espere um pouco. Eu também vou beber um pouco disso, então pode falar comigo depois de um minuto?";
+		close;
+	case 2:
+		erasequest 3472;
+		break;
+	}
+	switch( checkquest(3471,HUNTING) ) {
+	case -1:
+		mes .@npc_name$;
+		mes "Olá!! Você está aqui de novo! Eu sou o Examinador de Mapa Tailing, da Sociedade de Monstros de Juno!";
+		next;
+		switch( select( "Receber missão de subjugação.", "Ir para uma cidade próxima.", "Sobre a missão de subjugação.", "Voltar depois." ) ) {
+		case 1:
+			mes .@npc_name$;
+			mes "Oh, você gostaria de uma missão?";
+			next;
+			mes .@npc_name$;
+			mes "Você só precisa derrotar 80 monstros neste campo onde eu estou.";
+			next;
+			setquest 3471;
+			mes .@npc_name$;
+			mes "Então estarei esperando por você, espero que volte em segurança.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "A cidade mais próxima daqui é Einbroch!";
+			next;
+			mes .@npc_name$;
+			mes "Se você me der uma " + .@item_name$ + ", eu te envio na hora!";
+			next;
+			if (select( "Mover", "Não mover" ) == 2) {
+				mes .@npc_name$;
+				mes "Sim, por favor me avise se precisar de teleporte!!";
+				close;
+			}
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Ei, você não tem " + .@item_name$ + "~";
+				next;
+				mes .@npc_name$;
+				mes "Para teleportar é necessário 1 " + .@item_name$ + ".";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Sim! Então vamos te teleportar!!";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "einbroch",146,49;
+			end;
+		case 3:
+			mes .@npc_name$;
+			mes "Há algum tempo, foi descoberto o fenômeno de colônias de monstros se expandindo.";
+			next;
+			mes .@npc_name$;
+			mes "Em certa época, a subjugação era realizada ativamente, mas ultimamente isso pode ser visto como resultado de um pequeno descuido.";
+			next;
+			mes .@npc_name$;
+			mes "Se esse fenômeno continuar, é perigoso, então a Sociedade de Monstros de Juno decidiu realizar uma subjugação em grande escala.";
+			next;
+			mes .@npc_name$;
+			mes "Isso significa que a subjugação está sendo realizada posicionando Examinadores de Mapa em cada área que precisa ser subjugada!";
+			close;
+		case 4:
+			mes .@npc_name$;
+			mes "Ah, para onde você vai?";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Você só precisa subjugar 80 monstros de qualquer tipo nesta área.";
+		next;
+		mes .@npc_name$;
+		mes "Depois de subjugar, venha até mim e pegue sua recompensa!!";
+		close;
+	case 2:
+		getexp 146520,131880;
+		erasequest 3471;
+		setquest 3472;
+		mes .@npc_name$;
+		mes "Você voltou em segurança!";
+		next;
+		mes .@npc_name$;
+		mes "Mal consegui alcançar a meta de hoje assim...";
+		next;
+		mes .@npc_name$;
+		mes "Se você puder amanhã, por favor venha novamente!!";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 76 && checkquest(3471,HUNTING) == -1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(3471,HUNTING) == 2" );
+	end;
+}
+
+// Nota: todos os monstros aumentam a contagem de caçadas.
+lhz_fild03,167,344,3	script	Examinadora de Mapas Modaka#madaka	4_F_JOB_KNIGHT,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 77) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(3474,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Ah, isso já é o suficiente de subjugação por hoje!";
+		next;
+		mes .@npc_name$;
+		mes "Eu agradeceria se você viesse novamente amanhã e ajudasse a subjugar os monstros!!";
+		next;
+		if (select( "Entregar " + .@item_name$ + ".", "Não entregar." ) == 2)
+			end;
+		if (countitem(1000374) < 3) {
+			mes " - São necessárias 3 " + .@item_name$ + ". - ";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 3474;
+		mes .@npc_name$;
+		mes "Ummm, muito obrigada~ É uma água gaseificada refrescante~?";
+		next;
+		mes .@npc_name$;
+		mes "Cucuuu~ Clap~";
+		next;
+		mes .@npc_name$;
+		mes "Ah, que delícia~!";
+		next;
+		mes .@npc_name$;
+		mes "Oh, aventureiro, espere um pouco~ Me dê um tempo pra enrolar isso no meu pescoço, então fale comigo de novo depois de um tempinho~";
+		close;
+	case 2:
+		erasequest 3474;
+		break;
+	}
+	switch( checkquest(3473,HUNTING) ) {
+	case -1:
+		mes .@npc_name$;
+		mes "Olá!! Você está aqui de novo! Eu sou Modaka, uma Examinadora de Mapa enviada pela Sociedade de Monstros de Juno!";
+		next;
+		switch( select( "Receber missão de subjugação.", "Ir para uma cidade próxima.", "Sobre a missão de subjugação.", "Voltar depois." ) ) {
+		case 1:
+			mes .@npc_name$;
+			mes "Oh, você gostaria de aceitar uma missão?";
+			next;
+			mes .@npc_name$;
+			mes "Você só precisa derrotar 80 monstros neste campo onde eu estou~";
+			next;
+			setquest 3473;
+			mes .@npc_name$;
+			mes "Então estarei esperando aqui, tome cuidado~!";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "A cidade mais próxima daqui é Lighthalzen~";
+			next;
+			mes .@npc_name$;
+			mes "Se você me der uma " + .@item_name$ + ", eu te envio na hora!";
+			next;
+			if (select( "Mover", "Não mover" ) == 2) {
+				mes .@npc_name$;
+				mes "Sim, se precisar de teleporte, por favor me avise!";
+				close;
+			}
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Ei, você não tem " + .@item_name$ + "~";
+				next;
+				mes .@npc_name$;
+				mes "Para teleportar é necessário 1 " + .@item_name$ + ".";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Sim, então eu vou te teleportar!!";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "lighthalzen",214,319;
+			end;
+		case 3:
+			mes .@npc_name$;
+			mes "Há algum tempo, foi descoberto o fenômeno de colônias de monstros se expandindo.";
+			next;
+			mes .@npc_name$;
+			mes "Em certa época, a subjugação era realizada ativamente, mas ultimamente isso pode ser visto como resultado de um pequeno descuido.";
+			next;
+			mes .@npc_name$;
+			mes "Se esse fenômeno continuar, é perigoso, então a Sociedade de Monstros de Juno decidiu realizar uma subjugação em grande escala.";
+			next;
+			mes .@npc_name$;
+			mes "Isso significa que a subjugação está sendo realizada posicionando Examinadores de Mapa em cada área que precisa ser subjugada!";
+			close;
+		case 4:
+			mes .@npc_name$;
+			mes "Ah, para onde você vai?";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Você só precisa subjugar 80 monstros na minha área, independentemente do tipo~";
+		next;
+		mes .@npc_name$;
+		mes "Depois de subjugar, por favor volte até mim~";
+		close;
+	case 2:
+		getexp 148560,140040;
+		erasequest 3473;
+		setquest 3474;
+		mes .@npc_name$;
+		mes "Você chegou~";
+		next;
+		mes .@npc_name$;
+		mes "Acho que a meta de hoje foi alcançada. Obrigada~";
+		next;
+		mes .@npc_name$;
+		mes "Espero que você possa vir amanhã também!!!";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 77 && checkquest(3473,HUNTING) == -1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(3473,HUNTING) == 2" );
+	end;
+}
+
+tur_dun02,151,256,4	script	Examinador de Mapas Tidun#yma	4_M_NINJA_BLUE,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 80) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(5929,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Você pode fazer a missão de subjugação da masmorra da Ilha das Tartarugas novamente amanhã. Você deve estar cansado, então vá para casa e descanse.";
+		next;
+		switch( select( "Você parece cansado. Gostaria de uma bebida?", "Ir para uma cidade próxima." ) ) {
+		case 1:
+			if (countitem(1000374) < 3) {
+				mes .@npc_name$;
+				mes "Acho que ouvi dizer que você me daria 3 " + .@item_name$ + ", mas devo ter ouvido errado.";
+				close;
+			}
+			delitem 1000374,3;	// Água com Gás
+			erasequest 5929;
+			mes .@npc_name$;
+			mes "Oh! Obrigado. Você é muito gentil. Vou beber.";
+			next;
+			npctalk "Sinto-me envolvido por uma sensação de frescor.", "", bc_self;
+			specialeffect EF_FLASHER;
+			mes .@npc_name$;
+			mes "Hmm! Acho que um visitante chegou.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Se você me der uma " + mesitemlink( 1000374 ) + ", eu posso te teleportar para a cidade mais próxima, Alberta.";
+			next;
+			select( "Dar 1 " + .@item_name$ + "." );
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "O teleporte para uma cidade próxima custa 1 " + .@item_name$ + ", então eu até queria te mandar de graça, mas é o preço oficial..";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Tenha uma boa viagem.";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "alberta",117,55;
+			end;
+		}
+		end;
+	case 2:
+		erasequest 5929;
+		mes .@npc_name$;
+		mes "Você pode fazer a subjugação da masmorra da Ilha das Tartarugas novamente.";
+		close;
+	}
+	switch( checkquest(5928,HUNTING) ) {
+	case -1:
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno preparou uma missão para subjugar a masmorra da Ilha das Tartarugas. O que você acha?";
+		next;
+		switch( select( "Receber missão de subjugação.", "Missão de subjugação?", "Ir para uma cidade próxima.", "Terceiro" ) ) {
+		case 1:
+			setquest 5928;
+			mes .@npc_name$;
+			mes "Depois de derrotar 80 monstros na masmorra da Ilha das Tartarugas, venha e reporte-se a mim. Então, desejo boa sorte.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Eu estava procurando um lugar tranquilo, e encontrei um trabalho adequado, então me candidatei como Examinador de Mapa.";
+			next;
+			mes .@npc_name$;
+			mes "O problema é que minha estadia está ficando mais longa do que eu esperava.";
+			next;
+			mes .@npc_name$;
+			mes "Quero voltar para casa logo..";
+			close;
+		case 3:
+			mes .@npc_name$;
+			mes "Se você me der uma " + mesitemlink( 1000374 ) + ", eu poderei te teleportar para a cidade mais próxima, Alberta.";
+			next;
+			select( "Dar 1 " + .@item_name$ + "." );
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "O teleporte para uma cidade próxima custa 1 " + .@item_name$ + ", então eu até queria te mandar de graça, mas é o preço oficial..";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Tenha uma boa viagem.";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "alberta",117,55;
+			end;
+		case 4:
+			mes .@npc_name$;
+			mes "Ouvi dizer que uma colisão entre colônias é prevista devido ao aumento no número de monstros.";
+			next;
+			mes .@npc_name$;
+			mes "Se as colônias de monstros colidirem umas com as outras, os humanos não tentariam reduzir o número deles antecipadamente?";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Depois de derrotar 80 monstros na masmorra da Ilha das Tartarugas, venha e reporte-se a mim. Estarei esperando por você.";
+		close;
+	case 2:
+		getexp 95240,88580;
+		erasequest 5928;
+		setquest 5929;
+		mes .@npc_name$;
+		mes "Você resolveu rapidamente. Isso é ótimo. Posso fazer essa missão de subjugação novamente amanhã, então nos vemos de novo se eu tiver tempo.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5929,PLAYTIME) == 0 || checkquest(5929,PLAYTIME) == 1) && countitem(1000374) > 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 80 && checkquest(5928,HUNTING) == -1 && checkquest(5929,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(5929,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(5928,HUNTING) == 2" );
+	end;
+}
+
+tur_dun03,125,186,6	script	Examinador de Mapas Tsensor#yma	4_M_SIT_NOVICE,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 80) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(5931,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Você não tem nada pra fazer? Você vem amanhã, então por que está falando comigo de novo?";
+		next;
+		switch( select( "Você parece cansado. Quer uma bebida?", "Ir para uma cidade próxima." ) ) {
+		case 1:
+			if (countitem(1000374) < 3) {
+				mes .@npc_name$;
+				mes "Haha.. Como " + .@item_name$ + " é caro, eu não posso te dar três deles.";
+				close;
+			}
+			delitem 1000374,3;	// Água com Gás
+			erasequest 5931;
+			mes .@npc_name$;
+			mes "Oh, você sabe das coisas? Vou beber com gosto. Eu queria experimentar, mas não pude beber porque era caro.";
+			next;
+			npctalk "Uau, então o gosto era assim.", "", bc_self;
+			specialeffect EF_FLASHER;
+			mes .@npc_name$;
+			mes "Hã?! Amigo, nós já nos vimos? Não é? Parece que estamos nos vendo pela primeira vez...";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Expresso de Alberta: 1 " + mesitemlink( 1000374 ) + ", saindo imediatamente.";
+			next;
+			select( "Dar 1 " + .@item_name$ + "." );
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Desculpe. Se você não me der uma " + .@item_name$ + ", eu não vou te enviar. Bom trabalho.";
+				close;
+			}
+			mes .@npc_name$;
+			mes "O Expresso de Alberta está partindo. Bom trabalho~";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "alberta",117,55;
+			end;
+		}
+		end;
+	case 2:
+		erasequest 5931;
+		mes .@npc_name$;
+		mes "Uau~ Eu posso fazer a missão de subjugação novamente. O que você acha?";
+		close;
+	}
+	switch( checkquest(5930,HUNTING) ) {
+	case -1:
+		mes .@npc_name$;
+		mes "Vamos lá! Você tem alguma intenção de subjugar?";
+		next;
+		switch( select( "Receber missão de subjugação.", "Missão de subjugação?", "Ir para uma cidade próxima.", "Aprendiz?" ) ) {
+		case 1:
+			setquest 5930;
+			mes .@npc_name$;
+			mes "Sim! Sim! Eu estou dizendo pra você ir e derrotar 80 monstros aqui em Yanggeochon, e quando derrotar todos, reporte-se e venha até mim.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Do que você está falando? É só uma missão para derrotar monstros.";
+			next;
+			mes .@npc_name$;
+			mes "Mas e aí! Você recebeu um pedido de 20 permutadores e 20 congeladores, derrotou todos os permutadores, mas ainda faltam cinco congeladores?";
+			next;
+			mes .@npc_name$;
+			mes "Não seria melhor simplesmente derrotar todos os monstros dessa vizinhança para que isso não aconteça? Não é?";
+			close;
+		case 3:
+			mes .@npc_name$;
+			mes "Expresso de Alberta: 1 " + mesitemlink( 1000374 ) + ", saindo imediatamente.";
+			next;
+			select( "Dar 1 " + .@item_name$ + "." );
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Desculpe. Se você não me der uma " + .@item_name$ + ", eu não vou te enviar. Bom trabalho.";
+				close;
+			}
+			mes .@npc_name$;
+			mes "O Expresso de Alberta está partindo. Bom trabalho~";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "alberta",117,55;
+			end;
+		case 4:
+			mes .@npc_name$;
+			mes "Hã? É a primeira vez que você vê um Aprendiz?";
+			next;
+			mes .@npc_name$;
+			mes "Quando eu era Aprendiz, mesmo sendo como uma masmorra viva, eu só dizia que fui lá. É chiclete.";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "O que você está fazendo? Por que você não vai derrotar 80 monstros em Yanggeochon?";
+		close;
+	case 2:
+		getexp 102260,96700;
+		erasequest 5930;
+		setquest 5931;
+		mes .@npc_name$;
+		mes "Bom, eu não sou grande coisa, mas minhas habilidades não são tão ruins. Vou ficar aqui, então se quiser fazer a missão de subjugação amanhã também.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_CLICKME, QMARK_YELLOW, "(checkquest(5931,PLAYTIME) == 0 || checkquest(5931,PLAYTIME) == 1) && countitem(1000374) > 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 80 && checkquest(5930,HUNTING) == -1 && checkquest(5931,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(5931,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(5930,HUNTING) == 2" );
+	end;
+}
+
+// nota: Todos os monstros aumentam a contagem de caçadas
+ra_fild12,50,219,1	script	Examinadora de Mapas Chakari#chakari	4_F_JOB_ASSASSIN,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 80) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(3476,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Por hoje já está bom!!";
+		next;
+		mes .@npc_name$;
+		mes "Se quiser fazer mais subjugação, por favor volte amanhã!!";
+		next;
+		if (select( "Entregar " + .@item_name$ + ".", "Não entregar." ) == 2)
+			end;
+		if (countitem(1000374) < 3) {
+			mes " - São necessárias 3 " + .@item_name$ + ". - ";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 3476;
+		mes .@npc_name$;
+		mes "Você vai me dar~?? Vou beber com gosto!!";
+		next;
+		mes .@npc_name$;
+		mes "Gulp~ Gulp~~~!!!!";
+		next;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "Ugh...?? Que gosto estranho é esse...";
+		next;
+		mes .@npc_name$;
+		mes "Uh... eu estou meio tonta agora, mas você pode falar comigo de novo daqui a pouco??";
+		close;
+	case 2:
+		erasequest 3476;
+		break;
+	}
+	switch( checkquest(3475,HUNTING) ) {
+	case -1:
+		mes .@npc_name$;
+		mes "Olá! Eu sou Chakarina, uma Examinadora de Mapa enviada pela Sociedade de Monstros de Juno~!";
+		next;
+		switch( select( "Receber missão de subjugação.", "Ir para uma cidade próxima.", "Sobre a missão de subjugação.", "Voltar depois." ) ) {
+		case 1:
+			mes .@npc_name$;
+			mes "Você vai aceitar pedidos?!";
+			next;
+			mes .@npc_name$;
+			mes "Você só precisa derrotar 80 monstros neste campo onde eu estou!";
+			next;
+			setquest 3475;
+			mes .@npc_name$;
+			mes "Vou confiar em você para terminar rápido!!";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Rachel é a cidade mais próxima daqui!!";
+			next;
+			mes .@npc_name$;
+			mes "Se você me der uma " + .@item_name$ + ", eu te envio na hora!";
+			next;
+			if (select( "Mover", "Não mover" ) == 2) {
+				mes .@npc_name$;
+				mes "Sim, se precisar de teleporte, por favor me avise!!";
+				close;
+			}
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Hã? Você não tem " + .@item_name$ + "!!";
+				next;
+				mes .@npc_name$;
+				mes "Você precisa de 1 " + .@item_name$ + " para teleportar!";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Sim! Então se prepare~!!";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "rachel",130,30;
+			end;
+		case 3:
+			mes .@npc_name$;
+			mes "Você já ouviu falar sobre a expansão de colônias de monstros?";
+			next;
+			mes .@npc_name$;
+			mes "Era para ser uma subjugação contínua, mas acho que ficou perto de uma situação perigosa por causa de uma breve pausa.";
+			next;
+			mes .@npc_name$;
+			mes "Então a Sociedade de Monstros de Juno enviou vários Examinadores de Mapa, e foi por isso que eu vim para cá.";
+			close;
+		case 4:
+			mes .@npc_name$;
+			mes "Até a próxima!!";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Você só precisa subjugar 80 monstros de qualquer tipo nesta área.";
+		next;
+		mes .@npc_name$;
+		mes "Se você vier depois de subjugar, eu vou te dar uma boa recompensa~!!";
+		close;
+	case 2:
+		getexp 155040,146520;
+		erasequest 3475;
+		setquest 3476;
+		mes .@npc_name$;
+		mes "No fim das contas, você veio e terminou rápido!!";
+		next;
+		mes .@npc_name$;
+		mes "Acho que não haverá problemas com a subjugação se tivermos apenas um aventureiro como você...";
+		next;
+		mes .@npc_name$;
+		mes "Espero que você possa vir e me ajudar amanhã também...!";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	// Nota: ! exibido quando a reprodução está em andamento
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 80 && checkquest(3475,HUNTING) == -1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(3475,HUNTING) == 2" );
+	end;
+}
+
+// Nota: todos os monstros aumentam a contagem de caçadas.
+ice_dun01,161,13,3	script	Examinador de Mapas Dove#dove123	8_F_GIRL,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 85) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(3484,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Ah, isso já é o suficiente de subjugação por hoje!";
+		next;
+		mes .@npc_name$;
+		mes "Eu agradeceria se você viesse novamente amanhã e ajudasse a subjugar os monstros!!";
+		next;
+		if (select( "Entregar " + .@item_name$ + ".", "Não entregar." ) == 2)
+			end;
+		if (countitem(1000374) < 3) {
+			mes " - São necessárias 3 " + .@item_name$ + ". - ";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 3484;
+		mes .@npc_name$;
+		mes "Ah~!! Muito obrigado~ Eu estava com muita sede naquele momento~";
+		next;
+		mes .@npc_name$;
+		mes "gulp~ gulp~~~";
+		next;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "Hã... esse sabor intenso...!";
+		next;
+		mes .@npc_name$;
+		mes "Eh.. você é novo pra mim, espere um pouco. Eu também vou beber um pouco disso, então pode falar comigo depois de um minuto?";
+		close;
+	case 2:
+		erasequest 3484;
+		break;
+	}
+	switch( checkquest(3483,HUNTING) ) {
+	case -1:
+		mes .@npc_name$;
+		mes "Olá!! Você está aqui de novo! Eu sou Dove, uma Examinadora de Mapa enviada pela Sociedade de Monstros de Juno!";
+		next;
+		switch( select( "Receber missão de subjugação.", "Ir para uma cidade próxima.", "Sobre a missão de subjugação.", "Voltar depois." ) ) {
+		case 1:
+			mes .@npc_name$;
+			mes "Oh, você gostaria de uma missão?";
+			next;
+			mes .@npc_name$;
+			mes "Você só precisa derrotar 80 monstros neste campo onde eu estou.";
+			next;
+			setquest 3483;
+			mes .@npc_name$;
+			mes "Então estarei esperando por você, espero que volte em segurança.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "A cidade mais próxima daqui é Einbroch!";
+			next;
+			mes .@npc_name$;
+			mes "Se você me der uma " + .@item_name$ + ", eu te envio na hora!";
+			next;
+			if (select( "Mover", "Não mover" ) == 2) {
+				mes .@npc_name$;
+				mes "Sim, por favor me avise se precisar de teleporte!!";
+				close;
+			}
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Ei, você não tem " + .@item_name$ + "~";
+				next;
+				mes .@npc_name$;
+				mes "Para teleportar é necessário 1 " + .@item_name$ + ".";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Sim! Então vamos te teleportar!!";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "rachel",130,30;
+			end;
+		case 3:
+			mes .@npc_name$;
+			mes "Há algum tempo, foi descoberto o fenômeno de colônias de monstros se expandindo.";
+			next;
+			mes .@npc_name$;
+			mes "Em certa época, a subjugação era realizada ativamente, mas ultimamente isso pode ser visto como resultado de um pequeno descuido.";
+			next;
+			mes .@npc_name$;
+			mes "Se esse fenômeno continuar, é perigoso, então a Sociedade de Monstros de Juno decidiu realizar uma subjugação em grande escala.";
+			next;
+			mes .@npc_name$;
+			mes "Isso significa que a subjugação está sendo realizada posicionando Examinadores de Mapa em cada área que precisa ser subjugada!";
+			close;
+		case 4:
+			mes .@npc_name$;
+			mes "Ah, para onde você vai?";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Você só precisa subjugar 80 monstros de qualquer tipo nesta área.";
+		next;
+		mes .@npc_name$;
+		mes "Depois de subjugar, venha até mim e pegue sua recompensa!!";
+		close;
+	case 2:
+		getexp 140296,132912;
+		erasequest 3483;
+		setquest 3484;
+		mes .@npc_name$;
+		mes "Você voltou em segurança!";
+		next;
+		mes .@npc_name$;
+		mes "Mal consegui alcançar a meta de hoje assim...";
+		next;
+		mes .@npc_name$;
+		mes "Se você puder amanhã, por favor venha novamente!!";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 85 && checkquest(3483,HUNTING) == -1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(3483,HUNTING) == 2" );
+	end;
+}
+
+// Nota: todos os monstros aumentam a contagem de caçadas.
+ra_fild08,163,47,5	script	Examinadora de Mapas Lucia#rsia	4_F_04,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 85) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(3480,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Por hoje, acabou.";
+		next;
+		mes .@npc_name$;
+		mes "Por favor, volte amanhã.";
+		next;
+		if (select( "Entregar " + .@item_name$ + ".", "Não entregar." ) == 2)
+			end;
+		if (countitem(1000374) < 3) {
+			mes " - São necessárias 3 " + .@item_name$ + ". - ";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 3480;
+		mes .@npc_name$;
+		mes "Hum... estou com sede... posso beber isso?";
+		next;
+		mes .@npc_name$;
+		mes "Clap.";
+		next;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "Ummm... estou me sentindo estranha...!";
+		next;
+		mes "[Map Examiner Lucia]";
+		mes "Hum... você veio receber um pedido? Você recebeu...?";
+		next;
+		mes .@npc_name$;
+		mes "Estou meio tonta agora, então por favor espere um pouco e fale comigo.";
+		close;
+	case 2:
+		erasequest 3480;
+		break;
+	}
+	switch( checkquest(3479,HUNTING) ) {
+	case -1:
+		mes .@npc_name$;
+		mes "Vejo você novamente, aqui é Lucia da Sociedade de Monstros de Juno.";
+		next;
+		switch( select( "Receber missão de subjugação.", "Ir para uma cidade próxima.", "Sobre a missão de subjugação.", "Voltar depois." ) ) {
+		case 1:
+			mes .@npc_name$;
+			mes "Eu estava desesperada por uma ajuda.";
+			next;
+			mes .@npc_name$;
+			mes "Por favor, derrote 80 monstros que habitam este campo.";
+			next;
+			setquest 3479;
+			mes .@npc_name$;
+			mes "Espero que você volte sem se ferir.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "Rachel é a mais próxima.";
+			next;
+			mes .@npc_name$;
+			mes "Se você me der uma " + .@item_name$ + ", eu vou ajudar.";
+			next;
+			if (select( "Mover", "Não mover" ) == 2) {
+				mes .@npc_name$;
+				mes "Me avise quando precisar.";
+				close;
+			}
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Parece que você não tem " + .@item_name$ + ".";
+				next;
+				mes .@npc_name$;
+				mes "Você precisa de 1 " + .@item_name$ + " para teleportar.";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Então, por favor se prepare.";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "rachel",130,30;
+			end;
+		case 3:
+			mes .@npc_name$;
+			mes "Algum dia... Faz bastante tempo que eu deixei os monstros aumentarem aos poucos.";
+			next;
+			mes .@npc_name$;
+			mes "Agora chegamos a um nível crítico.";
+			next;
+			mes .@npc_name$;
+			mes "Eu não tive escolha a não ser agir pela Sociedade de Monstros de Juno.";
+			next;
+			mes .@npc_name$;
+			mes "Foi assim que enviamos Examinadores de Mapa para cada área que precisa de subjugação.";
+			close;
+		case 4:
+			mes .@npc_name$;
+			mes "Adeus";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Por favor, derrote 80 monstros que habitam este campo.";
+		next;
+		mes .@npc_name$;
+		mes "Por favor, volte até mim quando terminar tudo.";
+		close;
+	case 2:
+		getexp 166440,157920;
+		erasequest 3479;
+		setquest 3480;
+		mes .@npc_name$;
+		mes "Fico feliz que você tenha voltado sem se ferir.";
+		next;
+		mes .@npc_name$;
+		mes "Acho que ficará tudo bem por um tempo.";
+		next;
+		mes .@npc_name$;
+		mes "Espero que você possa vir amanhã também.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 85 && checkquest(3479,HUNTING) == -1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(3479,HUNTING) == 2" );
+	end;
+}
+
+ra_fild04,274,69,5	script	Examinador de Mapas Sukumari#85	4_M_MOC_SOLDIER,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 86) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(8667,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		if (countitem(1000374) < 3) {
+			mes .@npc_name$;
+			mes "Em princípio, as missões de subjugação são limitadas a uma vez por dia.";
+			mes "Hoje, descanse um pouco, na próxima vez...";
+			close;
+		}
+		mes .@npc_name$;
+		mes "Em princípio, as missões de subjugação são limitadas a uma vez por dia.";
+		mes "Hoje, descanse um pouco, na próxima vez...";
+		next;
+		if (select( "Eu recomendo " + .@item_name$ + "", "Até amanhã!" ) == 2) {
+			mes .@npc_name$;
+			mes "Sim! Até amanhã.";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 8667;
+		mes .@npc_name$;
+		mes "Oh, essa é minha " + .@item_name$ + " favorita!";
+		mes "Posso ficar com isso? Obrigado!";
+		mes "Kick Knock Kick...";
+		next;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "É refrescante!";
+		mes "Kyaha~...";
+		mes "...";
+		mes "Ah! Aventureiro!";
+		next;
+		mes .@npc_name$;
+		.@skip = true;
+		break;
+	case 2:
+		mes .@npc_name$;
+		mes "Olá. Você veio hoje!";
+		erasequest 8667;
+		break;
+	}
+	switch( checkquest(8668,HUNTING) ) {
+	case -1:
+		if (!.@skip) {
+			mes .@npc_name$;
+			mes "Olá. Você veio hoje!";
+		}
+		mes "Estou enviando um pedido de investigação de subjugação de monstros para os aventureiros que passam por aqui, o que acha?";
+		mes "Ou, se estiver por perto, também oferecemos serviço de teleporte.";
+		next;
+		switch( select( "Missão de Subjugação", "Ir para uma cidade próxima", "Parar" ) ) {
+		case 1:
+			mes .@npc_name$;
+			mes "Se você derrotar 80 monstros neste prado de Audumla, este campo que eu consigo ver, nossa sociedade reconhecerá suas conquistas e lhe dará pontos de experiência.";
+			next;
+			if (select( "Aceitar", "Recusar" ) == 2) {
+				mes .@npc_name$;
+				mes "É benéfico para ambos, então por que recusar...";
+				close;
+			}
+			setquest 8668;
+			mes .@npc_name$;
+			mes "Gosto disso, gosto disso.";
+			mes "Vou verificar se há controle populacional suficiente por aqui.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "O lugar mais próximo daqui é ^0033FFRachel^000000,";
+			mes "Se você tiver " + .@item_name$ + ", por favor me dê umaa... e eu vou te teleportar.";
+			mes "Ha~ Está popular ultimamente, mas eu não consigo ir comprar.";
+			next;
+			if (select( "Dar 1 " + .@item_name$ + ", Rachel", "Não" ) == 2) {
+				mes .@npc_name$;
+				mes "Ah... Então o que eu posso fazer?";
+				mes "Quando será que vou tentar de novo...";
+				close;
+			}
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Parece que você não tem " + .@item_name$ + "?";
+				mes "Eu fiquei esperando... desculpe.";
+				close;
+			}
+			delitem 1000374,1;	// Água com Gás
+			warp "rachel",113,136;
+			end;
+		case 3:
+			mes .@npc_name$;
+			mes "É benéfico para ambos, então por que recusar...";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Por favor, derrote 80 monstros por aqui.";
+		mes "...Sim? Serviço de mobilidade?";
+		next;
+		mes .@npc_name$;
+		mes "O lugar mais próximo daqui é ^0033FFRachel^000000,";
+		mes "Se você tiver " + .@item_name$ + ", por favor me dê umaa... e eu vou te teleportar.";
+		mes "Ha~ Está popular ultimamente, mas eu não consigo ir comprar.";
+		next;
+		if (select( "Dar 1 " + .@item_name$ + ", Rachel", "Não" ) == 2) {
+			mes .@npc_name$;
+			mes "Ah... Então o que eu posso fazer?";
+			mes "Quando será que vou tentar de novo...";
+			close;
+		}
+		if (countitem(1000374) < 1) {
+			mes .@npc_name$;
+			mes "Parece que você não tem " + .@item_name$ + "?";
+			mes "Eu fiquei esperando... desculpe.";
+			close;
+		}
+		delitem 1000374,1;	// Água com Gás
+		warp "rachel",113,136;
+		end;
+	case 2:
+		mes .@npc_name$;
+		mes "Ah, aventureiro! Eu vi muito bem o seu desempenho. Obrigado pelo seu esforço.";
+		next;
+		mes .@npc_name$;
+		mes "Acho que a medida certa é realmente importante para qualquer coisa, não é?";
+		getexp 171420,162480;
+		erasequest 8668;
+		setquest 8667;
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 86 && checkquest(8668,HUNTING) == -1 && checkquest(8667,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8667,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8668,HUNTING) == 2" );
+
+	// (sem informações sobre a missão durante o tempo de jogo)
+	end;
+}
+
+// Nota: todos os monstros aumentam a contagem de caçadas.
+ve_fild07,158,354,3	script	Examinador de Mapas Shevko#chevco	2_M_DYEINGER,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 86) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(3478,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "O pedido de hoje está encerrado.";
+		next;
+		mes .@npc_name$;
+		mes "Vou receber novamente amanhã, então nos vemos lá.";
+		next;
+		if (select( "Entregar " + .@item_name$ + ".", "Não entregar." ) == 2)
+			end;
+		if (countitem(1000374) < 3) {
+			mes " - São necessárias 3 " + .@item_name$ + ". - ";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 3478;
+		mes .@npc_name$;
+		mes "Hum? O que é isso? Vou beber primeiro.";
+		next;
+		mes .@npc_name$;
+		mes "Woooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo~~~";
+		next;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "Hmm!!! É um gosto estranho, mas isso é... hã...";
+		next;
+		mes .@npc_name$;
+		mes ".........";
+		next;
+		mes .@npc_name$;
+		mes "Desculpe, eu acabei dormindo por um tempo. Acho que logo vou conseguir recobrar os sentidos, então por favor espere um pouco.";
+		close;
+	case 2:
+		erasequest 3478;
+		break;
+	}
+	switch( checkquest(3477,HUNTING) ) {
+	case -1:
+		mes .@npc_name$;
+		mes "Prazer em conhecê-lo, eu sou Shevko, Examinador de Mapa da Sociedade de Monstros de Juno.";
+		next;
+		switch( select( "Receber missão de subjugação.", "Ir para uma cidade próxima.", "Sobre a missão de subjugação.", "Voltar depois." ) ) {
+		case 1:
+			mes .@npc_name$;
+			mes "Gostaria de receber uma missão de subjugação?";
+			next;
+			mes .@npc_name$;
+			mes "Você só precisa derrotar 80 monstros neste campo onde estamos atualmente.";
+			next;
+			setquest 3477;
+			mes .@npc_name$;
+			mes "Então desejo boa sorte.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "A cidade mais próxima daqui é Veins.";
+			next;
+			mes .@npc_name$;
+			mes "Se você me der 1 " + .@item_name$ + ", eu vou te teleportar imediatamente.";
+			next;
+			if (select( "Mover", "Não mover" ) == 2) {
+				mes .@npc_name$;
+				mes "Se precisar de algo, por favor me avise.";
+				close;
+			}
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Você não tem " + .@item_name$ + ".";
+				next;
+				mes .@npc_name$;
+				mes "Para teleportar é necessário 1 " + .@item_name$ + ".";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Certo então, vamos lá.";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "veins",146,32;
+			end;
+		case 3:
+			mes .@npc_name$;
+			mes "Em algum momento, o número de monstros que habitam cada campo começou a aumentar.";
+			next;
+			mes .@npc_name$;
+			mes "Eu sabia que o número de monstros estava aumentando gradualmente, mas foi resultado de não levar isso a sério.";
+			next;
+			mes .@npc_name$;
+			mes "Para restaurar tudo ao seu estado anterior, a Sociedade de Monstros de Juno enviou Examinadores de Mapa para vários lugares.";
+			next;
+			mes .@npc_name$;
+			mes "Eu sou um desses Examinadores de Mapa, e estou esperando pela subjugação dos bravos aventureiros.";
+			close;
+		case 4:
+			mes .@npc_name$;
+			mes "Tenha um bom dia";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Você só precisa subjugar 80 monstros de qualquer tipo nesta área.";
+		next;
+		mes .@npc_name$;
+		mes "Depois de subjugar, por favor não se esqueça e me avise.";
+		close;
+	case 2:
+		getexp 148560,140040;
+		erasequest 3477;
+		setquest 3478;
+		mes .@npc_name$;
+		mes "Você voltou ileso... Você deve ser alguém incrível.";
+		next;
+		mes .@npc_name$;
+		mes "Graças a você, eu consegui alcançar com sucesso a meta de subjugação de hoje, obrigado.";
+		next;
+		mes .@npc_name$;
+		mes "Espero poder vê-lo novamente amanhã, se possível.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 86 && checkquest(3477,HUNTING) == -1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(3477,HUNTING) == 2" );
+	end;
+}
+
+ra_fild03,368,183,5	script	Examinadora de Mapas Lauren#85	4_M_MOC_SOLDIER,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 86) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar a missão.";
+		close;
+	}
+	switch( checkquest(8664,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		if (countitem(1000374) < 3) {
+			mes .@npc_name$;
+			mes "Em princípio, as missões de subjugação são limitadas a uma vez por dia.";
+			mes "Hoje, descanse um pouco, na próxima vez...";
+			close;
+		}
+		mes .@npc_name$;
+		mes "Em princípio, as missões de subjugação são limitadas a uma vez por dia.";
+		mes "Hoje, descanse um pouco, na próxima vez...";
+		next;
+		if (select( "Eu recomendo " + .@item_name$ + "", "Até amanhã!" ) == 2) {
+			mes .@npc_name$;
+			mes "Sim! Até amanhã.";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 8664;
+		mes .@npc_name$;
+		mes "Oh, essa é minha " + .@item_name$ + " favorita!";
+		mes "Posso ficar com isso? Obrigado!";
+		mes "Kick Knock Kick...";
+		next;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "!";
+		mes "Kyaha~...";
+		mes "...";
+		next;
+		mes .@npc_name$;
+		mes "Ah, aventureiro! Estou solicitando uma investigação de subjugação de monstros, o que acha?";
+		.@skip = true;
+		break;
+	case 2:
+		erasequest 8664;
+		break;
+	}
+	switch( checkquest(8665,HUNTING) ) {
+	case -1:
+		if (!.@skip) {
+			mes .@npc_name$;
+			mes "Olá. Você veio hoje!";
+			mes "Estou enviando um pedido de investigação de subjugação de monstros para os aventureiros que passam por aqui, o que acha?";
+		}
+		mes "Ou, se estiver por perto, também oferecemos serviço de teleporte.";
+		next;
+		switch( select( "Missão de Subjugação", "Ir para uma cidade próxima", "Parar" ) ) {
+		case 1:
+			mes .@npc_name$;
+			mes "Planície de Iida, se você derrotar 80 monstros dentro deste campo que eu consigo ver, nossa sociedade reconhecerá suas conquistas e lhe dará pontos de experiência.";
+			next;
+			if (select( "Aceitar", "Recusar" ) == 2) {
+				mes .@npc_name$;
+				mes "Se não for possível...";
+				close;
+			}
+			setquest 8665;
+			mes .@npc_name$;
+			mes "Gosto disso, gosto disso.";
+			mes "Vou verificar se há controle populacional suficiente por aqui.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "O lugar mais próximo daqui é ^0033FFRachel^000000,";
+			mes "Se você tiver " + .@item_name$ + ", por favor me dê umaa... e eu vou te teleportar.";
+			mes "É a coisa mais triste ficar aqui.";
+			next;
+			if (select( "Dar 1 " + .@item_name$ + ", Rachel", "Não" ) == 2) {
+				mes .@npc_name$;
+				mes "Ah... Então o que eu posso fazer?";
+				close;
+			}
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Parece que você não tem " + .@item_name$ + "?";
+				close;
+			}
+			delitem 1000374,1;	// Água com Gás
+			warp "rachel",113,136;
+			end;
+		case 3:
+			mes .@npc_name$;
+			mes "É benéfico para ambos, então por que recusar...";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Por favor, derrote 80 monstros por aqui.";
+		mes "...Sim? Serviço de mobilidade?";
+		next;
+		mes .@npc_name$;
+		mes "O lugar mais próximo daqui é ^0033FFRachel^000000,";
+		mes "Se você tiver " + .@item_name$ + ", por favor me dê umaa... e eu vou te teleportar.";
+		mes "Ha~ Está popular ultimamente, mas eu não consigo ir comprar.";
+		next;
+		if (select( "Dar 1 " + .@item_name$ + ", Rachel", "Não" ) == 2) {
+			mes .@npc_name$;
+			mes "Ah... Então o que eu posso fazer?";
+			mes "Quando será que vou tentar de novo...";
+			close;
+		}
+		if (countitem(1000374) < 1) {
+			mes .@npc_name$;
+			mes "Parece que você não tem " + .@item_name$ + "?";
+			close;
+		}
+		delitem 1000374,1;	// Água com Gás
+		warp "rachel",113,136;
+		end;
+	case 2:
+		mes .@npc_name$;
+		mes "Ah, aventureiro! Eu vi muito bem o seu desempenho. Obrigado pelo seu esforço.";
+		next;
+		mes .@npc_name$;
+		mes "Acho que a medida certa é realmente importante para qualquer coisa, não é?";
+		getexp 165480,156750;
+		erasequest 8665;
+		setquest 8664;
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 86 && checkquest(8665,HUNTING) == -1 && checkquest(8664,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8664,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8665,HUNTING) == 2" );
+
+	// (sem informações sobre a missão durante o tempo de jogo)
+	end;
+}
+
+ra_fild05,48,356,5	script	Examinadora de Mapas Valenzela#85	4_M_MOC_SOLDIER,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 87) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(8670,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		if (countitem(1000374) < 3) {
+			mes .@npc_name$;
+			mes "Em princípio, as missões de subjugação são limitadas a uma vez por dia.";
+			mes "Hoje, descanse um pouco, na próxima vez...";
+			close;
+		}
+		mes .@npc_name$;
+		mes "Em princípio, as missões de subjugação são limitadas a uma vez por dia.";
+		mes "Hoje, descanse um pouco, na próxima vez...";
+		next;
+		if (select( "Eu recomendo " + .@item_name$ + "", "Até amanhã!" ) == 2) {
+			mes .@npc_name$;
+			mes "Sim! Até amanhã.";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 8670;
+		mes .@npc_name$;
+		mes "Oh, essa é minha " + .@item_name$ + " favorita!";
+		mes "Posso ficar com isso? Obrigado!";
+		mes "Kick Knock Kick...";
+		next;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "É refrescante!";
+		mes "Kyaha~...";
+		mes "...";
+		mes "Ah! Aventureiro!";
+		next;
+		mes .@npc_name$;
+		.@skip = true;
+		break;
+	case 2:
+		erasequest 8670;
+		break;
+	}
+	switch( checkquest(8671,HUNTING) ) {
+	case -1:
+		if (!.@skip) {
+			mes .@npc_name$;
+			mes "Olá. Você veio hoje!";
+		}
+		mes "Estou enviando um pedido de investigação de subjugação de monstros para os aventureiros que passam por aqui, o que acha?";
+		mes "Ou, se estiver por perto, também oferecemos serviço de teleporte.";
+		next;
+		switch( select( "Missão de Subjugação", "Ir para uma cidade próxima", "Parar" ) ) {
+		case 1:
+			mes .@npc_name$;
+			mes "Se você derrotar 80 monstros neste prado de Audumla, este campo que eu consigo ver, nossa sociedade reconhecerá suas conquistas e lhe dará pontos de experiência.";
+			next;
+			if (select( "Aceitar", "Recusar" ) == 2) {
+				mes .@npc_name$;
+				mes "É benéfico para ambos, então por que recusar...";
+				close;
+			}
+			setquest 8671;
+			mes .@npc_name$;
+			mes "Gosto disso, gosto disso.";
+			mes "Vou verificar se há controle populacional suficiente por aqui.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "O lugar mais próximo daqui é ^0033FFRachel^000000,";
+			mes "Se você tiver " + .@item_name$ + ", por favor me dê umaa... e eu vou te teleportar.";
+			mes "Ha~ Está popular ultimamente, mas eu não consigo ir comprar.";
+			next;
+			if (select( "Dar 1 " + .@item_name$ + ", Rachel", "Não" ) == 2) {
+				mes .@npc_name$;
+				mes "Ah... Então o que eu posso fazer?";
+				mes "Quando será que vou tentar de novo...";
+				close;
+			}
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Parece que você não tem " + .@item_name$ + "?";
+				mes "Eu fiquei esperando... desculpe.";
+				close;
+			}
+			delitem 1000374,1;	// Água com Gás
+			warp "rachel",113,136;
+			end;
+		case 3:
+			mes .@npc_name$;
+			mes "É benéfico para ambos, então por que recusar...";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Por favor, derrote 80 monstros por aqui.";
+		mes "...Sim? Serviço de mobilidade?";
+		next;
+		mes .@npc_name$;
+		mes "O lugar mais próximo daqui é ^0033FFRachel^000000,";
+		mes "Se você tiver " + .@item_name$ + ", por favor me dê umaa... e eu vou te teleportar.";
+		mes "Ha~ Está popular ultimamente, mas eu não consigo ir comprar.";
+		next;
+		if (select( "Dar 1 " + .@item_name$ + ", Rachel", "Não" ) == 2) {
+			mes .@npc_name$;
+			mes "Ah... Então o que eu posso fazer?";
+			mes "Quando será que vou tentar de novo...";
+			close;
+		}
+		if (countitem(1000374) < 1) {
+			mes .@npc_name$;
+			mes "Parece que você não tem " + .@item_name$ + "?";
+			mes "Eu fiquei esperando... desculpe.";
+			close;
+		}
+		delitem 1000374,1;	// Água com Gás
+		warp "rachel",113,136;
+		end;
+	case 2:
+		mes .@npc_name$;
+		mes "Ah, aventureiro! Eu vi muito bem o seu desempenho. Obrigado pelo seu esforço.";
+		next;
+		mes .@npc_name$;
+		mes "Acho que a medida certa é realmente importante para qualquer coisa, não é?";
+		getexp 187410,178020;
+		erasequest 8671;
+		setquest 8670;
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 87 && checkquest(8671,HUNTING) == -1 && checkquest(8670,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8670,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8671,HUNTING) == 2" );
+
+	// (sem informações sobre a missão durante o tempo de jogo)
+	end;
+}
+
+ra_fild01,224,319,5	script	Examinadora de Mapas Ciara#85	4_M_MOC_SOLDIER,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 88) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(8661,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		if (countitem(1000374) < 3) {
+			mes .@npc_name$;
+			mes "Aventureiro, é perigoso por aqui.";
+			mes "Não sei se a minha vida não vale nada...";
+			close;
+		}
+		mes .@npc_name$;
+		mes "Em princípio, as missões de subjugação são limitadas a uma vez por dia.";
+		mes "Hoje, descanse um pouco, na próxima vez...";
+		next;
+		if (select( "Eu recomendo " + .@item_name$ + "", "Até amanhã!" ) == 2) {
+			mes .@npc_name$;
+			mes "Sim! Até amanhã.";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 8661;
+		mes .@npc_name$;
+		mes "Oh, essa é minha " + .@item_name$ + " favorita!";
+		mes "Posso ficar com isso? Obrigado!";
+		mes "Kick Knock Kick...";
+		next;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "É refrescante!";
+		mes "Kyaha~...";
+		mes "...";
+		mes "Ah! Aventureiro!";
+		next;
+		mes .@npc_name$;
+		mes "É realmente muito bom. Estamos pedindo para aventureiros que passam por aqui investigarem a subjugação de monstros, o que acha?";
+		.@skip = true;
+		break;
+	case 2:
+		erasequest 8661;
+		break;
+	}
+	switch( checkquest(8662,HUNTING) ) {
+	case -1:
+		if (!.@skip) {
+			mes .@npc_name$;
+			mes "Olá. Você veio hoje!";
+			mes "Estou enviando um pedido de investigação de subjugação de monstros para os aventureiros que passam por aqui, o que acha?";
+		}
+		mes "Ou, se estiver por perto, também oferecemos serviço de teleporte.";
+		next;
+		switch( select( "Missão de Subjugação", "Ir para uma cidade próxima", "Parar" ) ) {
+		case 1:
+			mes .@npc_name$;
+			mes "Se você derrotar 80 monstros neste prado de Audumla, este campo que eu consigo ver, nossa sociedade reconhecerá suas conquistas e lhe dará pontos de experiência.";
+			next;
+			if (select( "Aceitar", "Recusar" ) == 2) {
+				mes .@npc_name$;
+				mes "É benéfico para ambos, então por que recusar...";
+				close;
+			}
+			setquest 8662;
+			mes .@npc_name$;
+			mes "Gosto disso, gosto disso.";
+			mes "Vou verificar se há controle populacional suficiente por aqui.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "O lugar mais próximo daqui é ^0033FFRachel^000000,";
+			mes "Se você tiver " + .@item_name$ + ", por favor me dê uma... e eu vou te teleportar.";
+			mes "Ha~ Está popular ultimamente, mas eu não consigo ir comprar.";
+			next;
+			if (select( "Dar 1 " + .@item_name$ + " por Rachel", "Não" ) == 2) {
+				mes .@npc_name$;
+				mes "Ah... Então o que eu posso fazer? Não.";
+				mes "Quando será que vou tentar de novo...";
+				close;
+			}
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Parece que você não tem " + .@item_name$ + "?";
+				mes "Eu fiquei esperando... desculpe.";
+				close;
+			}
+			delitem 1000374,1;	// Água com Gás
+			warp "rachel",113,136;
+			end;
+		case 3:
+			mes .@npc_name$;
+			mes "É benéfico para ambos, então por que recusar...";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Por favor, derrote 80 monstros por aqui.";
+		mes "...Sim? Serviço de mobilidade?";
+		next;
+		mes .@npc_name$;
+		mes "O lugar mais próximo daqui é ^0033FFRachel^000000,";
+		mes "Se você tiver " + .@item_name$ + ", por favor me dê uma... e eu vou te teleportar.";
+		mes "Ha~ Está popular ultimamente, mas eu não consigo ir comprar.";
+		next;
+		if (select( "Dar 1 " + .@item_name$ + ", Rachel", "Não" ) == 2) {
+			mes .@npc_name$;
+			mes "Ah... Então o que eu posso fazer?";
+			mes "Quando será que vou tentar de novo...";
+			close;
+		}
+		if (countitem(1000374) < 1) {
+			mes .@npc_name$;
+			mes "Parece que você não tem " + .@item_name$ + "?";
+			mes "Eu fiquei esperando... desculpe.";
+			close;
+		}
+		delitem 1000374,1;	// Água com Gás
+		warp "rachel",113,136;
+		end;
+	case 2:
+		mes .@npc_name$;
+		mes "Ah, aventureiro! Eu vi muito bem o seu desempenho. Obrigado pelo seu esforço.";
+		next;
+		mes .@npc_name$;
+		mes "Acho que a medida certa é realmente importante para qualquer coisa, não é?";
+		getexp 166760,157960;
+		erasequest 8662;
+		setquest 8661;
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 88 && checkquest(8662,HUNTING) == -1 && checkquest(8661,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8661,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8662,HUNTING) == 2" );
+
+	// (sem informações sobre a missão durante o tempo de jogo)
+	end;
+}
+
+// Nota: todos os monstros aumentam a contagem de caçadas.
+ve_fild01,354,280,3	script	Examinadora de Mapas Yirun Seo#suiroon	4_F_SISTER,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 90) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(3482,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Ah, já chega de subjugação por hoje!";
+		next;
+		mes .@npc_name$;
+		mes "Eu agradeceria se você voltasse amanhã e ajudasse a derrotar monstros!!";
+		next;
+		if (select( "Entregar " + .@item_name$ + ".", "Não entregar." ) == 2)
+			end;
+		if (countitem(1000374) < 3) {
+			mes " - Requer 3 " + .@item_name$ + ". - ";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 3482;
+		mes .@npc_name$;
+		mes "Ah~!! Muito obrigada~ Eu estava morrendo de sede~";
+		next;
+		mes .@npc_name$;
+		mes "gulp~ gulp~~~";
+		next;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "Hã... esse sabor intenso...!";
+		next;
+		mes .@npc_name$;
+		mes "Eh.. você é novo pra mim, espere um minuto. Vou beber mais um pouco disso, então pode falar comigo de novo daqui a pouco?";
+		close;
+	case 2:
+		erasequest 3482;
+		break;
+	}
+	switch( checkquest(3481,HUNTING) ) {
+	case -1:
+		mes .@npc_name$;
+		mes "Olá!! Meu nome é Irun Seo, uma Examinadora de Mapa enviada pela Sociedade de Monstros de Juno!";
+		next;
+		switch( select( "Receber missão de subjugação.", "Ir para uma cidade próxima.", "Sobre a missão de subjugação.", "Voltar depois." ) ) {
+		case 1:
+			mes .@npc_name$;
+			mes "Oh, gostaria de aceitar um pedido?";
+			next;
+			mes .@npc_name$;
+			mes "Você só precisa derrotar 80 monstros neste campo onde eu estou.";
+			next;
+			setquest 3481;
+			mes .@npc_name$;
+			mes "Então vou esperar por você, espero que volte em segurança.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "A cidade mais próxima daqui é Einbroch!";
+			next;
+			mes .@npc_name$;
+			mes "Se você me der uma " + .@item_name$ + ", eu te envio na hora!";
+			next;
+			if (select( "Mover", "Não mover" ) == 2) {
+				mes .@npc_name$;
+				mes "Sim, me avise se precisar de teleporte!!";
+				close;
+			}
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Ei, você não tem " + .@item_name$ + "~";
+				next;
+				mes .@npc_name$;
+				mes "Para teleportar é necessário 1 " + .@item_name$ + ".";
+				close;
+			}
+			mes .@npc_name$;
+			mes "Sim! Então vamos te mover!!";
+			close2;
+			delitem 1000374,1;	// Água com Gás
+			warp "veins",146,32;
+			end;
+		case 3:
+			mes .@npc_name$;
+			mes "Há algum tempo, foi descoberto o fenômeno de colônias de monstros se expandindo.";
+			next;
+			mes .@npc_name$;
+			mes "Houve um período em que a subjugação era feita ativamente, mas ultimamente isso parece ser resultado de um certo descuido.";
+			next;
+			mes .@npc_name$;
+			mes "Se esse fenômeno continuar, será perigoso, então a Sociedade de Monstros de Juno decidiu realizar uma subjugação em larga escala.";
+			next;
+			mes .@npc_name$;
+			mes "Isso significa que a subjugação está sendo realizada colocando Examinadores de Mapa em cada área que precisa ser controlada!";
+			close;
+		case 4:
+			mes .@npc_name$;
+			mes "Ah, para onde você vai?";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Você só precisa derrotar 80 monstros de qualquer tipo nesta área.";
+		next;
+		mes .@npc_name$;
+		mes "Depois da subjugação, venha até mim e receba sua recompensa!!";
+		close;
+	case 2:
+		getexp 209440,157920;
+		erasequest 3481;
+		setquest 3482;
+		mes .@npc_name$;
+		mes "Você voltou em segurança!";
+		next;
+		mes .@npc_name$;
+		mes "Mal consegui atingir a meta de hoje assim...";
+		next;
+		mes .@npc_name$;
+		mes "Se puder amanhã, por favor venha novamente!!";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "BaseLevel >= 90 && checkquest(3481,HUNTING) == -1 && checkquest(3482,PLAYTIME) == -1" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(3482,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(3481,HUNTING) == 2" );
+
+	// (sem informações sobre a missão durante o tempo de jogo)
+	end;
+}
+
+ve_fild04,52,242,5	script	Examinadora de Mapas Rana#85	4_M_MOC_SOLDIER,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 90) {
+		mes .@npc_name$;
+		mes "Aventureiro, é perigoso por aqui.";
+		mes "Não sei se a minha vida não vale nada...";
+		close;
+	}
+	switch( checkquest(8676,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		if (countitem(1000374) < 3) {
+			mes .@npc_name$;
+			mes "Em princípio, as missões de subjugação são limitadas a uma vez por dia.";
+			mes "Hoje, descanse um pouco, na próxima vez...";
+			close;
+		}
+		mes .@npc_name$;
+		mes "Em princípio, as missões de subjugação são limitadas a uma vez por dia.";
+		mes "Hoje, descanse um pouco, na próxima vez...";
+		next;
+		if (select( "Eu recomendo " + .@item_name$ + "", "Até amanhã!" ) == 2) {
+			mes .@npc_name$;
+			mes "Sim! Até amanhã.";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 8676;
+		mes .@npc_name$;
+		mes "Oh, essa é minha " + .@item_name$ + " favorita!";
+		mes "Posso ficar com isso? Obrigado!";
+		mes "Kick Knock Kick...";
+		next;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "É refrescante!";
+		mes "...";
+		mes "Ah! Aventureiro!";
+		next;
+		mes .@npc_name$;
+		mes "Estou enviando um pedido de investigação de subjugação de monstros para os aventureiros que passam por aqui, o que acha?";
+		callsub( S_Quest, 8677, 2 );	// sem texto
+	case 2:
+		erasequest 8676;
+		break;
+	}
+	if (isbegin_quest(8675) < 2) {
+		switch( checkquest(8675,HUNTING) ) {	// primeira vez
+		case -1:
+			callsub( S_Quest, 8675, 0 );
+		case 0:
+		case 1:
+			mes .@npc_name$;
+			mes "Por favor, derrote 80 monstros por aqui.";
+			mes "...Sim? Serviço de mobilidade?";
+			next;
+			callsub( S_Warp );
+		case 2:
+			mes .@npc_name$;
+			mes "Ah, aventureiro! Eu vi muito bem o seu desempenho. Obrigado pelo seu esforço.";
+			getexp 188600,173200;
+			completequest 8675;
+			setquest 8676;
+			close;
+		}
+	}
+	switch( checkquest(8677,HUNTING) ) {
+	case -1:
+		callsub( S_Quest, 8677, 1 );
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Por favor, derrote 80 monstros por aqui.";
+		mes "...Sim? Serviço de mobilidade?";
+		next;
+		callsub( S_Warp );
+	case 2:
+		mes .@npc_name$;
+		mes "Ah, aventureiro! Eu vi muito bem o seu desempenho. Obrigado pelo seu esforço.";
+		getexp 188600,173200;
+		erasequest 8677;
+		setquest 8676;
+		close;
+	}
+	end;
+
+S_Quest:
+	.@quest_id = getarg(0);
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+
+	switch( getarg(1) ) {
+	case 0:	// missão 8675
+		mes .@npc_name$;
+		mes "Olá. Eu sou a Ranya, da Sociedade de Monstros de Juno.";
+		mes "Estou pedindo aos aventureiros que investiguem a subjugação de monstros, o que acha?";
+		break;
+	case 1:	// missão 8677
+		mes .@npc_name$;
+		mes "Olá. Você veio hoje!";
+		mes "Estou solicitando investigações de subjugação de monstros aos aventureiros que passam por aqui. O que acha?";
+		break;
+	case 2:	// missão 8677, mas sem texto
+		break;
+	}
+	mes "Ou, se estiver por perto, também oferecemos serviço de teleporte.";
+	next;
+	switch( select( "Ouvir a situação", "Ir para uma cidade próxima", "Parar" ) ) {
+	case 1:
+		if (.@quest_id == 8675) {
+			mes .@npc_name$;
+			mes "Recentemente, o número de monstros tem aumentado em algumas áreas, inclusive ao redor daqui.";
+			mes "Acho que o motivo é que há menos pessoas do que antes...";
+			next;
+			mes .@npc_name$;
+			mes "Isso já significa que não é mais possível controlar naturalmente.";
+			mes "Para impedir que a colonização continue se expandindo, nossa Sociedade de Monstros de Juno planejou uma subjugação em larga escala.";
+			next;
+			mes .@npc_name$;
+			mes "Não importa quantos aventureiros visitem, será um grande problema se eles descerem até onde as pessoas vivem...";
+			mes "Então, posso pedir que você faça a subjugação?";
+			next;
+		}
+		mes .@npc_name$;
+		mes "Se você derrotar 80 monstros neste Campo de Veins, este campo que eu consigo ver, nossa sociedade reconhecerá suas conquistas e lhe dará pontos de experiência.";
+		next;
+		if (select( "Aceitar", "Recusar" ) == 2) {
+			mes .@npc_name$;
+			mes "É benéfico para ambos, então por que recusar...";
+			close;
+		}
+		setquest .@quest_id;
+		mes .@npc_name$;
+		mes "Ótimo. Vou esperar aqui.";
+		close;
+	case 2:
+		callsub( S_Warp );
+	case 3:
+		mes .@npc_name$;
+		mes "É benéfico para ambos, então por que recusar...";
+		close;
+	}
+	end;
+
+S_Warp:
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	mes .@npc_name$;
+	mes "O lugar mais próximo daqui é ^0033FFVeins^000000,";
+	mes "Se você tiver " + .@item_name$ + ", por favor me dê uma... e eu vou te teleportar.";
+	next;
+	if (select( "Dar 1 " + .@item_name$ + " por Veins", "Não" ) == 2) {
+		mes .@npc_name$;
+		mes "Ah... Então o que eu posso fazer?";
+		close;
+	}
+	if (countitem(1000374) < 1) {
+		mes .@npc_name$;
+		mes "Parece que você não tem " + .@item_name$ + "?";
+		close;
+	}
+	delitem 1000374,1;	// Água com Gás
+	warp "veins",208,124;
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 90 && checkquest(8675,HUNTING) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8675) == 2 && checkquest(8677,HUNTING) == -1 && checkquest(8676,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8676,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8675,HUNTING) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8677,HUNTING) == 2" );
+
+	// (sem informações sobre a missão durante o tempo de jogo)
+	end;
+}
+
+ra_fild06,292,39,5	script	Examinador de Mapas Kantu#85	4_M_MOC_SOLDIER,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 93) {
+		mes .@npc_name$;
+		mes "A Sociedade de Monstros de Juno está realizando missões de subjugação. Mas você ainda parece um pouco fraco para realizar essas missões.";
+		close;
+	}
+	switch( checkquest(8673,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		if (countitem(1000374) < 3) {
+			mes .@npc_name$;
+			mes "Em princípio, as missões de subjugação são limitadas a uma vez por dia.";
+			mes "Hoje, descanse um pouco, na próxima vez...";
+			close;
+		}
+		mes .@npc_name$;
+		mes "Em princípio, as missões de subjugação são limitadas a uma vez por dia.";
+		mes "Hoje, descanse um pouco, na próxima vez...";
+		next;
+		if (select( "Eu recomendo " + .@item_name$ + "", "Até amanhã!" ) == 2) {
+			mes .@npc_name$;
+			mes "Sim! Até amanhã.";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 8673;
+		mes .@npc_name$;
+		mes "Oh, essa é minha " + .@item_name$ + " favorita!";
+		mes "Posso ficar com isso? Obrigado!";
+		next;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "É refrescante!";
+		mes "Kyaha~...";
+		next;
+		mes .@npc_name$;
+		mes "Ah, aventureiro. Estou aceitando um pedido de investigação de subjugação de monstros hoje, o que acha?";
+		.@skip = true;
+		break;
+	case 2:
+		erasequest 8673;
+		break;
+	}
+	if (isbegin_quest(8672) == 2)
+		.@quest_id = 8674;
+	else
+		.@quest_id = 8672;
+
+	switch( checkquest(.@quest_id,HUNTING) ) {
+	case -1:
+		if (!.@skip) {
+			mes .@npc_name$;
+			mes "Olá, aventureiro! Eu sou Kantu, da Sociedade de Monstros de Juno.";
+			mes "Estou pedindo aos aventureiros que investiguem a subjugação de monstros, o que acha?";
+			next;
+			mes .@npc_name$;
+		}
+		mes "Ou, se estiver por perto, nós oferecemos um serviço de teleporte.";
+		next;
+		switch( select( "Ouvir a situação", "Ir para uma cidade próxima", "Parar" ) ) {
+		case 1:
+			if (.@quest_id == 8672) {
+				mes .@npc_name$;
+				mes "Recentemente, o número de monstros tem aumentado em algumas áreas, inclusive ao redor daqui.";
+				mes "Isso já significa que não é mais possível controlar naturalmente.";
+				next;
+				mes .@npc_name$;
+				mes "Para impedir que a colonização continue se expandindo, nossa Sociedade de Monstros de Juno planejou uma subjugação em larga escala.";
+				mes "Não importa quantos aventureiros visitem, será um grande problema se eles descerem até onde as pessoas vivem...";
+				next;
+			}
+			mes .@npc_name$;
+			mes "Então, posso pedir que você faça a subjugação?";
+			mes "Este Porto Luna, se você derrotar 80 monstros dentro deste campo que eu consigo ver, nossa sociedade reconhecerá suas conquistas e lhe dará pontos de experiência.";
+			next;
+			if (select( "Aceitar", "Recusar" ) == 2) {
+				mes .@npc_name$;
+				mes "Ah... você pode nos ajudar?";
+				close;
+			}
+			setquest .@quest_id;
+			mes .@npc_name$;
+			mes "Sim, já registrei!";
+			mes "Vou verificar se a população está sendo controlada aqui.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "O lugar mais próximo daqui é ^0033FFRachel^000000,";
+			mes "Se você tiver " + .@item_name$ + ", por favor me dê uma... e eu vou te teleportar.";
+			mes "Ha~ Está popular ultimamente, mas eu não consigo ir comprar.";
+			next;
+			if (select( "Dar 1 " + .@item_name$ + " por Rachel", "Não" ) == 2) {
+				mes .@npc_name$;
+				mes "Não tem jeito.";
+				close;
+			}
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Parece que você não tem " + .@item_name$ + "?";
+				mes "Eu fiquei esperando... desculpe.";
+				close;
+			}
+			delitem 1000374,1;	// Água com Gás
+			warp "rachel",113,136;
+			end;
+		case 3:
+			mes .@npc_name$;
+			mes "Ah... Por favor, nos ajude...";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Por favor, derrote 80 monstros por aqui.";
+		mes "...Sim? Serviço de mobilidade?";
+		next;
+		mes .@npc_name$;
+		mes "O lugar mais próximo daqui é ^0033FFRachel^000000,";
+		mes "Se você tiver " + .@item_name$ + ", por favor me dê uma... e eu vou te teleportar.";
+		next;
+		if (select( "Dar 1 " + .@item_name$ + " por Rachel", "Não" ) == 2) {
+			mes .@npc_name$;
+			mes "Não tem jeito.";
+			close;
+		}
+		if (countitem(1000374) < 1) {
+			mes .@npc_name$;
+			mes "Parece que você não tem " + .@item_name$ + "?";
+			mes "Eu fiquei esperando... desculpe.";
+			close;
+		}
+		delitem 1000374,1;	// Água com Gás
+		warp "rachel",113,136;
+		end;
+	case 2:
+		mes .@npc_name$;
+		mes "Olá, aventureiro! Eu sou Kantu, da Sociedade de Monstros de Juno.";
+		mes "Estou pedindo aos aventureiros que investiguem a subjugação de monstros, o que acha?";
+		next;
+		getexp 194712,185136;
+		mes .@npc_name$;
+		mes "Ah, aventureiro! Eu vi muito bem o seu desempenho. Obrigado pelo seu esforço.";
+		if (.@quest_id == 8672)
+			completequest 8672;
+		else
+			erasequest 8674;
+		setquest 8673;
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 93 && checkquest(8672,HUNTING) == -1 && checkquest(8673,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(8672) == 2 && checkquest(8674,HUNTING) == -1 && checkquest(8673,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8673,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8672,HUNTING) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8674,HUNTING) == 2" );
+	end;
+}
+
+ve_fild03,348,230,5	script	Examinador de Mapas Dew#85	4_M_MOC_SOLDIER,{
+	.@npc_name$ = "[" + strnpcinfo(1) + "]";
+	.@item_name$ = getitemname(1000374);
+
+	if (BaseLevel < 95) {
+		mes .@npc_name$;
+		mes "Aventureiro, é perigoso por aqui.";
+		mes "Não sei se a minha vida não vale nada...";
+		close;
+	}
+	switch( checkquest(8679,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		if (countitem(1000374) < 3) {
+			mes .@npc_name$;
+			mes "Em princípio, as missões de subjugação são limitadas a uma vez por dia.";
+			mes "Hoje, descanse um pouco, na próxima vez...";
+			close;
+		}
+		mes .@npc_name$;
+		mes "Em princípio, as missões de subjugação são limitadas a uma vez por dia.";
+		mes "Hoje, descanse um pouco, na próxima vez...";
+		next;
+		if (select( "Eu recomendo " + .@item_name$ + "", "Até amanhã!" ) == 2) {
+			mes .@npc_name$;
+			mes "Sim! Até amanhã.";
+			close;
+		}
+		delitem 1000374,3;	// Água com Gás
+		erasequest 8679;
+		mes .@npc_name$;
+		mes "Oh, essa é minha " + .@item_name$ + " favorita!";
+		mes "Posso ficar com isso? Obrigado!";
+		mes "Kick Knock Kick...";
+		next;
+		specialeffect EF_FLASHER;
+		mes .@npc_name$;
+		mes "É refrescante!";
+		mes "l~...";
+		next;
+		mes .@npc_name$;
+		mes "Estou pedindo aos aventureiros que investiguem a subjugação de monstros, o que acha?";
+		.@skip = true;
+		break;
+	case 2:
+		erasequest 8679;
+		break;
+	}
+	switch( checkquest(8680,HUNTING) ) {
+	case -1:
+		if (!.@skip) {
+			mes .@npc_name$;
+			mes "Olá. Você veio hoje!";
+			mes "Estou enviando um pedido de investigação de subjugação de monstros para os aventureiros que passam por aqui, o que acha?";
+		}
+		mes "Ou, se estiver por perto, também oferecemos serviço de teleporte.";
+		next;
+		switch( select( "Missão de Subjugação", "Ir para uma cidade próxima", "Parar" ) ) {
+		case 1:
+			mes .@npc_name$;
+			mes "Se você derrotar 80 monstros neste Campo de Veins, este campo que eu consigo ver, nossa sociedade reconhecerá suas conquistas e lhe dará pontos de experiência.";
+			next;
+			if (select( "Aceitar", "Recusar" ) == 2) {
+				mes .@npc_name$;
+				mes "Me desculpe";
+				close;
+			}
+			setquest 8680;
+			mes .@npc_name$;
+			mes "Ótimo.";
+			mes "Estou verificando se a população está sendo controlada aqui.";
+			close;
+		case 2:
+			mes .@npc_name$;
+			mes "O lugar mais próximo daqui é ^0033FFVeins^000000,";
+			mes "Se você tiver " + .@item_name$ + ", por favor me dê uma... e eu vou te teleportar.";
+			next;
+			if (select( "Dar 1 " + .@item_name$ + " por Veins", "Não" ) == 2) {
+				mes .@npc_name$;
+				mes "Ah... Então o que eu posso fazer?";
+				close;
+			}
+			if (countitem(1000374) < 1) {
+				mes .@npc_name$;
+				mes "Parece que você não tem " + .@item_name$ + "?";
+				close;
+			}
+			delitem 1000374,1;	// Água com Gás
+			warp "veins",208,124;
+			end;
+		case 3:
+			mes .@npc_name$;
+			mes "Me desculpe";
+			close;
+		}
+		end;
+	case 0:
+	case 1:
+		mes .@npc_name$;
+		mes "Por favor, derrote 80 monstros por aqui.";
+		mes "...Sim? Serviço de mobilidade?";
+		next;
+		mes .@npc_name$;
+		mes "O lugar mais próximo daqui é ^0033FFVeins^000000,";
+		mes "Se você tiver " + .@item_name$ + ", por favor me dê uma... e eu vou te teleportar.";
+		mes "Ha~ Está popular ultimamente, mas eu não consigo ir comprar.";
+		next;
+		if (select( "Dar 1 " + .@item_name$ + " por Veins", "Não" ) == 2) {
+			mes .@npc_name$;
+			mes "Ah... Então o que eu posso fazer?";
+			close;
+		}
+		if (countitem(1000374) < 1) {
+			mes .@npc_name$;
+			mes "Parece que você não tem " + .@item_name$ + "?";
+			close;
+		}
+		delitem 1000374,1;	// Água com Gás
+		warp "veins",208,124;
+		end;
+	case 2:
+		mes .@npc_name$;
+		mes "Ah, aventureiro! Eu vi muito bem o seu desempenho. Obrigado pelo seu esforço.";
+		next;
+		mes .@npc_name$;
+		mes "Acho que a medida certa é realmente importante para qualquer coisa, não é?";
+		erasequest 8680;
+		setquest 8679;
+		getexp 209440,193440;
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Sociedade de Monstros de Juno>";
+
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 95 && checkquest(8680,HUNTING) == -1 && checkquest(8679,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8679,PLAYTIME) == 2" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(8680,HUNTING) == 2" );
+	end;
+}

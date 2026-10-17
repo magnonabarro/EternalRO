@@ -1,0 +1,276 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ platina_arqueiro.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.7 ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= Missões das habilidades: Fabricar Flechas, Disparo Violento.
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================// 
+
+moc_ruins,118,99,5	script	Roberto	88,{
+	if (BaseClass == Job_Archer) {
+		if (getskilllv("AC_MAKINGARROW") == 1) {
+			mes "[Roberto]";
+			mes "Ooh, você é da minha terra natal!";
+			mes "Que bom ver você!";
+			mes "Como você está?";
+			mes "Ah! Essa flecha!";
+			mes "Você quem fez, não foi?";
+			next;
+			mes "[Roberto]";
+			mes "Haha...!";
+			mes "Você não acha que é muito melhor?";
+			mes "Haha... então. Estou orgulhoso!";
+			mes "Volte aqui de vez em quando";
+			mes "com notícias de Payon.";
+			mes "Até mais~";
+			close;
+		}
+		else if (JobLevel >= 30 || (BaseJob == Job_Hunter || BaseJob == Job_Bard || BaseJob == Job_Dancer)) {
+			mes "[Roberto]";
+			mes "Eh!";
+			mes " ";
+			mes "Você é...";
+			next;
+			if ((countitem(907) > 19) && (countitem(921) > 6) && (countitem(906) > 40) && (countitem(1019) > 12) && (countitem(501) > 0)) {
+				mes "[Roberto]";
+				mes "Você trouxe os itens!";
+				mes "Muito obrigado!";
+				mes "Então, como prometi, irei lhe ensinar a habilidade.";
+				next;
+				delitem 907,20; //Resina
+				delitem 921,7; //Esporo de Cogumelo
+				delitem 906,41; //Escama Afiada
+				delitem 1019,13; //Tronco
+				delitem 501,1; //Poção Vermelha
+				skill "AC_MAKINGARROW",1,SKILL_PERM;
+				mes "[Roberto]";
+				mes "Não precisa mais se preocupar";
+				mes "com flechas. Ah, por um acaso";
+				mes "você viu alguém chamado Jason";
+				mes "em Payon? Tenha cuidado, ele é";
+				mes "um feroz caçador.";
+				next;
+				mes "[Roberto]";
+				mes "Você só precisa tomar cuidado";
+				mes "com Jason em Payon. Lembre-se.";
+				mes "Obrigado pelos presentes, até mais~";
+				close;
+			}
+			mes "[Roberto]";
+			mes "Um arqueiro em Morroc!?";
+			mes "É bom ver você! Conhecer um";
+			mes "arqueiro em um lugar como este! *sniff sniff*!";
+			mes "Eu vim sozinho para Morroc...";
+			mes "eu era um novato, e a pressão... aaah~";
+			mes "Eu sempre estava sozinho~";
+			next;
+			switch (select("Deve ter sido difícil.:Haha, continue sofrendo!")) {
+			case 1:
+				mes "[Roberto]";
+				mes "Sim...";
+				mes "Você deve estar tendo dificuldades";
+				mes "em um lugar como essa cidade.";
+				mes "Está sendo difícil de encontrar";
+				mes "flechas por aqui? É por isso que eu faço as minhas.";
+				next;
+				select("Sério?!");
+				mes "[Roberto]";
+				mes "Sim! Eu junto diferentes itens";
+				mes "e faço flechas usando eles.";
+				mes "É uma habilidade útil ajudar a";
+				mes "sobreviver sozinho neste mundo.";
+				mes "Se você quiser, posso lhe ensinar.";
+				next;
+				select("Isso seria ótimo!");
+				mes "[Roberto]";
+				mes "Mas... não farei isso de graça.";
+				mes "Nada é de graça neste mundo~";
+				mes "Hmm... Que tal isso?";
+				mes "Se você me trouxer o que eu pedir";
+				mes "então lhe ensinarei a habilidade.";
+				next;
+				mes "[Roberto]";
+				mes "Eu estive bem sozinho desde que";
+				mes "saí de Payon. Eu gostaria de";
+				mes "relembrar um pouco da cidade";
+				mes "com algumas coisas de lá.";
+				mes "Traga-me 20 Resinas da floresta";
+				mes "de Payon e 1 Poção Vermelha vendida nas lojas.";
+				next;
+				mes "[Roberto]";
+				mes "Outra coisa, 13 Troncos dos";
+				mes "Salgueiros que vivem na floresta.";
+				mes "41 Escamas Afiadas,";
+				mes "7 Esporos de Cogumelo.";
+				mes "Se me trouxer estes itens.";
+				next;
+				mes "[Roberto]";
+				mes "Eu ensino para você a habilidade.";
+				mes "Então.. Estarei esperando.";
+				mes "Por notícias da minha terra natal.";
+				close;
+			case 2:
+				mes "[Roberto]";
+				mes "...ok "+((Sex == SEX_MALE)?"senhor":"senhora")+".";
+				mes "...tenha cuidado de noite.";
+				close;
+			}
+		}
+		mes "[Roberto]";
+		mes "Hmm... Você";
+		mes "tem algo para dizer?";
+		mes "Porque eu não tenho.";
+		mes "Diferença grande de níveis";
+		mes "corta a conversa.";
+		close;
+	}
+	mes "[?]";
+	mes "Hm? Primeira vez que você vê";
+	mes "um arqueiro ou algo assim?";
+	mes "Siga seu caminho.";
+	mes "Eu só falo com arqueiros de";
+	mes "alto nível. Não abro minha boca";
+	mes "se não for para isso.";
+	close;
+}
+
+payon,103,63,3	script	Jason	88,3,3,{
+	if (BaseClass == Job_Archer) {
+		if (getskilllv("AC_CHARGEARROW") == 1) {
+			mes "[Jason]";
+			mes "Hmm, nos encontramos de novo.";
+			mes "Hmmmm tão estranho.";
+			mes "Sempre que re-encontro alguém";
+			mes "Eu começo a dizer muitos 'Hmm's.";
+			mes "Hmmm... então, bom te ver de novo.";
+			mes "Hmmmm... não venha aqui de novo hmm...";
+			close;
+		}
+		else if (JobLevel >= 35 || (BaseJob == Job_Hunter || BaseJob == Job_Bard || BaseJob == Job_Dancer)) {
+			mes "[Jason]";
+			mes "Droga... minha ferida não";
+			mes "está curando. Argh...";
+			mes "Eu fui muito descuidado...";
+			mes "se tornar isto.. err...";
+			mes "Mas ainda assim, machucando... abrindo tantas feridas...";
+			next;
+			mes "Eu que devo fazer sobre o Roberto.";
+			mes "Hmmm... Ah!";
+			mes "Você? Há quanto tempo está aí?";
+			mes "Hmm... Nível bem alto.";
+			mes "Alguém como você seria muito bem";
+			mes "capaz de aprender a habilidade Disparo Violento.";
+			next;
+			switch (select("O que é isso?:Ensine-me.")) {
+			case 1:
+				mes "[Jason]";
+				mes "...você está brincando, certo?";
+				mes "Não acredito, você não conhece";
+				mes "Disparo Violento nesse nível?";
+				mes "Você é estranh"+((Sex)?"o":"a")+".";
+				next;
+				mes "[Jason]";
+				mes "(Jason estava na terra da fantasia.)";
+				next;
+				mes "[Jason]";
+				mes "Hmm, ok. Vou te ensinar o";
+				mes "que Disparo Violento é.";
+				next;
+				mes "[Jason]";
+				mes "Disparo Violento é uma habilidade";
+				mes "que permite empurrar um oponente";
+				mes "enquanto você ataca. Você só vai";
+				mes "conseguir isso quando mirar bem";
+				mes "no alvo. Mas diferente de magias não é possível cortar o lançamento.";
+				next;
+				mes "[Jason]";
+				mes "É muito útil para arqueiros";
+				mes "que são fracos em curtas";
+				mes "distâncias. Se você quiser";
+				mes "aprender a habilidade. Me procure novamente.";
+				mes "Existem alguns materiais necessários.";
+				next;
+				mes "[Jason]";
+				mes "Primeiro, já que é necessário";
+				mes "modificar um Arco, traga um que";
+				mes "você não use. Precisarei de:";
+				mes "10 Tentáculos, 10 Bicos de Ave,";
+				mes "3 Caudas de Yoyo... bem elásticas.";
+				mes "Também, 2 Esmeraldas. E por último... 36 Sucos de Banana que eu adoro!";
+				next;
+				mes "[Jason]";
+				mes "......Ehem!";
+				mes "Se me trouxer estes itens,";
+				mes "Eu irei te ensinar a habilidade";
+				mes "Disparo Violento. Então, até mais.";
+				mes "(Ficarei irritado se não trouxer o Suco de Banana!)";
+				close;
+			case 2:
+				if ((countitem(721) > 1) && (countitem(942) > 2) && (countitem(962) > 9) && (countitem(925) > 9) && (countitem(532) > 35)) {
+					mes "[Jason]";
+					mes "Ok! Perfeito!";
+					mes "Te ensinarei a renomada";
+					mes "habilidade, Disparo Violento!";
+					next;
+					delitem 721,2; //Esmeralda
+					delitem 942,3; //Cauda de Yoyo
+					delitem 962,10; //Tentáculo
+					delitem 925,10; //Bico de Ave
+					delitem 532,36; //Suco de Banana
+					skill "AC_CHARGEARROW",1,SKILL_PERM;
+					mes "[Jason]";
+					mes "Oh, funciona melhor do que eu";
+					mes "esperava. Não será preciso";
+					mes "modificar o arco. Pode ficar";
+					mes "com ele. Aproveite sua nova";
+					mes "habilidade em cavernas e campos!";
+					mes "Hehe~";
+					close;
+				}
+				mes "[Jason]";
+				mes "Hmm... que pena.";
+				mes "Estão faltando algumas coisas.";
+				mes "De novo, preciso de 2 Esmeraldas,";
+				mes "3 Caudas de Yoyo, 10 Tentáculos,";
+				mes "10 Bicos de Ave, e por último";
+				mes "36 Sucos de Banana!";
+				next;
+				mes "[Jason]";
+				mes "Certifique-se que você tem todos os itens e volte aqui.";
+				close;
+			}
+		}
+		mes "[Jason]";
+		mes "Ooh... você é um arqueiro.";
+		mes "Se você treinar um pouco";
+		mes "mais, você terá uma ótima";
+		mes "reputação como arqueiro!";
+		mes "Esforce-se!";
+		close;
+	}
+	mes "[?]";
+	mes "O que o mundo precisa é";
+	mes "de um rapaz solitário como eu?";
+	close;
+
+OnTouch_:
+	mes "[???]";
+	mes "Errrrrrr...";
+	close;
+}
+ 

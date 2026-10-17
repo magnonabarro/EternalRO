@@ -1,0 +1,135 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ carregadores_de_municao.txt ]
+//====== Versão Atual: ====================================================
+//= [ v2.1 - Pré-Renovação ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= [ Transforma Projéteis em Carregadores. ]
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+que_ng,187,149,3	script	Mercador Kenny::mdk	4_M_01,{
+	mes "[Kenny]";
+	if (BaseClass == Job_Gunslinger) {
+		mes "Bem-vindo à minha Loja de Carregadores.";
+		mes "Como você deve saber, um grande número";
+		mes "de projéteis podem ser transportados mais";
+		mes "facilmente quando estão em Carregadores. Agora, estás";
+		mes "interessado em alguma coisa em particular?";
+		next;
+		switch(select("Pacote de Esferas de Relâmpagos:Pacote de Esferas Cegantes:Pacote de Esferas Venenosas:Pacote de Esferas Congelantes:Pacote de Esferas de Chamas:Cartucho Comum:Antigo Cartucho Sanguinário:Antigo Cartucho de Prata:Cancelar")) {
+		case 1: callsub S_Casing,13204,12144;// <ID do projétil>, <ID do carregador>
+		case 2: callsub S_Casing,13206,12145;
+		case 3: callsub S_Casing,13205,12146;
+		case 4: callsub S_Casing,13207,12147;
+		case 5: callsub S_Casing,13203,12148;
+		case 6: callsub S_Casing,13200,12149;
+		case 7: callsub S_Casing,13202,12150;
+		case 8: callsub S_Casing,13201,12151;
+		case 9:
+			mes "[Kenny]";
+			mes "Bem, se você encontrar";
+			mes "muitos projéteis,";
+			mes "venha me ver.";
+			mes "É uma ideia inteligente armazenar";
+			mes "projéteis em meus carregadores.";
+			close;
+		}
+	}
+	mes "Bem-vindo à minha loja.";
+	mes "Aqui, disponibilizo Carregadores";
+	mes "e Cartuchos para Justiceiros.";
+	mes "Desculpe, mas não parece que";
+	mes "meus serviços seriam de alguma";
+	mes "utilidade para você, aventureiro.";
+	next;
+	mes "[Kenny]";
+	mes "Ah, mas se acontecer de você";
+	mes "encontar algum Justiceiro, peça";
+	mes "pra ele vir até mim. Nunca será";
+	mes "possível carregar muitos projéteis.";
+	close;
+
+S_Casing:
+	.@bullet_id = getarg(0);
+	.@pack_id = getarg(1);
+
+	mes "[Kenny]";
+	mes "Agora, você pode negociar";
+	mes callfunc("F_InsertPlural",500,getitemname(.@bullet_id));
+	mes "e 500 zenys por 1 "+getitemname(.@pack_id)+", então certifique-se";
+	mes "de que você possui projéteis e zenys";
+	mes "suficientes para esta tranzação.";
+	next;
+	mes "[Kenny]";
+	mes "You can exchange "+callfunc("F_InsertPlural",500,getitemname(.@bullet_id))+" and 500 zeny";
+	mes "com 1 "+getitemname(.@pack_id)+".";
+	next;
+	mes "[Kenny]";
+	mes "Lembre-se que eu não posso dar";
+	mes "a você mais de 50 carregadores";
+	mes "por vez. Agora por favor, digite";
+	mes "o número de carregadores que você";
+	mes "deseja receber. Se preferir cancelar, basta digitar ''0''.";
+	next;
+	input .@amount;
+	mes "[Kenny]";
+	if (.@amount > 50 || .@amount == 0) {
+		mes "Ei, eu não posso te dar";
+		mes "tantos carregadores.";
+		mes "Por favor, tente novamente e";
+		mes "digite um número que não seja";
+		mes "maior do que 50.";
+	}
+	else if (countitem(.@bullet_id) >= (500*.@amount)) {
+		if (Zeny >= (500*.@amount)) {
+			if (checkweight(.@pack_id,.@amount) == 0) {
+				mes "Ei, você tem muito";
+				mes "lixo amontoado em seu";
+				mes "Inventário. Liberte um pouco";
+				mes "de espaço e depois volte";
+				mes "para trocar seus projéteis por";
+				mes "alguns carregadores, ok?";
+			} else {
+				mes "Tudo bem, aqui estão";
+				mes "seus carregadores. Obrigado";
+				mes "por visitar minha loja, e";
+				mes "espero que você use todas";
+				mes "suas munições com sabedoria.";
+				Zeny = Zeny -500*.@amount;
+				delitem .@bullet_id,(500*.@amount);
+				getitem .@pack_id,.@amount;
+			}
+		} else {
+			mes "Desculpe, mas você não";
+			mes "tem zenys suficientes para";
+			mes "efetuar esta compra de carregadores.";
+			mes "Retorne para minha loja";
+			mes "depois que conseguir";
+			mes "mais algum dinheiro.";
+		}
+	} else {
+		mes "Desculpe, mas você não";
+		mes "tem projéteis suficientes para";
+		mes "trocar por carregadores.";
+		mes "Talvez você devesse";
+		mes "verificar seu inventário e";
+		mes "depois volte até mim novamente.";
+	}
+	close;
+}
+
+izlude,171,127,3	duplicate(mdk)	Mercador Kenny#iz	4_M_01

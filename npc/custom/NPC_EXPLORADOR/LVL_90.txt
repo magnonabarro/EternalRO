@@ -1,0 +1,54 @@
+moc_para01,44,38,4	script	LvL 90	10281,{
+
+	mes "[LvL 90]";
+	mes "Olá aventureiro!";
+	next;
+
+	switch(select("Iniciar LvL 90","Entregar Recompensa","Cancelar")){
+		case 1:
+			callsub S_Start;
+			end;
+		case 2:
+			callsub S_Complete;
+			end;
+		default:
+			close;
+	}
+	end;
+
+//==============================
+// INICIAR QUEST
+//==============================
+S_Start:
+
+	if (checkquest(60320) >= 0) {
+		mes "[LvL 90]";
+		mes "Você já iniciou esta missão!";
+		close;
+	}
+
+	setquest 60320;
+	mes "[LvL 90]";
+	mes "Cace todos os dragões e volte quando terminar!";
+	close;
+	end;
+
+//==============================
+// ENTREGA
+//==============================
+S_Complete:
+
+	if (checkquest(60320,HUNTING) == 2) {
+		erasequest 60320;
+		mes "[LvL 90]";
+		mes "Excelente trabalho!";
+		getexp 30000,20000;
+		getitem Golden_Coin_,40;
+		close;
+	} else {
+		mes "[LvL 90]";
+		mes "Você ainda não derrotou todos os dragões.";
+		close;
+	}
+	end;
+}

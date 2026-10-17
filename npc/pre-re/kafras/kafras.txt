@@ -1,0 +1,35 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ kafras.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.0 - Pré-Renovação ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= [ 
+//= Configurações de argumento para callfunc "F_Kafra":
+//= arg(0): 0 - Mensagem Kafra padrão
+//= 1 - Mensagem da Kafra em Niflhiem.
+//= 2 - Mensagem da Guilda na Kafra.
+//= arg(1): 1 - Desabilita menu de teletransporte.
+//= arg(2): 1 - Desabilita menu de informações.
+//= arg(3): Custo do serviço de Armazém.
+//= arg(4): Custo do serviço de Aluguel de Carrinho.
+//= ]
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+// Izlude
+//============================================================
+izlude,134,87,3	duplicate(kaf_izlude)	Funcionária Kafra#iz	117

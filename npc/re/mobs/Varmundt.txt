@@ -1,0 +1,51 @@
+//===== rAthena Script =======================================
+//= Biosfera dungeons
+//===== Description: =========================================
+//= Biosfera dungeons Monster Spawn Script.
+//===== Additional Comments: =================================
+//= 1.0 version. [Ribaamr Costa]
+//============================================================
+
+//============================================================
+//= Biosfera - Gelo
+//============================================================
+bl_ice	monster	Titã Glacial	21564,35
+bl_ice	monster	Siroma Glacial	21565,35
+bl_ice	monster	Snowier Glacial	21566,35
+bl_ice	monster	Centopéia Glacial	21567,35
+bl_ice	monster	Elemental Glacial	21568,45
+bl_ice	monster	Angelgolt Glacial	21569,25
+bl_ice	monster	Rhyncho Glacial	21570,15
+
+//============================================================
+//= Biosfera - Fogo
+//============================================================
+bl_lava	monster	Explosão Ardente	21556,40
+bl_lava	monster	Eliminador Ardente	21557,40
+bl_lava	monster	Jacket Ardente	21558,30
+bl_lava	monster	Golem Ardente	21559,35
+bl_lava	monster	Majoruros Ardente	21560,30
+bl_lava	monster	Hydrolancer Ardente	21561,15
+bl_lava	monster	Acidus Ardente	21562,35
+
+//============================================================
+//= Biosfera - Grama
+//============================================================
+bl_grass	monster	Corinus Verdejante	21548,40
+bl_grass	monster	Pinguicula Verdejante	21549,45
+bl_grass	monster	Mosca Verdejante	21550,25
+bl_grass	monster	Rocker Verdejante	21551,40
+bl_grass	monster	Selvagem Verdejante	21552,40
+bl_grass	monster	Flora Verdejante	21553,25
+bl_grass	monster	Acidus Ardente	21554,45
+
+//============================================================
+//= Biosfera - Morte
+//============================================================
+bl_death	monster	Múmia Grave	21572,30
+bl_death	monster	Lude Grave	21573,35
+bl_death	monster	Zombie Grave	21574,30
+bl_death	monster	Espectro Grave	21575,35
+bl_death	monster	Crânio Grave	21576,35
+bl_death	monster	Banshee Grave	21577,45
+bl_death	monster	Cavaleiro Abysmal Grave	21578,15

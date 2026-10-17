@@ -1,0 +1,24 @@
+moc_para01,25,35,4	script	Trocadora de Itens	913,{	
+	mes "Ofereço Troca de ticket po Itens<ITEM>Trocadora de Itens<INFO>607</INFO></ITEM>.";
+	mes "------------------";
+	mes "Caso esteja interessado, eu ofereço equipamentos de todas as raridades";
+	mes "e encantamentos";
+	switch(select("Troca de itens")){
+		next;
+		case 1:
+		close2;
+		callshop "itens_box",1;
+		break;	
+		next;
+		break;
+	}
+OnInit:
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	showscript("Trocadora de itens");
+	setnpctimer 0;
+	end;
+}
+// Lojas localizadas no custom/barters.yml

@@ -1,0 +1,2613 @@
+//===== Crazyarashi Services =====================================|
+//= Edda Glastheim                                               =|
+//===== By: ======================================================|
+//= crazyarashi                                                  =|
+//===== Current Version: =========================================|
+//= 1.0 Initial Version                                          =|
+//================================================================|
+
+glast_01,244,290,0	script	#gh_fall_ev_00	HIDDEN_WARP_NPC,3,3,{
+	end;
+	
+OnTouch:
+	if(BaseLevel >= 99){
+		cloaknpc("Oscar#gh_fall",false,getcharid(0));
+		if(isbegin_quest(12458) == 2){
+			cloaknpc("OSC1198#edda_fogh",false,getcharid(0));
+			cloaknpc("OSC1127#edda_fogh",false,getcharid(0));
+			cloaknpc("OSC1052#edda_fogh",false,getcharid(0));
+			specialeffect EF_YELLOBODY,AREA,"OSC1198#edda_fogh";
+			specialeffect EF_YELLOBODY,AREA,"OSC1127#edda_fogh";
+			specialeffect EF_YELLOBODY,AREA,"OSC1052#edda_fogh";
+			specialeffect EF_WHITEBODY,AREA,"OSC1198#edda_fogh";
+		    specialeffect EF_WHITEBODY,AREA,"OSC1127#edda_fogh";
+			specialeffect EF_WHITEBODY,AREA,"OSC1052#edda_fogh";
+		}
+	}
+end;
+}
+
+glast_01,241,290,5	script	Oscar#gh_fall	4_ED_OSCAR,{
+	if(isbegin_quest(12457) == 0){
+		cutin "oscar02",2;
+		mes "[ Oscar ]";
+		mes "Oh! Podem ver-me?";
+		emotion ET_BIGTHROB;
+		next;
+		select("Sim, parece normal.");
+		cutin "oscar01",2;
+		mes "[ Oscar ]";
+		mes "Quantas vezes � que j� entraste e sa�ste da fenda dimensional??";
+		next;
+		mes "[ Oscar ]";
+		mes "Hehehe~";
+		mes "Oh! A s�rio! Sabem, eu consigo cheirar pessoas que estiveram noutras dimens�es.";
+		next;
+		select("Acho que te est�s a cheirar a ti pr�prio.");
+		cutin "oscar02",2;
+		mes "[ Oscar ]";
+		mes "�s mesmo tu. As pessoas na fenda dimensional n�o t�m cheiro.";
+		next;
+		select("Quem �s tu??");
+		cutin "oscar01",2;
+		mes "[ Oscar ]";
+		mes "Pode chamar-me ^0000CDOscar^000000.";
+		mes "� um passatempo meu colecionar registos de pessoas que entraram e sa�ram do fosso dimensional.";
+		next;
+		mes "[ Oscar ]";
+		mes "Estava a visitar o meu tempo e espa�o favoritos, estava prestes a ir-me embora, mas fiquei bastante surpreendido por te ver a olhar para mim.";
+		next;
+		select("Desculpem se vos interrompi.:Estou ocupado.");
+		mes "[ Oscar ]";
+		mes "Espera. Quantas vezes viajaste? Tens muita experi�ncia? Onde � que se encontra o fosso dimensional mais impressionante em que j� estiveste??";
+		next;
+		select("Por favor, fa�a uma pergunta de cada vez.");
+		cutin "oscar05",2;
+		mes "[ Oscar ]";
+		mes "Ah... desculpa. � a primeira vez que conhe�o algu�m com experi�ncia em viagens dimensionais para al�m de mim.";
+		next;
+		mes "[ Oscar ]";
+		mes "Falo frequentemente com homens s�bios como Varmundt, mas mesmo que tente falar com ele sobre estas coisas...";
+		next;
+		select("O Varmundt faz-lhe a vida negra??");
+		cutin "oscar04",2;
+		mes "[ Oscar ]";
+		mes "Sim, tento n�o me envolver demasiado.";
+		mes "Quero manter-me educado. N�o falei muito com ele sobre viagens dimensionais.";
+		next;
+		cutin "",255;
+		mes "[ "+strcharinfo(0)+" ]";
+		mes "N�o te conhe�o bem, mas tenho a certeza de uma coisa. Fazes umas piadas muito engra�adas.";
+		next;
+		cutin "oscar01",2;
+		mes "[ Oscar ]";
+		mes "Mas isso � normal. N�o � de admirar que os s�bios sejam t�midos quando t�m 500 anos de idade.";
+		next;
+		select("Espera, o que � que acabaste de dizer?");
+		cutin "oscar02",2;
+		mes "[ Oscar ]";
+		mes "O qu�? Que os s�bios s�o muito t�midos...?";
+		next;
+		select("N�o, n�o � isso...");
+		select("E o resto?");
+		mes "[ Oscar ]";
+		mes "Os meus pensamentos s�o bastante complexos e, por vezes, dif�ceis de seguir. Est� quente? Pensei que estava frio.";
+		next;
+		select("500 anos de idade...");
+		mes "[ Oscar ]";
+		mes "Sim. Porque � que de repente ficaste assim?";
+		next;
+		select("Est�o a gozar comigo?");
+		cutin "oscar03",2;
+		mes "[ Oscar ]";
+		mes "Sim, fa�o sempre isso! Eu estava prestes a observar o tempo e o espa�o. Espera?! Porque � que est�s deitado no ch�o?!";
+		next;
+		select("Pode voltar a apresentar-se??");
+		cutin "oscar02",2;
+		mes "[ Oscar ]";
+		mes "Ah, �s um aventureiro!";
+		mes strcharinfo(0) + ". Agora levanta-te, est� na hora de ir para o meu tempo e espa�o favoritos.";
+		next;
+		mes "[ Oscar ]";
+		mes "Queres visitar um espa�o dimensional que nunca viste antes??";
+		next;
+		select("Por favor, mostre-me, seria uma honra.");
+		cutin "oscar01",2;
+		mes "[ Oscar ]";
+		mes "�timo. Vou ver a Queda de Glast Heim. Fico feliz que tenhas decidido ir comigo.";
+		next;
+		select("Concordo com ele.");
+		mes "[ Oscar ]";
+		mes "Eu sabia que ias ficar feliz. Ent�o prepara-te e ajuda-me a abrir a fenda dimensional.";
+		setquest 12457;
+		close3;
+	}
+	if(isbegin_quest(12457) == 1){
+		.@md_name$ = "Glastheim Fall";
+		.@party_id = getcharid(1);
+		getpartymember .@party_id,3;
+		if(!.@party_id || $@partymembercount != 1 || is_party_leader() == false){
+			cutin "oscar01",2;
+			mes "[ Oscar ]";
+			mes "S� posso activ�-lo para ti, aventureiro. Por favor, crie o seu pr�prio grupo e volte a falar comigo.";
+			close3;
+		}
+		cutin "oscar01",2;
+		mes "[ Oscar ]";
+		mes "Est�s mentalmente preparado? Concentra a tua energia na minha m�o para me seguires.";
+		emotion ET_BIGTHROB;
+		next;
+		.@s = select(((instance_id(IM_PARTY))?"":"Criar uma lacuna dimensional."),((instance_id(IM_PARTY))?"Introduzir a diferen�a dimensional.":""));
+		switch(.@s){
+			case 1:
+				switch(instance_create(.@md_name$)){
+					case -1:
+						mes "[ Oscar ]";
+						mes "Ocorreu um erro desconhecido.";
+						close3;
+						
+					case -2:
+						mes "[ Oscar ]";
+						mes "S� posso activ�-lo para ti, aventureiro. Por favor, cria o teu pr�prio grupo e volta a falar comigo.";
+						close3;
+						
+					case -3:
+						mes "[ Oscar ]";
+						mes "Oh, parece que ainda tem uma lacuna dimensional ativa.";
+						mes "Vamos esperar que desapare�a.";
+						close3;
+						
+					case -4:
+						mes "[ Oscar ]";
+						mes "A reserva da inst�ncia est� cheia neste momento. Tente novamente mais tarde.";
+						close3;
+						
+					default:
+						mes "[ Oscar ]";
+						mes "Cri�mos com sucesso o fosso dimensional. Voltem a falar comigo para entrarem no fosso dimensional.";
+						close3;
+				}
+				
+			case 2:
+				switch(instance_enter(.@md_name$)){
+					case IE_OTHER:
+						mes "Ocorreu um erro desconhecido.";
+						end;
+						
+					case IE_NOINSTANCE:
+						mes "^ff0000O car�cter n�o tem uma inst�ncia reservada.^000000";
+						end;
+						
+					case IE_NOMEMBER:	
+						mes "Apenas os membros registados podem entrar no " + .@md_name$ + " inst�ncia.";
+						end;
+						
+					case IE_OK:
+						mapannounce "glast_01", strcharinfo(0) + " do Grupo, "+ .@party_name$ +", est� a entrar no " + .@md_name$ + ".", bc_map, "0x00FF99";
+						end;
+				}			
+		}
+	}
+	if(isbegin_quest(12458) == 0){
+		cutin "oscar05",2;
+		mes "[ Oscar ]";
+		mes "Infelizmente, n�o havia maneira de impedir que Schmidt fosse engolido pela esfera.";
+		next;
+		select("O globo foi destru�do?");
+		mes "[ Oscar ]";
+		mes "Sim. Depois do incidente, o orbe foi definitivamente parado e deixou de haver energia sinistra que drena a energia dos vivos. Isso � que � bom.";
+		next;
+		cutin "oscar04",2;
+		mes "[ Oscar ]";
+		mes "Mas parar a energia do globo n�o parou a energia da morte que cobria a �rea.";
+		next;
+		cutin "oscar05",2;
+		mes "[ Oscar ]";
+		mes "O fragmento de mem�ria de Schmidt come�ou a aparecer aqui e ali.";
+		next;
+		select("O que � que aconteceu ao Schmidt?...");
+		cutin "oscar04",2;
+		mes "[ Oscar ]";
+		mes "Procurei saber se a alma de Schmidt permanecia ou n�o dentro da esfera, n�o encontrei a sua alma, talvez tenha desaparecido completamente.";
+		next;
+		mes "[ Oscar ]";
+		mes "No entanto, o empenho e as convic��es de Schmidt transformaram-se numa fraqueza pol�tica para outras regras de Midgard.";
+		next;
+		select("Porqu� a pol�tica...");
+		cutin "oscar05",2;
+		mes "[ Oscar ]";
+		mes "Os rumores espalharam-se muito rapidamente, o ato de atirar o seu pr�prio corpo para salvar a vida de outros transformou-se na queda do rei na loucura.";
+		next;
+		mes "[ Oscar ]";
+		mes "Nos registos, o rei Schmidt � mencionado como um rei que se tornou louco e �vido de riqueza.";
+		next;
+		cutin "oscar04",2;
+		mes "[ Oscar ]";
+		mes "Acho que a verdadeira alma de Schmidt est� viva algures. Nas minhas viagens dimensionais, os pensamentos do Rei Schmidt ca�ram dez mil vezes.";
+		next;
+		mes "[ Oscar ]";
+		mes "Recolher e explorar os vest�gios dos cad�veres pode um dia revelar o que realmente aconteceu � alma do Rei Schmidt...";
+		next;
+		select("Porque � que vai t�o longe?");
+		cutin "oscar01",2;
+		mes "[ Oscar ]";
+		mes "Antes de mais, quero que saibam que n�o prezo a vida e a sua preciosidade da mesma forma que outros s�bios.";
+		next;
+		mes "[ Oscar ]";
+		mes "N�o quero acreditar que o sacrif�cio de si pr�prio � uma a��o nobre.";
+		next;
+		mes "[ Oscar ]";
+		mes "Eu, �scar, que controlo o tempo e os registos. A minha miss�o � entrar em diferentes tempos e espa�os.";
+		next;
+		select("Posso ajudar de alguma forma?");
+		cutin "oscar02",2;
+		mes "[ Oscar ]";
+		mes "Hmm... Talvez haja algo em que possas ser �til.";
+		next;
+		cutin "oscar01",2;
+		mes "[ Oscar ]";
+		mes "Podemos purificar as cren�as de Schmidt recolhendo cristais e detritos. Claro que os estou a recolher sozinho, mas quantos mais, melhor.";
+		next;
+		mes "[ Oscar ]";
+		mes "Ah. Deixa-me apresentar-te estas m�quinas que est�o � minha frente. Colocar os cristais certos nelas reflectir� a minha vontade para que possas troc�-los por encantamentos e outras coisas.";
+		next;
+		cloaknpc("OSC1198#edda_fogh",false,getcharid(0));
+		cloaknpc("OSC1127#edda_fogh",false,getcharid(0));
+		cloaknpc("OSC1052#edda_fogh",false,getcharid(0));
+		select("I don't know how to do that.");
+		cutin "oscar03",2;
+		mes "[ Oscar ]";
+		mes "Chama-se o poder do s�bio. Em todo o caso, fala comigo quando quiseres. Abrirei a dimens�o para purificar a alma dele.";
+		setquest 12458;
+		completequest 12458;
+		close3;
+	}
+	cutin "oscar03",2;
+	mes "[ Oscar ]";
+	mes "A tua mente est� pronta? Ent�o, por favor, ponha a sua m�o na minha m�o e concentre-se.";
+	next;
+	switch(checkquest(12460,PLAYTIME)){
+		case -1:
+			.@normal = true;
+			break;
+			
+		case 0:
+		case 1:
+			break;
+			
+		case 2:
+			erasequest 12460;
+			.@normal = true;
+			break;
+	}
+	switch(checkquest(12461,PLAYTIME)){
+		case -1:
+			.@hard = true;
+			break;
+			
+		case 0:
+		case 1:
+			break;
+			
+		case 2:
+			erasequest 12461;
+			.@hard = true;
+			break;
+	}
+	if(.@normal == false && .@hard == false){
+		cutin "oscar03",2;
+		mes "[ Oscar ]";
+		mes "^0000CDJ� purific�mos o suficiente por hoje.^000000 Precisas de descansar o teu corpo para fazer outra viagem dimensional. Volta de novo ao amanhecer, aventureiro.";
+		close3;	
+	}
+	switch(select("Enter")){
+		case 1:
+			if(!.@check){
+				cutin "oscar03",2;
+				mes "[ Oscar ]";
+				mes "^0000CDJ� purific�mos o suficiente por hoje.^000000 Precisas de descansar o teu corpo para fazeres outra viagem dimensional. Volta de novo ao amanhecer, aventureiro.";
+				close3;
+			}
+			switch(instance_enter(.@md_name$)){
+				case IE_OTHER:
+					mes "An unknown error has occurred.";
+					close3;
+					
+				case IE_NOINSTANCE:
+					mes "^ff0000O car�cter n�o tem uma inst�ncia reservada.^000000";
+					close3;
+					
+				case IE_NOMEMBER:	
+					mes "Apenas os membros registados podem entrar no " + .@md_name$ + " instance.";
+					close3;
+					
+				case IE_OK:
+					mapannounce "glast_01", strcharinfo(0) + " Do Grupo, "+ .@party_name$ +", est� a entrar no " + .@md_name$ + ".", bc_map, "0x00FF99";
+					if(isbegin_quest(.@hunt))
+						erasequest .@hunt;
+					setquest .@hunt;
+					setquest .@cooldown;
+					end;
+			}	
+			
+		case 2:
+			.@party_id = getcharid(1);
+			if(!.@party_id){
+				mes "[ Oscar ]";
+				mes "S� posso activ�-lo para ti, aventureiro. Por favor, crie o seu pr�prio grupo e volte a falar comigo.";
+				close3;
+			}
+			.@md_name$ = "Glastheim Purification";
+			switch(instance_create(.@md_name$)){
+				case -1:
+					mes "[ Oscar ]";
+					mes "Ocorreu um erro desconhecido.";
+					close3;
+					
+				case -2:
+					mes "[ Oscar ]";
+					mes "S� posso activ�-lo para ti, aventureiro. Por favor, cria o teu pr�prio grupo e volta a falar comigo.";
+					close3;
+					
+				case -3:
+					mes "[ Oscar ]";
+					mes "Oh, parece que ainda tem uma lacuna dimensional ativa.";
+					mes "Vamos esperar que desapare�a.";
+					close3;
+					
+				case -4:
+					mes "[ Oscar ]";
+					mes "A reserva da inst�ncia est� cheia neste momento. Tente novamente mais tarde.";
+					close3;
+					
+				default:
+					mes "[ Oscar ]";
+					mes "Cri�mos com sucesso o fosso dimensional. Voltem a falar comigo para entrarem no fosso dimensional.";
+					close3;
+			}
+			
+		case 3:
+			.@party_id = getcharid(1);
+			if(!.@party_id){
+				mes "[ Oscar ]";
+				mes "S� posso activ�-lo para ti, aventureiro. Por favor, crie o seu pr�prio grupo e volte a falar comigo.";
+				close3;
+			}
+			.@md_name$ = "Glastheim Purification Hard";
+			switch(instance_create(.@md_name$)){
+				case -1:
+					mes "[ Oscar ]";
+					mes "Ocorreu um erro desconhecido.";
+					close3;
+					
+				case -2:
+					mes "[ Oscar ]";
+					mes "S� posso activ�-lo para ti, aventureiro. Por favor, cria o teu pr�prio grupo e volta a falar comigo.";
+					close3;
+					
+				case -3:
+					mes "[ Oscar ]";
+					mes "Oh, parece que ainda tem uma lacuna dimensional ativa.";
+					mes "Vamos esperar que desapare�a.";
+					close3;
+					
+				case -4:
+					mes "[ Oscar ]";
+					mes "A reserva da inst�ncia est� cheia neste momento. Tente novamente mais tarde.";
+					close3;
+					
+				default:
+					mes "[ Oscar ]";
+					mes "Cri�mos com sucesso a fenda dimensional. Voltem a falar comigo para entrarem no fosso dimensional.";
+					close3;
+			}		
+	}
+}
+
+glast_01,241,296,5	script	OSC1198#edda_fogh	2_DROP_MACHINE,{
+	disable_items;
+	mes "[ OSC1198 ]";
+	mes "Posso desmontar seu artefato desnecess�rio Queda de Glastheim e devolv�-lo parcialmente como material.";
+	next;
+	switch(select("Cancelar:Armadura:Capa:Acess�rio esquerdo")){
+		case 1:
+			mes "[ OSC1198 ]";
+			mes "Uma decis�o sensata. Pense bem no assunto.";
+			end;
+			
+		case 2:
+			.@slot = EQI_ARMOR;
+			.@equip_id = getequipid(.@slot);
+			.@bool = inarray(.equip_id,.@equip_id);
+			break;
+			
+		case 3:
+			.@slot = EQI_GARMENT;
+			.@equip_id = getequipid(.@slot);
+			.@bool = inarray(.equip_id,.@equip_id);
+			break;
+			
+		case 4:
+			.@slot = EQI_ACC_L;
+			.@equip_id = getequipid(.@slot);
+			.@bool = inarray(.insignia,.@equip_id);
+			.@stone = 25740;
+			break;
+	}
+	if(.@bool == -1){
+		mes "[ OSC1198 ]";
+		mes "Retirou o equipamento?";
+		end;
+	}
+	for(.@i = 0; .@i < 4; .@i++){
+		.@card[.@i] = getequipcardid(.@slot,.@i);
+		.@check[.@i] = .@card[.@i];
+	}
+	.@refine = getequiprefinerycnt(.@slot);
+	.@enchant_count = ((.@card[1] > 0 ? 3 : (.@card[2] > 0 ? 2 : (.@card[3] > 0 ? 1 : 0))));
+	if(!.@stone)
+		.@stone = 25739;	
+	switch(.@enchant_count){
+		case 0:
+			mes "[ OSC1198 ]";
+			mes "O teu equipamento deve ter pelo menos um encantamento para receberes um reembolso parcial.";
+			end;
+			
+		case 1:
+			if(.@stone == 25739){
+				.@min = 3;
+				.@max = 6;
+			} else {
+				.@min = 2;
+				.@max = 6;
+			}
+			break;
+			
+		case 2:
+			if(.@stone == 25739){
+				.@min = 6;
+				.@max = 10;
+			} else {
+				.@min = 4;
+				.@max = 12;
+			}
+			break;
+			
+		case 3:
+			if(.@stone == 25739){
+				.@min = 9;
+				.@max = 15;
+			} else {
+				.@min = 6;
+				.@max = 18;
+			}
+			break;					
+	}
+	mes "[ OSC1198 ]";
+	mes "Tens a certeza que queres desmantelar o ^CC0000" + getitemname(.@equip_id) + "^000000 que tem atualmente equipado?";
+	next;
+	if(select("N�o.:Por favor, pare!:Sim, tenho a certeza.") < 3){
+		mes "[ OSC1198 ]";
+		mes "Uma decis�o sensata. Pense bem no assunto.";
+		end;
+	}
+	if(callfunc("F_IsEquipIDHack", .@slot, .@equip_id) || callfunc("F_IsEquipRefineHack", .@slot, .@refine) || callfunc("F_IsEquipCardHack", .@slot, .@check[0], .@check[1], .@check[2], .@check[3]))
+		end;
+	mes "[ OSC1198 ]";
+	mes "Desmontagem do equipamento...";
+	progressbar_npc "00FF00",2;
+	delequip .@slot;
+	mes "O seu equipamento foi processado com sucesso.";
+	getitem .@stone,rand(.@min,.@max);
+	if(rand(1,100) <= .chance){
+		next;
+		.@costume_id = .drooping_id[rand(getarraysize(.drooping_id))];
+		mes "[ OSC1198 ]";
+		mes "*Pi-pi-ping*";
+		mes "� o vosso dia de sorte... Consegui criar uma recorda��o a partir do equipamento que reciclou.";
+		getitem .@costume_id,1;
+	}
+	end;
+	
+OnInit:
+	cloaknpc(strnpcinfo(0),true);
+	setarray .equip_id,15388,15389;
+	setarray .insignia,32228,32229,32230,32231,32232,32233;
+	setarray .drooping_id,31631,31632,31633;
+	.chance = 3; //Chance to get a drooping costume
+	setunittitle getnpcid(0),"[Dismantle Machine]";
+end;
+}
+
+glast_01,243,296,5	script	OSC1127#edda_fogh	2_SLOT_MACHINE,{
+	disable_items;
+	mes "[ OSC1127 ]";
+	mes "Se queres fortalecer os teus artefactos da Queda de Glastheim, ent�o est�s na m�quina certa. Seleciona o artefacto que queres encantar.";
+	next;
+	switch(select("Cancelar:Armadura:Capa:Acess�rio esquerdo")){
+		case 1:
+			mes "[ OSC1127 ]";
+			mes "Volte novamente quando tiver decidido.";
+			end;
+			
+		case 2:
+			.@part = EQI_ARMOR;
+			.@equip_id = getequipid(.@part);
+			.@bool = inarray(.equip_id,.@equip_id);
+			setarray .@requirement,25739,5,6608,10;
+			
+			break;
+			
+		case 3:
+			.@part = EQI_GARMENT;
+			.@equip_id = getequipid(.@part);
+			.@bool = inarray(.equip_id,.@equip_id);
+			setarray .@requirement,25739,5,6608,10;
+			break;
+			
+		case 4:
+			.@part = EQI_ACC_L;
+			.@equip_id = getequipid(.@part);
+			.@bool = inarray(.insignia,.@equip_id);
+			setarray .@requirement,25740,10,6755,40;
+			break;
+	}
+	if(.@bool == -1){
+		mes "[ OSC1127 ]";
+		mes "Retirou o equipamento?";
+		end;
+	}
+	.@refine = getequiprefinerycnt(.@part);
+	.@equip_name$ = getitemname(.@equip_id);
+	for(.@i = 0; .@i < 4; .@i++){
+		.@card[.@i] = getequipcardid(.@part,.@i);
+		.@check[.@i] = .@card[.@i];
+	}
+	if(.@card[1] > 0){
+		mes "[ OSC1127 ]";
+		mes "O teu equipamento j� est� encantado at� ao limite.";
+		end;
+	}
+	.@slot = ((.@card[3] == 0 ? 3 : (.@card[2] == 0 ? 2 : 1)));
+	switch(.@slot){
+		case 1:
+			if(.@part == EQI_ARMOR)
+				setarray .@enchant_list,4702,4712,4722,4732,4742,4752,29302,29303,29304,29305,29306,29307,29308,29309;
+			else if(.@part == EQI_GARMENT)
+				setarray .@enchant_list,4808,4820,4821,4813,4812,4826,4817,4816,4843,4834,4835,4836,4863,4864,4865;
+			else {
+				setarray .@enchant_list,29587,29588,29589,29590,29591,29592;
+				.@break = 30;
+			}
+			.@word$ = "Final";
+			break;
+			
+		case 2:
+			if(.@part == EQI_ARMOR)
+				setarray .@enchant_list,4702,4703,4704,4712,4713,4714,4722,4723,4724,4732,4733,4734,4742,4743,4744,4752,4753,4754;
+			else if(.@part == EQI_GARMENT)
+				setarray .@enchant_list,4808,4820,4821,4813,4812,4826,4817,4816,4843,4834,4835,4836,4863,4864,4865;
+			else
+				setarray .@enchant_list,4821,4822,4812,4826,4843,4844,4835,4836,4864,4865;
+			.@word$ = "Second";
+			break;
+		
+		case 3:
+			if(.@part == EQI_ARMOR)
+				setarray .@enchant_list,4702,4703,4704,4712,4713,4714,4722,4723,4724,4732,4733,4734,4742,4743,4744,4752,4753,4754;
+			else if(.@part == EQI_GARMENT)
+				setarray .@enchant_list,4808,4820,4821,4813,4812,4826,4817,4816,4843,4834,4835,4836,4863,4864,4865;
+			else
+				setarray .@enchant_list,4702,4703,4704,4712,4713,4714,4722,4723,4724,4732,4733,4734,4742,4743,4744,4752,4753,4754;
+			.@word$ = "First";
+			break;
+	}
+	mes "[ OSC1127 ]";
+	mes "^0000CD" + .@equip_name$ + "^000000";
+	mes "Slot : " + .@word$ + " Encanta";
+	mes "Requisito : ";
+	for(.@i = 0; .@i < getarraysize(.@requirement); .@i += 2){
+		mes "^0000CD" + .@requirement[.@i+1] + " " + getitemname(.@requirement[.@i]) + "^000000";
+		if(countitem(.@requirement[.@i]) < .@requirement[.@i+1])
+			.@miss++;
+	}
+	if(.@break){
+		mes "";
+		mes "este artigo tem um " + .@break + "% oportunidade de avan�ar com a adi��o da �ltima ranhura, quer continuar?";
+	}
+	next;
+	if(select("Cancelar:Prosseguir") == 1){
+	}
+	if(.@miss){
+		mes "[ OSC1127 ]";
+		mes "N�o tem material suficiente para prosseguir com o encantamento.";
+		end;
+	}
+	.@enchant = .@enchant_list[rand(getarraysize(.@enchant_list))];
+	.@card[.@slot] = .@enchant;
+	for(.@i = 0; .@i < getarraysize(.@requirement); .@i += 2)
+		delitem .@requirement[.@i],.@requirement[.@i+1];
+	if(rand(1,100) > .@break){
+		mes "[ OSC1127 ]";
+		mes "O teu equipamento foi encantado com sucesso.";
+		specialeffect EF_REPAIRWEAPON;
+		delequip .@part;
+		getitem2 .@equip_id,1,1,.@refine,0,.@card[0],.@card[1],.@card[2],.@card[3];
+	} else {
+		mes "[ OSC1127 ]";
+		mes "O teu equipamento ultrapassou o processo de encantamento.";	
+		specialeffect EF_REFINEFAIL;
+		delequip .@part;
+	}
+	end;
+	
+OnInit:
+	setarray .equip_id,15388,15389;
+	setarray .insignia,32228,32229,32230,32231,32232,32233;
+	cloaknpc(strnpcinfo(0),true);
+	setunittitle getnpcid(0),"[Enchant Machine]";
+end;
+}
+
+glast_01,245,296,5	script	OSC1052#edda_fogh	2_VENDING_MACHINE1,{
+	mes "[ OSC1052 ]";
+	mes "Preservaste o que resta da Queda de Glastheim.";
+	mes "Selecione o item que pretende para ver as suas informa��es.";
+	next;
+	switch(select("Cancelar:Armadura:Capa:Acess�rio esquerdo")){
+		case 1:
+			mes "[ OSC1052 ]";
+			mes "Voltem sempre que puderem. Aqueles que saltam atrav�s das dimens�es s�o sempre bem-vindos.";
+			end;
+			
+		case 2:
+			.@item_id = .equip_id[0];
+			setarray .@requirement,25739,5,6607,10;
+			.@item$ = " Suit[1]";
+			break;
+			
+		case 3:
+			.@item_id = .equip_id[1];
+			setarray .@requirement,25739,5,6607,10;
+			.@item$ = " Manteau[1]";
+			break;
+			
+		case 4:
+			mes "[ OSC1052 ]";
+			mes "Selecione o tipo de acess�rio que deseja.";
+			next;
+			setarray .@menu$,"Power","Poder Divino","Cem Sorteios","Flash","Celestial";
+			.@s = select("Poder:Poder Divino:Cem Sorteios:Flash:Celestial") - 1;
+			.@item_id = .insignia[.@s];
+			setarray .@requirement,25740,5,6755,5;
+			.@item$ = " " + .@menu$[.@s] + " Insignia[1]";
+			break;
+	}
+	mes "[ OSC1052 ]";
+	mes "[<ITEM>King Schmidt's" + .@item$ + "<INFO>" + .@item_id + "</INFO></ITEM>]";
+	mes "Requesito : ";
+	for(.@i = 0; .@i < getarraysize(.@requirement); .@i += 2){
+		mes "^0000CD" + .@requirement[.@i+1] + " " + getitemname(.@requirement[.@i]) + "^000000";
+		if(countitem(.@requirement[.@i]) < .@requirement[.@i+1])
+			.@miss++;
+	}
+	next;
+	if(select("Cancel:Buy Equipment") == 1){
+		mes "[ OSC1052 ]";
+		mes "Voltem sempre que puderem. Aqueles que saltam atrav�s das dimens�es s�o sempre bem-vindos.";
+		end;	
+	}
+	if(.@miss){
+		mes "[ OSC1052 ]";
+		mes "You don't have enough materials to buy this equipment.";
+		end;
+	}
+	for(.@i = 0; .@i < getarraysize(.@requirement); .@i += 2)
+		delitem .@requirement[.@i],.@requirement[.@i+1];
+	mes "[ OSC1052 ]"; 
+	mes "Aqui est� o seu <ITEM>King Schmidt's" + .@item$ + "<INFO>" + .@item_id + "</INFO></ITEM>";
+	getitem .@item_id,1;
+	end;
+	
+OnInit:
+	setarray .equip_id,15388,15389;
+	setarray .insignia,32228,32229,32230,32231,32232,32233;
+	cloaknpc(strnpcinfo(0),true);
+	setunittitle getnpcid(0),"[Exchange Machine]";
+end;
+}
+
+1@gl_prq,1,1,0	script	#gh_fall_control	-1,{
+	end;
+
+OnInstanceInit:
+	set_instance_var("map$",instance_mapname("1@gl_prq"));
+	.@type$ = instance_live_info(ILI_NAME);
+	instance_enable("#edda_fence_0",false);
+	instance_enable("#edda_warp_0",false);
+	instance_enable("Orb#edda_fall_0",false);
+	instance_enable("#gh_purification_ev_0",false);
+	instance_enable("#gh_purification_mob",false);
+	instance_enable("#gh_purification_boss",false);
+	instance_enable("#gh_purification_fire",false);
+	instance_enable("#schmidt_gh_purification",false);
+	
+	for(.@i = 0; .@i < 2; .@i++)
+		instance_enable("Heinrich#gh_fall_" + .@i,false);
+	for(.@i = 0; .@i < 3; .@i++){
+		instance_enable("Oscar#gh_fall_" + .@i,false);
+		instance_enable("#gh_fall_ev_" + .@i,false);
+	}
+	for(.@i = 0; .@i < 4; .@i++)
+		instance_enable("Varmundt#gh_fall_" + .@i,false);
+	for(.@i = 0; .@i < 5; .@i++){
+		instance_enable("Schmidt#gh_fall_" + .@i,false);
+		instance_enable("Oscar#gh_purification_" + .@i,false);
+	}
+	for(.@i = 0; .@i < 8; .@i++)
+		instance_enable("Knight Survivor#gh_fall_" + .@i,false);
+	for(.@i = 0; .@i < 16; .@i++)
+		instance_enable("Victim#gh_fall_" + .@i,false);
+	for(.@i = 0; .@i < 44; .@i++)
+		instance_enable("#schmidt_dummy_" + .@i,false);
+	
+	//= Fall of Glastheim
+	if(.@type$ == "Glastheim Fall"){
+		instance_enable("#gh_fall_ev_0",true);
+		for(.@i = 0; .@i < 4; .@i++){
+			instance_enable("Varmundt#gh_fall_" + .@i,true);
+			instance_hide("Varmundt#gh_fall_" + .@i,true);
+		}
+		for(.@i = 0; .@i < 5; .@i++){
+			instance_enable("Schmidt#gh_fall_" + .@i,true);
+			instance_hide("Schmidt#gh_fall_" + .@i,true);
+		}
+		for(.@i = 0; .@i < 2; .@i++){
+			instance_enable("Heinrich#gh_fall_" + .@i,true);
+			instance_hide("Heinrich#gh_fall_" + .@i,true);
+		}
+		for(.@i = 0; .@i < 6; .@i++){
+			instance_enable("#gh_fall_guard_" + .@i,true);
+			instance_hide("#gh_fall_guard_" + .@i,true);
+		}
+		for(.@i = 0; .@i < 3; .@i++){
+			instance_enable("Oscar#gh_fall_" + .@i,true);
+			instance_hide("Oscar#gh_fall_" + .@i,true);
+		}
+		for(.@i = 0; .@i < 44; .@i++){
+			instance_enable("#schmidt_dummy_" + .@i,true);
+			instance_hide("#schmidt_dummy_" + .@i,true);
+		}
+		end;
+	}
+	if(.@type$ == "Glastheim Purification"){	
+		set_instance_var("maid",20392);
+		set_instance_var("khalitzburg",20388);
+		set_instance_var("knight",20390);
+		set_instance_var("bloody",20394);
+		set_instance_var("schmidt",20386);
+		set_instance_var("hunt",12459);
+	} else {
+		set_instance_var("mode",1);
+		set_instance_var("maid",20392);
+		set_instance_var("khalitzburg",20389);
+		set_instance_var("knight",20391);
+		set_instance_var("bloody",20394);
+		set_instance_var("schmidt",20387);	
+		set_instance_var("hunt",12462);
+	}
+	instance_enable("#gh_purification_ev_0",true);
+	instance_enable("Oscar#gh_purification_0",true);
+	instance_enable("#gh_purification_mob",true);
+	instance_enable("#gh_purification_boss",true);
+	instance_enable("#gh_purification_fire",true);
+	instance_event("#gh_purification_mob","OnSpawn00",false);
+end;
+}
+
+1@gl_prq,299,17,0	script	#gh_fall_ev_0	HIDDEN_WARP_NPC,3,2,{
+	end;
+	
+OnTouch:
+	.@var = get_instance_var("gh_fall");
+	set_instance_var("gh_fall",0);
+	if(.@var == 0){
+		set_instance_var("gh_fall",1);
+		instance_enable(strnpcinfo(0),false);
+		instance_hide("Varmundt#gh_fall_0",false);
+		specialeffect EF_YELLOBODY,AREA,instance_npcname("Varmundt#gh_fall_0");
+		specialeffect EF_WHITEBODY,AREA,instance_npcname("Varmundt#gh_fall_0");
+	}
+end;
+}
+
+1@gl_prq,299,30,4	script	Varmundt#gh_fall_0	4_M_BARMUND,5,4,{
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 2){
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt's Illusion ]";
+		mes "Por favor, volta para tr�s. Este lugar est� a transformar-se num lugar onde os seres vivos n�o podem entrar.";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "S�lvia. O que � que aconteceu aqui?";
+		mes "Cancelei todos os meus planos para regressar aqui o mais depressa poss�vel. Onde est� o Heinrich?";
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt's Illusion ]";
+		mes "Como podem ver, a maldi��o de Himmelmez est� a espalhar-se por todo o castelo. � extremamente perigoso entrar agora.";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "No entanto, h� muitas pessoas que ainda n�o foram evacuadas.";
+		mes "N�o dever�amos concentrar-nos nisso primeiro?";
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt's Illusion ]";
+		mes "O Senhor Heinrich j� come�ou.";
+		mes "O que deve fazer agora � remediar a situa��o ap�s a evacua��o, e n�o mergulhar imprudentemente no castelo.";
+		next;
+		cutin "schmidt03",0;
+		mes "[ Schmidt ]";
+		mes "Tens raz�o, mas h� outras raz�es para eu querer entrar no castelo.";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "Eu sei algumas coisas sobre este tipo de maldi��o. Talvez o catalisador esteja dentro do castelo. Se n�o o destruirmos...";
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt's Illusion ]";
+		mes "Mencionou a maldi��o, mas n�o a raz�o da mesma.";
+		next;
+		cutin "schmidt06",0;
+		mes "[ Schmidt ]";
+		mes "O que � ent�o? Conheces a fonte de energia?!";
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt's Illusion ]";
+		mes "Explicarei mais tarde.";
+		mes "N�o queres esperar que eu esteja fisicamente aqui?";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "Sabes que n�o � assim.";
+		mes "Eu sou o rei deste continente e o dono deste castelo. � meu dever alterar a situa��o atual.";
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt's Illusion ]";
+		mes "Eu sei melhor do que ningu�m, jovem rei.";
+		mes "Sei que n�o h� mentira nem hesita��o no teu cora��o.";
+		next;
+		mes "[ Varmundt's Illusion ]";
+		mes "Mas a vossa vida n�o � s� vossa, � a vida do pr�prio continente, por favor voltem atr�s.";
+		next;
+		cutin "schmidt03",0;
+		mes "[ Schmidt ]";
+		mes "Sage... Lamento, mas tenho de me ir embora.";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "Pode explicar-me melhor a situa��o?";
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt's Illusion ]";
+		mes "Quero contar-vos um pouco mais, mas como estou a perseguir o Himmelmez, n�o posso dar-me ao luxo de vos contar agora.";
+		next;
+		mes "[ Varmundt's Illusion ]";
+		mes "Uma coisa � certa. Se voltares agora, podes ter f� nas minhas capacidades e ficar descansado.";
+		next;
+		mes "[ Varmundt's Illusion ]";
+		mes "Claro que n�o posso garantir a vida de todos os que est�o no castelo, isso n�o pode ser evitado.";
+		next;
+		cutin "schmidt06",0;
+		mes "[ Schmidt ]";
+		mes "Os meus subordinados s�o o meu povo. Quero que todos sobrevivam. N�o voltarei a ouvir essa hist�ria!";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "Vou-me embora.";
+		next;
+		cutin "gl_barmund3",2;
+		mes "[ Varmundt's Illusion ]";
+		mes "Espera, jovem rei! N�o deveis ir assim t�o descuidadamente!";
+		close2;
+		cutin "",255;
+		.@var = get_instance_var("gh_fall");
+		if(.@var == 2){
+			set_instance_var("gh_fall",3);
+			.@mercenary = getmercinfo(8);
+			if(.@mercenary != 0){
+				if(unitexists(.@mercenary))
+					unitkill .@mercenary;
+			}
+			instance_hide("Schmidt#gh_fall_0",true);
+			instance_enable("Schmidt#gh_fall_0",false);
+			instance_hide("Oscar#gh_fall_0",false);
+			mercenary_create 20385,300000;
+		}
+		end;
+	}
+	if(.@var == 3){
+		cutin "gl_barmund3",2;
+		mes "[ Varmundt's Illusion ]";
+		mes "Espera, jovem rei! N�o deveis ir assim t�o descuidadamente!";
+		close3;
+	}
+	end;
+	
+OnTouch:
+	specialeffect EF_YELLOBODY;
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 1){
+		set_instance_var("gh_fall",2);
+		instance_hide("Schmidt#gh_fall_0",false);
+		npctalk "P�ra a� mesmo, Schmidt. Este n�o � um lugar para simplesmente entrar a qualquer momento.";	
+	}
+end;
+}
+
+1@gl_prq,299,25,0	script	Schmidt#gh_fall_0	4_ED_SCHMIDT,{
+	cutin "schmidt02",0;
+	mes "[ Schmidt ]";
+	mes "Estou a falar com o s�bio. Por favor, espere um momento...";
+	close3;
+}
+
+1@gl_prq,280,32,3	script	Oscar#gh_fall_0	4_ED_OSCAR,3,3,{
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 3){
+		cutin "oscar01",0;
+		mes "[ Oscar ]";
+		mes "E se algu�m me v�??";
+		mes "N�o te preocupes. O meu corpo tem uma barreira dimensional para que s� tu me possas ver.";
+		next;
+		mes "[ Oscar ]";
+		mes "E tu? Acha que h� uma forma de mudar o curso da hist�ria e tirar estas pessoas de uma trag�dia?";
+		next;
+		cutin "oscar05",0;
+		mes "[ Oscar ]";
+		mes "Afinal de contas, o destino destas pessoas � dr�stico.";
+		next;
+		mes "[ Oscar ]";
+		mes "� um futuro sem sonhos nem esperan�a. Uma hist�ria dolorosa e distorcida.";
+		mes "Para onde quer que se olhe, n�o h� um vislumbre de esperan�a.";
+		next;
+		mes "[ Oscar ]";
+		mes "Claro que o que eu queria mesmo era um final feliz, por isso tentei mudar o meu pr�prio destino algumas vezes.";
+		next;
+		cutin "oscar01",0;
+		mes "[ Oscar ]";
+		mes "O que eu disse foi uma piada?!";
+		mes "Nunca me levas muito a s�rio, n�o �?";
+		next;
+		cutin "oscar02",0;
+		mes "[ Oscar ]";
+		mes "Enfim. Na minha opini�o, a decis�o militar do Rei Schmidt deixou a desejar...";
+		next;
+		mes "[ Oscar ]";
+		mes "Foi taticamente correto, mas falhou estrategicamente.";
+		next;
+		mes "[ Oscar ]";
+		mes "De qualquer forma, ver� por si mesmo, mas foi por isso que Varmundt tentou impedi-lo de entrar.";
+		next;
+		cutin "oscar05",0;
+		mes "[ Oscar ]";
+		mes "Pobre Schmidt...";
+		next;
+		mes "[ Oscar ]";
+		mes "Penso sempre em como a hist�ria teria sido diferente se ele tivesse sido um pouco mais ego�sta.";
+		next;
+		cutin "oscar01",0;
+		mes "[ Oscar ]";
+		mes "Estou a mexer-me. Ainda h� eventos para testemunhar!";
+		close2;
+		cutin "",255;
+		set_instance_var("gh_fall",4);
+		instance_enable("#gh_fall_ev_1",true);
+		for(.@i = 0; .@i < 16; .@i++)
+			instance_enable("Victim#gh_fall_" + .@i,true);	
+		end;
+	}
+	cutin "oscar01",0;
+	mes "[ Oscar ]";
+	mes "Estou a mexer-me. Ainda h� eventos para testemunhar!";
+	close3;
+	
+OnTouch:
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 3)
+		npctalk "Oh~ Tiveste uma boa conversa com o Varmundt?";
+	if(.@var == 4)
+		npctalk "Continue. N�o deve ser preciso muito para ver os seguintes eventos.";
+end;
+}
+
+1@gl_prq,273,49,0	script	#gh_fall_ev_1	HIDDEN_WARP_NPC,4,3,{
+	end;
+	
+OnTouch:
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 4){
+		set_instance_var("gh_fall",5);
+		instance_hide(strnpcinfo(0),true);
+		instance_enable(strnpcinfo(0),false);
+		.@mercenary = getmercinfo(8);
+		if(.@mercenary != 0){
+			if(unitexists(.@mercenary))
+				unitkill .@mercenary;
+		}
+		instance_enable("Schmidt#gh_fall_1",true);
+		instance_hide("Schmidt#gh_fall_1",false);
+		npctalk "Espera. Os meus soldados n�o est�o na frente? ",instance_npcname("Schmidt#gh_fall_1");
+	}
+end;
+}
+
+1@gl_prq,273,51,7	script	Schmidt#gh_fall_1	4_ED_SCHMIDT,{
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 5){
+		cutin "schmidt02",2;
+		mes "[ Schmidt ]";
+		mes "Parece que h� pessoas que ainda n�o foram evacuadas. Tenho de lhes dizer para regressarem l� fora.";
+		npctalk "Schmidt : Demoraste o teu tempo. N�o s�o os meus soldados que est�o � minha frente??";
+		next;
+		select("Por favor, volte agora.:Tem ordens.");
+		mes "[ Schmidt ]";
+		mes "N�o, n�o posso. Eu n�o vou voltar...";
+		next;
+		mes "[ Schmidt ]";
+		mes "Lamento, mas preciso que me ajudes. Preciso da tua ajuda para encontrar o resto dos sobreviventes.";
+		next;
+		mes "[ Schmidt ]";
+		mes "H� uma hip�tese de eles te atacarem se n�o estiveres comigo. Acho que eles j� perderam metade da sanidade mental...";
+		next;
+		mes "[ Schmidt ]";
+		mes "Voltarei a encontrar-me contigo quando os nossos caminhos se cruzarem.";
+		close2;
+		cutin "",255;
+		set_instance_var("gh_fall",6);
+		.@mercenary = getmercinfo(8);
+		if(.@mercenary != 0){
+			if(unitexists(.@mercenary))
+				unitkill .@mercenary;
+		}
+		instance_hide(strnpcinfo(0),true);
+		instance_enable(strnpcinfo(0),true);
+		instance_enable("#edda_fence_0",true);
+		mercenary_create 20385,300000;
+		for(.@i = 0; .@i < 8; .@i++)
+			instance_enable("Knight Survivor#gh_fall_" + .@i,true);
+	}
+	end;
+}
+
+1@gl_prq,283,54,3	script	Victim#gh_fall_0	4_TOWER_06,5,5,{
+	end;
+	
+OnTouch:
+	specialeffect EF_VENOMDUST;
+	instance_hide(strnpcinfo(0),true);
+	instance_enable(strnpcinfo(0),false);
+	getmapxy(.@map$,.@x,.@y,BL_NPC);
+	monster .@map$,.@x,.@y,"Maggot",2467,1;
+end;
+}
+
+1@gl_prq,287,78,4	duplicate(Victim#gh_fall_0)	Victim#gh_fall_1	4_TOWER_08,5,5
+1@gl_prq,294,94,2	duplicate(Victim#gh_fall_0)	Victim#gh_fall_2	4_TOWER_11,5,5
+1@gl_prq,291,132,5	duplicate(Victim#gh_fall_0)	Victim#gh_fall_3	4_TOWER_13,5,5
+1@gl_prq,295,149,4	duplicate(Victim#gh_fall_0)	Victim#gh_fall_4	4_TOWER_03,5,5
+1@gl_prq,283,152,2	duplicate(Victim#gh_fall_0)	Victim#gh_fall_5	4_TOWER_01,5,5
+1@gl_prq,278,146,3	duplicate(Victim#gh_fall_0)	Victim#gh_fall_6	4_TOWER_06,5,5
+1@gl_prq,289,167,6	duplicate(Victim#gh_fall_0)	Victim#gh_fall_7	4_TOWER_08,5,5
+1@gl_prq,284,176,8	duplicate(Victim#gh_fall_0)	Victim#gh_fall_8	4_TOWER_11,5,5
+1@gl_prq,287,201,7	duplicate(Victim#gh_fall_0)	Victim#gh_fall_9	4_TOWER_13,5,5
+1@gl_prq,297,209,1	duplicate(Victim#gh_fall_0)	Victim#gh_fall_10	4_TOWER_03,5,5
+1@gl_prq,280,210,5	duplicate(Victim#gh_fall_0)	Victim#gh_fall_11	4_TOWER_01,5,5
+1@gl_prq,299,267,7	duplicate(Victim#gh_fall_0)	Victim#gh_fall_12	4_TOWER_06,5,5
+1@gl_prq,292,283,8	duplicate(Victim#gh_fall_0)	Victim#gh_fall_13	4_TOWER_08,5,5
+1@gl_prq,285,294,8	duplicate(Victim#gh_fall_0)	Victim#gh_fall_14	4_TOWER_11,5,5
+1@gl_prq,297,297,8	duplicate(Victim#gh_fall_0)	Victim#gh_fall_15	4_TOWER_13,5,5
+
+1@gl_prq,290,51,7	script	Knight Survivor#gh_fall_0	4_F_KHALITZBURG,3,3,{
+	end;
+	
+OnTouch:
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 6){
+		.@id = atoi(replacestr(strnpcinfo(2),"gh_fall_",""));
+		unittalk getcharid(3),strcharinfo(0) + " : Por ordem do rei. Por favor, evacuem rapidamente.";
+		setpcblock PCBLOCK_ALL,true;
+		switch(.@id){
+			case 0:
+				.@mes$ = "Evitar o castelo? Oh meu rei, n�o deveis entrar. Por favor, evita-o.";
+				break;
+				
+			case 1:
+				.@mes$ = "Uma estranha esfera no castelo est� a sugar a vida do nosso povo. Todas as pessoas que se aproximaram dela est�o a transformar-se em mortos-vivos.";
+				break;
+				
+			case 2:
+				.@mes$ = "Os vivos est�o a transformar-se em mortos-vivos. Tens de o evitar. Os cavaleiros est�o a bloquear a �rea exterior, mas � o limite.";
+				break;
+				
+			case 3:
+				.@mes$ = "Ugh... Consigo sentir a minha alma a ser corro�da pelo som da esfera. Fica longe de mim.";
+				break;
+				
+			case 4:
+				.@mes$ = "N�o � verdade que os cavaleiros dentro do castelo se transformaram em monstros, certo? Estou a ir embora.";
+				break;
+				
+			case 5:
+				.@mes$ = "N�o avance mais, Sua Alteza! � perigoso! Por favor, vem comigo!";
+				break;
+				
+			case 6:
+				.@mes$ = "Deixem-me em paz! N�o te aproximes de mim!";
+				break;
+				
+			case 7:
+				.@mes$ = "S� recebo ordens de Sua Majestade, Schmidt!";
+				break;
+		}
+		npctalk .@mes$;
+		sleep2 3000;
+		setpcblock PCBLOCK_ALL,false;
+		instance_hide(strnpcinfo(0),true);
+		instance_enable(strnpcinfo(0),false);
+		set_instance_var("survivor",get_instance_var("survivor") + 1);
+		if(.@id >= 6){
+			getmapxy(.@map$,.@x,.@y,BL_NPC);
+			monster .@map$,.@x,.@y,"Unreasonable Person",20388,1,instance_npcname(strnpcinfo(0)) + "::OnMobDead";
+		}
+		end;
+	}
+	
+OnMobDead:
+end;
+}
+
+1@gl_prq,295,102,5	duplicate(Knight Survivor#gh_fall_0)	Knight Survivor#gh_fall_1	4_F_KHALITZBURG,3,3
+1@gl_prq,295,134,3	duplicate(Knight Survivor#gh_fall_0)	Knight Survivor#gh_fall_2	4_F_KHALITZBURG,3,3
+1@gl_prq,287,156,4	duplicate(Knight Survivor#gh_fall_0)	Knight Survivor#gh_fall_3	4_F_KHALITZBURG,3,3
+1@gl_prq,279,160,7	duplicate(Knight Survivor#gh_fall_0)	Knight Survivor#gh_fall_4	4_F_KHALITZBURG,3,3
+1@gl_prq,278,165,6	duplicate(Knight Survivor#gh_fall_0)	Knight Survivor#gh_fall_5	4_F_KHALITZBURG,3,3
+1@gl_prq,299,179,1	duplicate(Knight Survivor#gh_fall_0)	Knight Survivor#gh_fall_6	4_F_KHALITZBURG,3,3
+1@gl_prq,300,193,2	duplicate(Knight Survivor#gh_fall_0)	Knight Survivor#gh_fall_7	4_F_KHALITZBURG,3,3
+
+1@gl_prq,284,217,4	script	#edda_fence_0	4_ED_FENCE,{
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 6){
+		if(get_instance_var("survivor") < 8){
+			cutin "schmidt02",2;
+			mes "[ Schmidt ]";
+			mes "Aventureiro. Parece que h� mais sobreviventes por perto. N�o os dev�amos encontrar primeiro?";
+			close3;
+		}
+		cutin "schmidt02",2;
+		mes "[ Schmidt ]";
+		mes "A porta j� est� gasta, por isso � melhor parti-la. Afasta-te um pouco, eu trato disso.";
+		close2;
+		cutin "",255;
+		set_instance_var("gh_fall",7);
+		specialeffect EF_LORD;
+		sleep2 3000;
+		instance_hide(strnpcinfo(0),true);
+		instance_enable("#edda_warp_0",true);
+		mercenary_create 20385,300000;
+	}
+	end;
+}
+
+1@gl_prq,284,217,4	script	#edda_warp_0	WARPNPC,3,3,{
+	end;
+	
+OnTouch:
+	.@map$ = get_instance_var("map$");
+	warp .@map$,284,229;
+end;
+}
+
+1@gl_prq,286,247,7	script	Schmidt#gh_fall_2	4_ED_SCHMIDT,3,3,{
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 8){
+		cutin "schmidt02",2;
+		mes "[ Schmidt ]";
+		mes "A minha vitalidade est� a desaparecer lentamente � medida que nos aproximamos. Enquanto estamos aqui, esta energia sinistra est� a drenar a vida e a sanidade de todos.";
+		next;
+		select("Tens de regressar agora.");
+		mes "[ Schmidt ]";
+		mes "Atravessar a passagem subterr�nea � dif�cil e os corredores acima j� se desmoronaram. N�o nos resta muito tempo.";
+		next;
+		mes "[ Schmidt ]";
+		mes "Vamos continuar, e apressar-nos o mais poss�vel.";
+		close2;
+		cutin "",255;
+		set_instance_var("gh_fall",9);
+		instance_hide(strnpcinfo(0),true);
+		mercenary_create 20385,300000;
+		end;
+	}
+	end;
+	
+OnTouch:
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 7){
+		.@mercenary = getmercinfo(8);
+		if(.@mercenary != 0){
+			if(unitexists(.@mercenary))
+				unitkill .@mercenary;
+		}
+		set_instance_var("gh_fall",8);
+		instance_hide(strnpcinfo(0),false);
+		npctalk "Schmidt : Tenho um mau pressentimento em rela��o a isto.";
+	}
+end;
+}
+
+1@gl_prq,297,294,5	script	Schmidt#gh_fall_3	4_ED_SCHMIDT,3,3,{
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 12){
+		cutin "schmidt04",0;
+		mes "[ Schmidt ]";
+		mes "Heinrich! Diz-me onde est� a esfera.";
+		next;
+		cutin "heinrich02",2;
+		mes "[ Heinrich ]";
+		mes "Rei Schmidt! Agora n�o � a altura certa para isto.";
+		next;
+		cutin "schmidt01",0;
+		mes "[ Schmidt ]";
+		mes "O Mestre � o �nico s�bio neste continente. Estou preocupado com a sua posi��o.";
+		next;
+		cutin "heinrich02",2;
+		mes "[ Heinrich ]";
+		mes "Mas tu �s o rei! O �nico rei deste continente!";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "O rei pode ser sucedido por outra pessoa, mas ningu�m pode substituir o s�bio, pelo menos durante muitos s�culos.";
+		next;
+		cutin "schmidt06",0;
+		mes "[ Schmidt ]";
+		mes "Consegues imaginar o que aconteceria ao estado do continente se o s�bio desaparecesse de repente?";
+		mes "Quem suportar� as amea�as deste mundo e as amea�as de outras dimens�es?";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "Esta � a minha decis�o... guia-me at� onde a salva entrou, Heinrich. Tenho a certeza que sabes a localiza��o.";
+		next;
+		cutin "heinrich02",2;
+		mes "[ Heinrich ]";
+		mes "N�o h� nada a fazer.";
+		next;
+		cutin "heinrich_a02",2;
+		mes "[ Heinrich ]";
+		mes "Obedecerei... �s vossas ordens.";
+		close2;
+		cutin "",255;
+		specialeffect EF_REDBODY;
+		specialeffect EF_CLOAKING;
+		specialeffect EF_REDBODY,AREA,instance_npcname("Heinrich#gh_fall_0");
+		specialeffect EF_CLOAKING,AREA,instance_npcname("Heinrich#gh_fall_0");
+		for(.@i = 0; .@i < 6; .@i++){
+			instance_hide("#gh_fall_guard_" + .@i,true);
+			instance_enable("#gh_fall_guard_" + .@i,false);
+		}
+		sleep 200;
+		instance_hide("Oscar#gh_fall_1",false);
+		sleep 1000;
+		set_instance_var("gh_fall",13);
+		npctalk "Oscar : A hist�ria tamb�m n�o mudou desta vez.",instance_npcname("Oscar#gh_fall_1");
+		end;
+	}
+	if(.@var == 13){
+		mes "^0000CDParece que n�o estou em sintonia com este tempo e espa�o. Iniciar uma conversa n�o funciona.";
+		end;
+	}
+	end;
+	
+OnTouch:
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 9){
+		.@mercenary = getmercinfo(8);
+		if(.@mercenary != 0){
+			if(unitexists(.@mercenary))
+				unitkill .@mercenary;
+		}
+		for(.@i = 0; .@i < 6; .@i++)
+			instance_hide("#gh_fall_guard_" + .@i,false);
+		instance_hide("Heinrich#gh_fall_0",false);
+		instance_hide("Schmidt#gh_fall_3",false);
+		set_instance_var("gh_fall",10);
+		npctalk "Schmidt : Heinrich!",instance_npcname("Schmidt#gh_fall_3");
+	}
+end;
+}
+
+1@gl_prq,301,294,3	script	Heinrich#gh_fall_0	4_M_HEINRICH,{
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 10){
+		cutin "heinrich02",2;
+		mes "[ Heinrich ]";
+		mes "Rei Schmidt! Vejo que voc� chegou.";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "Heinrich, estou feliz que voc� est� seguro!";
+		next;
+		cutin "heinrich02",2;
+		mes "[ Heinrich ]";
+		mes "Eu disse aos soldados para lev�-lo para fora quando eles se encontram com voc�, mas eles n�o desobedeceram minhas ordens. Voc� deve ser teimoso para vir aqui, sua majestade...";
+		next;
+		cutin "schmidt05",0;
+		mes "[ Schmidt ]";
+		mes "Oh, j� faz um tempo desde a �ltima vez que nos encontramos e voc� j� est� me importunando Heinrich. � bom te ver de novo.";
+		next;
+		cutin "heinrich02",2;
+		mes "[ Heinrich ]";
+		mes "Rei Schmidt, n�o h� tempo a perder. Voc� deve deixar este lugar comigo imediatamente.";
+		next;
+		cutin "schmidt01",0;
+		mes "[ Schmidt ]";
+		mes "Voc� � o mesmo que o grande s�bio, n�o me diga para sair rapidamente. O que est� no castelo causando tudo isso?";
+		next;
+		cutin "heinrich02",2;
+		mes "[ Heinrich ]";
+		mes "...";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "Agora, diga-me. Heinrich, o que est� fazendo voc� me faz ir o mais longe poss�vel.";
+		next;
+		cutin "heinrich02",2;
+		mes "[ Heinrich ]";
+		mes "O orbe amaldi�oado estava localizado dentro do castelo, presume-se que seja um trabalho de Himmelmez. Eu n�o conseguia descobrir, mas a sua energia est� ficando mais forte.";
+		next;
+		cutin "schmidt04",0;
+		mes "[ Schmidt ]";
+		mes "Certo. Eu n�o entendo por que voc� est� me pedindo para evacuar.";
+		next;
+		cutin "schmidt01",0;
+		mes "[ Schmidt ]";
+		mes "Mas se a esfera � o problema, n�o acho que ser� resolvido por mim evacuando, voc� acha?";
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt�s Illusion ]";
+		mes "Correto. � sem sentido fugir. � um objeto amaldi�oado que tira interminavelmente a energia dos vivos.";
+		close2;
+		cutin "",255;
+		instance_hide("Varmundt#gh_fall_1",false);
+		npctalk "Heinrich : Varmundt!";
+		npctalk "Schmidt : Master!",instance_npcname("Schmidt#gh_fall_3");
+		set_instance_var("gh_fall",11);
+		end;
+	}
+	if(.@var < 13){
+		cutin "heinrich02",2;
+		mes "[ Heinrich ]";
+		mes "(Temos de evacuar Schmidt, aconte�a o que acontecer.)";
+		close3;
+	}
+	mes "^0000CDParece que n�o estou em sintonia com este tempo e espa�o. Iniciar uma conversa n�o funciona.";
+	end;
+}
+
+1@gl_prq,299,297,4	script	Varmundt#gh_fall_1	4_M_BARMUND,{
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 11){
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt ]";
+		mes "Se eu tivesse corrido um pouco mais, t�-lo-ia alcan�ado. Estava preocupado com o nosso rei, n�o pude deixar de vir c�.";
+		next;
+		cutin "schmidt04",0;
+		mes "[ Schmidt ]";
+		mes "Master...";
+		next;
+		cutin "gl_barmund3",2;
+		mes "[ Varmundt ]";
+		mes "Que raio est� a fazer, Heinrich! Ordenei-vos que garantissem que o Rei n�o viria aqui.";
+		next;
+		cutin "heinrich02",2;
+		mes "[ Heinrich ]";
+		mes "Vou evacuar Schmidt imediatamente!";
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt ]";
+		mes "Foi o que eu pensei. Eu trato da esfera, por isso evacuem o castelo imediatamente.";
+		close2;
+		cutin "",255;
+		instance_hide("Varmundt#gh_fall_1",true);
+		instance_enable("Varmundt#gh_fall_1",false);
+		set_instance_var("gh_fall",12);
+		end;
+	}
+	end;
+}
+
+1@gl_prq,299,297,4	script	Oscar#gh_fall_1	4_ED_OSCAR,{
+	.@map$ = get_instance_var("map$");
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 13){
+		cutin "OSCAR01",2;
+		mes "[ Oscar ]";
+		mes "Acho que j� vi isto acontecer cerca de 824000 vezes.";
+		next;
+		mes "[ Oscar ]";
+		mes "Por vezes, caio noutra �rea, mas as dimens�es que podem ver agora n�o passam de hist�ria.";
+		next;
+		cutin "OSCAR03",2;
+		mes "[ Oscar ]";
+		mes "Por enquanto, temos de atravessar as dimens�es e observar a hist�ria de Schmidt. A linha do tempo a partir de agora � muito perigosa.";
+		next;
+		mes "[ Oscar ]";
+		mes "Schmidt e Heinrich provavelmente n�o ser�o capazes de o detetar, mesmo que Heinrich seja um mestre da reconstru��o m�gica.";
+		next;
+		mes "[ Oscar ]";
+		mes "Ent�o, vais seguir o Schmidt e ver o que acontece a seguir? Se n�o estiveres interessado, podes parar aqui.";
+		next;
+		if(select("Espera.:Vou-me embora") == 1){
+			mes "[ Oscar ]";
+			mes "Bem, a decis�o � tua. Acho que os interesses das pessoas s�o diferentes.";
+			close3;
+		}
+		cutin "OSCAR01",2;
+		mes "[ Oscar ]";
+		mes "Boa decis�o. Depois de o verem, v�o querer v�-lo at� ao fim.";
+		close2;
+		cutin "",255;
+		instance_enable("#gh_fall_ev_2",true);
+		instance_enable("Orb#edda_fall_0",true);
+		instance_enable("Varmundt#gh_fall_2",true);
+		instance_hide("Varmundt#gh_fall_2",false);
+		set_instance_var("gh_fall",14);
+		warp .@map$,52,275;
+	}
+	end;
+}
+
+1@gl_prq,52,275,0	script	#gh_fall_ev_2	HIDDEN_WARP_NPC,1,1,{
+	end;
+	
+OnTouch:
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 14){
+		.@v$ = instance_npcname("Varmundt#gh_fall_2");
+		.@o$ = instance_npcname("Orb#edda_fall_0");
+		.@s$ = instance_npcname("Schmidt#gh_fall_4");
+		.@h$ = instance_npcname("Heinrich#gh_fall_1");
+		instance_hide(strnpcinfo(0),true);
+		instance_enable(strnpcinfo(0),false);
+		sleep 1500;
+		npctalk "Varmundt : Por favor, p�ra desta vez!",.@v$;
+		specialeffect(EF_ROTATE_LINE_BLUE,.@v$);
+		sleep 3000;
+		//specialeffect(EF_TETRA,.@v$);
+		sleep 3000;
+		//specialeffect(EF_TETRA,.@v$);
+		sleep 2000;
+		//specialeffect(EF_TETRA,.@v$);
+		sleep 2000;
+		specialeffect(EF_TEIHIT3,.@v$);
+		sleep 2000;
+		specialeffect(EF_ENDURE,.@o$);
+		sleep 2000;
+		npctalk "Varmundt : Hmmm! S� mais um bocadinho!",.@v$;
+		sleep 3000;
+		specialeffect(EF_PRIMECHARGE2,.@o$);
+		sleep 3100;
+		specialeffect(EF_BOTTOM_BASILICA2,.@s$);
+		specialeffect(EF_BOTTOM_BASILICA2,.@h$);
+		sleep 3000;
+		npctalk "Varmundt : I failed.",.@v$;
+		sleep 200;
+		specialeffect(EF_THUNDERSTORM2,.@s$);
+		specialeffect(EF_THUNDERSTORM2,.@h$);
+		instance_hide("Varmundt#gh_fall_2",true);
+		instance_hide("Varmundt#gh_fall_3",false);
+		instance_hide("Schmidt#gh_fall_4",false);
+		instance_hide("Heinrich#gh_fall_1",false);
+		.@v$ = instance_npcname("Varmundt#gh_fall_3");
+		npctalk "Varmundt : Huh?!",.@v$;
+		sleep 2000;
+		npctalk "Schmidt : Mestre, porque est� a tentar fazer isto sozinho!",.@s$;
+		sleep 2000;
+		npctalk "Heinrich : Varmundt!",.@h$;
+		sleep 3100;
+		npctalk "Varmundt : Jovem rei, �s mesmo teimoso.",.@v$;
+		sleep 5500;
+		npctalk "Varmundt : Porque n�o gastam o vosso tempo num ch� da tarde, em vez de estarem aqui?",.@v$;
+		sleep 5500;
+		npctalk "Schmidt : Isso pode esperar, n�o dev�amos estar mais preocupados com aquilo que temos diante dos olhos??",.@s$;
+		sleep 5500;
+		npctalk "Varmundt : Suspiro... jovem rei. O maior problema para mim neste momento � que ainda est�s aqui.",.@v$;
+		sleep 3000;
+		npctalk "Schmidt : Mestre!",.@s$;
+		sleep 3000;
+		npctalk "Varmundt : Regressar agora. Estar� a ajudar-me, indo o mais longe poss�vel daqui.",.@v$;
+		sleep 5500;
+		npctalk "Schmidt : Mestre! Se nos juntarmos a mim, podemos facilmente destruir esse objeto!",.@s$;
+		sleep 5000;
+		npctalk "Varmundt : Claro que sim. Achavas mesmo que o teu mestre n�o saberia como partir este objeto.",.@v$;
+		sleep 3000;
+		npctalk "Schmidt : ...",.@s$;
+		sleep 3000;
+		npctalk "Varmundt : Deixem-me dizer-vos porque vos queria manter afastados do castelo. Primeiro, deponham as vossas m�os, acho que desta vez vou conseguir destruir esta esfera.",.@v$;
+		sleep 5500;
+		npctalk "Heinrich : Rei Schmidt. Sigam as palavras do s�bio. Este globo parece muito perigoso!",.@h$;
+		instance_hide("Varmundt#gh_fall_3",true);
+		instance_hide("Varmundt#gh_fall_2",false);
+		.@v$ = instance_npcname("Varmundt#gh_fall_2");
+		sleep 3000;
+		set_instance_var("gh_fall",15);
+		specialeffect(EF_HIT2,.@v$);
+		end;
+	}
+end;
+}
+
+
+1@gl_prq,55,281,3	script	Varmundt#gh_fall_2	4_M_BARMUND,{
+	.@var = get_instance_var("gh_fall");
+	'party_id = getcharid(1);
+	if(.@var == 15){
+		.@map$ = get_instance_var("map$");
+		.@o$ = instance_npcname("Orb#edda_fall_0");
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt ]";
+		mes "Ouve-me, jovem rei. A julgar pela minha capacidade de ler mana, este orbe n�o tem fraqueza.";
+		specialeffect(EF_MAXPOWER,.@o$);
+		next;
+		mes "[ Varmundt ]";
+		mes "Este objeto est� constantemente a absorver toda a vida que nos rodeia e a expandir o seu alcance.";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "Acho que � por isso que os seres vivos das redondezas est�o a transformar-se lentamente em mortos-vivos.";
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt ]";
+		mes "A taxa de absor��o � lenta, mas a quantidade de vida que pode absorver n�o tem limite. Funciona como um canal para outra dimens�o onde a energia est� a ser absorvida em.";
+		next;
+		cutin "schmidt07",0;
+		mes "[ Schmidt ]";
+		mes "Outra dimens�o?! Ser� que absorve a vida e simplesmente a deita fora para outra dimens�o?";
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt ]";
+		mes "Consegue-se sentir a mal�cia do criador deste Orbe. A �nica maneira de o destruir � sobrecarreg�-lo com uma poderosa energia vital.";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "DSignifica que...";
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt ]";
+		mes "Uma pessoa com uma forte energia vital deve deitar toda a sua energia na esfera num curto espa�o de tempo.";
+		next;
+		mes "[ Varmundt ]";
+		mes "Este n�o � outro sen�o eu, Varmundt.";
+		next;
+		cutin "heinrich02",2;
+		mes "[ Heinrich ]";
+		mes "N�o digas isso, Varmundt!";
+		specialeffect(EF_MAXPOWER,.@o$);
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt ]";
+		mes "N�o h� outra maneira, agora sabes a raz�o, Schmidt. A raz�o pela qual te disse para ires o mais longe poss�vel.";
+		next;
+		mes "[ Varmundt ]";
+		mes "Certamente descobririas como destruir este orbe mesmo que eu n�o te tivesse ensinado. E certamente terias desistido da tua pr�pria vida.";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "Talvez assim.";
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt ]";
+		mes "A tua for�a � o pin�culo da Guarda Real, a tua for�a vital � suficiente para destruir esta esfera. Mas n�o deves morrer.";
+		next;
+		mes "[ Varmundt ]";
+		mes "Normalmente n�o me ouves, mas desta vez quero que me ou�as.";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "Como � que vai lidar com este mestre?";
+		next;
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt ]";
+		mes "Vou substituir a minha vida por mana e deit�-la na esfera. Se te conseguires concentrar na esfera por um momento, talvez seja poss�vel destru�-la.";
+		next;
+		cutin "schmidt06",0;
+		mes "[ Schmidt ]";
+		mes "Mestre! Isso n�o significa que a tua morte chegar� em breve?";
+		next;
+		cutin "gl_barmund1",2;
+		mes "[ Varmundt ]";
+		mes "Existe outra forma de?";
+		specialeffect(EF_MAXPOWER,.@o$);
+		next;
+		cutin "schmidt06",0;
+		mes "[ Schmidt ]";
+		mes "Mas mestre, � o �nico s�bio neste continente. J� pensaste no caos que ocorrer� se morreres?";
+		next;
+		cutin "gl_barmund1",2;
+		mes "[ Varmundt ]";
+		mes "......";
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "Haver� alguma confus�o se o rei desaparecer. No entanto, o decreto determina quem actuar� em seu nome e quem suceder� ao trono.";
+		next;
+		cutin "schmidt03",0;
+		mes "[ Schmidt ]";
+		mes "Mas haver� algu�m que o substitua? Tenho a certeza que essa pessoa n�o aparecer� dentro de alguns s�culos.";
+		next;
+		cutin "gl_barmund3",2;
+		mes "[ Varmundt ]";
+		mes "�s um tolo!";
+		next;
+		cutin "heinrich02",2;
+		mes "[ Heinrich ]";
+		mes "Schmidt, por favor, acalma-te um pouco. Varmundt, podes ouvir-me??";
+		next;
+		mes "[ Heinrich ]";
+		mes "Na minha opini�o, ambos s�o indispens�veis para este continente e para o reino. Mesmo que apenas um de v�s esteja ausente, ser� um desastre.";
+		next;
+		mes "[ Heinrich ]";
+		mes "Que tal isto em vez disso? Eu sei que n�o sou... t�o poderoso como qualquer um de v�s, mas se for a minha vida, � provavelmente suficiente para destruir esta esfera.";
+		next;
+		mes "[ Heinrich ]";
+		mes "Penso que � a escolha mais razo�vel neste momento.";
+		next;
+		cutin "schmidt06",0;
+		mes "[ Schmidt ]";
+		mes "Nem pensar! Sentir-me-ei culpado para o resto da minha vida, Heinrich!";
+		next;
+		mes "[ Schmidt ]";
+		mes "�s um servo deste reino. �s meu amigo. Tenho de o proteger como rei.";
+		specialeffect(EF_CLOUD4,.@o$);
+		next;
+		cutin "schmidt02",0;
+		mes "[ Schmidt ]";
+		mes "Serei eu a quebrar o globo. � o dever do rei proteger o seu povo. H� alguma obje��o aqui??";
+		next;
+		cutin "gl_barmund3",2;
+		mes "[ Varmundt ]";
+		mes "�s demasiado imprudente, Heinrich! E n�o sejas demasiado idiota, Schmidt! Que tipo de professor � que eu seria?";
+		next;
+		mes "[ Varmundt ]";
+		mes "ainda poderias chamar-me teu professor se eu deixasse os meus disc�pulos morrerem por minha causa?!";
+		next;
+		cutin "schmidt01",0;
+		mes "[ Schmidt ]";
+		mes "Mestre. Enquanto estamos a discutir aqui, a esfera est� a expandir-se.";
+		specialeffect(EF_CLOUD4,.@o$);
+		next;
+		cutin "schmidt03",0;
+		mes "[ Schmidt ]";
+		mes "N�o quero atrasar isto muito mais tempo. Eu vou � frente primeiro. Adeus Heinrich, Varmundt!";
+		next;
+		cutin "heinrich02",2;
+		mes "[ Heinrich ]";
+		mes "P�ra com isso, Schmidt. P�ra!!";
+		next;
+		cutin "gl_barmund3",2;
+		mes "[ Varmundt ]";
+		mes "n�o o fa�am! Schmidt!";
+		close2;
+		cutin "",255;
+		set_instance_var("gh_fall",16);
+		.@map$ = get_instance_var("map$");
+		warp .@map$,55,280;
+		instance_event("Orb#edda_fall_0","OnEvent",false);
+		end;
+	}
+	if(.@var == 17){
+		.@s$ = instance_npcname("#schmidt_dummy_5");
+		.@o$ = instance_npcname(strnpcinfo(0));
+		.@h$ = instance_npcname("Heinrich#gh_fall_1");
+		.@v$ = instance_npcname("Varmundt#gh_fall_2");
+		specialeffect(EF_CLOUD4,.@o$);
+		specialeffect(EF_STEAL,.@o$);
+		cutin "schmidt07",0;
+		mes "[ Schmidt ]";
+		mes "Ugh!!! Ahhhhhh!!!!";
+		next;
+		cutin "gl_barmund3",2;
+		mes "[ Varmundt ]";
+		mes "Schmidt! Espera, eu fa�o o que puder!";
+		next;
+		specialeffect(EF_STEAL,.@o$);
+		cutin "schmidt07",0;
+		mes "[ Schmidt ]";
+		mes "Ugh... N�o! N�o te aproximes de mim!";
+		next;
+		cutin "HEINRICH_A02",2;
+		mes "[ Heinrich ]";
+		mes "Schmidt!";
+		next;
+		specialeffect(EF_STEAL,.@o$);
+		cutin "schmidt07",0;
+		mes "[ Schmidt ]";
+		mes "O mesmo para ti, Heinrich! N�o te aproximes de mim!";
+		next;
+		mes "[ Schmidt ]";
+		mes "Est� a partir-se! Se eu n�o tivesse feito isto, n�o ter�amos chegado a tempo!";
+		next;
+		specialeffect(EF_CLOUD4,.@o$);
+		specialeffect(EF_STEAL,.@o$);	
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt ]";
+		mes "Meu disc�pulo tolo... Porqu�? Porque � que tu...";
+		next;
+		specialeffect(EF_STEAL,.@o$);
+		cutin "schmidt07",0;
+		mes "[ Schmidt ]";
+		mes "Ha... haha... Mestre. �s s�bio, tenho a certeza que j� sabes a resposta. O que � que eu devo fazer agora?...";
+		next;
+		specialeffect(EF_STEAL,.@o$);
+		mes "[ Schmidt ]";
+		mes "Em breve, a esfera ser� destru�da. Se ficarem aqui, ser�o apanhados pela energia da massa e ser�o destru�dos com ela.";
+		next;
+		specialeffect(EF_STEAL,.@o$);
+		mes "[ Schmidt ]";
+		mes "Depressa... Ir...";
+		next;
+		specialeffect(EF_STEAL,.@o$);
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt ]";
+		mes "Vou lan�ar um feiti�o para anular a tua dor, n�o sentir�s nada. � a �ltima coisa que posso fazer por ti como teu professor.";
+		specialeffect(EF_CLOUD4,.@o$);
+		specialeffect(EF_STEAL,.@o$);	
+		next;
+		specialeffect(EF_STEAL,.@o$);	
+		cutin "schmidt07",0;
+		mes "[ Schmidt ]";
+		mes "Heinrich! Esta � a minha ordem final! Fujam com Varmundt imediatamente e saiam do castelo!";
+		next;
+		specialeffect(EF_STEAL,.@o$);	
+		cutin "HEINRICH_A02",2;
+		mes "[ Heinrich ]";
+		mes "Eu, Heinrich...";
+		next;
+		specialeffect(EF_STEAL,.@o$);	
+		cutin "HEINRICH_A03",2;
+		mes "[ Heinrich ]";
+		mes "Aceitar o seu comando.";
+		next;
+		specialeffect(EF_STEAL,.@o$);	
+		cutin "gl_barmund2",2;
+		mes "[ Varmundt ]";
+		mes "Schmidt, Eu...";
+		next;
+		specialeffect(EF_STEAL,.@o$);	
+		mes "[ Varmundt ]";
+		mes "Lembrar-me-ei sempre de ti, como o disc�pulo que n�o ouviu o seu mestre durante toda a sua vida.";
+		next;
+		specialeffect(EF_CLOUD4,.@o$);
+		cutin "schmidt04",0;
+		mes "[ Schmidt ]";
+		mes "Obrigado por te lembrares. Ent�o, isto � um adeus, Mestre!";
+		close2;
+		cutin "",255;
+		set_instance_var("gh_fall",18);
+		instance_event("Orb#edda_fall_0","OnEvent02",false);
+		end;
+	}
+	end;
+}
+
+1@gl_prq,55,281,3	duplicate(dummynpc2)	Varmundt#gh_fall_3	4_M_BARMUND
+1@gl_prq,52,285,5	duplicate(dummynpc2)	Schmidt#gh_fall_4	4_ED_SCHMIDT
+1@gl_prq,48,281,5	duplicate(dummynpc2)	Heinrich#gh_fall_1	4_M_HEINRICH
+
+1@gl_prq,52,277,5	script	Orb#edda_fall_0	4_ED_ORB,{
+	end;
+	
+OnEvent:
+	sleep 1200;
+	specialeffect EF_MAXPOWER;
+	specialeffect EF_CLOUD4;
+	instance_hide("Schmidt#gh_fall_4",true);
+	instance_enable("Schmidt#gh_fall_4",false);
+	for(.@i = 0; .@i < 44; .@i++)
+		instance_hide("#schmidt_dummy_" + .@i,false);
+	sleep 200;
+	for(.@i = 0; .@i < 44; .@i++)
+		//specialeffect("#schmidt_dummy_" + .@i,EF_REDBODY);
+	sleep 200;
+	for(.@i = 0; .@i < 44; .@i++)
+		//specialeffect("#schmidt_dummy_" + .@i,EF_CLOAKING);
+	sleep 300;
+	for(.@i = 0; .@i < 44; .@i++){
+		instance_hide("#schmidt_dummy_" + .@i,true);
+		instance_enable("#schmidt_dummy_" + .@i,false);
+	}
+	sleep 2000;
+	.@s$ = instance_npcname("#schmidt_dummy_5");
+	.@o$ = instance_npcname(strnpcinfo(0));
+	.@h$ = instance_npcname("Heinrich#gh_fall_1");
+	.@v$ = instance_npcname("Varmundt#gh_fall_2");
+	instance_enable("#schmidt_dummy_5",true);
+	specialeffect(EF_MAGNUS,.@s$);
+	sleep 5500;
+	specialeffect(EF_MAGNUS,.@o$);
+	sleep 1000;
+	npctalk "Stop it... No-!!",.@s$;
+	specialeffect(EF_CLOUD4,.@o$);
+	sleep 3000;
+	specialeffect(EF_CLOUD4,.@o$);
+	npctalk "Heinrich : Vossa Majestade! Como � que... Como � que isto pode acontecer!",.@h$;
+	sleep 5000;
+	npctalk "Varmundt : Schmidt, seu idiota!",.@v$;
+	set_instance_var("gh_fall",17);
+	specialeffect(EF_WINDHIT,.@v$);
+end;
+
+OnEvent02:
+	.@o$ = instance_npcname(strnpcinfo(0));
+	.@h$ = instance_npcname("Heinrich#gh_fall_1");
+	.@v$ = instance_npcname("Varmundt#gh_fall_2");
+	.@s$ = instance_npcname("#schmidt_dummy_5");
+	.@map$ = get_instance_var("map$");
+	specialeffect(EF_STEAL,.@o$);
+	sleep 2000;
+	//specialeffect(EF_EVILS_PAW,.@o$);
+	specialeffect(EF_CLOUD4,.@o$);
+	mapannounce .@map$,"Schmidt's Cry : A todos os que permanecem no castelo! Fujam por todos os meios, imediatamente!",bc_map,0xFFFF00;
+	sleep 2000;
+	specialeffect(EF_CLOUD4,.@o$);
+	specialeffect(EF_STEAL,.@o$);
+	sleep 2000;
+	specialeffect(EF_STEAL,.@o$);
+	sleep 2000;
+	specialeffect(EF_STEAL,.@o$);
+	mapannounce .@map$,"Schmidt's Cry : Este � o vosso rei!",bc_map,0xFFFF00;
+	sleep 2000;
+	specialeffect(EF_STEAL,.@o$);
+	sleep 2000;
+	specialeffect(EF_STEAL,.@o$);
+	sleep 2000;
+	specialeffect(EF_CLOUD4,.@o$);
+	specialeffect(EF_STEAL,.@o$);
+	npctalk "Heinrich : King Schmidt! Em breve estarei convosco... Vamos l�, Varmunt.",.@h$;
+	sleep 2000;
+	specialeffect(EF_STEAL,.@o$);
+	specialeffect(EF_ENHANCE,.@v$);
+	sleep 1000;
+	instance_enable("Varmundt#gh_fall_2",false);
+	sleep 1000;
+	specialeffect(EF_STEAL,.@o$);
+	sleep 2000;
+	specialeffect(EF_STEAL,.@o$);
+	specialeffect(EF_ENHANCE,.@h$);
+	sleep 1000;
+	specialeffect(EF_STEAL,.@o$);
+	instance_enable("Heinrich#gh_fall_1",false);
+	sleep 2000;
+	npctalk "Ent�o vamos l� acabar com isto!",.@s$;
+	sleep 2000;
+	specialeffect(EF_LORD,.@o$);
+	specialeffect(EF_STEAL,.@o$);
+	sleep 2000;
+	specialeffect(EF_LORD,.@o$);
+	specialeffect(EF_STEAL,.@o$);
+	sleep 2000;
+	npctalk "Oh, esqueci-me de dizer ao Heinrich para agir como o novo rei...",.@s$;
+	specialeffect(EF_LORD,.@o$);
+	specialeffect(EF_STEAL,.@o$);
+	sleep 2000;
+	specialeffect(EF_LORD,.@o$);
+	specialeffect(EF_STEAL,.@o$);
+	sleep 2000;
+	specialeffect(EF_LORD,.@o$);
+	specialeffect(EF_STEAL,.@o$);
+	npctalk "Heinrich, Sei que te vais sair bem... Gostava que pud�ssemos tomar, pelo menos, uma �ltima bebida juntos..",.@s$;
+	sleep 2000;
+	specialeffect(EF_LORD,.@o$);
+	specialeffect(EF_STEAL,.@o$);
+	sleep 2000;
+	specialeffect(EF_LORD,.@o$);
+	specialeffect(EF_STEAL,.@o$);
+	sleep 2000;
+	specialeffect(EF_LORD,.@o$);
+	specialeffect(EF_STEAL,.@o$);
+	warpparty .@map$,53,263,'party_id;
+	instance_enable("#schmidt_dummy_5",false);
+	instance_enable("Orb#edda_fall_0",false);
+	instance_hide("Oscar#gh_fall_2",false);
+	sleep 2000;
+	npctalk "Oscar : Uau. Se me tivesse escapado por uns segundos, teria sido demasiado tarde.",instance_npcname("Oscar#gh_fall_2");
+	set_instance_var("gh_fall",19);
+end;
+}
+
+1@gl_prq,52,270,4	script	Oscar#gh_fall_2	4_ED_OSCAR,2,2,{
+	.@var = get_instance_var("gh_fall");
+	if(.@var == 19){
+		cutin "OSCAR01",0;
+		mes "[ Oscar ]";
+		mes "Ele usou toda a sua energia na esfera dimensional e destruiu-a, mas as ondas de energia que criou eram t�o grandes que quase varreram toda a gente que estava por perto.";
+		next;
+		mes "[ Oscar ]";
+		mes "Depois de verem a hist�ria, v�o sentir a dor deles.";
+		next;
+		mes "[ Oscar ]";
+		mes "^0000CDAqui est� uma experi�ncia para se juntar a mim.^000000";
+		getexp 600000,600000;
+		if(isbegin_quest(12457) == 1)
+			completequest 12457;
+		next;
+		mes "[ Oscar ]";
+		mes "No final, Heinrich n�o deu ouvidos �s �ltimas palavras de Schmidt.";
+		next;
+		mes "[ Oscar ]";
+		mes "Havia demasiado trabalho a fazer depois da morte do rei (oficialmente...) ap�s a Queda de Glastheim.";
+		next;
+		mes "[ Oscar ]";
+		mes "Bem, vamos dar outra vista de olhos na pr�xima vez, vamos sair daqui por agora. Vou andar depressa porque os canais dimensionais est�o a colapsar rapidamente.";
+		close2;
+		warp "glast_01",244,290;
+		end;
+	}
+	end;
+}
+
+
+1@gl_prq,303,296,3	duplicate(dummynpc2)	#gh_fall_guard_0	4_F_KHALITZBURG
+1@gl_prq,303,294,3	duplicate(dummynpc2)	#gh_fall_guard_1	4_F_KHALITZBURG
+1@gl_prq,303,292,3	duplicate(dummynpc2)	#gh_fall_guard_2	4_F_KHALITZBURG
+1@gl_prq,305,296,7	duplicate(dummynpc2)	#gh_fall_guard_3	4_F_KHALITZBURG
+1@gl_prq,305,294,6	duplicate(dummynpc2)	#gh_fall_guard_4	4_F_KHALITZBURG
+1@gl_prq,305,292,1	duplicate(dummynpc2)	#gh_fall_guard_5	4_F_KHALITZBURG
+
+1@gl_prq,52,282,4	duplicate(dummynpc2)	#schmidt_dummy_0	4_ED_SCHMIDT
+1@gl_prq,52,281,4	duplicate(dummynpc2)	#schmidt_dummy_1	4_ED_SCHMIDT
+1@gl_prq,52,280,4	duplicate(dummynpc2)	#schmidt_dummy_2	4_ED_SCHMIDT
+1@gl_prq,52,279,4	duplicate(dummynpc2)	#schmidt_dummy_3	4_ED_SCHMIDT
+1@gl_prq,52,278,4	duplicate(dummynpc2)	#schmidt_dummy_4	4_ED_SCHMIDT
+1@gl_prq,52,277,4	duplicate(dummynpc2)	#schmidt_dummy_5	4_ED_SCHMIDT
+1@gl_prq,52,276,4	duplicate(dummynpc2)	#schmidt_dummy_6	4_ED_SCHMIDT
+1@gl_prq,52,275,4	duplicate(dummynpc2)	#schmidt_dummy_7	4_ED_SCHMIDT
+1@gl_prq,52,274,4	duplicate(dummynpc2)	#schmidt_dummy_8	4_ED_SCHMIDT
+1@gl_prq,52,273,4	duplicate(dummynpc2)	#schmidt_dummy_9	4_ED_SCHMIDT
+1@gl_prq,52,272,4	duplicate(dummynpc2)	#schmidt_dummy_10	4_ED_SCHMIDT
+1@gl_prq,47,277,6	duplicate(dummynpc2)	#schmidt_dummy_11	4_ED_SCHMIDT
+1@gl_prq,48,277,6	duplicate(dummynpc2)	#schmidt_dummy_12	4_ED_SCHMIDT
+1@gl_prq,49,277,6	duplicate(dummynpc2)	#schmidt_dummy_13	4_ED_SCHMIDT
+1@gl_prq,50,277,6	duplicate(dummynpc2)	#schmidt_dummy_14	4_ED_SCHMIDT
+1@gl_prq,51,277,6	duplicate(dummynpc2)	#schmidt_dummy_15	4_ED_SCHMIDT
+1@gl_prq,52,277,6	duplicate(dummynpc2)	#schmidt_dummy_16	4_ED_SCHMIDT
+1@gl_prq,53,277,6	duplicate(dummynpc2)	#schmidt_dummy_17	4_ED_SCHMIDT
+1@gl_prq,54,277,6	duplicate(dummynpc2)	#schmidt_dummy_18	4_ED_SCHMIDT
+1@gl_prq,55,277,6	duplicate(dummynpc2)	#schmidt_dummy_19	4_ED_SCHMIDT
+1@gl_prq,56,277,6	duplicate(dummynpc2)	#schmidt_dummy_20	4_ED_SCHMIDT
+1@gl_prq,57,277,6	duplicate(dummynpc2)	#schmidt_dummy_21	4_ED_SCHMIDT
+1@gl_prq,52,272,8	duplicate(dummynpc2)	#schmidt_dummy_22	4_ED_SCHMIDT
+1@gl_prq,52,273,8	duplicate(dummynpc2)	#schmidt_dummy_23	4_ED_SCHMIDT
+1@gl_prq,52,274,8	duplicate(dummynpc2)	#schmidt_dummy_24	4_ED_SCHMIDT
+1@gl_prq,52,275,8	duplicate(dummynpc2)	#schmidt_dummy_25	4_ED_SCHMIDT
+1@gl_prq,52,276,8	duplicate(dummynpc2)	#schmidt_dummy_26	4_ED_SCHMIDT
+1@gl_prq,52,277,8	duplicate(dummynpc2)	#schmidt_dummy_27	4_ED_SCHMIDT
+1@gl_prq,52,278,8	duplicate(dummynpc2)	#schmidt_dummy_28	4_ED_SCHMIDT
+1@gl_prq,52,279,8	duplicate(dummynpc2)	#schmidt_dummy_29	4_ED_SCHMIDT
+1@gl_prq,52,280,8	duplicate(dummynpc2)	#schmidt_dummy_30	4_ED_SCHMIDT
+1@gl_prq,52,281,8	duplicate(dummynpc2)	#schmidt_dummy_31	4_ED_SCHMIDT
+1@gl_prq,52,282,8	duplicate(dummynpc2)	#schmidt_dummy_32	4_ED_SCHMIDT
+1@gl_prq,57,277,2	duplicate(dummynpc2)	#schmidt_dummy_33	4_ED_SCHMIDT
+1@gl_prq,56,277,2	duplicate(dummynpc2)	#schmidt_dummy_34	4_ED_SCHMIDT
+1@gl_prq,55,277,2	duplicate(dummynpc2)	#schmidt_dummy_35	4_ED_SCHMIDT
+1@gl_prq,54,277,2	duplicate(dummynpc2)	#schmidt_dummy_36	4_ED_SCHMIDT
+1@gl_prq,53,277,2	duplicate(dummynpc2)	#schmidt_dummy_37	4_ED_SCHMIDT
+1@gl_prq,52,277,2	duplicate(dummynpc2)	#schmidt_dummy_38	4_ED_SCHMIDT
+1@gl_prq,51,277,2	duplicate(dummynpc2)	#schmidt_dummy_39	4_ED_SCHMIDT
+1@gl_prq,50,277,2	duplicate(dummynpc2)	#schmidt_dummy_40	4_ED_SCHMIDT
+1@gl_prq,49,277,2	duplicate(dummynpc2)	#schmidt_dummy_41	4_ED_SCHMIDT
+1@gl_prq,48,277,2	duplicate(dummynpc2)	#schmidt_dummy_42	4_ED_SCHMIDT
+1@gl_prq,47,277,2	duplicate(dummynpc2)	#schmidt_dummy_43	4_ED_SCHMIDT
+
+1@gl_prq,79,22,0	script	#gh_purification_ev_0	HIDDEN_WARP_NPC,2,2,{
+	end;
+	
+OnTouch:
+	set_instance_var("party_id",getcharid(1));
+	instance_hide(strnpcinfo(0),true);
+	instance_enable(strnpcinfo(0),false);
+	.@map$ = get_instance_var("map$");
+	instance_event("#gh_purification_mob","OnSpawn00",false);
+	mapannounce .@map$,"Oscar : Este s�tio foi outrora a cozinha.",bc_map,0xFF66FF;
+	sleep 2800;
+	mapannounce .@map$,"Oscar : Infelizmente... As criadas que estavam a preparar as refei��es foram as mais afectadas pela maldi��o.",bc_map,0xFF66FF;
+	sleep 2800;
+	mapannounce .@map$,"Oscar : A �nica coisa que podemos fazer por eles � libert�-los da sua dor e p�-los a descansar.",bc_map,0xFF66FF;
+	sleep 2800;
+	mapannounce .@map$,"Oscar : Ainda teremos tempo para os pr�ximos trimestres, se purificar as criadas que foram amaldi�oadas.",bc_map,0xFF66FF;
+	sleep 2800;
+	mapannounce .@map$,"Oscar : O tempo e o espa�o desta dimens�o est�o distorcidos, tornando dif�cil a desloca��o.",bc_map,0xFF66FF;
+	sleep 2800;
+	mapannounce .@map$,"Oscar : Oh, quase me esqueci de vos lembrar, se alguma vez encontrarem um Espinho Flamejante, tentem evit�-lo. � o ser mais inc�modo desta dimens�o.",bc_map,0xFF66FF;
+end;
+}
+
+1@gl_prq,127,63,4	script	Oscar#gh_purification_0	4_ED_OSCAR,3,3,{
+	end;
+
+OnTouch:
+	.@var = get_instance_var("purification");
+	.@map$ = get_instance_var("map$");
+	if(.@var == 0){
+		set_instance_var("purification",1);
+		npctalk "Oscar : Este local costumava ser o local de trabalho do Cavaleiro.";
+		sleep 3000;
+		instance_event("#gh_purification_mob","OnSpawn01",false);
+		npctalk "Oscar : Aqueles que estavam a descansar depois de o seu trabalho n�o ter sido evacuado a tempo.";
+		sleep 3000;
+		npctalk "Oscar : Ficaram loucas por causa da maldi��o, tal como as criadas que preparavam as refei��es.";
+		sleep 3000;
+		npctalk "Oscar : Vou dirigir-me para a pr�xima zona, por favor ponham os cavaleiros a descansar.";
+		sleep 1000;
+		instance_enable(strnpcinfo(0),false);
+	}
+end;
+}
+
+1@gl_prq,148,121,4	script	Oscar#gh_purification_1	4_ED_OSCAR,3,3,{
+	end;
+
+OnTouch:
+	.@var = get_instance_var("purification");
+	.@map$ = get_instance_var("map$");
+	if(.@var == 1){
+		set_instance_var("purification",2);
+		npctalk "Oscar : Este s�tio costumava ser uma �rea de h�spedes, com uma sala de estar ali.";
+		sleep 3000;
+		instance_event("#gh_purification_mob","OnSpawn02",false);
+		npctalk "Oscar : Os alimentos eram distribu�dos de manh� pelas criadas. A maldi��o tamb�m afectava a comida e contagiava as pessoas que a comiam.";
+		sleep 3000;
+		npctalk "Oscar : Ficaram loucas por causa da maldi��o, tal como as criadas que preparavam as refei��es.";
+		sleep 3000;
+		npctalk "Oscar : Vou para a pr�xima zona, por favor, deixem as pessoas daqui descansadas.";
+		sleep 1000;
+		instance_enable(strnpcinfo(0),false);
+	}
+end;
+}
+
+1@gl_prq,67,176,4	script	Oscar#gh_purification_2	4_ED_OSCAR,3,3,{
+	end;
+
+OnTouch:
+	.@var = get_instance_var("purification");
+	.@map$ = get_instance_var("map$");
+	if(.@var == 2){
+		set_instance_var("purification",3);
+		npctalk "Oscar : Este local costumava ser uma �rea de h�spedes, com uma sala de estar ali.";
+		sleep 3000;
+		instance_event("#gh_purification_mob","OnSpawn03",false);
+		npctalk "Oscar : Este local era onde se guardava literatura e informa��o militar.";
+		sleep 3000;
+		npctalk "Oscar : Era principalmente utilizado e guardado por comandantes.";
+		sleep 3000;
+		npctalk "Oscar : As pessoas nesta �rea s�o bastante poderosas. Cuidado.";
+		sleep 3000;
+		npctalk "Oscar : Vou dirigir-me para a zona final, por favor ponham os comandantes daqui a descansar.";
+		sleep 1000;
+		instance_enable(strnpcinfo(0),false);
+	}
+end;
+}
+
+1@gl_prq,52,270,4	script	Oscar#gh_purification_3	4_ED_OSCAR,3,3,{
+	end;
+
+OnTouch:
+	.@var = get_instance_var("purification");
+	.@map$ = get_instance_var("map$");
+	if(.@var == 3){
+		set_instance_var("purification",4);
+		npctalk "Oscar : Uma vez que a barreira dimensional n�o est� presente, podes acabar por te magoar ou pior. Tem cuidado.";
+		sleep 3000;
+		npctalk "Oscar : Como podem ver, h� muitos cad�veres � volta.";
+		sleep 3000;
+		npctalk "Oscar : � a apar�ncia do Rei Schmidt, mas este n�o � o verdadeiro Schmidt. N�o te contenhas nos teus ataques.";
+		sleep 3000;
+		npctalk "Oscar : Vou reunir a energia dimensional. A batalha vai come�ar, prepara-te.";
+		instance_hide(strnpcinfo(0),true);
+		instance_enable(strnpcinfo(0),false);
+		instance_hide("#schmidt_gh_purification",true);
+		instance_enable("#schmidt_gh_purification",false);
+		instance_event("#gh_purification_boss","OnSummon",false);
+		instance_event("#gh_purification_fire","OnSummon",false);
+	}
+end;
+}
+
+1@gl_prq,52,270,4	script	Oscar#gh_purification_4	4_ED_OSCAR,3,3,{
+	.@var = get_instance_var("hunt");
+	.@mode = get_instance_var("mode");
+	cutin "oscar01",2;
+	mes "[ Oscar ]";
+	mes "Viajar para diferentes linhas temporais e entrar em combate consome muita energia.";
+	next;
+	mes "[ Oscar ]";
+	mes "Isto? S�o fragmentos das mem�rias do Rei Schmidt.";
+	next;
+	mes "[ Oscar ]";
+	mes "Oh, acho que esta dimens�o vai come�ar a colapsar. Vamos sair primeiro.";
+	if(checkquest(.@var,HUNTING) == 2){
+		if(!.@mode)
+			getitem 25739,9;
+		else {
+			getitem 25739,5;
+			getitem 25740,6;
+		}
+		erasequest .@var;
+	}
+	close2;
+	warp "glast_01",244,290;
+	end;
+}
+
+1@gl_prq,52,277,4	duplicate(dummynpc2)	#schmidt_gh_purification	4_ED_SCHMIDT
+
+1@gl_prq,1,1,0	script	#gh_purification_boss	-1,{
+	end;
+	
+OnSummon:
+	.@boss = get_instance_var("schmidt");
+	.@map$ = get_instance_var("map$");
+	.@gid = monster(.@map$,52,277,"Cursed King Schmidt",.@boss,1,instance_npcname(strnpcinfo(0)) + "::OnBossKill");
+	set_instance_var("gid",.@gid);
+	set_instance_var("boss_alive",1);
+end;
+
+OnBossKill:
+	instance_enable("Oscar#gh_purification_4",true);
+end;
+}
+
+1@gl_prq,1,1,0	script	#gh_purification_fire	-1,{
+	end;
+	
+OnSummon:
+	instance_event(strnpcinfo(0),"OnSummonLeft",false);
+end;
+
+OnSummonLeft:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnLeftFireDead";
+	.@gid = get_instance_var("gid");
+	for(.@i = 10; .@i < 96; .@i++){
+		if(!unitexists(.@gid))
+			end;
+		if(.@i == 10)
+			instance_event(strnpcinfo(0),"OnSummonRight",false);
+		if(.@i == 55){
+			instance_event(strnpcinfo(0),"OnSummonTop",false);
+			instance_event(strnpcinfo(0),"OnSummonBottom",false);
+		}
+		.@left[0] = monster(.@map$,.@i,248,"",20426,1,.@event$);
+		.@left[1] = monster(.@map$,.@i,251,"",20426,1,.@event$);
+		.@left[2] = monster(.@map$,.@i,254,"",20426,1,.@event$);
+		.@left[3] = monster(.@map$,.@i,257,"",20426,1,.@event$);
+		.@left[4] = monster(.@map$,.@i,260,"",20426,1,.@event$);
+		.@left[5] = monster(.@map$,.@i,263,"",20426,1,.@event$);
+		.@left[6] = monster(.@map$,.@i,266,"",20426,1,.@event$);
+		.@left[7] = monster(.@map$,.@i,269,"",20426,1,.@event$);
+		.@left[8] = monster(.@map$,.@i,281,"",20426,1,.@event$);
+		.@left[9] = monster(.@map$,.@i,284,"",20426,1,.@event$);
+		.@left[10] = monster(.@map$,.@i,287,"",20426,1,.@event$);
+		.@left[11] = monster(.@map$,.@i,290,"",20426,1,.@event$);
+		.@left[12] = monster(.@map$,.@i,293,"",20426,1,.@event$);
+		.@left[13] = monster(.@map$,.@i,296,"",20426,1,.@event$);
+		.@left[14] = monster(.@map$,.@i,299,"",20426,1,.@event$);
+		.@left[15] = monster(.@map$,.@i,302,"",20426,1,.@event$);
+		.@left[16] = monster(.@map$,.@i,305,"",20426,1,.@event$);
+		.@left[17] = monster(.@map$,.@i,308,"",20426,1,.@event$);
+		sleep 300;
+		killmonster .@map$,.@event$;
+	}
+OnLeftFireDead:
+end;
+
+OnSummonRight:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnRightFireDead";
+	.@gid = get_instance_var("gid");
+	for(.@i = 95; .@i > 10; .@i--){
+		if(!unitexists(.@gid))
+			end;
+		.@right[0] = monster(.@map$,.@i,248,"",20426,1,.@event$);
+		.@right[1] = monster(.@map$,.@i,251,"",20426,1,.@event$);
+		.@right[2] = monster(.@map$,.@i,254,"",20426,1,.@event$);
+		.@right[3] = monster(.@map$,.@i,257,"",20426,1,.@event$);
+		.@right[4] = monster(.@map$,.@i,260,"",20426,1,.@event$);
+		.@right[5] = monster(.@map$,.@i,263,"",20426,1,.@event$);
+		.@right[6] = monster(.@map$,.@i,266,"",20426,1,.@event$);
+		.@right[7] = monster(.@map$,.@i,269,"",20426,1,.@event$);
+		.@right[8] = monster(.@map$,.@i,272,"",20426,1,.@event$);
+		.@right[9] = monster(.@map$,.@i,275,"",20426,1,.@event$);
+		.@right[10] = monster(.@map$,.@i,278,"",20426,1,.@event$);
+		.@right[11] = monster(.@map$,.@i,287,"",20426,1,.@event$);
+		.@right[12] = monster(.@map$,.@i,290,"",20426,1,.@event$);
+		.@right[13] = monster(.@map$,.@i,293,"",20426,1,.@event$);
+		.@right[14] = monster(.@map$,.@i,296,"",20426,1,.@event$);
+		.@right[15] = monster(.@map$,.@i,299,"",20426,1,.@event$);
+		.@right[16] = monster(.@map$,.@i,302,"",20426,1,.@event$);
+		.@right[17] = monster(.@map$,.@i,305,"",20426,1,.@event$);
+		.@right[18] = monster(.@map$,.@i,308,"",20426,1,.@event$);
+		sleep 300;
+		killmonster .@map$,.@event$;
+	}
+OnRightFireDead:	
+end;
+
+OnSummonBottom:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnBottomFireDead";
+	.@gid = get_instance_var("gid");
+	for(.@i = 248; .@i < 309; .@i++){
+		if(!unitexists(.@gid))
+			end;
+		.@bottom[0] = monster(.@map$,12,.@i,"",20426,1,.@event$);
+		.@bottom[1] = monster(.@map$,15,.@i,"",20426,1,.@event$);
+		.@bottom[2] = monster(.@map$,18,.@i,"",20426,1,.@event$);
+		.@bottom[3] = monster(.@map$,21,.@i,"",20426,1,.@event$);
+		.@bottom[4] = monster(.@map$,24,.@i,"",20426,1,.@event$);
+		.@bottom[5] = monster(.@map$,27,.@i,"",20426,1,.@event$);
+		.@bottom[6] = monster(.@map$,30,.@i,"",20426,1,.@event$);
+		.@bottom[7] = monster(.@map$,33,.@i,"",20426,1,.@event$);
+		.@bottom[8] = monster(.@map$,36,.@i,"",20426,1,.@event$);
+		.@bottom[9] = monster(.@map$,49,.@i,"",20426,1,.@event$);
+		.@bottom[10] = monster(.@map$,52,.@i,"",20426,1,.@event$);
+		.@bottom[11] = monster(.@map$,55,.@i,"",20426,1,.@event$);
+		.@bottom[12] = monster(.@map$,58,.@i,"",20426,1,.@event$);
+		.@bottom[13] = monster(.@map$,61,.@i,"",20426,1,.@event$);
+		.@bottom[14] = monster(.@map$,64,.@i,"",20426,1,.@event$);
+		.@bottom[15] = monster(.@map$,67,.@i,"",20426,1,.@event$);
+		.@bottom[16] = monster(.@map$,70,.@i,"",20426,1,.@event$);
+		.@bottom[17] = monster(.@map$,73,.@i,"",20426,1,.@event$);
+		.@bottom[18] = monster(.@map$,76,.@i,"",20426,1,.@event$);
+		.@bottom[19] = monster(.@map$,79,.@i,"",20426,1,.@event$);
+		.@bottom[20] = monster(.@map$,82,.@i,"",20426,1,.@event$);
+		.@bottom[21] = monster(.@map$,85,.@i,"",20426,1,.@event$);
+		.@bottom[22] = monster(.@map$,88,.@i,"",20426,1,.@event$);
+		.@bottom[23] = monster(.@map$,91,.@i,"",20426,1,.@event$);
+		.@bottom[24] = monster(.@map$,94,.@i,"",20426,1,.@event$);
+		sleep 300;
+		killmonster .@map$,.@event$;
+	}
+OnBottomFireDead:
+end;
+
+OnSummonTop:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnTopFireDead";
+	.@gid = get_instance_var("gid");
+	for(.@i = 308; .@i > 247; .@i--){
+		if(!unitexists(.@gid))
+			end;	
+		if(.@i == 260)
+			instance_event(strnpcinfo(0),"OnSummonLeft",false);
+		.@bottom[0] = monster(.@map$,13,.@i,"",20426,1,.@event$);
+		.@bottom[1] = monster(.@map$,16,.@i,"",20426,1,.@event$);
+		.@bottom[2] = monster(.@map$,19,.@i,"",20426,1,.@event$);
+		.@bottom[3] = monster(.@map$,22,.@i,"",20426,1,.@event$);
+		.@bottom[4] = monster(.@map$,25,.@i,"",20426,1,.@event$);
+		.@bottom[5] = monster(.@map$,28,.@i,"",20426,1,.@event$);
+		.@bottom[6] = monster(.@map$,31,.@i,"",20426,1,.@event$);
+		.@bottom[7] = monster(.@map$,34,.@i,"",20426,1,.@event$);
+		.@bottom[8] = monster(.@map$,37,.@i,"",20426,1,.@event$);
+		.@bottom[9] = monster(.@map$,40,.@i,"",20426,1,.@event$);
+		.@bottom[10] = monster(.@map$,43,.@i,"",20426,1,.@event$);
+		.@bottom[11] = monster(.@map$,46,.@i,"",20426,1,.@event$);
+		.@bottom[12] = monster(.@map$,49,.@i,"",20426,1,.@event$);
+		.@bottom[13] = monster(.@map$,52,.@i,"",20426,1,.@event$);
+		.@bottom[14] = monster(.@map$,55,.@i,"",20426,1,.@event$);
+		.@bottom[15] = monster(.@map$,58,.@i,"",20426,1,.@event$);
+		.@bottom[16] = monster(.@map$,70,.@i,"",20426,1,.@event$);
+		.@bottom[17] = monster(.@map$,73,.@i,"",20426,1,.@event$);
+		.@bottom[18] = monster(.@map$,76,.@i,"",20426,1,.@event$);
+		.@bottom[19] = monster(.@map$,79,.@i,"",20426,1,.@event$);
+		.@bottom[20] = monster(.@map$,82,.@i,"",20426,1,.@event$);
+		.@bottom[21] = monster(.@map$,85,.@i,"",20426,1,.@event$);
+		.@bottom[22] = monster(.@map$,88,.@i,"",20426,1,.@event$);
+		.@bottom[23] = monster(.@map$,91,.@i,"",20426,1,.@event$);
+		.@bottom[24] = monster(.@map$,94,.@i,"",20426,1,.@event$);
+		sleep 300;
+		killmonster .@map$,.@event$;
+	}
+OnTopFireDead:
+end;
+}
+
+1@gl_prq,1,1,0	script	#gh_purification_mob	-1,{
+	end;
+	
+OnSpawn00:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnMobKill00";
+	.@event2$ = instance_npcname(strnpcinfo(0)) + "::OnDummy";
+	.@maid = get_instance_var("maid");
+	setarray .@bone_xy,
+	45,35,
+	32,41,
+	61,45,
+	70,59,
+	19,62,
+	31,50;
+	for(.@i = 0; .@i < getarraysize(.@bone_xy); .@i += 2){
+		.@bone = monster(.@map$,.@bone_xy[.@i],.@bone_xy[.@i+1],"Flaming Thorn",1960,1,.@event2$);
+		.@flame = monster(.@map$,.@bone_xy[.@i],.@bone_xy[.@i+1],"",20426,1,.@event2$);
+		getunitdata .@bone,.@mode;
+		setunitdata .@bone,UMOB_MODE,(.@mode[UMOB_MODE]|MD_IGNOREMELEE|MD_IGNOREMAGIC|MD_IGNORERANGED|MD_IGNOREMISC|MD_DETECTOR);
+		setunitdata .@flame,UMOB_DMGIMMUNE,true;
+	}
+	setarray .@xy,
+	20,41,.@maid,
+	70,72,.@maid,
+	62,36,.@maid,
+	20,57,.@maid,
+	67,36,.@maid,
+	20,67,.@maid,
+	56,72,.@maid,
+	56,40,.@maid,
+	26,61,.@maid,
+	38,36,.@maid,
+	63,75,.@maid,
+	20,56,.@maid,
+	62,36,.@maid,
+	34,61,.@maid,
+	64,72,.@maid,
+	63,47,.@maid,
+	35,61,.@maid,
+	64,72,.@maid,
+	20,57,.@maid,
+	20,56,.@maid,
+	61,36,.@maid;
+	for(.@i = 0; .@i < getarraysize(.@xy); .@i += 3){
+		monster .@map$,.@xy[.@i],.@xy[.@i+1],"--ja--",.@xy[.@i+2],1,.@event$;
+		.@x++;
+		if(.@x % 4 == 0) //Spawning has intervals
+			sleep 3000;
+	}
+end;
+
+OnMobKill00:
+	//There is 21 maids but event triggers on 20th maid kill.
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnMobKill00";
+	.@party_id = get_instance_var("party_id");
+	set_instance_var("phase_one",get_instance_var("phase_one") + 1);
+	if(get_instance_var("phase_one") == 20){
+		killmonster .@map$,.@event$;
+		instance_enable("Oscar#gh_purification_0",true);
+		mapannounce .@map$,"Oscar : O fluxo de tempo na primeira �rea voltou ao normal. Vamos para a �rea seguinte.",bc_map,0xFF66FF;
+		sleep 3000;
+		warpparty .@map$,123,63,.@party_id;
+	}
+end;
+
+OnSpawn01:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnMobKill01";
+	.@event2$ = instance_npcname(strnpcinfo(0)) + "::OnDummy";
+	.@kh = get_instance_var("khalitzburg");
+	.@bloody = get_instance_var("bloody");
+	setarray .@bone_xy,
+	151,70,
+	161,33,
+	137,57,
+	160,38,
+	138,39,
+	151,54,
+	148,56,
+	139,66;
+	for(.@i = 0; .@i < getarraysize(.@bone_xy); .@i += 2){
+		.@bone = monster(.@map$,.@bone_xy[.@i],.@bone_xy[.@i+1],"Flaming Thorn",1960,1,.@event2$);
+		.@flame = monster(.@map$,.@bone_xy[.@i],.@bone_xy[.@i+1],"",20426,1,.@event2$);
+		getunitdata .@bone,.@mode;
+		setunitdata .@bone,UMOB_MODE,(.@mode[UMOB_MODE]|MD_IGNOREMELEE|MD_IGNOREMAGIC|MD_IGNORERANGED|MD_IGNOREMISC|MD_KNOCKBACKIMMUNE|MD_DETECTOR);
+		setunitdata .@flame,UMOB_DMGIMMUNE,true;
+	}
+	setarray .@xy,
+	167,47,.@kh,
+	160,21,.@kh,
+	167,59,.@kh,
+	165,66,.@kh,
+	169,21,.@kh,
+	144,21,.@kh,
+	158,66,.@kh,
+	167,64,.@kh,
+	134,34,.@kh,
+	154,49,.@kh,
+	160,66,.@kh,
+	158,66,.@kh,
+	134,43,.@kh,
+	134,31,.@kh,
+	134,21,.@kh,
+	167,62,.@kh,
+	156,21,.@kh,
+	134,31,.@kh,
+	134,47,.@kh,
+	134,35,.@kh,
+	134,33,.@kh,
+	167,47,.@kh,
+	167,67,.@bloody,
+	181,67,.@bloody;
+	for(.@i = 0; .@i < getarraysize(.@xy); .@i += 3){
+		if(.@xy[.@i+2] == .@kh)
+			monster .@map$,.@xy[.@i],.@xy[.@i+1],"Insane Knight",.@xy[.@i+2],1,.@event$;
+		else
+			monster .@map$,.@xy[.@i],.@xy[.@i+1],"--ja--",.@xy[.@i+2],1,.@event$;
+		.@x++;
+		if(.@x % 6 == 0)
+			sleep 3000;
+	}
+end;
+
+OnMobKill01:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnMobKill01";
+	.@party_id = get_instance_var("party_id");
+	set_instance_var("phase_two",get_instance_var("phase_two") + 1);
+	if(get_instance_var("phase_two") == 24){
+		killmonster .@map$,.@event$;
+		instance_enable("Oscar#gh_purification_1",true);
+		mapannounce .@map$,"Oscar : O fluxo de tempo na segunda �rea voltou ao normal. Vamos para a �rea seguinte.",bc_map,0xFF66FF;
+		sleep 3000;
+		warpparty .@map$,148,116,.@party_id;
+	}
+end;
+
+OnSpawn02:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnMobKill02";
+	.@event2$ = instance_npcname(strnpcinfo(0)) + "::OnDummy";
+	.@knight = get_instance_var("knight");
+	.@bloody = get_instance_var("bloody");
+	setarray .@bone_xy,
+	136,173,
+	154,148,
+	142,171,
+	181,120,
+	158,161,
+	148,140,
+	178,133,
+	161,157,
+	149,146,
+	143,120;
+	for(.@i = 0; .@i < getarraysize(.@bone_xy); .@i += 2){
+		.@bone = monster(.@map$,.@bone_xy[.@i],.@bone_xy[.@i+1],"Flaming Thorn",1960,1,.@event2$);
+		.@flame = monster(.@map$,.@bone_xy[.@i],.@bone_xy[.@i+1],"",20426,1,.@event2$);
+		getunitdata .@bone,.@mode;
+		setunitdata .@bone,UMOB_MODE,(.@mode[UMOB_MODE]|MD_IGNOREMELEE|MD_IGNOREMAGIC|MD_IGNORERANGED|MD_IGNOREMISC|MD_KNOCKBACKIMMUNE|MD_DETECTOR);
+		setunitdata .@flame,UMOB_DMGIMMUNE,true;
+	}
+	setarray .@xy,
+	178,141,.@knight,
+	165,123,.@knight,
+	148,139,.@knight,
+	178,141,.@knight,
+	171,141,.@knight,
+	164,173,.@knight,
+	148,141,.@knight,
+	131,165,.@knight,
+	173,123,.@knight,
+	169,173,.@knight,
+	131,131,.@knight,
+	147,173,.@knight,
+	160,123,.@knight,
+	164,173,.@knight,
+	148,172,.@knight,
+	164,173,.@knight,
+	159,141,.@knight,
+	160,141,.@knight,
+	182,123,.@knight,
+	185,123,.@knight,
+	148,145,.@knight,
+	136,173,.@knight,
+	140,173,.@knight,
+	132,173,.@knight,
+	131,159,.@knight,
+	171,173,.@knight,
+	148,150,.@knight,
+	134,141,.@bloody,
+	137,141,.@bloody,
+	131,141,.@bloody;
+	for(.@i = 0; .@i < getarraysize(.@xy); .@i += 3){
+		monster .@map$,.@xy[.@i],.@xy[.@i+1],"--ja--",.@xy[.@i+2],1,.@event$;
+		.@x++;
+		if(.@x % 10 == 0)
+			sleep 3000;
+	}
+end;
+
+OnMobKill02:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnMobKill02";
+	.@party_id = get_instance_var("party_id");
+	set_instance_var("phase_three",get_instance_var("phase_three") + 1);
+	if(get_instance_var("phase_three") == 30){
+		killmonster .@map$,.@event$;
+		instance_enable("Oscar#gh_purification_2",true);
+		mapannounce .@map$,"Oscar : O fluxo de tempo na terceira �rea voltou ao normal. Vamos para a �rea seguinte.",bc_map,0xFF66FF;
+		sleep 3000;
+		warpparty .@map$,76,178,.@party_id;
+	}
+end;
+
+OnSpawn03:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnMobKill03";
+	.@event2$ = instance_npcname(strnpcinfo(0)) + "::OnDummy";
+	.@knight = get_instance_var("knight");
+	.@bloody = get_instance_var("bloody");
+	setarray .@bone_xy,
+	59,142,
+	56,177,
+	63,178,
+	24,146,
+	40,147,
+	26,153,
+	45,159,
+	26,162,
+	40,128,
+	20,163,
+	46,128,
+	56,164;
+	for(.@i = 0; .@i < getarraysize(.@bone_xy); .@i += 2){
+		.@bone = monster(.@map$,.@bone_xy[.@i],.@bone_xy[.@i+1],"Flaming Thorn",1960,1,.@event2$);
+		.@flame = monster(.@map$,.@bone_xy[.@i],.@bone_xy[.@i+1],"",20426,1,.@event2$);
+		// Definindo o modo da unidade
+setunitdata .@bone, UMOB_MODE, (.@mode | MD_IGNOREMELEE | MD_IGNOREMAGIC | MD_IGNORERANGED | MD_IGNOREMISC | MD_KNOCKBACKIMMUNE | MD_DETECTOR);
+
+// Definindo a imunidade a dano da unidade
+setunitdata .@flame, UMOB_DMGIMMUNE, true;
+
+	}
+	setarray .@xy,
+	32,165,.@knight,
+	37,178,.@knight,
+	32,163,.@knight,
+	40,164,.@knight,
+	41,164,.@knight,
+	36,178,.@bloody,
+	41,130,.@bloody,
+	55,164,.@bloody,
+	32,141,.@bloody,
+	26,130,.@bloody,
+	25,164,.@bloody,
+	17,164,.@bloody,
+	47,164,.@bloody,
+	42,130,.@bloody,
+	27,130,.@bloody;
+	for(.@i = 0; .@i < getarraysize(.@xy); .@i += 3){
+		monster .@map$,.@xy[.@i],.@xy[.@i+1],"--ja--",.@xy[.@i+2],1,.@event$;
+		.@x++;
+		if(.@x % 7 == 0)
+			sleep 3000;
+	}
+end;
+
+OnMobKill03:
+	.@map$ = get_instance_var("map$");
+	.@event$ = instance_npcname(strnpcinfo(0)) + "::OnMobKill03";
+	.@party_id = get_instance_var("party_id");
+	set_instance_var("phase_four",get_instance_var("phase_four") + 1);
+	if(get_instance_var("phase_four") == 15){
+		killmonster .@map$,.@event$;
+		instance_enable("Oscar#gh_purification_3",true);
+		instance_enable("#schmidt_gh_purification",true);
+		mapannounce .@map$,"Oscar : Esse era o �ltimo quarto. Vamos ver se o esp�rito do Rei Schmidt ainda anda por a�.",bc_map,0xFF66FF;
+		sleep 3000;
+		warpparty .@map$,52,244,.@party_id;
+	}
+end;
+
+OnDummy:
+end;
+}

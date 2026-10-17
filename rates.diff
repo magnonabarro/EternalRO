@@ -1,0 +1,143 @@
+diff --git a/src/custom/script.inc b/src/custom/script.inc
+index 18cb2bb..3b7a00a 100644
+--- a/src/custom/script.inc
++++ b/src/custom/script.inc
+@@ -70,6 +70,10 @@ BUILDIN_FUNC(set_custom_rate)
+ 		case CR_IT_RATE_TREASURE:		sd->custom_rate.item_rate_treasure = value; break;
+ 		case CR_IT_DROP_TREASURE_MIN:	sd->custom_rate.item_drop_treasure_min = value; break;
+ 		case CR_IT_DROP_TREASURE_MAX:	sd->custom_rate.item_drop_treasure_max = value; break;
++		case CR_PVM_SEASONAL:
++			sd->custom_rate.pvm_seasonal = (value != 0);
++			status_calc_pc(sd, SCO_FORCE);
++			break;
+ 		default:
+ 			ShowError("buildin_set_custom_rate: Invalid type %d\n", type);
+ 			script_pushint(st,0);
+@@ -132,6 +136,7 @@ BUILDIN_FUNC(get_custom_rate)
+ 		case CR_IT_RATE_TREASURE:		value = sd->custom_rate.item_rate_treasure; break;
+ 		case CR_IT_DROP_TREASURE_MIN:	value = sd->custom_rate.item_drop_treasure_min; break;
+ 		case CR_IT_DROP_TREASURE_MAX:	value = sd->custom_rate.item_drop_treasure_max; break;
++		case CR_PVM_SEASONAL:			value = sd->custom_rate.pvm_seasonal ? 1 : 0; break;
+ 		default:
+ 			ShowError("buildin_get_custom_rate: Invalid type %d\n", type);
+ 			script_pushint(st,0);
+diff --git a/src/map/battle.cpp b/src/map/battle.cpp
+index 4f9069c..2051e32 100644
+--- a/src/map/battle.cpp
++++ b/src/map/battle.cpp
+@@ -6789,6 +6789,23 @@ struct Damage battle_calc_attack(int32 attack_type,block_list *bl,block_list *ta
+ 
+ 	map_session_data *sd = BL_CAST(BL_PC, bl);
+ 
++	// Hero Saga seasonal PvM rewards: both the +265 and +275 tiers are moved to level 99.
++	// The +15% physical/magic bonus stacks additively with +15% for long-range weapon attacks.
++	if (sd != nullptr && target->type == BL_MOB && sd->custom_rate.pvm_seasonal &&
++		sd->status.base_level >= 99 && d.damage + d.damage2 > 0) {
++		int32 pvm_damage_bonus = 0;
++		if (attack_type == BF_WEAPON || attack_type == BF_MAGIC)
++			pvm_damage_bonus = 15; // +10% from the first tier and +5% from the second.
++		if (attack_type == BF_WEAPON && (flag & BF_LONG))
++			pvm_damage_bonus += 15; // Additional long-range damage.
++		if (pvm_damage_bonus > 0) {
++			if (d.damage > 0)
++				d.damage = static_cast<int64>(d.damage) * (100 + pvm_damage_bonus) / 100;
++			if (d.damage2 > 0)
++				d.damage2 = static_cast<int64>(d.damage2) * (100 + pvm_damage_bonus) / 100;
++		}
++	}
++
+ 	if (sd && d.damage + d.damage2 > 1)
+ 		battle_vanish_damage(sd, target, d.flag);
+ 
+diff --git a/src/map/pc.cpp b/src/map/pc.cpp
+index 6b5ac82..10f9059 100644
+--- a/src/map/pc.cpp
++++ b/src/map/pc.cpp
+@@ -13888,6 +13888,8 @@ bool pc_custom_mob_rate_mvp(map_session_data* sd, const std::shared_ptr<s_mob_db
+ 
+ 	int32 rate_adjust = sd->custom_rate.item_rate_mvp > 0 ? sd->custom_rate.item_rate_mvp : battle_config.item_rate_mvp;
+ 	item_dropratio_adjust(drop->nameid, static_cast<int32>(mob->id), &rate_adjust);
++	if (sd->custom_rate.pvm_seasonal && sd->status.base_level >= 99 && rate_adjust > 0)
++		rate_adjust += 10; // Seasonal +10 percentage points on top of the selected drop rate.
+ 	const uint16 rate_min = sd->custom_rate.item_drop_mvp_min > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_mvp_min) : battle_config.item_drop_mvp_min;
+ 	const uint16 rate_max = sd->custom_rate.item_drop_mvp_max > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_mvp_max) : battle_config.item_drop_mvp_max;
+ 	*rate = static_cast<int32>(mob_drop_adjust(static_cast<int32>(drop->rateSet), rate_adjust, rate_min, rate_max));
+@@ -13959,6 +13961,8 @@ bool pc_custom_mob_rate(map_session_data* sd, const std::shared_ptr<s_mob_db>& m
+ 		return false;
+ 
+ 	item_dropratio_adjust(drop->nameid, static_cast<int32>(mob->id), &rate_adjust);
++	if (sd->custom_rate.pvm_seasonal && sd->status.base_level >= 99 && rate_adjust > 0)
++		rate_adjust += 10; // Seasonal +10 percentage points on top of the selected drop rate.
+ 	*rate = static_cast<int32>(mob_drop_adjust(static_cast<int32>(drop->rateSet), rate_adjust, rate_min, rate_max));
+ 	return true;
+ }
+diff --git a/src/map/pc.hpp b/src/map/pc.hpp
+index 6702e5e..8e8e7ab 100644
+--- a/src/map/pc.hpp
++++ b/src/map/pc.hpp
+@@ -960,6 +960,7 @@ public:
+ 		int item_rate_card, item_rate_card_boss, item_rate_card_mvp, item_drop_card_min, item_drop_card_max;
+ 		int item_rate_mvp, item_drop_mvp_min, item_drop_mvp_max;
+ 		int item_rate_treasure, item_drop_treasure_min, item_drop_treasure_max;
++		bool pvm_seasonal; // Hero Saga: seasonal PvM rewards (level 99).
+ 	} custom_rate;
+ 
+ 	void update_look( _look look );
+diff --git a/src/map/script.hpp b/src/map/script.hpp
+index 2ec004c..820d425 100644
+--- a/src/map/script.hpp
++++ b/src/map/script.hpp
+@@ -2476,7 +2476,8 @@ enum customrate_types {
+ 	CR_IT_RATE_EQUIP, CR_IT_RATE_EQUIP_BOSS, CR_IT_RATE_EQUIP_MVP, CR_IT_DROP_EQUIP_MIN, CR_IT_DROP_EQUIP_MAX,
+ 	CR_IT_RATE_CARD, CR_IT_RATE_CARD_BOSS, CR_IT_RATE_CARD_MVP, CR_IT_DROP_CARD_MIN, CR_IT_DROP_CARD_MAX,
+ 	CR_IT_RATE_MVP, CR_IT_DROP_MVP_MIN, CR_IT_DROP_MVP_MAX,
+-	CR_IT_RATE_TREASURE, CR_IT_DROP_TREASURE_MIN, CR_IT_DROP_TREASURE_MAX
++	CR_IT_RATE_TREASURE, CR_IT_DROP_TREASURE_MIN, CR_IT_DROP_TREASURE_MAX,
++	CR_PVM_SEASONAL
+ };
+ 
+ #endif /* SCRIPT_HPP */
+diff --git a/src/map/script_constants.hpp b/src/map/script_constants.hpp
+index c62e083..a4078e8 100644
+--- a/src/map/script_constants.hpp
++++ b/src/map/script_constants.hpp
+@@ -11197,6 +11197,7 @@
+ 	export_constant(CR_IT_RATE_TREASURE);
+ 	export_constant(CR_IT_DROP_TREASURE_MIN);
+ 	export_constant(CR_IT_DROP_TREASURE_MAX);
++	export_constant(CR_PVM_SEASONAL);
+ 
+ 
+ 	/* searchstore constants */
+diff --git a/src/map/status.cpp b/src/map/status.cpp
+index e0beecc..201b68f 100644
+--- a/src/map/status.cpp
++++ b/src/map/status.cpp
+@@ -3890,6 +3890,17 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
+ 
+ 	memset(&sd->bonus, 0, sizeof(sd->bonus));
+ 
++	// Hero Saga seasonal PvM bonuses start at level 99 on this server.
++	// These are rebuilt every status calculation, so equipment changes do not erase them.
++	if (sd->custom_rate.pvm_seasonal && sd->status.base_level >= 99) {
++		sd->bonus.hp += 10; // +10 flat HP.
++		sd->bonus.sp += 10; // +10 flat SP.
++		sd->bonus.add_heal_rate += 10;
++		sd->def_rate += 5;
++		sd->mdef_rate += 5;
++		sd->bonus.delayrate += 5; // Positive delayrate reduces after-cast delay in this source.
++	}
++
+ 	// Autobonus
+ 	pc_delautobonus(*sd, sd->autobonus, true);
+ 	pc_delautobonus(*sd, sd->autobonus2, true);
+@@ -4444,6 +4455,9 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
+ 		sd->flee2_rate = 0;
+ 	if(sd->flee2_rate != 100)
+ 		base_status->flee2 = base_status->flee2 * sd->flee2_rate/100;
++	// Screenshot specifies +5 Perfect Dodge points (not +5 percent).
++	if (sd->custom_rate.pvm_seasonal && sd->status.base_level >= 99 && (BL_PC & battle_config.enable_perfect_flee))
++		base_status->flee2 = cap_value(base_status->flee2 + 50, 0, SHRT_MAX); // Internally represented in tenths.
+ 
+ 	if (sd->patk_rate < 0)
+ 		sd->patk_rate = 0;

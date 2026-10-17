@@ -1,0 +1,204 @@
+# This file is a part of rAthena.
+#   Copyright(C) 2022 rAthena Development Team
+#   https://rathena.org - https://github.com/rathena
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+###########################################################################
+# Item Cash Database
+###########################################################################
+#
+# Item Cash Settings
+#
+###########################################################################
+# - Tab                     Cash shop tab. Available tabs are New, Hot, Limited, Rental, Permanent, Scrolls, Consumables, Other, Sale.
+#   Items:                  List of possible items.
+#     - Item                Item name.
+#       Price               Item cost in cash points (#CASHPOINTS).
+###########################################################################
+
+Header:
+  Type: ITEM_CASH_DB
+  Version: 1
+Body:
+  - Tab: New
+    Items:
+      - Item: Passe_VIP_3
+        Price: 15000
+      - Item: Passe_VIP_7
+        Price: 3000
+      - Item: Passe_VIP_30
+        Price: 3000
+  - Tab: Hot
+    Items:
+      - Item: C_Tiger_WH
+        Price: 10000
+      - Item: C_Soccer_Ball
+        Price: 10000
+      - Item: C_Little_Abyss_Dragon
+        Price: 10000
+      - Item: C_Avenger
+        Price: 10000       
+      - Item: C_Released_Ground
+        Price: 10000 
+      - Item: C_Wall
+        Price: 10000 
+      - Item: C_Snow_Fox_TW
+        Price: 10000
+      - Item: C_Gossip_Raven
+        Price: 10000 
+      - Item: C_PocketWatch_Hair_Orna
+        Price: 10000
+      - Item: C_Deviruchi_Apron
+        Price: 10000 
+      - Item: C_Floating_Parasol
+        Price: 10000 
+      - Item: C_8Type_PurgatorialWing
+        Price: 10000
+      - Item: C_ZombieMask
+        Price: 10000 
+      - Item: C_Smiling_Eyes
+        Price: 10000
+      - Item: C_Baby_Panda
+        Price: 10000 
+      - Item: C_Fallen_Angel_Blessing
+        Price: 10000
+      - Item: C_Yesterday_Once_More_K
+        Price: 10000 
+      - Item: C_Vampire_Familiar
+        Price: 10000
+      - Item: C_Devil_Whisper
+        Price: 10000
+      - Item: C_Pet_Popcorn_Box
+        Price: 10000
+      - Item: C_Minstrel_Hat
+        Price: 20000
+      - Item: C_Palace_Guard_Cap
+        Price: 20000
+      - Item: C_Owlviscount_Silk_Hat
+        Price: 20000
+      - Item: C_Smoky_TransformHat
+        Price: 20000
+      - Item: C_GatesofNetherWorld
+        Price: 20000
+      - Item: C_Penguin_Cap_BU
+        Price: 20000
+      - Item: C_Jormungandr_Hat
+        Price: 20000
+      - Item: C_Two_Tone_Beret
+        Price: 20000
+      - Item: C_Black_Rabbit_Bonnet
+        Price: 20000
+      - Item: C_Over_Protector
+        Price: 20000
+      - Item: C_Lude_Hood
+        Price: 20000
+      - Item: C_Bouquet_Hat
+        Price: 20000
+      - Item: Little_Golden_Wing
+        Price: 20000
+      - Item: C_Hippo_Hat
+        Price: 20000
+      - Item: C_Let_It_Snow
+        Price: 20000
+      - Item: C_Ignis_Cap
+        Price: 20000
+      - Item: C_Rabbit_Hopping_BL
+        Price: 20000
+      - Item: C_Piamette_Hood
+        Price: 20000
+      - Item: C_Pierced_Apple_
+        Price: 20000
+      - Item: C_Choco_Minihat
+        Price: 20000
+      - Item: C_Para_Team_Hat160
+        Price: 20000
+      - Item: C_Evil_Druid_Hat_Black
+        Price: 20000
+      - Item: C_Muranyasa
+        Price: 20000
+      - Item: C_Wing_Of_Angel_Move_GD
+        Price: 15000
+      - Item: C_Wing_Of_Angel_Move_BK
+        Price: 20000
+      - Item: C_Wing_Of_Angel_Move_RD
+        Price: 10000
+      - Item: C_Wing_Of_Angel_Move
+        Price: 10000
+      - Item: C_Bow_On_the_Back
+        Price: 10000
+      - Item: C_Loli_Ruri_Moon
+        Price: 10000
+      - Item: C_Diabolic_Rock_Guitar
+        Price: 10000
+      - Item: C_Put_On_Coat
+        Price: 15000
+      - Item: C_Ten_G_Shield_TW
+        Price: 15000
+      - Item: C_Book_Of_Magic
+        Price: 10000
+      - Item: C_Blossom_Fluttering
+        Price: 2000
+      - Item: C_Jack_Castle_Bat
+        Price: 2000
+      - Item: C_Stall_Of_Bat
+        Price: 10000
+      - Item: C_Underlamp
+        Price: 10000
+      - Item: C_BaphoJ_Parachute_JP
+        Price: 10000
+      - Item: C_Mob_Scarf
+        Price: 10000
+      - Item: C_Protect_Cloth_B
+        Price: 10000 
+      - Item: C_Sleep_Sheep_TW
+        Price: 10000
+      - Item: C_Poring_Traffic_Light
+        Price: 10000       
+      - Item: C_BearBalloon
+        Price: 10000 
+      - Item: C_Heart_Card_In_Mouth
+        Price: 10000 
+      - Item: C_Poker_Card_In_Mouth
+        Price: 10000
+      - Item: C_Bubble_Gum_In_Mouth
+        Price: 10000
+      - Item: C_Chilly_Breath
+        Price: 10000 
+      - Item: C_Happy_Balloon_J
+        Price: 10000
+      - Item: C_Poring_Letter_TW
+        Price: 10000
+      - Item: C_Royalguard_Necklace
+        Price: 10000
+      - Item: C_Subject_Aura_Red
+        Price: 10000 
+      - Item: C_Eremes_Scarf
+        Price: 10000
+      - Item: C_Eremes_Scarf_BU
+        Price: 10000
+      - Item: C_SnackParty
+        Price: 10000    
+  - Tab: Consumables
+    Items:
+      - Item: Bubble_Gum
+        Price: 5000
+      - Item: Enriched_Elunium_Box
+        Price: 10000
+      - Item: Enriched_Oridecon_Box
+        Price: 10000
+      - Item: Miracle_Medicine
+        Price: 155
+      - Item: Max_Weight_Up_Box
+        Price: 15000

@@ -1,0 +1,673 @@
+-	script	Timmer#AC	-1,{
+
+OnInit:
+
+setcell "job_thief1",174,18,185,18,cell_walkable,0;
+setcell "izlude",112,112,97,125,cell_nochat,1;
+setcell "izlude",112,112,97,125,cell_novending,1;
+
+//Armadilhas
+set $SC_ARMCRIS,17;		//Chance de ir para arena com cristais premiados e PvP.
+set $SC_ARMBLIND,15; 	//Chance de congelar por 15 segundos.
+set $SC_ARMDEG,15; 		//Chance de diminuir agi.
+set $SC_ARMEXIT,43; 	//Chance de ser retirado da sala.
+set $SC_ARMBON1,7; 		//Chance de ganhar 2 bandeiras.
+set $SC_ARMBON2,12; 	//Chance de ganhar 1 bandeira.
+set $SC_ARMAGIL,17; 	//Chance de aumentar sua agilidade.
+set $SC_ARMDISPELL,15; 	//Chance de perder todos buffs e de-buffs
+set $SC_ARMIMUN,23; 	//Chance de ficar imune a todas armadilhas por 15 segundos
+set $SC_ARMSTRIP,7; 	//Chance de divestar algum equip
+
+//Limite das arenas
+set $limite1,55;		//Limite de usuários arena 1
+set $limite2,50;		//Limite de usuários arena 2
+set $limite3,40;		//Limite de usuários arena 3
+
+//Level de gm do vip que poderá entrar mesmo se a sala estiver lotada.
+set $lvlPassVip,5;
+
+end;
+
+//=== Não mexer aqui por favor ==//
+
+OnClock1002:
+OnClock1202:
+OnClock1402:
+OnClock1602:
+OnClock1802:
+OnClock2002:
+OnClock2202:
+OnClock0002:
+			setmapflag "izlude",mf_noskill; end;
+			
+//
+OnClock1010:
+OnClock1210:
+OnClock1410:
+OnClock1610:
+OnClock1810:
+OnClock2010:
+OnClock2210:
+OnClock0010:
+			set $arenac_gate, 1; announce "A Arena dos Cristais está aberta!",bc_all; end;
+
+//
+OnClock1020:
+OnClock1220:
+OnClock1420:
+OnClock1620:
+OnClock1820:
+OnClock2020:
+OnClock2220:
+OnClock0020:
+			set $arenac_gate, 0; announce "A Arena dos Cristais está fechada!",0; mapwarp "job_thief1","prontera",156,185; mapwarp "que_qaru02","prontera",156,185; mapwarp "job_monk","prontera",156,185; removemapflag "izlude",mf_noskill; end;
+
+//
+OnClock1021:
+OnClock1221:
+OnClock1421:
+OnClock1621:
+OnClock1821:
+OnClock2021:
+OnClock2221:
+OnClock0021:
+			mapwarp "job_thief1","prontera",156,185; mapwarp "que_qaru02","prontera",156,185; mapwarp "job_monk","prontera",156,185; end;
+}
+
+sec_in01,163,170,4	script	Arena dos Cristais	855,{
+
+
+L_Init:
+	
+	mes "[Arena dos Cristais]";
+	mes "Olá ^FF0000"+strcharinfo(0)+"^000000, hoje é um ótimo dia para dropar bandeiras, não acha?";
+	next;
+	
+	if($arenac_gate == 1) goto M_start;
+	
+	mes "[Arena dos Cristais]";
+	mes "Uma pena que a arena está fechada no momento!";
+	emotion ET_KEK;
+	next;
+	mes "[Arena dos Cristais]";
+	mes "A arena fica aberta nestes horários:";
+	mes "^FF0000 10:10 até 10:20 ^000000";
+	mes "^0000FF 12:10 até 12:20 ^000000";
+	mes "^FF0000 14:10 até 14:20 ^000000";
+	mes "^0000FF 16:10 até 16:20 ^000000";
+	mes "^FF0000 18:10 até 18:20 ^000000";
+	mes "^0000FF 20:10 até 20:20 ^000000";
+	mes "^FF0000 22:10 até 22:20 ^000000";
+	mes "^0000FF 00:10 até 00:20 ^000000";
+	close;
+
+
+M_start:
+
+	mes "[Arena dos Cristais]";
+	mes "Qual arena deseja entrar?";
+	mes "^309A98Usuários VIP TOTAL podem entrar na arena mesmo estando lotada^000000.";
+	if(getgmlevel() >= 20){ mes "^306C2FVocê é um usuário VIP TOTAL^000000."; }else{ mes "^306C2FVocê não é um usuário VIP TOTAL^000000."; }
+	next;
+	menu "Arena 1 ^0000FF[" + getmapusers("job_thief1") + "/"+$limite1+"]^000000",arena1,"Arena 2 ^0000FF[" + getmapusers("que_qaru02") + "/" + $limite2 + "]^000000",arena2;
+
+arena1:
+
+	if($arenac_gate == 1 && getgmlevel () >= $lvlPassVip) { warp "job_thief1",0,0; end; }
+	if($arenac_gate == 1 && getmapusers("job_thief1") < $limite1){ warp "job_thief1",0,0; end; }
+	if($arenac_gate == 1){ mes "[Arena dos Cristais]"; mes "A arena está lotada."; emotion ET_KEK; next; goto L_Init; }
+	mes "[Arena dos Cristais]";
+	mes "Você está meio atrasado, não é?!";
+	next;
+	mes "[Arena dos Cristais]";
+	mes "A arena já fechou!";
+	emotion ET_SCRATCH;
+	close;
+
+
+arena2:
+
+	if($arenac_gate == 1 && getgmlevel () >= $lvlPassVip) { warp "que_qaru02",0,0; end; }
+	if($arenac_gate == 1 && getmapusers("que_qaru02") < $limite2){ warp "que_qaru02",0,0; end; }
+	if($arenac_gate == 1){ mes "[Arena dos Cristais]"; mes "A arena está lotada."; emotion ET_KEK; next; goto L_Init; }
+	mes "[Arena dos Cristais]";
+	mes "Você está meio atrasado, não é?!";
+	next;
+	mes "[Arena dos Cristais]";
+	mes "A arena já fechou!";
+	emotion ET_SCRATCH;
+	close;
+
+}
+
+-	script	OnDie#2	-1,{
+
+OnPCDieEvent:
+
+	if(strcharinfo(3) == "que_qaru02" || strcharinfo(3) == "job_monk" || strcharinfo(3) == "job_thief1"){
+	specialeffect2 555;
+	sleep2 750;
+	warp "prontera",156,185;
+	}
+	end;
+}
+
+
+-	script	OnDie#1	-1,{
+
+OnPCDieEvent:
+
+	if(strcharinfo(3) == "job_monk" && $crist_death)
+	{
+		set @killer$,rid2name(killerrid);
+		set @killed$,rid2name($crist_death);
+		
+		if(strcharinfo(0) == @killed$)
+		{
+			if(attachrid(killerrid))
+			{
+			announce ""+strcharinfo(0)+" matou "+rid2name($crist_death)+" e ganhou 3 bandeiras!",bc_all;
+			getitem 7549,3;
+			specialeffect2 586;
+			}
+			
+			set $crist_death,0;
+		}
+	}
+	end;
+}
+
+
+job_monk,0,0,0	script	Setter#551	-1,{
+
+OnInit:
+
+	monster "job_monk",0,0,"Cristal Premiado",1951,100,"Setter#551::OnDie";
+	end;
+
+OnDie:
+
+	monster	"job_monk",0,0,"Cristal Premiado",1951,1,"Setter#551::OnDie";
+	set @crist_death, @crist_death+1;
+	set @SC_RANDOM,rand(1,100);
+	if(@crist_death > 2){ announce "A cabeça de "+strcharinfo(0)+" está ao preço de 3 bandeiras!",bc_map; set $crist_death,getcharid(3); set @crist_death, 0; specialeffect2 744; specialeffect2 233; end; }
+	if(@SC_RANDOM >= 97){ announce ""+strcharinfo(0)+" matou o Cristal premiado e ganhou bônus de 2 bandeiras!",bc_map; getitem 7549,2; }
+	if(@SC_RANDOM > 79 && @SC_RANDOM < 85){ dispbottom "Armadilha! você será jogado para fora"; warp "prontera",156,185; }
+	if(@SC_RANDOM > 4 && @SC_RANDOM < 25){ specialeffect2 744; }
+	if(@SC_RANDOM < 4){ announce "A cabeça de "+strcharinfo(0)+" está ao preço de 3 bandeiras!",bc_map; set $crist_death,getcharid(3); specialeffect2 744; specialeffect2 233; }
+	end;
+}
+
+function	script	SC_DISPARM	{
+
+	if(@imun > 0){ emotion ET_KIK; dispbottom "Armadilha falhou! Você está imune."; return; }
+
+	ARMEXIT:
+
+	set @SC_RANDOM,rand(1,100);
+
+	if(@SC_RANDOM <= $SC_ARMEXIT) {
+	specialeffect2 69;
+	specialeffect2 304;
+	dispbottom "Armadilha! Você será jogado para fora";
+	warp "prontera",156,185;
+	emotion ET_CRY;
+	return;
+	} else {
+	goto ARMDEG;
+	}
+	
+ARMDEG:
+
+	set @SC_RANDOM,rand(1,100);
+
+	if(@SC_RANDOM <= $SC_ARMDEG) {
+	specialeffect2 38;
+	specialeffect2 234;
+	specialeffect2 372;
+	emotion ET_FRET;
+	dispbottom "Armadilha! Velocidade Diminuida!";
+	sc_start SC_DECREASEAGI,80000,50;
+	sc_start SC_CHANGEUNDEAD,50000,0;
+	return;
+	} else {
+	goto ARMDISPELL;
+	}
+
+ARMDISPELL:
+
+	set @SC_RANDOM,rand(1,100);
+
+	if(@SC_RANDOM <= $SC_ARMDISPELL) {
+	specialeffect2 235;
+	emotion ET_HUK;
+	dispbottom "Armadilha! Todos efeitos foram retirados!";
+	sc_end SC_ALL;
+	return;
+	} else {
+	goto ARMIMUN;
+	}
+
+ARMIMUN:
+
+	set @SC_RANDOM,rand(1,100);
+
+	if(@SC_RANDOM <= $SC_ARMIMUN) {
+	specialeffect2 675;
+	specialeffect2 749;
+	emotion ET_SMILE;
+	dispbottom "Bônus! Você está imune as armadilhas por 15 segundos!";
+	set @imun,1;
+	sleep2 15000;
+	set @imun,0;
+	return;
+	} else {
+	goto ARMSTRIP;
+	}
+
+ARMSTRIP:
+
+	set @SC_RANDOM,rand(1,100);
+
+	if(@SC_RANDOM <= $SC_ARMSTRIP) {
+	switch(rand(1,4)){
+	case 1: if(getequipid(EQI_HAND_R)){ specialeffect2 269; dispbottom "Armadilha! "+getequipname(EQI_HAND_R)+" retirada!"; unequip EQI_HAND_R; } break;
+	case 2: if(getequipid(EQI_HAND_R)){ specialeffect2 270; dispbottom "Armadilha! "+getequipname(EQI_HAND_R)+" retirado!"; unequip EQI_HAND_L; } break;
+	case 3: if(getequipid(EQI_ARMOR)){ specialeffect2 271; dispbottom "Armadilha! "+getequipname(EQI_ARMOR)+" retirada!"; unequip EQI_ARMOR; } break;
+	case 4: if(getequipid(EQI_HEAD_TOP)){ specialeffect2 272; dispbottom "Armadilha! "+getequipname(EQI_HEAD_TOP)+" retirado!"; unequip EQI_HEAD_TOP; } break;
+	}
+	emotion ET_HUK;
+	return;
+	} else {
+	goto ARMBON1;
+	}
+
+ARMBON1:
+
+	set @SC_RANDOM,rand(1,100);
+
+	if(@SC_RANDOM <= $SC_ARMBON1) {
+	specialeffect2 100;
+	specialeffect2 847;
+	emotion ET_KIK;
+	dispbottom "Bônus! Você recebeu 2 Bandeiras Nacionais!";
+	getitem 7549,2;
+	return;
+	} else {
+	goto ARMBON2;
+	}
+
+ARMBON2:
+
+	set @SC_RANDOM,rand(1,100);
+
+	if(@SC_RANDOM <= $SC_ARMBON2) {
+	specialeffect2 100;
+	emotion ET_SMILE;
+	dispbottom "Bônus! Você recebeu 1 Bandeira Nacional!";
+	getitem 7549,1;
+	return;
+	} else {
+	goto ARMBLIND;
+	}
+
+ARMBLIND:
+
+	set @SC_RANDOM,rand(1,100);
+
+	if(@SC_RANDOM <= $SC_ARMBLIND) {
+	if (checkoption(0x10)){ set @falcon, 1; }
+	if (checkoption(0x20)){ set @peco, 1; }
+	specialeffect2 108;
+	emotion ET_KEK;
+	dispbottom "Armadilha! Congelado!";
+	atcommand "@option 2";
+	if (@falcon > 0){ setoption 0x10; }
+	if (@peco > 0){ setoption 0x20; }
+	sleep2 6000;
+	atcommand "@option 0";
+	if (@falcon > 0){ setoption 0x10; set @falcon, 0; }
+	if (@peco > 0){ setoption 0x20; set @peco, 0; }
+	return;
+	} else {
+	goto ARMAGIL;
+	}
+
+ARMAGIL:
+
+	set @SC_RANDOM,rand(1,100);
+
+	if(@SC_RANDOM <= $SC_ARMAGIL) {
+	dispbottom "Bônus! Você recebeu Aumentar Agilidade Nv. 10!";
+	emotion ET_HUNGRY;
+	sc_start 32,240000,10;
+	skilleffect 29,0;
+	specialeffect2 507;
+	specialeffect2 519;
+	return;
+	} else {
+	goto ARMCRIS;
+	}
+
+ARMCRIS:
+
+	set @SC_RANDOM,rand(1,100);
+
+	if(@SC_RANDOM <= $SC_ARMCRIS) {
+	emotion ET_MONEY;
+	pcblockmove getcharid(3),1;
+	specialeffect2 60;
+	specialeffect2 501;
+	sleep2 2400;
+	pcblockmove getcharid(3),0;
+	dispbottom "Bônus! Teleporte para a Arena Premiada!";
+	specialeffect2 227;
+	warp "job_monk",0,0;
+	return;
+	} else {
+	goto ARMBONN;
+	}
+
+
+ARMBONN:
+
+	set @SC_RANDOM,rand(1,20);
+	if(@SC_RANDOM <= 1 && countitem(7549) > 2){
+	specialeffect2 722;
+	specialeffect2 380;
+	emotion ET_CRY;
+	dispbottom "Armadilha! Você perdeu 3 Bandeiras Nacionais!";
+	delitem 7549,3;
+	return;
+	}else{ goto ARMFIM; }
+
+ARMFIM:
+
+	set @SC_RANDOM,rand(1,10);
+	if(@SC_RANDOM <= 5 && countitem(7549) > 0){
+	specialeffect2 18;
+	emotion ET_KEK;
+	dispbottom "Armadilha! Você perdeu 1 Bandeira Nacional!";
+	delitem 7549,1;
+	return;
+	}
+}
+
+-	script	Warper#AC	-1,{
+
+OnTimer90000:
+	areawarp "que_qaru02",rand(13,384),rand(18,387),rand(13,384),rand(18,387),"job_monk",0,0;
+	stopnpctimer;
+	initnpctimer;
+	end;
+
+OnTimer60000:
+	areawarp "job_thief1",rand(18,341),rand(18,341),rand(18,341),rand(18,341),"job_monk",0,0;
+	end;
+
+OnInit:
+	initnpctimer;
+	end;
+}
+
+//
+
+job_thief1,0,0,0	script	SC_ARMS#1::ARM1	-1,7,7,{
+
+OnTouch: callfunc "SC_DISPARM";
+
+OnTimer60000:
+	movenpc strnpcinfo(3),rand(19,340),rand(27,340);
+	stopnpctimer;
+	initnpctimer;
+	end;
+
+OnInit:
+	movenpc strnpcinfo(3),rand(19,340),rand(27,340);
+	initnpctimer;
+	end;
+}
+
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#2	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#3	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#4	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#5	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#6	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#7	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#8	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#9	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#10	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#11	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#12	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#13	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#14	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#15	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#16	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#17	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#18	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#19	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#20	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#21	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#22	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#23	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#24	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#25	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#26	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#27	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#28	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#29	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#30	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#31	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#32	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#33	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#34	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#35	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#36	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#37	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#38	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#39	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#40	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#41	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#42	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#43	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#44	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#45	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#46	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#47	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#48	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#49	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#50	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#51	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#52	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#53	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#54	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#55	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#56	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#57	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#58	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#59	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#60	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#61	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#62	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#63	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#64	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#65	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#66	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#67	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#68	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#69	-1,7,7
+job_thief1,0,0,0	duplicate(ARM1)	SC_ARMS#70	-1,7,7
+
+//
+
+que_qaru02,0,0,0	script	SC_ARMS4#1::ARM3	-1,4,4,{
+
+OnTouch:
+	callfunc "SC_DISPARM";
+	
+OnTimer60000:
+	movenpc strnpcinfo(3),rand(2,390),rand(2,390);
+	stopnpctimer;
+	initnpctimer;
+	end;
+	
+OnInit:
+	movenpc strnpcinfo(3),rand(2,390),rand(2,390);
+	initnpctimer;
+	end;
+}
+
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#2	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#3	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#4	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#5	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#6	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#7	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#8	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#9	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#10	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#11	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#12	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#13	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#14	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#15	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#16	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#17	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#18	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#19	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#20	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#21	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#22	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#23	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#24	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#25	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#26	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#27	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#28	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#29	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#30	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#31	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#32	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#33	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#34	-1,4,4
+que_qaru02,0,0,0	duplicate(ARM3)	SC_ARMS4#35	-1,4,4
+
+
+//Spawns do cristal.
+que_qaru02,0,0	monster	Cristal MidgardRO	1951,100,30000,0,0
+job_thief1,0,0	monster	Cristal MidgardRO	1951,100,30000,0,0
+
+//gld_dun02,0,0	monster	Cristal MidgardRO	1395,25,1800000,0,0
+//schg_dun01,0,0	monster	Cristal MidgardRO	1395,25,1800000,0,0
+
+//Warps D:
+que_qaru02,346,81,0	script	WBQ#1-1	45,1,1,{
+
+OnTouch:
+	warp "que_qaru02",0,0;
+	end;
+}
+
+que_qaru02,132,171,0	script	WBQ#1-2	45,1,1,{
+
+OnTouch:
+	warp "que_qaru02",114,158;
+	end;
+}
+
+que_qaru02,149,105,0	script	WBQ#1-3	45,1,1,{
+
+OnTouch:
+	warp "que_qaru02",119,103;
+	end;
+}
+
+que_qaru02,129,102,0	script	WBQ#1-4	45,1,1,{
+
+OnTouch:
+	warp "que_qaru02",146,109;
+	end;
+}
+
+que_qaru02,252,339,0	script	WBQ#1-5	45,1,1,{
+
+OnTouch:
+	warp "que_qaru02",0,0;
+	end;
+}
+
+que_qaru02,73,272,0	script	WBQ#1-6	45,1,1,{
+
+OnTouch:
+	warp "que_qaru02",0,0;
+	end;
+}
+
+que_qaru02,275,298,0	script	WBQ#1-7	45,1,1,{
+
+OnTouch:
+	warp "que_qaru02",0,0;
+	end;
+}
+
+que_qaru02,259,375,0	script	WBQ#1-8	45,1,1,{
+
+OnTouch:
+	warp "que_qaru02",0,0;
+	end;
+}
+
+que_qaru02,244,375,0	script	WBQ#1-9	45,1,1,{
+
+OnTouch:
+	warp "que_qaru02",0,0;
+	end;
+}
+
+que_qaru02,228,297,0	script	WBQ#2-1	45,1,1,{
+
+OnTouch:
+	warp "que_qaru02",0,0;
+	end;
+}
+
+que_qaru02,345,22,0	script	WBQ#2-2	45,1,1,{
+
+OnTouch:
+	warp "que_qaru02",0,0;
+	end;
+}
+
+que_qaru02,114,163,0	script	WBQ#2-3	45,1,1,{
+
+OnTouch:
+	warp "que_qaru02",135,172;
+	end;
+}
+
+
+//Mapflags.
+que_qaru02	mapflag	nowarpto
+que_qaru02	mapflag	nosave	SavePoint
+que_qaru02	mapflag	nomemo
+que_qaru02	mapflag	nobranch
+que_qaru02	mapflag	noreturn
+que_qaru02	mapflag	noicewall
+que_qaru02	mapflag	noteleport
+
+job_monk	mapflag	nowarpto
+job_monk	mapflag	nowarp
+job_monk	mapflag	nosave	SavePoint
+job_monk	mapflag	nomemo
+job_monk	mapflag	nobranch
+job_monk	mapflag	noreturn
+job_monk	mapflag	noteleport
+job_monk	mapflag	pvp
+
+job_thief1	mapflag	noreturn
+job_thief1	mapflag	nowarpto
+job_thief1	mapflag	nosave	SavePoint
+job_thief1	mapflag	nomemo
+job_thief1	mapflag	nobranch
+job_thief1	mapflag	noicewall
+job_thief1	mapflag	noteleport

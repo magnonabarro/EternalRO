@@ -1,0 +1,99 @@
+/*
+NPC: Plagiadora
+Por: tecapeteca
+Discord: tecapeteca#6716
+Cliente: Celio
+*/
+
+sala_vip,112,114,4	script	Plágio Vip Premium	482,{
+
+	// Preço para plagiar. Caso queira que seja grátis, deixe no valor 0;
+	@zenyPrice = 500000;
+
+	mes .n$;
+	if (getskilllv("RG_PLAGIARISM")>=1){
+		mes "Olá, ^0000FF" + strcharinfo(0)+"^000000!";
+		mes "Sou integrante da guilda dos Desordeiros, e estou aqui para auxiliar a galera do "+.serverName$+" com algumas habilidades plagiáveis.";
+		next;
+		mes .n$;
+		mes "Deseja plagiar alguma habilidade?";
+		if (@zenyPrice)
+			mes "Preço: "+@zenyPrice;
+		next;
+		set .@menu, select(.menu$) -1;
+		mes .n$;
+		mes "Você deseja copiar a habilidade "+.skill$[.@menu*3]+"?";
+		mes "Você precisará se reconectar.";
+		switch(select("Copiar:Sair")){
+			case 1:
+				if (zeny < @zenyPrice){
+					next;
+					mes .n$;
+					mes "Você não tem zeny o suficiente para isto.";
+					close;
+				}
+				Loop:
+				next;
+				.@totalLevel$ = atoi(.skill$[.@menu*3+2])>1?"-"+.skill$[.@menu*3+2]:"" ;
+				mes .n$;
+				mes "Escolha o nível: (1"+.@totalLevel$+")";
+				if (input(.@skillLevel,1,(atoi(.skill$[.@menu*3+2])>1?atoi(.skill$[.@menu*3+2]):1))!=0) {
+					mes "O nível que você inseriu está acima do permitido.";
+					mes "Por favor, insira novamente.";
+					goto Loop;
+				}
+				close2;
+				zeny -= @zenyPrice;
+				CLONE_SKILL = atoi(.skill$[.@menu*3+1]);
+				CLONE_SKILL_LV = .@skillLevel;
+				message strcharinfo(0),strcharinfo(0)+" se desconectará para aplicar as atualizações.";
+				sleep2 5000;
+				atcommand "@kick "+ strcharinfo(0);
+				end;
+
+			case 2:
+				close;
+		}
+	} else {
+		mes "Apenas as classes ^FF0000Arruaceiro/Desordeiro^000000 podem plagiar habilidades.";
+		//mes "Estou aqui para ajudar a galera do "+.serverName$+".";
+		close;
+	}
+	end;
+	
+	OnInit:
+		// Nome do NPC
+		.n$ = "[ ^0000FFMestre do Plágio^000000 ";
+		// Nome no Balão de Chat
+		waitingroom "Plágio Premium",0;
+		// Nome do Servidor
+		.serverName$ = "MidgardRO";
+		setarray .skill$, 
+		// "Nome da Habilidade", "ID", "Nível máximo",
+"Combo Triplo", 263, 10,
+"Lansas de Gelo", 14, 10,
+"Lansas de Fogo", 19, 10,
+"Lansas Congelantes", 537, 10,
+"Pétalas Flamejantes", 534, 10,
+"Lâmina do Vento", 540, 10,
+"Relâmpago", 20, 10,
+"Tempestade de Raios", 21, 10,
+"Coluna de Pedra", 90, 10,
+"Trovão de Jupiter", 84, 10,
+"Dragão Explosivo", 536, 10,
+"Nevasca", 89, 10,
+"Ira de Thor", 85, 10,
+"Grande Floco de Neve", 539, 10,
+"Escudo de Chamas", 535, 10,
+"Congelar", 88, 10,
+"Chuva de Meteoros", 83, 10,
+"Destruidor de Almas", 379, 10,
+"Impacto de Tyr", 62, 10,
+"Crux Magnum", 254, 10,
+"Chute Aéreo", 421, 7,
+"Fúria da Terra", 91, 10; // Obs.: A última habilidade precisa ser finalizada com ; no final
+    	set .@sizeSkill, getarraysize(.skill$);
+    	for (.@i=0; .@i<.@sizeSkill; .@i=.@i+3)
+    	    set .menu$, .menu$+"^3CB371[>]^000000 "+.skill$[.@i]+":";
+    	end;
+	}

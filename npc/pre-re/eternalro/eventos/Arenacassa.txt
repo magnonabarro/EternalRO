@@ -1,0 +1,101 @@
+jupe_ele,37,53,4	script	Arena de Caça	763,{
+
+mes "[Arena de Caça]";
+mes "Olá! Sou o guardião da Arena de Caça.";
+next;
+mes "[Arena de Caça]";
+mes "Quanto mais monstros você mata, mais pontos ganha.";
+mes "Você pode trocar esses pontos por itens.";
+if (getgmlevel() > 98) {
+    menu "Entrar na Arena", GoArena, "Trocar Pontos", GoPontos, "Alterar Loja", GoMudar, "Ver Itens", Checagem;
+} else {
+    menu "Entrar na Arena", GoArena, "Trocar Pontos", GoPontos;
+}
+
+GoArena:
+if ($WarpLiberado) {
+    mes "[Arena de Caça]";
+    mes "Boa sorte! Tente sobreviver.";
+    close2;
+    warp "ordeal_1-2", 154, 153;
+} else {
+    mes "[Arena de Caça]";
+    mes "Desculpe, estamos fechados.";
+}
+close;
+
+GoMudar:
+mes "[Arena de Caça]";
+mes "Configure os itens da loja.";
+for (set .@i, 1; .@i <= 6; set .@i, .@i + 1) {
+    mes "Digite o ID do Item "+.@i+":";
+    input .@Item[.@i];
+    mes "Digite o preço em pontos:";
+    input .@Pontos[.@i];
+    set $Item[.@i], .@Item[.@i];
+    set $Pontos[.@i], .@Pontos[.@i];
+}
+mes "Itens atualizados com sucesso!";
+close;
+
+Checagem:
+mes "[Arena de Caça]";
+mes "Itens disponíveis para troca:";
+for (set .@i, 1; .@i <= 6; set .@i, .@i + 1) {
+    if ($Item[.@i]) {
+        mes "" + getitemname($Item[.@i]) + " - " + $Pontos[.@i] + " pontos";
+    }
+}
+close;
+
+GoPontos:
+mes "[Arena de Caça]";
+mes "Você tem "+Ponto+" pontos.";
+mes "Escolha um item para trocar:";
+for (set .@i, 1; .@i <= 6; set .@i, .@i + 1) {
+    if ($Item[.@i]) {
+        .@menu$ = .@menu$ + getitemname($Item[.@i]) + " - " + $Pontos[.@i] + " pontos,";
+    }
+}
+switch (select(.@menu$)) {
+    case 1: callfunc("ExchangeItem", 1); break;
+    case 2: callfunc("ExchangeItem", 2); break;
+    case 3: callfunc("ExchangeItem", 3); break;
+    case 4: callfunc("ExchangeItem", 4); break;
+    case 5: callfunc("ExchangeItem", 5); break;
+    case 6: callfunc("ExchangeItem", 6); break;
+}
+close;
+
+function ExchangeItem {
+    if (Ponto < $Pontos[getarg(0)]) {
+        mes "Você não tem pontos suficientes.";
+        close;
+    }
+    mes "Digite a quantidade desejada:";
+    input .@quantia;
+    if (Ponto < ($Pontos[getarg(0)] * .@quantia)) {
+        mes "Você não tem pontos suficientes para essa quantia.";
+        close;
+    }
+    set Ponto, Ponto - ($Pontos[getarg(0)] * .@quantia);
+    getitem $Item[getarg(0)], .@quantia;
+    mes "Item recebido com sucesso!";
+    close;
+}
+
+OnHour00:
+killmonsterall "ordeal_1-2";
+announce "Arena de Caça aberta em 5 minutos!", 8;
+set $WarpLiberado, 1;
+end;
+
+OnClock0005:
+set $WarpLiberado, 0;
+announce "Warps fechados!", 8;
+end;
+
+OnMobKill:
+set Ponto, Ponto + getarg(0);
+end;
+}

@@ -1,0 +1,36 @@
+//==================================================
+// Floresta Diabolica Anda 1 Nível necessário: 200+
+//==================================================
+mjo_wst01,0,0	monster	Punch Bug Giver	21951,150
+mjo_wst01,0,0	monster	Aferde	21952,150
+mjo_wst01,0,0	monster	Empathize	21953,150
+mjo_wst01,0,0	monster	Dispol	21953,150
+mjo_wst01,0,0	monster	Timbers	21954,150
+mjo_wst01,0,0	boss_monster	Renire	21955,1,3600000,600000,1
+
+//==================================================
+// Thanatos Tower Revamp Anda 1 Nível necessário: 260+
+//==================================================
+ra_pol01,0,0	monster	Deadsera Giver	21947,300
+ra_pol01,0,0	monster	Tinta de Pedra	21948,300
+ra_pol01,0,0	monster	Deadween	21949,300
+ra_pol01,0,0	monster	Burning Night	21946,300
+ra_pol01,0,0	boss_monster	Gaia Pol	21950,1,3600000,600000,0
+
+//==================================================
+// Thanatos Tower Revamp Anda 1 Nível necessário: 150+
+//==================================================
+2@thts,0,0	monster	Happiness Giver	20774,100,3000,5000
+3@thts,0,0	monster	Happiness	20774,100,3000,5000
+3@thts,0,0	monster	Empathize	20773,100,3000,5000
+4@thts,0,0	monster	Pray Giver	20844,100,3000,5000
+5@thts,0,0	monster	Smile Giver	20845,100,3000,5000
+5@thts,0,0	monster	Eldest	20781,100,3000,5000
+6@thts,0,0	monster	Book of Death	20780,100,3000,5000
+6@thts,0,0	monster	Void Mimic	20779,100,3000,5000
+7@thts,0,0	monster	Crow Duke	20782,100,3000,5000
+7@thts,0,0	monster	Crow Baron	20783,100,3000,5000
+8@thts,141,214	monster	Anger of Thanatos	20775,5,3000,5000
+8@thts,206,162	monster	Horror of Thanatos	20776,5,3000,5000
+8@thts,191,88	monster	Resent of Thanatos	20777,5,3000,5000
+8@thts,90,86	monster	Regret of Thanatos	20778,5,3000,5000

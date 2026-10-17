@@ -1,0 +1,178 @@
+//|==========================================================================================|
+//|   __________     __________       __________   _____          _____   _____        _____ |
+//|  |::::::::::|   |::::::::: |     |::::::::::|  ::::        /::::/	  ::::      /::::/ |
+//|  |:: ____ ::|   |:: ____ ::|     |:: ____ ::|   ::::      /::::/	   ::::    /::::/  |
+//|  |::|    |::|   |::|    |::|     |::|    |::|    ::::    /::::/       ::::  /::::/   |
+//|  |::|    |::|   |::|    |::|     |::|    |::|     ::::  /::::/         ::::/::::/    |
+//|  |::|____|::|   |::|____|::|     |::|    |::|      ::::/::::/           ::::::::/     |
+//|  |::::::::::|   |::::::::::     |::|    |::| 	::::::::/             ::::::/	     |
+//|  |::________|   |:: ____ :::    |::|    |::|	 ::::::/	       	::::/	     |
+//|  |::|	    |::|     :::|   |::|____|::|	 /::::::               |::::|	     |
+//|  |::|           |::|      |::|   |::      ::|       /::::::::              |::::|       |
+//|  |::|           |::|      |::|   |::::::::::|      /::::/::::             |::::|       |
+//|  |__|	    |__|      |__|   |__________|     /____/  ____	        |____|	     |
+//|        									   	     |
+//|==========================================================================================|
+//|   Script Criando por ragnaproxy | Cronus | Por Favor, Não Retire Os Créditos.            |
+//|==========================================================================================|
+//|         *************************Evento sobrevivente****************************         |
+//|==========================================================================================|
+ 
+ 
+que_temsky,55,147,6	script	Evento Sobrevivente	752,{
+ 
+ 
+ 
+//---------------------------CONFIGURAÇÕES---------------------------+
+//						     		     |
+//+=-=-=-=-=+-=-=-=-=-=+=-=-=-=-=-=-=+=-=-=-=-=-=-=-=-=+=-=-=-=-=-=-=+
+set .nome$,"^800000[Sobrevivente]^000000"; 			      // Nome Do NPC de Entrada.
+//-=-=--=-=-=-=--=-=-=-=--=--=-=-=--=-=--=-=-=-=-=--===-=-=-=-=--=-=-|
+set $max,15;    						      // Limite máximo de Players
+//-=-=--=-=-=-=--=-=-=-=--=--=-=-=--=-=--=-=-=-=-=--===-=-=-=-=--=-=-|
+setarray $@Sobrevivente[0],674,15;  // Id dos premeios e quantidade ,Os premeios são sorteado entre eles.
+//-=-=--=-=-=-=--=-=-=-=--=--=-=-=--=-=--=-=-=-=-=--===-=-=-=-=--=-=-|
+set .item$,"Moeda de Mythril, que pode ser trocada por quests!";                     // Nome dos premios
+//+=-=-=-=-=+=-=-=-=-=-+-=-=-=-=-=-=-+=-=--=-=-=-=-=-=-+=-=-=-=-=-=-=+
+ 
+ 
+ 
+mes .nome$;
+mes "^ff6600Olá Bravo Guerreiro, o que deseja?^000000";
+next;
+switch(select("^0000ffEntra no evento^000000 ["+getmapusers ("g_room1-1")+"]","^0000ffInformações^000000","^0000ffO que eu ganho?^000000")){
+	case 1:
+		if($sob_on == 0){ mes .nome$; mes "^ff6600O Evento sobrevivente não está aberto. Ele abre a cada 30 Minutos.^000000"; close; }
+		if(getmapusers("g_room1-1") == $max){ mes .nome$; mes "^ff6600Desculpe, o evento está lotado!^000000"; close; }
+		if($sob_on == 1){
+		mes .nome$;
+		mes "^FF6600Desejo uma Boa Sorte!^000000";
+		close2;
+		if(getgmlevel()<20) announce strcharinfo(0)+" conseguiu entrar no Evento Sobrevivente",8;
+		percentheal 100,100; warp "g_room1-1",74,182; end; }
+	case 2:
+		mes .nome$;
+		mes "^0000FFEvento Sobrevivente, tente fica vivo até o final do evento.";
+		mes "Suporta até "+$max+" Players no mapa.";
+		mes "Mate quantos puder e se você chega ate o final Ganhara um Item";
+		mes "que e Escolhido pela Administração.^000000";
+		close;
+	case 3:
+		mes .nome$;
+		mes "^ff6600Você pode ganhar:^000000";
+		mes "^ff6600Um Desse itens..^000000";
+		mes .item$;
+		close;
+ 
+ 
+		}
+	close;
+}
+ 
+g_room1-1,64,183,3	script	Saída	708,{
+ 
+ 
+set .nome2$,"^0000FF[Saída]^000000"; // Nome Do NPC de Saída.
+ 
+if($ganhou == 0){
+ 
+	set @n,rand(getarraysize($Sobrevivente)/2);
+	getitem $@Sobrevivente[@n*2],$@Sobrevivente[@n*2+1];
+	set $sob_on,0; warp "prontera",150,150; end; }
+mes	.nome2$;
+mes	"^008000Você foi muito bem hoje!";
+mes	"Como recompensa, um item de presente.^000000";
+close2;
+set @n,rand(getarraysize($@Sobrevivente)/2);
+	getitem $@Sobrevivente[@n*2],$@Sobrevivente[@n*2+1];
+set $ganhou,0;
+set $sob_on,0;
+warp "prontera",138,171;
+end;
+}
+ 
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
+//	    sobreviventeiHide		   |
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
+ 
+g_room1-1,64,181,5	script	sobreviventeiHide	-1,{
+ 
+ 
+OnMinute35:
+OnMinute15:
+ 
+ 
+	announce "O Evento Sobrevivente está aberto, e em 5 minutos ele começará! Venha pegue sua vaga!",8;
+	disablenpc "Saída"; enablenpc "Buff"; initnpctimer; set $sob_on,1; killmonsterall "g_room1-1"; end;
+ 
+OnTimer60000:	announce "O Evento Sobrevivente está aberto, e em 4 minutos ele começará!",8;	end;
+OnTimer90000:	announce "Corra para conseguir sua vaga no O Evento Sobrevivente, são só "+$max+"!",8;	end;
+OnTimer120000:	announce "O Evento Sobrevivente está aberto, e em 3 minutos ele começará!",8;	end;
+OnTimer150000:	announce "Corra para conseguir sua vaga no O Evento Sobrevivente, são só "+$max+"!",8;	end;
+OnTimer180000:	announce "O Evento Sobrevivente está aberto, e em 2 minutos ele começará!",8;	end;
+OnTimer210000:	announce "Corra para conseguir sua vaga no O Evento Sobrevivente, são só "+$max+"!",8;	end;
+OnTimer240000:	announce "O Evento Sobrevivente está aberto, e em 1 minuto ele começará!",8;	end;
+OnTimer270000:	announce "Corra para conseguir sua vaga no O Evento Sobrevivente, são só "+$max+"!",8;	end;
+OnTimer300000:	announce "O Evento Sobrevivente começou!",8;
+disablenpc "Buff";
+pvpon "g_room1-1";
+set $sob_on,0;
+end;
+ 
+ 
+ 
+ 
+OnTimer400000:	mapannounce "g_room1-1","Em alguns segundos O 2° Round Tera inicio!!",8;
+pvpoff "g_room1-1";
+OnTimer420000:	mapannounce "g_room1-1","Enquanto isso recarregue suas Energias!!",0;
+enablenpc "Buff";
+end;
+ 
+OnTimer430000:	mapannounce "g_room1-1","O 2° Round Começou LUTEM!!!",8;
+disablenpc "Buff";
+pvpon "g_room1-1";;
+end;
+ 
+OnTimer500000:	mapannounce "g_room1-1","Em alguns segundos O 3° Round Tera inicio!!",8;
+pvpoff "g_room1-1";
+OnTimer530000:	mapannounce "g_room1-1","Enquanto isso recarregue suas Energias!!",0;
+enablenpc "Buff";
+end;
+ 
+OnTimer540000:	mapannounce "g_room1-1","O 3° Round Começou LUTEM!!!",8;
+pvpon "g_room1-1";
+disablenpc "Buff";
+end;
+ 
+OnTimer600000:	announce "O Evento Sobrevivente termino Parabens Aos vencendores!!!",8;
+pvpoff "g_room1-1";
+end;
+ 
+OnTimer610000:	mapannounce "g_room1-1","Parabéns! Vocês Sobreviveram ao Evento sobrevivente Retirem seus Prêmios com o NPC ''!",8;
+enablenpc "Saída";
+end;
+ 
+}
+ 
+ 
+g_room1-1,74,185,3	script	Buff	90,{
+ 
+percentheal 100,100;
+skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+skilleffect 75,0; sc_start SC_GLORIA,360000,5;skilleffect 459,0;
+end;
+ 
+}
+ 
+ 
+// Map-Flags
+g_room1-1	mapflag	nowarp
+g_room1-1	mapflag	nowarpto
+g_room1-1	mapflag	noteleport
+g_room1-1	mapflag	nogo
+g_room1-1	mapflag	nosave	savepoint
+g_room1-1	mapflag	nomemo
+g_room1-1	mapflag	nobranch
+g_room1-1	mapflag	nopenalty
+g_room1-1	mapflag	monster_noteleport

@@ -1,0 +1,63 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ gvg.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.1 ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= Batalha de Clãs com mecânica de PVP.
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+pvp_y_room,77,85,4	script	Guia da Batalha dos Clãs	105,{
+
+	setarray .@map1X[1],7,9,16,8,20;
+	setarray .@map2X[1],91,90,83,91,79;
+	setarray .@mapY[1],49,49,50,49,50;
+
+	mes "[Guia da Batalha dos Clãs]";
+	mes "Como você está?";
+	mes "Eu sou o Guia da Batalha dos Clãs";
+	mes "para os novos mapas PvP.";
+	mes "Preciso saber para qual mapa";
+	mes "você quer que eu te leve.";
+	next;
+	set .@i, select("Mapa 1:Mapa 2:Mapa 3:Mapa 4:Mapa 5");
+	mes "[Guia da Batalha dos Clãs]";
+	mes "Você escolheu o Mapa "+.@i+".";
+	mes "Agora, em qual equipe";
+	mes "você quer entrat? Você pode escolher";
+	mes "a Equipe 1 ou a Equipe 2.";
+	next;
+	set .@j, select("Equipe 1:Equipe 2");
+	mes "[Guia da Batalha dos Clãs]";
+	mes "Tudo bem, eu vou te enviar";
+	mes "para o mapa "+.@i+" como membro";
+	mes "da Equipe "+.@j+". Você está pronto para";
+	mes "ser teletransportado para a batalha agora?";
+	next;
+	if(select("Sim.:Não.") == 2) {
+		mes "[Guia da Batalha dos Clãs]";
+		mes "Tudo bem, espero";
+		mes "ver você de novo nos";
+		mes "campos PvP!";
+		close;
+	}
+	mes "[Guia da Batalha dos Clãs]";
+	mes "Ótimo! Tenha uma boa estadia ~";
+	close2;
+	warp "guild_vs"+.@i,getd(".@map"+.@j+"X["+.@i+"]"),.@mapY[.@i];
+	end;
+}

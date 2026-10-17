@@ -1,0 +1,47 @@
+//
+//= =========================== rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=                                                                        
+//= ====================== http://rathena.org/board/ ======================
+//= ==== Nome do Script: ==================================================
+//=> [ ayo_dun.txt ]
+//= ==== Versão Atual: ====================================================
+//=> [ v1.4 - Pré-Renovação ]
+//= ==== Compatível/Por: ==================================================
+//=> [ Projeto e Equipe de Desenvolvimento rAthena ]
+//= ==== Descrição: =======================================================
+//=> [ Invocação de monstros das Praias de Comodo. ]
+//= ==== Créditos: ========================================================
+//=> [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//= =====================================================================//
+
+//==================================================
+// beach_dun - Karu, a Caverna do Oeste
+//==================================================
+beach_dun,0,0	monster	Medusa	1148,60
+beach_dun,0,0	monster	Tritão	1264,3,10000,5000
+beach_dun,0,0	monster	Nereida	1255,20
+beach_dun,0,0	monster	Peste	1256,20
+beach_dun,0,0,0,0	boss_monster	Tao Gunka	1583,1,18000000,600000,0
+
+//==================================================
+// beach_dun2 - Ruande, a Caverna do Norte
+//==================================================
+beach_dun2,0,0	monster	Megalith	1274,15
+beach_dun2,0,0	monster	Nereida	1255,10
+beach_dun2,0,0	monster	Golem Estalactitico	1278,65,5000
+beach_dun2,0,0	monster	Trilobita	1279,20
+beach_dun2,0,0	monster	Hidra	1068,10
+
+//==================================================
+// beach_dun3 - Mao, a Caverna do Leste
+//==================================================
+beach_dun3,0,0	monster	Nereida	1255,1,200000,100000
+beach_dun3,0,0	monster	Sapo de Thara	1034,50
+beach_dun3,0,0	monster	Hidra	1068,30
+beach_dun3,0,0	monster	Megalodon	1064,30

@@ -1,0 +1,199 @@
+//==================================================================================
+//-------------------------------- RagnaERO Script ---------------------------------
+//=    __________                              _____________________ ________
+//=    \______   \_____     ____   ____ _____  \_   _____/\______   \\_____  \
+//=     |       _/\__  \   / ___\ /    \\__  \  |    __)_  |       _/ /   |   \
+//=   	|    |   \ / __ \_/ /_/  >   |  \/ __ \_|        \ |    |   \/    |    \
+//=   	|____|_  /(____  /\___  /|___|  (____  /_______  / |____|_  /\_______  /
+//=            \/      \//_____/      \/     \/        \/         \/         \/
+//=                                                          RagnaERO Scripts
+//=                                                                       
+//--------------------------- http://rathena.org/board/ ----------------------------
+//==================================================================================
+//----- NOME DO SCRIPT -------------------------------------------------------------
+//= pagar_pena.txt
+//----- POR: -----------------------------------------------------------------------
+//= Equipe de Desenvolvimento rAthena
+//----- VERSÃO ATUAL DO SCRIPT: ----------------------------------------------------
+//= v1.2
+//----- DESCRIÇÃO: -----------------------------------------------------------------
+//= Um simples script de servidão penal. Pode animar seus prisioneiros um pouco.  
+//----- COMENTÁRIOS ADICIONAIS: ----------------------------------------------------
+//= Projeto RagnaERO
+//= Cabeçalho e Tradução Pt-BR Por [ADM] Eragonat PK
+//================================================================================== 
+
+sec_pri,36,58,1	script	Chefe Warder	105,{
+	mes "[Saddeus]";
+	emotion ET_QUESTION;
+	if(Sex) {
+		mes "Sr. Prisioneiro #"+BaseLevel+JobLevel+",";
+	} else {
+		mes "Sra. Prisioneira #"+BaseLevel+JobLevel+",";
+	}
+	mes "qual é o barulho aí?";
+	next;
+	menu "Deixe-me livre, eu vou pagar!",-, "Deixe-me trabalhar preso!",M_Q1, "Nada",M_NO_THANKS;
+
+M_PAY:
+	mes "[Saddeus]";
+	set .@MUSTPAY,(PRISON+1)*1000000;
+	if (.@MUSTPAY<1000000) set .@MUSTPAY,1000000;
+	if (.@MUSTPAY>100000000) set .@MUSTPAY,100000000;
+	if (PRISON==0) mes "Não me lembro de você. É sua primeira vez?";
+	if (PRISON>0) mes "Você de novo? Me parece que você não aprendeu nada desde a primeira visita...";
+	mes "OK, nós poderíamos liberar você por ^FF0000"+.@MUSTPAY+" zeny(s)^000000.";
+	next;
+	menu "Eu pago em dinheiro!",M_PAYCASH,"Você aceita cheques?",M_PAYBANK,"Eu mudei de idéia.",-;
+
+	mes "[Saddeus]";
+	mes "Você tem algum tempo para pensar...";
+	close;
+
+M_PAYCASH:
+	if (.@MUSTPAY>Zeny) goto L_NOCASH;
+	set Zeny,Zeny-.@MUSTPAY;
+	mes "[Saddeus]";
+	mes "OK, cante aqui e ali.";
+	goto L_RELEASE;
+
+L_NOCASH:
+	mes "[Saddeus]";
+	mes "O que é isso? Não é suficiente!";
+	close;
+
+M_PAYBANK:
+	if (.@MUSTPAY>#kafrabank) goto L_NOBANK;
+	set #kafrabank,#kafrabank-.@MUSTPAY;
+	mes "[Saddeus]";
+	mes "OK, assine seu cheque. E coloque seu nome aqui no meu livro.";
+	goto L_RELEASE;
+
+L_NOBANK:
+	mes "[Saddeus]";
+	if (#kafrabank==0) mes "Seu caso não me diz nada sobre sua conta bancária.";
+	if (#kafrabank!=0) mes "Infelizmente, há informações da sua conta bancária... ^FF0000"+#kafrabank+" zeny(s)^000000... no caso. Não é o suficiente.";
+	mes "Pare com seus jogos bobos agora!";
+	close;
+
+L_RELEASE:
+	set PRISON,PRISON+1;
+	next;
+	mes "[Saddeus]";
+	mes "Você está livre agora!";
+	next;
+	savepoint "izlude",105,112;
+	warp "izlude",105,112;
+	close;
+
+M_Q1:
+	mes "[Saddeus]";
+	mes "Nossos estoques estão com falta de cogumelos. Lembre-se de suas manhãs sem faser nada? Que tal um pouco de trabalho em nossa fazenda de cogumelos patrocinada?";
+	next;
+	menu "OK, eu vou malhar um pouco!",-, "Eu amo essa prisão!",M_NO_THANKS;
+
+	mes "[Saddeus]";
+	if(checkcart() || checkfalcon() || checkriding()){
+		emotion ET_SCRATCH;
+		mes "Sinto muito, mas antes você deve liberar seu Carrinho, M.E.C.H.A ou Falcão!";
+		close;
+	}
+	mes "Fale com nosso supervisor, Oliver.";
+	next;
+
+	nude;
+
+	set .@rw,rand(1,4);
+	if (.@rw==2) goto L_W2;
+	if (.@rw==3) goto L_W3;
+	if (.@rw==4) goto L_W4;
+
+L_W1:
+	savepoint "sec_in02",179,76;
+	warp "sec_in02",179,76;
+	close;
+
+L_W2:
+	savepoint "sec_in02",139,32;
+	warp "sec_in02",139,32;
+	close;
+
+L_W3:
+	savepoint "sec_in02",100,28;
+	warp "sec_in02",100,28;
+	close;
+
+L_W4:
+	savepoint "sec_in02",107,75;
+	warp "sec_in02",107,75;
+	close;
+
+M_NO_THANKS:
+	mes "[Saddeus]";
+	if (rand(2)) mes "Hoje é dia de X-Mas, hein?";
+	mes "Agora cale a boca e recue!";
+	if (rand(2)) emotion ET_HUK;
+	close;
+}
+
+sec_in02,137,57,1	script	Supervisor	4_M_PAY_SOLDIER,{
+	mes "[Oliver]";
+
+	delitem 4002,countitem(4002);//Item: Carta Fabre,
+	delitem 4009,countitem(4009);//Item: Carta Chonchon,
+	delitem 4022,countitem(4022);//Item: Carta Esporo,
+	delitem 4048,countitem(4048);//Item: Carta Esporo Venenoso,
+	
+	if (PRISON_Q <= 0 ) goto L_GET_Q;
+
+	mes "Eu quero que você junte ^FF0000"+PRISON_Q+" Cogumelo Venenoso^000000.";
+	if ( countitem(1069)<PRISON_Q ) close;//Item: Cogumelo Venenoso,
+	mes "OK... me dê todos os cogumelos...";
+	mes "Deixe-me ver... "+countitem(1069)+" quase comíveis...";//Item: Cogumelo Venenoso,
+	mes "E "+countitem(1070)+" inúteis e mortais.";//Item: Cogumelo Borrachento,
+	next;
+	mes "[Oliver]";
+	mes "Obrigado. Você está livre!";
+	set PRISON_Q,0;
+	delitem 1069,countitem(1069);//Item: Cogumelo Venenoso,
+	delitem 1070,countitem(1070);//Item: Cogumelo Borrachento,
+	next;
+	savepoint "izlude",105,112;
+	warp "izlude",105,112;
+	close;
+
+L_GET_Q:
+	set PRISON,PRISON+1;
+	if (PRISON > 1) mes "Hmm... Você já esteve aqui... Bem... bem...";
+
+	if ( countitem(1069) || countitem(1070) ) mes "Solte estes cogumelos!! Eles são venenosos!"; //Items: Cogumelo Venenoso, Cogumelo Borrachento,
+	delitem 1069,countitem(1069); //Item: Cogumelo Venenoso,
+	delitem 1070,countitem(1070); //Item: Cogumelo Borrachento,
+
+	set PRISON_Q, PRISON*3 + BaseLevel/3;
+	set PRISON_Q, PRISON_Q * (readparam(bAspd)/55 + 1);
+	set PRISON_Q, PRISON_Q+rand(50,60);
+	mes "OK, você deve me trazer ^FF0000"+PRISON_Q+"^000000 ^FF0000Cogumelo Venenoso^000000 comestível... cogumelos.";
+	if(readparam(bAspd)>=100) mes "Você é um cara rápido! Você terá que pegar mais cogumelos, então.";
+	if (rand(10)<4) mes "E você poderá comer os cogumelos mortais no café da manhã.";
+	close;
+}
+
+sec_in02	mapflag	nomemo
+sec_in02	mapflag	nosave	SavePoint
+sec_in02	mapflag	noteleport
+sec_in02	mapflag	nobranch
+sec_in02	mapflag	nowarp
+sec_in02	mapflag	nowarpto
+sec_in02	mapflag	noexp
+sec_in02	mapflag	noskill
+//sec_in02	mapflag	pvp
+//sec_in02	mapflag	pvp_noparty
+//sec_in02	mapflag	gvg
+sec_in02	mapflag	pvp_nightmaredrop	random,all,300
+
+sec_in02,138,55,100,100	monster	Cogumelo	1182,30,10000,10000
+sec_in02,138,55,100,100	monster	Fabre	1184,10,20000,20000
+sec_in02,138,55,100,100	monster	Chonchon	1183,11,20000,20000
+sec_in02,138,55,100,100	monster	Esporo	1014,12,20000,20000
+sec_in02,138,55,100,100	monster	Esporo Venenoso	1077,3,20000,20000

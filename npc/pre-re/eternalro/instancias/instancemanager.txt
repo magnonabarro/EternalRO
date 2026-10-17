@@ -1,0 +1,337 @@
+// Gerenciador de Instancias - Pre-Renewal 99/70, catalogo ampliado sem Mini Torre Sem Fim.
+// C++ generico deve encaminhar OnCreate_<token> e OnEnter_<token> usando o nome do .lub.
+// Criar reserva a instancia sem teleportar; Entrar acessa a instancia criada pelo grupo.
+
+-	script	InstanceManagerBridge	-1,{
+OnInit:
+	setarray .DisplayName$[0], "Torre Sem Fim", "Catacumba Selada", "Memorial dos Orcs", "Ninho de Nidhogg", "Caverna do Polvo", "Torneio de Geffen", "Fabrica do Terror", "Vila Poring", "Labirinto Nebuloso", "Memorias da Sara", "Palacio Fantasma", "Jitterbug Macabro", "Espaco Infinito", "Assalto Aereo", "Dungeon Fim Semana", "Caverna Buwaya", "Lago de Bakonawa", "Ninho Faceworm", "Ilha de Bios", "Dungeon Sexta", "Caverna Morse", "Torre do Diabo", "Hospital Bangungot", "Lab Central", "Charleston Perigo", "Glastheim Antigo", "Fortaleza Aerea", "Meia Lua Dia";
+	setarray .InstanceName$[0], "Endless Tower", "Sealed Catacomb", "Orc's Memory", "Nidhoggur's Nest", "Octopus Cave", "Geffen Magic Tournament", "Horror Toy Factory", "Poring Village", "Mistwood Maze", "Sara's Memories", "Ghost Palace", "Nightmarish Jitterbug", "Infinite Space", "Assault on the Airship", "Weekend Dungeon", "Buwaya Cave", "Bakonawa Lake", "Faceworm's Nest", "Isle of Bios", "Friday Dungeon", "Morse's Cave", "Devil's Tower", "Bangungot Hospital 2F", "Central Laboratory", "Charleston in Distress", "Old Glast Heim", "Sky Fortress Invasion", "Half Moon In The Daylight";
+	setarray .CooldownQuest[0], 60200, 3040, 12059, 3135, 4197, 9316, 12331, 12417, 7211, 15002, 1261, 13182, 12365, 15051, 12378, 4229, 12278, 12326, 15005, 12379, 9319, 7577, 9223, 12347, 13185, 12317, 9419, 14586;
+	setarray .MinLevel[0], 50, 75, 30, 70, 1, 90, 99, 30, 98, 99, 99, 99, 99, 99, 60, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 80;
+	setarray .MaxLevel[0], 99, 99, 80, 99, 99, 99, 99, 60, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99;
+	setarray .MinMembers[0], 1, 2, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1;
+	setarray .MaxMembers[0], 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+	setarray .AuxQuest[0], 60201, 0, 0, 3136, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+	setarray .Token$[0], "TorreSemFim", "CatacumbaSelada", "MemorialdosOrcs", "NinhodeNidhogg", "CavernadoPolvo", "TorneiodeGeffen", "FabricadoTerror", "VilaPoring", "LabNebuloso", "MemoriasdaSara", "PalacioFantasma", "Jitterbug", "EspacoInfinito", "AssaltoAereo", "FimSemana", "CavernaBuwaya", "LagodeBakonawa", "NinhoFaceworm", "IlhadeBios", "DungeonSexta", "CavernaMorse", "TorredoDiabo", "HospBangungot", "LabCentral", "Charleston", "GlastheimAntigo", "FortalezaAerea", "MeiaLuaDia";
+	setarray .ReqKey$[0], "Nivel 50+; cooldown 24h; reentrada conforme regra original.", "Nivel 75+; grupo 2+; cooldown 24h.", "Nivel 30-80; grupo 2+; cooldown 24h.", "Nivel 70+; exige progresso original da quest; cooldown 24h.", "Requer item alugado ID 6442; cooldown 24h.", "Nivel 90+; grupo de uma personagem; cooldown 24h.", "Nivel 99; requer introducao original concluida; cooldown 24h.", "Nivel 30-60; requer contrato com Emily; cooldown 24h.", "Nivel 98+; grupo; cooldown 24h.", "Nivel 99; requer preparacao da quest original; cooldown 24h.", "Nivel 99; cooldown 24h.", "Nivel 99; requer quest de Roel iniciada; cooldown 24h.", "Nivel 99; requer quest de preparacao concluida; cooldown 24h.", "Nivel 99; grupo solo; cooldown 24h.", "Nivel 60+; disponivel sabado/domingo; cooldown 24h.", "Nivel 99; grupo; cooldown 24h.", "Nivel 99; requer progresso original de Malaya e peso livre; cooldown 24h.", "Nivel 99; respeita quests e cooldowns do Ninho Faceworm.", "Nivel 99; requer quest do Andarilho concluida; cooldown 24h.", "Nivel 99; somente sexta-feira; cooldown 24h.", "Nivel 99; requer progresso original da Ilha; cooldown 24h.", "Nivel 99; preserva quest e etapas da Torre; cooldown 24h.", "Nivel 99; requer progresso da historia de Malaya; cooldown 24h.", "Nivel 99; requer quest de preparacao iniciada; cooldown 24h.", "Nivel 99; requer inicio da quest original; cooldown 24h.", "Nivel 99; requer a quest original iniciada; cooldown 24h.", "Nivel 99; requer quest de entrada iniciada; cooldown 24h.", "Nivel 80+; requer introducao da quest; cooldown 24h.";
+	end;
+
+OnCreate_TorreSemFim:
+	callsub L_Create;
+	end;
+OnCreate_CatacumbaSelada:
+	callsub L_Create;
+	end;
+OnCreate_MemorialdosOrcs:
+	callsub L_Create;
+	end;
+OnCreate_NinhodeNidhogg:
+	callsub L_Create;
+	end;
+OnCreate_CavernadoPolvo:
+	callsub L_Create;
+	end;
+OnCreate_TorneiodeGeffen:
+	callsub L_Create;
+	end;
+OnCreate_FabricadoTerror:
+	callsub L_Create;
+	end;
+OnCreate_VilaPoring:
+	callsub L_Create;
+	end;
+OnCreate_LabNebuloso:
+	callsub L_Create;
+	end;
+OnCreate_MemoriasdaSara:
+	callsub L_Create;
+	end;
+OnCreate_PalacioFantasma:
+	callsub L_Create;
+	end;
+OnCreate_Jitterbug:
+	callsub L_Create;
+	end;
+OnCreate_EspacoInfinito:
+	callsub L_Create;
+	end;
+OnCreate_AssaltoAereo:
+	callsub L_Create;
+	end;
+OnCreate_FimSemana:
+	callsub L_Create;
+	end;
+OnCreate_CavernaBuwaya:
+	callsub L_Create;
+	end;
+OnCreate_LagodeBakonawa:
+	callsub L_Create;
+	end;
+OnCreate_NinhoFaceworm:
+	callsub L_Create;
+	end;
+OnCreate_IlhadeBios:
+	callsub L_Create;
+	end;
+OnCreate_DungeonSexta:
+	callsub L_Create;
+	end;
+OnCreate_CavernaMorse:
+	callsub L_Create;
+	end;
+OnCreate_TorredoDiabo:
+	callsub L_Create;
+	end;
+OnCreate_HospBangungot:
+	callsub L_Create;
+	end;
+OnCreate_LabCentral:
+	callsub L_Create;
+	end;
+OnCreate_Charleston:
+	callsub L_Create;
+	end;
+OnCreate_GlastheimAntigo:
+	callsub L_Create;
+	end;
+OnCreate_FortalezaAerea:
+	callsub L_Create;
+	end;
+OnCreate_MeiaLuaDia:
+	callsub L_Create;
+	end;
+
+OnEnter_TorreSemFim:
+	callsub L_Enter;
+	end;
+OnEnter_CatacumbaSelada:
+	callsub L_Enter;
+	end;
+OnEnter_MemorialdosOrcs:
+	callsub L_Enter;
+	end;
+OnEnter_NinhodeNidhogg:
+	callsub L_Enter;
+	end;
+OnEnter_CavernadoPolvo:
+	callsub L_Enter;
+	end;
+OnEnter_TorneiodeGeffen:
+	callsub L_Enter;
+	end;
+OnEnter_FabricadoTerror:
+	callsub L_Enter;
+	end;
+OnEnter_VilaPoring:
+	callsub L_Enter;
+	end;
+OnEnter_LabNebuloso:
+	callsub L_Enter;
+	end;
+OnEnter_MemoriasdaSara:
+	callsub L_Enter;
+	end;
+OnEnter_PalacioFantasma:
+	callsub L_Enter;
+	end;
+OnEnter_Jitterbug:
+	callsub L_Enter;
+	end;
+OnEnter_EspacoInfinito:
+	callsub L_Enter;
+	end;
+OnEnter_AssaltoAereo:
+	callsub L_Enter;
+	end;
+OnEnter_FimSemana:
+	callsub L_Enter;
+	end;
+OnEnter_CavernaBuwaya:
+	callsub L_Enter;
+	end;
+OnEnter_LagodeBakonawa:
+	callsub L_Enter;
+	end;
+OnEnter_NinhoFaceworm:
+	callsub L_Enter;
+	end;
+OnEnter_IlhadeBios:
+	callsub L_Enter;
+	end;
+OnEnter_DungeonSexta:
+	callsub L_Enter;
+	end;
+OnEnter_CavernaMorse:
+	callsub L_Enter;
+	end;
+OnEnter_TorredoDiabo:
+	callsub L_Enter;
+	end;
+OnEnter_HospBangungot:
+	callsub L_Enter;
+	end;
+OnEnter_LabCentral:
+	callsub L_Enter;
+	end;
+OnEnter_Charleston:
+	callsub L_Enter;
+	end;
+OnEnter_GlastheimAntigo:
+	callsub L_Enter;
+	end;
+OnEnter_FortalezaAerea:
+	callsub L_Enter;
+	end;
+OnEnter_MeiaLuaDia:
+	callsub L_Enter;
+	end;
+
+L_FindIndex:
+	.@selected$ = @im_selected_name$;
+	for (.@i = 0; .@i < getarraysize(.DisplayName$); .@i++) {
+		if (.DisplayName$[.@i] == .@selected$)
+			return .@i;
+	}
+	return -1;
+
+L_CheckParty:
+	.@idx = getarg(0);
+	.@party_id = getcharid(1);
+	if (.@party_id <= 0) {
+		dispbottom "Gerenciador: crie um grupo (pode ter apenas voce nele).";
+		return 0;
+	}
+	if (!instance_check_party(.@party_id, .MinMembers[.@idx], .MinLevel[.@idx], .MaxLevel[.@idx])) {
+		dispbottom "Gerenciador: nivel ou quantidade de membros fora dos requisitos desta instancia.";
+		return 0;
+	}
+	if (.MaxMembers[.@idx] > 0) {
+		getpartymember(.@party_id, 0);
+		if ($@partymembercount > .MaxMembers[.@idx]) {
+			dispbottom "Esta instancia aceita somente uma personagem no grupo.";
+			return 0;
+		}
+	}
+	return 1;
+
+L_CheckSpecReq:
+	.@idx = getarg(0);
+	// Torre Sem Fim: regra de progresso original preservada.
+	if (.@idx == 3 && !(ins_nyd == 131 || ins_nyd == 132 || ins_nyd > 199)) {
+		dispbottom "Ninho de Nidhogg: avance primeiro na quest original do Portao Enigmatico.";
+		return 0;
+	}
+	// Caverna do Polvo: item alugado original.
+	if (.@idx == 4 && rentalcountitem(6442) <= 0) {
+		dispbottom "Caverna do Polvo: e necessario portar o item alugado ID 6442.";
+		return 0;
+	}
+	// Torneio de Geffen: nivel e cooldown original.
+	if (.@idx == 5 && BaseLevel < 90) { dispbottom "Torneio de Geffen: nivel 90+ necessario."; return 0; }
+	if (.@idx == 5 && GeffenTournament > gettimetick(2)) { dispbottom "Torneio de Geffen: cooldown ativo."; return 0; }
+	// Fabrica do Terror: nivel maximo do servidor e introducao original.
+	if (.@idx == 6 && isbegin_quest(12330) != 2) { dispbottom "Fabrica do Terror: conclua a introducao original antes de entrar."; return 0; }
+	if (.@idx == 6 && getstatus(SC_MONSTER_TRANSFORM, 1) > 0) { dispbottom "Fabrica do Terror: aguarde o efeito de transformacao terminar."; return 0; }
+	// Vila Poring: contrato original com Emily e limite de nivel 30-60.
+	if (.@idx == 7 && isbegin_quest(12416) != 2) { dispbottom "Vila Poring: conclua o contrato de Emily (quest 12416) primeiro."; return 0; }
+	// Memorias da Sara: manter estado de preparacao feito no NPC original.
+	if (.@idx == 9 && saramemory != 4) { dispbottom "Memorias da Sara: fale com Leon e prepare a quest original antes de entrar."; return 0; }
+	// Jitterbug: manter o convite/quest de Roel.
+	if (.@idx == 11 && isbegin_quest(13181) != 1) { dispbottom "Jitterbug: fale com Roel e inicie a quest 13181 antes de entrar."; return 0; }
+	// Espaco Infinito exige a etapa de preparacao.
+	if (.@idx == 12 && isbegin_quest(12364) != 2) { dispbottom "Espaco Infinito: conclua a preparacao original (quest 12364)."; return 0; }
+	// Dungeon de fim de semana: preservar disponibilidade oficial.
+	if (.@idx == 14) { .@day = gettime(DT_DAYOFWEEK); if (.@day != SATURDAY && .@day != SUNDAY) { dispbottom "Dungeon Fim Semana: disponivel somente sabado e domingo."; return 0; } }
+	// Bakonawa: preservar progresso original e requisito de peso livre.
+	if (.@idx == 16 && malaya_bakona1 < 7 && malaya_bakona2 < 15) { dispbottom "Lago de Bakonawa: avance primeiro na historia de Malaya."; return 0; }
+	if (.@idx == 16 && (checkweight(1201,1) == 0 || MaxWeight - Weight < 10000)) { dispbottom "Lago de Bakonawa: reduza o peso do inventario antes de entrar."; return 0; }
+	// Ninho Faceworm: manter requisito de peso original.
+	if (.@idx == 17 && (!checkweight(1201,1) || MaxWeight - Weight < 1000)) { dispbottom "Ninho Faceworm: reduza o peso do inventario."; return 0; }
+	// Ilha de Bios exige a quest do Andarilho.
+	if (.@idx == 18 && isbegin_quest(15006) == 0) { dispbottom "Ilha de Bios: conclua primeiro a quest com o Andarilho."; return 0; }
+	// Caverna Morse exige progresso da Ilha de Brasilis.
+	if (.@idx == 20 && ep14_3_isle == 0) { dispbottom "Caverna Morse: conclua o progresso original da Ilha antes de entrar."; return 0; }
+	if (.@idx == 20 && checkweight(2104,2) == 0) { dispbottom "Caverna Morse: libere espaco no inventario."; return 0; }
+	// Hospital Bangungot requer etapa da historia de Malaya.
+	if (.@idx == 22 && malaya_bang < 30) { dispbottom "Hospital Bangungot: avance primeiro na historia de Malaya."; return 0; }
+	// Laboratorio Central preserva a introducao original.
+	if (.@idx == 23 && isbegin_quest(12346) == 0) { dispbottom "Laboratorio Central: fale com o NPC da quest original antes de entrar."; return 0; }
+	// Charleston preserva a cadeia de quest original.
+	if (.@idx == 24 && isbegin_quest(13184) == 0 && isbegin_quest(13186) == 0) { dispbottom "Charleston: inicie a quest original antes de entrar."; return 0; }
+	// Old Glast Heim preserva a introducao original.
+	if (.@idx == 25 && isbegin_quest(12316) == 0) { dispbottom "Glast Heim Antigo: inicie a quest original antes de entrar."; return 0; }
+	// Sky Fortress preserva a quest de entrada original.
+	if (.@idx == 26 && isbegin_quest(9418) == 0) { dispbottom "Fortaleza Aerea: inicie a quest original antes de entrar."; return 0; }
+	// Half Moon preserva a introducao da quest original.
+	if (.@idx == 27 && isbegin_quest(14594) == 0) { dispbottom "Meia Lua Dia: converse com a Sacerdotisa Niren para iniciar a quest."; return 0; }
+	return 1;
+
+L_ClearExpiredCooldown:
+	.@idx = getarg(0);
+	if (.CooldownQuest[.@idx] > 0 && checkquest(.CooldownQuest[.@idx], PLAYTIME) == 2)
+		erasequest .CooldownQuest[.@idx];
+	if (.AuxQuest[.@idx] > 0 && checkquest(.AuxQuest[.@idx], PLAYTIME) == 2)
+		erasequest .AuxQuest[.@idx];
+	return;
+
+L_Create:
+	.@idx = callsub(L_FindIndex);
+	if (.@idx < 0) { dispbottom "Gerenciador: instancia nao cadastrada."; return; }
+	if (callsub(L_CheckParty, .@idx) == 0 || callsub(L_CheckSpecReq, .@idx) == 0) return;
+	if (!is_party_leader()) { dispbottom "Gerenciador: somente o lider do grupo pode criar a instancia."; return; }
+	.@oldid = instance_id(IM_PARTY);
+	if (.@oldid > 0) {
+		if (instance_live_info(ILI_NAME, .@oldid) == .InstanceName$[.@idx]) dispbottom "A instancia ja esta criada. Clique em Entrar.";
+		else dispbottom "Seu grupo ja possui outra instancia ativa. Termine-a antes de criar outra.";
+		return;
+	}
+	.@cd = -1;
+	if (.CooldownQuest[.@idx] > 0) .@cd = checkquest(.CooldownQuest[.@idx], PLAYTIME);
+	if (.@cd == 2) { callsub L_ClearExpiredCooldown, .@idx; .@cd = -1; }
+	if (.@cd == 0 || .@cd == 1) { dispbottom "Gerenciador: cooldown de 24 horas ativo para esta instancia."; return; }
+	if (.@idx == 5) { for (.@q = 9284; .@q <= 9314; .@q++) if (checkquest(.@q) != -1) erasequest .@q; }
+	.@created_id = instance_create(.InstanceName$[.@idx]);
+	if (.@created_id < 0) { dispbottom "Gerenciador: falha ao criar. Confira Name e mapas no instance_db.yml."; return; }
+	dispbottom "Instancia criada. Voce ainda nao foi teleportado; clique em Entrar quando estiver pronto.";
+	return;
+
+L_Enter:
+	.@idx = callsub(L_FindIndex);
+	if (.@idx < 0) { dispbottom "Gerenciador: instancia nao cadastrada."; return; }
+	if (callsub(L_CheckParty, .@idx) == 0 || callsub(L_CheckSpecReq, .@idx) == 0) return;
+	.@iid = instance_id(IM_PARTY);
+	if (.@iid <= 0 || instance_live_info(ILI_NAME, .@iid) != .InstanceName$[.@idx]) { dispbottom "Seu grupo ainda nao criou esta instancia. O lider deve clicar em Criar primeiro."; return; }
+	.@cd = -1;
+	if (.CooldownQuest[.@idx] > 0) .@cd = checkquest(.CooldownQuest[.@idx], PLAYTIME);
+	if (.@cd == 2) { callsub L_ClearExpiredCooldown, .@idx; .@cd = -1; }
+	if (.@cd == 0 || .@cd == 1) {
+		if (.@idx == 0) {
+			.@aux = checkquest(60201, PLAYTIME);
+			if (.@aux < 0 || .@aux >= 2 || etower_partyid != getcharid(1)) { dispbottom "Torre Sem Fim: reentrada somente para o mesmo grupo na janela original de 4 horas."; return; }
+		} else if (.AuxQuest[.@idx] > 0 && .@idx == 3) {
+			.@aux = checkquest(.AuxQuest[.@idx], PLAYTIME); if (.@aux == 0 || .@aux == 1) { dispbottom "Ninho de Nidhogg: a janela auxiliar da quest ainda esta ativa."; return; }
+		}
+	}
+	.@result = instance_enter(.InstanceName$[.@idx]);
+	if (.@result != IE_OK) {
+		if (.@result == IE_NOINSTANCE) dispbottom "A instancia nao existe mais. O lider deve clicar em Criar.";
+		else if (.@result == IE_NOMEMBER) dispbottom "Voce nao pertence ao grupo dono desta instancia.";
+		else dispbottom "Falha ao entrar na instancia (codigo " + .@result + ").";
+		return;
+	}
+	// Comeca cooldown ao entrar, nunca ao criar. Os quest flags abaixo preservam temporizadores oficiais usados nos NPCs originais.
+	if (.CooldownQuest[.@idx] > 0 && checkquest(.CooldownQuest[.@idx]) == -1) setquest .CooldownQuest[.@idx];
+	switch (.@idx) {
+	case 13: if (checkquest(15050) == -1) setquest 15050; if (checkquest(15051) == -1) setquest 15051; break;
+	case 14: if (checkquest(12377) == -1) setquest 12377; if (checkquest(12378) == -1) setquest 12378; break;
+	case 16: if (checkquest(12279) == -1) setquest 12279; break;
+	case 17: if (checkquest(12327) == -1) setquest 12327; if (checkquest(12328) == -1) setquest 12328; if (checkquest(12329) == -1) setquest 12329; break;
+	case 18: if (checkquest(15007) == -1) setquest 15007; if (checkquest(15008) == -1) setquest 15008; break;
+	case 21: if (checkquest(7568) == -1) setquest 7568; break;
+	case 22: if (checkquest(9224) == -1) setquest 9224; break;
+	case 24: if (checkquest(13188) == -1) setquest 13188; break;
+	}
+	if (.@idx == 5) GeffenTournament = gettimetick(2) + 86400;
+	dispbottom "Entrada autorizada. Cooldown desta instancia: 24 horas.";
+	return;
+}

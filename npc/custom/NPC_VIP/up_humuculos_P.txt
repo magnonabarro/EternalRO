@@ -1,0 +1,29 @@
+//=====UPADOR DE HUMUCULOS ======================================== 
+//= [Adm] Celiÿ
+//= 1.0
+sala_vip,120,108,5	script	Criador Premium	4_F_ALCHE,{
+
+if(Class == 18 || Class == 4019 || Class == 4259) goto L_OK;
+mes "^FF1493[Homunculus]^000000";
+mes "Desculpe eu atendo somente Alquimistas!";
+close;
+
+L_OK:
+mes "^FF1493[Homunculus]^000000";
+mes "Ol· ^FF4500"+StrCharInfo(0)+"^000000, Gostaria de evoluir seu Humuculos?";
+next;
+if(select("^FF1493Sim, Evolua ele pra mim!^000000:^FF0000N„o, obrigado^000000") == 2 ) { close; }
+mes "Prontinho! seu humuculos agora est· no Level Maximo";
+next;
+atcommand "@homlvl 49 "+strcharinfo(0);
+atcommand "@homfriendly 1000 "+strcharinfo(0);
+atcommand "@homevolve "+strcharinfo(0);
+atcommand "@homfriendly 1000 "+strcharinfo(0);
+atcommand "@homhungry 100 "+strcharinfo(0);
+close;
+
+OnInit:
+	waitingroom "[ Homunculos Premium ]",0;
+	end;
+
+}

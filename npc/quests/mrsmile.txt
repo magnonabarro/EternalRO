@@ -1,0 +1,103 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ dona_risadinha.txt ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= Troque Trevos, Felpas e Jellopys por uma Máscara Feliz.
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+-	script	Dona Risadinha::SmileHelper	92,{
+	mes "[Dona Risadinha]";
+	mes "Olá!";
+	mes "Eu sou a Dona Risadinha";
+	mes "Como posso te ajudar?";
+	next;
+	switch(select("O que é uma ^3355FFMáscara Feliz^000000?:Quero fazer uma ^3355FFMáscara Feliz^000000.:Por que você tem esse nome?")) {
+	case 1:
+		mes "[Dona Risadinha]";
+		mes "A Máscara Feliz é um item que instantaneamente te deixa sorrindo!";
+		mes "E se todos usarem Máscaras Feliz, o mundo de Ragnarök será um mundo mais feliz!";
+		mes "A Máscara Feliz ajuda a lembrar a todos que sempre devemos estar de bom-humor.";
+		next;
+		mes "[Dona Risadinha]";
+		mes "Usamos materiais básicos que qualquer Aprendiz pode conseguir.";
+		mes "Irei lhe dizer quais são, preste atenção e anote!";
+		next;
+		mes "[Dona Risadinha]";
+		mes "^3355FF10 Jellopys^000000";
+		mes "^3355FF10 Felpas^000000";
+		mes "^3355FF10 Trevos^000000";
+		next;
+		mes "[Dona Risadinha]";
+		mes "É só você me trazer esses itens que eu farei para você uma Máscara feliz!";
+		mes "Agora apresse-se...";
+		close;
+	case 2:
+			mes "[Dona Risadinha]";
+		if (countitem(909) > 9 && countitem(914) > 9 && countitem(705) > 9) {
+			mes "Parabéns!";
+			mes "Por favor, aceite esta Máscara Feliz.";
+			next;
+			delitem 909,10; // Jellopy
+			delitem 914,10; // Felpa
+			delitem 705,10; // Trevo
+			getitem 2278,1; // Máscara Feliz
+			mes "[Dona Risadinha]";
+			mes "Vossa majestade, Tristam III";
+			mes "prometeu dar seu melhor para tornar";
+			mes "Ragnarok um jogo melhor e mais agradável.";
+			next;
+			mes "O fato mencionado anteriormente";
+			mes "foi anunciado pelo";
+			mes "Serviço de Informações do Reino de Rune-Midgard.";
+			close;
+		}
+			mes "Ah, mas que pena!";
+			mes "Você ainda não possui todos os itens necessários para";
+			mes "fazer uma Máscara Feliz!";
+			mes "^3355FF10 Jellopys^000000";
+			mes "^3355FF10 Felpas^000000";
+			mes "^3355FF10 Trevos^000000";
+			mes "Por favor, veja os requerimentos acima e volte após coletá-los.";
+			close;
+	case 3:
+		mes "[Dona Risadinha]";
+		mes "Hihihihihihi";
+		mes "Por que eu tenho esse nome?";
+		mes "É por que eu adoro rir!";
+		next;
+		mes "[Dona Risadinha]";
+		mes "Adoro Máscaras Felizes e Piadas. Vou te contar uma piada:";
+    next;
+		mes "[Dona Risadinha]";
+		mes "Dois porings estavam pulando nos arredores de prontera...";
+		mes "Primeiro Poring: Cuidado com o Apren... *BLOSH*!";
+		mes " ";
+		mes "Segundo Poring: Que Apren... *BLOSH*!";
+		mes "Hahahahahahahahaha.";
+		close;
+	}
+}
+
+//= Duplicatas: Dona Risadinha.
+
+alberta,113,53,4	duplicate(SmileHelper)	Dona Risadinha#alb	92
+aldebaran,136,135,4	duplicate(SmileHelper)	Dona Risadinha#alde	92
+geffen,119,107,4	duplicate(SmileHelper)	Dona Risadinha#gef	92
+moc_ruins,59,154,3	duplicate(SmileHelper)	Dona Risadinha#moc	92
+payon,186,104,5	duplicate(SmileHelper)	Dona Risadinha#pay	92
+//prontera,147,253,4	duplicate(SmileHelper)	Dona Risadinha#prt	92  //Coordenadas Originais
+prontera,144,255,5	duplicate(SmileHelper)	Dona Risadinha#prt	92

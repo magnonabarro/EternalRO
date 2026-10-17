@@ -1,0 +1,109 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ missao_zhupolong.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.0 - Pré-Renovação ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= [ Missão de EXP Repetível iRO. (Zhu Po Long) ]
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+lou_dun02,161,264,4	script	Caçador de Dragão	732,{
+
+	if (checkquest(60182) != -1) {
+		if (checkquest(60182,HUNTING) != 2 ) {
+			mes "[Caçador de Dragão]";
+			mes "Você terminou de caçar os 50 Zhu Po Long?";
+			next;
+			switch(select("Sim.:Não.:Quero sair.")) {
+			case 1:
+				mes "[Caçador de Dragão]";
+				mes "Hmm, eu não acho que você tenha caçado 50 ainda.";
+				close;
+			case 2:
+				mes "[Caçador de Dragão]";
+				mes "Lembre-se, eu preciso de ajuda para caçar Zhu Po Long então vá caçar 50 deles.";
+				close;
+			case 3:
+				mes "[Caçador de Dragão]";
+				mes "Você tem certeza que quer parar de caçar?";
+				mes "Qualquer progresso que você tenha feito será apagado.";
+				next;
+				switch(select("Sim:Não")) {
+				case 1:
+					mes "[Caçador de Dragão]";
+					mes "Ok, então volte aqui se você mudar de idéia.";
+					erasequest 60182;
+					close;
+				case 2:
+					mes "[Caçador de Dragão]";
+					mes "Por favor, mate 50 Zhu Po Long para fazer deste um lugar onde as pessoas possam ir e coletar Experiência com segurança.";
+					close;
+				}
+			}
+		}
+		mes "[Caçador de Dragão]";
+		mes "Incrível, você fez isso com velocidade.";
+		getexp 151300,60520;
+		erasequest 60182;
+		close;
+	}
+	if ((BaseLevel > 49) && (BaseLevel < 91)) {
+		mes "[Caçador de Dragão]";
+		mes "Oh ótimo!";
+		mes "Você está aqui para me ajudar né?";
+		mes "Se não, eu não sei o que fazer com os monstros neste lugar!";
+		next;
+		switch(select("Claro:Não")) {
+		case 1:
+			mes "[Caçador de Dragão]";
+			mes "Ótimo! Eu soube no momento em que te vi que posso contar com você!";
+			mes "Eu preciso que você reduza a quantidade de monstros que estão atacando neste Mapa!";
+			mes "Há muitos Zhu Po Long por aí, o que torna impossível para os jogadores de nível mais baixo ganhar uma boa experiência aqui.";
+			next;
+			mes "[Caçador de Dragão]";
+			mes "Então, você ainda gostaria de me ajudar?";
+			next;
+			switch(select("Claro:Cancelar")) {
+			case 1:
+				if (BaseLevel > 90) {
+					mes "[Caçador de Dragão]";
+					mes "Obrigado por sua grande ajuda com o Zhu Po Long!";
+					mes "Atualmente a situação está estável e eu não preciso mais da sua ajuda para matá-los.";
+					close;
+				}
+				mes "[Caçador de Dragão]";
+				mes "Mate 50 desses Zhu Po Long e me avise quando terminar. Eu recompensarei você pelos seus esforços.";
+				setquest 60182;
+				close;
+			case 2:
+				mes "[Caçador de Dragão]";
+				mes "Se você mudar de idéia, por favor, volte.";
+				close;
+			}
+		case 2:
+			mes "[Caçador de Dragão]";
+			mes "Se você mudar de idéia, por favor, volte.";
+			close;
+		}
+	}
+	mes "[Caçador de Dragão]";
+	mes "Oh garoto, oh garoto!";
+	next;
+	mes "[Caçador de Dragão]";
+	mes "Desculpe, mas eu não posso falar agora, eu estou em um mundo de dor aqui, esses malditos Zhu Po Long vão me matar.";
+	close;
+}

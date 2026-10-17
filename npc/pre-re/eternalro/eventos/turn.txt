@@ -1,0 +1,300 @@
+
+//===== Por: ==================================================
+//= UnnA
+//===== Versão: =====================================
+//= 1.0
+//============================================================
+
+prontera,149,194,3	script	Gerente Turn In	4_EP19_IWIN_DIVER,{
+    	set .np$,"^00B2EE[ Gerente Turn in ]^000000";
+        cutin "ep19_iwin_diver02",2;
+
+        mes .np$;
+        mes (gettime(3)>= 6&&gettime(3)<= 12?"Bom-dia":(gettime(3)>=13&&gettime(3)<=18?"Boa-tarde":"Boa-noite"))+", ^FFA500"+strcharinfo(0)+"^000000!";
+        mes "Sou o Gerente da Turn in !";
+        mes "Comigo você irá começar sua jornada...";
+        mes "Te levarei para mapas onde voce jamais esteve.";
+        mes "Além de adquirir equipamentos, você também irá ganhar muitos níveis de experência derrotando monstros!";
+        switch(select("^2988CD[»]^000000 Mapas:^2988CD[»]^000000 Loja:^2988CD[»]^000000 Reciclagem:^2988CD[»]^000000 Sair")){
+            case 1:
+                next;
+                mes .np$;
+                mes "Selecione o Mapa desejado com base no seu Nivel";
+                switch(select("^2988CD[»]^000000 Nivel (70 - 100):^2988CD[»]^000000 Nivel (101 - 125):^2988CD[»]^000000 Nivel (126 - 150):^2988CD[»]^000000 Sair")){
+                    case 1:
+                        next;
+                        if ((BaseLevel >= 70 && BaseLevel <= 101)) {
+							warp "epay_dun00l",0,0;	
+							end;
+						} else {   
+							mes .np$;                   
+							mes "Desculpe você não tem o nível necessário para este mapa.";
+							close3;
+						}
+					case 2:
+                        next;
+                        if ((BaseLevel >= 102 && BaseLevel <= 125)) {
+							warp "egef_dun03m",0,0;	
+							end;
+						} else {   
+							mes .np$;                   
+							mes "Desculpe você não tem o nível necessário para este mapa.";
+							close3;
+						}   
+					case 3:
+                        next;
+                        if ((BaseLevel >= 126 && BaseLevel <= 150)) {
+							warp "eabyss_03h",0,0;	
+							end;
+						} else {   
+							mes .np$;                   
+							mes "Desculpe você não tem o nível necessário para este mapa.";
+							close3;
+						}      
+					case 4:
+						next;
+							mes .np$; 
+							mes "Pode me visitar sempre que precisar de algo !";
+							close3;
+						}
+			break;
+			case 2:
+                next;
+                mes .np$;
+				mes "Muito Bem, ^FFA500"+strcharinfo(0)+"^000000!";
+				mes "irei lhe mostrar nossa loja, fique a vontade para escolher o que desejar.";
+				switch(select("^2988CD[»]^000000 Caixa de Armas:^2988CD[»]^000000 Caixa de Chapéus:^2988CD[»]^000000 Caixa de Equipamentos:^2988CD[»]^000000 Moedas:^2988CD[»]^000000 Sair")){
+					case 1:
+						next;
+						mes "Você encontrará caixas com muitas Armas, ^FFA500"+strcharinfo(0)+"^000000!";
+						callshop "inici#barter",1;
+						break;
+					case 2:
+						next;
+						mes "Você encontrará caixas com muitos Chapéus, ^FFA500"+strcharinfo(0)+"^000000!";
+						callshop "Chapeus Turn In#turnin",1;
+						break;
+					case 3:
+   						next;
+						mes "Você encontrará caixas com muitos Equipamentos, ^FFA500"+strcharinfo(0)+"^000000!";
+						callshop "Equipamentos Turn In#turnin",1;
+						break;
+					case 4:
+   						next;
+						mes "Você poderá trocar suas moedas por uma sacola com 5 unidades de moedas";
+						mes "Possibilitando a venda ou trocas de Sacolas por itens ou Zeny, ^FFA500"+strcharinfo(0)+"^000000!";
+						callshop "Sacola Moedas Turnin#turnin",1;
+						break;
+					case 5:
+						next;
+							mes .np$; 
+							mes "Pode me visitar sempre que precisar de algo !";
+							close3;
+						}
+			break;
+			case 3:
+                next;
+                mes .np$;
+				mes "Muito Bem, ^FFA500"+strcharinfo(0)+"^000000!";
+				mes "Na reciclagem, você trocará itens turn in não utilizados por moedas.";
+				next;
+				switch(select("^2988CD[»]^000000 Chapéus:^2988CD[»]^000000 Equipamentos:^2988CD[»]^000000 Sair")){
+					case 1:
+						next;
+						mes "Os seguintes equipamentos podem ser trocados por Sacolas de Moedas";
+						callshop "Reciclagem Chapeus#turnin",1;
+						break;
+
+					case 2:
+						next;
+						mes "Os seguintes equipamentos podem ser trocados por Sacolas de Moedas";
+						callshop "Reciclagem Equipamento#turnin",1;
+						break;
+					case 3:
+						next;
+							mes .np$; 
+							mes "Pode me visitar sempre que precisar de algo !";
+							close3;
+						}
+			break;
+			
+
+        }
+end;
+OnInit:
+	setunitdata getnpcid(0),UNPC_GROUP_ID,7;
+	end;
+}
+//==================================================
+// Monstros 70 ~ 100
+//==================================================
+epay_dun00l,0,0,0,0	monster	Bathory	1102,150,0,0,"#TurnIn_Drop3::OnTurnInMobDead"
+epay_dun00l,0,0,0,0	monster	Fornalha Velha	1617,150,0,0,"#TurnIn_Drop3::OnTurnInMobDead"
+
+//==================================================
+// Monstros 101 ~ 125
+//==================================================
+egef_dun03m,0,0,0,0	monster	Isilla	1772,150,0,0,"#TurnIn_Drop2::OnTurnInMobDead"
+egef_dun03m,0,0,0,0	monster	Andarilho	1208,150,0,0,"#TurnIn_Drop2::OnTurnInMobDead"
+
+//==================================================
+// Monstros 126 ~ 150
+//==================================================
+eabyss_03h,0,0,0,0	monster	Acidus Amarelo	1713,100,0,0,"#TurnIn_Drop::OnTurnInMobDead"
+eabyss_03h,0,0,0,0	monster	Acidus Azul	1716,100,0,0,"#TurnIn_Drop::OnTurnInMobDead"
+eabyss_03h,0,0,0,0	monster	Wickebine Tres	1653,100,0,0,"#TurnIn_Drop::OnTurnInMobDead"
+
+//==================================================
+// Mapflags
+//==================================================
+epay_dun00l	mapflag	loadevent
+egef_dun03m	mapflag	loadevent
+eabyss_03h	mapflag	loadevent
+
+//==================================================
+// Drop de Moedas a 10% nos mapas da Turn In
+//==================================================
+eabyss_03h,0,0,0	script	#TurnIn_Drop	-1,{
+
+OnTurnInMobDead:
+if (BaseLevel <= 151) {
+	 goto OnModDeathTurnInDrop; 
+	 } 
+	 else { 
+		 dispbottom "[ Seu Servidor ] : Você já atingiu o nível máximo recomendado para este mapa.";
+		 sleep2 500;
+		 warp "SavePoint",0,0;
+		 end; }
+
+OnModDeathTurnInDrop:
+if(getcharid(1)) {
+    getpartymember getcharid(1),1;
+    getpartymember getcharid(1),2;
+    
+    for ( .@p = 0; .@p < $@partymembercount; .@p++)
+        if(attachrid($@partymemberaid[.@p],$@partymembercid[.@p]) == 1) {
+            if(strcharinfo(3) != strnpcinfo(4)) continue;
+            if(rand(1,10000) >= (10000 - .chance)) 
+                getitem .drop_id[rand(getarraysize(.drop_id))],1;
+        }
+
+} else {
+	if(rand(1,10000) >= (10000 - .chance)) 
+		getitem .drop_id[rand(getarraysize(.drop_id))],1;
+}
+end;
+
+OnInit:
+setarray .drop_id[0],60003; // Moeda Turn In
+
+// ==== Drop Settings ====
+// Multiply the Drop Chance below with the Server Drop Chance
+// 1 = Yes
+// 0 = No
+.battleconf_drop = 0;
+
+// General Drop Chance
+.drop = 400; // 50 = 0.5%
+
+// Calculation
+.chance = .drop * ( (.battleconf_drop)?( (getbattleflag("item_rate_common")%100 > 0)? (getbattleflag("item_rate_common")/100):1):1);
+end;
+}
+//==================================================
+// Drop de Moedas a 10% nos mapas da Turn In
+//==================================================
+egef_dun03m,0,0,0	script	#TurnIn_Drop2	-1,{
+
+OnTurnInMobDead:
+if (BaseLevel <= 126) {
+	 goto OnModDeathTurnInDrop; 
+	 } 
+	 else { 
+		 dispbottom "[ Seu Servidor ] : Você já atingiu o nível máximo recomendado para este mapa.";
+		 sleep2 500;
+		 warp "SavePoint",0,0;
+		 end; }
+
+OnModDeathTurnInDrop:
+if(getcharid(1)) {
+    getpartymember getcharid(1),1;
+    getpartymember getcharid(1),2;
+    
+    for ( .@p = 0; .@p < $@partymembercount; .@p++)
+        if(attachrid($@partymemberaid[.@p],$@partymembercid[.@p]) == 1) {
+            if(strcharinfo(3) != strnpcinfo(4)) continue;
+            if(rand(1,10000) >= (10000 - .chance)) 
+                getitem .drop_id[rand(getarraysize(.drop_id))],1;
+        }
+
+} else {
+	if(rand(1,10000) >= (10000 - .chance)) 
+		getitem .drop_id[rand(getarraysize(.drop_id))],1;
+}
+end;
+
+OnInit:
+setarray .drop_id[0],60003; // Moeda Turn In
+
+// ==== Drop Settings ====
+// Multiply the Drop Chance below with the Server Drop Chance
+// 1 = Yes
+// 0 = No
+.battleconf_drop = 0;
+
+// General Drop Chance
+.drop = 300; // 50 = 0.5%
+
+// Calculation
+.chance = .drop * ( (.battleconf_drop)?( (getbattleflag("item_rate_common")%100 > 0)? (getbattleflag("item_rate_common")/100):1):1);
+end;
+}
+//==================================================
+// Drop de Moedas a 10% nos mapas da Turn In
+//==================================================
+epay_dun00l,0,0,0	script	#TurnIn_Drop3	-1,{
+
+OnTurnInMobDead:
+if (BaseLevel <= 101) {
+	 goto OnModDeathTurnInDrop; 
+	 } 
+	 else { 
+		 dispbottom "[ Seu Servidor ] : Você já atingiu o nível máximo recomendado para este mapa.";
+		 sleep2 500;
+		 warp "SavePoint",0,0;
+		 end; }
+
+OnModDeathTurnInDrop:
+if(getcharid(1)) {
+    getpartymember getcharid(1),1;
+    getpartymember getcharid(1),2;
+    
+    for ( .@p = 0; .@p < $@partymembercount; .@p++)
+        if(attachrid($@partymemberaid[.@p],$@partymembercid[.@p]) == 1) {
+            if(strcharinfo(3) != strnpcinfo(4)) continue;
+            if(rand(1,10000) >= (10000 - .chance)) 
+                getitem .drop_id[rand(getarraysize(.drop_id))],1;
+        }
+
+	} else {
+		if(rand(1,10000) >= (10000 - .chance)) 
+			getitem .drop_id[rand(getarraysize(.drop_id))],1;
+	}
+end;
+
+OnInit:
+setarray .drop_id[0],60003; // Moeda Turn In
+
+// ==== Drop Settings ====
+// Multiply the Drop Chance below with the Server Drop Chance
+// 1 = Yes
+// 0 = No
+.battleconf_drop = 0;
+
+// General Drop Chance
+.drop = 200; // 50 = 0.5%
+
+// Calculation
+.chance = .drop * ( (.battleconf_drop)?( (getbattleflag("item_rate_common")%100 > 0)? (getbattleflag("item_rate_common")/100):1):1);
+end;
+}

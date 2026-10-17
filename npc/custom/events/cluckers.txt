@@ -1,0 +1,123 @@
+//
+//==================================================================================
+//-------------------------------- RagnaERO Script ---------------------------------
+//=    __________                              _____________________ ________
+//=    \______   \_____     ____   ____ _____  \_   _____/\______   \\_____  \
+//=     |       _/\__  \   / ___\ /    \\__  \  |    __)_  |       _/ /   |   \
+//=   	|    |   \ / __ \_/ /_/  >   |  \/ __ \_|        \ |    |   \/    |    \
+//=   	|____|_  /(____  /\___  /|___|  (____  /_______  / |____|_  /\_______  /
+//=            \/      \//_____/      \/     \/        \/         \/         \/
+//=                                                          RagnaERO Scripts
+//=                                                                       
+//--------------------------- http://rathena.org/board/ ----------------------------
+//==================================================================================
+//----- NOME DO SCRIPT -------------------------------------------------------------
+//= Cacarejos.txt
+//----- POR: -----------------------------------------------------------------------
+//= Equipe de Desenvolvimento rAthena
+//----- VERSÃO ATUAL DO SCRIPT: ----------------------------------------------------
+//= v1.3
+//----- DESCRIÇÃO: -----------------------------------------------------------------
+//= Evento Cacarejos.   
+//----- COMENTÁRIOS ADICIONAIS: ----------------------------------------------------
+//= Projeto RagnaERO
+//= Cabeçalho e Tradução Pt-BR Por [ADM] Eragonat PK
+//==================================================================================
+
+prontera,160,246,4	script	Cacarejos	800,{  //Novo local adicionado pelo [ADM] Eragonat PK.
+
+//prontera,156,219,4	script	Cacarejos	800,{  //Local Original.
+	set .@GMAccess,80;	// Nível de GM necessário para acessar o NPC
+
+	if (.startcluck) {
+		specialeffect2 EF_HIT3;
+		switch(rand(15)) {
+			case 0: npctalk "Cacarejos : CLUUUUUUCK!!!"; unitkill getcharid(3); skilleffect "NPC_SELFDESTRUCTION",1; emotion ET_HUK; break;
+			case 1: npctalk "Cacarejos : Cluuuuuck!~"; break;
+			case 2: unitkill getcharid(3); skilleffect "NPC_SELFDESTRUCTION",1; break;
+			case 3: sc_start SC_Freeze,10000,0; break;
+			case 4: npctalk "Cacarejos : CLUUUUUUUUUCK!!!"; unitkill getcharid(3); skilleffect "NPC_SELFDESTRUCTION",1; emotion ET_HUK; break;
+			case 5: sc_start SC_Sleep,10000,0; break;
+			case 6: sc_start SC_Stone,10000,0; emotion ET_KIK; break;
+			case 7: npctalk "Cacarejos : CLUUUUUUCK!!!"; unitkill getcharid(3); skilleffect "NPC_SELFDESTRUCTION",1; emotion ET_HUK; break;
+			case 8: npctalk "Cacarejos : Cluck! CLUUUCK!!"; unitkill getcharid(3); skilleffect "NPC_SELFDESTRUCTION",1; emotion ET_HUK; break;
+			case 9: sc_start SC_Stun,10000,0; break;
+			case 10: sc_start SC_Sleep,10000,0; emotion ET_KIK; break;
+			case 11: npctalk "Cacarejos : Cluck! Cluck!"; break;
+			case 12: sc_start SC_Stun,10000,0; break;
+			case 13: unitkill getcharid(3); skilleffect "NPC_SELFDESTRUCTION",1; break;
+			default:
+				if (rand(50) < 4) {
+					npctalk "Cacarejos : WOOF!...........";
+					specialeffect2 EF_SPHERE;
+					announce "[Cluck! Cluck! Boom!] " + strcharinfo(0) + " Prêmio espremido! Muito bem!",0;
+					getitem $cluck_item_id,$cluck_item_amount;
+					set .startcluck,0;
+				} else {
+					npctalk "Cluck! CLUUUCK!!";
+					unitskilluseid getcharid(3),"NPC_SELFDESTRUCTION",1;
+				}
+				break;
+		}
+		end;
+	}
+	mes "[Cacarejos]";
+	if (getgroupid() >= .@GMAccess) {
+		mes "Cluck cluck! Cluuuuuck? ^FF0000~Oi GM " + strcharinfo(0) + ", Quer jogar hoje?~^000000";
+		mes "Cluck cluck... CLUCK! ^FF0000~Apenas me diga o que fazer!~^000000";
+		next;
+		while(1) switch(select("Iniciar Evento:Checar Prêmio:Inserir Prêmio:Não jogar Cacarejos hoje.")) {
+			case 1:
+				mes "[Cacarejos]";
+				mes "CLUCK! ^FF0000~Claro!~^000000";
+				emotion ET_OK;
+				close2;
+				announce "[Cluck! Cluck! Boom!]: Está prestes a começar em Prontera!",bc_blue;
+				initnpctimer;
+				end;
+			case 2:
+				mes "[Cacarejos]";
+				mes "Cluck, cluck cluck... Cluck! ^FF0000~O prêmio atual é^000000 ^008000"+ $cluck_item_amount +" "+ getitemname($cluck_item_id) +".^000000";
+				next;
+				break;
+			case 3:
+				mes "[Cacarejos]";
+				mes "Cluck cluck? Cluck??? ^FF0000~Qual deve ser o prêmio para o ganhador? Por favor coloque o ID.~^000000";
+				input $cluck_item_id;
+				next;
+				mes "[Cacarejos]";
+				mes "Cluck? cluuuck? ^FF0000~Quantos deste item eu devo dar?~^000000";
+				input $cluck_item_amount;
+				next;
+				mes "[Cacarejos]";
+				mes "Cluck cluck..? Cluck. ^FF0000~Então, o prêmio é^000000 ^008000"+ $cluck_item_amount +" "+ getitemname($cluck_item_id) +"^000000? ^FF0000Grande.~^000000";
+				emotion 33;
+				next;
+				break;
+			case 4:
+				mes "[Cacarejos]";
+				mes "Cluck cluck cluck...";
+				close;
+		}
+	}
+	mes "Cluck cluck! Cluuuuuck?";
+	mes "Cluck....";
+	close;
+
+OnTimer10000:
+	announce "Por favor, siga as minhas orientações se quiser brincar com o galo louco!",bc_blue;
+	end;
+OnTimer20000:
+	announce "Cacarejos comeu um dos meus itens! Estou com muito medo de tentar recuperá-lo!",bc_blue;
+	end;
+OnTimer30000:
+	announce "Clique no galo louco e tente espremer o item, se tiver sorte, você o ganhará! Você está pronto?",bc_blue;
+	end;
+OnTimer40000:
+	announce "VAI! Clique no galo para ganhar o prêmio!",bc_blue;
+	stopnpctimer;
+	if (!$cluck_item_id) set $cluck_item_id,512;
+	if (!$cluck_item_amount) set $cluck_item_amount,1;
+	set .startcluck,1;
+	end;
+}

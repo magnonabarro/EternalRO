@@ -1,0 +1,17 @@
+diff a/npc/re/mobs/dungeons/lhz_dun.txt b/npc/re/mobs/dungeons/lhz_dun.txt	(rejected hunks)
+@@ -98,11 +98,15 @@ OnInit:
+ 	}
+ 	set .@mob2,rand(1640,1645);
+ 	monster "lhz_dun03",.@x2,.@y2,getmonsterinfo(.@mob2, MOB_NAME),.@mob2,1,strnpcinfo(3)+"::OnMy99Dead";
++	$lhzid = .@mob;// added for mvp board system
++   stopnpctimer;// added for mvp board system (need to stop here because of the donpcevent below, this label will not return to the OnTimer and will not stopnpctimer)
++	donpcevent "mvp_board::OnLHZRespawn";// added for mvp board system
+ 	end;
+ 
+ OnMyMVPDead:
+ 	killmonster "lhz_dun03",strnpcinfo(3)+"::OnMy99Dead";
+ 	initnpctimer;
++	donpcevent "mvp_board::OnLhzDead";// added for mvp board system
+ OnMy99Dead:
+ 	end;
+ }

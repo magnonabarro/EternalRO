@@ -1,0 +1,409 @@
+//===== rAthena Script =======================================
+//= Custom Rate - Hero Saga
+//= Adaptado para as rates exibidas na tela de configuracao.
+//= Nota: bonus PvM, descontos e recursos VIP dependem de scripts/mods
+//= adicionais do servidor; este arquivo configura EXP e taxas de drop.
+//============================================================
+-	script	Custom Rate#main	-1,{
+OnInit:
+	// IDs unicos: 1x normal preserva o ID antigo 1; IDs 2 e 3 antigos
+	// serao solicitados novamente para evitar que 2x/3x virem outra rate.
+	setarray .CustomRates$[0],
+		100, "Rates 100x",
+		50, "Rates 50x",
+		25, "Rates 25x",
+		12, "Rates 12x",
+		1, "Rates 1x",
+		6, "Rates 1x [Temporada]"
+	;
+
+	// Todas as taxas de EXP usam o multiplicador da rate selecionada.
+	// Os drops usam apenas as bonificacoes mostradas na imagem:
+	// 100x = +0%, 50x = +12%, 25x = +25%, 12x = +37%, 1x = +50%, temporada = +60%.
+	// Min/max de drop ficam em 1/10000 para nao escalar os limites junto com a EXP.
+	// Os quatro parametros de VIP ficam fora do set_custom_rate para preservar as configs do servidor.
+
+	// RATE 100x - EXP 100x, drops +0%
+	setarray .CustomRates_100[0],
+		10000,	// base_exp_rate
+		10000,	// job_exp_rate
+		10000,	// mvp_exp_rate
+		10000,	// quest_exp_rate
+		0,	// heal_exp
+		100,	// item_rate_common
+		100,	// item_rate_common_boss
+		100,	// item_rate_common_mvp
+		1,	// item_drop_common_min
+		10000,	// item_drop_common_max
+		100,	// item_rate_heal
+		100,	// item_rate_heal_boss
+		100,	// item_rate_heal_mvp
+		1,	// item_drop_heal_min
+		10000,	// item_drop_heal_max
+		100,	// item_rate_use
+		100,	// item_rate_use_boss
+		100,	// item_rate_use_mvp
+		1,	// item_drop_use_min
+		10000,	// item_drop_use_max
+		100,	// item_rate_equip
+		100,	// item_rate_equip_boss
+		100,	// item_rate_equip_mvp
+		1,	// item_drop_equip_min
+		10000,	// item_drop_equip_max
+		100,	// item_rate_card
+		100,	// item_rate_card_boss
+		100,	// item_rate_card_mvp
+		1,	// item_drop_card_min
+		10000,	// item_drop_card_max
+		100,	// item_rate_mvp
+		1,	// item_drop_mvp_min
+		10000,	// item_drop_mvp_max
+		100,	// item_rate_treasure
+		1,	// item_drop_treasure_min
+		10000	// item_drop_treasure_max
+	;
+
+	// RATE 50x - EXP 50x, drops +12%
+	setarray .CustomRates_50[0],
+		5000,	// base_exp_rate
+		5000,	// job_exp_rate
+		5000,	// mvp_exp_rate
+		5000,	// quest_exp_rate
+		0,	// heal_exp
+		112,	// item_rate_common
+		112,	// item_rate_common_boss
+		112,	// item_rate_common_mvp
+		1,	// item_drop_common_min
+		10000,	// item_drop_common_max
+		112,	// item_rate_heal
+		112,	// item_rate_heal_boss
+		112,	// item_rate_heal_mvp
+		1,	// item_drop_heal_min
+		10000,	// item_drop_heal_max
+		112,	// item_rate_use
+		112,	// item_rate_use_boss
+		112,	// item_rate_use_mvp
+		1,	// item_drop_use_min
+		10000,	// item_drop_use_max
+		112,	// item_rate_equip
+		112,	// item_rate_equip_boss
+		112,	// item_rate_equip_mvp
+		1,	// item_drop_equip_min
+		10000,	// item_drop_equip_max
+		112,	// item_rate_card
+		112,	// item_rate_card_boss
+		112,	// item_rate_card_mvp
+		1,	// item_drop_card_min
+		10000,	// item_drop_card_max
+		112,	// item_rate_mvp
+		1,	// item_drop_mvp_min
+		10000,	// item_drop_mvp_max
+		112,	// item_rate_treasure
+		1,	// item_drop_treasure_min
+		10000	// item_drop_treasure_max
+	;
+
+	// RATE 25x - EXP 25x, drops +25%
+	setarray .CustomRates_25[0],
+		2500,	// base_exp_rate
+		2500,	// job_exp_rate
+		2500,	// mvp_exp_rate
+		2500,	// quest_exp_rate
+		0,	// heal_exp
+		125,	// item_rate_common
+		125,	// item_rate_common_boss
+		125,	// item_rate_common_mvp
+		1,	// item_drop_common_min
+		10000,	// item_drop_common_max
+		125,	// item_rate_heal
+		125,	// item_rate_heal_boss
+		125,	// item_rate_heal_mvp
+		1,	// item_drop_heal_min
+		10000,	// item_drop_heal_max
+		125,	// item_rate_use
+		125,	// item_rate_use_boss
+		125,	// item_rate_use_mvp
+		1,	// item_drop_use_min
+		10000,	// item_drop_use_max
+		125,	// item_rate_equip
+		125,	// item_rate_equip_boss
+		125,	// item_rate_equip_mvp
+		1,	// item_drop_equip_min
+		10000,	// item_drop_equip_max
+		125,	// item_rate_card
+		125,	// item_rate_card_boss
+		125,	// item_rate_card_mvp
+		1,	// item_drop_card_min
+		10000,	// item_drop_card_max
+		125,	// item_rate_mvp
+		1,	// item_drop_mvp_min
+		10000,	// item_drop_mvp_max
+		125,	// item_rate_treasure
+		1,	// item_drop_treasure_min
+		10000	// item_drop_treasure_max
+	;
+
+	// RATE 12x - EXP 12x, drops +37%
+	setarray .CustomRates_12[0],
+		1200,	// base_exp_rate
+		1200,	// job_exp_rate
+		1200,	// mvp_exp_rate
+		1200,	// quest_exp_rate
+		0,	// heal_exp
+		137,	// item_rate_common
+		137,	// item_rate_common_boss
+		137,	// item_rate_common_mvp
+		1,	// item_drop_common_min
+		10000,	// item_drop_common_max
+		137,	// item_rate_heal
+		137,	// item_rate_heal_boss
+		137,	// item_rate_heal_mvp
+		1,	// item_drop_heal_min
+		10000,	// item_drop_heal_max
+		137,	// item_rate_use
+		137,	// item_rate_use_boss
+		137,	// item_rate_use_mvp
+		1,	// item_drop_use_min
+		10000,	// item_drop_use_max
+		137,	// item_rate_equip
+		137,	// item_rate_equip_boss
+		137,	// item_rate_equip_mvp
+		1,	// item_drop_equip_min
+		10000,	// item_drop_equip_max
+		137,	// item_rate_card
+		137,	// item_rate_card_boss
+		137,	// item_rate_card_mvp
+		1,	// item_drop_card_min
+		10000,	// item_drop_card_max
+		137,	// item_rate_mvp
+		1,	// item_drop_mvp_min
+		10000,	// item_drop_mvp_max
+		137,	// item_rate_treasure
+		1,	// item_drop_treasure_min
+		10000	// item_drop_treasure_max
+	;
+
+	// RATE 1x NORMAL - EXP 1x, drops +50%
+	setarray .CustomRates_1[0],
+		100,	// base_exp_rate
+		100,	// job_exp_rate
+		100,	// mvp_exp_rate
+		100,	// quest_exp_rate
+		0,	// heal_exp
+		150,	// item_rate_common
+		150,	// item_rate_common_boss
+		150,	// item_rate_common_mvp
+		1,	// item_drop_common_min
+		10000,	// item_drop_common_max
+		150,	// item_rate_heal
+		150,	// item_rate_heal_boss
+		150,	// item_rate_heal_mvp
+		1,	// item_drop_heal_min
+		10000,	// item_drop_heal_max
+		150,	// item_rate_use
+		150,	// item_rate_use_boss
+		150,	// item_rate_use_mvp
+		1,	// item_drop_use_min
+		10000,	// item_drop_use_max
+		150,	// item_rate_equip
+		150,	// item_rate_equip_boss
+		150,	// item_rate_equip_mvp
+		1,	// item_drop_equip_min
+		10000,	// item_drop_equip_max
+		150,	// item_rate_card
+		150,	// item_rate_card_boss
+		150,	// item_rate_card_mvp
+		1,	// item_drop_card_min
+		10000,	// item_drop_card_max
+		150,	// item_rate_mvp
+		1,	// item_drop_mvp_min
+		10000,	// item_drop_mvp_max
+		150,	// item_rate_treasure
+		1,	// item_drop_treasure_min
+		10000	// item_drop_treasure_max
+	;
+
+	// RATE 1x TEMPORADA - EXP 1x, drops +60%
+	setarray .CustomRates_6[0],
+		100,	// base_exp_rate
+		100,	// job_exp_rate
+		100,	// mvp_exp_rate
+		100,	// quest_exp_rate
+		0,	// heal_exp
+		160,	// item_rate_common
+		160,	// item_rate_common_boss
+		160,	// item_rate_common_mvp
+		1,	// item_drop_common_min
+		10000,	// item_drop_common_max
+		160,	// item_rate_heal
+		160,	// item_rate_heal_boss
+		160,	// item_rate_heal_mvp
+		1,	// item_drop_heal_min
+		10000,	// item_drop_heal_max
+		160,	// item_rate_use
+		160,	// item_rate_use_boss
+		160,	// item_rate_use_mvp
+		1,	// item_drop_use_min
+		10000,	// item_drop_use_max
+		160,	// item_rate_equip
+		160,	// item_rate_equip_boss
+		160,	// item_rate_equip_mvp
+		1,	// item_drop_equip_min
+		10000,	// item_drop_equip_max
+		160,	// item_rate_card
+		160,	// item_rate_card_boss
+		160,	// item_rate_card_mvp
+		1,	// item_drop_card_min
+		10000,	// item_drop_card_max
+		160,	// item_rate_mvp
+		1,	// item_drop_mvp_min
+		10000,	// item_drop_mvp_max
+		160,	// item_rate_treasure
+		1,	// item_drop_treasure_min
+		10000	// item_drop_treasure_max
+	;
+
+	// Comandos administrativos.
+	bindatcmd "cratereset", "Custom Rate#main::OnResetVar", 99, 99;
+	bindatcmd "cratecall", "Custom Rate#main::OnCallSet", 99, 99;
+	end;
+
+OnResetVar:
+	CUSTOM_RATE = 0;
+	set_custom_rate CR_PVM_SEASONAL, 0;
+	dispbottom "[Servidor]: Selecao de rate resetada. Entre novamente ou use @cratecall para escolher.";
+	end;
+
+OnCallSet:
+OnPCLoginEvent:
+	.@size = 0;
+	.@buildin$ = "";
+	deletearray .@RatesId;
+	deletearray .@RatesName$;
+	for (.@i = 0; .@i < getarraysize(.CustomRates$); .@i += 2) {
+		.@RatesId[.@size] = atoi(.CustomRates$[.@i]);
+		.@RatesName$[.@size] = .CustomRates$[.@i + 1];
+		.@size2 = getarraysize(getd(".CustomRates_" + .CustomRates$[.@i]));
+		if (.@size2 >= 36)
+			.@buildin$ += "- " + .CustomRates$[.@i + 1] + ".";
+		.@buildin$ += ":";
+		.@size++;
+	}
+
+	if (.@buildin$ == "")
+		end;
+
+	// IDs antigos 2x/3x nao existem mais; pede uma nova escolha em vez de aplicar uma rate errada.
+	if (CUSTOM_RATE > 0 && inarray(.@RatesId, CUSTOM_RATE) == -1) {
+		CUSTOM_RATE = 0;
+		dispbottom "[Servidor]: As rates foram atualizadas. Escolha sua nova rate.";
+	}
+
+	if (CUSTOM_RATE <= 0) {
+		// Abre o painel ilustrado de rates no cliente. Requer rates_saga.bmp
+		// em data/texture/유저인터페이스/illust/ (ou no GRF do cliente).
+		cutin "rates_saga", 3;
+		freeloop(1);
+		.@loop_1 = 1;
+		while (.@loop_1) {
+			mes "^FFC83D[Bonificacao de Rates]^000000";
+			mes "Escolha com atencao: a rate nao podera ser alterada depois.";
+			mes "^FFCC33RATE 100x^000000 - Drops: sem bonificacao adicional.";
+			mes "^FFCC33RATE 50x^000000 - Drops: +12%.";
+			mes "^FFCC33RATE 25x^000000 - Drops: +25%; descontos de 15%.";
+			mes "^FFCC33RATE 12x^000000 - Drops: +37%; descontos de 30%.";
+			mes "^FFCC33RATE 1x NORMAL^000000 - Drops: +50%; descontos de 60%.";
+			mes "^FFCC33RATE 1x TEMPORADA^000000 - Drops: +60%; descontos de 70%.";
+			mes "Os recursos de desconto e os bonus PvM dependem dos scripts especificos do servidor.";
+			next;
+			prompt(.@buildin$);
+			if (@menu == 255) {
+				mes "^FF0000[Servidor]^000000";
+				mes "Voce precisa selecionar uma rate para continuar.";
+				next;
+				continue;
+			}
+
+			.@choose = @menu - 1;
+			.@RateId = .@RatesId[.@choose];
+			.@RateName$ = .@RatesName$[.@choose];
+
+			mes "^FFC83DResumo da rate escolhida^000000";
+			mes "Rate: ^0000FF" + .@RateName$ + "^000000";
+			switch (.@RateId) {
+				case 100:
+					mes "EXP: 100x | Drops: sem bonificacao adicional.";
+					break;
+				case 50:
+					mes "EXP: 50x | Drops: +12%.";
+					break;
+				case 25:
+					mes "EXP: 25x | Drops: +25% | Descontos: 15%.";
+					mes "Agente VIP sem ser VIP e @buff sem ser VIP.";
+					mes "Esses recursos exigem scripts adicionais para realmente funcionar.";
+					break;
+				case 12:
+					mes "EXP: 12x | Drops: +37% | Descontos: 30%.";
+					mes "Agente VIP sem ser VIP e @buff sem ser VIP.";
+					mes "Esses recursos exigem scripts adicionais para realmente funcionar.";
+					break;
+				case 1:
+					mes "EXP: 1x | Drops: +50% | Descontos: 60%.";
+					mes "Agente VIP sem ser VIP e @buff sem ser VIP.";
+					mes "Esses recursos exigem scripts adicionais para realmente funcionar.";
+					break;
+				case 6:
+					mes "EXP: 1x | Drops: +60% | Descontos: 70%.";
+					mes "Agente VIP sem ser VIP e @buff sem ser VIP.";
+					mes "Bonus PvM da Temporada ativado no nivel 99.";
+					mes "+15% dano fisico e magico; +15% adicional para dano fisico a distancia.";
+					mes "+10% drop adicional, +10 HP/SP, +10% efetividade de cura.";
+					mes "+5% DEF/DEFM, +5 Esquiva Perfeita e -5% pos-conjuracao.";
+					mes "Descontos, Agente VIP e @buff sem VIP continuam dependendo de scripts proprios.";
+					break;
+			}
+			mes "A escolha e permanente para este personagem.";
+			next;
+			switch (prompt("- Sim, confirmar.", "- Nao, escolher outra.")) {
+				case 1:
+					CUSTOM_RATE = .@RateId;
+					mes "^00AA00[Servidor]^000000";
+					mes "Rate configurada: ^0000FF" + .@RateName$ + "^000000.";
+					close2;
+					.@loop_1 = 0;
+					break;
+				case 2:
+					break;
+				case 255:
+					mes "^FF0000[Servidor]^000000";
+					mes "Voce precisa confirmar ou escolher outra rate.";
+					next;
+					break;
+			}
+		}
+		freeloop(0);
+		// Limpa a imagem depois que a escolha inicial termina.
+		cutin "", 255;
+	}
+
+	.@Index = inarray(.@RatesId, CUSTOM_RATE);
+	if (.@Index == -1)
+		end;
+
+	setarray .@Flags[0], CR_BASE_EXP_RATE, CR_JOB_EXP_RATE, CR_MVP_EXP_RATE, CR_QUEST_EXP_RATE, CR_HEAL_EXP_RATE, CR_IT_RATE_COMMON, CR_IT_RATE_COMMON_BOSS, CR_IT_RATE_COMMON_MVP, CR_IT_DROP_COMMON_MIN, CR_IT_DROP_COMMON_MAX, CR_IT_RATE_HEAL, CR_IT_RATE_HEAL_BOSS, CR_IT_RATE_HEAL_MVP, CR_IT_DROP_HEAL_MIN, CR_IT_DROP_HEAL_MAX, CR_IT_RATE_USE, CR_IT_RATE_USE_BOSS, CR_IT_RATE_USE_MVP, CR_IT_DROP_USE_MIN, CR_IT_DROP_USE_MAX, CR_IT_RATE_EQUIP, CR_IT_RATE_EQUIP_BOSS, CR_IT_RATE_EQUIP_MVP, CR_IT_DROP_EQUIP_MIN, CR_IT_DROP_EQUIP_MAX, CR_IT_RATE_CARD, CR_IT_RATE_CARD_BOSS, CR_IT_RATE_CARD_MVP, CR_IT_DROP_CARD_MIN, CR_IT_DROP_CARD_MAX, CR_IT_RATE_MVP, CR_IT_DROP_MVP_MIN, CR_IT_DROP_MVP_MAX, CR_IT_RATE_TREASURE, CR_IT_DROP_TREASURE_MIN, CR_IT_DROP_TREASURE_MAX;
+	copyarray .@RateSettings[0], getd(".CustomRates_" + CUSTOM_RATE + "[0]"), getarraysize(getd(".CustomRates_" + CUSTOM_RATE));
+
+	if (getarraysize(.@RateSettings) < getarraysize(.@Flags)) {
+		dispbottom "[Servidor]: Erro ao carregar as configuracoes da rate.";
+		end;
+	}
+
+	for (.@i = 0; .@i < getarraysize(.@Flags); .@i++)
+		set_custom_rate .@Flags[.@i], .@RateSettings[.@i];
+
+	// Only Rate 1x Temporada (ID 6) receives the PvM bonuses; this call also recalculates status.
+	set_custom_rate CR_PVM_SEASONAL, (CUSTOM_RATE == 6);
+
+	message strcharinfo(0), "[Servidor]: Taxas aplicadas: " + .@RatesName$[.@Index] + ".";
+	end;
+}

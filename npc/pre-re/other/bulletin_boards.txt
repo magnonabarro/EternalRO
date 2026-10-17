@@ -1,0 +1,198 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ quadro_de_avisos.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.1 - Pré-Renovação ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= [ Quadros de avisos para Aprendizes. ]
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+izlude,131,116,4	script	Quadro de Avisos#5	837,{
+	mes "[A Cidade Satélite, Izlude]";
+	mes "Bem-vind"+(Sex?"o":"a")+" a Izlude, a cidade satélite de Prontera. Izlude foi construída para apoiar a defesa de Prontera e para acomodar sua crescente população.";
+	next;
+	mes "[A Cidade Satélite, Izlude]";
+	mes "Pontos interessantes de Izlude incluem: A Associação de Espadachins, lugar onde Aprendizes podem mudar de classe e se tornarem Espadachins, e há também a Arena de Batalha que está localizada ao Norte de Izlude.";
+	next;
+	mes "[A Cidade Satélite, Izlude]";
+	mes "Nas estações de barco, você pode alugar um barco e ir até ^123972Alberta^000000 ou a ^2F0400Ilha de Byalan^000000.";
+	next;
+	mes "[A Cidade Satélite, Izlude]";
+	mes "De Izlude, ^6D6FE0Prontera^000000 está localizada a Noroeste, e ^1F3A11Payon^000000 está localizada ao Sul.";
+	mes "Aproveite sua viagem no Reino de Rune-Midgard.";
+	close;
+}
+
+gef_tower,55,142,5	script	Quadro de Avisos#21	837,{
+	mes "[Calabouço de Geffen]";
+	mes "^6B1312Cuidado!^000000";
+	mes "O Calabouço de Geffen é composto por 3 níveis,";
+	mes "e é muito difícil para novos aventureiros se aventurarem.";
+	mes "Aqui os monstros principais aparecem constantemente,";
+	mes "existem ^6B1312Moscas Caçadoras^000000, ^6B1312Pesadelos^000000 e ^6B1312Jakks^000000.";
+	mes "Pesadelos e Jakks só aparecem neste calabouço.";
+	next;
+	mes "[Calabouço de Geffen]";
+	mes "No 2º nível deste calabouço,";
+	mes "^6B1312Tirfing^000000, a criatura de uma espada condenada e o ^6B1312Drácula^000000,";
+	mes "o monstro Chefe que aparece sem aviso.";
+	mes "No 3º nível, ^6B1312Doppelganger^000000 um dos monstros chefes mais fortes aparece em um determinado tempo.";
+	close;
+}
+
+yuno_fild03,37,143,5	script	Quadro de Avisos#24	837,{
+	mes "[A Caverna de Magma]";
+	mes "^6B1312Cuidado!^000000";
+	mes "A Caverna de Magma está cheia de criaturas muito perigosas.";
+	mes "É limitado para entrar apenas para aventureiros bem experientes.";
+	next;
+	mes "[A Caverna de Magma]";
+	mes "Os principais monstros desta masmorra são os";
+	mes "^6B1312Kahos^000000 e ^6B1312Pesadelos Smbrios^000000.";
+	mes "Por favor, esteja atento.";
+	close;
+}
+
+mjolnir_02,76,362,5	script	Quadro de Avisos#10	837,{
+	mes "[Mina de Carvão]";
+	mes "^6B1312Cuidado!^000000";
+	mes "A Mina de Carvão consiste em um total de 3 níveis. Esta masmorra é adequada para aventureiros novos e experientes, dependendo do nível da masmorra.";
+	next;
+	mes "[Mina de Carvão]";
+	mes "No terceiro nível, os monstros tendem a atacar aventureiros em enxames, então evite ser cercado. Como esta área é uma mina, muitos Minérios podem ser encontrados nas profundezas desta masmorra.";
+	close;
+}
+
+moc_fild19,107,101,5	script	Quadro de Avisos#20	837,{
+	mes "[Esfinge]";
+	mes "^6B1312Cuidado!^000000";
+	mes "A Esfinge consiste em 5 níveis.";
+	mes "Esta masmorra é adequada para o treinamento";
+	mes "de aventureiros bem experientes.";
+	next;
+	mes "[Esfinge]";
+	mes "Existem muitos monstros agressivos";
+	mes "residindo na Esfinge, e é";
+	mes "aconselhável fugir se acontecer de você";
+	mes "ficar cercado por eles.";
+	next;
+	mes "[Esfinge]";
+	mes "No quinto nível, o monstro";
+	mes "Chefe ^6B1312Faraó^000000 aparecerá em";
+	mes "certos momentos. Exorcize-o com";
+	mes "preconceito extremo.";
+	close;
+}
+
+aldebaran,136,133,5	script	Quadro de Avisos#19	837,{
+	mes "[Torre do Relógio]";
+	mes "^6B1312Cuidado!^000000";
+	mes "Somente aventureiros experientes";
+	mes "devem considerar entrar na Torre do Relógio.";
+	mes "Há um total de 8 níveis:";
+	mes "4 abaixo do solo e 4 acima da terra.";
+	next;
+	mes "[Torre do Relógio]";
+	mes "Os principais monstros da Torre do Relógio";
+	mes "são os Relógios, Alarmes e as";
+	mes "Bathorys. Cuidado com os Relógios";
+	mes "Guardiões da Torre em patrulha.";
+	next;
+	mes "[Torre do Relógio]";
+	mes "Os caminhos na Torre do Relógio são";
+	mes "sinuosos e complicados, então, por favor,";
+	mes "tenha cuidado e evite se";
+	mes "perder.";
+	close;
+}
+
+gef_fild10,69,340,5	script	Quadro de Avisos#3	837,{
+	mes "[Caverna dos Orcs]";
+	mes "^6B1312Cuidado!^000000";
+	mes "A Caverna dos Orcs é composta por 2 níveis. Embora não sejam muito fortes individualmente, os monstros aqui atacam em grupos. Tenha cuidado.";
+	next;
+	mes "[Caverna dos Orcs]";
+	mes "Somente neste calabouço você poderá encontrar Orcs Esqueletos, Zenorcs e Orcs Zumbis.";
+	next;
+	mes "[Caverna dos Orcs]";
+	mes "Armas de atributo sagrado ajudarão muito você neste lugar, já que a maioria dos monstros nesta caverna são de mortos-vivos.";
+	next;
+	mes "[Caverna dos Orcs]";
+	mes "Se você não tiver de posse de uma Arma Sagrada e estiver em equipe com um Sacerdote, o feitiço 'Aspersio' do Sacerdote seria de tremenda ajuda.";
+	close;
+}
+
+xmas,147,311,5	script	Quadro de Avisos#23	837,{
+	mes "[Fábrica de Brinquedos]";
+	mes "^6B1312Cuidado!^000000";
+	mes "A Fábrica de Brinquedos é composta por 2 níveis.";
+	mes "Esta masmorra não é tão difícil de se aventurar para novos aventureiros,";
+	mes "mas há 3 monstros Chefes perigosos que aparecem em um determinado tempo.";
+	next;
+	mes "[Fábrica de Brinquedos]";
+	mes "No 1º nível, você encontrará o monstro Chefe, ^6B1312Angeling^000000.";
+	mes "No 2º nível, você encontrará 2 monstros Chefes perigosos que são:";
+	mes "^6B1312Cavaleiro da Tempestade^000000 e ^6B1312Hatii^000000. É aconselhável estar atento ao se aventurar.";
+	mes "Para sua referência, os monstros ^6B1312Presentes^000000, ^6B1312Soldadinhos de Chumbo^000000 e ^6B1312Cookies^000000 só aparecem nesta masmorra.";
+	close;
+}
+
+pay_arche,39,134,5	script	Quadro de Avisos#08	837,{
+	mes "[Caverna de Payon]";
+	mes "^6B1312Cuidado!^000000";
+	mes "A Caverna de Payon consiste em 5 níveis cheios de monstros Mortos-vivos e Demônios. Cuidado com os enxames de Hidras no terceiro e quarto níveis.";
+	next;
+	mes "[Caverna de Payon]";
+	mes "No quinto nível, há um monstro Chefe bonito, mas terrível, conhecido como ^6B1312Flor do Luar^000000 que aparece em certos momentos. Aproxime-se com extremo cuidado.";
+	close;
+}
+
+moc_ruins,61,164,5	script	Quadro de Avisos#27	837,{
+	mes "[Pirâmides]";
+	mes "^6B1312Cuidado!^000000";
+	mes "As Pirâmides consistem em um total de 7 níveis, sendo 4 níveis na terra e o restante no subsolo.";
+	mes "Os primeiros níveis são adequados para novos aventureiros se aventurarem, mas conforme você se aprofunda, encontrará monstros mais fortes.";
+	next;
+	mes "[Pirâmides]";
+	mes "No primeiro nível, há a Guilda dos Gatunos, onde as pessoas podem mudar suas classes para Gatuno.";
+	mes "No 4º nível, um monstro Chefe chamado ^6B1312Osíris^000000 fica aparecendo em um determinado tempo.";
+	mes "No 3° nível do porão, o ^6B1312Amon Ra^000000 também fica aparecendo em um determinado tempo.";
+	close;
+}
+
+prt_fild05,278,220,5	script	Quadro de Avisos#16	837,{
+	mes "[Esgoto]";
+	mes "O Esgoto é composto por um total de";
+	mes "4 níveis, e é um bom lugar para";
+	mes "treinar os novos aventureiros.";
+	next;
+	mes "[Esgoto]";
+	mes "Para acessar o Esgoto, você";
+	mes "deve se voluntariar como um exterminador";
+	mes "de monstros na Cavalaria de";
+	mes "Prontera. Lembre-se de que os";
+	mes "monstros aqui podem atacar em";
+	mes "enxames.";
+	next;
+	mes "[Esgoto]";
+	mes "No quarto nível do Esgoto de";
+	mes "Prontera, você pode encontrar o monstro";
+	mes "Chefe conhecido como ^6B1312Besouro-Ladrão Dourado^000000.";
+	mes "Os novos aventureiros devem";
+	mes "ter muito cuidado.";
+	close;
+}

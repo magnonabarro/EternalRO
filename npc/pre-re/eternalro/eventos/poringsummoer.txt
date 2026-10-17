@@ -1,0 +1,350 @@
+//     ___  __            __    ___     //
+//    /   \/__\/\   /\   /__\  / __\    //
+//   / /\ /_\  \ \ / /  / \// /__\//    //
+//  / /_///__   \ V /  / _  \/ \/  \    //
+// /___,'\__/    \_/   \/ \_/\_____/    //
+//////////////////////////////////////////
+//		  Script Homem Macaco			//
+//////////////////////////////////////////
+//		    Old, Porém Gold				//
+//////////////////////////////////////////
+
+-	script	Monkey Treasure	-1,{
+OnBoxBreak:
+
+	set .monkeytrasurex1,rand(41,57);
+	set .monkeytrasurex2,rand(41,57);
+	set .monkeytrasurex3,rand(41,57);
+	set .monkeytrasurex4,rand(41,57);
+	set .monkeytrasurex5,rand(41,57);
+	set .monkeytrasurex6,rand(41,57);
+	set .monkeytrasurex7,rand(41,57);
+	set .monkeytrasurex8,rand(41,57);
+	set .monkeytrasurex9,rand(41,57);
+	set .monkeytrasurex10,rand(41,57);
+	set .monkeytrasurex11,rand(41,57);
+	set .monkeytrasurex12,rand(41,57);
+	set .monkeytrasurex13,rand(41,57);
+	set .monkeytrasurex14,rand(41,57);
+	set .monkeytrasurex15,rand(41,57);
+	set .monkeytrasurey1,rand(40,55);
+	set .monkeytrasurey2,rand(40,55);
+	set .monkeytrasurey3,rand(40,55);
+	set .monkeytrasurey4,rand(40,55);
+	set .monkeytrasurey5,rand(40,55);
+	set .monkeytrasurey6,rand(40,55);
+	set .monkeytrasurey7,rand(40,55);
+	set .monkeytrasurey8,rand(40,55);
+	set .monkeytrasurey9,rand(40,55);
+	set .monkeytrasurey10,rand(40,55);
+	set .monkeytrasurey11,rand(40,55);
+	set .monkeytrasurey12,rand(40,55);
+	set .monkeytrasurey13,rand(40,55);
+	set .monkeytrasurey14,rand(40,55);
+	set .monkeytrasurey15,rand(40,55);
+
+	makeitem 18000,1,"safari",.monkeytrasurex1,.monkeytrasurey1;
+	makeitem 513,12,"safari",.monkeytrasurex11,.monkeytrasurey11;
+	makeitem 513,12,"safari",.monkeytrasurex12,.monkeytrasurey12;
+	makeitem 513,12,"safari",.monkeytrasurex13,.monkeytrasurey13;
+	makeitem 513,12,"safari",.monkeytrasurex14,.monkeytrasurey14;
+	makeitem 513,12,"safari",.monkeytrasurex15,.monkeytrasurey15;
+	makeitem 513,12,"safari",.monkeytrasurex11,.monkeytrasurey11;
+	makeitem 513,12,"safari",.monkeytrasurex12,.monkeytrasurey12;
+	makeitem 513,12,"safari",.monkeytrasurex13,.monkeytrasurey13;
+	makeitem 513,12,"safari",.monkeytrasurex14,.monkeytrasurey14;
+	makeitem 513,12,"safari",.monkeytrasurex15,.monkeytrasurey15;
+
+	close;
+
+}
+
+-	script	Monkey Banana	-1,{
+OnBoxBreak:
+
+	set .monkeytrasurex1,rand(41,57);
+	set .monkeytrasurex2,rand(41,57);
+	set .monkeytrasurex3,rand(41,57);
+	set .monkeytrasurex4,rand(41,57);
+	set .monkeytrasurex5,rand(41,57);
+	set .monkeytrasurex6,rand(41,57);
+	set .monkeytrasurex7,rand(41,57);
+	set .monkeytrasurex8,rand(41,57);
+	set .monkeytrasurex9,rand(41,57);
+	set .monkeytrasurex10,rand(41,57);
+	set .monkeytrasurex11,rand(41,57);
+	set .monkeytrasurex12,rand(41,57);
+	set .monkeytrasurex13,rand(41,57);
+	set .monkeytrasurex14,rand(41,57);
+	set .monkeytrasurex15,rand(41,57);
+	set .monkeytrasurey1,rand(40,55);
+	set .monkeytrasurey2,rand(40,55);
+	set .monkeytrasurey3,rand(40,55);
+	set .monkeytrasurey4,rand(40,55);
+	set .monkeytrasurey5,rand(40,55);
+	set .monkeytrasurey6,rand(40,55);
+	set .monkeytrasurey7,rand(40,55);
+	set .monkeytrasurey8,rand(40,55);
+	set .monkeytrasurey9,rand(40,55);
+	set .monkeytrasurey10,rand(40,55);
+	set .monkeytrasurey11,rand(40,55);
+	set .monkeytrasurey12,rand(40,55);
+	set .monkeytrasurey13,rand(40,55);
+	set .monkeytrasurey14,rand(40,55);
+	set .monkeytrasurey15,rand(40,55);
+
+	makeitem 607,2,"safari",.monkeytrasurex1,.monkeytrasurey1;
+	makeitem 12208,1,"safari",.monkeytrasurex6,.monkeytrasurey6;
+	makeitem 12210,1,"safari",.monkeytrasurex7,.monkeytrasurey7;
+	makeitem 7558,1,"safari",.monkeytrasurex8,.monkeytrasurey8;
+	makeitem 513,12,"safari",.monkeytrasurex9,.monkeytrasurey9;
+	makeitem 513,12,"safari",.monkeytrasurex10,.monkeytrasurey10;
+	makeitem 513,12,"safari",.monkeytrasurex11,.monkeytrasurey11;
+	makeitem 513,12,"safari",.monkeytrasurex12,.monkeytrasurey12;
+	makeitem 513,12,"safari",.monkeytrasurex13,.monkeytrasurey13;
+	makeitem 513,12,"safari",.monkeytrasurex14,.monkeytrasurey14;
+	makeitem 513,12,"safari",.monkeytrasurex15,.monkeytrasurey15;
+
+	close;
+
+}
+
+
+
+
+
+safari,30,58,5	script	Monkey Man Servant	799,{
+
+
+	onMenuMacaco:
+	if (getgmlevel() > 19){
+	mes "[Monkey Man Servant]";
+	mes "Olá, o que gostaria de fazer?";
+	next;
+	menu "Derrubar um tesouro",treas,"Invocar o Homem Macaco",smonk,"Invocar o filho",sfmonk,"Matar Homem Macaco",kmonk,"Iniciar Evento",start,"Fechar Warp",closewarp;
+
+
+		smonk:
+
+			mes "[Monkey Man Servant]";
+			mes "WHROOOOOOOOOOAH!!!";
+			next;
+			monster "safari",48,48,"Homem Macaco",1585,1;
+			close;
+
+		sfmonk:
+			mes "[Monkey Man Servant]";
+			mes "WHROOOOOOOOOOAH!!!";
+			next;
+			atcommand "@monstersmall 1585";
+			close;
+
+		kmonk:
+
+			mes "[Monkey Man Servant]";
+			mes "Dead!";
+			atcommand "@killmonster2";
+			close;
+
+		treas:
+			
+			mapannounce "safari","Um tesouro foi derrubado pelo Homem Macaco!",0;
+
+			set .monkeydrop,rand(1,3);
+			if (.monkeydrop == 1) {
+				monster "safari",48,48,"Baú do Tesouro",1798,1,"Monkey Treasure::OnBoxBreak"; close;
+						}else{
+			monster "safari",48,48,"Baú do Tesouro",1798,1,"Monkey Banana::OnBoxBreak"; close;
+							}
+
+		start:
+			mes "[Monkey Man Servant]";
+			mes "Warps abertas";
+			announce "Um warp foi aberto na cidade de prontera(155,219), com destino ao território do Homem Macaco. Boa Sorte a todos!",bc_all;
+			setcell "safari",39,58,40,55,cell_walkable,0;
+			setcell "safari",58,56,60,58,cell_walkable,0;
+			enablenpc "Homem das Selvas#Event2";
+			close;
+
+		closewarp:
+
+			mes "[Monkey Man Servant]";
+			mes "Warps fechadas.";
+			disablenpc "Homem das Selvas#Event2";
+			announce "Warp para o território do Homem Macaco fechado.",bc_all;
+			close;
+		
+
+				}
+									}
+
+
+prt_in,160,134,5	script	Homem das Selvas#Event2	784,{
+specialeffect 417;
+
+		mes "[Homem das Selvas]";
+		mes "Deseja ir ao território do Homem Macaco?";
+		next;
+		menu "Sim!",-,"Não",leave;
+		sc_end sc_all;
+		setcart 0;
+		setfalcon 0;
+		setriding 0; 
+		if(Class == 4041 || Class == 18 || Class == 4019) { atcommand "@useskill 244 1 "+strcharinfo(0)+""; }
+		if (getpetinfo(2) != "null")  { mes "[Homem das Selvas]"; mes "Por favor, remova o Pet."; close; }
+		next;
+		mes "[Homem das Selvas]";
+		mes "Boa Sorte!";
+		close2;
+		sc_end sc_all;
+		warp "safari",48,48;
+		end;
+
+			leave:
+				mes "[Homem das Selvas]";
+				mes "Uma pena, o evento é bem legal!";
+				close;
+
+}
+
+
+-	script	macaco-PCDieEvent	-1,{
+
+OnPCDieEvent:
+	getmapxy @map$,@x,@y,0;
+	
+
+	sleep2 180000;
+	if ( @map$ == "safari" || @map$ == "bomber" ) {
+	set .@spoint$, getsavepoint(0);
+	set .@x, getsavepoint(1);
+	set .@y, getsavepoint(2);
+	warp .@spoint$, .@x, .@y;
+	end;
+		}
+			else { end; }
+}
+
+//Mapflags - Homem Macaco
+safari	mapflag	novending
+safari	mapflag	nowarp
+safari	mapflag	nochat
+safari	mapflag	noloot
+safari	mapflag	nodrop
+safari	mapflag	noskill
+safari	mapflag	noteleport
+safari	mapflag	noicewall
+safari	mapflag	nobranch
+safari	mapflag	nomemo
+safari	mapflag	nopenalty
+safari	mapflag	nosave	SavePoint
+safari	mapflag	nowarpto
+
+//Restricted - Não alterar
+safari	mapflag	restricted	1
+
+
+//===== eAthena Script ================================================================================================================
+//= Poring Summoner
+//===== Created By: ===================================================================================================================
+//= MoonlightRO
+//===== Current Version: ==============================================================================================================
+//= 1.2
+//===== Compatible With: ==============================================================================================================
+//= TXT & SQL
+//===== Link: ==============================================================================================================
+//= http://www.eathena.ws/board/index.php?showtopic=236779
+//===== Credits: ==============================================================================================================
+//= Myself
+//===================================================================================================================
+-	script	Poring Summoner	-1,{
+
+OnMenuSummoner:
+
+mes "[Poring Summoner]";
+if(getgmlevel() < 50) {
+	if(.Event) mes "Não há nenhum evento Poring Summon agora.";
+	else {
+		mes "Há um Poring Summon evento agora!";
+		mes "Localização: " + .Map$;
+		mes "Porings Prêmiados: " + .SpecialPorings[1];
+		mes "Porings Normais: " + .NormalPorings[0];
+	}
+	close;
+}
+mes "Por favor, personalizar o Poring Summon event:";
+Main:
+next;
+mes "[Poring Summoner]";
+	switch(select("Item [" + getitemname(.ItemID) + "]:Special Porings [" + .SpecialPorings + "]:Normal Porings [" + .NormalPorings + "]:Start Event:End Event")) {
+		case 1:
+			mes "Qual item você gostaria Porings especial a dropa-se?";
+			mes "Porfavor escolha o ID do item a ser dropado:";
+			input .ItemID;
+			goto Main;
+		case 2:
+			mes "Quantos Especial Porings gostaria de chamar?";
+			input .SpecialPorings;
+			goto Main;
+		case 3:
+			mes "Quantos Porings Normal gostaria de chamar?";
+			input .NormalPorings;
+			goto Main;
+		case 4:
+			mes "Iniciando o evento de hoje...";
+OnHour0200:
+OnHour0800:
+OnHour1400:
+OnHour2000:
+	set $@ran, rand(1,11);
+	if ($@ran == 11) set .Map$,"prt_fild05";
+	if ($@ran == 10) set .Map$,"prt_fild01";
+	if ($@ran == 9) set .Map$,"prt_fild08";
+	if ($@ran == 8) set .Map$,"comodo";
+	if ($@ran == 7) set .Map$,"xmas";
+	if ($@ran == 6) set .Map$,"aldebaran";
+	if ($@ran == 5) set .Map$,"izlude";
+	if ($@ran == 4) set .Map$,"payon";
+	if ($@ran == 3) set .Map$,"geffen";
+	if ($@ran == 2) set .Map$,"morocc";
+	if ($@ran == 1) set .Map$,"prontera";
+			set .Event,1;
+			monster .Map$,0,0,"Poring",1002,.SpecialPorings,"Poring Summoner::OnSpecialKill";
+			monster .Map$,0,0,"Poring",1002,.NormalPorings,"Poring Summoner::OnNormalKill";
+			set .SpecialPorings[1],.SpecialPorings;
+			set .NormalPorings[1],.NormalPorings;
+			announce "O evento Poring começou!",bc_all;
+			announce "O evento está acontecendo em: " + .Map$,bc_all;
+			announce "Porings Prêmiados: " + .SpecialPorings,bc_all;
+			announce "Porings Normais: " + .NormalPorings,bc_all;
+			close;
+		case 5:
+			mes "O Evento Poring Terminou...";
+			goto EndEvent;
+	}
+OnTimer216000000:
+	announce "Poring Summoner acabou. Ninguém matou os Porings",bc_all;
+	killmonster .Map$,"All";
+	set .Event,0;
+	stopnpctimer;
+	end;
+OnSpecialKill:
+	set .SpecialPorings[1],.SpecialPorings[1]-1;
+	announce strcharinfo(0) + " got a " + getitemname(.ItemID) + "!",bc_map;
+	getitem .ItemID,1;
+	goto PoringCount;
+OnNormalKill:
+	set .NormalPorings[1],.NormalPorings[1]-1;
+	goto PoringCount;
+PoringCount:
+	announce "Special Porings: " + .SpecialPorings[1] + " || Normal Porings: " + .NormalPorings[1],bc_map;
+	if(!.SpecialPorings[1]) goto EndEvent;
+	end;
+EndEvent:
+	if(.Event) announce "The Poring Summon Event is now over!",bc_all;
+	killmonster .Map$,"All";
+	set .Event,0;
+	set .SpecialPorings[1],0;
+	set .NormalPorings[1],0;
+	close;
+}

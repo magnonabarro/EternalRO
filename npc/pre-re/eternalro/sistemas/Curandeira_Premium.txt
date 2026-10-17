@@ -1,0 +1,1196 @@
+//====================================================================================
+//        _____ _           _ _                                                       
+//       / ____| |         | (_)                                                      
+//      | |  __| | __ _  __| |_ _   _ ___                                             
+//      | | |_ | |/ _` |/ _` | | | | / __|                                            
+//      | |__| | | (_| | (_| | | |_| \__ \                                            
+//       \_____|_|\__,_|\__,_|_|\__,_|___/                                            
+//                                                                                    
+//===== rAthena Script ===============================================================
+//=	Curandeira Premium     
+//= ? Curandeira separada por categorias de jogadores: Normal, VIP e Premium;
+//= ? Oferece vantagens e beneficios exclusivos para jogadores VIP e Premium;
+//= ? Cura Free ou Paga (Oferece desconto para jogadores VIP e Premium);
+//= ? A cura e /ou buff podem ser cobrados em Zeny ou Cash;
+//= ? Os Buffs podem ser configurados de acordo com a categoria do jogador;
+//= ? O jogador pode escolher se quer apenas ser curado ou apenas ser bufado;
+//= ? As opiões de configuraiões são acessadas via comando @curandeira;
+//= ? Os beneficios da curandeira (NPC ou Comando) podem ser desativados em mapas 
+//=   específicos ou mapas que possuem mapflags de pvp ou gvg;
+//= ? O valor gasto pelos jogadores é acumulado e sorteado por algum membro da staff
+//=   via comando @rpsloteria;
+//= ? Os efeitos visuais de buff são diferenciados pela categoria do jogador;
+//= ? @buff char e @buff map;
+//= ? O NPC e Comando possuem um delay fixo para evitar possíveis abusos e anti-jogo;
+//= ? É possível desabilitar a cobrania para um jogador abaixo de um nível de base
+//=   pré configurado, exemplo: Não cobrar de jogador a baixo do nível de base 75;
+//= ? O status Premium é ativado de forma visual como um status de buff;
+//===== Versão Atual: ================================================================
+//= 5.1                                                                              
+//===== Créditos: ====================================================================
+//= Gladius e FelipeFepa                                                        
+//===== Comentários Adicionais: ======================================================
+//= 1.0 = Versão base do rAthena [Euphy]
+//= 1.1 = Traduzido [Gladius]
+//= 1.2 = Adicionado funiões VIP [Felipe FePa]
+//=	1.3 = Adicionado opião de repairall e identifyall [Gladius]
+//= 1.4 = Adicionado Remoião de debuffs [Gladius]
+//= 1.5 = Adicionado duplicate em cidades e campos [Gladius]
+//=	1.6 = Adicionado duplicate em Cheffenia [Gladius]
+//=	1.7 = Adicionado delay para uso do NPC [Felipe FePa]
+//= 2.0 = Adicionado Funiões Premium da curandeira [Felipe FePa]
+//= 2.1 = Adicionado opiões de valor do 1 ao 4 [Felipe FePa]
+//= 2.2 = Adicionado opiões de sobreposiião de buffs [Felipe FePa]
+//= 2.3 = Adicionado comando de verificaião premium @healpremium [Gladius]
+//= 2.4 = Adicionado comando @buff [Gladius e Felipe FePa]
+//= 2.5 = Adicionado comando @buff char[Felipe FePa]
+//= 2.6 = Adicionado comando @buff map[Felipe FePa]
+//= 2.7 = Adicionado opião de categoria para @buff[Felipe FePa]
+//= 3.0 = Adicionado funião de cobrania na recuperaião de HP e SP [Felipe FePa]
+//= 3.1 = Adicionado opião de desconto para usuários VIP [Felipe FePa]
+//= 3.2 = Adicionado opião de desconto para usuários Premium [Felipe FePa]
+//= 3.3 = Adicionado opião de escolha de apenas cura ou apenas buff [Felipe FePa]
+//= 4.0 = Adicionado ícone de status de Curandeira Premium (client-side) [Gladius]
+//= 4.1 = Adicionado efeitos visuais de buff por categoria de jogador [Gladius]
+//= 4.2 = Adicionado opião para ativar ou desativar efeitos [Gladius]
+//= 5.0 = Adicionado log de recolhimento de taxas da curandeira [Felipe FePa]
+//= 5.1 = Adicionado sorteio das taxas recolhidas pela curandeira [Felipe FePa]
+//====================================================================================
+
+-	script	Curandeira	-1,{
+	OnAtcommand_buff:
+	
+//====================================================================================
+//= Configuraiões de Restriiões de Mapa:
+//===== Validaião de Ativaião: =======================================================
+//= .enablePVP / GVG = Verifica se o jogador esta em mapas com mapflag gvg ou pvp.
+//= 0 = Pode usar (Restriião desativada) / 1 = Restriião ativa (Não pode usar).
+//===== Validaião de Mapa: ===========================================================
+//= .desablebuffmaps = Verifica se o jogador está em um mapa com bloqueio de uso.
+//= "sec_pri" = Não pode se curar ou usar @buff neste mapa.
+//====================================================================================
+
+	set .enablePVP,1;
+	set .enableGVG,1;
+	set .enableBG,1;
+	
+	setarray (.desablebuffmaps$[0],1,
+		//"Prontera",
+		//"Geffen",
+		//"Morroc",
+		"sec_pri"
+	);
+	
+//====================================================================================
+//= Configuraiões de Recolhimento de Taxas:
+//===== Instruiões: ==================================================================
+//= .tax_enable = (0 = Desativado / 1 = Ativo). (Recolhimento de Taxas)
+//= bindatcmd "rpsloteria",strnpcinfo(0)+"::OnAtcommand_buff",99,99; 
+//===== Importante: ==================================================================
+//= Se estiver desativado o evento terá inserião de valor manual!
+//====================================================================================
+
+	set .tax_enable,0;
+	
+//====================================================================================
+//= Configuraiões de Auxilar de UP:
+//===== Instruiões: ==================================================================
+//= .enablelvlup (0 = Desativado / 1 = Ativo).
+//= .limitbaselvl (0 = Para Todos / 1 = Premium e vip / 2 = Somente premium).
+//= .currencybaselvl - Level max para não cobrar pelos serviios da curandeira.
+//= Ao passar de nível de base, o jogador receberá os beneficios de cura e buffs.
+//====================================================================================
+	
+	set .enablelvlup,0;
+	set .limitbaselvl, 0;
+	set .currencybaselvl, 75;
+	
+//====================================================================================
+//= Configuraiões (VIP):
+//===== Instruiões: ==================================================================
+//= .vip_needed = Nível de vip necessário para receber buffs do .buff_vip
+//===== Importante: ==================================================================
+//= Nível 5 = Nível de vip padrão do emulador
+//====================================================================================
+
+	set .vip_needed, 5;
+	
+//====================================================================================
+//= Configuraiões de Identificaião e Reparo de Equipamentos:
+//===== Instruiões: ==================================================================
+//= Valor 1: 0 = Desativado
+//= Valor 2: 0 = Somente VIP / 1 = para Todos
+//= setarray comando[0],valor 1,valor 2;
+//===== Exemplo: =====================================================================
+//= setarray .identifyall[0],1,0; = (Ativado e Somente para VIP) 
+//====================================================================================
+	                                                                                  
+	setarray .identifyall[0],1,1;                                                     
+	setarray .repairall[0],1,1;                                                       
+                                                                                      
+//====================================================================================
+//= Configuraiões de Delay:                                                           
+//===== Instruiões: ==================================================================
+//= 0 = Desativado                                                                    
+//= Maior que 0 = Tempo do delay em segundos                                          
+//===== Exemplo: =====================================================================
+//= set .Delay,10; = Delay de 10 segundos                                             
+//====================================================================================
+	                                                                                  
+	set .Delay,10;                                                                    
+                                                                                      
+//====================================================================================
+//= Configuraiões de Cobrania de Cura:                                                        
+//===== Instruiões (Valor 1): ========================================================
+//= 0 = Desativado / 1 = Zeny / 2 = Cash                                     
+//===== Instruiões (Valor 2): ========================================================
+//= Se 0 (Zero) = 1z por HP + 1z por SP Curado 
+//= Se maior que 0 (Zero) = Valor Cobrado é Fixo
+//===== Instruiões (Valor 3): ========================================================
+//= Percentual desconto VIP
+//===== Instruiões (Valor 4): ========================================================
+//= Percentual desconto Premium
+//===== Importante: ==================================================================
+//= O desconto é acumulativo se o usuário possuir conta VIP e Curandeira Premium
+//====================================================================================	
+	
+	setarray .RPS_currencyHeal[0],0,75,50,100;
+	
+//====================================================================================
+//= Configuraiões de Cobrania de Buff:                                                        
+//===== Instruiões (Valor 1): ========================================================
+//= 0 = Desativado / 1 = Zeny / 2 = Cash                                     
+//===== Instruiões (Valor 2): ========================================================
+//= Obrigatkrio possui um valor maior que 0 (Zero)
+//= 100 = Valor de cobrania fixa do buff.
+//===== Instruiões (Valor 3): ========================================================
+//= Percentual desconto VIP
+//===== Instruiões (Valor 4): ========================================================
+//= Percentual desconto Premium
+//===== Importante: ==================================================================
+//= O desconto é acumulativo se o usuário possuir conta VIP e Curandeira Premium
+//====================================================================================	
+	
+	setarray .RPS_currencyBuff[0],0,225,50,100;
+	
+
+//====================================================================================
+//= Configuraiões de Cobrania 2:
+//===== Instruiões (Valor 1): ========================================================	
+//= .currency_premium (0 = Não cobra / 1 = Cobra) de jogadores premium.
+//===== Importante: ==================================================================
+//= Se desativado, não acumulará valores de taxas para o sorteio.
+//====================================================================================
+	                                                                                  
+	set .currency_premium,0;                                                          
+
+//====================================================================================
+//= Configuraiões de Efeitos:
+//===== Instruiões: ==================================================================
+//= .effects (0 = Desativado / 1 = Ativo)
+//===== Importante: ==================================================================
+//= Desative caso queira diminuir o lag gráfico do seu servidor.
+//====================================================================================
+
+	set .effect,1;
+	
+//====================================================================================
+//= Instruiões: Renova (0 = Sim), Buff, Tempo, Valor1, Valor2, Valor3, Valor4         
+//= Documentaião: https://github.com/rathena/rathena/blob/master/doc/status_change.txt
+//===== Instruiões: ==================================================================
+//= .buff_premium = Exclusivo da Curandeira Premium (Acumula com Buff Vip ou Normal)  
+//= .buff_vip     = Buffs para jogadores que possuem conta VIP                        
+//= .buff_normal  = Buffs para jogadores que NÃO possuem conta VIP                    
+//= endbuff       = Remove status negativos (debuffs)                                 
+//===== Importante: ==================================================================
+//= O ultimo buff não deve conter a " , " (Virgula) apenas os anteriores.             
+//= Exemplo: 0,SC_GLORIA,30000,5,0,0,0 (Ultimo buff)                                  
+//= Para não usar algum dos buff, comente a linha (Comentar = //).                    
+//====================================================================================
+if (.buff_premium[1] && #Curandeira_Premium > gettimetick(2)) {
+	switch (Class) {
+		case 18: case 4019: case 4071: case 4078: // Alchemist
+			skilleffect "SL_ALCHEMIST",0;
+			sc_start4 SC_SPIRIT,350000,5,455,0,0;
+			break;
+		case 15: case 4016: case 4070: case 4077: // Monk
+			skilleffect "SL_MONK",0;
+			sc_start4 SC_SPIRIT,350000,5,447,0,0;
+			break;
+		case 4047: // Star Gladiator
+			skilleffect "SL_STAR",0;
+			sc_start4 SC_SPIRIT,350000,5,448,0,0;
+			break;
+		case 16: case 4017: case 4067: case 4074: // Sage
+			skilleffect "SL_SAGE",0;
+			sc_start4 SC_SPIRIT,350000,5,449,0,0;
+			break;
+		case 14: case 4015: case 4066: case 4073: // Crusader
+			skilleffect "SL_CRUSADER",0;
+			sc_start4 SC_SPIRIT,350000,5,450,0,0;
+			break;
+		case 23: case 4190: // Super Novice
+			skilleffect "SL_SUPERNOVICE",0;
+			sc_start4 SC_SPIRIT,350000,5,451,0,0;
+			break;
+		case 7: case 4008: case 4054: case 4060: // Knight
+			skilleffect "SL_KNIGHT",0;
+			sc_start4 SC_SPIRIT,350000,5,452,0,0;
+			break;
+		case 9: case 4010: case 4055: case 4061: // Wizard
+			skilleffect "SL_WIZARD",0;
+			sc_start4 SC_SPIRIT,350000,5,453,0,0;
+			break;
+		case 8: case 4009: case 4057: case 4063: // Priest
+			skilleffect "SL_PRIEST",0;
+			sc_start4 SC_SPIRIT,350000,5,454,0,0;
+			break;
+		case 19: case 20: case 4020: case 4021: case 4068: case 4069: case 4075: case 4076: // Bard/Dancer
+			skilleffect "SL_BARDDANCER",0;
+			sc_start4 SC_SPIRIT,350000,5,455,0,0;
+			break;
+		case 17: case 4018: case 4072: case 4079: // Rogue
+			skilleffect "SL_ROGUE",0;
+			sc_start4 SC_SPIRIT,350000,5,456,0,0;
+			break;
+		case 12: case 4013: case 4059: case 4065: // Assassin
+			skilleffect "SL_ASSASIN",0;
+			sc_start4 SC_SPIRIT,350000,5,457,0,0;
+			break;
+		case 10: case 4011: // Blacksmith
+			skilleffect "SL_BLACKSMITH",0;
+			sc_start4 SC_SPIRIT,350000,5,458,0,0;
+			break;
+		case 11: case 4012: case 4056: case 4062: // Hunter
+			skilleffect "SL_HUNTER",0;
+			sc_start4 SC_SPIRIT,350000,5,460,0,0;
+			break;
+		case 4049: // Soul Linker
+			skilleffect "SL_SOULLINKER",0;
+			sc_start4 SC_SPIRIT,350000,5,461,0,0;
+			break;
+		default:
+			break;
+	}
+}
+	
+	setarray (.buff_premium[0],1,								// (0 = Desativado)
+			//0,SC_ATKPOTION,140000,15,0,0,0,						// Poião de Ataque Físico
+			//0,SC_MATKPOTION,140000,15,0,0,0,					// Poião de Ataque Mágico
+			//1,SC_PROMOTE_HEALTH_RESERCH,240000,1,1,0,0,			// Poião Pequena de HP
+			//1,SC_ENERGY_DRINK_RESERCH,240000,1,1,0,0,			// Poião Pequena de SP
+			//1,SC_SPIRIT,350000,5,447,0,0,						// Espirito Soul Linker ( SL_MONK)
+			//1,SC_SPIRIT,350000,5,448,0,0,						// Espirito Soul Linker ( SL_STAR)
+			//1,SC_SPIRIT,350000,5,449,0,0,						// Espirito Soul Linker ( SL_SAGE)
+			//1,SC_SPIRIT,350000,5,450,0,0,						// Espirito Soul Linker ( SL_CRUSADER)
+			//1,SC_SPIRIT,350000,5,451,0,0,						// Espirito Soul Linker ( SL_SUPERNOVICE)
+			//1,SC_SPIRIT,350000,5,452,0,0,						// Espirito Soul Linker ( SL_KNIGHT)
+			//1,SC_SPIRIT,350000,5,453,0,0,						// Espirito Soul Linker ( SL_WIZARD)
+			//1,SC_SPIRIT,350000,5,454,0,0,						// Espirito Soul Linker ( SL_PRIEST)
+			//1,SC_SPIRIT,350000,5,455,0,0,						// Espirito Soul Linker ( SL_ALCHEMIST)
+			//1,SC_SPIRIT,350000,5,456,0,0,						// Espirito Soul Linker ( SL_ROGUE)
+			//1,SC_SPIRIT,350000,5,457,0,0,						// Espirito Soul Linker ( SL_ASSASIN)
+			//1,SC_SPIRIT,350000,5,458,0,0,						// Espirito Soul Linker ( SL_BLACKSMITH)
+			//1,SC_SPIRIT,350000,5,460,0,0,						// Espirito Soul Linker ( SL_HUNTER)
+			//1,SC_SPIRIT,350000,5,461,0,0,						// Espirito Soul Linker ( SL_SOULLINKER)
+			//1,SC_SPIRIT,350000,5,459,0,0,						// Espirito Soul Linker ( Mago)
+			//1,SC_CP_WEAPON,600000,5,0,0,0,					// Revestir Arma
+			//1,SC_CP_ARMOR,600000,5,0,0,0,						// Revestir Armadura
+			//1,SC_CP_HELM,600000,5,0,0,0,						// Revestir Capacete
+			//1,SC_CP_SHIELD,600000,5,0,0,0,					// Revestir Escudo
+			//1,SC_EDP,600000,5,0,0,0,							// Encantar com Veneno Mortal
+			//1,SC_EXPLOSIONSPIRITS,180000,5,20,0,0,			// Fúria Interior
+			//1,SC_KAITE,600000,7,0,0,0,						// Kaite
+			//1,SC_KAIZEL,600000,7,0,0,0,						// Kaizel
+			//1,SC_KAUPE,600000,3,0,0,0,						// Kaupe
+			//1,SC_INCREASING,60000,1,20,4,4,					// Aumentar Precisão
+			1,SC_ADJUSTMENT,20000,1,30,30,20,					// Pânico do Justiceiro
+			1,SC_STRFOOD,240000,10,0,0,0,						// Comida de Str +10		
+			1,SC_AGIFOOD,240000,10,0,0,0,						// Comida de Agi +10		
+			1,SC_INTFOOD,240000,10,0,0,0,						// Comida de Int +10		
+			1,SC_DEXFOOD,240000,10,0,0,0,						// Comida de Dex +10		
+			1,SC_LUKFOOD,240000,10,0,0,0,						// Comida de Luk +10		
+			1,SC_VITFOOD,240000,10,0,0,0						// Comida de Vit +10
+			//1,SC_SAVAGE_STEAK,240000,20,0,0,0,				// Comida de Str +20 
+			//1,SC_COCKTAIL_WARG_BLOOD,240000,20,0,0,0,			// Comida de Agi +20 
+			//1,SC_MINOR_BBQ,240000,20,0,0,0,					// Comida de Int +20 
+			//1,SC_SIROMA_ICE_TEA,240000,20,0,0,0,				// Comida de Dex +20 
+			//1,SC_DROCERA_HERB_STEAMED,240000,20,0,0,0,		// Comida de Luk +20 
+			//1,SC_PUTTI_TAILS_NOODLES,240000,20,0,0,0,			// Comida de Vit +20 
+	);
+	
+	setarray (.buff_vip[0],1,									// (0 = Desativado)
+			0,SC_BLESSING,240000,10,0,0,0,						// Benião
+			0,SC_INCREASEAGI,240000,10,0,0,0					// Aumentar Agilidade
+			//0,SC_ANGELUS,300000,10,0,0,0,						// Angelus
+			//0,SC_GLORIA,30000,5,0,0,0,						// Glkria
+			//0,SC_MAGNIFICAT,90000,5,0,0,0,					// Magnificat
+			//0,SC_IMPOSITIO,60000,5,0,0,0,						// Impositio Manus
+			//0,SC_KYRIE,120000,10,0,0,0,						// Kyrie Eleison
+			//0,SC_ASSUMPTIO,100000,10,0,0,0,					// Assumptio
+			//0,SC_SUFFRAGIUM,10000,3,0,0,0,					// Suffragium
+			//0,SC_ENDURE,37000,10,10,0,0,						// Vigor
+			//0,SC_TWOHANDQUICKEN,300000,10,0,0,0,				// Rapidez com Duas Mãos
+			//0,SC_AURABLADE,120000,5,100,0,0,					// Lâmina de Aura
+			//0,SC_PARRYING,60000,10,0,0,0,						// Aparar Golpe
+			//0,SC_CONCENTRATION,45000,5,25,50,25,				// Dedicaião
+			//0,SC_DEFENDER,180000,5,80,0,0,					// Aura Sagrada
+			//0,SC_AUTOGUARD,300000,10,0,0,0,					// Bloqueio
+			//0,SC_PROVIDENCE,180000,5,25,0,0,					// Divina Providencia
+			//0,SC_ENERGYCOAT,300000,5,0,0,0,					// Proteião Arcana
+			//0,SC_MAGICPOWER,30000,10,50,0,0,					// Amplificaião Mística
+			//0,SC_DOUBLECAST,90000,5,0,0,0,					// Lanias Duplas
+			//0,SC_MEMORIZE,0,1,0,0,0,							// Presciencia
+			//0,SC_CONCENTRATE,240000,10,12,0,0,				// Concentraião
+			//0,SC_WINDWALK,400000,10,20,5,0,					// Caminho do Vento
+			//0,SC_TRUESIGHT,30000,10,20,10,30,					// Visão Real
+			//0,SC_ASSNCROS,120000,10,20,0,0,					// Crepúsculo Sangrento
+			//0,SC_APPLEIDUN,180000,10,25,0,0,					// Maiãs de Idun
+			//0,SC_POEMBRAGI,180000,10,30,50,0,					// Poema de Bragi
+			//0,SC_FORTUNE,120000,10,10,0,0,					// Beijo da Sorte
+			//0,SC_SERVICE4U,180000,10,25,50,0,					// Dania Cigana
+			//0,SC_HUMMING,60000,10,20,0,0,						// Sibilo
+			//0,SC_LOUD,300000,1,0,0,0,							// Grito de Guerra
+			//0,SC_ADRENALINE,150000,5,0,0,0,					// Adrenalina Pura
+			//0,SC_MAXIMIZE,0,5,0,0,0,							// Amplificar Poder
+			//0,SC_OVERTHRUST,100000,5,25,0,0,					// Foria Violenta
+			//0,SC_WEAPONPERFECT,50000,5,0,0,0,					// Manejo Perfeito
+			//0,SC_OVERTHRUSTMAX,50000,100,0,0,0,				// Foria Violentíssima
+			//0,SC_MELTDOWN,60000,10,0,0,0,						// Golpe Estilhaiante
+			//0,SC_CARTBOOST,60000,1,0,0,0,						// Impulso no Carrinho
+			//0,SC_POISONREACT,60000,10,0,0,0,					// Refletir Veneno		
+	);
+
+	setarray (.buff_normal[0],1,								// (0 = Desativado)
+			0,SC_BLESSING,140000,5,0,0,0,						// Benião
+			0,SC_INCREASEAGI,140000,5,0,0,0,						// Aumentar Agilidade
+			0,SC_ANGELUS,150000,5,0,0,0							// Angelus
+	);	
+	
+			
+		if(.@atcmd_numparameters && getgroupid() >= 99){
+			if(strtolower(.@atcmd_parameters$[0]) == "char"){
+				if(.@atcmd_parameters$[1] == ""){
+					dispbottom "[ @buff ] : Digite @buff char <char_name>.";
+					end;
+				}
+				if(isloggedin(convertpcinfo(.@atcmd_parameters$[1],CPC_ACCOUNT),convertpcinfo(.@atcmd_parameters$[1],CPC_CHAR))){
+					dispbottom "[ @buff ] : Jogador Bufado.";
+					detachrid;
+					attachrid(convertpcinfo(.@atcmd_parameters$[1],CPC_ACCOUNT));
+					callsub curandeira,0,0;
+				} else dispbottom "[ @buff ] : Jogador não encontrado ou offline.";
+			} else 
+			if(strtolower(.@atcmd_parameters$[0]) == "map"){
+				if(.@atcmd_parameters$[1] == ""){
+					dispbottom "[ @buff ] : Digite @buff map <map_name>.";
+					end;
+				}
+				if(getmapusers(strtolower(.@atcmd_parameters$[1])) < 0){
+					dispbottom "[ @buff ] : Mapa não encontrado.";
+					end;
+				}
+				if(getmapunits(BL_PC,strtolower(.@atcmd_parameters$[1]),.@map_chars$[0])){
+					for(.@i = 0; .@i < getarraysize(.@map_chars$); .@i++){
+						detachrid;
+						attachrid(convertpcinfo(.@map_chars$[.@i],CPC_ACCOUNT));
+						callsub curandeira,0,0;
+					}
+				} else {
+					dispbottom "[ @buff ] : Nenhum jogador encontrado em "+.@atcmd_parameters$[1];
+					end;
+				}
+					
+			} else {
+				dispbottom "[ @buff ] : Digite @buff map <map_name> ou @buff char <char_name>.";
+			}
+		} else {
+			if (!CURAFIX && !BUFFFIX) doevent strnpcinfo(0)+"::OnDisableCurandeira";
+			callsub curandeira,1,0;
+		}
+	end;
+	
+//====================================================================================
+//= Comandos da Curandeira Premium
+//====================================================================================
+	
+	OnInit:
+		bindatcmd "healpremium",strnpcinfo(0)+"::OnAtcmd_healpremium",0;
+		bindatcmd "buff",strnpcinfo(0)+"::OnAtcommand_buff",0;
+		bindatcmd "buffs",strnpcinfo(0)+"::OnAtcommand_buff",99;
+		bindatcmd "rpsloteria",strnpcinfo(0)+"::OnRPSLoteria",99;
+		bindatcmd "curandeira",strnpcinfo(0)+"::OnRPSFix",0;
+	end;
+
+//====================================================================================
+//= Comando @curandeira
+//====================================================================================
+
+	OnRPSFix:
+		if(.@atcmd_numparameters){
+			if(strtolower(.@atcmd_parameters$[0]) == "off"){
+				set CURAFIX, 0;
+				set BUFFFIX, 0;
+				dispbottom "[ @curandeira ] : As configuraiões da Curandeira foram apagadas.";
+			} else {
+				dispbottom "[ @curandeira ] : Parâmetro inválido. Digite: @curandeira off, para apagar as configuraiões.";
+			}
+		
+		} else {
+			OnDisableCurandeira:
+			mes "^00B2EE[ Curandeira ]^000000";
+			cutin "RPS_Healer",2;
+			mes (gettime(3)>= 6&&gettime(3)<= 12?"Bom dia":(gettime(3)>=13&&gettime(3)<=18?"Boa tarde":"Boa noite"))+", ^FFA500"+strcharinfo(0)+"^000000! Posso alterar as configuraiões de fixaião de cura e buff, para desativa-las, digite: ^FF0000@curandeira off^000000. O que deseja fazer?";
+			if(CURAFIX) .@menu$  += "^3CB371[g]^000000 Desafixar Cura:";
+			else .@menu$  += "^3CB371[g]^000000 Fixar Cura:";
+			if(BUFFFIX) .@menu$  += "^3CB371[g]^000000 Desafixar Buff:";
+			else .@menu$  += "^3CB371[g]^000000 Fixar Buff:";
+			.@menu$  += "^ff0000[g]^000000 Sair";
+
+			switch(select(.@menu$)) {
+				case 1:
+					if(CURAFIX) set CURAFIX, 0;
+					else set CURAFIX, 1;
+				break;
+				
+				case 2:
+					if(BUFFFIX) set BUFFFIX, 0;
+					else set BUFFFIX, 1;
+				break;
+				
+				case 3:
+					close;
+				break;
+				
+				default:
+					close;
+			}
+			cutin "",255;
+			dispbottom "[ @curandeira ] : Configuraiões atualizadas com sucesso!";
+			end;
+		}
+		
+	end;
+
+//====================================================================================
+//= Comando @healpremium
+//====================================================================================
+	
+	OnAtcmd_healpremium:
+	
+		if(#Curandeira_Premium)
+			dispbottom "[ Curandeira Premium ] : Seu beneficio expira em: " + callfunc("Time2Str",#Curandeira_Premium) + ".";
+		else
+			dispbottom "[ Curandeira Premium ] : Voce não possui acesso ao beneficio Premium da curandeira.";
+	end;
+
+//====================================================================================
+//= Comando @rpsloteria
+//====================================================================================
+
+	OnRPSLoteria:
+	
+	if(getgroupid() >= .tax_GMLvl){
+	
+		set .@nome$, "^00B2EE[Loteria da Curandeira]^000000";
+		set .nome2$, "[ Loteria da Curandeira ]";
+			
+		mes .@nome$;
+		cutin "RPS_Healer",2;
+		
+		if (!$tax_healer){
+			mes "O valor do premio esta zerado, deseja inserir um valor manualmente?";
+			if (select("^3CB371[g]^000000 Digitar Valor:^ff0000[g]^000000 Não") == 2) {
+				cutin "",255;
+				close;
+			}
+			valorinvalido:
+			next;
+			mes .@nome$;
+			mes "Digite um valor:";
+			input .@tax_healer;
+			if (.@tax_healer <= 0) goto valorinvalido;
+			mes "Voce digitou "+callfunc("RPS_InsertDot",.@tax_healer)+". Esta correto?";
+			if (select("^3CB371[g]^000000 Sim:^3CB371[g]^000000 Digitar Novo Valor") == 2) goto valorinvalido;
+			set $tax_healer, .@tax_healer;
+			next;
+			mes .@nome$;
+		}
+		
+		if ($RPS_SORTEIO == 1) { 
+			mes "O sorteio já está em andamento. Houve algum problema? Voce gostaria de ^FF0000encerra-lo^000000?";
+			if (select("^ff0000[g]^000000 Cancelar Sorteio:^3CB371[g]^000000 Continuar") == 2){
+				cutin "",255;
+				close;
+			}
+			set $RPS_SORTEIO, 0;
+			.staffcancel$ = StrCharinfo(0);
+			mes " ";
+			mes "^FF0000O EVENTO FOI ENCERRADO^000000! A premiaião não ocorrerá.";
+			cutin "",255;
+			end;
+		}
+		
+		if(.RPS_currencyHeal[0] == 1) mes "Olá, ^FFA500"+StrCharinfo(0)+"^000000. O valor arrecadado pela Curandeira até o momento é de: ^3CB371" + callfunc("RPS_InsertDot",$tax_healer)+" Zenys^000000. O que gostaria de fazer?";
+		if(.RPS_currencyHeal[0] == 2) mes "Olá, ^FFA500"+StrCharinfo(0)+"^000000. O valor arrecadado pela Curandeira até o momento é de: ^3CB371" + callfunc("RPS_InsertDot",$tax_healer)+" Cashs^000000. O que gostaria de fazer?";
+		
+		if (select("^3CB371[g]^000000 Realizar Sorteio:^ff0000[g]^000000 Sair") == 2) {
+			cutin "",255;
+			close;		
+		}
+		
+		backinputtax:
+		next;
+		mes .@nome$;
+		mes "Para realizar o sorteio, preciso que me informe a porcentagem de quantos % do valor arrecadado voce deseja sortear aos jogadores, ^FFA500insira um valor entre 1 e 100%^000000.";
+		input .@tax_percent,1,100;
+		next;
+		mes .@nome$;
+		mes "Voce digitou ^FFA500"+.@tax_percent+"%^000000. Este valor esta correto?";
+		
+		if (select("^3CB371[g]^000000 Sim:^ff0000[g]^000000 Não") == 2) goto backinputtax;	
+		
+		next;
+		mes .@nome$;
+		set .@valorsorteio, $tax_healer*.@tax_percent/100;
+		if(.RPS_currencyHeal[0] == 1) mes "O valor que voce deseja sortear é de: ^3CB371"+callfunc("RPS_InsertDot",.@valorsorteio)+" Zenys^000000. Está correto?";
+		if(.RPS_currencyHeal[0] == 2) mes "O valor que voce deseja sortear é de: ^3CB371"+callfunc("RPS_InsertDot",.@valorsorteio)+" Cashs^000000. Está correto?";
+
+		if (select("^3CB371[g]^000000 Sim:^ff0000[g]^000000 Não") == 2) goto backinputtax;	
+	
+		next;
+		mes .@nome$;	
+		mes "^ff0000ATENIÃO: Marque^000000 ^3CB371<Inicia Evento>^000000 ^ff0000apenas quando tiver certeza que deseja iniciar o sorteio^000000. Ao confirmar, o sorteio será iniciado!";
+		
+		if (select("^3CB371[g]^000000 Iniciar Sorteio:^ff0000[g]^000000 Sair") == 2){
+			cutin "",255;
+			close;
+		}
+		
+		cutin "",255;
+		close2;
+		
+		set $RPS_SORTEIO, 1;
+		announce .nome2$+" : "+StrCharinfo(0)+" iniciou o sorteio!",bc_all,"0xFFCE00";
+		sleep2 10000;
+		if(.RPS_currencyHeal[0] == 1)
+			announce .nome2$+" : O Valor do premio é de: "+callfunc("RPS_InsertDot",.@valorsorteio)+" Zenys",bc_all,"0xFFCE00";
+		if(.RPS_currencyHeal[0] == 2)
+			announce .nome2$+" : O Valor do premio é de: "+callfunc("RPS_InsertDot",.@valorsorteio)+" Cashs",bc_all,"0xFFCE00";
+		sleep2 10000;
+		callsub cancelarevento;
+		announce .nome2$+" : Para participar é simples: Basta estar logado no servidor!",bc_all,"0xFFCE00";
+		sleep2 10000;
+		callsub cancelarevento;
+		announce .nome2$+" : Entretanto, iremos desconsiderar jogadores com lojas ou chats abertos no momento do sorteio!",bc_all,"0xFFCE00";
+		sleep2 10000;
+		callsub cancelarevento;
+		announce .nome2$+" : O sorteio será realizado em 1 minuto.",bc_all,"0xFFCE00";
+		sleep2 60000;
+		callsub cancelarevento;
+		announce .nome2$+" : Sorteando...",bc_all,"0xFFCE00";
+		sleep2 10000;
+		callsub cancelarevento;
+		
+		query_sql "SELECT `c`.`char_id` FROM `char` AS `c` INNER JOIN `login` AS `l` ON `c`.`account_id` = `l`.`account_id` WHERE `c`.`online` = 1 AND `l`.`group_id` IN (0,1,5)",.@charid;
+		backcheckcharon:
+		callsub cancelarevento;
+		.@tamarray = getarraysize(.@charid);
+		
+		if(.@tamarray < 2){
+			announce .nome2$+" : O sorteio foi cancelado por inatividade de jogadores.",bc_all,"0xFFCE00";
+			sleep2 10000;
+			if(.RPS_currencyHeal[0] == 1) announce .nome2$+" : O premio de "+callfunc("RPS_InsertDot",$tax_healer)+" Zenys foi acumulado para o prkximo sorteio!",bc_all,"0xFFCE00";
+			if(.RPS_currencyHeal[0] == 2) announce .nome2$+" : O premio de "+callfunc("RPS_InsertDot",$tax_healer)+" Cashs foi acumulado para o prkximo sorteio!",bc_all,"0xFFCE00";
+			end;
+		}
+		
+		.@randchar = rand(.@tamarray);
+		.@accountid = convertpcinfo(.@charid[.@randchar],CPC_ACCOUNT);
+		.@charname$ = convertpcinfo(.@charid[.@randchar],CPC_NAME);
+
+		if(.@accountid){
+			if(!isloggedin(.@accountid,.@charid[.@randchar])) goto backcheckcharon;					//valida se esta on
+			if(checkvending(.@charname$)) goto backcheckcharon;										//valida se esta com lojinha
+			if(checkchatting(.@charname$)) goto backcheckcharon;									//valida se esta com chat
+		}else goto backcheckcharon;
+		callsub cancelarevento;
+		if(.RPS_currencyHeal[0] == 1) {
+			announce .nome2$+" : O Jogador ["+.@charname$+"] foi sorteado! Parabéns pelo premio de: "+callfunc("RPS_InsertDot",.@valorsorteio)+" Zenys!",bc_all,"0xFFCE00";
+			sleep2 25000;
+			mail .@charid[.@randchar], "Curandeira Premiun", "Loteria da Curandeira", "Parabéns, voce foi o grande sortudo. Receba seu Premio em anexo.", .@valorsorteio;
+			set $tax_healer, 0;
+		}
+		if(.RPS_currencyHeal[0] == 2){
+			
+			announce .nome2$+" : O Jogador: ["+.@charname$+"] foi sorteado! Parabéns pelo premio de: "+callfunc("RPS_InsertDot",.@valorsorteio)+" Cashs",bc_all,"0xFFCE00";
+			sleep2 25000;
+			detachrid;
+			attachrid(.@accountid);
+			mail .@charid[.@randchar], "Curandeira Premiun", "Loteria da Curandeira", "Parabéns, voce foi o grande sortudo. Seu premio já foi depositado na sua carteira de Cash.";
+			set #CASHPOINTS, #CASHPOINTS+.@valorsorteio;
+			set $tax_healer, 0;
+		}
+		set $RPS_SORTEIO, 0;
+		end;
+		
+	}
+	end;
+	
+	cancelarevento:
+		if (!$RPS_SORTEIO) { 
+			announce .nome2$+" : O evento foi CANCELADO pelo membro da staff: "+.staffcancel$+"!",bc_all,"0xFF0000";
+			end;
+		}
+	return;
+	end;
+	
+curandeira:	{
+
+OnCurandeira:
+
+//====================================================================================
+//= Remoião de Efeitos Negativos
+//===== Instruiões: ==================================================================
+//= Para desativar a remoião do efeito negativo, comente (//) a linha.
+//= Para adicionar novos efeitos negativos a serem removidos, adicione seu nome.
+//= Documentaião: https://github.com/rathena/rathena/blob/master/doc/status_change.txt
+//====================================================================================
+
+	endbuff:
+		sc_end SC_BLIND;			// Remove Cegueira
+		sc_end SC_CONFUSION;		// Remove Confusão
+		sc_end SC_SLEEP;			// Remove Sono
+		sc_end SC_STUN;				// Remove Atordoamento
+		sc_end SC_FREEZE;			// Remove Congelamento
+		sc_end SC_STONE;			// Remove Petrificar
+		sc_end SC_SILENCE;			// Remove Silencio
+		sc_end SC_BLEEDING;			// Remove Sangramento
+		sc_end SC_POISON;			// Remove Veneno
+		sc_end SC_CURSE;			// Remove Maldiião
+		sc_end SC_ORCISH;			// Remove Transformaião Orc
+		sc_end SC_CHANGEUNDEAD;		// Remove Propriedade Maldita
+		sc_end SC_SLOWDOWN;			// Remove Propriedade Lentidão
+		sc_end SC_ANKLE;			// Remove Propriedade Aprisionamento
+		sc_end SC_STRIPWEAPON;		// Remove Propriedade Remoião de Arma
+		sc_end SC_STRIPSHIELD;		// Remove Propriedade Remoião de Escudo
+		sc_end SC_STRIPARMOR;		// Remove Propriedade Remoião de Armadura
+		sc_end SC_STRIPHELM;		// Remove Propriedade Remoião de Elmo
+		sc_end SC_BERSERK;			// Remove Propriedade Fúria Selvagem
+		sc_end SC_SPIDERWEB;		// Remove Propriedade Prisão de Teia
+		sc_end SC_CLOSECONFINE;		// Remove Propriedade Confinamento
+		sc_end SC_CLOSECONFINE2;	// Remove Propriedade Confinamento
+		sc_end SC_COMA;				// Remove Propriedade Coma
+		sc_end SC_SLOWCAST;			// Remove Propriedade Conjuraião Lenta
+		sc_end SC_FEAR;				// Remove Propriedade Medo
+		sc_end SC_BURNING;			// Remove Propriedade Queimadura
+		sc_end SC_FREEZING;			// Remove Propriedade Hipotermia
+		
+//====================================================================================
+//= Script (Não Mexer)
+//====================================================================================
+//= Validaiões
+		
+	if( .enableGVG && getmapflag(strcharinfo(3),MF_GVG) || getmapflag(strcharinfo(3),MF_GVG_CASTLE)) {
+		dispbottom "[ Curandeira ] : Não pode ser usado em mapas de GvG.";
+		end;
+	}
+
+	if( getmapflag(strcharinfo(3),MF_PVP) && .enablePVP) {
+		dispbottom "[ Curandeira ] : Não pode ser usado em mapas de PvP.";
+		end;
+	}
+	
+	if( getmapflag(strcharinfo(3),MF_BATTLEGROUND) && .enableBG) {
+		dispbottom "[ Curandeira ] : Não pode ser usado em mapas Battleground.";
+		end;
+	}		
+
+	if( getarraysize(.desablebuffmaps$) > 1 && .desablebuffmaps$[0] == "1") {
+		for(.@i = 1;.@i < getarraysize(.desablebuffmaps$);.@i++){
+			if(strtolower(.desablebuffmaps$[.@i]) == strcharinfo(3)){
+				dispbottom "[ Curandeira ] : Não pode ser usado em "+.desablebuffmaps$[.@i]+".";
+				end;
+			}
+		}
+	}
+			
+	if ( Delay_Heal > gettimetick(2) ) {
+		dispbottom "[ Curandeira ] : Aguarde "+ callfunc("Time2Str",Delay_Heal)+" para ser curado novamente.";
+		end;
+	}
+	if ( Delay_Buff > gettimetick(2) ) {
+		dispbottom "[ Curandeira ] : Aguarde "+ callfunc("Time2Str",Delay_Buff)+" para ser buffado novamente.";
+		end;
+	}
+		
+//= Fim das Validaiões
+//====================================================================================
+
+	if (BUFFFIX){
+		
+		if(.RPS_currencyBuff[0]){
+			if(!.RPS_currencyBuff[1]){
+				.@pricebuff = 0;
+				debugmes "Curandeira : Cobranca ativa com valor zerado.";
+			}else{
+				.@pricebuff = .RPS_currencyBuff[1];
+				if (getgroupid() >= .vip_needed) .@pricebuff -= (.RPS_currencyBuff[1]*.RPS_currencyHeal[2]/100);
+				if (#Curandeira_Premium) .@pricebuff -= (.RPS_currencyBuff[1]*.RPS_currencyHeal[3]/100);
+			}
+			if(.enablelvlup && BaseLevel < .currencybaselvl) set .@pricebuff, 0;
+			else{
+				if(getarg(1)){
+					if(.limitbaselvl == 2 && #Curandeira_Premium) set .@pricebuff, 0;
+					if(.limitbaselvl == 1 && (#Curandeira_Premium || getgroupid() < .vip_needed)) set .@pricebuff, 0;
+				}
+			}
+			if(.@pricebuff < 0) set .@pricebuff, 0;
+			if(!getarg(0)) set .@pricebuff, 0;
+			if(!.currency_premium && #Curandeira_Premium) set .@pricebuff, 0;
+			if(.RPS_currencyBuff[0] == 1){
+				if(Zeny < .@pricebuff){
+					dispbottom "[ Curandeira ] : Voce não tem Zeny suficiente para ser buffado.";
+					end;
+				}else Zeny -= .@pricebuff;
+			}
+			if(.RPS_currencyBuff[0] == 2){
+				if(#CASHPOINTS < .@pricebuff){
+					dispbottom "[ Curandeira ] : Voce não tem Cash suficiente para ser buffado.";
+					end;
+				}else #CASHPOINTS -= .@pricebuff;
+			}
+			if(.tax_enable) set $tax_healer, $tax_healer + .@pricebuff;
+		}
+		
+		if (getgroupid() >= .vip_needed) {
+			if (.repairall[0])	repairall getcharid(0);
+			if (.identifyall[0]) identifyall;
+			
+			if (#Curandeira_Premium && .buff_premium[0]) {
+				for(.@i=1;.@i<getarraysize(.buff_premium);.@i=.@i+7){
+					if(.buff_premium[.@i]){
+						if( !getstatus( .buff_premium[.@i+1]) )
+							sc_start4(.buff_premium[.@i+1],.buff_premium[.@i+2],.buff_premium[.@i+3],.buff_premium[.@i+4],.buff_premium[.@i+5],.buff_premium[.@i+6]);		
+					}else{
+						sc_start4(.buff_premium[.@i+1],.buff_premium[.@i+2],.buff_premium[.@i+3],.buff_premium[.@i+4],.buff_premium[.@i+5],.buff_premium[.@i+6]);
+					}
+				}
+				if(.Delay) set Delay_Buff,gettimetick(2)+.Delay;
+				if(.effect)	specialeffect2 805;
+			}
+			if(.buff_vip[0]){
+				for(.@i=1;.@i<getarraysize(.buff_vip);.@i=.@i+7){
+					if(.buff_vip[.@i]){
+						if( !getstatus( .buff_vip[.@i+1]) )
+							sc_start4(.buff_vip[.@i+1],.buff_vip[.@i+2],.buff_vip[.@i+3],.buff_vip[.@i+4],.buff_vip[.@i+5],.buff_vip[.@i+6]);			
+					}else{
+						sc_start4(.buff_vip[.@i+1],.buff_vip[.@i+2],.buff_vip[.@i+3],.buff_vip[.@i+4],.buff_vip[.@i+5],.buff_vip[.@i+6]);
+					}
+				}
+				if(.Delay) set Delay_Buff,gettimetick(2)+.Delay;
+				if(.effect) specialeffect2 911;
+			}
+		}else{
+			if (.repairall[0] && .repairall[1]) repairall getcharid(0);
+			if (.identifyall[0] && .identifyall[1]) identifyall;
+			
+			if (#Curandeira_Premium && .buff_premium[0]) {
+				for(.@i=1;.@i<getarraysize(.buff_premium);.@i=.@i+7){
+					if(.buff_premium[.@i]){
+						if( !getstatus( .buff_premium[.@i+1] ) )
+							sc_start4(.buff_premium[.@i+1],.buff_premium[.@i+2],.buff_premium[.@i+3],.buff_premium[.@i+4],.buff_premium[.@i+5],.buff_premium[.@i+6]);
+							
+					}else{
+						sc_start4(.buff_premium[.@i+1],.buff_premium[.@i+2],.buff_premium[.@i+3],.buff_premium[.@i+4],.buff_premium[.@i+5],.buff_premium[.@i+6]);
+					}
+				}
+				if(.Delay) set Delay_Buff,gettimetick(2)+.Delay;
+				if(.effect)	specialeffect2 805;
+			}
+			if(.buff_normal[0]){
+				for(.@i=1;.@i<getarraysize(.buff_normal);.@i=.@i+7){
+					if(.buff_normal[.@i+3]){
+						if( !getstatus( .buff_normal[.@i] ) )
+							sc_start4(.buff_normal[.@i+1],.buff_normal[.@i+2],.buff_normal[.@i+3],.buff_normal[.@i+4],.buff_normal[.@i+5],.buff_normal[.@i+6]);
+								
+					}else{
+						sc_start4(.buff_normal[.@i+1],.buff_normal[.@i+2],.buff_normal[.@i+3],.buff_normal[.@i+4],.buff_normal[.@i+5],.buff_normal[.@i+6]);
+					}
+				}
+				if(.Delay) set Delay_Buff,gettimetick(2)+.Delay;
+			}
+		}
+	}
+		
+//====================================================================================
+//= Funiões de Cobrania para Curar
+//====================================================================================
+	
+	if(CURAFIX){
+		if(!.currency_premium && #Curandeira_Premium){
+			percentheal 100,100;
+			if(.effect) {
+				specialeffect2 312; 
+				specialeffect2 549; 
+			}
+			if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+			dispbottom "[ Curandeira ] : Voce foi Curado e Bufado! Divirta-se.";
+			end;
+		}
+		
+		if(.RPS_currencyHeal[0] < 0 || .RPS_currencyHeal[0] > 2) set .RPS_currencyHeal[0],0;
+		if(.RPS_currencyHeal[0]){
+			if(!.RPS_currencyHeal[1]){
+				set .@curaHp, MaxHp-Hp;
+				set .@curaSp, MaxSp-Sp;
+				if(.enablelvlup && BaseLevel > .currencybaselvl){
+									
+					.@priceHP = .@curaHp;
+					if (getgroupid() >= .vip_needed) .@priceHP -= (.@curaHp*.RPS_currencyHeal[2]/100);
+					if (#Curandeira_Premium) .@priceHP -= (.@curaHp*.RPS_currencyHeal[3]/100);
+					if (.@priceHP < 0) set .@priceHP, 0;
+					
+					.@priceSP = .@curaSp;
+					if (getgroupid() >= .vip_needed) .@priceSP -= (.@curaSp*.RPS_currencyHeal[2]/100);
+					if (#Curandeira_Premium) .@priceSP -= (.@curaSp*.RPS_currencyHeal[3]/100);
+					if (.@priceSP < 0) set .@priceSP, 0;
+				} else {
+					.@priceSP = 0;
+					.@priceHP = 0;
+				}
+				if(!getarg(0)){
+					.@priceSP = 0;
+					.@priceHP = 0;
+				}
+				if(.RPS_currencyHeal[0] == 1){
+					if(Zeny < .@priceHP){
+						if(Zeny){ 
+							if(.enablelvlup && BaseLevel < .currencybaselvl){
+								percentheal 100,0;
+								if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+							} else {
+								heal Zeny,0;
+								if(.tax_enable) set $tax_healer, $tax_healer + Zeny;
+								set Zeny,0;
+								if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+							}
+							if(.effect) specialeffect2 312;
+						}else{
+							dispbottom "[ Curandeira ] : Voce não tem Zeny suficiente para curar seu HP.";
+							end;
+						}
+					}else{ 
+						heal .@curaHp,0;
+						set Zeny, Zeny - .@priceHP; 
+						if(.tax_enable) set $tax_healer, $tax_healer + .@priceHP;
+						if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+						if(.effect) specialeffect2 312;
+					}
+					if(Zeny < .@priceSP){
+						if(Zeny){ 
+							if(.enablelvlup && BaseLevel < .currencybaselvl){
+								percentheal 0,100;
+								if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+							} else {
+								heal 0,Zeny;
+								if(.tax_enable) set $tax_healer, $tax_healer + Zeny;
+								set Zeny,0;
+								if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+							}
+							if(.effect) specialeffect2 549;
+						}else{
+							dispbottom "[ Curandeira ] : Voce não tem Zeny suficiente para curar seu SP.";
+							end;
+						}
+					}else{ 
+						heal 0,.@curaSp;
+						set Zeny, Zeny - .@priceSP; 
+						if(.tax_enable) set $tax_healer, $tax_healer + .@priceSP;
+						if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+						if(.effect) specialeffect2 549;
+					}
+				}
+				if(.RPS_currencyHeal[0] == 2){
+					if(#CASHPOINTS < .@priceHP){
+						if(#CASHPOINTS){
+							if(.enablelvlup && BaseLevel < .currencybaselvl){
+								percentheal 100,0;
+								if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+							} else {
+								heal #CASHPOINTS ,0;
+								if(.tax_enable) set $tax_healer, $tax_healer + #CASHPOINTS;
+								set #CASHPOINTS ,0;
+								if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+							}
+							if(.effect) specialeffect2 312;
+						}else{
+							dispbottom "[ Curandeira ] : Voce não tem Cash suficiente para curar seu HP.";
+							end;
+						}
+					}else{ 
+						heal .@curaHp,0;
+						set #CASHPOINTS, #CASHPOINTS - .@priceHP;
+						if(.tax_enable) set $tax_healer, $tax_healer + .@priceHP;
+						if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+						if(.effect) specialeffect2 312;
+					}
+					if(#CASHPOINTS  < .@priceSP){
+						if(#CASHPOINTS){ 
+							if(.enablelvlup && BaseLevel < .currencybaselvl){
+								percentheal 0,100;
+								if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+							} else {
+								heal 0,#CASHPOINTS;
+								if(.tax_enable) set $tax_healer, $tax_healer + #CASHPOINTS;
+								set #CASHPOINTS,0;
+								if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+							}
+							if(.effect) specialeffect2 549;
+						}else{
+							dispbottom "[ Curandeira ] : Voce não tem Cash suficiente para curar seu SP.";
+							end;
+						}
+					}else{ 
+						heal 0,.@curaSp;
+						set #CASHPOINTS, #CASHPOINTS - .@priceSP;
+						if(.tax_enable) set $tax_healer, $tax_healer + .@priceSP;						
+						if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+						if(.effect) specialeffect2 549;
+					}
+				}
+				if(.@curaHp || .@curaSp) dispbottom "[ Curandeira ] : Foram Curados HP: "+.@curaHp+" e SP: "+.@curaSp+".";
+			}else{
+				if(.enablelvlup && BaseLevel > .currencybaselvl){
+					.@price = .RPS_currencyHeal[1];
+					if (getgroupid() >= .vip_needed) .@price -= (.RPS_currencyHeal[1]*.RPS_currencyHeal[2]/100);
+					if (#Curandeira_Premium) .@price -= (.RPS_currencyHeal[1]*.RPS_currencyHeal[3]/100);
+					if (.@price < 0) set .@price, 0;
+				}else set .@price, 0;
+				if(!getarg(0)) .@price = 0;
+
+				
+				if(.RPS_currencyHeal[0] == 1)
+					if(Zeny < .@price){ 
+						dispbottom "[ Curandeira ] : Voce não tem Zeny suficiente.";
+						end;
+					}else Zeny -= .@price;
+				if(.RPS_currencyHeal[0] == 2)
+					if(#CASHPOINTS < .@price) {
+						dispbottom "[ Curandeira ] : Voce não tem Cash suficiente.";
+						end;
+					}else #CASHPOINTS -= .@price;
+				percentheal 100,100;
+				if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+				if(.tax_enable) set $tax_healer, $tax_healer + .@price;	
+				if(.effect) {
+					specialeffect2 312; 
+					specialeffect2 549; 
+				}
+			}	
+		}else{
+			percentheal 100,100;
+			if(.Delay) set Delay_Heal,gettimetick(2)+.Delay;
+			if(.effect) {
+				specialeffect2 312; 
+				specialeffect2 549; 
+			}
+		}
+		
+	}
+	
+	if(BUFFFIX && CURAFIX) dispbottom "[ Curandeira ] : Voce foi Curado e Bufado! Divirta-se.";	
+	else if(CURAFIX) dispbottom "[ Curandeira ] : Voce foi Curado! Divirta-se.";	
+	else if(BUFFFIX) dispbottom "[ Curandeira ] : Voce foi Bufado! Divirta-se.";	
+	
+	if(.@price || .@priceHP || .@priceSP || .@pricebuff)
+		if(.RPS_currencyHeal[0] == 1) dispbottom "[ Curandeira ] : Foram gastos "+callfunc("RPS_InsertDot",.@price + .@priceHP + .@priceSP + .@pricebuff)+" Zenys pelos meus serviios.";
+		if(.RPS_currencyHeal[0] == 2) dispbottom "[ Curandeira ] : Foram gastos "+callfunc("RPS_InsertDot",.@price + .@priceHP + .@priceSP + .@pricebuff)+" Cashs pelos meus serviios.";
+	.@curou++;
+	end;
+	
+}
+}
+				
+//====================================================================================
+//= Funião da Curandeira Premium no item_db.txt
+//===== item_db.txt ==================================================================
+//=	callfunc("Curandeira_Premium",1); // 1dia
+//====================================================================================
+
+function	script	Curandeira_Premium	{
+
+	set .@Time,86400;
+	set .@day,getarg(0);
+	
+	if( #Curandeira_Premium > gettimetick(2) ) set #Curandeira_Premium, #Curandeira_Premium + (.@Time*.@day);
+	else set #Curandeira_Premium, gettimetick(2) + (.@Time*.@day);
+
+	dispbottom "[ Curandeira Premium ] : Seu beneficio expira em: " + callfunc("Time2Str",#Curandeira_Premium) + ".";
+	end;
+}
+
+//====================================================================================
+//= Atualizar Status
+//===== Observaião: ==================================================================
+//= Verifica status do jogador ao logar e 00:00h
+//====================================================================================
+
+-	script	Curandeira_Premium_Update	-1,{
+
+	OnPCLoginEvent:
+	OnHour0000:
+
+		if ( #Curandeira_Premium >  gettimetick(2) ) {
+			fstatus(getcharid(0),973,0,1);
+			dispbottom "[ Curandeira Premium ] : Seu beneficio expira em: " + callfunc("Time2Str",#Curandeira_Premium) + ".";
+		} else {
+			set #Curandeira_Premium,0;
+			dispbottom "[ Curandeira Premium ] : Seu beneficio expirou, renove-o ainda hoje.";
+		}
+		
+		if(!RPS_FirstLogin){
+			set CURAFIX, 1;
+			set BUFFFIX, 1;
+			set RPS_FirstLogin, 1;	
+		}
+		dispbottom "[ Curandeira Premium ] : Use @curandeira para configurar opiões de cura e buff.";
+	end;
+}
+
+//====================================================================================
+//= Funião de Conversão
+//====================================================================================
+
+function	script	RPS_InsertDot	{
+	set .@str$, getarg(0);
+	for (set .@i,getstrlen(.@str$)-3; .@i>0; set .@i,.@i-3)
+		set .@str$, insertchar(.@str$,".",.@i);
+	return .@str$;
+}
+
+//====================================================================================
+//= Duplicates (Cidades)
+//====================================================================================
+alberta,125,59,4	duplicate(Curandeira)	Curandeira#alb	646
+aldebaran,135,118,6	duplicate(Curandeira)	Curandeira#alde	646
+amatsu,102,144,6	duplicate(Curandeira)	Curandeira#ama	646
+ayothaya,212,179,6	duplicate(Curandeira)	Curandeira#ayo	646
+comodo,184,158,6	duplicate(Curandeira)	Curandeira#com	646
+einbech,194,131,6	duplicate(Curandeira)	Curandeira#einbe	646
+einbroch,57,202,6	duplicate(Curandeira)	Curandeira#einbr	646
+geffen,115,58,5	duplicate(Curandeira)	Curandeira#gef	646
+gonryun,156,122,6	duplicate(Curandeira)	Curandeira#gon	646
+hugel,89,150,6	duplicate(Curandeira)	Curandeira#hug	646
+izlude,128,120,6	duplicate(Curandeira)	Curandeira#izl	646	//Pre-RE: (125,118)
+jawaii,120,180,6	duplicate(Curandeira)	Curandeira#jaw	646
+lighthalzen,154,85,6	duplicate(Curandeira)	Curandeira#lhz	646
+louyang,226,103,4	duplicate(Curandeira)	Curandeira#lou	646
+manuk,272,144,6	duplicate(Curandeira)	Curandeira#man	646
+mid_camp,203,289,6	duplicate(Curandeira)	Curandeira#mid	646
+moc_ruins,72,164,4	duplicate(Curandeira)	Curandeira#moc	646
+morocc,153,97,6	duplicate(Curandeira)	Curandeira#mor	646
+moscovia,220,191,4	duplicate(Curandeira)	Curandeira#mos	646
+niflheim,212,182,5	duplicate(Curandeira)	Curandeira#nif	646
+payon,166,110,5	duplicate(Curandeira)	Curandeira#pay	646
+prontera,149,190,5	duplicate(Curandeira)	Curandeira#prt	646
+rachel,125,144,6	duplicate(Curandeira)	Curandeira#rac	646
+splendide,201,153,4	duplicate(Curandeira)	Curandeira#spl	646
+thor_camp,249,74,4	duplicate(Curandeira)	Curandeira#thor	646
+umbala,105,148,3	duplicate(Curandeira)	Curandeira#umb	646
+veins,217,121,4	duplicate(Curandeira)	Curandeira#ve	646
+xmas,143,136,4	duplicate(Curandeira)	Curandeira#xmas	646
+yuno,152,188,6	duplicate(Curandeira)	Curandeira#yuno	646
+
+yuno_fild03,39,143,4	duplicate(Curandeira)	Curandeira#hmag	646
+cmd_fild07,266,332,5	duplicate(Curandeira)	Curandeira#cmd2	646
+cmd_fild08,322,357,5	duplicate(Curandeira)	Curandeira#hcmd8	646
+alb2trea,62,69,5	duplicate(Curandeira)	Curandeira#hnv1	646
+gef_fild10,76,340,4	duplicate(Curandeira)	Curandeira#h03a	646
+gef_tower,156,36,3	duplicate(Curandeira)	Curandeira#hgeft	646
+glast_01,203,297,4	duplicate(Curandeira)	Curandeira#hgla	646
+hu_fild05,186,209,5	duplicate(Curandeira)	Curandeira#habys1	646
+in_orcs01,35,176,4	duplicate(Curandeira)	Curandeira#h03ab	646
+izlu2dun,104,88,5	duplicate(Curandeira)	Curandeira#h06a	646
+moc_fild19,108,101,4	duplicate(Curandeira)	Curandeira#hmoc19	646
+moc_ruins,69,164,4	duplicate(Curandeira)	Curandeira#h2moc1	646
+pay_arche,55,121,4	duplicate(Curandeira)	Curandeira#h4a	646
+prt_fild05,290,217,4	duplicate(Curandeira)	Curandeira#fprt5	646
+ra_fild01,227,328,5	duplicate(Curandeira)	Curandeira#hice	646
+ve_fild03,164,237,5	duplicate(Curandeira)	Curandeira#hthor	646
+
+// Duplicates (Renewal)
+//============================================================
+brasilis,190,222,6	duplicate(Curandeira)	Curandeira#bra	646
+//dewata,195,187,4	duplicate(Curandeira)	Curandeira#dew	646
+//dicastes01,201,194,4	duplicate(Curandeira)	Curandeira#dic	646
+//ecl_in01,45,60,4	duplicate(Curandeira)	Curandeira#ecl	646
+//malangdo,132,114,6	duplicate(Curandeira)	Curandeira#mal	646
+//malaya,227,204,6	duplicate(Curandeira)	Curandeira#ma	646
+//mora,55,152,4	duplicate(Curandeira)	Curandeira#mora	646
+
+
+//prontera,150,195,5	duplicate(Curandeira)	Curandeira#prt0	11000
+//alb2trea,62,69,5	duplicate(Curandeira)	Curandeira#hnv1	11000
+//alberta,113,53,7	duplicate(Curandeira)	Curandeira#h5	11000
+//aldebaran,135,113,5	duplicate(Curandeira)	Curandeira#h7	11000
+//amatsu,107,137,5	duplicate(Curandeira)	Curandeira#h11	11000
+//aru_gld,299,112,4	duplicate(Curandeira)	Curandeira#aru5	11000
+//ayothaya,203,174,5	duplicate(Curandeira)	Curandeira#h16	11000
+//brasilis,192,219,5	duplicate(Curandeira)	Curandeira#h25	11000
+//cmd_fild07,266,332,5	duplicate(Curandeira)	Curandeira#cmd2	11000
+//cmd_fild08,322,357,5	duplicate(Curandeira)	Curandeira#hcmd8	11000
+//comodo,184,159,5	duplicate(Curandeira)	Curandeira#h9	11000
+//dicastes01,192,199,5	duplicate(Curandeira)	Curandeira#h30	11000
+//einbech,143,250,4	duplicate(Curandeira)	Curandeira#hemb19	11000
+//einbech,180,128,5	duplicate(Curandeira)	Curandeira#h19	11000
+//einbroch,227,183,7	duplicate(Curandeira)	Curandeira#h17	11000
+//gef_fild10,76,340,4	duplicate(Curandeira)	Curandeira#h03a	11000
+//gef_tower,156,36,3	duplicate(Curandeira)	Curandeira#hgeft	11000
+//geffen,127,64,4	duplicate(Curandeira)	Curandeira#h3	11000
+//glast_01,203,297,4	duplicate(Curandeira)	Curandeira#hgla	11000
+//gonryun,153,116,5	duplicate(Curandeira)	Curandeira#h26	11000
+//gonryun,155,198,5	duplicate(Curandeira)	Curandeira#h27	11000
+//hu_fild05,186,209,5	duplicate(Curandeira)	Curandeira#habys1	11000
+//hugel,91,152,5	duplicate(Curandeira)	Curandeira#h20	11000
+//in_orcs01,35,176,4	duplicate(Curandeira)	Curandeira#h03ab	11000
+//izlu2dun,104,88,5	duplicate(Curandeira)	Curandeira#h06a	11000
+//izlude,121,115,5	duplicate(Curandeira)	Curandeira#h6	11000
+//jawaii,211,120,5	duplicate(Curandeira)	Curandeira#h15	11000
+//lighthalzen,153,100,5	duplicate(Curandeira)	Curandeira#h18	11000
+//louyang,219,121,4	duplicate(Curandeira)	Curandeira#h14	11000
+//manuk,305,232,3	duplicate(Curandeira)	Curandeira#h29	11000
+//mid_camp,206,286,5	duplicate(Curandeira)	Curandeira#h24	11000
+//mjolnir_02,76,362,5	duplicate(Curandeira)	Curandeira#hmjo2	11000
+//moc_fild19,108,101,4	duplicate(Curandeira)	Curandeira#hmoc19	11000
+//moc_ruins,69,164,4	duplicate(Curandeira)	Curandeira#h2moc1	11000
+//morocc,159,97,4	duplicate(Curandeira)	Curandeira#h2	11000
+//moscovia,220,186,7	duplicate(Curandeira)	Curandeira#h23	11000
+//new_1-1,50,113,5	duplicate(Curandeira)	Curandeira#newg	11000
+//niflheim,198,190,4	duplicate(Curandeira)	Curandeira#h13	11000
+//pay_arche,55,121,4	duplicate(Curandeira)	Curandeira#h4a	11000
+//payon,184,104,5	duplicate(Curandeira)	Curandeira#h4	11000
+//prt_fild05,290,217,4	duplicate(Curandeira)	Curandeira#fprt5	11000
+//ra_fild01,227,328,5	duplicate(Curandeira)	Curandeira#hice	11000
+//rachel,132,117,4	duplicate(Curandeira)	Curandeira#h21	11000
+//splendide,202,153,4	duplicate(Curandeira)	Curandeira#h28	11000
+//tur_dun01,154,39,5	duplicate(Curandeira)	Curandeira#htur1	11000
+//umbala,114,285,4	duplicate(Curandeira)	Curandeira#humba2	11000
+//umbala,132,218,5	duplicate(Curandeira)	Curandeira#h12	11000
+//ve_fild03,164,237,5	duplicate(Curandeira)	Curandeira#hthor	11000
+//veins,200,240,4	duplicate(Curandeira)	Curandeira#h22	11000
+//xmas,143,136,5	duplicate(Curandeira)	Curandeira#h8	11000
+//yuno,163,187,4	duplicate(Curandeira)	Curandeira#h10	11000
+//yuno_fild03,39,143,4	duplicate(Curandeira)	Curandeira#hmag	11000
+//
+//
+////====================================================================================
+////= Duplicates (Cheffenia)
+////====================================================================================
+//
+//bossnia_01,121,110,5	duplicate(Curandeira)	Curandeira#boss01	11000
+//bossnia_02,121,110,5	duplicate(Curandeira)	Curandeira#boss02	11000
+//bossnia_03,121,110,5	duplicate(Curandeira)	Curandeira#boss03	11000
+//bossnia_04,121,110,5	duplicate(Curandeira)	Curandeira#boss04	11000
+
+

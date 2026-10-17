@@ -1,0 +1,126 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ negociante_de_municoes.txt ]
+//====== Versão Atual: ====================================================
+//= [ v2.1 - Pré-Renovação ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= [ Negociante de Projéteis. ]
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+alberta,118,160,3	script	Mercador Tony#alb::bdt	4_M_04,{
+	mes "[Tony]";
+	if (BaseClass == Job_Gunslinger) {
+		mes "Sou Tony, o Negocinte de Cápsulas.";
+		mes "Venha até mim sempre que estiver";
+		mes "com pouca munição. Só me traga";
+		mes "os materiais, e eu farei";
+		mes "as cápsulas que você precisa.";
+		next;
+		switch(select("Cápsula Venenosa Excedente:Cápsula de Chamas Excedente:Cápsula de Relâmpagos Excedente:Cápsula Cegante Excedente:Cápsula Congelante Excedente:Cancelar")) {
+		case 1: callsub S_BulletTrade,937,10,13205;// <item requerido>, <quantidade do item requerido>, <ID do projétil>
+		case 2: callsub S_BulletTrade,7097,2,13203;
+		case 3: callsub S_BulletTrade,7053,3,13204;
+		case 4: callsub S_BulletTrade,1024,5,13206;
+		case 5: callsub S_BulletTrade,7054,2,13207;
+		case 6:
+			mes "[Tony]";
+			mes "Mudou de ideia?";
+			mes "Bem, se você precisar de";
+			mes "qualquer Cápsula, estarei";
+			mes "aqui certo. Volte sempre";
+			mes "que precisar de mais";
+			mes "munições, Justiceiro.";
+			close;
+		}
+	}
+	mes "Ei, meu nome é Tony. Eu fui";
+	mes "encarregado de faser e";
+	mes "distribuir cápsulas de projéteis para";
+	mes "Justiceiros. É dessa";
+	mes "forma que nossa guilda gosta";
+	mes "de fazer as coisas.";
+	next;
+	mes "[Tony]";
+	mes "Me desculpe, mas se você veio";
+	mes "aqui para comprar cápsulas,";
+	mes "eu só posso fazer negócios com";
+	mes "Justiceiros, pois eles tem pleno direito.";
+	close;
+
+S_BulletTrade:
+	.@required_id = getarg(0);
+	.@required_amount = getarg(1);
+	.@bullet_id = getarg(2);
+
+	mes "[Tony]";
+	mes "Para cada projétil de";
+	mes callfunc("F_InsertPlural",30,getitemname(.@bullet_id))+",";
+	mes "você deverá me trazer";
+	mes "1 Emveretarcon,";
+	mes "1 Fracon, e";
+	mes callfunc("F_InsertPlural",.@required_amount,getitemname(.@required_id))+".";
+	next;
+	mes "[Tony]";
+	mes "Lembre-se de que eu só posso lhe";
+	mes "fornecer o máximo de 500 cápsulas de";
+	mes "30 projéteis por vez. Por favor,";
+	mes "insira o número de cápsulas";
+	mes "que você quer. Se quiser";
+	mes "cancelar, basta digitar ''0.''";
+	next;
+	input .@amount;
+	mes "[Tony]";
+	if (.@amount < 1 || .@amount > 500) {
+		mes "Ei, eu não posso te dar";
+		mes "tantas cápsulas. Não";
+		mes "esqueça de que você não pode";
+		mes "inserir um número superior a 500,";
+		mes "se quiser negociar seus";
+		mes "itens por cápsulas.";
+	}
+	else if (countitem(1010) >= .@amount && countitem(1011) >= .@amount && countitem(.@required_id) >= (.@amount*.@required_amount)) {
+		if (checkweight(.@bullet_id,.@amount * 30) == 0) {
+			mes "Eh? Seu inventário não";
+			mes "tem espaço suficiente para";
+			mes "armazenar muitas cápsulas. Volte";
+			mes "depois de abrir mais espaço";
+			mes "em seu inventário. Coloque um pouco";
+			mes "de seus itens no armazém da Kafra.";
+		} else {
+			mes "Ótimo, tudo parece";
+			mes "estar em ordem. Deixe-me pegar";
+			mes "esses materiais, e aqui estão";
+			mes "suas cápsulas. É um prazer";
+			mes "fazer negócios com você~";
+			delitem 1010,.@amount; //Fracon
+			delitem 1011,.@amount; //Emveretarcon
+			delitem .@required_id,.@amount * .@required_amount;
+			getitem .@bullet_id,.@amount * 30;
+		}
+	} else {
+		mes "Huh. Parece que você";
+		mes "não possui os materiais suficientes";
+		mes "para faser tantas cápsulas.";
+		mes "Bem, não há problemas.";
+		mes "Volte depois de reunir tudo";
+		mes "que você precisa, ok?";
+	}
+	close;
+}
+
+que_ng,187,156,3	duplicate(bdt)	Mercador Tony#ng	86
+izlude,171,133,3	duplicate(bdt)	Mercador Tony#iz	86

@@ -1,0 +1,32 @@
+prontera,169,175,2	script	Pacote de iniciante	688,{
+	
+set .@n$, "^00B2EE[Pacote de Iniciante]^000000";
+	
+if( !#Freebies ){
+set #Freebies,1;
+
+mes .@n$;
+mes "Bem-vindo ao servidor. ^00B2EE"+strcharinfo(0)+"^000000!"; 
+getitem 17176,1;	//Itens (Id/Qt)
+getitem 14545,30;	//Itens (Id/Qt)
+getitem 14592,30;	//Itens (Id/Qt)
+getitem 12210,10;	//Itens (Id/Qt)
+getitem 12531,1;	//Itens (Id/Qt)
+getitem 19533,1;	//Itens (Id/Qt)
+next;
+mes .@n$;
+mes "Esse pecket é para apenas jogadores Novos"; 
+next;
+}else{
+mes .@n$;
+mes "Desculpe, ^00B2EE"+strcharinfo(0)+"^000000. O Pacote de iniciação é somente para novos jogadores!";
+next;
+mes .@n$;
+mes "Boa diversão!"; 
+next;
+}
+
+OnInit:
+	waitingroom "Pacote de Iniciante!",0;
+	end;
+}

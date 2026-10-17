@@ -1,0 +1,1255 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ platina_bardo.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.6 ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= - Missão oficial para a habilidade do Bardo "Voz Dolorosa".
+//= Pré-requisito: Missão do Bardo em Geffen.
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================// 
+
+prontera,174,328,3	script	Rapaz#bard_q1	89,3,3,{
+	if (BaseJob == Job_Bard) {
+		emotion ET_HUK;
+				mes "[Rapaz Tímido]";
+				mes "Eh? Wwwaaaah--!";
+				mes "V-você é--é-é--";
+				if (Upper != 1)
+					mes "É um maldito Bardo!";
+				else
+					mes "É um maldito Menestrel!";
+				mes "N-não chegue mais perto!";
+				mes "E-eu... Eu não gosto de vocês!";
+				next;
+				if (select("O quê--? Por que não?:Ei, calma aí, cara.") == 1) {
+					mes "[Rapaz Tímido]";
+					mes "N-não! Não me olhe!";
+					mes "Eu sei o que você está";
+					mes "tentando fazer! Por favor,";
+					mes "eu não fiz nada com você!";
+					mes "S-só fique longe!";
+					next;
+					mes "[" + strcharinfo(0) + "]";
+					mes "Uhm...";
+					mes "Eu realmente não estou tentando";
+					mes "fazer nada. Por que você não";
+					mes "relaxa um pouco, e--";
+					next;
+					mes "[Rapaz Tímido]";
+					mes "Relaxar?! Ninguém acredita em mim";
+					mes "quando digo o quão perigosos";
+					mes "vocês são. Vocês se acham";
+					mes "engraçadinhos com suas piadas e";
+					mes "canções lindas, mas eu sei";
+					mes "que tipo de poder vocês têm!";
+					close;
+				}
+				else {
+					mes "[Rapaz Tímido]";
+					mes "N-não! Não me olhe!";
+					mes "Eu sei o que você está";
+					mes "tentando fazer! Por favor,";
+					mes "eu não fiz nada com você!";
+					mes "S-só fique longe!";
+					next;
+					if (select("Oferecer uma bebida.:Acalmá-lo dizendo que você é inofensivo.") == 1) {
+						mes "[" + strcharinfo(0) + "]";
+						mes "Olha, não sei qual é o seu problema";
+						mes "comigo, mas você realmente precisa se acalmar.";
+						mes "Aqui, toma uma bebida por minha conta.";
+						next;
+						if (countitem(12112) > 0) {
+							mes "[Rapaz Tímido]";
+							mes "Oh~! Isso é";
+							mes "um Sograt Tropical?";
+							mes "É minha bebida favorita";
+							mes "em todo o mundo!";
+							if (qskill_bard == 9) {
+								mes "Valeu mesmo--peraí.";
+								next;
+								mes "[Rapaz Tímido]";
+								mes "Isso é algum tipo";
+								mes "de truque, né?";
+								mes "E pensar que eu quase";
+								mes "c-c-caí nisso! P-por favor";
+								mes "s-só me deixe em paz!";
+								close;
+							}
+							else if (qskill_bard > 0) {
+								next;
+								mes "[Rapaz Tímido]";
+								mes "Espera, já te vi antes.";
+								mes "E você me trouxe uma bebida";
+								mes "exatamente assim. Você...";
+								mes "Você n-não aprendeu a-aquela";
+								mes "h-habilidade estranha, n-né?";
+								mes "Espera, não. Você não poderia...";
+								next;
+								mes "[" + strcharinfo(0) + "]";
+								mes "Ah, por favor~";
+								mes "Sabe, acho que"; 
+								mes "talvez você";
+								mes "se preocupe demais.";
+								close;
+							}
+							else {
+								next;
+								mes "[Rapaz Tímido]";
+								mes "^333333*Gole Gole*^000000";
+								mes "Ahhhh~ Você não imagina";
+								mes "quanto tempo eu"; 
+								mes "queria essa bebida!";
+								mes "Está tão boa, e agora estou";
+								mes "tããão relaxado...";
+								next;
+								switch(select("Viu? Eu não sou perigoso~:Por que alguém como eu te assustaria?")) {
+								case 1:
+									mes "[Rapaz Tímido]";
+									mes "Hmmm... Talvez.";
+									mes "Talvez nem todos os Bardos";
+									mes "e Menestréis sejam tão ruins.";
+									mes "Mas nunca vou esquecer";
+									mes "o que aquele Bardo fez comigo...";
+									next;
+									mes "[Rapaz Tímido]";
+									mes "Tudo começou quando eu estava";
+									mes "viajando por Umbala e";
+									mes "conheci um Bardo estranho que";
+									mes "estava estudando sob a tutela";
+									mes "de Puchuchartan, o Xamã Utan da vila.";
+									next;
+									mes "[Rapaz Tímido]";
+									mes "Nos demos até bem, até que ele me levou ao";
+									mes "Salto de Umbala. Ele insistiu para que eu pulasse";
+									mes "ao menos uma vez para ter a ''Experiência completa de Umbala.''";
+									mes "Eu recusei, já que não usam corda elástica.";
+									next;
+									mes "[Rapaz Tímido]";
+									mes "O Bardo pareceu ofendido";
+									mes "e disse que era perfeitamente";
+									mes "seguro, e que apenas algumas pessoas";
+									mes "haviam morrido ao pular. Então ele...";
+									mes "me olhou com um olhar muito intenso.";
+									next;
+									mes "[Rapaz Tímido]";
+									mes "Seus olhos estavam cheios";
+									mes "de raiva! Lembro dele";
+									mes "murmurando algo e,";
+									mes "de repente, perdi o controle";
+									mes "do meu corpo! Meus braços e pernas";
+									mes "se moviam sozinhos!";
+									next;
+									mes "[Rapaz Tímido]";
+									mes "Logo me vi lutando";
+									mes "pra não pular daquela plataforma.";
+									mes "Quanto mais resistia,"; 
+									mes "mais violentamente";
+									mes "me jogava pra beirada."; 
+									mes "Foi horrível!";
+									next;
+									mes "[Rapaz Tímido]";
+									mes "Foi a experiência mais";
+									mes "aterrorizante da minha vida!";
+									mes "Correr risco de vida já foi ruim,";
+									mes "mas não ter controle do corpo...";
+									mes "é algo insuportável!";
+									next;
+									mes "[" + strcharinfo(0) + "]";
+									mes "Espera, está dizendo que";
+									mes "um Bardo fez isso com você?";
+									mes "Nunca ouvi falar de nenhuma canção";
+									mes "ou habilidade com esse tipo de efeito... Estranho.";
+									next;
+									mes "[Rapaz Tímido]";
+									mes "Pois é, eu também nunca tinha ouvido falar";
+									mes "até que tive que passar por isso.";
+									mes "Ah, ainda vejo o sorriso maligno dele";
+									mes "nos meus pesadelos...";
+									next;
+									mes "[Rapaz Tímido]";
+									mes "De qualquer forma,"; 
+									mes "obrigado pela bebida,";
+									mes "realmente me ajudou a acalmar.";
+									mes "Mas tenho que te alertar a não procurar";
+									mes "por aquele Bardo estranho. Tenho certeza que ele é algum tipo de demônio ou algo assim...";
+									next;
+									if (JobLevel > 39) {
+										mes "[Rapaz Tímido]";
+										mes "Mas... Se você realmente";
+										mes "quer alcançar esse tipo";
+										mes "de poder, não posso te impedir.";
+										mes "Felizmente, ninguém";
+										mes "faz ideia de onde ele está~";
+										delitem 12112,1; // Sograt Tropical
+										set qskill_bard,1;
+									}
+									else {
+										mes "[Rapaz Tímido]";
+										mes "Mesmo que você encontrasse esse";
+										mes "Bardo e conseguisse convencê-lo a";
+										mes "ensinar como ele fez aquilo comigo, ele disse algo sobre";
+										mes "ser necessário ter pelo menos ^660000Nível de Classe 40^000000";
+										mes "pra conseguir suportar esse poder...";
+										delitem 12112,1; // Sograt Tropical
+									}
+									close;
+						case 2:
+							mes "[Rapaz Tímido]";
+							mes "^333333*Suspiro*^000000 Bem, talvez nem todos os Bardos";
+							mes "e Menestréis sejam assustadores. Mas qualquer Bardo me lembra";
+							mes "daquele que conheci durante minhas";
+							mes "viagens. Só de pensar naquela época já fico arrepiado.";
+							next;
+							mes "[Rapaz Tímido]";
+							mes "Tudo começou quando eu estava";
+							mes "viajando por Umbala e conheci";
+							mes "um Bardo estranho que estudava";
+							mes "sob a tutela de"; 
+							mes "Puchuchartan, o";
+							mes "Xamã Utan da vila.";
+							next;
+							mes "[Rapaz Tímido]";
+							mes "Nos dávamos relativamente bem até que ele me levou até";
+							mes "o Salto de Umbala. Ele insistiu que eu pulasse ao menos uma vez";
+							mes "para ter a ''Experiência completa de Umbala.'' Eu recusei, já que não usam cordas elásticas.";
+							next;
+							mes "[Rapaz Tímido]";
+							mes "O Bardo pareceu ofendido";
+							mes "e disse que era perfeitamente";
+							mes "seguro, e que só algumas pessoas";
+							mes "haviam morrido ao pular. Então ele...";
+							mes "Ele me deu um olhar intenso.";
+							next;
+							mes "[Rapaz Tímido]";
+							mes "Os olhos dele estavam cheios";
+							mes "de raiva! Lembro que ele murmurou";
+							mes "alguma coisa e, de repente,";
+							mes "perdi o controle do meu corpo!";
+							mes "Meus braços e pernas se";
+							mes "moviam sozinhos!";
+							next;
+							mes "[Rapaz Tímido]";
+							mes "Logo me vi lutando";
+							mes "para não pular daquele";
+							mes "Salto de Umbala. Mas quanto";
+							mes "mais eu resistia, mais";
+							mes "me arremessava violentamente em";
+							mes "direção à borda. Foi horrível!";
+							next;
+							mes "[Rapaz Tímido]";
+							mes "Essa foi a experiência mais";
+							mes "assustadora da minha vida!";
+							mes "Já bastava arriscar a vida,";
+							mes "mas perder o controle do";
+							mes "próprio corpo é demais!";
+							next;
+							mes "[" + strcharinfo(0) + "]";
+							mes "Espera aí, está dizendo que";
+							mes "um Bardo fez isso com você?";
+							mes "Nunca ouvi falar de uma música";
+							mes "ou habilidade com esse tipo de efeito... Muito estranho.";
+							next;
+							mes "[Rapaz Tímido]";
+							mes "Pois é, eu também nunca";
+							mes "tinha ouvido falar de um poder";
+							mes "assim até viver isso na pele.";
+							mes "Ah, ainda consigo ver aquele";
+							mes "sorriso maligno dele nos meus pesadelos...";
+							next;
+							mes "[Rapaz Tímido]";
+							mes "Enfim, obrigado pela bebida,";
+							mes "me ajudou muito a acalmar os nervos.";
+							mes "Mas tenho que te alertar para";
+							mes "não procurar por aquele Bardo estranho.";
+							mes "Tenho certeza de que ele é algum tipo de demônio ou algo assim...";
+							next;
+							if (JobLevel > 39) {
+								mes "[Rapaz Tímido]";
+								mes "Mas... Se você realmente";
+								mes "quiser alcançar esse tipo";
+								mes "de poder, não posso te impedir.";
+								mes "Felizmente, ninguém faz ideia";
+								mes "de onde ele está~";
+								delitem 12112,1; // Sograt Tropical
+								set qskill_bard,1;
+							}
+							else {
+								mes "[Rapaz Tímido]";
+								mes "Mesmo que encontrasse esse";
+								mes "Bardo e o convencesse a te ensinar";
+								mes "como ele fez aquilo comigo, tenho certeza";
+								mes "que ele mencionou algo sobre precisar de";
+								mes "ao menos ^660000Nível de Classe 40^000000 para";
+								mes "suportar esse poder...";
+								delitem 12112,1; // Sograt Tropical
+							}
+							close;
+						}
+					}
+				}
+				else {
+					mes "[Rapaz Tímido]";
+					mes "Eh...?! Hm, o-o-obrigado";
+					mes "pela oferta, mas eu"; 
+					mes "sou m-muito exigente";
+					mes "com o que eu b-bebo.";
+					mes "A-além disso, eu não sei se posso";
+					mes "c-confiar em você.";
+					next;
+					mes "[Rapaz Tímido]";
+					mes "Acho que nada";
+					mes "mudaria m-minha opinião!";
+					mes "Bem... Talvez se você trouxesse";
+					mes "minha bebida favorita,"; 
+					mes "Sograt Tropical,";
+					mes "eu repensaria...";
+					close;
+				}
+			}
+			mes "[" + strcharinfo(0) + "]";
+			mes "Não se preocupe,";
+			mes "não vou te machucar.";
+			next;
+			mes "[Rapaz Tímido]";
+			mes "É-é o que todos dizem,";
+			mes "antes de entrar"; 
+			mes "na sua mente e";
+			mes "virá-la do avesso com força total!";
+			if (qskill_bard == 9) {
+				mes "S-só não me t-toque!";
+				mes "...Ahh! E fique longe!";
+			}
+			else {
+				mes "M-mesmo que você n-não tenha";
+				mes "esse p-poder, m-me deixe em paz!";
+			}
+			close;
+		}
+	}
+	else {
+		mes "[Rapaz Tímido]";
+		mes "Ah... Céus.";
+		mes "Aquilo era um"; 
+		mes "Bardo ali atrás?";
+		mes "Tenho tanto medo desses caras!";
+		mes "E os Menestréis"; 
+		mes "são ainda piores!";
+		next;
+		mes "[Rapaz Tímido]";
+		mes "Não me entenda mal, adoro";
+		mes "música e entretenimento,";
+		mes "mas você precisa entender!";
+		mes "Alguns deles têm poderes que";
+		mes "você nem imaginaria!";
+		mes "Eu... Eu vi com meus próprios olhos!";
+		close;
+	}
+
+OnTouch:
+	if (BaseJob == Job_Bard) {
+		emotion ET_HUK;
+	}
+	end;
+}
+
+morocc_in,169,72,7	script	Bardo Rancoroso#bs	741,3,3,{
+	if (BaseJob == Job_Bard) {
+		if (Class == Job_Clown && qskill_bard == 9) {
+			if (getskilllv("BA_PANGVOICE") != 0) {
+				mes "[Riott]";
+				mes "Geh heh heh~";
+				mes "Tem feito bom uso";
+				mes "do que eu te ensinei? Só tome";
+				mes "cuidado para não usar essa habilidade de forma imprudente. Caso contrário,";
+				mes "as pessoas vão te odiar como me odeiam.";
+				next;
+				mes "[Riott]";
+				mes "Seus inimigos e os";
+				mes "bêbados ocasionais, por";
+				mes "outro lado, são assuntos";
+				mes "totalmente diferentes! Bwah hah hah!";
+				close;
+			}
+			else {
+				mes "[Riott]";
+				mes "Impossível! Você esqueceu";
+				mes "tudo o que eu te ensinei?";
+				mes "Como isso é possível? Bom,";
+				mes "não tem problema. Posso te";
+				mes "ensinar de novo, se quiser.";
+				next;
+				if (select("Não, obrigado.:Sim, eu agradeço.") == 1) {
+					mes "[Riott]";
+					mes "O quê...?";
+					mes "Você realmente não";
+					mes "quer aprender?";
+					mes "Garanto que não há";
+					mes "pegadinhas nisso.";
+					mes "Se mudar de ideia...";
+					close;
+				}
+				mes "[Riott]";
+				mes "Primeiro, encare";
+				mes "profundamente os olhos do";
+				mes "alvo e concentre-se em";
+				mes "pensamentos de domínio. Isso";
+				mes "é a base da hipnose. Agora ouça este encantamento...";
+				next;
+				mes "[Riott]";
+				mes "Uuuummm Baaalaaaa";
+				mes "Uuuummmm Baaalaaa~";
+				mes "Kkkkuuurrirrreeee";
+				mes "Kkkkuuurrirrreeee";
+				mes "Oooumm guandlejdl";
+				mes "Woooo Ei ei ei ei......";
+				specialeffect EF_TALK_FROSTJOKE;
+				next;
+				mes "[Riott]";
+				mes "^FF0000Voz Dolorosa^000000 é usada para";
+				mes "confundir as pessoas e atrapalhar";
+				mes "o controle de seus corpos. Não é";
+				mes "uma habilidade fatal, mas é eficaz";
+				mes "em desestabilizar mentalmente seu inimigo.";
+				mes "Use essa habilidade com sabedoria.";
+				skill "BA_PANGVOICE",1,SKILL_PERM;
+				close;
+			}
+		}
+		else if (qskill_bard > 8) {
+			mes "[Riott]";
+			mes "Geh heh heh~";
+			mes "Tem feito bom uso";
+			mes "do que eu te ensinei? Só tome";
+			mes "cuidado para não usar essa habilidade de forma imprudente. Caso contrário,";
+			mes "as pessoas vão te odiar como me odeiam.";
+			next;
+			mes "[Riott]";
+			mes "Seus inimigos e os";
+			mes "bêbados ocasionais, por";
+			mes "outro lado, são assuntos";
+			mes "totalmente diferentes! Bwah hah hah!";
+			close;
+		}
+		else if (qskill_bard == 8) {
+			if (countitem(7277) > 0) {
+				mes "[Riott]";
+				mes "Ah, você trouxe pra mim";
+				mes "uma ^FF0000Boneco de Munak^000000 feita por";
+				mes "Yao Jun, como prometeu.";
+				mes "Sim, isso é obra dela, impecável";
+				mes "como sempre. Mandou bem~";
+				next;
+				mes "[Riott]";
+				mes "Agora, para cumprir minha parte";
+				mes "do trato, vou te ensinar";
+				mes "minha habilidade especial. Eu a";
+				mes "desenvolvi ouvindo encantamentos";
+				mes "do Xamã Utan em Umbala.";
+				next;
+				mes "[Riott]";
+				mes "Primeiro, encare";
+				mes "profundamente os olhos do";
+				mes "alvo e concentre-se em";
+				mes "pensamentos de domínio. Isso";
+				mes "é a base da hipnose. Agora ouça este encantamento...";
+				next;
+				mes "[Riott]";
+				mes "''Perna de Sapo, Coração de Verit,";
+				mes "estrelas girando, zenys caindo,";
+				mes "mãos e pés amarrados. Essa voz";
+				mes "é sua, essa voz é minha.";
+				mes "Cabeça girando, cabeça";
+				mes "girando, cabeça girando...!''";
+				specialeffect2 EF_TALK_FROSTJOKE;
+				delitem 7277,1; // Boneco de Munak
+				skill "BA_PANGVOICE",1,SKILL_PERM;
+				set qskill_bard,9;
+				next;
+				mes "[Riott]";
+				mes "Lembre-se: não importa";
+				mes "o que você diz, mas como diz.";
+				mes "Induza hipnoticamente seu";
+				mes "alvo com um ritmo";
+				mes "sedutor e proibido, e seu";
+				mes "domínio será inevitável!";
+				next;
+				mes "[Riott]";
+				mes "Ah, e use truques com as mãos";
+				mes "para distrair seu alvo";
+				mes "do verdadeiro propósito! Acho";
+				mes "que usar ^FF0000Piada Infame^000000 junto com";
+				mes "essa habilidade dá um ótimo resultado.";
+				next;
+				mes "[Riott]";
+				mes "^FF0000Voz Dolorosa^000000 causa um";
+				mes "choque mental e atrapalha o";
+				mes "controle do corpo do alvo por";
+				mes "um tempo. Você não controla";
+				mes "a vítima, mas ela pensa que sim...";
+				next;
+				mes "[Riott]";
+				mes "Você precisa ser cuidadoso ao";
+				mes "usar essa habilidade! Não a use";
+				mes "sem pensar, ou as pessoas";
+				mes "vão te odiar como me odeiam.";
+				mes "Mas ^FF0000Voz Dolorosa^000000 pode ser útil em certas ocasiões.";
+				next;
+				mes "[Riott]";
+				mes "Use a ^FF0000Voz Dolorosa^000000 nos seus";
+				mes "inimigos o quanto quiser,";
+				mes "ninguém vai te culpar por isso.";
+				mes "E pode usá-la contra valentões";
+				mes "e bêbados de vez em quando...";
+				close;
+			}
+			mes "[Riott]";
+			mes "Hmpf. Não conseguiu";
+			mes "encontrar um Boneco de Munak";
+			mes "ainda? Bem, não se preocupe, eu sou";
+			mes "um homem paciente. Apenas tente conseguir";
+			mes "uma para mim o mais rápido possível.";
+			close;
+		}
+		else if (qskill_bard == 7) {
+			if (countitem(574) > 4) {
+				mes "[Riott]";
+				mes "Ah, você trouxe";
+				mes "ovos frescos postos por";
+				mes "Yhelle, exatamente como pedi.";
+				mes "Imagino que foi perigoso";
+				mes "ir até Niflheim, mas o sabor desses ovos vale a pena.";
+				next;
+				next;
+				mes "[Riott]";
+				mes "Agora, cumprindo minha parte";
+				mes "do trato, vou te ensinar";
+				mes "minha habilidade especial. Eu a";
+				mes "desenvolvi ouvindo encantamentos";
+				mes "do Xamã Utan em Umbala.";
+				next;
+				mes "[Riott]";
+				mes "Primeiro, encare profundamente";
+				mes "os olhos do seu alvo e concentre-se";
+				mes "em pensamentos de dominação.";
+				mes "Essa é a base da hipnose.";
+				mes "Agora ouça este encantamento...";
+				next;
+				mes "[Riott]";
+				mes "''Perna de Sapo, Coração de Verit,";
+				mes "estrelas girando, zenys caindo,";
+				mes "mãos e pés amarrados. Essa";
+				mes "voz é sua, essa voz é minha.";
+				mes "Cabeça girando, cabeça girando, cabeça girando...!''";
+				specialeffect2 EF_TALK_FROSTJOKE;
+				delitem 574,5; // Ovo
+				skill "BA_PANGVOICE",1,SKILL_PERM;
+				set qskill_bard,9;
+				next;
+				mes "[Riott]";
+				mes "Lembre-se: não importa";
+				mes "o que você diz, mas como você diz.";
+				mes "Hipnotize seu alvo com um ritmo";
+				mes "sedutor e proibido, e o domínio";
+				mes "será inevitável!";
+				next;
+				mes "[Riott]";
+				mes "Ah, e use truques com as mãos";
+				mes "para distrair seu alvo da";
+				mes "verdadeira intenção! Acho que";
+				mes "usar ^FF0000Piada Infame^000000 junto dessa";
+				mes "habilidade funciona muito bem. O nome é ^FF0000Voz Dolorosa^000000.";
+				next;
+				mes "[Riott]";
+				mes "^FF0000Voz Dolorosa^000000 causa um";
+				mes "choque mental e interfere";
+				mes "no controle do corpo da vítima";
+				mes "por um tempo. Você não exerce";
+				mes "controle direto, mas elas pensam que sim...";
+				next;
+				mes "[Riott]";
+				mes "Use essa habilidade com sabedoria!";
+				mes "Não a use imprudentemente ou";
+				mes "as pessoas vão te odiar como";
+				mes "me odeiam. Mas ^FF0000Voz Dolorosa^000000 pode ser";
+				mes "bem-vinda em certas situações.";
+				next;
+				mes "[Riott]";
+				mes "Use ^FF0000Voz Dolorosa^000000 contra seus inimigos";
+				mes "o quanto quiser, ninguém vai te";
+				mes "culpar. E você pode usá-la";
+				mes "contra valentões e bêbados ocasionalmente...";
+				close;
+			}
+			else {
+				mes "[Riott]";
+				mes "Hmm... Você não trouxe";
+				mes "ovos o suficiente...";
+				mes "Isso não vai servir."; 
+				mes "Vai demorar";
+				mes "pra Yhelle botar mais ovos.";
+				mes "Sim, isso não é o bastante...";
+				next;
+				mes "[Riott]";
+				mes "Bom, pra compensar a falta dos ovos,";
+				mes "vá buscar pra mim um"; 
+				mes "^4D4DFFBoneco de Munak^000000.";
+				mes "Eu sei que as bonecas da Yao Jun";
+				mes "são obras-primas, e eu sou um";
+				mes "ávido colecionador do trabalho dela.";
+				next;
+				mes "[Riott]";
+				if (countitem(574) > 0) {
+					mes "Enquanto isso,"; 
+					mes "vou aproveitar os";
+					mes "poucos ovos que você trouxe!";
+					mes "Bweh heh heh heh heh!";
+					delitem 574,countitem(574); //Ovo
+				}
+				set qskill_bard,8;
+				close;
+			}
+		}
+		else if (qskill_bard > 1 && qskill_bard < 7) {
+			mes "[Riott]";
+			mes "Então, você está tendo";
+			mes "dificuldades para conseguir";
+			mes "Ovos da Yhelle? Eu sei que";
+			mes "ela é uma galinha bem rápida.";
+			mes "Mas pra sobreviver onde ela";
+			mes "vive, isso é necessário.";
+			close;
+		}
+		else {
+			mes "[Riott]";
+			mes "Hmmrmpf!";
+			mes "Eh heh heh heh!";
+			emotion ET_KIK;
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "Hmm...";
+			mes "Qual é a graça?";
+			next;
+			if (gef_bard_q == 30 || gef_bard_q == 31) {
+				mes "[Riott]";
+				mes "Hm? Ah! Esse é um dos";
+				if (gef_bard_q == 30) {
+					mes "Selos Negros que só podem";
+					mes "ser dados por Kino Kitty.";
+					mes "Você deve ter uma grande";
+					mes "profundidade emocional pra";
+					mes "ele confiar isso a você.";
+				}
+				else {
+					mes "Selos Prateados que só podem";
+					mes "ser dados por Errende.";
+					mes "Você deve ter um coração";
+					mes "verdadeiramente bondoso";
+					mes "pra ele querer ser seu amigo.";
+				}
+				next;
+				mes "[Riott]";
+				mes "Geh heh heh~";
+				mes "Ei, olha ali"; 
+				mes "aqueles dois";
+				mes "bêbados sentados.";
+				next;
+				mes "[" + strcharinfo(0) + "]";
+				mes "É, tô vendo.";
+				mes "Mas o que tem de";
+				mes "especial neles?";
+				next;
+				mes "[Riott]";
+				mes "Apenas...";
+				mes "Continue assistindo.";
+				next;
+				mes "^3355FFRiott encara intensamente";
+				mes "um dos bêbados e começa a";
+				mes "murmurar algo inaudível em";
+				mes "voz rouca. Um dos homens";
+				mes "começa a se contorcer levemente.^000000";
+				next;
+				mes "[Bêbado Meio Tonto]";
+				mes "H-hey...! ^333333*Hic!*^000000";
+				mes "O que você tá fazendo?!";
+				mes "T-tira as mãos de mim!";
+				mes "Por acaso eu pareço uma moça?!";
+				next;
+				mes "[Bêbado Mais Tonto]";
+				mes "Do que você tá falando?";
+				mes "P-por que meus braços estão";
+				mes "te abraçando?! Foi mal! Eu só";
+				mes "tava tentando passar por ali!";
+				mes "Eu não quis te abraçar!";
+				next;
+				mes "[Bêbado Meio Tonto]";
+				mes "Esbarrar em mim, beleza.";
+				mes "Mas um abraço completo?";
+				mes "Foi de propósito!";
+				mes "O-o que? Minha mão!";
+				mes "Ela tá... se mexendo sozinha?!";
+				next;
+				mes "[Bêbado Mais Tonto]";
+				mes "Aaah! O que você tá fazendo?!";
+				mes "P-para de apertar"; 
+				mes "minha bunda!";
+				next;
+				mes "^3355FFOs dois continuam gesticulando e se movendo";
+				mes "de forma completamente aleatória.^000000";
+				next;
+				mes "[" + strcharinfo(0) + "]";
+				mes "Aqueles dois...";
+				mes "Eles beberam demais.";
+				next;
+				mes "[Riott]";
+				mes "Nada disso, eles só";
+				mes "perderam o controle dos corpos";
+				mes "por um momento. É o efeito";
+				mes "da minha habilidade, que";
+				mes "embaralha a mente deles.";
+				next;
+				if (qskill_bard == 1) {
+					mes "[" + strcharinfo(0) + "]";
+					mes "Embaralhar a mente?";
+					mes "Espera... Você é o Bardo que";
+					mes "fez alguém pular do Bungee Jump";
+					mes "de Umbala contra a própria vontade?";
+					next;
+					mes "[Riott]";
+					mes "Hã? Como você soube disso?";
+					mes "Não tenho orgulho daquilo";
+					mes "(apesar de ter sido hilário)";
+					mes "mas sim, fui eu.";
+					next;
+					if (select("Por favor, me ensine a habilidade!:Ah, só estava confirmando.") == 1) {
+						mes "[Riott]";
+						mes "Hm? Você quer aprender";
+						mes "a como embaralhar mentes";
+						mes "como eu fiz agora? Bem,";
+						mes "eu inventei essa habilidade, embora";
+						mes "tenha tido muita ajuda do";
+						mes "Xamã Utan. Vamos ver...";
+						next;
+						mes "[Riott]";
+						mes "Certo. Se quiser que eu";
+						mes "te ensine, então traga para mim";
+						mes "5 Ovos de uma galinha chamada";
+						mes "Yhelle. Yhelle bota os Ovos de";
+						mes "melhor qualidade: são deliciosos";
+						mes "e ótimos para a voz de um Bardo~";
+						next;
+						mes "[Riott]";
+						mes "Porém, essa galinha se empoleira";
+						mes "em um lugar estranho e perigoso.";
+						mes "Você vai precisar explorar uma enorme e misteriosa árvore em Umbala";
+						mes "para chegar até lá. Da última vez que fui,";
+						mes "eu praticamente quase morri.";
+						next;
+						mes "[Riott]";
+						mes "Certo...";
+						mes "Então não se esqueça";
+						mes "de voltar aqui";
+						mes "e me trazer";
+						mes "^4D4DFF5 Ovos da Yhelle^000000, tudo bem?";
+						set qskill_bard,2;
+						close;
+					}
+					mes "[Riott]";
+					mes "Puxa, você é curioso mesmo.";
+					mes "Mas se sabe disso e esbarrou em mim,";
+					mes "certamente deve viajar";
+					mes "bastante. Eu respeito um bom";
+					mes "e experiente aventureiro como você.";
+					close;
+				}
+				mes "[" + strcharinfo(0) + "]";
+				mes "O quê...?";
+				mes "Eu não acredito em você.";
+				mes "Embaralhar mentes? Isso";
+				mes "não faz o menor sentido!";
+				mes "Eles só estão muito bêbados...";
+				next;
+				mes "[Riott]";
+				mes "Como ousa questionar meu";
+				mes "poder? Ah, bem, suponho que";
+				mes "não posso ficar muito bravo.";
+				mes "A maioria das pessoas que acredita";
+				mes "em mim geralmente diz que eu sou";
+				mes "um eixo do mal nessa altura...";
+				close;
+			}
+			mes "[Riott]";
+			mes "Ah, nada demais. Olha só,";
+			mes "você não tem nenhum Selo de Bardo?";
+			mes "Isso é um claro sinal de que";
+			mes "você não tem se conectado";
+			mes "com a comunidade dos Bardos.";
+			mes "É uma pena...";
+			next;
+			mes "[Riott]";
+			mes "*Suspiro* Certo, eu sei";
+			mes "como você pode conhecer mais Bardos.";
+			mes "Por que não tenta fazer amizade com Errende? Procure por um Bardo";
+			mes "vestido de verde em Geffen e";
+			mes "você deve encontrá-lo.";
+			close;
+		}
+	}
+	else {
+		mes "[Riott]";
+		mes "Hmmrmpf!";
+		mes "Eh heh heh heh!";
+		emotion ET_KIK;
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Hum...";
+		mes "Qual a graça?";
+		next;
+		if (gef_bard_q == 30 || gef_bard_q == 31) {
+			mes "[Riott]";
+			mes "Hm? Ah! Esse é um dos";
+			if (gef_bard_q == 30) {
+				mes "Selos Negros que só podem";
+				mes "ser dados por Kino Kitty. Você";
+				mes "deve ter uma grande";
+				mes "profundidade emocional para que ele";
+				mes "te conceda esse presente.";
+			}
+			else {
+				mes "Selos Prateados que só podem";
+				mes "ser dados por Errende. Você";
+				mes "deve ser realmente bondoso de coração";
+				mes "se ele se ofereceu para ser seu";
+				mes "amigo. O que me diz?";
+			}
+			next;
+			mes "[Riott]";
+			mes "Geh heh heh~";
+			mes "Ei, dá uma olhada";
+			mes "naqueles dois bêbados";
+			mes "lá no fundo.";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "Sim, eu vejo que estão";
+			mes "juntos. Mas o que";
+			mes "tem eles?";
+			next;
+			mes "[Riott]";
+			mes "Apenas...";
+			mes "Continue observando.";
+			close;
+		}
+		mes "[Riott]";
+		mes "Ah, nada demais. Olha,";
+		mes "notei que você não tem";
+		mes "nenhum selo de Bardo. Isso me mostra";
+		mes "que você não encontra muitos Bardos.";
+		mes "Você realmente devia mudar isso.";
+		next;
+		mes "[Riott]";
+		mes "Bardos e Menestréis podem";
+		mes "ser amigos bem úteis";
+		mes "se você der uma chance.";
+		mes "Olha, por que não tenta";
+		mes "encontrar Errende em Geffen?";
+		mes "Ele é um cara bem popular...";
+		close;
+	}
+
+OnTouch:
+	emotion ET_KIK;
+	end;
+}
+
+// Yhelle, a Galinha
+//============================================================ 
+niflheim,239,70,1	script	Yhelle#bard_chick1	800,3,3,{
+	emotion ET_HUK, playerattached();
+	emotion ET_HUK;
+	mes "[Hen Yhelle]";
+	mes "Cluck-Cluuuck?";
+	mes "Cluck cluck cluck!";
+	next;
+	disablenpc "Yhelle#bard_chick1";
+	donpcevent "Yhelle#bard_chick2::OnEnable";
+	mes "^3355FFAo perceber sua";
+	mes "presença, a galinha";
+	mes "fugiu rapidamente.^000000";
+	close;
+
+OnInit:
+	disablenpc "Yhelle#bard_chick5";
+	disablenpc "Yhelle#bard_chick4";
+	disablenpc "Yhelle#bard_chick3";
+	disablenpc "Yhelle#bard_chick2";
+	end;
+
+OnEnable:
+	enablenpc "Yhelle#bard_chick1";
+	end;
+
+OnDisable:
+	disablenpc "Yhelle#bard_chick1";
+	end;
+
+OnTouch:
+	callfunc "F_BardSkillYhelle",1,2; close;
+}
+
+niflheim,185,205,3	script	Yhelle#bard_chick2	800,3,3,{
+	emotion ET_HUK, playerattached();
+	emotion ET_HUK;
+	mes "[Galinha Yhelle]";
+	mes "Cócóóó?";
+	mes "Cócó, cócó có!";
+	next;
+	disablenpc "Yhelle#bard_chick2";
+	donpcevent "Yhelle#bard_chick3::OnEnable";
+	mes "^3355FFAo perceber sua";
+	mes "presença, a galinha";
+	mes "fugiu rapidamente.^000000";
+	close;
+
+OnEnable:
+	enablenpc "Yhelle#bard_chick2";
+	end;
+
+OnDisable:
+	disablenpc "Yhelle#bard_chick2";
+	end;
+
+OnTouch:
+	callfunc "F_BardSkillYhelle",2,3; close;
+}
+
+niflheim,85,203,5	script	Yhelle#bard_chick3	800,3,3,{
+	emotion ET_HUK, playerattached();
+	emotion ET_HUK;
+	mes "[Galinha Yhelle]";
+	mes "Cócóóó?";
+	mes "Cócó, cócó có!";
+	next;
+	disablenpc "Yhelle#bard_chick3";
+	donpcevent "Yhelle#bard_chick4::OnEnable";
+	mes "^3355FFAo perceber sua";
+	mes "presença, a galinha";
+	mes "fugiu rapidamente.^000000";
+	close;
+
+OnEnable:
+	enablenpc "Yhelle#bard_chick3";
+	end;
+
+OnDisable:
+	disablenpc "Yhelle#bard_chick3";
+	end;
+
+OnTouch:
+	callfunc "F_BardSkillYhelle",3,4; close;
+}
+
+niflheim,149,81,7	script	Yhelle#bard_chick4	800,3,3,{
+	emotion ET_HUK, playerattached();
+	emotion ET_HUK;
+	mes "[Galinha Yhelle]";
+	mes "Cócóóó?";
+	mes "Cócó, cócó có!";
+	next;
+	disablenpc "Yhelle#bard_chick4";
+	donpcevent "Yhelle#bard_chick5::OnEnable";
+	mes "^3355FFAo perceber sua";
+	mes "presença, a galinha";
+	mes "fugiu rapidamente.^000000";
+	close;
+
+OnEnable:
+	enablenpc "Yhelle#bard_chick4";
+	end;
+
+OnDisable:
+	disablenpc "Yhelle#bard_chick4";
+	end;
+
+OnTouch:
+	callfunc "F_BardSkillYhelle",4,5; close;
+}
+
+niflheim,209,144,3	script	Yhelle#bard_chick5	800,3,3,{
+	emotion ET_HUK, playerattached();
+	emotion ET_HUK;
+	mes "[Galinha Yhelle]";
+	mes "Cócóóó?";
+	mes "Cócó, cócó có!";
+	next;
+	disablenpc "Yhelle#bard_chick5";
+	donpcevent "Yhelle#bard_chick1::OnEnable";
+	mes "^3355FFAo perceber sua";
+	mes "presença, a galinha";
+	mes "fugiu rapidamente.^000000";
+	close;
+
+OnEnable:
+	enablenpc "Yhelle#bard_chick5";
+	end;
+
+OnDisable:
+	disablenpc "Yhelle#bard_chick5";
+	end;
+
+OnTouch:
+	callfunc "F_BardSkillYhelle",5,1; close;
+}
+
+// Homens Bêbados
+//============================================================ 
+morocc_in,178,73,3	script	Cliente#bard_skill01	54,{
+	mes "[Carinha Meio Bêbado]";
+	mes "O que você acha";
+	mes "que é a melhor bebida";
+	mes "do mundo? Eu acho que";
+	mes "é Tri-- Tristan? Como";
+	mes "era mesmo o nome?";
+	next;
+	mes "[Carinha Mais Bêbado]";
+	mes "Ah! Tristan de 13 Anos?";
+	mes "Essa é uma bebida ótima, com certeza,";
+	mes "mas é cara demais pra qualquer";
+	mes "ocasião que não seja especial.";
+	mes "^333333*Hic*^000000 Pessoalmente,";
+	mes "eu gosto mesmo é de Ver... Uh, Ver...";
+	next;
+	mes "[Carinha Meio Bêbado]";
+	mes "Escarlate Praiano?";
+	mes "Sim, essa é muito boa,";
+	mes "você apaga depois de";
+	mes "um único shot! É...";
+	mes "Tro... Tropical! Dizem";
+	mes "que essa também é boa. Espera, o quê?";
+	next;
+	mes "[Carinha Meio Bêbado]";
+	mes "E-ei...! ^333333*Hic!*^000000";
+	mes "O que você está fazendo?!";
+	mes "M-mantenha suas mãos";
+	mes "longe de mim! Por acaso";
+	mes "eu pareço uma mulher pra você?";
+	next;
+	mes "[Carinha Mais Bêbado]";
+	mes "Do que você tá falando?";
+	mes "O-o quê?! Por que meus braços";
+	mes "tão todos enrolados em você?";
+	mes "D-desculpa, eu só tava";
+	mes "tentando ir pra lá—";
+	mes "Eu não queria te abraçar!";
+	next;
+	mes "[Carinha Meio Bêbado]";
+	mes "Esbarrar em mim,";
+	mes "ok, eu entendo. Mas um";
+	mes "abraço completo? Aí não dá!";
+	mes "Isso foi totalmente de propósito!";
+	mes "O-o quê? Minha mão! Ela...";
+	mes "Ela tá se mexendo sozinha?!";
+	next;
+	mes "[Carinha Mais Bêbado]";
+	mes "Ai! O-o que você tá";
+	mes "fazendo?! P-para de";
+	mes "encostar na minha bunda!";
+	next;
+	mes "^3355FFUm Bardo na sala";
+	mes "observa os dois bêbados";
+	mes "atentamente e dá risadinhas";
+	mes "com o estado deles. Lembre-se:";
+	mes "beber demais não faz bem!^000000";
+	close;
+}
+
+morocc_in,175,70,7	script	Cliente#bard_skill02	50,{
+	mes "[Carinha Meio Bêbado]";
+	mes "O que você acha";
+	mes "que é a melhor bebida";
+	mes "do mundo? Eu acho que";
+	mes "é Tri-- Tristan? Como";
+	mes "era mesmo o nome?";
+	next;
+	mes "[Carinha Mais Bêbado]";
+	mes "Ah! Tristan de 13 Anos?";
+	mes "Essa é uma bebida ótima, com certeza,";
+	mes "mas é cara demais pra qualquer";
+	mes "ocasião que não seja especial.";
+	mes "^333333*Hic*^000000 Pessoalmente,";
+	mes "eu gosto mesmo é de Ver... Uh, Ver...";
+	next;
+	mes "[Carinha Meio Bêbado]";
+	mes "Escarlate Praiano?";
+	mes "Sim, essa é muito boa,";
+	mes "você apaga depois de";
+	mes "um único shot! É...";
+	mes "Tro... Tropical! Dizem";
+	mes "que essa também é boa. Espera, o quê?";
+	next;
+	mes "[Carinha Meio Bêbado]";
+	mes "E-ei...! ^333333*Hic!*^000000";
+	mes "O que você está fazendo?!";
+	mes "M-mantenha suas mãos";
+	mes "longe de mim! Por acaso";
+	mes "eu pareço uma mulher pra você?";
+	next;
+	mes "[Carinha Mais Bêbado]";
+	mes "Do que você tá falando?";
+	mes "O-o quê?! Por que meus braços";
+	mes "tão todos enrolados em você?";
+	mes "D-desculpa, eu só tava";
+	mes "tentando ir pra lá—";
+	mes "Eu não queria te abraçar!";
+	next;
+	mes "[Carinha Meio Bêbado]";
+	mes "Esbarrar em mim,";
+	mes "ok, eu entendo. Mas um";
+	mes "abraço completo? Aí não dá!";
+	mes "Isso foi totalmente de propósito!";
+	mes "O-o quê? Minha mão! Ela...";
+	mes "Ela tá se mexendo sozinha?!";
+	next;
+	mes "[Carinha Mais Bêbado]";
+	mes "Ai! O-o que você tá";
+	mes "fazendo?! P-para de";
+	mes "encostar na minha bunda!";
+	next;
+	mes "^3355FFUm Bardo na sala";
+	mes "observa os dois bêbados";
+	mes "atentamente e dá risadinhas";
+	mes "com o estado deles. Lembre-se:";
+	mes "beber demais não faz bem!^000000";
+	close;
+}
+
+// Barman
+//============================================================ 
+morocc_in,166,76,7	script	Barman#bard_qskill	46,{
+	if (checkweight(1201,1) == 0) {
+		mes "^3355FFEi, pera aí!";
+		mes "Você está carregando itens demais e não tem espaço suficiente no inventário para receber recompensas. Libere espaço e volte depois para tentar esse desafio.";
+		close;
+	}
+	mes "[Barman]";
+	mes "Então, o que você";
+	mes "vai querer pedir?";
+	next;
+	switch(select("Sograt Tropical.:Escarlate Praiano.:Nada, valeu.")) {
+	case 1:
+	if (MaxWeight - Weight < 2000) {
+		mes "[Barman]";
+		mes "Tem certeza que consegue";
+		mes "carregar mais coisa?";
+		mes "Hmm, pra mim não parece.";
+		mes "Dá uma aliviada aí e guarda";
+		mes "algumas coisas no Armazém da Kafra, beleza?";
+		close;
+	}
+	if (Zeny < 1000) {
+		mes "[Barman]";
+		mes "Tem certeza que pode pagar?";
+		mes "Essa bebida custa 1.000 zenys.";
+		mes "Melhor conferir o dinheiro";
+		mes "que tem aí. Bom, volta depois";
+		mes "quando tiver a grana.";
+		close;
+	}
+	mes "[Barman]";
+	mes "Aqui está,";
+	mes "1 Sograt Tropical.";
+	mes "Tem um gosto doce e suave,";
+	mes "mas se não tomar cuidado,";
+	mes "você apaga rapidinho.";
+	mes "Vai com calma.";
+	set Zeny, Zeny-1000;
+	getitem 12112,1; //Sograt Tropical
+	close;
+
+case 2:
+	if (MaxWeight - Weight < 2000) {
+		mes "[Barman]";
+		mes "Tem certeza que consegue";
+		mes "carregar mais coisa?";
+		mes "Hmm, pra mim não parece.";
+		mes "Dá uma aliviada aí e guarda";
+		mes "algumas coisas no"; 
+		mes "Armazém da Kafra, beleza?";
+		close;
+	}
+	if (Zeny < 1000) {
+		mes "[Barman]";
+		mes "Tem certeza que pode pagar?";
+		mes "Essa bebida custa 1.000 zenys.";
+		mes "Melhor conferir o dinheiro";
+		mes "que tem aí. Bom,"; 
+		mes "volta depois";
+		mes "quando tiver a grana.";
+		close;
+	}
+	mes "[Barman]";
+	mes "Aqui está.";
+	mes "Aproveita a bebida,";
+	mes "mas sem perder a"; 
+	mes "cabeça, hein?";
+	set Zeny, Zeny-1000;
+	getitem 12113,1; //Escarlate Praiano
+	close;
+
+	case 3:
+		mes "[Barman]";
+		mes "Beleza, então.";
+		mes "Até a próxima.";
+		close;
+	}
+}
+
+// Função
+//============================================================ 
+function	script	F_BardSkillYhelle	{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 2000) {
+		mes "^3355FFEi, pera aí!";
+		mes "Você está carregando itens demais e não tem espaço suficiente no inventário para receber recompensas. Libere espaço e volte aqui para tentar esse desafio.";
+		close;
+	}
+	emotion ET_HUK, playerattached();
+	emotion ET_HUK;
+	mes "[Galinha Yhelle]";
+	mes "Cocoricóó?";
+	mes "Cócó cócó có!";
+	next;
+	if (rand(1,3) == 2) {
+		disablenpc "Yhelle#bard_chick"+getarg(0);
+		donpcevent "Yhelle#bard_chick"+getarg(1)+"::OnEnable";
+		mes "^3355FFAo perceber sua"; 
+		mes "presença, a galinha";
+		mes "fugiu rapidamente.^000000";
+		if (qskill_bard > 1 && qskill_bard < 7) {
+			mes "^3355FFVocê encontrou ^3333331 Ovo^3355FF no";
+			mes "lugar onde a Galinha Yhelle";
+			mes "estava empoleirada.^000000";
+			set qskill_bard,qskill_bard+1;
+			getitem 574,1; //Ovo
+		}
+	}
+	else {
+		disablenpc "Yhelle#bard_chick"+getarg(0);
+		donpcevent "Yhelle#bard_chick"+getarg(1)+"::OnEnable";
+		mes "^3355FFAo perceber sua"; 
+		mes "presença, a galinha";
+		mes "fugiu rapidamente.^000000";
+	}
+	return;
+}

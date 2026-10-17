@@ -1,0 +1,316 @@
+//============================================================
+// Eternal - Passe de Batalha automatico (20 niveis)
+// Ativacao pelo item 50024; sem NPC visivel. Progresso e validade por conta.
+// Duracao: 30 dias. XP: 250 pontos por monstro.
+// Cada nivel exige 5.000 XP; limite diario de 5 niveis; XP maxima: 100.000.
+// Essencias: Diluida +10.000; Pura +25.000; Concentrada +50.000 XP.
+// As recompensas desbloqueadas sao enviadas automaticamente pelo Rodex.
+//============================================================
+-	script	BattlePass#system	-1,{
+OnInit:
+	set .PassItemID, 50024;
+	set .Duration, 2592000; // 30 dias em segundos
+	set .XPPerLevel, 5000;
+	set .MaxLevel, 20;
+	set .MaxXP, .XPPerLevel * .MaxLevel;
+	set .DailyLevelLimit, 5; // Maximo de 5 niveis de progresso por dia, por conta
+	set .ImagePrefix$, "battlepass_herosaga_";
+	set .ShowXPGain, 1; // 1 = mostrar XP por abate; 0 = sem mensagem por abate
+	set .EssenceDilutedID, 50025;
+	set .EssencePureID, 50026;
+	set .EssenceConcentratedID, 50027;
+
+	// Recompensas de exemplo. Personalize os IDs e quantidades para o Eternal.
+	setarray .RewardItem[0],
+		40726, 14545, 12210, 22979, 6635,
+		14534, 12111, 7621, 40727, 40728,
+		40729, 40730, 6635, 40734, 40727,
+		7621, 14545, 12210, 35007, 35002;
+	setarray .RewardQty[0],
+		1, 10, 10, 5, 1,
+		10, 1, 10, 1, 1,
+		1, 1, 15, 1, 4,
+		30, 20, 30, 1, 1;
+	end;
+
+// Sincroniza o item alugado em cada personagem da conta. O progresso e o prazo
+// ficam nas variaveis permanentes de conta (#BP2_*), nao no personagem.
+OnPCLoginEvent:
+	.@now = gettimetick(2);
+
+	// Migracao unica: se o personagem atual ainda possui progresso da versao antiga
+	// (variaveis de personagem BP2_*), copia-o para a conta antes da sincronizacao.
+	// Para preservar o progresso antigo, entre primeiro no personagem que o possui.
+	if (#BP2_End == 0 && BP2_End > .@now) {
+		#BP2_Start = BP2_Start;
+		#BP2_End = BP2_End;
+		#BP2_XP = BP2_XP;
+		#BP2_MailedLevel = BP2_MailedLevel;
+		dispbottom "[Passe de Batalha] Seu progresso anterior foi migrado para toda a conta.";
+	}
+
+	if (#BP2_End > .@now) {
+		.@remaining = #BP2_End - .@now;
+
+		// Marcador por personagem para evitar que o item seja criado repetidamente
+		// caso countitem() ainda nao reconheca o item alugado em algum login.
+		// Cada personagem pode receber o passe uma vez por ciclo de validade da conta.
+		if (countitem(.PassItemID) > 0) {
+			// O personagem ja possui o passe no inventario; nao entregue outro.
+			BP2_ItemGrantEnd = #BP2_End;
+		} else if (BP2_ItemGrantEnd != #BP2_End) {
+			rentitem .PassItemID, .@remaining;
+			BP2_ItemGrantEnd = #BP2_End;
+			dispbottom "[Passe de Batalha] Item sincronizado com sua conta. Restam " + ((.@remaining + 86399) / 86400) + " dia(s).";
+		}
+	}
+	end;
+
+// O item 50024 chama este evento. Nenhum NPC aparece no mapa.
+OnItemUse:
+	.@now = gettimetick(2);
+
+	// Passe ativo: usar o item apenas abre o painel; nao reinicia XP nem prazo.
+	if (#BP2_End > .@now) {
+		callsub S_ShowPanel;
+		end;
+	}
+
+	mes "^0000FF[Eternal - Passe de Batalha]^000000";
+	mes "Este item ativa o Passe de Batalha por ^FF000030 dias^000000.";
+	mes "Todos os personagens da conta compartilham o mesmo progresso. Derrotar monstros concede 250 XP.";
+	mes "Cada nivel exige ^0080005.000 XP^000000, com limite de ^FF00005 niveis por dia^000000.";
+	mes "O passe possui 20 niveis e as recompensas sao enviadas pelo Rodex.";
+	mes "Deseja ativar o passe agora?";
+	next;
+
+	.@choice = select("Sim, ativar por 30 dias:Agora nao");
+	if (.@choice != 1) {
+		mes "^0000FF[Eternal - Passe de Batalha]^000000";
+		mes "Ativacao cancelada. O prazo ainda nao comecou.";
+		close;
+		end;
+	}
+
+	if (countitem(50024) < 1) {
+		mes "^FF0000Erro: o item de ativacao nao esta no inventario.^000000";
+		mes "Confira se o item 50024 esta definido com Flags: NoConsume: true.";
+		close;
+		end;
+	}
+
+	// Remove o item normal e cria a versao alugada por 30 dias.
+	delitem 50024, 1;
+	#BP2_Start = gettimetick(2);
+	#BP2_End = #BP2_Start + .Duration;
+	#BP2_XP = 0;
+	#BP2_MailedLevel = 0;
+	// Reinicia o controle diario para este novo ciclo do passe.
+	#BP2_DayKey = 0;
+	#BP2_DayMaxLevel = 0;
+	#BP2_DayMaxXP = 0;
+	#BP2_DailyNoticeDay = 0;
+	rentitem .PassItemID, .Duration;
+	// Marca este personagem para nao receber outro item no proximo login
+	// durante o mesmo periodo de validade do passe.
+	BP2_ItemGrantEnd = #BP2_End;
+	dispbottom "[Passe de Batalha] Ativado por 30 dias! Cada monstro concede 250 XP. Limite de 5 niveis por dia.";
+	close2;
+	callsub S_ShowPanel;
+	end;
+
+// Atualiza o limite diario quando muda a data do servidor.
+// O limite e compartilhado por todos os personagens da conta.
+S_RefreshDailyLimit:
+	.@today = gettime(7) * 10000 + gettime(6) * 100 + gettime(5);
+	if (#BP2_DayKey != .@today) {
+		#BP2_DayKey = .@today;
+		.@currentLevel = #BP2_XP / .XPPerLevel;
+		#BP2_DayMaxLevel = .@currentLevel + .DailyLevelLimit;
+		if (#BP2_DayMaxLevel > .MaxLevel)
+			#BP2_DayMaxLevel = .MaxLevel;
+		#BP2_DayMaxXP = #BP2_DayMaxLevel * .XPPerLevel;
+	}
+	return;
+
+// XP automatica por monstro derrotado.
+OnNPCKillEvent:
+	if (#BP2_End == 0 || #BP2_End <= gettimetick(2))
+		end;
+	if (#BP2_XP >= .MaxXP)
+		end;
+	callsub S_AddXP, 250, 0, "";
+	end;
+
+// Chamado depois que a funcao consumivel ja atualizou #BP2_XP diretamente.
+// Este evento apenas envia as recompensas dos niveis que foram liberados.
+OnUpdateRewards:
+	if (#BP2_End == 0 || #BP2_End <= gettimetick(2))
+		end;
+	callsub S_MailUnlockedRewards;
+	end;
+
+// Rotina unica para XP de monstros e Essencias. Respeita limite diario e limite total.
+S_AddXP:
+	.@addxp = getarg(0);
+	.@source = getarg(1);
+	.@essenceName$ = getarg(2);
+
+	if (#BP2_End == 0 || #BP2_End <= gettimetick(2))
+		return;
+	if (.@addxp <= 0 || #BP2_XP >= .MaxXP)
+		return;
+
+	callsub S_RefreshDailyLimit;
+	if (#BP2_XP >= #BP2_DayMaxXP) {
+		if (#BP2_DailyNoticeDay != #BP2_DayKey) {
+			#BP2_DailyNoticeDay = #BP2_DayKey;
+			dispbottom "[Passe de Batalha] Voce atingiu o limite diario de 5 niveis. O progresso sera liberado novamente apos a virada do dia do servidor.";
+		}
+		return;
+	}
+
+	.@oldXP = #BP2_XP;
+	.@dailyRoom = #BP2_DayMaxXP - #BP2_XP;
+	if (.@addxp > .@dailyRoom)
+		.@addxp = .@dailyRoom;
+	#BP2_XP += .@addxp;
+	if (#BP2_XP > .MaxXP)
+		#BP2_XP = .MaxXP;
+	.@gained = #BP2_XP - .@oldXP;
+
+	if (.@source == 1) {
+		if (.@gained < getarg(0))
+			dispbottom "[Passe de Batalha] Essencia " + .@essenceName$ + ": aplicados " + .@gained + " XP. O excedente nao foi aplicado por causa do limite diario ou total.";
+		else
+			dispbottom "[Passe de Batalha] Essencia " + .@essenceName$ + ": +" + .@gained + " XP.";
+	} else if (.ShowXPGain) {
+		dispbottom "[Passe de Batalha] +" + .@gained + " XP | Total da conta: " + #BP2_XP + "/" + .MaxXP + ".";
+	}
+
+	callsub S_MailUnlockedRewards;
+	if (#BP2_XP >= #BP2_DayMaxXP && #BP2_DayMaxXP < .MaxXP && #BP2_DailyNoticeDay != #BP2_DayKey) {
+		#BP2_DailyNoticeDay = #BP2_DayKey;
+		dispbottom "[Passe de Batalha] Limite diario de 5 niveis atingido. O progresso sera liberado novamente apos a virada do dia do servidor.";
+	}
+	return;
+
+// Mantido separado para ser reutilizado por XP de monstros e Essencias.
+S_MailUnlockedRewards:
+	.@newLevel = #BP2_XP / .XPPerLevel;
+	if (.@newLevel > .MaxLevel)
+		.@newLevel = .MaxLevel;
+
+	while (#BP2_MailedLevel < .@newLevel) {
+		.@nextLevel = #BP2_MailedLevel + 1;
+		.@idx = .@nextLevel - 1;
+		setarray .@mailItem[0], .RewardItem[.@idx];
+		setarray .@mailAmount[0], .RewardQty[.@idx];
+		mail getcharid(0), "Eternal", "Passe de Batalha - Nivel " + .@nextLevel,
+			"Parabens! Voce desbloqueou o nivel " + .@nextLevel + " do Passe de Batalha. Sua recompensa esta anexada.",
+			0, .@mailItem, .@mailAmount;
+		#BP2_MailedLevel = .@nextLevel;
+		dispbottom "[Passe de Batalha] Nivel " + .@nextLevel + "/" + .MaxLevel + " desbloqueado! Recompensa enviada pelo Rodex.";
+	}
+	return;
+
+S_ShowPanel:
+	callsub S_RefreshDailyLimit;
+	.@now = gettimetick(2);
+	.@remaining = #BP2_End - .@now;
+	if (.@remaining < 0)
+		.@remaining = 0;
+	.@days = (.@remaining + 86399) / 86400;
+	.@level = #BP2_XP / .XPPerLevel;
+	if (.@level > .MaxLevel)
+		.@level = .MaxLevel;
+	.@withinLevel = #BP2_XP - (.@level * .XPPerLevel);
+	if (.@level >= .MaxLevel)
+		.@withinLevel = .XPPerLevel;
+
+	.@image$ = .ImagePrefix$;
+	if (#BP2_MailedLevel < 10)
+		.@image$ += "0" + #BP2_MailedLevel;
+	else
+		.@image$ += #BP2_MailedLevel;
+
+	cutin .@image$, 4;
+	dispbottom "[Passe de Batalha] Nivel " + .@level + "/" + .MaxLevel + " | XP total: " + #BP2_XP + "/" + .MaxXP + " | Progresso do nivel: " + .@withinLevel + "/" + .XPPerLevel + " XP | Limite diario: nivel " + #BP2_DayMaxLevel + "/" + .MaxLevel + " | Dias restantes: " + .@days + ".";
+	return;
+}
+
+// Chamado diretamente pelos Scripts dos itens consumiveis.
+// Os itens usam Flags: NoConsume: true para que so sejam removidos apos validar o passe.
+function	script	BP_UseBattlePassEssence	{
+	.@itemId = getarg(0);
+	.@xp = getarg(1);
+	.@name$ = getarg(2);
+
+	// Toda validacao ocorre antes de consumir o item.
+	if (#BP2_End == 0 || #BP2_End <= gettimetick(2)) {
+		dispbottom "[Passe de Batalha] Ative um passe valido antes de usar uma Essencia. O item nao foi consumido.";
+		return;
+	}
+	if (#BP2_XP >= 100000) {
+		dispbottom "[Passe de Batalha] Seu passe ja atingiu 100.000 XP. A Essencia nao foi consumida.";
+		return;
+	}
+
+	// Limite diario de cinco niveis, compartilhado por toda a conta.
+	.@today = gettime(7) * 10000 + gettime(6) * 100 + gettime(5);
+	if (#BP2_DayKey != .@today) {
+		#BP2_DayKey = .@today;
+		.@currentLevel = #BP2_XP / 5000;
+		#BP2_DayMaxLevel = .@currentLevel + 5;
+		if (#BP2_DayMaxLevel > 20)
+			#BP2_DayMaxLevel = 20;
+		#BP2_DayMaxXP = #BP2_DayMaxLevel * 5000;
+	}
+	if (#BP2_XP >= #BP2_DayMaxXP) {
+		dispbottom "[Passe de Batalha] Voce ja atingiu o limite diario de 5 niveis. A Essencia nao foi consumida; tente novamente apos a virada do dia do servidor.";
+		return;
+	}
+
+	if (.@itemId != 50025 && .@itemId != 50026 && .@itemId != 50027) {
+		dispbottom "[Passe de Batalha] ID de Essencia invalido. O item nao foi consumido.";
+		return;
+	}
+	if (countitem(.@itemId) < 1) {
+		dispbottom "[Passe de Batalha] Essencia nao encontrada no inventario. O item nao foi consumido.";
+		return;
+	}
+	if (.@xp <= 0) {
+		dispbottom "[Passe de Batalha] A Essencia esta configurada com XP invalida. O item nao foi consumido.";
+		return;
+	}
+
+	// Nao permite exceder o limite diario nem o limite total do passe.
+	.@applyXP = .@xp;
+	.@dailyRoom = #BP2_DayMaxXP - #BP2_XP;
+	.@totalRoom = 100000 - #BP2_XP;
+	if (.@applyXP > .@dailyRoom)
+		.@applyXP = .@dailyRoom;
+	if (.@applyXP > .@totalRoom)
+		.@applyXP = .@totalRoom;
+	if (.@applyXP <= 0) {
+		dispbottom "[Passe de Batalha] Nenhuma XP pode ser aplicada agora. A Essencia nao foi consumida.";
+		return;
+	}
+
+	// Itens estao marcados NoConsume: true; o script consome apos validar.
+	delitem .@itemId, 1;
+	#BP2_XP += .@applyXP;
+
+	dispbottom "[Passe de Batalha] Essencia " + .@name$ + " consumida: +" + .@applyXP + " XP. Total: " + #BP2_XP + "/100000 XP.";
+	if (.@applyXP < .@xp) {
+		dispbottom "[Passe de Batalha] Parte da XP foi descartada porque o limite diario de 5 niveis ou o limite total foi atingido.";
+	}
+	if (#BP2_XP >= #BP2_DayMaxXP && #BP2_DayMaxXP < 100000) {
+		#BP2_DailyNoticeDay = #BP2_DayKey;
+		dispbottom "[Passe de Batalha] Limite diario de 5 niveis atingido. O progresso sera liberado novamente apos a virada do dia do servidor.";
+	}
+
+	// Atualiza as recompensas sem adicionar a XP uma segunda vez.
+	doevent "BattlePass#system::OnUpdateRewards";
+	return;
+}

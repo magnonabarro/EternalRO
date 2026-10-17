@@ -1,0 +1,34 @@
+sala_caca,10,16,5	script	Itens de Caça	57,{
+	
+	mes "[Abyss]";
+	mes "Ofereço equipamentos Por ticket de caça <ITEM>Caça<INFO>1000367</INFO></ITEM>.";
+	mes "------------------";
+	mes "Caso esteja interessado, eu ofereço equipamentos de todas as raridades";
+	mes "e encantamentos";
+	switch(select("Equipamentos TOP:Equipamentos Meio:Equipamentos Baixo")){
+		next;
+		case 1:
+		close2;
+		callshop "uniao_top",1;
+		break;			
+		next;
+		case 2:
+		close2;
+		callshop "uniao_mid",2;
+		break;
+		next;
+		case 3:
+		close2;
+		callshop "uniao_baixo",3;
+		break;
+	}
+OnInit:
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	showscript("Itens de Caça");
+	setnpctimer 0;
+	end;
+}
+// Lojas localizadas no custom/barters.yml

@@ -1,0 +1,150 @@
+//=============================================
+//== Script ~ brA || Encantador global ========
+//== Versão: ==================================
+//== 1.7
+//== Autor: ===================================
+//== CinquentaeUM || Vulthoom
+//=============================================
+prontera,150,150,3	script	Mago Negro	4_M_REPAIR,{
+// ==============================================================
+// CONFIGURAÇÕES GERAIS
+set .npc$,"[^0000FF Mago Negro ^000000]"; // NOME DO NPC
+set .item_id,7714; // ID DO ITEM QUE SERÁ COBRADO
+set .item_amount,1; // QUANTIDADE DO ITEM QUE SERÁ COBRADO
+// ==============================================================
+// CONFIGURAÇÕES DE CHANCE DE FALHA
+set @rate,42;
+// EX 1: @rate == 100 = 42% de sair algum enchant, 58% falhar.
+// EX 2: @rate == 42 = 100% de chance de sair algum enchant, 0% de falhar.
+// EX 3: @rate == 12 = 100% de chance de sair algum enchant, 0% de falhar. Apenas enchants de nível 5 e 4.
+// ==============================================================
+set @sys,0; // Se o equipamento tiver slot, não fará o enchant.
+// 1 para não encantar se tiver slot, 0 para encantar independente.
+// ==============================================================
+mes .npc$;
+mes "Gostaria de refinar o seu equipamento, usando um tipo de magia negra desconhecida?";
+next;
+mes .npc$;
+mes "Você vai precisar de " + .item_amount + "x - "+getitemname(.item_id)+".";
+mes "Deseja usar os meus poderes mágicos?";
+next;
+switch(select("Sim","Não")) {
+case 1:
+mes .npc$;
+mes "Se seu equipamento tiver algum refinamento ou cartas, será tudo perdido no processo.";
+mes "Selecione o item que você quer encantar.";
+next;
+menu getequipname(1),PART1,getequipname(2),PART2,getequipname(3),PART3,getequipname(4),PART4,getequipname(5),PART5,
+getequipname(6),PART6,getequipname(7),PART7,getequipname(8),PART8,getequipname(9),PART9,getequipname(10),PART10,"Eu mudei de idea.",L_Cancel;
+PART1: set @part,1; goto M_Check;
+PART2: set @part,2; goto M_Check;
+PART3: set @part,3; goto M_Check;
+PART4: set @part,4; goto M_Check;
+PART5: set @part,5; goto M_Check;
+PART6: set @part,6; goto M_Check;
+PART7: set @part,7; goto M_Check;
+PART8: set @part,8; goto M_Check;
+PART9: set @part,9; goto M_Check;
+PART10: set @part,10; goto M_Check;
+PART11: goto L_Cancel;
+case 2: goto L_Cancel;
+}
+M_Check:
+if (getequipisequiped(@part)) {
+set .@item, getequipid(@part);
+mes .npc$;
+mes "Deseja encantar: "+getitemname(.@item)+"?";
+mes "Lembre-se que você só pode ter ^FF0000UM^000000 desse item no inventário.";
+next;
+switch(select("Sim","Não")) {
+case 1:
+if(countitem(.@item) > 1) {
+mes .npc$; mes "Você tem itens demais. Volte com apenas UM.";
+close;
+}
+if(countitem(.@item) == 0) {
+mes .npc$;
+mes "Você não tem nenhum item. Volte depois.";
+close;
+}
+if(countitem(.item_id) < .item_amount) {
+mes .npc$;
+mes "Você não " + getitemname(.item_id) + " suficiente. Volte aqui quando tiver " + .item_amount + "x - " + .item_amount + ".";
+close;
+}
+if(@sys == 1 && getitemslots(.@item) > 0) {
+mes .npc$; mes "O equipamento não pode haver nenhum slot.";
+close;
+}
+mes .npc$;
+mes "Okay, vamos lá!!!";
+next;
+callsub S_EnchantArmor,.@item,@rate;
+case 2: goto L_Cancel;
+}
+}
+mes .npc$;
+mes "Eu não posso encantar o ar...";
+close;
+S_EnchantArmor:
+set .npc$,"[^0000FF Mago Negro ^000000]";
+set @itemid,getarg(0);
+set @failrate,getarg(1);
+nude;
+set @enc_ran,rand(1,@failrate);
+delitem .item_id, .item_amount;
+delitem @itemid,1;
+//+5
+if (@enc_ran == 1) set @addpart,4823;
+else if (@enc_ran == 2) set @addpart,4820;
+else if (@enc_ran == 3) set @addpart,4821;
+else if (@enc_ran == 4) set @addpart,4822;
+else if (@enc_ran == 5) set @addpart,4823;
+else if (@enc_ran == 6) set @addpart,4843;
+//+4
+else if (@enc_ran == 7) set @addpart,4844;
+else if (@enc_ran == 8) set @addpart,4807;
+else if (@enc_ran == 9) set @addpart,4823;
+else if (@enc_ran == 10) set @addpart,4834;
+else if (@enc_ran == 11) set @addpart,4835;
+else if (@enc_ran == 12) set @addpart,4836;
+//+3
+else if (@enc_ran == 13) set @addpart,4837;
+else if (@enc_ran == 14) set @addpart,4732;
+else if (@enc_ran == 15) set @addpart,4733;
+else if (@enc_ran == 16) set @addpart,4734;
+else if (@enc_ran == 17) set @addpart,4735;
+else if (@enc_ran == 18) set @addpart,4812;
+//+2
+else if ((@enc_ran == 19) || (@enc_ran == 20)) set @addpart,4826;
+else if ((@enc_ran == 21) || (@enc_ran == 22)) set @addpart,4827;
+else if ((@enc_ran == 23) || (@enc_ran == 24)) set @addpart,4712;
+else if ((@enc_ran == 25) || (@enc_ran == 26)) set @addpart,4713;
+else if ((@enc_ran == 27) || (@enc_ran == 28)) set @addpart,4714;
+else if ((@enc_ran == 29) || (@enc_ran == 30)) set @addpart,4715;
+//+1
+else if ((@enc_ran == 31) || (@enc_ran == 32)) set @addpart,4700;
+else if ((@enc_ran == 33) || (@enc_ran == 34)) set @addpart,4701;
+else if ((@enc_ran == 35) || (@enc_ran == 36)) set @addpart,4702;
+else if ((@enc_ran == 37) || (@enc_ran == 38)) set @addpart,4703;
+else if ((@enc_ran == 39) || (@enc_ran == 40)) set @addpart,4796;
+else if ((@enc_ran == 41) || (@enc_ran == 42)) set @addpart,4801;
+else {
+specialeffect2 EF_SUI_EXPLOSION;
+mes .npc$;
+mes "Bem, isso é muito ruim.";
+mes "Não consegui encantar seu equipamento.";
+close;
+}
+specialeffect2 EF_REPAIRWEAPON;
+mes .npc$;
+mes "Parece que tudo ocorreu bem.";
+mes "Você recebeu um adicional de: "+getitemname(@addpart);
+mes "Tome seu item!";
+getitem2 @itemid, 1, 1, 0, 0, 0, 0, 0, @addpart;
+close;
+L_Cancel:
+mes .npc$;
+mes "Okay. Volte quando precisar de algo.";
+close;
+}

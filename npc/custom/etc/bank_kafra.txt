@@ -1,0 +1,125 @@
+//
+//========================================================================
+//---------------------------- rAthena Script ----------------------------
+//=                      ___   __  __                                     
+//=                _____/   | / /_/ /_   ___   ____   _____               
+//=               / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `//             
+//=              / /  / ___ / /_/ / / /  __/ / / / // /_/ //              
+//=             /_/  /_/  |_\\_/_/ /_/\\____/_/ /_/\\__,_//               
+//=                                      RagnaERO Scripts                 
+//=                                                                       
+//---------------------- http://rathena.org/board/ -----------------------
+//========================================================================
+//----- NOME DO SCRIPT ---------------------------------------------------
+//= banco_kafra.txt
+//----- POR: -------------------------------------------------------------
+//= Equipe de Desenvolvimento rAthena
+//----- VERSÃO ATUAL DO SCRIPT: ------------------------------------------
+//= v1.2a
+//----- DESCRIÇÃO: -------------------------------------------------------
+//= O 2º Banco de Prontera (com rendimento diário de 0,01%!) 
+//= Veja esta fórmula e configure seus juros diários do banco.
+//   # kafrabank / 1000 = 0,1% de juros por dia. 
+//   # kafrabank / 100 = 1% de juros por dia. 
+//   # kafrabank / 10 = 10% de juros por dia.
+//----- COMENTÁRIOS ADICIONAIS: ------------------------------------------
+//= Projeto rAthena Pt-BR
+//= Tradução e Revisão Pt-Br Por [ADM] Eragonat PK
+//========================================================================
+
+-	script	Bank Clerk::bankg	833,{
+	mes"[Maniss]";
+	mes strcharinfo(0)+", Seja Bem-vind"+(Sex?"o":"a")+"(a) ao 2º Banco de Prontera!";
+
+	set @kb_int,(gettime(MONTH)*31)+gettime(DAYOFMONTH); //Número de hoje
+	set @income,0;
+	//calculo %
+	if (#kafrabank<=0 || #kb_int>=@kb_int) goto L_NoIncomeToday;
+	set @income,(#kafrabank/1000)*(@kb_int-#kb_int); //@income == % da soma
+	//max income constant:
+	if (@income>100000) set @income,100000;
+L_NoIncomeToday:
+	set #kb_int,@kb_int; //Reseta o tempo dos dias
+
+	if(#kafrabank==0) mes "Nós poderíamos abrir uma conta para você.";
+	if(@income>0) mes "Renda de hoje: ^135445" + @income + "^000000 zeny(s).";
+	set #kafrabank,#kafrabank+@income;
+	if(#kafrabank>0) mes "Sua conta: ^135445" + #kafrabank + "^000000 zeny(s).";
+	mes "O que você gostaria?";
+	next;
+	if(#kafrabank==0) menu "- Abrir uma Conta",-,"- Sair",B_EXIT2;
+	if(#kafrabank>0) menu "- Depositar Dinheiro",-,"- Retirar Dinheiro",M_WITHDRAW,"- Sair",B_EXIT2;
+
+	mes"[Maniss]";
+	mes "Por favor, me diga quanto zeny você gostaria de depositar.";
+	next;
+	if(input(@kafrabank) == 1) goto L_TOO_BIG_AMOUNT;
+
+	if(@kafrabank<1000) goto L_LESS_1000;
+	if(@kafrabank>zeny) goto L_NOT_ENOUGH;
+	set Zeny, Zeny-@kafrabank;
+	set #kafrabank,#kafrabank+@kafrabank;
+	mes"[Maniss]";
+	mes "Você fez um depósito de ^135445" + @kafrabank + " zeny(s)^000000.";
+	//Registramos essas operações zeny no log db
+	logmes "Banco %: " + @income +"z, Depósito: "+ @kafrabank +"z, Final: "+ #kafrabank +"z";
+	goto B_EXIT;
+
+M_WITHDRAW:
+	if(#kafrabank==0) goto L_ZERO_ACCOUNT;
+	mes"[Maniss]";
+	mes "Sua conta: ^135445" + #kafrabank + "^000000 zeny(s).";
+	mes "Quanto zeny você gostaria de retirar?";
+	next;
+	if(input(@kafrabank) == 1) goto L_TOO_BIG_AMOUNT;
+
+	if(@kafrabank<1) goto B_EXIT2;
+	if(@kafrabank>#kafrabank) goto L_NOT_ENOUGH;
+	set #kafrabank,#kafrabank-@kafrabank;
+	set Zeny, Zeny+@kafrabank;
+	mes"[Maniss]";
+	mes "Aqui está o seu(s) ^135445" + @kafrabank + "z^000000, coloque a sua assinatura aqui...";
+	//Registramos essas operações zeny no log db
+	logmes "Banco %: " + @income +"z, Saque: "+ @kafrabank +"z, Final: "+ #kafrabank +"z";
+	goto B_EXIT;
+
+L_NOT_ENOUGH:
+	mes"[Maniss]";
+	mes "Você não tem zeny suficiente para realizar esta operação.";
+	next;
+	goto B_EXIT2;
+
+L_ZERO_ACCOUNT:
+	mes"[Maniss]";
+	mes "Você não tem nenhum zeny na sua conta!";
+	next;
+	goto B_EXIT2;
+
+L_TOO_BIG_AMOUNT:
+	mes"[Maniss]";
+	mes "Desculpe. O depósito máximo que você pode fazer em sua conta é 10.000.000 de zenys.";
+	next;
+	goto B_EXIT2;
+
+L_LESS_1000:
+	mes"[Maniss]";
+	mes "Lamentamos informar, que a quantidade mínima de zeny que você pode depositar é de 1.000 zenys.";
+	next;
+	goto B_EXIT2;
+
+B_EXIT:
+	mes "Muito bem... Volte logo!";
+	next;
+
+B_EXIT2:
+	mes"[Maniss]";
+	mes "Obrigado por usar o nosso serviço bancário. Esperamos vê-lo novamente em breve.";
+	close;
+}
+
+prontera,131,216,5	duplicate(bankg)	Funcionário do Banco#1-1	833  //Novo local adicionado pelo [ADM] Eragonat PK.
+
+//prontera,131,190,1	duplicate(bankg)	Funcionário do Banco#1-1	833  //Local Original
+geffen,125,73,3	duplicate(bankg)	Funcionário do Banco#2-1	833
+izlude,145,107,1	duplicate(bankg)	Funcionário do Banco#3-1	833
+morocc,147,84,7	duplicate(bankg)	Funcionário do Banco#4-1	833

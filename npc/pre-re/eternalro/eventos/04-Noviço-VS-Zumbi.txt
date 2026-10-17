@@ -1,0 +1,131 @@
+-	script	announce_nvz	-1,{
+
+// beginning Time
+
+OnClock1754:
+OnClock0000:
+OnClock1423:
+OnClock1620:
+OnClock1930:
+OnClock2317:
+OnClock0234:
+
+announce "O Evento aprendiz vs zumbi irá começar em 3 minutos",0;
+killmonsterall "quiz_01";
+disablenpc "Brinde";
+sleep 5000;
+announce "Fale com o NPC ' Zumbi ' digite @evento ",0;
+enablenpc "Novice vs. Zombie";
+sleep 55000;
+announce "O evento aprendiz vs zumbi irá começar em 2 minutos !",0;
+sleep 60000;
+announce "Resta 1 minuto para o evento Aprendiz vs Zumbi. ",0;
+sleep 30000;
+mapannounce "quiz_01","O Evento irá começar em 30 segundos, corra !",0;
+sleep 25000;
+announce "~5~",0;
+sleep 1000;
+announce "~4~",0;
+sleep 1000;
+announce "~3~",0;
+sleep 1000;
+announce "~2~",0;
+sleep 1000;
+announce "~1~",0;
+sleep 1000;
+announce "Que comece o evento.",0,0x00FF00;
+monster "quiz_01",42,369,"Zombie",1036,1;
+disablenpc "Novice vs. Zombie";
+sleep 10000;
+monster "quiz_01",42,369,"Zombie-2",1036,2;
+sleep 10000;
+monster "quiz_01",42,369,"Zombie-3",1036,2;
+sleep 10000;
+monster "quiz_01",42,369,"Zombie-4",1036,3;
+initnpctimer;
+end;
+
+OnTimer5000:
+if ( getmapusers("quiz_01") == 0 )
+{
+killmonsterall "quiz_01";
+announce "O Evento acabou, todos os sobreviventes foram mortos.",0;
+disablenpc "Brinde";
+stopnpctimer;
+end;
+}
+else if ( getmapusers("quiz_01") > 1 )
+{
+mapannounce "quiz_01",getmapusers("quiz_01") +"Restantes.",0,0x00FF00;;
+initnpctimer;
+end;
+}
+initnpctimer;
+end;
+
+OnPCDieEvent:
+getmapxy .@mapnvz$,.@xnvz,.@ynvz,0;
+if ( .@mapnvz$ == "quiz_01") {
+sleep2 1;
+warp "prontera",156,223;
+atcommand "@alive "+ strcharinfo(0);
+dispbottom "Você foi infectado";
+}
+sleep2 1000;
+if ( .@mapnvz$ == "quiz_01" && getmapusers("quiz_01") == 1 ) {
+killmonsterall "quiz_01";
+mapannounce "quiz_01","Sobrevivente !",0;
+enablenpc "Brinde";
+stopnpctimer;
+end;
+}
+end;
+}
+
+quiz_01,42,369,3	script	Brinde	72,{
+if (sex == 1) {
+announce "O jogador" + strcharinfo (0) + "sobreviveu ao apocalipse",0;
+}
+else {
+announce "A jogadora" + strcharinfo (0) + "sobreviveu ao apocalipse",0;
+};
+getitem 12130,4;
+warp "prontera",156,223;
+sleep2 250;
+disablenpc "Brinde";
+end;
+}
+
+que_temsky,35,136,3	script	Novice vs. Zombie	1015,{
+if (BaseLevel > 1) goto NO;
+if (class == 0) goto event;
+if (class > 0) goto NO;
+event:
+mes "[^0000FFZumbi^000000]";
+mes "Deseja participar do evento?";
+next;
+switch(select("Sim","Não")) {
+case 1:
+atcommand "@storeall";
+atcommand "@adjgmlvl 0 "+ strcharinfo(0) +"";
+sc_end SC_ALL;
+sc_start SC_DECREASEAGI,300000,10;
+percentheal 100,100;
+warp "quiz_01",42,369;
+end;
+break;
+case 2:
+mes "[^0000FFZumbir^000000]";
+mes "Fraco";
+close;
+break;
+NO:
+mes "[^0000FFZumbi^000000]";
+mes "Você deve ser um aprendiz nivel 1.";
+close;
+}
+OnInit:
+disablenpc "Novice vs. Zombie";
+disablenpc "Brinde";
+end;
+}

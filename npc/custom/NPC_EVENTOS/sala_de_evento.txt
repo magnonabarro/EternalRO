@@ -1,0 +1,38 @@
+-	script	go_evento	-1,{
+    OnInit:
+        bindatcmd("evento",strnpcinfo(0)+"::Onevento",0,99);
+        end;
+
+	Onevento:
+
+		atcommand "@warp sec_in01 169 162";
+        dispbottom "Prontinho, divirta-se";
+
+}
+
+new_1-2,99,69,0	warp	ev01	2,2,prontera,155,177
+
+new_1-2	mapflag	nomemo
+//new_1-2	mapflag	nowarp
+//new_1-2	mapflag	nowarpto
+new_1-2	mapflag	noicewall
+new_1-2	mapflag	nosave
+new_1-2	mapflag	noreturn
+new_1-2	mapflag	noteleport
+new_1-2	mapflag	nobranch
+
+//prontera,176,179,2	script	Sala de Eventos	715,{
+//	mes "Olá "+StrCharInfo(0)+"!";
+//	mes "Deseja ir para algum dos lugares abaixo?";
+//	next;
+//	switch(select("Sala de Eventos")){
+//		case 1:
+//			mes "Até mais!";
+//			close2;
+//			warp "sec_in01",169,162;
+//			end;
+//OnInit:
+//waitingroom "Sala de Eventos",0;	
+//end;
+//	}
+//}

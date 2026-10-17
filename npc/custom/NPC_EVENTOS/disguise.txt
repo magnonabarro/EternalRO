@@ -1,0 +1,235 @@
+//===== Hercules Script ======================================
+//= Evento Disguise
+//===== By: ==================================================
+//= GmOcean
+//===== Versão atual: =====================================
+//= 5.2
+//===== Compativel Com: ===================================== 
+//= Hercules/Cronus-Emulator
+//===== Comentários Adicionais: =============================  
+//= Nota: Este script requer PCRE para funcionar adequadamente.
+//= 5.0 Última atualização por GmOcean.
+//= 5.1 Limpo e padronizado, principalmente. [Euphy]
+//= 5.2 Traduzido para PT/BR por KiiLiN(ADM Milk)
+//============================================================
+
+sec_in01,176,170,4	script	Evento Disguise	4_M_NFDEADMAN,{
+
+	//Atualmente definido para ser executado cada duas horas.
+	//Para mudar os tempos, editar os rótulos OnClock abaixo.
+
+	set .@GMLevel,99;	// GM level required to access NPC.
+	set .@n$,"[^0000FFEvento Disguise^000000]";
+
+	if (getgmlevel()>=.@GMLevel) {
+		mes .@n$;
+		mes "Selecione uma opção.";
+		next;
+		switch(select("Ligar / Desligar Evento:Configurações de Eventos")) {
+		case 1:
+			mes .@n$;
+			if (.EventON) {
+				mes "O evento está atualmente: [^0000FFLigado^000000]";
+				mes "Gostaria de desligá-lo?";
+			} else {
+				mes "O evento está atualmente: [^FF0000ODesligado^000000]";
+				mes "Gostaria de ligá-lo?";
+			}
+			if(select("Yes:No")==2) close;
+			if (.EventON) {
+				set .EventON,0; set .timer,0;
+				setnpctimer 0; stopnpctimer;
+				announce "A Staff decidiu transformar o evento Disguise off. Como resultado, não há mais prémios.",bc_map | bc_blue;
+				deletepset 1;
+				setnpcdisplay "Evento Disguise",795;
+				close;
+			}
+			set .EventON,1; set .timer,1; setnpctimer 0; initnpctimer;
+			set .ResetCounter,.ResetCounter+1;
+			announce "O evento Disguise começará em 3 minutos.",bc_all | bc_blue;
+			announce "[Evento Disguise] Evento Começou Corra Pra sala de eventos para participar!.",bc_all | bc_blue;
+			close;
+		case 2:
+			mes .@n$;
+			mes "Escolha uma configuração para modificar.";
+			next;
+			switch(select("Configurações de Monstros:Número de rodadas:Configurações do Prêmio")) {
+			case 1:
+				setarray .@r$[0],"Disguise como todos os monstros.","Disguise só como MVPs.";
+				mes .@n$;
+				mes "Escolha o Disguise.";
+				next;
+				set .Rule, select(implode(.@r$,":"));
+				mes .@n$;
+				mes "O Disguise foi definido:";
+				mes "  > ^0055FF"+.@r$[.Rule-1]+"^000000";
+				close;
+			case 2:
+				mes .@n$;
+				mes "Introduza o número de rodadas que você deseja que o evento tenha.";
+				mes "número atual: [^0000FF"+.Rounds+"^000000]";
+				next;
+				input .@Rounds;
+				set .Rounds,.@Rounds;
+				mes .@n$;
+				mes "O número de rodadas foi alterado para "+.Rounds+".";
+				close;
+			case 3:
+				mes .@n$;
+				mes "Coloque o ID do Prêmio.";
+				mes "item atual: [^0000FF"+getitemname(.Prize)+"^000000] (ID#"+.Prize+")";
+				next;
+				input .@Prize;
+				mes .@n$;
+				if (getitemname(.@Prize)=="" || getitemname(.@Prize)=="null") {
+					mes "Esse item não existe. Por favor, tente novamente.";
+					close;
+				}
+				set .Prize,.@Prize;
+				mes "A Quantia a ser dada.";
+				next;
+				input .@amount;
+				mes .@n$;
+				if (.@amount<=0 || .@amount>=10000) {
+					mes "Oque você citou é invalido . Usando Relação Padrão 1.";
+					set .@amount,1;
+					next;
+					mes .@n$;
+				}
+				set .PrizeAmt,.@amount;
+				mes "O Prêmio foi alterada com sucesso.";
+				mes "Prize: "+.PrizeAmt+"x [^0000FF"+getitemname(.Prize)+"^000000]";
+				close;
+			}
+		}
+	}
+	if (.EventON) end;
+	mes .@n$;
+	mes "Bem Vindo.";
+	mes "Como posso ser útil?";
+	if(select("Informações:Nada,só de passagem.")==2) close;
+	next;
+	mes .@n$;
+	mes "Este evento é bastante simples.";
+	mes "No início do evento, vou";
+	mes "me disfarçar como um qualquer";
+	mes "monstro. Você tem que gritar";
+	mes "qual o nome do monstro em voz alta.";
+	next;
+	mes "Se você estiver correto, você receberá";
+	mes "um prêmio. Se não, continue tentando!";
+	mes "Isso é tudo o que há para este evento.";
+	close;
+
+OnInit:
+	set .EventON,0;
+	set .Wait,0;
+	set .Winner,0;
+	set .ResetCounter,0;
+	set .Rounds,10;
+	set .Prize,35055;
+	set .PrizeAmt,1;
+	set .Rule,1;
+	setarray .MVP[0],1038,1039,1046,1059,1086,1087,1112,1115,1147,1150,1157,1159,1190,1251,1252,1272,1312,1373,
+	                  1389,1399,1418,1492,1502,1511,1583,1623,1630,1646,1647,1648,1649,1650,1651,1658,1685,1688,
+				   1708,1719,1734,1751,1768,1779,1785,1802,1832,1871,1874,1885,1917,1980,2022,2068;
+	set .BlackList$, "1023,1045,1074,1076,1187,1207,1208,1209,1210,1219,1495,2027,2030,2031,2042,2045,2046,2047,2049," + 
+	    "2057,2076,2077,2078,2081";
+	end;
+OnClock0830:
+OnClock1030:
+OnClock1230:
+OnClock1430:
+OnClock1630:
+OnClock1830:
+
+
+
+
+	set .ResetCounter,.ResetCounter+1;
+	set .EventON,1;
+	set .timer,1;
+	set .Wait,1;
+	announce "O evento Disguise começará em 3 minutos.",bc_all | bc_blue;
+	announce "[Evento Disguise] EVENTO COMEÇOU !",bc_all | bc_blue;
+	setnpctimer 0;
+	initnpctimer;
+	end;
+OnTimer10000:
+	if (.timer || .Change) end;
+	set .Wait,0;
+	goto iDisguise;
+	end;
+OnTimer30000:
+	if (.timer) end;
+	set .Change,0;
+	setnpcdisplay "Evento Disguise",795;
+	npctalk "Você demorou muito para adivinhar o que eu era. Por favor, aguarde 10 segundos, enquanto eu vou me disfarçar novamente.";
+	specialeffect 725;
+	set $MonsterName$,"";
+	deletepset 1;
+	stopnpctimer;
+	setnpctimer 0;
+	initnpctimer;
+	end;
+OnTimer60000:
+	if (.timer!=1) end;
+	announce "O evento Disguise começará em 2 minutos.",bc_all | bc_blue;
+	announce "[Evento Disguise] Evento Começou Corra Pra sala de eventos para participar!.",bc_all | bc_blue;
+	end;
+OnTimer120000:
+	if (.timer!=1) end;
+	announce "O evento Disguise começará um minuto.",bc_all | bc_blue;
+	announce "[Evento Disguise] Evento Começou Corra Pra Pra sala de eventos para participar!",bc_all | bc_blue;
+	end;
+OnTimer180000:
+	if (.timer!=1) end;
+	announce "O evento Disguise começou!",bc_all | bc_blue;
+	announce "[Evento Disguise] Evento Começou Corra Pra Pra sala de eventos para participar!",bc_all | bc_blue;
+	set .timer,0; stopnpctimer;
+	setnpctimer 0; initnpctimer;
+iDisguise:
+	if (.Rule==1) {
+		set .Winner,0;
+		set .Monster,1000+rand(1,995);
+		if (compare(","+.BlackList$+"," , ","+.Monster+",")) goto iDisguise;
+		if (.Monster==.LastMonster) goto iDisguise;
+		set .LastMonster,.Monster;
+		set $MonsterName$,getmonsterinfo(.Monster,0);
+	}
+	if (.Rule==2) {
+		set .Winner,0;
+		set .Monster,rand(49);
+		set $MonsterName$,getmonsterinfo(.MVP[.Monster],0);
+	}
+	deletepset 1;
+	defpattern 1,"([^:]+):.\\s*"+$MonsterName$+".*", "iCorrect";
+	activatepset 1;
+	if (.Rule==1) setnpcdisplay "Evento Disguise",.Monster;
+	if (.Rule==2) setnpcdisplay "Evento Disguise",.MVP[.Monster];
+	set .Change,1;
+	setnpctimer 0;
+	end;
+iCorrect:
+	if (.Winner) {
+		dispbottom "Alguém já ganhou esta rodada.";
+		end;
+	}
+	set .Winner,1;
+	set .RoundCount,.RoundCount+1;
+	deletepset 1;
+	activatepset 1;
+	getitem .Prize,.PrizeAmt;
+	announce strcharinfo(0)+" está correto! Eu estava disfarçado como: "+$MonsterName$+"",bc_map | bc_blue;
+	if (.RoundCount>=.Rounds) {
+		setnpcdisplay "Evento Disguise",795;
+		set .RoundCount,0; set .Change,0; set .EventON,0;
+		setnpctimer 0; stopnpctimer;
+		npctalk "Obrigado a todos por jogar. Essa foi a última rodada do Evento Disguise. Venha jogar novamente mais tarde.";
+		end;
+	}
+	setnpcdisplay "Evento Disguise",795;
+	set .Change,0;
+	setnpctimer 0;
+	end;
+}

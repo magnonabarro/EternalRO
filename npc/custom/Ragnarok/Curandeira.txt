@@ -1,0 +1,96 @@
+//===== Cronus Script ===================================================
+//= Buffer VIP e não VIP
+//===== Criado para: ====================================================
+//= Projeto AerieRO.
+//===== Por: ============================================================
+//= Slicer
+//===== Versão Atual: ===================================================
+//= 0.4
+//===== Descrição: ======================================================
+//= Da buffs nos jogadores, diferenciando os grupos entre vips e comuns.
+//===== Changelog: ======================================================
+//= 0.1 - Script criado
+//= 0.2 - Adicionado checagem de level.
+//= 0.3 - Atualizado para checagem de grupos.
+//= 0.4 - Adicionado efeito.
+//= 0.4.1 - Criado diversas duplicatas nas principais cidades.
+//=======================================================================
+
+-	script	Healer	-1,{
+
+	.@Price = 0;	// Zeny required for heal
+	.@Buffs = 0;	// Also buff players? (1: yes / 0: no)
+	.@Delay = 0;	// Heal delay, in seconds
+
+	if (@HD > gettimetick(2))
+		end;
+	if (.@Price) {
+		message strcharinfo(0), "Healing costs " + callfunc("F_InsertComma",.@Price) + " Zeny.";
+		if (Zeny < .@Price)
+			end;
+		if (select("^0055FFHeal^000000:^777777Cancel^000000") == 2)
+			end;
+		Zeny -= .@Price;
+	}
+	sc_start SC_INCREASEAGI,240000,10;
+	sc_start SC_BLESSING,240000,10;
+	specialeffect2 EF_HEAL2;
+	percentheal 100,100;
+	if (.@Buffs) {
+		specialeffect2 EF_INCAGILITY;
+		sc_start SC_INCREASEAGI,240000,10;
+		specialeffect2 EF_BLESSING;
+		sc_start SC_BLESSING,240000,10;
+	}
+	if (.@Delay)
+		@HD = gettimetick(2) + .@Delay;
+end;
+	
+	OnInit:
+waitingroom "Curandeira",0;	
+end;
+
+}
+
+
+// Duplicates
+//============================================================
+alberta,25,240,6	duplicate(Healer)	Curandeira#alb	569
+aldebaran,135,118,6	duplicate(Healer)	Curandeira#alde	569
+amatsu,200,79,4	duplicate(Healer)	Curandeira#ama	569
+ayothaya,207,169,6	duplicate(Healer)	Curandeira#ayo	569
+comodo,184,158,6	duplicate(Healer)	Curandeira#com	569
+einbech,57,36,6	duplicate(Healer)	Curandeira#einbe	569
+einbroch,57,202,6	duplicate(Healer)	Curandeira#einbr	569
+geffen,115,72,6	duplicate(Healer)	Curandeira#gef	569
+gonryun,156,122,6	duplicate(Healer)	Curandeira#gon	569
+hugel,89,150,6	duplicate(Healer)	Curandeira#hug	569
+izlude,121,150,6	duplicate(Healer)	Curandeira#izl	569	//Pre-RE: (125,118)
+jawaii,250,139,4	duplicate(Healer)	Curandeira#jaw	569
+lighthalzen,149,100,6	duplicate(Healer)	Curandeira#lhz	569
+louyang,226,103,4	duplicate(Healer)	Curandeira#lou	569
+manuk,272,144,6	duplicate(Healer)	Curandeira#man	569
+mid_camp,203,289,6	duplicate(Healer)	Curandeira#mid	569
+moc_ruins,72,164,4	duplicate(Healer)	Curandeira#moc	569
+morocc,153,97,6	duplicate(Healer)	Curandeira#mor	569
+moscovia,220,191,4	duplicate(Healer)	Curandeira#mos	569
+niflheim,212,182,5	duplicate(Healer)	Curandeira#nif	569
+payon,179,106,4	duplicate(Healer)	Curandeira#pay	569
+prontera,159,193,4	duplicate(Healer)	Curandeira#prt	569
+rachel,125,116,6	duplicate(Healer)	Curandeira#rac	569
+splendide,201,153,4	duplicate(Healer)	Curandeira#spl	569
+thor_camp,249,74,4	duplicate(Healer)	Curandeira#thor	569
+umbala,105,148,3	duplicate(Healer)	Curandeira#umb	569
+veins,217,121,4	duplicate(Healer)	Curandeira#ve	569
+xmas,143,136,4	duplicate(Healer)	Curandeira#xmas	569
+yuno,164,45,4	duplicate(Healer)	Curandeira#yuno	569
+
+// Duplicates (Renewal)
+//============================================================
+brasilis,194,221,6	duplicate(Healer)	Curandeira#bra	569
+dewata,195,187,4	duplicate(Healer)	Curandeira#dew	569
+dicastes01,201,194,4	duplicate(Healer)	Curandeira#dic	569
+ecl_in01,45,60,4	duplicate(Healer)	Curandeira#ecl	569
+malangdo,132,114,6	duplicate(Healer)	Curandeira#mal	569
+malaya,227,204,6	duplicate(Healer)	Curandeira#ma	569
+mora,55,152,4	duplicate(Healer)	Curandeira#mora	569

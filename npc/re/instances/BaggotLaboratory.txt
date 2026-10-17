@@ -1,0 +1,476 @@
+// Frase coreana para manter a codificacao como EUC-KR.
+//===== rAthena Script =======================================
+//= 2 Instances:
+// - Baggot Laboratory
+// - Simulation Battle
+//===== Description: =========================================
+//- [Walkthrough conversion]
+//- Instance of episode 19 (same map).
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Baggot Laboratory
+// ------------------------------
+
+// Main Quest: Step 58
+jor_dun03,57,63,3	script	Junkea#ep19re2::ep19_jor_dun03_57_63	4_EP19_JUNCEA,{
+	if (ep19_main == 49) {	// Step 58
+		cutin "ep19_juncea04.png",2;
+        mes "[Junquea]";
+		mes "Oh, preciso de falar contigo em privado, Seneciogand. Pode ser?";
+		next;
+		cutin "",255;
+		mes "- Vamos formar um grupo de ^0000FF1 e ouvir o que Junquea tem para dizer.^000000 -";
+		erasequest 16659;
+		setquest 16660;
+		ep19_main = 50;
+		close;
+	}
+	if (ep19_main == 50) {
+		if (is_party_leader() == false) {
+			mes "[Junkea]";
+			mes "So posso abrir a passagem secreta para os lideres dos partidos. Por favor, peca ao lider do seu partido para falar comigo.";
+			close;
+		}
+		.@md_name$ = "Vagot's Lab";
+		switch( select( "Preparar para entrar no laboratorio de Vagot", "Entrar no laboratorio de Vagot" ) ) {
+		case 1:
+			if (is_party_leader() == false) {
+				mes "[Junkea]";
+				mes "So posso abrir a passagem secreta para os lideres dos partidos. Por favor, peca ao lider do seu partido para falar comigo.";
+				close;
+			}
+			mes "- ^0000ffEsta agora pronto para entrar. Quando estiver pronto, prima o botao Enter Lab no bargot para entrar.^000000 -";
+			instance_create(.@md_name$);
+			close;
+		case 2:
+			if (is_party_leader() == false) {
+				mes "[Junkea]";
+				mes "So posso abrir a passagem secreta para os lideres dos partidos. Por favor, peca ao lider do seu partido para falar comigo.";
+				close;
+			}
+			switch( instance_enter(.@md_name$) ) {
+			case IE_OTHER:
+				mes "Ocorreu um erro desconhecido.";
+				close;
+			case IE_NOINSTANCE:
+				mes "- ^0000ffA masmorra memorial nao foi criada, por favor verifique novamente.^000000 -";
+				close;
+			case IE_NOMEMBER:
+				mes "[Junkea]";
+				mes "^ff0000Apenas um membro do grupo pode entrar na Masmorra Memorial.^000000";
+				close;
+			case IE_OK:
+				// warp "1@jorlab",57,45;
+				end;
+			}
+			end;
+		}
+		end;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(16659) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "isbegin_quest(16660) == 1" );
+	end;
+}
+
+
+1@jorlab,1,1,0	script	#jorlab_main	-1,{
+	end;
+OnInstanceInit:
+	'map_jorlab$ = instance_mapname("1@jorlab");
+	'event = 0;
+	.@md_name$ = "Vagot's Lab";
+
+	disablenpc instance_npcname("ep19_jorlab_58_67_B");
+
+	if (instance_live_info(ILI_NAME) == .@md_name$)	// Baggot Laboratory
+		disablenpc instance_npcname("ep19_jorlab_58_67_C");
+	else {	// Simulation
+		disablenpc instance_npcname("#jorlab_hw1");
+		disablenpc instance_npcname("ep19_jorlab_58_67_A");
+	}
+	end;
+}
+
+1@jorlab,58,45,0	script	#jorlab_hw1	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	disablenpc();
+	if (ep19_main == 50) {
+		if ('event != 0)
+			end;
+		if (is_party_leader() == false)
+			end;
+		enablenpc instance_npcname("ep19_jorlab_58_67_A");
+		end;
+	}
+	end;
+}
+
+// Main Quest: Step 59
+1@jorlab,58,67,3	script	Junkea#ep19re3::ep19_jorlab_58_67_A	4_EP19_JUNCEA,{
+	if (ep19_main != 50)
+		end;
+	if (is_party_leader() == false)
+		end;
+	.@npc_name$ = instance_npcname("ep19_jorlab_58_67_A");
+	if ('event == 0) {
+		cutin "ep19_juncea04.png",2;
+		mes "[Junkea]";
+		mes "Ah, ca estamos nos. Seneciogand. Bem-vindos.";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "De que e que estao a falar?";
+		mes "Tambem tinha uma pergunta a fazer ao homem da Junkea.";
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[Junkea]";
+		mes "Ah, bem me parecia.";
+		mes "Mas oucam-me primeiro.";
+		next;
+		mes "[Junkea]";
+		mes "Isso da muito trabalho, tu.";
+		mes "Vou ter dificuldade em ser um inadaptado.";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "O que queres dizer? O que se passa? E estranho, Junkea, humano. Tenho medo.";
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[Junkea]";
+		mes "De que e que tens medo? Tens sido tao bom a ser amigavel. Porque e que de repente estas outra vez com medo?";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Nao fingi ser amigavel porque queria mesmo conhecer Junkea, a humana.";
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[Junkea]";
+		mes "Hoo-hoo, entao tens estado a trabalhar arduamente para que eu diga coisas desagradaveis sobre ti, essa e uma boa maneira, essa e uma boa maneira";
+		mes "Nao ha maneira mais rapida de nos darmos bem do que praguejar contra a mesma pessoa";
+		next;
+		mes "[Junkea]";
+		mes "Mas escolhi o tipo errado. Estupidamente";
+		next;
+		mes "[Junkea]";
+		mes "Achas que... o grande... Bagot... vai... cair em truques tao superficiais...?";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "(Junkea e estranho..., sera que Bagot fez alguma coisa?)";
+		next;
+		cutin "ep19_juncea04.png",2;
+		mes "[Junkea]";
+		mes "Mesmo que tenhas fugido... ja estas na palma da mao do Bagot-sama";
+		next;
+		cutin "ep19_juncea00.png",1;
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA_M );
+		mes "[Junkea]";
+		mes "Eu trato de... aqui...!";
+		next;
+		cutin "",255;
+		mes "[" + strcharinfo(0) + "]";
+		mes "(...nao ha tempo para pedir ajuda a alguem! Tens de fazer algo sozinho!)";
+		if ('event == 0)
+			'event = 1;
+		close;
+	}
+	if ('event == 1) {
+		cutin "ep19_juncea04.png",2;
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA );
+		mes "[Junkea]";
+		mes "Aaah... aaahhhh!";
+		next;
+		cutin "ep19_juncea00.png",1;
+		sleep2 500;
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA_M );
+		mes "[Junkea]";
+		mes "Tudo... significa... para... Bagot-sama...!";
+		next;
+		cutin "ep19_juncea04.png",2;
+		sleep2 500;
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA );
+		mes "[Junkea]";
+		mes "Aaaahhhhh!";
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA_M );
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA );
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA_M );
+		sleep2 500;
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA );
+		next;
+		cutin "ep19_juncea00.png",1;
+		sleep2 500;
+		setnpcdisplay( .@npc_name$, 4_EP19_JUNCEA_M );
+		mes "[Junkea]";
+		mes "Como tu dizes... eu vou retaliar!";
+		close2;
+		if ('event != 1)
+			end;
+		'event = 2;
+		cutin "",255;
+		disablenpc();
+		donpcevent instance_npcname("jorlab_boss") + "::OnStart";
+		end;
+	}
+	end;
+}
+
+1@jorlab,1,1,0	script	jorlab_boss	-1,{
+	end;
+OnStart:
+	sleep 500;
+	monster 'map_jorlab$,58,67,"--ja--",21532,1, instance_npcname("jorlab_boss") + "::OnMobDead";	// EP19_MD_JUNCEA
+	end;
+OnMobDead:
+	if ('event != 2)
+		end;
+	'event = 3;
+	enablenpc instance_npcname("ep19_jorlab_58_67_B");
+	end;
+}
+
+
+// Main Quest: Step 60
+1@jorlab,58,67,3	script	Junkea#ep19re4::ep19_jorlab_58_67_B	4_EP19_JUNCEA_D,{
+	if (ep19_main != 50) {
+		warp "icecastle",27,123;
+		end;
+	}
+	if ('event != 3)
+		end;
+	if (is_party_leader() == false)
+		end;
+	mes "[" + strcharinfo(0) + "]";
+	mes "(Consegui subjuga-lo. Junkea perdeu a cabeca...)";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "(Caramba... o que e que fizeste a Junkea, ela esta completamente monstruosa?)";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "(De acordo com o teu plano, devias te-la persuadido a vir contigo, mas acho que vais ter de a levar, mesmo neste estado)";
+	mapannounce 'map_jorlab$, "Vagot : Caramba, se calhar usar Junkea como recipiente nao foi suficiente.", bc_map, 0xFFFF;
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "(E para Junkea, usei o pergaminho de transformacao de Legane como planeado...)";
+	mapannounce 'map_jorlab$, "Vargot: As previsoes de Vargot estao erradas desta vez.", bc_map, 0xFFFF;
+	next;
+	setnpcdisplay( instance_npcname("ep19_jorlab_58_67_B"), 4_EP19_RGAN_R1 );
+	mes "[" + strcharinfo(0) + "]";
+	mes "(Por agora, vamos leva-lo de volta a cidade.)";
+	mapannounce 'map_jorlab$, "Vagabond: A proposito, nao acredito que exista um pergaminho como este... Eu sabia que estava a enganar o Vagabond, mas a existencia de tal coisa e divertida.", bc_map, 0xFFFF;
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "(Acho que ouvi qualquer coisa... mas devo ter ouvido mal?)";
+	mapannounce 'map_jorlab$, "Bagot: Hoohoo.", bc_map, 0xFFFF;
+	erasequest 16660;
+	setquest 16661;
+	ep19_main = 51;
+	close2;
+	warp "icecastle",27,123;
+	end;
+
+OnInstanceInit:
+	questinfo( QTYPE_QUEST, QMARK_NONE, "checkquest(16660,HUNTING) == 2" );
+	end;
+}
+
+
+
+
+
+// Simulation Battle
+// ------------------------------
+
+jor_nest,66,260,3	script	Arorong#ep19re2::ep19_jor_nest_66_260	4_EP19_IWIN,{
+	if (ep19_main < 100)
+		end;
+	if (checkweight("Ep19_Snow_Flower",1) == 0) {
+		mes "[Arorong]";
+		mes " - O seu saco esta cheio. Por favor, verifique o seu peso e o numero de artigos que tem e volte a falar connosco. -";
+		close;
+	}
+	switch( checkquest(16663,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Arorong]";
+		mes "O desafio terminou por hoje.";
+		mes "Volta amanha e deixar-te-emos entrar.";
+		next;
+		mes "[Arorong]";
+		mes "Ok?";
+		mes "Descansa um pouco, volta amanha.";
+		close;
+	case 2:
+		erasequest 16663;
+		break;
+	}
+	if (checkquest(16662,HUNTING) == 2) {
+		mes "[Arorong]";
+		mes "Simulacao Asocial Junkemawi";
+		mes "Ganhaste a luta?";
+		next;
+		mes "[Arorong]";
+		mes "Ai, nao precisas de responder.";
+		mes "Eu estava a ver tudo daqui.";
+		next;
+		mes "[Arorong]";
+		mes "Muito bem.";
+		mes "Voltaste com uma grande vitoria.";
+		next;
+		mes "[Arorong]";
+		mes "Os dados estao emparelhados, por isso os nossos investigadores";
+		mes "O vitelo serve.";
+		mes "Entao, por favor, aceita a recompensa prometida.";
+		next;
+		mes "[Arorong]";
+		mes "Descansa um pouco e volta amanha.";
+		mes "Tenta outra vez amanha.";
+		close2;
+		erasequest 16662;
+		setquest 16663;
+		getitem "Snow_F_Ore",1;
+		end;
+	}
+	// Nota: O jogador pode voltar a entrar / recriar uma instancia ate o boss ser derrotado
+	cutin "ep19_iwin01.png",2;
+	mes "[Arorong]";
+	mes "A batalha com Junkea, nao foi emocionante?";
+	mes "Apetece-te lutar outra vez, nao e?";
+	next;
+	cutin "",255;
+	if (select( "Levantar.", "Nao levantar." ) == 2) {
+		cutin "ep19_iwin01.png",2;
+		mes "[Arorong]";
+		mes "A serio?";
+		mes "Sissy.";
+		close3;
+	}
+	cutin "ep19_iwin01.png",2;
+	mes "[Arorong]";
+	mes "Para um aventureiro assim.";
+	mes "Uma emocionante batalha simulada com dados de simulacao Junkea.";
+	next;
+	mes "[Arorong]";
+	mes "Foi preparado no castelo de gelo, por isso e seguro.";
+	mes "" + getmonsterinfo("EP19_MD_JUNCEA_S", MOB_NAME) + "pode ser derrotado uma vez por dia.";
+	next;
+	mes "[Arorong]";
+	mes "Mas podes tentar uma e outra vez ate a derrotares.";
+	mes "Queres tentar?";
+	next;
+	.@md_name$ = "Vagot Lab";	// nota: espaco extra personalizado para tornar o nome unico
+	if (is_party_leader() == true)
+		.@menu$ = "Laboratorio Vagot Preparar a entrada";
+
+	cutin "",255;
+	switch( select( .@menu$, "Posicao do Laboratorio Vagot", "nao a contesto") ) {
+	case 1:
+		mes "- ^0000ffEsta agora pronto para entrar. Quando estiver pronto, prima o botao de admissao do Laboratorio Vagot para entrar.^000000 -";
+		instance_create(.@md_name$);
+		close;
+	case 2:
+		switch( instance_enter(.@md_name$) ) {
+		case IE_OTHER:
+			mes "Ocorreu um erro desconhecido.";
+			close;
+		case IE_NOINSTANCE:
+			mes "- ^0000ffA masmorra memorial nao foi criada, por favor verifique novamente.^000000 -";
+			close;
+		case IE_NOMEMBER:
+			mes "[Junkea]";
+			mes "^ff0000Apenas um membro do grupo pode entrar na Masmorra Memorial.Apenas um membro do grupo pode entrar na Masmorra Memorial.^000000";
+			close;
+		case IE_OK:
+			if (isbegin_quest(16662) == 0)
+				setquest 16662;
+			    warp "1@jorlab",57,45;
+			end;
+		}
+		end;
+	case 3:
+		cutin "ep19_iwin01.png",2;
+		mes "[Arorong]";
+		mes "Ahem, o aventureiro aborrecido.";
+		close3;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep19_main >= 100 && checkquest(16662,HUNTING) != 2 && checkquest(16663,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(16663,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(16662,HUNTING) == 2" );
+	end;
+}
+
+1@jorlab,54,67,3	script	Dispositivos de invocacao#ep19re1::ep19_jorlab_58_67_C	PORTAL,{
+	if ('event == 2) {
+		mes "[convocar dispositivo]";
+		mes "Batalha concluida, guardar dados";
+		mes "Para sair do laboratorio, prima o botao Sim";
+		mes "Por favor, prima-o.";
+		next;
+		if (select( "Sim", "Nao" ) == 2) {
+			mes "[Dispositivos de invocacao]";
+			mes "Sair.";
+			close;
+		}
+		mes "[Dispositivos de invocacao]";
+		mes "3, 2, 1. Esta pronto para avancar.";
+		close2;
+		warp "jor_nest",63,257;
+		end;
+	}
+	if (is_party_leader() == false || 'event != 0) {
+		mes "[Dispositivos de invocacao]";
+		mes"- Esta a falar com outro membro do grupo. Por favor, junte-se a nos por um momento. -";
+		mes "- Se a sua conversa terminou por engano, estara disponivel para falar 5 minutos apos o inicio da conversa. -";
+		close;
+	}
+	mes "[Dispositivos de invocacao]";
+	mes "Esta prestes a iniciar uma batalha simulada";
+	mes "Se estiveres pronto, prime o botao Sim";
+	next;
+	mes "[Dispositivos de invocacao]";
+	mes "Esta pronto?";
+	next;
+	if (select( "Sim", "Nao" ) == 2) {
+		mes "[Dispositivos de invocacao]";
+		mes "Sair.";
+		close;
+	}
+	mes "[Dispositivos de invocacao]";
+	mes "" + getmonsterinfo("EP19_MD_JUNCEA_S", MOB_NAME) + "para o convocar.";
+	mes "3, 2, 1. Pronto para ser convocado.";
+	close2;
+	if ('event == 0) {
+		'event = 1;
+		disablenpc();
+		donpcevent instance_npcname("ep19_simulation_battle") + "::OnStart";
+	}
+	end;
+}
+
+1@jorlab,1,1,0	script	ep19_simulation_battle	-1,{
+	end;
+OnStart:
+	monster 'map_jorlab$,58,67,"--ja--","EP19_MD_JUNCEA_S",1, instance_npcname("ep19_simulation_battle") + "::OnBossDead";
+	end;
+OnBossDead:
+	if ('event != 1)
+		end;
+	'event = 2;
+	enablenpc instance_npcname("ep19_jorlab_58_67_C");
+	end;
+}

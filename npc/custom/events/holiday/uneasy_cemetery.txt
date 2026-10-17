@@ -1,0 +1,137 @@
+//
+//==================================================================================
+//-------------------------------- RagnaERO Script ---------------------------------
+//=    __________                              _____________________ ________
+//=    \______   \_____     ____   ____ _____  \_   _____/\______   \\_____  \
+//=     |       _/\__  \   / ___\ /    \\__  \  |    __)_  |       _/ /   |   \
+//=   	|    |   \ / __ \_/ /_/  >   |  \/ __ \_|        \ |    |   \/    |    \
+//=   	|____|_  /(____  /\___  /|___|  (____  /_______  / |____|_  /\_______  /
+//=            \/      \//_____/      \/     \/        \/         \/         \/
+//=                                                          RagnaERO Scripts
+//=                                                                       
+//--------------------------- http://rathena.org/board/ ----------------------------
+//==================================================================================
+//----- NOME DO SCRIPT -------------------------------------------------------------
+//= cemiterio_inquieto.txt
+//----- POR: -----------------------------------------------------------------------
+//= Equipe de Desenvolvimento rAthena
+//----- VERSÃO ATUAL DO SCRIPT: ----------------------------------------------------
+//= v1.0
+//----- DESCRIÇÃO: -----------------------------------------------------------------
+//= Evento personalizado do Cemitério Inquieto.
+//----- COMENTÁRIOS ADICIONAIS: ----------------------------------------------------
+//= Projeto RagnaERO
+//= Cabeçalho e Tradução Pt-BR Por [ADM] Eragonat PK
+//==================================================================================
+
+prontera,3,3,3	script	Uneasy_Check	-1,{
+	end;
+
+OnHour00:
+	set $UNEASY_DL,$UNEASY_DL-1;
+	set $UNEASY_BL,$UNEASY_BL+30; //Adiciona a necessidade de HW para 30 frascos por dia
+	if ($UNEASY_BL>666) set $UNEASY_BL,666; //Mantem as garrafas necessárias, não menos <= 666
+	if ($UNEASY_DL < 0) goto L_Start_Undead;
+	disablenpc "Madre Mathana";
+	end;
+OnInit:
+	if ($UNEASY_DL >= 0) disablenpc "Madre Mathana";
+	end;
+
+OnHour06:
+	killmonsterall "prontera";	//Todos os mortos morrem ào verem a luz do dia
+	end;
+
+OnHour01:
+	if ($@UNEASY_MOB > 0) mapannounce "prontera","[Madre Mathana]: Em nome de Odin! Acabe com essas sobras de mortos!!!",0;
+	end;
+
+OnZombieDead:
+	set $@UNEASY_MOB,$@UNEASY_MOB-1;
+	if ($@UNEASY_MOB>0) end;
+	set $UNEASY_DL,0;
+	set $UNEASY_H$,strcharinfo(0);
+	if (Sex==SEX_MALE) mapannounce "prontera","[Madre Mathana]: Bravo "+$UNEASY_H$+" Acabou de matar o último zumbi de Prontera!",0;
+	else mapannounce "prontera","[Madre Mathana]: A Guerreira "+$UNEASY_H$+" Acabou de matar o último zumbi de Prontera!",0;
+	set JobExp,JobExp+100;
+	set BaseExp,BaseExp+50;
+	end;
+
+L_Start_Undead:
+	killmonsterall "prontera";	//Mata os monstros restantes
+	enablenpc "Madre Mathana";
+//Chama os monstros para a cidade
+	set $@UNEASY_MOB, 65;
+	areamonster "prontera",0,0,0,0,"Zumbi",1015,30,"Uneasy_Check::OnZombieDead";
+//in the Cemetery
+	monster "prontera",268,349,"Zumbi",1015,30,"Uneasy_Check::OnZombieDead";
+	monster "prontera",269,350,"Carniçal",1036,5,"Uneasy_Check::OnZombieDead";
+//Anúncio
+	mapannounce "prontera","[Madre Mathana]: O cemitério acordou!  Em nome de Odin! Corram para o santuário! Salvem Prontera!",0;
+}
+
+prontera,257,313,5	script	Madre Mathana	79,{
+	mes "[Madre Mathana]";
+	if ($UNEASY_DL <= 0) goto L_Undead_Walk;
+	mes "Sinto que há algo de errado em nosso cemitério";
+	if ($UNEASY_H$==strcharinfo(0)) mes "Mas graças à você, "+$UNEASY_H$+", nós poderemos dormir novamente " + $UNEASY_DL + " noites!";
+	if ($UNEASY_H$!=strcharinfo(0)) mes "Mas graças à ajude de "+$UNEASY_H$+" Nós teremos " + $UNEASY_DL + " noites calmas!";
+	emotion ET_SURPRISE;
+	close;
+
+L_Undead_Walk:
+	if ($UNEASY_DL == 0) mes "ELES podem retornar novamente amanhã!";
+	if ($UNEASY_DL == 0 && $UNEASY_H$==strcharinfo(0)) mes "Obrigado, "+$UNEASY_H$+"! Agora nós poderemos dormir até a meia-noite de amanhã!";
+	if ($UNEASY_DL == 0 && $UNEASY_H$!=strcharinfo(0)) mes "Ainda bem que "+$UNEASY_H$+" ajudou, agora poderemos dormir em paz!";
+	mes "Para acalmar a fúria desse cemitério nós devemos jogar Água Benta em todas as covas, mas está faltando Água Benta";
+	mes "Você pode nos ajudar dando mais?";
+	next;
+	menu "^0000ff•^000000 Sim, tome toda a minha Água Benta!",-, "Não... Estou sem.",M_NO, "Não tenho nenhuma.",M_DONT_HAVE;
+
+	if ( countitem(523)<1 ) goto M_DONT_HAVE;
+	set $UNEASY_BL,$UNEASY_BL-countitem(523);
+	delitem 523,countitem(523);
+
+	if ( $UNEASY_BL > 0 ) goto L_NEED_MORE;
+//Dias calmos, sem mais zumbis para perturbar
+	set $UNEASY_DL,5+((0-$UNEASY_BL)/30);
+	set $UNEASY_H$,strcharinfo(0);
+	mes "[Madre Mathana]";
+	mes "Obrigado, "+$UNEASY_H$+"! Agora temos Água benta suficiente!";
+	next;
+	mes "[Madre Mathana]";
+	mes "No momento que encharcarmos o cemitério com Água benta teremos " + $UNEASY_DL + " noites calmas!";
+	next;
+	killmonsterall "prontera";
+	mes "[Madre Mathana]";
+	mes "Viu, "+ $UNEASY_H$ +"? Eles já foram embora!";
+	next;
+	mes "[Madre Mathana]";
+	mes "A nossa igreja irá agradecê-lo pessoalmente...";
+	next;
+	if (Sex==SEX_MALE) mapannounce "prontera","[Madre Mathana]: Em nome de Odin declaro o Bravo "+$UNEASY_H$+" como o salvador de prontera!",0;
+	else mapannounce "prontera","[Madre Mathana]: Em nome de Odin declaro a Bela "+$UNEASY_H$+" como a salvadora de prontera!",0;
+	mes "[Madre Mathana]";
+	mes "Em nome de Odin, eu te abençôo e te presenteio com este modesto Presente de Mareusis.";
+	getitem 505,1; //Poção Azul
+	set JobExp,JobExp+100;
+	set BaseExp,BaseExp+50;
+	close;
+
+L_NEED_MORE:
+	mes "[Madre Mathana]";
+	mes "Obrigado "+strcharinfo(0)+", mas ainda precisamos de " + $UNEASY_BL + " mais garrafas de Água Benta.";
+	close;
+
+M_NO:
+	mes "[Madre Mathana]";
+	mes "Eu temo que o cemitério acordará logo se não tivermos água benta suficiente! Corra! Pegue todas as garrafas que encontrar!";
+	close;
+
+M_DONT_HAVE:
+	mes "[Madre Mathana]";
+	mes "Ainda precisamos de " + $UNEASY_BL + " mais garrafas...  Porque você não vai procurar mais garrafas com outras pessoas?.";
+	mes "O velho cemiterio está saindo de controle...";
+	mes "Por favor, em nome de Odin, ajudem a cidade de Prontera.";
+	close;
+}

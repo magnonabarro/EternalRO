@@ -1,0 +1,23 @@
+sala_quest,16,13,5	script	Quest de Coroas	540,{	
+	mes "[Quest de Coroas]";
+	mes "Ofereço equipamentos Por Itens <ITEM>Caça<INFO>1000367</INFO></ITEM>.";
+	mes "------------------";
+	mes "Caso esteja interessado, eu ofereço equipamentos de todas as raridades";
+	mes "e encantamentos";
+	switch(select("Equipamentos Coroas")){
+		next;
+		case 1:
+		close2;
+		callshop "Equipamentos_coroa",1;
+		break;
+	}
+OnInit:
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	showscript("Quest de Coroas");
+	setnpctimer 0;
+	end;
+}
+// Lojas localizadas no custom/barters.yml

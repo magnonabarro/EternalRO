@@ -1,0 +1,54 @@
+sala_caca,16,13,4	script	Caça LvL 60#NPC	46,{
+
+	mes "[Caça LvL 60]";
+	mes "Olá aventureiro!";
+	next;
+
+	switch(select("Iniciar Caça LvL 60","Entregar Recompensa","Cancelar")){
+		case 1:
+			callsub S_Start;
+			end;
+		case 2:
+			callsub S_Complete;
+			end;
+		default:
+			close;
+	}
+	end;
+
+//==============================
+// INICIAR QUEST
+//==============================
+S_Start:
+
+	if (checkquest(60313) >= 0) {
+		mes "[Caça LvL 60]";
+		mes "Você já iniciou esta missão!";
+		close;
+	}
+
+	setquest 60313;
+	mes "[Caça LvL 60]";
+	mes "Cace todos os dragões e volte quando terminar!";
+	close;
+	end;
+
+//==============================
+// ENTREGA
+//==============================
+S_Complete:
+
+	if (checkquest(60313,HUNTING) == 2) {
+		erasequest 60313;
+		mes "[Caça LvL 60]";
+		mes "Excelente trabalho!";
+		getexp 30000,20000;
+		getitem Silver_Coin,30;
+		close;
+	} else {
+		mes "[Caça LvL 60]";
+		mes "Você ainda não derrotou todos os dragões.";
+		close;
+	}
+	end;
+}

@@ -1,0 +1,54 @@
+moc_para01,38,38,4	script	LvL 70#NPC	10281,{
+
+	mes "[LvL 70]";
+	mes "Olá aventureiro!";
+	next;
+
+	switch(select("Iniciar LvL 70","Entregar Recompensa","Cancelar")){
+		case 1:
+			callsub S_Start;
+			end;
+		case 2:
+			callsub S_Complete;
+			end;
+		default:
+			close;
+	}
+	end;
+
+//==============================
+// INICIAR QUEST
+//==============================
+S_Start:
+
+	if (checkquest(60318) >= 0) {
+		mes "[LvL 70]";
+		mes "Você já iniciou esta missão!";
+		close;
+	}
+
+	setquest 60318;
+	mes "[LvL 70]";
+	mes "Cace todos os dragões e volte quando terminar!";
+	close;
+	end;
+
+//==============================
+// ENTREGA
+//==============================
+S_Complete:
+
+	if (checkquest(60318,HUNTING) == 2) {
+		erasequest 60318;
+		mes "[LvL 70]";
+		mes "Excelente trabalho!";
+		getexp 30000,20000;
+		getitem Golden_Coin_,20;
+		close;
+	} else {
+		mes "[LvL 70]";
+		mes "Você ainda não derrotou todos os dragões.";
+		close;
+	}
+	end;
+}

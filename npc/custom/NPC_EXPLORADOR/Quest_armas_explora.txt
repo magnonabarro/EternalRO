@@ -1,0 +1,27 @@
+moc_para01,14,35,6	script	Troca de Ticket	564,{	
+	mes "Ofereço Troca de Ticket por equipamento aprimorados<ITEM>Equipamento Aprimorados<INFO>604</INFO></ITEM>.";
+	mes "------------------";
+	mes "Caso esteja interessado, eu ofereço equipamentos de todas as raridades";
+	mes "e encantamentos";
+	switch(select("Armas Aprimoradas:Equipamento Aprimorados")){
+		next;
+		case 1:
+		close2;
+		callshop "arma_aprimorado",1;
+		break;	
+		next;
+		case 2:
+		close2;
+		callshop "armadura_aprimorado",2;
+		break;
+	}
+OnInit:
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	showscript("Troca de Ticket");
+	setnpctimer 0;
+	end;
+}
+// Lojas localizadas no custom/barters.yml

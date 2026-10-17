@@ -1,0 +1,34 @@
+prontera,174,162,4	script	Arena PvP	418,{
+cutin "bat_kiyom2",2;
+set $namenpc$, "^CD0000[Arena PvP]^000000";
+mes "[Arena PvP]";
+mes "Arena PvP anda.";
+menu "Opa,claro que sim",sim,"Ah,agora nao to afim",nao;
+
+nao:
+next;
+mes "[Arena PvP]";
+mes "OK, volte quando quiser";
+close;
+
+sim:
+next;
+mes "[Arena PvP]";
+mes "Arena PVP";
+menu "Arena PVP",Masmorra;
+
+n:
+next;
+mes "[Arena PvP]";
+mes "OK, volte quando quiser";
+close;
+
+Masmorra:
+warp "ufc_pvp3",62,36;
+end;
+
+OnInit:
+waitingroom "Arena PvP",0;	
+end;
+
+}

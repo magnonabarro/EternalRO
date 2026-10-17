@@ -1,0 +1,140 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ guias_niflheim.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.3 - Pré-Renovação ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= [ Guias da cidade de Niflheim. ]
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+  
+niflheim,107,156,6	script	Homem Nervoso#nif	798,{
+	mes "[Ricael]";
+	mes "Você deve estar perdido...";
+	mes "Por que alguém viria";
+	mes "para esse lugar horrível e terrível,";
+	mes "com que propósito...??";
+	next;
+	mes "[Ricael]";
+	mes "Desde que eu tropecei e cai nesta árvore gigante, eu sofro infinitamente aqui. Eu desperdicei anos em tristeza, sendo incapaz de escapar de Niflheim.";
+	next;
+	mes "[Ricael]";
+	mes "Mas em busca de uma";
+	mes "rota de fuga, eu provavelmente conheço";
+	mes "esta cidade melhor que ninguém.";
+	mes "Mas eu acho que conhecer todo o";
+	mes "layout da cidade pode ajudá-lo a escapar,";
+	mes "se você não fosse tão fútil.";
+	next;
+	switch(select("Perguntar sobre a cidade.:Remover Marcações do Mini-mapa.:Cancelar!")) {
+	case 1:
+		mes "[Ricael]";
+		mes "Então, qual lugar você quer conhecer?";
+		next;
+		switch(select("Castelo das Bruxas.:Loja de Utilidades.:Loja de Armas.:Bar.:Cancelar!")) {
+		case 1:
+			mes "[Ricael]";
+			mes "Ali. Eu fiz uma marca de ^FF3355+^000000";
+			mes "no seu Mini-mapa para que você possa ver a localização do Castelo.";
+			mes "Vá para o castelo onde a";
+			mes "bruxa assustadora vive.";
+			next;
+			mes "[Ricael]";
+			mes "Eu fui lá uma vez, depois que eu";
+			mes "fugi, decidi que eu";
+			mes "deveria tentar não morrer tanto";
+			mes "quanto o necessário. Esse objetivo de vida é";
+			mes "minha prioridade aqui em";
+			mes "Niflheim.";
+			viewpoint 1,253,191,2,0xFF3355;
+			break;
+		case 2:
+			mes "[Ricael]";
+			mes "A Loja de Utilidades está localizada";
+			mes "na marca de CE6300+^000000 que eu fiz";
+			mes "no seu Mini-mapa.";
+			next;
+			mes "[Ricael]";
+			mes "Eles vendem alguns itens exclusivos que";
+			mes "você não pode encontrar fora dessa";
+			mes "cidade. Claro, eles não eram assim tão";
+			mes "especiais, mas uma vez eu percebi que existem";
+			mes "poções aqui que podem aliviar a dor que sinto.";
+			mes "...eu gostaria de estar na prisão.";
+			emotion ET_KEK;
+			viewpoint 1,217,196,3,0xCE6300;
+			break;
+		case 3:
+			mes "[Ricael]";
+			mes "A Loja de Armas está localizada";
+			mes "na marca de ^55FF33+^000000 que eu fiz";
+			mes "no seu Mini-mapa.";
+			next;
+			mes "[Ricael]";
+			mes "Eles vendem alguns itens exclusivos que";
+			mes "você não pode encontrar fora dessa";
+			mes "cidade... Claro, lutando com";
+			mes "os monstros daqui você só conseguirá apenas";
+			mes "deixa-los mais irritados. Você poderá se";
+			mes "quise, deixar que eles comam você.";
+			emotion ET_KEK;
+			viewpoint 1,216,171,4,0x55FF33;
+			break;
+		case 4:
+			mes "[Ricael]";
+			mes "O Bar está localizado na";
+			mes "marca de ^3355FF+^000000 que eu fiz";
+			mes "no seu Mini-mapa.";
+			next;
+			mes "[Ricael]";
+			mes "Às vezes eu vejo pessoas mortas no";
+			mes "Bar se divertindo, tendo um";
+			mes "bom divertimento. Eu costumava ser capaz de me";
+			mes "divertir também, mas agora tudo que eu sinto";
+			mes "é o formigamento frio da solidão";
+			mes "e desespero... todo momento acordado.";
+			viewpoint 1,189,207,5,0x3355FF;
+			break;
+		case 5:
+			mes "[Ricael]";
+			mes "Se você quiser remover as indicações";
+			mes "de locais do seu Mini-mapa, por favor";
+			mes "escolha ''Remover Marcações do Mini-mapa''";
+			mes "do menu. ";
+		}
+		break;
+	case 2:
+		viewpoint 2,253,191,2,0xFF3355;
+		viewpoint 2,217,196,3,0xCE6300;
+		viewpoint 2,216,171,4,0x55FF33;
+		viewpoint 2,189,207,5,0x3355FF;
+		mes "[Ricael]";
+		mes "Eu removi as marcas de localização do";
+		mes "seu Mini-mapa. Vá em frente e fale comigo";
+		mes "se você quiser marcar as indicações de locais";
+		mes "em seu Mini-mapa novamente.";
+		mes "É, isso me ajuda a ignorar a depressão que";
+		mes "me atormenta constantemente.";
+		break;
+	case 3:
+		mes "[Ricael]";
+		mes "Não é uma boa idéia explorar";
+		mes "Niflheim sozinho...";
+		mes "Pelo menos, tente ser cuidadoso.";
+		break;
+	}
+	close;
+}

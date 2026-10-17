@@ -1,0 +1,36 @@
+-	script	govip_atcmd	FAKE_NPC,{
+OnAtcommand:
+if(getmapflag(strcharinfo(3),mf_pvp)){ message strcharinfo(0),"Você não pode usar '@govip' em mapas PvP."; end; }
+if(getmapflag(strcharinfo(3),mf_gvg)){ message strcharinfo(0),"Você não pode usar '@govip' em mapas GvG."; end; }
+if(getmapflag(strcharinfo(3),mf_battleground)){ message strcharinfo(0),"Você não pode usar '@govip' em mapas BG."; end; }
+
+switch( select("- Sala Vip?:- Não Obrigado!") )
+			{
+	case 1:
+		if (vip_status(5)) {
+		warp "sala_vip",107,89; // mude o mapa e as coordenadas da sua Sala VIP.
+		}else {
+		mes "Apenas Vip Premium pode se teleportar para a Sala VIP.";
+		}
+		break;
+	case 2:
+		break;
+	}
+	
+OnInit:
+bindatcmd "govip",strnpcinfo(3)+"::OnAtcommand";
+end;
+}
+
+//=================//
+//====mapflag======//
+//=================//
+sala_vip	mapflag	loadevent
+sala_vip	mapflag	nowarpto
+sala_vip	mapflag	nobranch
+sala_vip	mapflag	noloot
+sala_vip	mapflag	noicewall
+sala_vip	mapflag	nomemo
+sala_vip	mapflag	nosave
+sala_vip	mapflag	novending
+sala_vip	mapflag	noreturn

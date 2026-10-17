@@ -1,0 +1,232 @@
+// @reloadnpcfile npc/retroc_scripts/quest/bountyshop.txt
+-	script	Master Hunter#1	-1,{
+
+	mes "[Master Hunter]";
+	mes "Welcome Bounty Hunter";
+	mes "What can i do for you?";
+	next;
+	switch(select("Daily Task"," "+ $mobstokill +" kills Bounty "+ (mobfreespin?"^00ff00Free Roll^000000":"^ff0000Read^000000"),"Bounty Shop","Spend your Points for Luck")){
+		case 1:
+			if ( getgroupid() < 90 ) { mes "Under Construction"; end; }
+			if (questhunter) {
+				mes "[Master Hunter]";
+			} else {
+				if (bSideQuest == 2) {
+					if (bSideReward1 == 0){
+					}
+					mes "[Master Hunter]";
+					mes "Talk to Board Quest Manager.";
+					end;
+				
+				}
+				if (bSideQuest == 1) {
+					mes "[Master Hunter]";
+					mes "Talk to Board Quest Manager.";
+					end;
+				
+				}
+				mes "[Master Hunter]";
+				mes "Your new here.";
+				mes "what are you looking for?";
+				next;
+				switch(select("Board Hunter Quest","Nothing")){
+					case 1:
+						mes "[Master Hunter]";
+						mes "In that case Put your name here.";
+						input .@pname$;
+						if ( strcharinfo(0) != .@pname$ ) { 
+							mes "[Master Hunter]";
+							mes "put your correct name.";
+							end;
+						}
+						next;
+						mes "[Master Hunter]";
+						mes "Alright i already put your name.";
+						mes "talk to board quest manager for your orientation.";
+						set bSideQuest, 1;
+						
+						end;
+					case 2:
+						mes "[Master Hunter]";
+						mes "Alright.";
+						end;
+
+
+				}
+			}
+			
+			end;
+		case 2:
+			if (mobskiller > $mobstokill){
+
+				mes "[Master Hunter]";
+				mes "Oww!!";
+				next;
+				mes "[Master Hunter]";
+				mes "What we have here?";
+				mes "You manage to kill a total of "+ $mobstokill +" mobs";
+				mes "by doin that i want to reward you but it's Random Reward";
+				next;
+				switch(select("Free Roll","Maybe Later")){
+					case 2:
+						mes "[Master Hunter]";
+						mes "See yah later..";
+						end;
+					case 1:
+						set mobskiller, 0;
+						set mobfreespin, 0;
+						goto OnRollLuck;
+						end;
+				}
+				end;
+			} else {
+			mes "[Master Hunter]";
+			mes "if you manage to kill "+ $mobstokill +" mobs";
+			mes "there is a Free Roll for you.";
+			}
+			end;
+
+			
+		case 3:
+			callshop "bountyshop";
+			end;
+		case 4:
+			mes "[Master Hunter]";
+			mes "^0000FF[Reward]^000000";
+			mes "Costume";
+			mes "Rare Blueprints";
+			mes "Supplies";
+			mes "Level 4 Box";
+			mes "Old card Album";
+			mes "Dead Branch";
+			mes "Bloody Branch";
+			next;
+			mes "[Master Hunter]";
+			mes "You need atleast 5 Bounty Points";
+			mes "to Spin";
+			next;
+			if (#BountyPoints < 5) { mes "you dont have much bounty points"; end; }
+			switch(select("Try my luck, do a Spin","Maybe nextime")){
+					case 1:
+						set #BountyPoints, #BountyPoints - 5;
+						goto OnRollLuck;
+						end;
+					case 2:
+						end;
+
+			}
+			end;
+
+
+	}
+	end;
+
+		OnRollLuck:
+					mes "Rolling .....";
+						for (.@i = 0; .@i < 37; .@i++) { 
+							if( .@i == 33 ) { mes "^777777-- stopping --^000000"; }
+	
+							set .@rad, rand(1,5);
+							cutin "bounty00"+ .@rad, 4;
+							soundeffect "se_casino.wav",0;
+							if ( .@i < 30 ){
+								sleep2 200;
+							} else {
+								sleep2 ( .@i * 25 + 50 );
+							}
+
+						}
+				sleep2 1500;
+				set .@rolchance, rand(1,1000);
+				soundeffect "se_cash_provider.wav",0;
+					if ( .@rolchance < 2 ){
+						setarray .@rewardwon[1],31517,20071,31246,31323,31374,31375,500,31396,31398,31433,31435,31457,31548,19620,19739,19739,31527,19769,19785,19824,19934,19935,19852,19827,31171,31290,31291,31204,20069,19544,31798,31512,31715,31512,31437,31600,31186,31614;
+						set .@radrew, rand(1,getarraysize(.@rewardwon)-1);
+						getitem .@rewardwon[.@radrew],1;
+						cutin "bounty001", 4;
+						mes "You Won a "+ getitemname(.@rewardwon[.@radrew]);
+						next;
+						cutin "", 255;
+						mes "Enjoy your New Item";
+						end;
+						}
+					if ( .@rolchance < 5 ){
+						setarray .@rewardwon[1],45201,45202,45203,45204,45205,45206,45207,45208,45209,45210,45211,45212,45213,45214,45215,45216,45217,45218,45219,45220,45221,45222,45223,45224,45225,45226,45227,45228;
+						set .@radrew, rand(1,getarraysize(.@rewardwon)-1);
+						getitem .@rewardwon[.@radrew],1;
+						cutin "bounty002", 4;
+						mes "You Won a "+ getitemname(.@rewardwon[.@radrew]);
+						next;
+						cutin "", 255;
+						mes "Enjoy your New Item";
+						end;
+						}
+					if ( .@rolchance < 80 ){
+						getitem 12623,1;
+						cutin "bounty004", 4;
+						mes "You Won a "+ getitemname(12623);
+						next;
+						cutin "", 255;
+						mes "Enjoy your New Item";
+						end;
+						}
+					if ( .@rolchance < 300 ){
+						setarray .@rewardwon[1],604,604,604,604,616,616,12103;
+						set .@radrew, rand(1,getarraysize(.@rewardwon)-1);
+						getitem .@rewardwon[.@radrew],1;
+						cutin "bounty005", 4;
+						mes "You Won a "+ getitemname(.@rewardwon[.@radrew]);
+						next;
+						cutin "", 255;
+						mes "Enjoy your New Item";
+						end;
+						}
+						
+
+						setarray .@rewardwon[1],14003,12210,12412,14533,12411,14592,12904,12905,12906,12907,12908,14169;
+						set .@radrew, rand(1,getarraysize(.@rewardwon)-1);
+						getitem .@rewardwon[.@radrew],1;
+						cutin "bounty003", 4;
+						mes "You Won a "+ getitemname(.@rewardwon[.@radrew]);
+						next;
+						cutin "", 255;
+						mes "Enjoy your New Item";
+						end;
+
+
+OnInit:
+	set $mobstokill, 1000;
+
+end;
+
+
+}
+
+
+-	pointshop	bountyshop	-1,#BountyPoints,5401:650,5775:650,5596:650,2917:2300,2918:2300,2919:2300,2920:2300,2921:2300,2922:2300
+
+
+///////////// Master Hunter
+
+moc_para01,47,38,6	duplicate(Master Hunter#1)	Master Hunter#2	810
+///jupe_ele,43,46,6	duplicate(Master Hunter#1)	Master Hunter#2	810
+
+
+
+-	script	Guildfunction	-1,{
+
+OnNPCKillEvent:
+	set mobskiller, mobskiller + 1;
+	if (mobskiller > $mobstokill && mobfreespin == 0 ){
+		set mobfreespin, 1;
+		message strcharinfo(0), "[You been Rewarded for Killing "+ $mobstokill +" mobs.]";
+		sleep2 1500;
+		message strcharinfo(0), "[Please Go to Quest Area and talk to Master Hunter.]";	
+		sleep2 1500;
+		message strcharinfo(0), "[and Claim your Reward.]";	
+		end;
+	}
+
+end;
+
+}

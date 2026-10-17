@@ -1,0 +1,137 @@
+//
+//==================================================================================
+//-------------------------------- RagnaERO Script ---------------------------------
+//=    __________                              _____________________ ________
+//=    \______   \_____     ____   ____ _____  \_   _____/\______   \\_____  \
+//=     |       _/\__  \   / ___\ /    \\__  \  |    __)_  |       _/ /   |   \
+//=   	|    |   \ / __ \_/ /_/  >   |  \/ __ \_|        \ |    |   \/    |    \
+//=   	|____|_  /(____  /\___  /|___|  (____  /_______  / |____|_  /\_______  /
+//=            \/      \//_____/      \/     \/        \/         \/         \/
+//=                                                          RagnaERO Scripts
+//=                                                                       
+//--------------------------- http://rathena.org/board/ ----------------------------
+//==================================================================================
+//----- NOME DO SCRIPT -------------------------------------------------------------
+//= hallow06.txt
+//----- POR: -----------------------------------------------------------------------
+//= Equipe de Desenvolvimento rAthena
+//----- VERSÃO ATUAL DO SCRIPT: ----------------------------------------------------
+//= v1.2
+//----- DESCRIÇÃO: -----------------------------------------------------------------
+//= Evento personalizado de Halloween 2006.
+//----- COMENTÁRIOS ADICIONAIS: ----------------------------------------------------
+//= Projeto RagnaERO
+//= Cabeçalho e Tradução Pt-BR Por [ADM] Eragonat PK
+//==================================================================================
+
+prontera,160,250,4	script	Evento Halloween	807,{  //Novo local adicionado pelo [ADM] Eragonat PK.
+
+//prontera,151,190,5	script	Evento Halloween	807,{  //Local Original.
+	mes "[Evento Halloween]";
+	if(Class == Job_Novice){
+		mes "Sinto muito, mas você tem que conseguir uma profissão para completar o evento.";
+		emotion ET_SWEAT, playerattached();
+		close;
+	}
+	if((EVENT_HALWN06&1) && (EVENT_HALWN06&2)){
+		mes "Sinto muito, mas você já completou o evento.";
+		emotion ET_SORRY;
+		close;
+	}
+	mes "Saudações, companheiro humano vivo.";
+	next;
+	mes "[Evento Halloween]";
+	mes "O Halloween está chegando e já é quase hora de se aventurar em lugares que poucos ousam ir.";
+	next;
+	mes "[Evento Halloween]";
+	mes "Doces ou travessuras, qual você prefere?";
+	next;
+	menu "Travessuras",-, "Doces",L_Treat;
+
+	mes "[Evento Halloween]";
+	if(EVENT_HALWN06&2){
+		mes "Sinto muito, mas você já recebeu suas travessuras. Por que você não escolher doces agora?";
+		emotion ET_SORRY;
+		close;
+	}
+	mes "Me dê um min...";
+	next;
+	set BaseExp,BaseExp+BaseLevel*1000;
+	set EVENT_HALWN06,EVENT_HALWN06|2;
+
+	mes "[Evento Halloween]";
+	mes "Aqui está o seu deleite. Sua Base EXP foi ligeiramente aumentada.";
+	next;
+	mes "[Evento Halloween]";
+	mes "Espero que você goste da sua Travessura e Feliz Dia das Bruxas!";
+	close;
+
+L_Treat:
+	mes "[Evento Halloween]";
+	if(EVENT_HALWN06&1){
+		mes "Sinto muito, mas você já recebeu seus doces. Por que você não vai e escolher travessuras agora?";
+		emotion ET_SORRY;
+		close;
+	}
+	if(!(EVENT_HALWN06&4)){
+		mes "Ótimo! Isso será muito divertido.";
+		next;
+		mes "[Evento Halloween]";
+		mes "Eu vou mandar você numa caçada de itens.";
+		next;
+		mes "[Evento Halloween]";
+		mes "Traga-me todos os itens necessários, e eu criarei um doce para você.";
+		next;
+		mes "[Evento Halloween]";
+		mes "Não apenas qualquer coisa normal que você possa comer, mas é algo que você poderá usar em sua cabeça.";
+		next;
+		mes "[Evento Halloween]";
+		mes "Mas como todas as coisas que são feitas, alguns itens são necessários primeiro.";
+		mes "A lista:";
+		mes "1 Chapéu,";
+		mes "30 Abóbora e";
+		mes "20 Retalho Negro.";
+		next;
+		mes "[Evento Halloween]";
+		mes "Apresse-se agora.";
+		set EVENT_HALWN06,EVENT_HALWN06|4;
+		close;
+	}
+	mes "Você conseguiu os itens que eu solicitei ou você precisa ver a lista novamente?";
+	next;
+	menu "Vamos lá, já possuo os itens.",-, "Não possuo ainda.",L_Dont_Have, "Ver lista.",L_List;
+
+	mes "[Evento Halloween]";
+	if((countitem(2220) < 1) || (countitem(535) < 30) || (countitem(7205) < 20)){
+		mes "Você não tem todos os itens. Volte quando você conseguir todos.";
+		emotion ET_SORRY;
+		close;
+	}
+	delitem 2220,1;
+	delitem 535,30;
+	delitem 7205,20;
+	getitem 5134,1;
+	set EVENT_HALWN06,EVENT_HALWN06|1;
+	mes "Bom trabalho! Espero que você tenha ficado feliz com o seu item.";
+	emotion ET_CONGRATULATION;
+	next;
+	mes "[Evento Halloween]";
+	mes "Aproveite o resto do seu Dia das Bruxas.";
+	emotion ET_SCISSOR, playerattached();
+	close;
+
+L_Dont_Have:
+	mes "[Evento Halloween]";
+	mes "Volte e procure por eles. Gostaria de ver a lista?";
+	next;
+	menu "Não",-, "Sim",L_List;
+	close;
+
+L_List:
+	mes "[Evento Halloween]";
+	mes "Eu preciso dos seguintes itens:";
+	mes "1 Chapéu";
+	mes "30 Abóbora e";
+	mes "20 Retalho Negro.";
+	close;
+}

@@ -1,0 +1,25 @@
+prontera,147,195,6	script	Porteiro Vip	760,{
+
+switch(select("Entrar na Sala:Sair")){
+    case 1:
+		if (vip_status(99)) {
+        warp "sala_vip",107,87; // coloca o seu mapa vip
+        }
+        if (vip_status(1)) {
+        warp "sala_vip",107,87; // coloca o seu mapa vip
+        }else {
+        mes "Você não é VIP, apenas VIPs tem acesso a esse mapa.";
+        }
+        break;
+    case 2:
+        mes "Você não é VIP, apenas VIPs tem acesso a esse mapa.";
+        break;
+    }
+end;
+	OnInit:
+waitingroom "Sala Vip",0;	
+end;
+}
+
+sala_vip,107,84,0	warp	vip02	0,0,prontera,150,150
+sala_vip,108,84,0	warp	vip03	0,0,prontera,150,150

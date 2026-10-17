@@ -1,0 +1,24 @@
+moc_para01,41,22,6	script	Àrvore da Yggdrasil	10211,{	
+	mes "Ofereço Troca de Ygg por Fruto de Yggdrasil<ITEM>Fruto de Yggdrasil<INFO>607</INFO></ITEM>.";
+	mes "------------------";
+	mes "Caso esteja interessado, eu ofereço equipamentos de todas as raridades";
+	mes "e encantamentos";
+	switch(select("Troca de Frutos de Yggdrasil")){
+		next;
+		case 1:
+		close2;
+		callshop "fruto_box",1;
+		break;	
+		next;
+		break;
+	}
+OnInit:
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	showscript("Àrvore da Yggdrasil");
+	setnpctimer 0;
+	end;
+}
+// Lojas localizadas no custom/barters.yml

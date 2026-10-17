@@ -1,0 +1,119 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ divinos_global.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.2 ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= - Use este NPC se as variáveis das missões dos selos ficarem confusas.
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================// 
+
+sec_in02,15,170,0	script	Variável Global	817,{
+	callfunc "F_GM_NPC";
+	mes "[Checagem]";
+	mes "Por favor, digite a senha.";
+	next;
+	if (callfunc("F_GM_NPC",68392411,0) == 1) {
+		mes "[Checagem]";
+		mes "Por favor, escolha um menu.";
+		next;
+		switch(select("Agora:Nº1:Nº2:Nº3:Nº4:Redefinir:god_sl_1:god_eremes:god_brising:god_mjo_0:god_mjo_1:god_mjo_2:god_mjo_3:god_mjo_4")) {
+		case 1:
+			mes "^0000FF$Divino1^000000 = ^FF0000" + $God1 + "^000000.";
+			mes "^0000FF$Divino2^000000 = ^FF0000" + $God2 + "^000000.";
+			mes "^0000FF$Divino3^000000 = ^FF0000" + $God3 + "^000000.";
+			mes "^0000FF$Divino4^000000 = ^FF0000" + $God4 + "^000000.";
+			close;
+		case 2: callsub L_Number,"$God1"; break;
+		case 3: callsub L_Number,"$God2"; break;
+		case 4: callsub L_Number,"$God3"; break;
+		case 5: callsub L_Number,"$God4"; break;
+		case 6:
+			mes "[Checagem]";
+			mes "Você tem certeza de que deseja redefinir toda a lista da Variável Global Divino?";
+			mes "Por favor, digite a senha.";
+			next;
+			if (callfunc("F_GM_NPC",68392411,0) == 1) {
+				mes "[Checagem]";
+				mes "Agora, toda a lista da Variável Global Divino está sendo redefinida.";
+				next;
+				set $God1,0;
+				set $God2,0;
+				set $God3,0;
+				set $God4,0;
+				mes "^0000FF$Divino1^000000 = ^FF0000" + $God1 + "^000000.";
+				mes "^0000FF$Divino2^000000 = ^FF0000" + $God2 + "^000000.";
+				mes "^0000FF$Divino3^000000 = ^FF0000" + $God3 + "^000000.";
+				mes "^0000FF$Divino4^000000 = ^FF0000" + $God4 + "^000000.";
+				close;
+			} else {
+				mes "[Checagem]";
+				mes "O comando foi cancelado.";
+				close;
+			}
+		case 7: callsub L_Var,"god_sl_1"; break;
+		case 8: callsub L_Var,"god_eremes"; break;
+		case 9: callsub L_Var,"god_brising"; break;
+		case 10: callsub L_Var,"god_mjo_0"; break;
+		case 11: callsub L_Var,"god_mjo_1"; break;
+		case 12: callsub L_Var,"god_mjo_2"; break;
+		case 13: callsub L_Var,"god_mjo_3"; break;
+		case 14: callsub L_Var,"god_mjo_4"; break;
+		}
+	} else {
+		mes "[Checagem]";
+		mes "Senha incorreta.";
+		close;
+	}
+
+L_Number:
+	input .@input,0,$@god_check2;
+	mes "[Checagem]";
+	mes "Você gostaria de mudar para "+.@input+"?";
+	mes "Por favor, digite a senha.";
+	next;
+	if (callfunc("F_GM_NPC",68392411,0) == 1) {
+		mes "[Checagem]";
+		mes "O comando "+.@input+" foi confirmado.";
+		next;
+		setd getarg(0),.@input;
+		mes getarg(0)+" "+.@input;
+		close;
+	} else {
+		mes "[Checagem]";
+		mes "O comando foi cancelado.";
+		close;
+	}
+
+L_Var:
+	input .@input;
+	setd getarg(0),.@input;
+	next;
+	mes "[Checagem]";
+	mes "Feito.";
+	close;
+
+OnInit:
+	// Os Selos rolam a 25/50 na Renovação e 50/100 na Pré-Renovação.
+	if (checkre(0)) {
+		set $@god_check1,25;
+		set $@god_check2,50;
+	} else {
+		set $@god_check1,50;
+		set $@god_check2,100;
+	}
+	end;
+}

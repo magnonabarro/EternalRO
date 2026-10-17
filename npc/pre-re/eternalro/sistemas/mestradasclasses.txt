@@ -1,0 +1,2365 @@
+//===== rAthena Script =======================================
+//= Job Master
+//===== Description: =========================================
+//= A fully functional job changer.
+//===== Additional Comments: =================================
+//= 1.0 Initial script. [Euphy]
+//= 1.1 Fixed reset on Baby job change.
+//= 1.2 Added Expanded Super Novice support and initial Kagerou/Oboro support.
+//= 1.3 Kagerou/Oboro added.
+//= 1.4 Rebellion added.
+//= 1.5 Added option to disable RebirthClass. [mazvi]
+//= 1.6 Added option to get job related equipment on change. [Braniff]
+//= 1.7 Readability changes. Also added BabyExpanded and BabySummoner classes. [Jey]
+//= 1.8 Added option to disable Baby Novice Only but Baby Class can be Enabled [mazvi]
+//= 1.9 Migrate/Integrate to Global Functions Platinum Skills. [mazvi]
+//= 2.0 Added 4th class [Lemongrass]
+//============================================================
+prontera.gat,156,194,4	script	Mestra das Classes	1_M_INNKEEPER,{
+
+
+
+//= CONFIGURAÇÕES GERAIS
+
+//------------------------------------------------------------------------
+
+set @npc$,"^FF0000 Mestra das Classes ^000000";	// Nome do Npc.
+
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=|
+
+//= Classes Existentes Na Mestra das Classes:
+
+set @TransHave,1;			// Tem Transclasse? (0: Não | 1: Sim).
+
+set @BabyHave,1;			// Tem BabyJobChanger? (0: Não | 1: Sim).
+
+set @Ninja,1;				// Tem a Classe Ninja? (0: Não | 1: Sim).
+
+set @Guns,1;				// Tem a Classe Gunslinger? (0: Não | 1: Sim).
+
+set @Taek,1;				// Tem a Classe Taekwon? (0: Não | 1: Sim).
+
+set @StarGlad,1;			// Tem a Classe Star Gladiator? (0: Não | 1: Sim).
+
+set @SoulLink,1;			// Tem a Classe Soul Linker? (0: Não | 1: Sim).
+
+
+
+set @RemoveSkillPoint,0;		// Quando for Renascer, remover Pontos de Skill Extra? (0: Não | 1: Sim)
+
+set @StatusPoint,100;			// Pontos de Status que ganha quando renasce. (Default: 150)
+
+set @Additem,1;				// Quando Renascer recebe os Equips de Aprendiz? (0: Não | 1: Sim)
+
+
+
+set @LevelMinSc,99;			// Level de Base Minimo pra Renascer. (Default: 99)
+
+set @LevelJobMinSc,50;			// Level de Job Minimo pra Renascer. (Default: 50)
+
+
+
+set @PriceAp,0;				// Preço pra aprendiz virar 1ª Classe ou SA ou Baby Novice.
+
+set @PriceFc,0;				// Preço pra 1ª Classe virar 2ª Classe.
+
+set @PriceAprT,0;			// Preço pra Renascer.
+
+set @PriceApT,0;			// Preço pra aprendiz T virar 1ª Classe T.
+
+set @PriceFcT,0;			// Preço pra 1ª Classe T virar 2ª Classe T.
+
+set @PriceFBaby,0;			// Preço pra virar 1ª Classe Baby.
+
+set @PriceSBaby,0;			// Preço pra virar 2ª Classe Baby.
+
+set @PriceMoreFClasses,0;		// Preço pra virar Ninja, Gunslinger, Taekwon.
+
+set @PriceMoreSClasses,0;		// Preço pra virar Star Gladiator e Soul Linker.
+
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=|
+
+
+
+if(Class == 0)goto Menu_Novice;
+
+if(Class == Job_Ninja) || (Class == Job_Gunslinger) || (Class == Job_Star_Gladiator) || (Class == Job_Soul_Linker) goto Menu_End2Class;
+
+if(Class == Job_Taekwon) goto Change2Taekwon;
+
+if(Class >= 1) && (Class <= 6) goto Menu_FirstClass;
+
+if(Class >= 7) && (Class <= 21) goto Menu_SecondClass;
+
+if(Class == 22) || (Class == 23) goto Menu_EndClass;
+
+if(Class == 4001)goto Menu_FirstClassT;
+
+if(Class >= 4002) && (Class <= 4007) goto Menu_SecondClassT;
+
+if(Class >= 4008) && (Class <= 4022) goto Menu_End2Class;
+
+if(Class == 4023) goto Menu_NoviceBaby;
+
+if(Class >= 4024) && (Class <= 4029) goto Menu_FirstClassBaby;
+
+if(Class >= 4030) && (Class <= 4045) goto Menu_End2Class;
+
+
+
+// First Classes
+
+//-------------------------------------------
+
+Menu_Novice:
+
+mes @npc$;
+
+mes "Olá Aprendiz, você deseja mudar de classe?";
+
+next;
+
+menu "Sim!",l_Yes_JobChange_Novice,"Não!",CJobChange;
+
+
+
+CJobChange:
+
+next;
+
+mes @npc$;
+
+mes "Ok, volte quando precisar de mim!";
+
+close;
+
+
+
+l_Yes_JobChange_Novice:
+
+next;
+
+if(JobLevel < 10) goto JobLevelFailedNovice;
+
+if(SkillPoint != 0) goto SkillPointFailedNovice;
+
+mes @npc$;
+
+mes "Escolha qual classe você deseja virar!";
+
+if(@BabyHave == 1) { menu "- ^800000 Aprendiz Bebê ^000000",L_BabyNovice,"- ^800000 Outras Classes ^000000 ",-;
+
+if(baselevel >= 45) goto MenuNumber2;
+
+if(baselevel <= 44) goto MenuNumber1;
+
+close;
+
+
+
+L_BabyNovice:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Aprendiz Bebê ^000000?";
+
+if(@PriceAp > 0) { mes "Eu cobro ^FF000"+@PriceAp+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceAp;
+
+jobchange 4023;
+
+close;
+
+
+
+MenuNumber1:
+
+if(@Ninja == 1) && (@Guns == 1) && (@Taek == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Ninja ^000000",ChangeNinja,"- ^800000 Gunslinger ^000000",ChangeGunslinger,"- ^800000 Taekwon ^000000",ChangeTaekown,"- Sair!",CJobChange;
+
+if(@Ninja == 1) && (@Guns == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Ninja ^000000",ChangeNinja,"- ^800000 Gunslinger ^000000",ChangeGunslinger,"- Sair!",CJobChange;
+
+if(@Ninja == 1) && (@Taek == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Ninja ^000000",ChangeNinja,"- ^800000 Taekwon ^000000",ChangeTaekwon,"- Sair!",CJobChange;
+
+if(@Taek == 1) && (@Guns == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Gunslinger ^000000",ChangeGunslinger,"- ^800000 Taekwon ^000000",ChangeTaekwon,"- Sair!",CJobChange;
+
+if(@Ninja == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Ninja ^000000",ChangeNinja,"- Sair!",CJobChange;
+
+if(@Taek == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Taekwon ^000000",ChangeTaekwon,"- Sair!",CJobChange;
+
+if(@Guns == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Gunslinger ^000000",ChangeGunslinger,"- Sair!",CJobChange;
+
+menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- Sair!",CJobChange;
+
+MenuNumber2:
+
+if(@Ninja == 1) && (@Guns == 1) && (@Taek == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Super Aprendiz ^000000",ChangeSuperAprendiz,"- ^800000 Ninja ^000000",ChangeNinja,"- ^800000 Gunslinger ^000000",ChangeGunslinger,"- ^800000 Taekwon ^000000",ChangeTaekown,"- Sair!",CJobChange;
+
+if(@Ninja == 1) && (@Guns == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Super Aprendiz ^000000",ChangeSuperAprendiz,"- ^800000 Ninja ^000000",ChangeNinja,"- ^800000 Gunslinger ^000000",ChangeGunslinger,"- Sair!",CJobChange;
+
+if(@Ninja == 1) && (@Taek == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Super Aprendiz ^000000",ChangeSuperAprendiz,"- ^800000 Ninja ^000000",ChangeNinja,"- ^800000 Taekwon ^000000",ChangeTaekwon,"- Sair!",CJobChange;
+
+if(@Taek == 1) && (@Guns == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Super Aprendiz ^000000",ChangeSuperAprendiz,"- ^800000 Gunslinger ^000000",ChangeGunslinger,"- ^800000 Taekwon ^000000",ChangeTaekwon,"- Sair!",CJobChange;
+
+if(@Ninja == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Super Aprendiz ^000000",ChangeSuperAprendiz,"- ^800000 Ninja ^000000",ChangeNinja,"- Sair!",CJobChange;
+
+if(@Taek == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Super Aprendiz ^000000",ChangeSuperAprendiz,"- ^800000 Taekwon ^000000",ChangeTaekwon,"- Sair!",CJobChange;
+
+if(@Guns == 1) menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Super Aprendiz ^000000",ChangeSuperAprendiz,"- ^800000 Gunslinger ^000000",ChangeGunslinger,"- Sair!",CJobChange;
+
+menu "- ^800000 Espadachim ^000000",ChangeEspadachim,"- ^800000 Mago ^000000",ChangeMago,"- ^800000 Arqueiro ^000000",ChangeArqueiro,"- ^800000 Noviço ^000000",ChangeNovico,"- ^800000 Mercador ^000000",ChangeMercador,"- ^800000 Gatuno ^000000",ChangeGatuno,"- ^800000 Super Aprendiz ^000000",ChangeSuperAprendiz,"- Sair!",CJobChange;
+
+
+
+ChangeEspadachim:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Espadachim ^000000?";
+
+if(@PriceAp > 0) { mes "Eu cobro ^FF000"+@PriceAp+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceAp;
+
+jobchange 1;
+
+close;
+
+
+
+ChangeMago:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Mago ^000000?";
+
+if(@PriceAp > 0) { mes "Eu cobro ^FF000"+@PriceAp+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceAp;
+
+jobchange 2;
+
+close;
+
+
+
+ChangeArqueiro:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Arqueiro ^000000?";
+
+if(@PriceAp > 0) { mes "Eu cobro ^FF000"+@PriceAp+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceAp;
+
+jobchange 3;
+
+close;
+
+
+
+ChangeNovico:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Noviço ^000000?";
+
+if(@PriceAp > 0) { mes "Eu cobro ^FF000"+@PriceAp+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceAp;
+
+jobchange 4;
+
+close;
+
+
+
+ChangeMercador:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Mercador ^000000?";
+
+if(@PriceAp > 0) { mes "Eu cobro ^FF000"+@PriceAp+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceAp;
+
+jobchange 5;
+
+close;
+
+
+
+ChangeGatuno:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Gatuno ^000000?";
+
+if(@PriceAp > 0) { mes "Eu cobro ^FF000"+@PriceAp+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceAp;
+
+jobchange 6;
+
+close;
+
+
+
+ChangeSuperAprendiz:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Super Aprendiz ^000000?";
+
+if(@PriceAp > 0) { mes "Eu cobro ^FF000"+@PriceAp+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceAp;
+
+jobchange 23;
+
+close;
+
+
+
+ChangeNinja:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Ninja ^000000?";
+
+if(@PriceMoreFClasses > 0) { mes "Eu cobro ^FF000"+@PriceMoreFClasses+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceMoreFClasses) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceMoreFClasses;
+
+jobchange Job_Ninja;
+
+close;
+
+
+
+ChangeGunslinger:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Pistoleiro ^000000?";
+
+if(@PriceMoreFClasses > 0) { mes "Eu cobro ^FF000"+@PriceMoreFClasses+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceMoreFClasses) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceMoreFClasses;
+
+jobchange Job_Gunslinger;
+
+close;
+
+
+
+ChangeTaekown:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Taekown ^000000?";
+
+if(@PriceMoreFClasses > 0) { mes "Eu cobro ^FF000"+@PriceMoreFClasses+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceMoreFClasses) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceMoreFClasses;
+
+jobchange Job_Taekwon;
+
+close;
+
+
+
+// Second Classes
+
+//-------------------------------------------
+
+Menu_FirstClass:
+
+if(Class == 1) goto Change2Espadachim;
+
+if(Class == 2) goto Change2Mago;
+
+if(Class == 3) goto Change2Arqueiro;
+
+if(Class == 4) goto Change2Novico;
+
+if(Class == 5) goto Change2Mercador;
+
+if(Class == 6) goto Change2Gatuno;
+
+if(Class == Job_Taekwon) goto Change2Taekwon;
+
+end;
+
+
+
+Change2Espadachim:
+
+mes @npc$;
+
+mes "Escolha qual classe deseja virar!";
+
+if(@PriceFc > 0) { mes "Eu cobro ^FF000"+@PriceFc+"^000000z!"; }
+
+next;
+
+menu 
+
+"- ^800000 Cavaleiro ^000000",ChangeCavaleiro,
+
+"- ^800000 Templário ^000000",ChangeTemplario,
+
+"- Sair!",CJobChange;
+
+//===============================\\
+
+ChangeCavaleiro:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Cavaleiro ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFc;
+
+jobchange 7;
+
+close;
+
+//-------------------------------\\
+
+ChangeTemplario:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Templário ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFc;
+
+jobchange 14;
+
+close;
+
+
+
+Change2Mago:
+
+mes @npc$;
+
+mes "Escolha qual classe deseja virar!";
+
+if(@PriceFc > 0) { mes "Eu cobro ^FF000"+@PriceFc+"^000000z!"; }
+
+next;
+
+menu 
+
+"- ^800000 Bruxo ^000000",ChangeBruxo,
+
+"- ^800000 Sábio ^000000",ChangeSabio,
+
+"- Sair!",CJobChange;
+
+//===============================\\
+
+ChangeBruxo:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bruxo ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFc;
+
+jobchange 9;
+
+close;
+
+//-------------------------------\\
+
+ChangeSabio:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Sábio ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFc;
+
+jobchange 16;
+
+close;
+
+
+
+Change2Arqueiro:
+
+mes @npc$;
+
+mes "Escolha qual classe deseja virar!";
+
+if(@PriceFc > 0) { mes "Eu cobro ^FF000"+@PriceFc+"^000000z!"; }
+
+next;
+
+if(Sex == 0) menu "- ^800000 Caçadora ^000000",ChangeCacador,"- ^800000 Odalisca ^000000",ChangeOdalisca,"- Sair!",CJobChange;
+
+if(Sex == 1) menu "- ^800000 Caçador ^000000",ChangeCacador,"- ^800000 Bardo ^000000",ChangeBardo,"- Sair!",CJobChange;
+
+end;
+
+//===============================\\
+
+ChangeCacador:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Caçador ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFc;
+
+jobchange 11;
+
+close;
+
+//-------------------------------\\
+
+ChangeBardo:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bardo ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFc;
+
+jobchange 19;
+
+close;
+
+//-------------------------------\\
+
+ChangeOdalisca:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Odalisca ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFc;
+
+jobchange 20;
+
+close;
+
+
+
+Change2Novico:
+
+mes @npc$;
+
+mes "Escolha qual classe deseja virar!";
+
+if(@PriceFc > 0) { mes "Eu cobro ^FF000"+@PriceFc+"^000000z!"; }
+
+next;
+
+menu 
+
+"- ^800000 Sacerdote ^000000",ChangeSacerdote,
+
+"- ^800000 Monge ^000000",ChangeMonge,
+
+"- Sair!",CJobChange;
+
+//===============================\\
+
+ChangeSacerdote:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Sacerdote ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFc;
+
+jobchange 8;
+
+close;
+
+//-------------------------------\\
+
+ChangeMonge:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Monge ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFc;
+
+jobchange 15;
+
+close;
+
+
+
+Change2Mercador:
+
+mes @npc$;
+
+mes "Escolha qual classe deseja virar!";
+
+if(@PriceFc > 0) { mes "Eu cobro ^FF000"+@PriceFc+"^000000z!"; }
+
+next;
+
+menu 
+
+"- ^800000 Ferreiro ^000000",ChangeFerreiro,
+
+"- ^800000 Alquimista ^000000",ChangeAlquimista,
+
+"- Sair!",CJobChange;
+
+//===============================\\
+
+ChangeFerreiro:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Ferreiro ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFc;
+
+jobchange 10;
+
+close;
+
+//-------------------------------\\
+
+ChangeAlquimista:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Alquimista ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFc;
+
+jobchange 18;
+
+close;
+
+
+
+Change2Gatuno:
+
+mes @npc$;
+
+mes "Escolha qual classe deseja virar!";
+
+if(@PriceFc > 0) { mes "Eu cobro ^FF000"+@PriceFc+"^000000z!"; }
+
+next;
+
+menu 
+
+"- ^800000 Mercenário ^000000",ChangeMercenario,
+
+"- ^800000 Arruaceiro ^000000",ChangeArruaceiro,
+
+"- Sair!",CJobChange;
+
+//===============================\\
+
+ChangeMercenario:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Mercenário ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFc;
+
+jobchange 12;
+
+close;
+
+//-------------------------------\\
+
+ChangeArruaceiro:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Arruaceiro ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFc;
+
+jobchange 17;
+
+close;
+
+
+
+
+
+
+
+
+Change2Taekwon:
+
+mes @npc$;
+
+if(@StarGlad == 0) && (@SoulLink == 0) { mes "Me desculpe, mas você chegou ao final das Classes!"; close; }
+
+mes "Escolha qual classe deseja virar!";
+
+if(@PriceMoreSClasses > 0) { mes "Eu cobro ^FF000"+@PriceMoreSClasses+"^000000z!"; }
+
+next;
+
+if(@StarGlad == 1) && (@SoulLink == 1) menu "- ^800000 Star Gladiator ^000000",ChangeStarGladiator,"- ^800000 Soul Linker ^000000",ChangeSoulLinker,"- Sair!",CJobChange;
+
+if(@StarGlad == 1) menu "- ^800000 Star Gladiator ^000000",ChangeStarGladiator,"- Sair!",CJobChange;
+
+if(@SoulLink == 1) menu "- ^800000 Soul Linker ^000000",ChangeSoulLinker,"- Sair!",CJobChange;
+
+end;
+
+//===============================\\
+
+ChangeStarGladiator:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Star Gladiator ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceMoreSClasses) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceMoreSClasses;
+
+jobchange Job_Star_Gladiator;
+
+close;
+
+//-------------------------------\\
+
+ChangeSoulLinker:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Soul Linker ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceMoreSClasses) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceMoreSClasses;
+
+jobchange Job_Soul_Linker;
+
+close;
+
+
+
+// Renascer e First Classes High
+
+//--------------------------------------------
+
+Menu_SecondClass:
+
+if(@TransHave == 0) { mes @npc$; mes "Você já chegou ao final das Classes!"; close; }
+
+if(BaseLevel < @LevelMinSc) { mes @npc$; mes "Você precisa ser level ^FF0000"+@LevelMinSc+"^000000 pra renascer!"; close; }
+
+if(JobLevel < @LevelJobMinSc) { mes @npc$; mes "Você precisa ser level ^FF0000"+@LevelJobMinSc+"^000000 pra renascer!"; close; }
+
+if(skillpoint != 0) { mes @npc$; mes "Você precisa ter 0 SkillPoints sobrando..."; }
+
+if(skillpoint != 0) && (@RemoveSkillPoint == 0) close;
+
+if(skillpoint != 0) && (@RemoveSkillPoint == 1) { mes "Deseja remover?!";next; menu "Sim!",-,"Não!",CJobChange; }
+
+if(skillpoint != 0) && (@RemoveSkillPoint == 1) { set skillpoint, skillpoint - skillpoint; goto Menu_SecondClass; }
+
+mes @npc$;
+
+mes "Olá ^0000FF"+strcharinfo(0)+"^000000, você quer renascer?";
+
+if(@PriceAprT > 0) { mes "Eu cobro ^0000FF"+@PriceAprT+"^000000z para renascer!"; }
+
+next;
+
+menu "Sim!",-,"Não!",CJobChange;
+
+if(Zeny < @PriceAprT) { mes "Você não tem Zeny suficiente!"; close; }
+
+if(Class == 7) set ClassReborn,1;
+
+if(Class == 13)set ClassReborn,1;
+
+if(Class == 8) set ClassReborn,2;
+
+if(Class == 9) set ClassReborn,3;
+
+if(Class == 10)set ClassReborn,4;
+
+if(Class == 11)set ClassReborn,5;
+
+if(Class == 12)set ClassReborn,6;
+
+if(Class == 14)set ClassReborn,7;
+
+if(Class == 21)set ClassReborn,7;
+
+if(Class == 15)set ClassReborn,8;
+
+if(Class == 16)set ClassReborn,9;
+
+if(Class == 17)set ClassReborn,10;
+
+if(Class == 18)set ClassReborn,11;
+
+if(Class == 19)set ClassReborn,12;
+
+if(Class == 20)set ClassReborn,13;
+
+jobchange 4001;
+
+resetlvl(1);
+
+set Zeny, Zeny - @PriceAprT;
+
+set statuspoint, statuspoint + @StatusPoint;
+
+if (@Additem == 1) {
+    getitem 1243,1;
+    getitem 2112,1;
+    getitem 2352,1;
+    getitem 2414,1;
+    getitem 2510,1;
+    getitem 5055,1;
+}
+
+close;
+
+
+
+Menu_FirstClassT:
+
+mes @npc$;
+
+mes "Olá Aprendiz T, você deseja mudar de classe?";
+
+if(@PriceApT > 0) { mes "Eu cobro ^0000FF"+@PriceApT+"^000000z pra isso!"; }
+
+next;
+
+menu "Sim!",l_Yes_JobChange_NoviceT,"Não!",CJobChange;
+
+
+
+l_Yes_JobChange_NoviceT:
+
+if(JobLevel < 10) goto JobLevelFailedNovice;
+
+if(SkillPoint != 0) goto SkillPointFailedNovice;
+
+mes @npc$;
+
+if(ClassReborn == 1) || (ClassReborn == 7) mes "Você vai virar Espadachim T";
+
+if(ClassReborn == 2) || (ClassReborn == 8) mes "Você vai virar Noviço T";
+
+if(ClassReborn == 3) || (ClassReborn == 9) mes "Você vai virar Mago T";
+
+if(ClassReborn == 4) || (ClassReborn == 11) mes "Você vai virar Mercador T";
+
+if(ClassReborn == 6) || (ClassReborn == 10) mes "Você vai virar Gatuno T";
+
+if(ClassReborn == 5) || (ClassReborn == 12) || (ClassReborn == 13) mes "Você vai virar Arqueiro T";
+
+mes "Tem certeza que deseja mudar de classe?";
+
+next;
+
+menu "Sim!",-,"Não!",CJobChange;
+
+if(Zeny < @PriceApT) { next; mes "Você não tem Zeny suficiente."; close; }
+
+if(ClassReborn == 1) || (ClassReborn == 7) jobchange 4002;
+
+if(ClassReborn == 2) || (ClassReborn == 8) jobchange 4005;
+
+if(ClassReborn == 3) || (ClassReborn == 9) jobchange 4003;
+
+if(ClassReborn == 4) || (ClassReborn == 11) jobchange 4006;
+
+if(ClassReborn == 6) || (ClassReborn == 10) jobchange 4007;
+
+if(ClassReborn == 5) || (ClassReborn == 12) || (ClassReborn == 13) jobchange 4004;
+
+if(ClassReborn == 0) goto Menu_First2ClassT;
+
+set Zeny, Zeny - @PriceApT;
+
+close;
+
+
+
+Menu_First2ClassT:
+
+next;
+
+mes @npc$;
+
+mes "Escolha que classe quer virar!";
+
+next;
+
+menu "- ^800000 Espadachim T ^000000",ChangeEspadachimT,
+
+"- ^800000 Mago T ^000000",ChangeMagoT,
+
+"- ^800000 Arqueiro T ^000000",ChangeArqueiroT,
+
+"- ^800000 Noviço T ^000000",ChangeNovicoT,
+
+"- ^800000 Mercador T ^000000",ChangeMercadorT,
+
+"- ^800000 Gatuno T ^000000",ChangeGatunoT,
+
+"- Sair!",CJobChange;
+
+
+
+ChangeEspadachimT:
+
+set Zeny, Zeny - @PriceApT;
+
+jobchange 4002;
+
+close;
+
+
+
+ChangeMagoT:
+
+set Zeny, Zeny - @PriceApT;
+
+jobchange 4003;
+
+close;
+
+
+
+ChangeArqueiroT:
+
+set Zeny, Zeny - @PriceApT;
+
+jobchange 4004;
+
+close;
+
+
+
+ChangeNovicoT:
+
+set Zeny, Zeny - @PriceApT;
+
+jobchange 4005;
+
+close;
+
+
+
+ChangeMercadorT:
+
+set Zeny, Zeny - @PriceApT;
+
+jobchange 4006;
+
+close;
+
+
+
+ChangeGatunoT:
+
+set Zeny, Zeny - @PriceApT;
+
+jobchange 4007;
+
+close;
+
+
+
+// Second Classes High
+
+//-----------------------------------------------
+
+Menu_SecondClassT:
+
+mes @npc$;
+
+if(JobLevel < 40) { mes "Você não tem level de classe minimo suficiente (lvl40)."; close; }
+
+mes "Você tem certeza que deseja virar Segunda Classe T?";
+
+if(@PriceFcT > 0) mes "Eu cobro ^0000FF"+@PriceFcT+"^000000z";
+
+next;
+
+menu "Sim!",-,"Não!",CJobChange;
+
+next;
+
+mes @npc$;
+
+if(ClassReborn == 1) mes "Você vai virar Lorde!";
+
+if(ClassReborn == 2) mes "Você vai virar Sumo Sacerdote!";
+
+if(ClassReborn == 3) mes "Você vai virar Arquimago!";
+
+if(ClassReborn == 4) mes "Você vai virar Mestre-Ferreiro!";
+
+if(ClassReborn == 5) mes "Você vai virar Atirador de Elite!";
+
+if(ClassReborn == 6) mes "Você vai virar Algoz!";
+
+if(ClassReborn == 7) mes "Você vai virar Paladino!";
+
+if(ClassReborn == 8) mes "Você vai virar Mestre (Champion)!";
+
+if(ClassReborn == 9) mes "Você vai virar Professor!";
+
+if(ClassReborn == 10)mes "Você vai virar Desordeiro!";
+
+if(ClassReborn == 11)mes "Você vai virar Criador!";
+
+if(ClassReborn == 12)mes "Você vai virar Menestrel!";
+
+if(ClassReborn == 13)mes "Você vai virar Cigana!";
+
+if(ClassReborn == 0) goto Menu_Second2ClassT;
+
+next;
+
+goto Menu_Virar_SecondClassT;
+
+
+
+Menu_Virar_SecondClassT:
+
+mes @npc$;
+
+mes "Tem certeza mesmo que deseja virar Segunda Classe T?";
+
+next;
+
+menu "Sim!",-,"Não!",CJobChange;
+
+if(Zeny < @PriceFcT) { next; mes @npc$; mes "Você não tem Zeny suficiente!"; close; }
+
+set Zeny, Zeny - @PriceFcT;
+
+if(ClassReborn == 1) jobchange 4008;
+
+if(ClassReborn == 2) jobchange 4009;
+
+if(ClassReborn == 3) jobchange 4010;
+
+if(ClassReborn == 4) jobchange 4011;
+
+if(ClassReborn == 5) jobchange 4012;
+
+if(ClassReborn == 6) jobchange 4013;
+
+if(ClassReborn == 7) jobchange 4015;
+
+if(ClassReborn == 8) jobchange 4016;
+
+if(ClassReborn == 9) jobchange 4017;
+
+if(ClassReborn == 10)jobchange 4018;
+
+if(ClassReborn == 11)jobchange 4019;
+
+if(ClassReborn == 12)jobchange 4020;
+
+if(ClassReborn == 13)jobchange 4021;
+
+close;
+
+
+
+Menu_Second2ClassT:
+
+if(Class == 4002) mes "Você pode virar Lorde ou Paladino!";
+
+if(Class == 4003) mes "Você pode virar Arquimago ou Professor!";
+
+if(Class == 4004) && (Sex == 0) mes "Você pode virar Atirador de Elite ou Cigana!";
+
+if(Class == 4004) && (Sex == 1) mes "Você pode virar Atirador de Elite ou Menestrel!";
+
+if(Class == 4005) mes "Você pode virar Sumo Sacerdote ou Mestre (Champion)!";
+
+if(Class == 4006) mes "Você pode virar Mestre-Ferreiro ou Criador!";
+
+if(Class == 4007) mes "Você pode virar Algoz ou Desordeiro!";
+
+next;
+
+mes @npc$;
+
+mes "Escolha qual classe quer virar!";
+
+next;
+
+if(Class == 4002) menu "- ^800000 Lorde ^000000",ChangeLorde,"- ^800000 Paladino ^000000",ChangePaladino,"- Sair!",CJobChange;
+
+if(Class == 4003) menu "- ^800000 Arquimago ^000000",ChangeArquimago,"- ^800000 Professor ^000000",ChangeProfessor,"- Sair!",CJobChange;
+
+if(Class == 4004) && (Sex == 0) menu "- ^800000 Atirador de Elite ^000000",ChangeAtiradorDeElite,"- ^800000 Cigana ^000000",ChangeCigana,"- Sair!",CJobChange;
+
+if(Class == 4004) && (Sex == 1) menu "- ^800000 Atirador de Elite ^000000",ChangeAtiradorDeElite,"- ^800000 Menestrel ^000000",ChangeMenestrel,"- Sair!",CJobChange;
+
+if(Class == 4005) menu "- ^800000 Sumo Sacerdote ^000000",ChangeSumoSacerdote,"- ^800000 Mestre (Champion) ^000000",ChangeMestre,"- Sair!",CJobChange;
+
+if(Class == 4006) menu "- ^800000 Mestre-Ferreiro ^000000",ChangeMestreFerreiro,"- ^800000 Criador ^000000",ChangeCriador,"- Sair!",CJobChange;
+
+if(Class == 4007) menu "- ^800000 Algoz ^000000",ChangeAlgoz,"- ^800000 Desordeiro ^000000",ChangeDesordeiro,"- Sair!",CJobChange;
+
+close;
+
+
+
+ChangeLorde:
+
+set @Classe,1;
+
+goto Menu_Transclasse;
+
+
+
+ChangePaladino:
+
+set @Classe,2;
+
+goto Menu_Transclasse;
+
+
+
+ChangeArquimago:
+
+set @Classe,3;
+
+goto Menu_Transclasse;
+
+
+
+ChangeProfessor:
+
+set @Classe,4;
+
+goto Menu_Transclasse;
+
+
+
+ChangeAtiradorDeElite:
+
+set @Classe,5;
+
+goto Menu_Transclasse;
+
+
+
+ChangeCigana:
+
+set @Classe,6;
+
+goto Menu_Transclasse;
+
+
+
+ChangeMenestrel:
+
+set @Classe,7;
+
+goto Menu_Transclasse;
+
+
+
+ChangeSumoSacerdote:
+
+set @Classe,8;
+
+goto Menu_Transclasse;
+
+
+
+ChangeMestre:
+
+set @Classe,9;
+
+goto Menu_Transclasse;
+
+
+
+ChangeMestreFerreiro:
+
+set @Classe,10;
+
+goto Menu_Transclasse;
+
+
+
+ChangeCriador:
+
+set @Classe,11;
+
+goto Menu_Transclasse;
+
+
+
+ChangeAlgoz:
+
+set @Classe,12;
+
+goto Menu_Transclasse;
+
+
+
+ChangeDesordeiro:
+
+set @Classe,13;
+
+goto Menu_Transclasse;
+
+
+
+Menu_Transclasse:
+
+mes @npc$;
+
+mes "Tem certeza mesmo que deseja virar Segunda Classe T?";
+
+next;
+
+menu "Sim!",-,"Não!",CJobChange;
+
+if(Zeny < @PriceFcT) { next; mes @npc$; mes "Você não tem Zeny suficiente!"; close; }
+
+set Zeny, Zeny - @PriceFcT;
+
+if(@Classe == 1) jobchange 4008;
+
+if(@Classe == 2) jobchange 4015;
+
+if(@Classe == 3) jobchange 4010;
+
+if(@Classe == 4) jobchange 4017;
+
+if(@Classe == 5) jobchange 4012;
+
+if(@Classe == 6) jobchange 4021;
+
+if(@Classe == 7) jobchange 4020;
+
+if(@Classe == 8) jobchange 4009;
+
+if(@Classe == 9) jobchange 4016;
+
+if(@Classe == 10) jobchange 4011;
+
+if(@Classe == 11) jobchange 4019;
+
+if(@Classe == 12) jobchange 4013;
+
+if(@Classe == 13) jobchange 4018;
+
+close;
+
+
+
+// End Classes (Super Aprendiz / Casamento)
+
+//-----------------------------------------------
+
+Menu_EndClass:
+
+mes @npc$;
+
+mes "Olá, você já chegou ao final das classes!";
+
+if(Class == 22) mes "A Classe 'Casamento', não tem evoluções.";
+
+close;
+
+
+
+// End Classes (Transclasses / Ninja / Guns)
+
+//-----------------------------------------------
+
+Menu_End2Class:
+
+mes @npc$;
+
+mes "Você já chegou ao final das classes!";
+
+close;
+
+
+
+// Baby Classes (First Classes Baby)
+
+//-----------------------------------------------
+
+Menu_NoviceBaby:
+
+mes @npc$;
+
+if(@BabyHave == 0) { mes "Me desculpe, mas não trabalho com classes Baby!"; close; }
+
+mes "Olá Aprendiz Bebê, você deseja mudar de classe?";
+
+next;
+
+menu "Sim!",l_yes_noviceb_change,"Não!",CJobChange;
+
+
+
+l_yes_noviceb_change:
+
+next;
+
+if(JobLevel < 10) goto JobLevelFailedNovice;
+
+if(SkillPoint != 0) goto SkillPointFailedNovice;
+
+mes @npc$;
+
+mes "Escolha que classe quer virar:";
+
+next;
+
+if(baselevel >= 45) menu "- ^800000 Bebê Espadachim ^000000",ChangeBebeEspadachim,"- ^800000 Bebê Mago ^000000",ChangeBebeMago,"- ^800000 Bebê Arqueiro ^000000",ChangeBebeArqueiro,"- ^800000 Bebê Noviço ^000000",ChangeBebeNovico,"- ^800000 Bebê Mercador ^000000",ChangeBebeMercador,"- ^800000 Bebê Gatuno ^000000",ChangeBebeGatuno,"- ^800000 Super Bebê ^000000",ChangeSuperBebe,"- Sair!",L_Cancelar;
+
+menu 
+
+"- ^800000 Bebê Espadachim ^000000",ChangeBebeEspadachim,
+
+"- ^800000 Bebê Mago ^000000",ChangeBebeMago,
+
+"- ^800000 Bebê Arqueiro ^000000",ChangeBebeArqueiro,
+
+"- ^800000 Bebê Noviço ^000000",ChangeBebeNovico,
+
+"- ^800000 Bebê Mercador ^000000",ChangeBebeMercador,
+
+"- ^800000 Bebê Gatuno ^000000",ChangeBebeGatuno,
+
+"- Sair!",CJobChange;
+
+end;
+
+
+
+ChangeBebeEspadachim:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Espadachim ^000000?";
+
+if(@PriceFBaby > 0) mes "Eu cobro ^FF000"+@PriceFBaby+"^000000z!";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFBaby;
+
+jobchange 4024;
+
+close;
+
+
+
+ChangeBebeMago:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Mago ^000000?";
+
+if(@PriceFBaby > 0) { mes "Eu cobro ^FF000"+@PriceFBaby+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFBaby;
+
+jobchange 4025;
+
+close;
+
+
+
+ChangeBebeArqueiro:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Arqueiro ^000000?";
+
+if(@PriceFBaby > 0) { mes "Eu cobro ^FF000"+@PriceFBaby+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFBaby;
+
+jobchange 4026;
+
+close;
+
+
+
+ChangeBebeNovico:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Noviço ^000000?";
+
+if(@PriceFBaby > 0) { mes "Eu cobro ^FF000"+@PriceFBaby+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFBaby;
+
+jobchange 4027;
+
+close;
+
+
+
+ChangeBebeMercador:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Mercador ^000000?";
+
+if(@PriceFBaby > 0) { mes "Eu cobro ^FF000"+@PriceFBaby+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFBaby;
+
+jobchange 4028;
+
+close;
+
+
+
+ChangeBebeGatuno:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Gatuno ^000000?";
+
+if(@PriceFBaby > 0) { mes "Eu cobro ^FF000"+@PriceFBaby+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFBaby;
+
+jobchange 4029;
+
+close;
+
+
+
+ChangeSuperBebe:
+
+next;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Super Bebê ^000000?";
+
+if(@PriceFBaby > 0) { mes "Eu cobro ^FF000"+@PriceFBaby+"^000000z!"; }
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+next;
+
+if(Zeny < @PriceAp) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceFBaby;
+
+jobchange 4045;
+
+close;
+
+
+
+// Baby Classes (Second Classes Baby)
+
+//-----------------------------------------------
+
+Menu_FirstClassBaby:
+
+if(@BabyHave == 0) { mes @npc$; mes "Me desculpe, mas não trabalho com Classes Baby!"; close; }
+
+if(Class == 4024) goto Change2BebeEspadachim;
+
+if(Class == 4025) goto Change2BebeMago;
+
+if(Class == 4026) goto Change2BebeArqueiro;
+
+if(Class == 4027) goto Change2BebeNovico;
+
+if(Class == 4028) goto Change2BebeMercador;
+
+if(Class == 4029) goto Change2BebeGatuno;
+
+end;
+
+
+
+Change2BebeEspadachim:
+
+mes @npc$;
+
+mes "Escolha qual classe deseja virar!";
+
+if(@PriceSBaby > 0) { mes "Eu cobro ^FF000"+@PriceSBaby+"^000000z!"; }
+
+next;
+
+menu 
+
+"- ^800000 Bebê Cavaleiro ^000000",ChangeBebeCavaleiro,
+
+"- ^800000 Bebê Templário ^000000",ChangeBebeTemplario,
+
+"- Sair!",CJobChange;
+
+//===============================\\
+
+ChangeBebeCavaleiro:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Cavaleiro ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceSBaby) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceSBaby;
+
+jobchange 4030;
+
+close;
+
+//-------------------------------\\
+
+ChangeBebeTemplario:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Templário ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceFc) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceSBaby;
+
+jobchange 4037;
+
+close;
+
+
+
+Change2BebeMago:
+
+mes @npc$;
+
+mes "Escolha qual classe deseja virar!";
+
+if(@PriceSBaby > 0) { mes "Eu cobro ^FF000"+@PriceSBaby+"^000000z!"; }
+
+next;
+
+menu 
+
+"- ^800000 Bebê Bruxo ^000000",ChangeBebeBruxo,
+
+"- ^800000 Bebê Sábio ^000000",ChangeBebeSabio,
+
+"- Sair!",CJobChange;
+
+//===============================\\
+
+ChangeBebeBruxo:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Bruxo ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceSBaby) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceSBaby;
+
+jobchange 4032;
+
+close;
+
+//-------------------------------\\
+
+ChangeBebeSabio:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Sábio ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceSBaby) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceSBaby;
+
+jobchange 4039;
+
+close;
+
+
+
+Change2BebeArqueiro:
+
+mes @npc$;
+
+mes "Escolha qual classe deseja virar!";
+
+if(@PriceSBaby > 0) mes "Eu cobro ^FF000"+@PriceSBaby+"^000000z!";
+
+next;
+
+if(Sex == 0) menu "- ^800000 Bebê Caçador ^000000",ChangeBebeCacador,"- ^800000 Bebê Odalisca ^000000",ChangeBebeOdalisca,"- Sair!",CJobChange;
+
+if(Sex == 1) menu "- ^800000 Bebê Caçador ^000000",ChangeBebeCacador,"- ^800000 Bebê Bardo ^000000",ChangeBebeBardo,"- Sair!",CJobChange;
+
+end;
+
+//===============================\\
+
+ChangeBebeCacador:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Caçador ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceSBaby) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceSBaby;
+
+jobchange 4034;
+
+close;
+
+//-------------------------------\\
+
+ChangeBebeBardo:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Bardo ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceSBaby) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceSBaby;
+
+jobchange 4042;
+
+close;
+
+//-------------------------------\\
+
+ChangeBebeOdalisca:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Odalisca ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceSBaby) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceSBaby;
+
+jobchange 4043;
+
+close;
+
+
+
+Change2BebeNovico:
+
+mes @npc$;
+
+mes "Escolha qual classe deseja virar!";
+
+if(@PriceSBaby > 0) mes "Eu cobro ^FF000"+@PriceSBaby+"^000000z!";
+
+next;
+
+menu 
+
+"- ^800000 Bebê Sacerdote ^000000",ChangeBebeSacerdote,
+
+"- ^800000 Bebê Monge ^000000",ChangeBebeMonge,
+
+"- Sair!",CJobChange;
+
+//===============================\\
+
+ChangeBebeSacerdote:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Sacerdote ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceSBaby) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceSBaby;
+
+jobchange 4031;
+
+close;
+
+//-------------------------------\\
+
+ChangeBebeMonge:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Monge ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceSBaby) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceSBaby;
+
+jobchange 4038;
+
+close;
+
+
+
+Change2BebeMercador:
+
+mes @npc$;
+
+mes "Escolha qual classe deseja virar!";
+
+if(@PriceSBaby > 0) mes "Eu cobro ^FF000"+@PriceSBaby+"^000000z!";
+
+next;
+
+menu 
+
+"- ^800000 Bebê Ferreiro ^000000",ChangeBebeFerreiro,
+
+"- ^800000 Bebê Alquimista ^000000",ChangeBebeAlquimista,
+
+"- Sair!",CJobChange;
+
+//===============================\\
+
+ChangeBebeFerreiro:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Ferreiro ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceSBaby) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceSBaby;
+
+jobchange 4033;
+
+close;
+
+//-------------------------------\\
+
+ChangeBebeAlquimista:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Alquimista ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceSBaby) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceSBaby;
+
+jobchange 4041;
+
+close;
+
+
+
+Change2BebeGatuno:
+
+mes @npc$;
+
+mes "Escolha qual classe deseja virar!";
+
+if(@PriceSBaby > 0) mes "Eu cobro ^FF000"+@PriceSBaby+"^000000z!";
+
+next;
+
+menu 
+
+"- ^800000 Bebê Mercenário ^000000",ChangeBebeMercenario,
+
+"- ^800000 Bebê Arruaceiro ^000000",ChangeBebeArruaceiro,
+
+"- Sair!",CJobChange;
+
+//===============================\\
+
+ChangeBebeMercenario:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Mercenário ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceSBaby) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceSBaby;
+
+jobchange 4035;
+
+close;
+
+//-------------------------------\\
+
+ChangeBebeArruaceiro:
+
+next;
+
+if(JobLevel < 40) goto JobLevelFailedSC;
+
+if(SkillPoint != 0) goto SkillPointFailedSC;
+
+mes @npc$;
+
+mes "Tem certeza que deseja virar ^FF0000 Bebê Arruaceiro ^000000?";
+
+next;
+
+menu "Não!",CJobChange,"Sim!",-;
+
+if(Zeny < @PriceSBaby) { mes @npc$; mes "Você não tem Zeny suficiente!!"; close; }
+
+set Zeny, Zeny - @PriceSBaby;
+
+jobchange 4040;
+
+close;
+
+
+
+// Other Labels
+
+//-----------------------------------------------
+
+JobLevelFailedNovice:
+
+mes @npc$;
+
+mes "Você precisa de ser lvl10 de classe!";
+
+close;
+
+
+
+SkillPointFailedNovice:
+
+mes @npc$;
+
+mes "Você precisa gastar todos seus pontos de skill!";
+
+close;
+
+
+
+JobLevelFailedSC:
+
+mes @npc$;
+
+mes "Você precisa de ser lvl40 ou superior de classe!";
+
+close;
+
+
+
+SkillPointFailedSC:
+
+mes @npc$;
+
+mes "Você precisa gastar todos seus pontos de skill!";
+
+close;
+
+L_Cancelar:
+mes @npc$;
+
+mes "Certo, volte quando mudar de idéia!";
+
+close;
+
+
+
+}
+
+
+
+}

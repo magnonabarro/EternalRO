@@ -1,0 +1,1367 @@
+// Inserir essas querys no seu banco de dados - [SlexFire]
+// INSERT INTO `mapreg` (`varname`, `index`, `value`) VALUES ('$mvpspawngid', '0', '1');
+// INSERT INTO `mapreg` (`varname`, `index`, `value`) VALUES ('$mvpspawn', '0', '1');
+
+-	script	MVP_Board	-1,{
+	OnAtcommand:
+	if(getgroupid() > 5){
+		if(MVPBOARD){
+			MVPBOARD = 0;
+			callsub clearBoard;
+			MYBOARDTIME = gettimetick(2);
+			end;
+		}
+		else if((MYBOARDTIME + .delay) > gettimetick(2)){
+			message strcharinfo(0), "Você só pode consultar o Quadro de MVP's a cada "+.delay+" segundos";
+			end;		
+		}
+		
+		MVPBOARD ++;
+        
+		//Efeito de fundo
+		hateffect 327,FALSE;
+		hateffect 327,true;
+
+//=================================================
+		//Efeito Mistress
+		if(.Mistress == 0){// Efeito Morto
+			hateffect 364,FALSE;
+			hateffect 364,TRUE;
+		}
+		else{
+			if(.Mistress == 1){// Efeito Vivo
+				hateffect 328,FALSE;
+				hateffect 328,TRUE;
+			}
+		}	
+
+		//Efeito Amon RA
+		if(.AmonRa == 0){// Efeito Morto
+			hateffect 365,FALSE;
+			hateffect 365,TRUE;
+		}
+		else{
+			if(.AmonRa == 1){// Efeito Vivo
+				hateffect 329,FALSE;
+				hateffect 329,TRUE;
+			}
+		}
+
+		//Efeito Atroce
+		if(.Atroce == 0){// Efeito Morto
+			hateffect 410,FALSE;
+			hateffect 410,TRUE;
+		}
+		else{
+			switch(.Atroce){//Efeito Vivo
+				case 1:
+					hateffect 405,FALSE;
+					hateffect 405,TRUE;
+				break;
+				
+				case 2:
+					hateffect 406,FALSE;
+					hateffect 406,TRUE;
+				break;
+				
+				case 3:
+					hateffect 407,FALSE;
+					hateffect 407,TRUE;
+				break;
+				
+				case 4:
+					hateffect 408,FALSE;
+					hateffect 408,TRUE;
+				break;
+				
+				case 5:
+					hateffect 409,FALSE;
+					hateffect 409,TRUE;
+				break;
+			}
+		}
+
+		//Efeito Baphoment
+		if(.Baphoment == 0){// Efeito Morto
+			hateffect 366,FALSE;
+			hateffect 366,TRUE;
+		}
+		else{
+			if(.Baphoment == 1){// Efeito Vivo
+				hateffect 330,FALSE;
+				hateffect 330,TRUE;
+			}
+		}
+        
+		//Efeito Beelzebub
+		if(.Beelzebub == 0){// Efeito Morto
+			hateffect 367,FALSE;
+			hateffect 367,TRUE;
+		}
+		else{
+			if(.Beelzebub == 1){// Efeito Vivo
+				hateffect 331,FALSE;
+				hateffect 331,TRUE;
+			}
+		} 
+        
+		//Efeito Golden Thief Bug
+		if(.GoldenBug == 0){// Efeito Morto
+			hateffect 368,FALSE;
+			hateffect 368,TRUE;
+		}
+		else{
+			if(.GoldenBug == 1){// Efeito Vivo
+				hateffect 332,FALSE;
+				hateffect 332,TRUE;
+			}
+		} 
+                     
+		//Efeito Fallen Bishop
+		if(.FallenBishop == 0){// Efeito Morto
+			hateffect 369,FALSE;
+			hateffect 369,TRUE;
+		}
+		else{
+			if(.FallenBishop == 1){// Efeito Vivo
+				hateffect 333,FALSE;
+				hateffect 333,TRUE;
+			}
+		} 
+                     
+		//Efeito Boitata
+		if(.Boitata == 0){// Efeito Morto
+			hateffect 370,FALSE;
+			hateffect 370,TRUE;
+		}
+		else{
+			if(.Boitata == 1){// Efeito Vivo
+				hateffect 334,FALSE;
+				hateffect 334,TRUE;
+			}
+		} 
+                     
+		//Efeito Stormy Knight
+		if(.StormyKnight == 0){// Efeito Morto
+			hateffect 371,FALSE;
+			hateffect 371,TRUE;
+		}
+		else{
+			if(.StormyKnight == 1){// Efeito Vivo
+				hateffect 335,FALSE;
+				hateffect 335,TRUE;
+			}
+		} 
+                     
+		//Efeito Detale
+		if(.Detale == 0){// Efeito Morto
+			hateffect 372,FALSE;
+			hateffect 372,TRUE;
+		}
+		else{
+			if(.Detale == 1){// Efeito Vivo
+				hateffect 336,FALSE;
+				hateffect 336,TRUE;
+			}
+		} 
+                     
+		//Efeito Doppelganger
+		if(.Doppelganger == 0){// Efeito Morto
+			hateffect 373,FALSE;
+			hateffect 373,TRUE;
+		}
+		else{
+			if(.Doppelganger == 1){// Efeito Vivo
+				hateffect 337,FALSE;
+				hateffect 337,TRUE;
+			}
+		} 
+                     
+		//Efeito Dracula
+		if(.Dracula == 0){// Efeito Morto
+			hateffect 374,FALSE;
+			hateffect 374,TRUE;
+		}
+		else{
+			if(.Dracula == 1){// Efeito Vivo
+				hateffect 338,FALSE;
+				hateffect 338,TRUE;
+			}
+		} 
+                     
+		//Efeito Drake
+		if(.Drake == 0){// Efeito Morto
+			hateffect 375,FALSE;
+			hateffect 375,TRUE;
+		}
+		else{
+			if(.Drake == 1){// Efeito Vivo
+				hateffect 339,FALSE;
+				hateffect 339,TRUE;
+			}
+		} 
+                     
+		//Efeito Eddga
+		if(.Eddga == 0){// Efeito Morto
+			hateffect 376,FALSE;
+			hateffect 376,TRUE;
+		}
+		else{
+			if(.Eddga == 1){// Efeito Vivo
+				hateffect 340,FALSE;
+				hateffect 340,TRUE;
+			}
+		} 
+                     
+		//Efeito Pharaoh
+		if(.Pharaoh == 0){// Efeito Morto
+			hateffect 377,FALSE;
+			hateffect 377,TRUE;
+		}
+		else{
+			if(.Pharaoh == 1){// Efeito Vivo
+				hateffect 341,FALSE;
+				hateffect 341,TRUE;
+			}
+		} 
+                     
+		//Efeito Moonlight Flower
+		if(.Moonlight == 0){// Efeito Morto
+			hateffect 378,FALSE;
+			hateffect 378,TRUE;
+		}
+		else{
+			if(.Moonlight == 1){// Efeito Vivo
+				hateffect 342,FALSE;
+				hateffect 342,TRUE;
+			}
+		} 
+                     
+		//Efeito Phreeoni
+		if(.Phreeoni == 0){// Efeito Morto
+			hateffect 379,FALSE;
+			hateffect 379,TRUE;
+		}
+		else{
+			if(.Phreeoni == 1){// Efeito Vivo
+				hateffect 343,FALSE;
+				hateffect 343,TRUE;
+			}
+		} 
+                     
+		//Efeito Turtle General
+		if(.TurtleGeneral == 0){// Efeito Morto
+			hateffect 380,FALSE;
+			hateffect 380,TRUE;
+		}
+		else{
+			if(.TurtleGeneral == 1){// Efeito Vivo
+				hateffect 344,FALSE;
+				hateffect 344,TRUE;
+			}
+		} 
+                     
+		//Efeito Gopinich
+		if(.Gopinich == 0){// Efeito Morto
+			hateffect 381,FALSE;
+			hateffect 381,TRUE;
+		}
+		else{
+			if(.Gopinich == 1){// Efeito Vivo
+				hateffect 345,FALSE;
+				hateffect 345,TRUE;
+			}
+		} 
+                     
+		//Efeito Garm
+		if(.Garm == 0){// Efeito Morto
+			hateffect 382,FALSE;
+			hateffect 382,TRUE;
+		}
+		else{
+			if(.Garm == 1){// Efeito Vivo
+				hateffect 346,FALSE;
+				hateffect 346,TRUE;
+			}
+		} 
+                     
+		//Efeito Ifrit
+		if(.Ifrit == 0){// Efeito Morto
+			hateffect 383,FALSE;
+			hateffect 383,TRUE;
+		}
+		else{
+			if(.Ifrit == 1){// Efeito Vivo
+				hateffect 347,FALSE;
+				hateffect 347,TRUE;
+			}
+		} 
+                     
+		//Efeito Kiel
+		if(.Kiel == 0){// Efeito Morto
+			hateffect 384,FALSE;
+			hateffect 384,TRUE;
+		}
+		else{
+			if(.Kiel == 1){// Efeito Vivo
+				hateffect 348,FALSE;
+				hateffect 348,TRUE;
+			}
+		} 
+                     
+		//Efeito White Lady
+		if(.WhiteLady == 0){// Efeito Morto
+			hateffect 385,FALSE;
+			hateffect 385,TRUE;
+		}
+		else{
+			if(.WhiteLady == 1){// Efeito Vivo
+				hateffect 349,FALSE;
+				hateffect 349,TRUE;
+			}
+		} 
+                     
+		//Efeito Lady Tanee
+		if(.LadyTanee == 0){// Efeito Morto
+			hateffect 386,FALSE;
+			hateffect 386,TRUE;
+		}
+		else{
+			if(.LadyTanee == 1){// Efeito Vivo
+				hateffect 350,FALSE;
+				hateffect 350,TRUE;
+			}
+		} 
+          
+		//Efeito LHZ
+		if(.lhzDelay){// lhz Vivo
+			hateffect 400,FALSE;
+			hateffect 400,TRUE;
+		}
+		else{// lhz Morto
+			hateffect 401,FALSE;
+			hateffect 401,TRUE;
+		}
+                     
+		//Efeito Maya
+		if(.Maya == 0){// Efeito Morto
+			hateffect 387,FALSE;
+			hateffect 387,TRUE;
+		}
+		else{
+			if(.Maya == 1){// Efeito Vivo
+				hateffect 351,FALSE;
+				hateffect 351,TRUE;
+			}
+		} 
+          
+		//Efeito Orc hero
+		if(.OrcHero == 0){// Efeito Morto
+			hateffect 404,FALSE;
+			hateffect 404,TRUE;
+		}
+		else{
+			if(.OrcHero == 1){//Efeito de 1 vivo
+				hateffect 402,FALSE;
+				hateffect 402,TRUE;
+			}				
+			else if(.OrcHero == 2){//Efeito de 2 vivos
+				hateffect 403,FALSE;
+				hateffect 403,TRUE;
+			}
+		}
+                     
+		//Efeito Osiris
+		if(.Osiris == 0){// Efeito Morto
+			hateffect 388,FALSE;
+			hateffect 388,TRUE;
+		}
+		else{
+			if(.Osiris == 1){// Efeito Vivo
+				hateffect 352,FALSE;
+				hateffect 352,TRUE;
+			}
+		} 
+          
+		//Efeito Gloom Under Night
+		if(.GloomUnder == 0){// Efeito Morto
+			hateffect 389,FALSE;
+			hateffect 389,TRUE;
+		}
+		else{
+			if(.GloomUnder == 1){// Efeito Vivo
+				hateffect 353,FALSE;
+				hateffect 353,TRUE;
+			}
+		}		
+          
+		//Efeito RSX 0806
+		if(.RSX == 0){// Efeito Morto
+			hateffect 390,FALSE;
+			hateffect 390,TRUE;
+		}
+		else{
+			if(.RSX == 1){// Efeito Vivo
+				hateffect 354,FALSE;
+				hateffect 354,TRUE;
+			}
+		}		
+          
+		//Efeito Incantation Samurai
+		if(.Samurai == 0){// Efeito Morto
+			hateffect 391,FALSE;
+			hateffect 391,TRUE;
+		}
+		else{
+			if(.Samurai == 1){// Efeito Vivo
+				hateffect 355,FALSE;
+				hateffect 355,TRUE;
+			}
+		}		
+          
+		//Efeito Satan Morroc
+		if(.Satan == 0){// Efeito Morto
+			hateffect 392,FALSE;
+			hateffect 392,TRUE;
+		}
+		else{
+			if(.Satan == 1){// Efeito Vivo
+				hateffect 356,FALSE;
+				hateffect 356,TRUE;
+			}
+		}		
+          
+		//Efeito Dark Lord
+		if(.DarkLord == 0){// Efeito Morto
+			hateffect 393,FALSE;
+			hateffect 393,TRUE;
+		}
+		else{
+			if(.DarkLord == 1){// Efeito Vivo
+				hateffect 357,FALSE;
+				hateffect 357,TRUE;
+			}
+		}		
+          
+		//Efeito Lord Of Death
+		if(.LordOfDeath == 0){// Efeito Morto
+			hateffect 394,FALSE;
+			hateffect 394,TRUE;
+		}
+		else{
+			if(.LordOfDeath == 1){// Efeito Vivo
+				hateffect 358,FALSE;
+				hateffect 358,TRUE;
+			}
+		}		
+          
+		//Efeito Orc Lord
+		if(.OrcLord == 0){// Efeito Morto
+			hateffect 395,FALSE;
+			hateffect 395,TRUE;
+		}
+		else{
+			if(.OrcLord == 1){// Efeito Vivo
+				hateffect 359,FALSE;
+				hateffect 359,TRUE;
+			}
+		}		
+          
+		//Efeito Evil Snake Lord
+		if(.EvilSnake == 0){// Efeito Morto
+			hateffect 396,FALSE;
+			hateffect 396,TRUE;
+		}
+		else{
+			if(.EvilSnake == 1){// Efeito Vivo
+				hateffect 360,FALSE;
+				hateffect 360,TRUE;
+			}
+		}
+        		
+		//Efeito Tao Gunka
+		if(.TaoGunka == 0){// Efeito Morto
+			hateffect 397,FALSE;
+			hateffect 397,TRUE;
+		}
+		else{
+			if(.TaoGunka == 1){// Efeito Vivo
+				hateffect 361,FALSE;
+				hateffect 361,TRUE;
+			}
+		}		
+        		
+		//Efeito Valkyrie Randrigs
+		if(.Valkyrie == 0){// Efeito Morto
+			hateffect 398,FALSE;
+			hateffect 398,TRUE;
+		}
+		else{
+			if(.Valkyrie == 1){// Efeito Vivo
+				hateffect 362,FALSE;
+				hateffect 362,TRUE;
+			}
+		}		
+        		
+		//Efeito Vesper
+		if(.Vesper == 0){// Efeito Morto
+			hateffect 399,FALSE;
+			hateffect 399,TRUE;
+		}
+		else{
+			if(.Vesper == 1){// Efeito Vivo
+				hateffect 363,FALSE;
+				hateffect 363,TRUE;
+			}
+		}		
+		
+	end;
+
+//======================================================
+
+	clearBoard:
+		for(.@i=327; .@i <= 410; .@i++){
+			//elimina los Efeitos del tablero
+			hateffect .@i,FALSE;			
+		}
+	end;
+
+//======================================================
+
+	OnLHZRespawn:
+		.lhzDelay = 1;
+	end;
+
+//======================================================
+
+	OnMvpSpawn: //Verifica el spawn del mvp en su mapa especifico
+
+		//Atualiza os valores conforme o MvP renascido - [SlexFire]
+		query_sql("SELECT value FROM mapreg WHERE varname = '$mvpspawn'", $mvpspawn);
+		query_sql("SELECT value FROM mapreg WHERE varname = '$mvpspawngid'", $mvpspawngid);
+
+		//$mvpspawn = mvp class spawned
+		//$mvpspawngid = mvp GID
+		getunitdata $mvpspawngid,.@por_arr;// get data from mvp spawned
+		.mapID = .@por_arr[5];// get the map id
+		.mapName$ = mapid2name(.mapID);// get map name from map id
+		
+		if($mvpspawn == 1059){// Mistress
+			for(.@i = 0; .@i < getarraysize(.MistressMapList$); .@i++){
+				if(.mapName$ == .MistressMapList$[.@i])
+				.Mistress  = 1;
+			}			
+		}
+		else if($mvpspawn == 1511){// Amon Ra
+			for(.@i = 0; .@i < getarraysize(.AmonRaMapList$); .@i++){
+				if(.mapName$ == .AmonRaMapList$[.@i]){
+					.AmonRa ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1785){// Atroce
+			for(.@i = 0; .@i < getarraysize(.AtroceMapList$); .@i++){
+				if(.mapName$ == .AtroceMapList$[.@i]){
+					.Atroce ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1039){// Baphomet
+			for(.@i = 0; .@i < getarraysize(.BaphomentMapList$); .@i++){
+				if(.mapName$ == .BaphomentMapList$[.@i]){
+					.Baphoment ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1874){// beelzebub
+			for(.@i = 0; .@i < getarraysize(.BeelzebubMapList$); .@i++){
+				if(.mapName$ == .BeelzebubMapList$[.@i]){
+					.Beelzebub ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1086){// Golden Thief Bug
+			for(.@i = 0; .@i < getarraysize(.GoldenBugMapList$); .@i++){
+				if(.mapName$ == .GoldenBugMapList$[.@i]){
+					.GoldenBug ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1871){// Fallen Bioshop
+			for(.@i = 0; .@i < getarraysize(.FallenBishopMapList$); .@i++){
+				if(.mapName$ == .FallenBishopMapList$[.@i]){
+					.FallenBishop ++;
+				}
+			}
+		}
+		else if($mvpspawn == 2068){// Boitata
+			for(.@i = 0; .@i < getarraysize(.BoitataMapList$); .@i++){
+				if(.mapName$ == .BoitataMapList$[.@i]){
+					.Boitata ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1251){// Stormy Knight
+			for(.@i = 0; .@i < getarraysize(.StormyKnightMapList$); .@i++){
+				if(.mapName$ == .StormyKnightMapList$[.@i]){
+					.StormyKnight ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1719){// Detale
+			for(.@i = 0; .@i < getarraysize(.DetaleMapList$); .@i++){
+				if(.mapName$ == .DetaleMapList$[.@i]){
+					.Detale ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1046){// Doppelganger
+			for(.@i = 0; .@i < getarraysize(.DoppelgangerMapList$); .@i++){
+				if(.mapName$ == .DoppelgangerMapList$[.@i]){
+					.Doppelganger ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1389){// Dracula
+			for(.@i = 0; .@i < getarraysize(.DraculaMapList$); .@i++){
+				if(.mapName$ == .DraculaMapList$[.@i]){
+					.Dracula ++;
+				}
+			}
+		}
+ 		else if($mvpspawn == 1112){// Drake
+			for(.@i = 0; .@i < getarraysize(.DrakeMapList$); .@i++){
+				if(.mapName$ == .DrakeMapList$[.@i]){
+					.Drake ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1115){// Eddga
+			for(.@i = 0; .@i < getarraysize(.EddgaMapList$); .@i++){
+				if(.mapName$ == .EddgaMapList$[.@i]){
+					.Eddga ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1157){// Pharaoh
+			for(.@i = 0; .@i < getarraysize(.PharaohMapList$); .@i++){
+				if(.mapName$ == .PharaohMapList$[.@i]){
+					.Pharaoh ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1150){// Moonlight Flower
+			for(.@i = 0; .@i < getarraysize(.MoonlightMapList$); .@i++){
+				if(.mapName$ == .MoonlightMapList$[.@i]){
+					.Moonlight ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1159){// Phreeoni
+			for(.@i = 0; .@i < getarraysize(.PhreeoniMapList$); .@i++){
+				if(.mapName$ == .PhreeoniMapList$[.@i]){
+					.Phreeoni ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1312){// Turtle General
+			for(.@i = 0; .@i < getarraysize(.TurtleGeneralMapList$); .@i++){
+				if(.mapName$ == .TurtleGeneralMapList$[.@i]){
+					.TurtleGeneral ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1885){// Gopinich
+			for(.@i = 0; .@i < getarraysize(.GopinichMapList$); .@i++){
+				if(.mapName$ == .GopinichMapList$[.@i]){
+					.Gopinich ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1252){// Garm
+			for(.@i = 0; .@i < getarraysize(.GarmMapList$); .@i++){
+				if(.mapName$ == .GarmMapList$[.@i]){
+					.Garm ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1832){// Ifrit
+			for(.@i = 0; .@i < getarraysize(.IfritMapList$); .@i++){
+				if(.mapName$ == .IfritMapList$[.@i]){
+					.Ifrit ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1733){// Kiel
+			for(.@i = 0; .@i < getarraysize(.KielMapList$); .@i++){
+				if(.mapName$ == .KielMapList$[.@i]){
+					.Kiel ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1630){// White Lady
+			for(.@i = 0; .@i < getarraysize(.WhiteLadyMapList$); .@i++){
+				if(.mapName$ == .WhiteLadyMapList$[.@i]){
+					.WhiteLady ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1688){// Lady Tanee
+			for(.@i = 0; .@i < getarraysize(.LadyTaneeMapList$); .@i++){
+				if(.mapName$ == .LadyTaneeMapList$[.@i]){
+					.LadyTanee ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1147){// Maya
+			for(.@i = 0; .@i < getarraysize(.MayaMapList$); .@i++){
+				if(.mapName$ == .MayaMapList$[.@i]){
+					.Maya ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1087){// Orc Hero
+			for(.@i = 0; .@i < getarraysize(.OrcHeroMapList$); .@i++){
+				if(.mapName$ == .OrcHeroMapList$[.@i]){
+					.OrcHero ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1038){// Osiris
+			for(.@i = 0; .@i < getarraysize(.OsirisMapList$); .@i++){
+				if(.mapName$ == .OsirisMapList$[.@i]){
+					.Osiris ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1768){// Gloom Under Night
+			for(.@i = 0; .@i < getarraysize(.GloomUnderMapList$); .@i++){
+				if(.mapName$ == .GloomUnderMapList$[.@i]){
+					.GloomUnder ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1623){// RSX 0806
+			for(.@i = 0; .@i < getarraysize(.RSXMapList$); .@i++){
+				if(.mapName$ == .RSXMapList$[.@i]){
+					.RSX ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1492){// Incantation Samurai
+			for(.@i = 0; .@i < getarraysize(.SamuraiMapList$); .@i++){
+				if(.mapName$ == .SamuraiMapList$[.@i]){
+					.Samurai ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1916){// Satan Morroc
+			for(.@i = 0; .@i < getarraysize(.SatanMapList$); .@i++){
+				if(.mapName$ == .SatanMapList$[.@i]){
+					.Satan ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1272){// Dark Lord
+			for(.@i = 0; .@i < getarraysize(.DarkLordMapList$); .@i++){
+				if(.mapName$ == .DarkLordMapList$[.@i]){
+					.DarkLord ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1373){// Lord Of Death
+			for(.@i = 0; .@i < getarraysize(.LordOfDeathMapList$); .@i++){
+				if(.mapName$ == .LordOfDeathMapList$[.@i]){
+					.LordOfDeath ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1190){// Orc Lord
+			for(.@i = 0; .@i < getarraysize(.OrcLordMapList$); .@i++){
+				if(.mapName$ == .OrcLordMapList$[.@i]){
+					.OrcLord ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1418){// Evil Snake Lord
+			for(.@i = 0; .@i < getarraysize(.EvilSnakeMapList$); .@i++){
+				if(.mapName$ == .EvilSnakeMapList$[.@i]){
+					.EvilSnake ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1583){// Tao Gunka
+			for(.@i = 0; .@i < getarraysize(.TaoGunkaMapList$); .@i++){
+				if(.mapName$ == .TaoGunkaMapList$[.@i]){
+					.TaoGunka ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1751){// Valkyrie Randgris
+			for(.@i = 0; .@i < getarraysize(.ValkyrieMapList$); .@i++){
+				if(.mapName$ == .ValkyrieMapList$[.@i]){
+					.Valkyrie ++;
+				}
+			}
+		}
+		else if($mvpspawn == 1685){// Vesper
+			for(.@i = 0; .@i < getarraysize(.VesperMapList$); .@i++){
+				if(.mapName$ == .VesperMapList$[.@i]){
+					.Vesper ++;
+				}
+			}
+		}
+	end; 
+		
+
+//======================================================
+    
+	OnLhzDead:
+		for(.@i = 0;.@i < getarraysize(.lhzId); .@i++){
+			if($lhzid == .lhzId[.@i]){
+				.lhzDelay = 0;
+				end;
+			}
+		}
+	end;
+
+//======================================================
+
+	OnNPCKillEvent:// Comprueba si el mvp esta Morto
+		if(killedrid == 1059){// Mistress
+			for(.@i = 0; .@i < getarraysize(.MistressMapList$); .@i++){
+				if(strcharinfo(3) == .MistressMapList$[.@i])
+				.Mistress = 0;
+			}			
+		}
+        else if(killedrid == 1511){// Amon Ra
+			for(.@i = 0; .@i < getarraysize(.AmonRaMapList$); .@i++){
+				if(strcharinfo(3) == .AmonRaMapList$[.@i]){
+					.AmonRa --;
+				}
+			}
+		}
+        else if(killedrid == 1785){// Atroce
+			for(.@i = 0; .@i < getarraysize(.AtroceMapList$); .@i++){
+				if(strcharinfo(3) == .AtroceMapList$[.@i]){
+					.Atroce --;
+				}
+			}
+		}
+        else if(killedrid == 1039){// Baphoment
+			for(.@i = 0; .@i < getarraysize(.BaphomentMapList$); .@i++){
+				if(strcharinfo(3) == .BaphomentMapList$[.@i]){
+					.Baphoment --;
+				}
+			}
+		}
+        else if(killedrid == 1874){// Beelzebub
+			for(.@i = 0; .@i < getarraysize(.BeelzebubMapList$); .@i++){
+				if(strcharinfo(3) == .BeelzebubMapList$[.@i]){
+					.Beelzebub --;
+				}
+			}
+		}
+        else if(killedrid == 1086){// GoldenBug
+			for(.@i = 0; .@i < getarraysize(.GoldenBugMapList$); .@i++){
+				if(strcharinfo(3) == .GoldenBugMapList$[.@i]){
+					.GoldenBug --;
+				}
+			}
+		}
+        else if(killedrid == 1871){// FallenBishop
+			for(.@i = 0; .@i < getarraysize(.FallenBishopMapList$); .@i++){
+				if(strcharinfo(3) == .FallenBishopMapList$[.@i]){
+					.FallenBishop --;
+				}
+			}
+		}
+        else if(killedrid == 2068){// Boitata
+			for(.@i = 0; .@i < getarraysize(.BoitataMapList$); .@i++){
+				if(strcharinfo(3) == .BoitataMapList$[.@i]){
+					.Boitata --;
+				}
+			}
+		}
+        else if(killedrid == 1251){// StormyKnight
+			for(.@i = 0; .@i < getarraysize(.StormyKnightMapList$); .@i++){
+				if(strcharinfo(3) == .StormyKnightMapList$[.@i]){
+					.StormyKnight --;
+				}
+			}
+		}
+        else if(killedrid == 1719){// Detale
+			for(.@i = 0; .@i < getarraysize(.DetaleMapList$); .@i++){
+				if(strcharinfo(3) == .DetaleMapList$[.@i]){
+					.Detale --;
+				}
+			}
+		}
+        else if(killedrid == 1046){// Doppelganger
+			for(.@i = 0; .@i < getarraysize(.DoppelgangerMapList$); .@i++){
+				if(strcharinfo(3) == .DoppelgangerMapList$[.@i]){
+					.Doppelganger --;
+				}
+			}
+		}
+        else if(killedrid == 1389){// Dracula
+			for(.@i = 0; .@i < getarraysize(.DraculaMapList$); .@i++){
+				if(strcharinfo(3) == .DraculaMapList$[.@i]){
+					.Dracula --;
+				}
+			}
+		}
+        else if(killedrid == 1112){// Drake
+			for(.@i = 0; .@i < getarraysize(.DrakeMapList$); .@i++){
+				if(strcharinfo(3) == .DrakeMapList$[.@i]){
+					.Drake --;
+				}
+			}
+		}
+        else if(killedrid == 1115){// Eddga
+			for(.@i = 0; .@i < getarraysize(.EddgaMapList$); .@i++){
+				if(strcharinfo(3) == .EddgaMapList$[.@i]){
+					.Eddga --;
+				}
+			}
+		}
+        else if(killedrid == 1157){// Pharaoh
+			for(.@i = 0; .@i < getarraysize(.PharaohMapList$); .@i++){
+				if(strcharinfo(3) == .PharaohMapList$[.@i]){
+					.Pharaoh --;
+				}
+			}
+		}
+        else if(killedrid == 1150){// Moonlight
+			for(.@i = 0; .@i < getarraysize(.MoonlightMapList$); .@i++){
+				if(strcharinfo(3) == .MoonlightMapList$[.@i]){
+					.Moonlight --;
+				}
+			}
+		}
+        else if(killedrid == 1159){// Phreeoni
+			for(.@i = 0; .@i < getarraysize(.PhreeoniMapList$); .@i++){
+				if(strcharinfo(3) == .PhreeoniMapList$[.@i]){
+					.Phreeoni --;
+				}
+			}
+		}
+        else if(killedrid == 1312){// TurtleGeneral
+			for(.@i = 0; .@i < getarraysize(.TurtleGeneralMapList$); .@i++){
+				if(strcharinfo(3) == .TurtleGeneralMapList$[.@i]){
+					.TurtleGeneral --;
+				}
+			}
+		}
+        else if(killedrid == 1885){// Gopinich
+			for(.@i = 0; .@i < getarraysize(.GopinichMapList$); .@i++){
+				if(strcharinfo(3) == .GopinichMapList$[.@i]){
+					.Gopinich --;
+				}
+			}
+		}
+        else if(killedrid == 1252){// Garm
+			for(.@i = 0; .@i < getarraysize(.GarmMapList$); .@i++){
+				if(strcharinfo(3) == .GarmMapList$[.@i]){
+					.Garm --;
+				}
+			}
+		}
+        else if(killedrid == 1832){// Ifrit
+			for(.@i = 0; .@i < getarraysize(.IfritMapList$); .@i++){
+				if(strcharinfo(3) == .IfritMapList$[.@i]){
+					.Ifrit --;
+				}
+			}
+		}
+        else if(killedrid == 1733){// Kiel
+			for(.@i = 0; .@i < getarraysize(.KielMapList$); .@i++){
+				if(strcharinfo(3) == .KielMapList$[.@i]){
+					.Kiel --;
+				}
+			}
+		}
+        else if(killedrid == 1630){// WhiteLady
+			for(.@i = 0; .@i < getarraysize(.WhiteLadyMapList$); .@i++){
+				if(strcharinfo(3) == .WhiteLadyMapList$[.@i]){
+					.WhiteLady --;
+				}
+			}
+		}
+        else if(killedrid == 1688){// LadyTanee
+			for(.@i = 0; .@i < getarraysize(.LadyTaneeMapList$); .@i++){
+				if(strcharinfo(3) == .LadyTaneeMapList$[.@i]){
+					.LadyTanee --;
+				}
+			}
+		}
+        else if(killedrid == 1147){// Maya
+			for(.@i = 0; .@i < getarraysize(.MayaMapList$); .@i++){
+				if(strcharinfo(3) == .MayaMapList$[.@i]){
+					.Maya --;
+				}
+			}
+		}
+        else if(killedrid == 1087){// OrcHero
+			for(.@i = 0; .@i < getarraysize(.OrcHeroMapList$); .@i++){
+				if(strcharinfo(3) == .OrcHeroMapList$[.@i]){
+					.OrcHero --;
+				}
+			}
+		}
+        else if(killedrid == 1038){// Osiris
+			for(.@i = 0; .@i < getarraysize(.OsirisMapList$); .@i++){
+				if(strcharinfo(3) == .OsirisMapList$[.@i]){
+					.Osiris --;
+				}
+			}
+		}
+        else if(killedrid == 1768){// GloomUnder
+			for(.@i = 0; .@i < getarraysize(.GloomUnderMapList$); .@i++){
+				if(strcharinfo(3) == .GloomUnderMapList$[.@i]){
+					.GloomUnder --;
+				}
+			}
+		}
+        else if(killedrid == 1623){// RSX
+			for(.@i = 0; .@i < getarraysize(.RSXMapList$); .@i++){
+				if(strcharinfo(3) == .RSXMapList$[.@i]){
+					.RSX --;
+				}
+			}
+		}
+        else if(killedrid == 1492){// Samurai
+			for(.@i = 0; .@i < getarraysize(.SamuraiMapList$); .@i++){
+				if(strcharinfo(3) == .SamuraiMapList$[.@i]){
+					.Samurai --;
+				}
+			}
+		}
+        else if(killedrid == 1916){// Satan
+			for(.@i = 0; .@i < getarraysize(.SatanMapList$); .@i++){
+				if(strcharinfo(3) == .SatanMapList$[.@i]){
+					.Satan --;
+				}
+			}
+		}
+        else if(killedrid == 1272){// DarkLord
+			for(.@i = 0; .@i < getarraysize(.DarkLordMapList$); .@i++){
+				if(strcharinfo(3) == .DarkLordMapList$[.@i]){
+					.DarkLord --;
+				}
+			}
+		}
+        else if(killedrid == 1373){// LordOfDeath
+			for(.@i = 0; .@i < getarraysize(.LordOfDeathMapList$); .@i++){
+				if(strcharinfo(3) == .LordOfDeathMapList$[.@i]){
+					.LordOfDeath --;
+				}
+			}
+		}
+        else if(killedrid == 1190){// OrcLord
+			for(.@i = 0; .@i < getarraysize(.OrcLordMapList$); .@i++){
+				if(strcharinfo(3) == .OrcLordMapList$[.@i]){
+					.OrcLord --;
+				}
+			}
+		}
+        else if(killedrid == 1418){// EvilSnake
+			for(.@i = 0; .@i < getarraysize(.EvilSnakeMapList$); .@i++){
+				if(strcharinfo(3) == .EvilSnakeMapList$[.@i]){
+					.EvilSnake --;
+				}
+			}
+		}
+        else if(killedrid == 1583){// TaoGunka
+			for(.@i = 0; .@i < getarraysize(.TaoGunkaMapList$); .@i++){
+				if(strcharinfo(3) == .TaoGunkaMapList$[.@i]){
+					.TaoGunka --;
+				}
+			}
+		}
+        else if(killedrid == 1751){// Valkyrie
+			for(.@i = 0; .@i < getarraysize(.ValkyrieMapList$); .@i++){
+				if(strcharinfo(3) == .ValkyrieMapList$[.@i]){
+					.Valkyrie --;
+				}
+			}
+		}        
+		else if(killedrid == 1685){// Vesper
+			for(.@i = 0; .@i < getarraysize(.VesperMapList$); .@i++){
+				if(strcharinfo(3) == .VesperMapList$[.@i]){
+					.Vesper --;
+				}
+			}
+		}
+	end;
+
+//======================================================
+
+	OnInit:
+		.delay = 5;// Delay para que los jugadores no spameen el comando @mvpboard
+		setarray .mvpDelay[0],0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;
+
+//======================================================
+		
+        .Mistress = 1;
+        .AmonRa = 1;
+        .Atroce = 5;
+        .Baphoment = 1;
+        .Beelzebub = 1;
+        .GoldenBug = 1;
+        .FallenBishop = 1;
+        .Boitata = 1;
+        .StormyKnight = 1;
+        .Detale = 1;
+        .Doppelganger = 1;
+        .Dracula = 1;
+        .Drake = 1;
+        .Eddga = 1;
+        .Pharaoh = 1;
+        .Moonlight = 1;
+        .Phreeoni = 1;
+        .TurtleGeneral = 1;
+        .Gopinich = 1;
+        .Garm = 1;
+        .Ifrit = 1;
+        .Kiel = 1;
+        .WhiteLady  = 1;
+        .LadyTanee = 1;
+        .lhzDelay = 0;// 0 = Morto Pre-Renewall / 1 = Vivo Renewall
+        .Maya = 1;
+        .OrcHero = 2;
+        .Osiris = 1;
+        .GloomUnder = 1;
+        .RSX = 1;
+        .Samurai = 1;
+        .Satan = 1;
+        .DarkLord = 1;
+        .LordOfDeath = 1;
+        .OrcLord = 1;
+        .EvilSnake = 1;
+        .TaoGunka = 1;
+        .Valkyrie = 1;
+        .Vesper = 1;
+		
+//======================================================
+
+        setarray .MistressMapList$[0],"mjolnir_04";
+        setarray .AmonRaMapList$[0],"moc_pryd06";
+		setarray .AtroceMapList$[0],"ra_fild02","ra_fild03","ra_fild04","ve_fild01","ve_fild02";
+        setarray .BaphomentMapList$[0],"prt_maze03";
+        setarray .BeelzebubMapList$[0],"abbey03";
+        setarray .GoldenBugMapList$[0],"prt_sewb4";
+        setarray .FallenBishopMapList$[0],"abbey02";
+        setarray .BoitataMapList$[0],"bra_dun02";
+        setarray .StormyKnightMapList$[0],"xmas_dun02";
+        setarray .DetaleMapList$[0],"abyss_03";
+        setarray .DoppelgangerMapList$[0],"gef_dun02";
+        setarray .DraculaMapList$[0],"gef_dun01";
+        setarray .DrakeMapList$[0],"treasure02";
+        setarray .EddgaMapList$[0],"pay_fild11";
+        setarray .PharaohMapList$[0],"in_sphinx5";
+        setarray .MoonlightMapList$[0],"pay_dun04";
+        setarray .PhreeoniMapList$[0],"moc_fild17";
+        setarray .TurtleGeneralMapList$[0],"tur_dun04";
+        setarray .GopinichMapList$[0],"mosk_dun03";
+        setarray .GarmMapList$[0],"xmas_fild01";
+        setarray .IfritMapList$[0],"thor_v03";
+        setarray .KielMapList$[0],"kh_dun02";
+        setarray .WhiteLadyMapList$[0],"lou_dun03";
+        setarray .LadyTaneeMapList$[0],"ayo_dun02";
+        setarray .lhzId[0],1646,1647,1648,1649,1650,1651;
+        setarray .MayaMapList$[0],"anthell02";
+		setarray .OrcHeroMapList$[0],"gef_fild02","gef_fild14";
+        setarray .OsirisMapList$[0],"moc_pryd04";
+        setarray .GloomUnderMapList$[0],"ra_san05";
+        setarray .RSXMapList$[0],"ein_dun02";
+        setarray .SamuraiMapList$[0],"ama_dun03";
+        setarray .SatanMapList$[0],"moc_fild21";
+        setarray .DarkLordMapList$[0],"gl_chyard";
+        setarray .LordOfDeathMapList$[0],"niflheim";
+        setarray .OrcLordMapList$[0],"gef_fild10";
+		setarray .EvilSnakeMapList$[0],"gon_dun03";
+		setarray .TaoGunkaMapList$[0],"beach_dun";
+        setarray .ValkyrieMapList$[0],"odin_tem03";
+        setarray .VesperMapList$[0],"jupe_core";
+                
+//======================================================
+
+        bindatcmd "mvpboard",strnpcinfo(3)+"::OnAtcommand",0,99;
+
+//======================================================
+		
+		for(.@i = 0; .@i < getarraysize(.MistressMapList$); .@i++){
+			setmapflag .MistressMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.AmonRaMapList$); .@i++){
+			setmapflag .AmonRaMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.AtroceMapList$); .@i++){
+			setmapflag .AtroceMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.BaphomentMapList$); .@i++){
+			setmapflag .BaphomentMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.BeelzebubMapList$); .@i++){
+			setmapflag .BeelzebubMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.GoldenBugMapList$); .@i++){
+			setmapflag .GoldenBugMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.FallenBishopMapList$); .@i++){
+			setmapflag .FallenBishopMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.BoitataMapList$); .@i++){
+			setmapflag .BoitataMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.StormyKnightMapList$); .@i++){
+			setmapflag .StormyKnightMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.DetaleMapList$); .@i++){
+			setmapflag .DetaleMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.DoppelgangerMapList$); .@i++){
+			setmapflag .DoppelgangerMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.DraculaMapList$); .@i++){
+			setmapflag .DraculaMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.DrakeMapList$); .@i++){
+			setmapflag .DrakeMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.EddgaMapList$); .@i++){
+			setmapflag .EddgaMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.PharaohMapList$); .@i++){
+			setmapflag .PharaohMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.MoonlightMapList$); .@i++){
+			setmapflag .MoonlightMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.PhreeoniMapList$); .@i++){
+			setmapflag .PhreeoniMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.TurtleGeneralMapList$); .@i++){
+			setmapflag .TurtleGeneralMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.GopinichMapList$); .@i++){
+			setmapflag .GopinichMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.GarmMapList$); .@i++){
+			setmapflag .GarmMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.IfritMapList$); .@i++){
+			setmapflag .IfritMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.KielMapList$); .@i++){
+			setmapflag .KielMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.WhiteLadyMapList$); .@i++){
+			setmapflag .WhiteLadyMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.LadyTaneeMapList$); .@i++){
+			setmapflag .LadyTaneeMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.MayaMapList$); .@i++){
+			setmapflag .MayaMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.OrcHeroMapList$); .@i++){
+			setmapflag .OrcHeroMapList$[.@i],mf_nobranch;
+		} 
+        for(.@i = 0; .@i < getarraysize(.OsirisMapList$); .@i++){
+			setmapflag .OsirisMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.GloomUnderMapList$); .@i++){
+			setmapflag .GloomUnderMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.RSXMapList$); .@i++){
+			setmapflag .RSXMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.SamuraiMapList$); .@i++){
+			setmapflag .SamuraiMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.SatanMapList$); .@i++){
+			setmapflag .SatanMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.DarkLordMapList$); .@i++){
+			setmapflag .DarkLordMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.LordOfDeathMapList$); .@i++){
+			setmapflag .LordOfDeathMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.OrcLordMapList$); .@i++){
+			setmapflag .OrcLordMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.EvilSnakeMapList$); .@i++){
+			setmapflag .EvilSnakeMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.TaoGunkaMapList$); .@i++){
+			setmapflag .TaoGunkaMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.ValkyrieMapList$); .@i++){
+			setmapflag .ValkyrieMapList$[.@i],mf_nobranch;
+		}
+        for(.@i = 0; .@i < getarraysize(.VesperMapList$); .@i++){
+			setmapflag .VesperMapList$[.@i],mf_nobranch;
+		}
+	end;
+    
+//======================================================
+    
+	}else{
+		message strcharinfo(0),"Este comando só pode ser usando por membros [VIP] !.";
+	}
+end;
+
+//======================================================
+
+}
+
+/*
+Lorde Seyren (id: 1646)		 ------> LHZ
+Algoz Eremes (id: 1647)		 ------> LHZ
+Mestre-Ferreiro Howard (id: 1648)		 ------> LHZ
+Suma-Sacerdotisa Margaretha (id: 1649) 		 ------> LHZ
+Atiradora de Elite Cecil (id: 1650)		 ------> LHZ
+Arquimaga Kathryne (id: 1651)		 ------> LHZ
+
+.Mistress      1059        mjolnir_04
+.AmonRa       1511         moc_pryd06
+.Atroce       1785         ra_fild02 ra_fild03 ra_fild04 ve_fild01 ve_fild02
+.Baphoment    1039         prt_maze03
+.Beelzebub    1874         abbey03
+.GoldenBug    1086         prt_sewb4
+.FallenBishop  1871        abbey02
+.Boitata       2068        bra_dun02
+.StormyKnight   1251       xmas_dun02
+.Detale         1719       abyss_03
+.Doppelganger   1046       gef_dun02
+.Dracula        1389       gef_dun01
+.Drake          1112       treasure02
+.Eddga          1115       pay_fild11
+.Pharaoh        1157       in_sphinx5
+.Moonlight      1150       pay_dun04
+.Phreeoni       1159       moc_fild17
+.TurtleGeneral  1312       tur_dun04
+.Gopinich       1885       mosk_dun03
+.Garm           1252       xmas_fild01
+.Ifrit          1832       thor_v03
+.Kiel           1733       kh_dun02
+.WhiteLady      1630       lou_dun03
+.LadyTanee      1688       ayo_dun02
+.Maya           1147       anthell02
+.OrcHero        1087       gef_fild02 gef_fild14
+.Osiris         1038       moc_pryd04
+.GloomUnder     1768       ra_san05
+.RSX            1623       ein_dun02
+.Samurai        1492       ama_dun03
+.Satan          1916       moc_fild21
+.DarkLord       1272       gl_chyard
+.LordOfDeath    1373       niflheim
+.OrcLord        1190       gef_fild10
+.EvilSnake      1418       gon_dun03
+.TaoGunka       1583       beach_dun
+.Valkyrie       1751       odin_tem03
+.Vesper         1685       jupe_core
+*/               

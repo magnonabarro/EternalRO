@@ -1,0 +1,109 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ guias_aldebaran.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.7 - Pré-Renovação ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= [ Guias da cidade de Al De Baran. ]
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+aldebaran,139,63,4	script	Soldado#alde	105,{
+	cutin "prt_soldier",2;
+	mes "[Guarda de Al De Baran]";
+	mes "Eu sou apenas um guarda comum";
+	mes "que você poderia encontrar em qualquer outra cidade. Acho que nem tenho nome...";
+	next;
+	mes "[Guarda de Al De Baran]";
+	mes "Sou responsável pelos Guias de Serviço da Guarnição Al De Baran.";
+	mes "pela nossa cidade!";
+	next;
+	if (select("Obter Guias de Localização.:Finalizar Conversa.") == 1) {
+		viewpoint 1,61,229,0,0xFF6633;
+		viewpoint 1,72,197,1,0x0000FF;
+		viewpoint 1,223,222,2,0x00FFFF;
+		viewpoint 1,233,105,3,0x515151;
+		viewpoint 1,197,70,4,0x3355FF;
+		viewpoint 1,60,60,5,0xFF5555;
+		mes "^FF6633+^000000 -> Escritório Central Kafra";
+		mes "^0000FF+^000000 -> Loja de Armas";
+		mes "^00FFFF+^000000 -> Guilda dos Feiticeiros (Fechada)";
+		mes "^515151+^000000 -> Taverna";
+		mes "^3355FF+^000000 -> Loja de Itens";
+		mes "^FF5555+^000000 -> Guilda dos Alquimistas";
+		close2;
+		cutin "prt_soldier",255;
+		end;
+	}
+	mes "[Guarda de Al De Baran]";
+	mes "Juramos proteger Al De Baran! Que as forças do mal sejam sempre esmagadas pelo";
+	mes "punho justo do bem!";
+	close2;
+	cutin "prt_soldier",255;
+	end;
+}
+
+aldebaran,133,108,4	script	Soldado#2alde	105,{
+	cutin "prt_soldier",2;
+	mes "[Guarda de Al De Baran]";
+	mes "Eu sou apenas um";
+	mes "guarda comum,";
+	mes "do tipo que você pode";
+	mes "encontrar em qualquer outra cidade.";
+	next;
+	mes "[Guarda de Al De Baran]";
+	mes "Quando não estou muito ocupado";
+	mes "protegendo a população de Al De Baran,";
+	mes "estou aqui dando orientações aos aventureiros";
+	mes "como você.";
+	next;
+	switch(select("Escritório Central Kafra:Loja de Armas:Guilda dos Feiticeiros:Taverna:Loja de Itens:Guilda dos Alquimistas:Finalizar Conversa.")) {
+	case 1:
+		viewpoint 1,61,229,0,0xFF6633;
+		mes "^FF6633+^000000 -> Escritório Central Kafra";
+		break;
+	case 2:
+		viewpoint 1,72,197,1,0x0000FF;
+		mes "^0000FF+^000000 -> Loja de Armas";
+		break;
+	case 3:
+		viewpoint 1,223,222,2,0x00FFFF;
+		mes "^00FFFF+^000000 -> Guilda dos Feiticeiros (Fechada)";
+		break;
+	case 4:
+		viewpoint 1,233,105,3,0x515151;
+		mes "^515151+^000000 -> Taverna";
+		break;
+	case 5:
+		viewpoint 1,197,70,4,0x3355FF;
+		mes "^3355FF+^000000 -> Loja de Itens";
+		break;
+	case 6:
+		viewpoint 1,60,60,5,0xFF5555;
+		mes "^FF5555+^000000 -> Guilda dos Alquimistas";
+		break;
+	case 7:
+		mes "[Guarda de Al De Baran]";
+		mes "Nós juramos";
+		mes "proteger Al De Baran!";
+		mes "Que as forças do bem";
+		mes "sempre prevaleçam sobre o mal~";
+		break;
+	}
+	close2;
+	cutin "prt_soldier",255;
+	end;
+}

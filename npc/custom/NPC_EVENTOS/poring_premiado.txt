@@ -1,0 +1,219 @@
+//= Poring Catcher - Auto Event Script
+//===== By: =================================================================================
+//= Washi - www.EarthBound-RO.com
+//===== By: =================================================================================
+//Editado por [Adm] CeliØ
+//===== Compativel com ====================================================================
+//= rAthena
+//===== Descrição: ========================================================================
+//= acheo poring  com o nome correto e ganha o evento
+//===== Additional Comments: ================================================================
+//= This script is a combenation of the Dice Event by [Mahina]
+//= and the origonal Poring Catcher Event by [Wild Karrd]
+//===========================================================================================
+//= OnClock - Altere ahora que deseja que este script carregue. [ LINHA 24 ]
+//= getitem - Altere isso para o ID do item do seu prêmio. [ LINHA 118 ]
+//===========================================================================================
+-	script	poring#announcer	-1,{
+
+OnInit:
+    disablenpc "poringevent";
+    hideonnpc "Poring Catcher#evnt2";
+    end;
+
+
+
+
+OnClock0600:
+OnClock1300:
+OnClock1500:
+OnClock2300:
+
+
+
+    announce "[Poring Premiado]: digite @evento para participar!",0;
+    killmonster "poring_w01","All";
+    sleep 10000;
+    announce "[Poring Premiado]: digite @evento para participar!",0;
+    sleep 10000;
+    announce "[Poring Premiado]: digite @evento para participar! Após 2 minuto, o portal será fechado.",0;
+    sleep 10000;
+    announce "[Poring Premiado]: digite @evento para participar! Após 1 minuto, o portal será fechado",0;
+    enablenpc "poringevent";
+    initnpctimer;
+    end;
+
+OnTimer30000:
+    announce "[Poring Premiado]: digite @evento para participar! Últimos 30 segundos.",0;
+    sleep 5000;
+    announce "[Poring Premiado]: digite @evento para participar!.",0;
+    end;
+    
+OnTimer50000:
+    announce "[Poring Premiado]: digite @evento para participar! Últimos 10 segundos.",0;
+    end;
+    
+OnTimer55000:
+    announce "[Poring Premiado]: 5.",0;
+    end;
+    
+OnTimer56000:
+    announce "[Poring Premiado]: 4.",0;
+    end;
+    
+OnTimer57000:
+    announce "[Poring Premiado]: 3.",0;
+    end;
+    
+OnTimer58000:
+    announce "[Poring Premiado]: 2.",0;
+    end;
+    
+OnTimer59000:
+    announce "[Poring Premiado]: 1.",0;
+    end;
+    
+OnTimer60000:
+    announce "[Poring Premiado]: Tempo esgotado. Portal Fechado. Evento començando!",0;
+    end;
+    
+OnTimer67000:
+    disablenpc "poringevent";
+    donpcevent "Poring Catcher#evnt2::OnEnable";
+    stopnpctimer;
+    end;
+    }
+    
+//--------------------------------------------------
+    
+sec_in01,162,165,0	warp	poringevent	2,2,poring_w01,103,101    
+    
+//--------------------------------------------------
+
+poring_w01,100,100,4	script	Poring Catcher#evnt2	72,{
+
+//--------------------------------------------------
+
+    mes "[Poring Premiado]";
+    if(PORING == 1) goto L_PORING;
+    mes "Por favor, me diga seu nome";
+    next;
+    input .@name$;
+    if(.@name$ != strcharinfo(0)) {
+        mes "[Poring Catcher]";
+        mes "Tem certeza que é o nome do seu personagem?";
+        close;
+    }
+    mes "[Poring Premiado]:";
+    mes "Parabéns. Você ganhou.";
+    close2;
+    announce "[Poring Premiado]: Todos riem de, "+.@name$+". - Este jogador tentou enganar o sistema. Muhahahahaha!",0;
+    warp "prontera",156,188;
+    end;
+
+L_PORING:
+    mes "Por favor, me diga seu nome";
+    next;
+    input .@name$;
+    if(.@name$ != strcharinfo(0)) {
+        mes "[Poring Catcher]";
+        mes "Tem certeza que é o nome do seu personagem?";
+        close;
+    }
+    mes "[Poring Premiado]:";
+    mes "Parabéns. Você ganhou.";
+    close2;
+    announce "[Poring Premiado]: Temos um vencedor, "+.@name$+". - Ganhou 1 Galho Sangrento!",0;
+	getitem 35004,1;
+	set PORING,0;
+	warp "prontera",154,186;
+	hideonnpc "Poring Catcher#evnt2";
+	end;
+    
+OnEnable:
+    mapannounce "poring_w01", "[Poring Premiado]: Eu convocarei 100 Porings diferentes.",0;
+    sleep 10000;
+    mapannounce "poring_w01", "[Poring Premiado]: Apenas um desses Porings é o Poring correto.",0;
+    sleep 10000;
+    mapannounce "poring_w01", "[Poring Premiado]: O Poring correto é chamado [Poring], todos os outros Porings têm nomes diferentes.",0;
+    sleep 10000;
+    mapannounce "poring_w01", "[Poring Premiado]: Não tenha pressa porque se você matar o Poring errado, você estará fora do jogo.",0;
+    sleep 10000;
+    mapannounce "poring_w01", "[Poring Premiado]: O primeiro jogador a matar o Poring correto vence.",0;
+    sleep 10000;
+    mapannounce "poring_w01", "[Poring Premiado]: É isso .. Agora vamos jogar ...",0;
+    goto L_Start;
+    end;
+    
+L_Start:
+    mapannounce "poring_w01","[Poring Premiado]: 5",0;
+    sleep 1000;
+    mapannounce "poring_w01","[Poring Premiado]: 4",0;
+    sleep 1000;
+    mapannounce "poring_w01","[Poring Premiado]: 3",0;
+    sleep 1000;
+    mapannounce "poring_w01","[Poring Premiado]: 2",0;
+    sleep 1000;
+    mapannounce "poring_w01","[Poring Premiado]: 1",0;
+    sleep 1000;
+    mapannounce "poring_w01", "Poring Catcher: Vamos fazer isso!",0;
+    areamonster "poring_w01",84,119,121,90,"Poring",1002,1,"poringwin::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"Pouring",1002,10,"poringlose::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"Proing",1002,10,"poringlose::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"Poiring",1002,10,"poringlose::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"Poing",1002,10,"poringlose::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"Não sou Poring",1002,5,"poringlose::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"Gniriop",1002,1,"poringlose::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"Porring",1113,1,"poringlose::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"Porinng",1062,1,"poringlose::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"Poriiing",1002,10,"poringlose::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"PoriNgg",1002,10,"poringlose::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"Porong",1002,10,"poringlose::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"P0ring",1002,10,"poringlose::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"Por1ng",1002,10,"poringlose::OnMobKilled";
+    areamonster "poring_w01",84,119,121,90,"Porng",1002,1,"poringlose::OnMobKilled";
+    end;
+}
+
+-	script	poringwin	-1,{
+
+OnMobKilled:
+	dispbottom "[Poring Premiado]: Parabéns!!. Você achou o poring certo.";
+	set PORING,1;
+	atcommand "@doommap";
+	killmonster "poring_w01","All";
+	mapannounce "poring_w01","Poring Catcher : Venha até mim no centro do mapa e diga-me seu nome.",0;
+	hideoffnpc "Poring Catcher#evnt2";
+	end;
+
+}
+
+-	script	poringlose	-1,{
+
+OnMobKilled:
+    dispbottom "[Poring Premiado]: Wahaha, você está fora do Evento! - Eu não era o Poring correto.";
+    warp "prontera",156,187;
+    end;
+
+}
+
+sec_in01,164,166,4	script	Poring-Premiado 	72,{
+
+    mes "[Poring Catcher]";
+	mes "Horário do Evento";
+	mes "todos os dias as 06:00|13:00|15:00|23:00";
+	close;
+    end;
+
+}
+
+// -- Mapflags
+poring_w01	mapflag	nowarp
+poring_w01	mapflag	nowarpto
+poring_w01	mapflag	noteleport
+poring_w01	mapflag	nosave
+poring_w01	mapflag	nomemo
+poring_w01	mapflag	nobranch
+poring_w01	mapflag	noloot
+poring_w01	mapflag	noskill
+poring_w01	mapflag	nopenalty

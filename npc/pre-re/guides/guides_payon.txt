@@ -1,0 +1,297 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ guias_payon.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.6 - Pré-Renovação ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= [ Guias da cidade de Payon. ]
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+payon,162,67,4	script	Guia#pay	708,{
+	cutin "pay_soldier",2;
+	mes "[Guia de Payon]";
+	mes "Bem vindo à";
+	mes "cidade montanhosa de Payon.";
+	mes "Se você não está familiarizado com essa";
+	mes "área, posso ajudá-lo a encontrar o que";
+	mes "você está procurando por aqui.";
+	set .@loop1,1;
+	while (.@loop1) {
+		next;
+		switch(select("Guia da Cidade:Remover Marcações do Mini-mapa:Informações.:Cancelar")) {
+		case 1:
+			mes "[Guia de Payon]";
+			mes "Por favor, selecione";
+			mes "um local do";
+			mes "menu a seguir.";
+			if (.@compass_check == 0) {
+				mes "Você gostaria que eu";
+				mes "marque os locais";
+				mes "em seu Mini-mapa?";
+				next;
+				if (select("Sim.:Não.") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+				switch(select("^FF0000Guilda dos Arqueiros^000000:Loja de Armas:Loja de Utilidades:Taverna:Palácio Central:A Imperatriz:Anexo do Palácio:Cozinha Real:Forja:Cancelar")) {
+				case 1:
+					mes "[Guia de Payon]";
+					mes "A Guilda dos Arqueiros lida com";
+					mes "Mudanças de classe para";
+					mes "a classe Arqueiro.";
+					mes "A Vila dos Arqueiros que está";
+					mes "localizada à nordeste de Payon.";
+					if (.@compass_check)
+						viewpoint 1,227,328,2,0xFF0000;
+					break;
+				case 2:
+					mes "[Guia de Payon]";
+					mes "A Loja de Armas";
+					mes "pode ser localizada no";
+					mes "canto noroeste da";
+					mes "cidade de Payón.";
+					if (.@compass_check)
+						viewpoint 1,139,159,3,0xFF00FF;
+					break;
+				case 3:
+					mes "[Guia de Payon]";
+					mes "A Loja de Utilidades";
+					mes "está localizada";
+					mes "à noroeste";
+					mes "da cidade de Payon.";
+					if (.@compass_check)
+						viewpoint 1,144,85,4,0xFF00FF;
+					break;
+				case 4:
+					mes "[Guia de Payon]";
+					mes "A Taverna pode ser";
+					mes "encontrada na parte";
+					mes "nordeste de Payon. Lá é um";
+					mes "ótimo ugar para relaxar depois";
+					mes "de um longo dia de caça.";
+					if (.@compass_check)
+						viewpoint 1,220,117,5,0xFF00FF;
+					break;
+				case 5:
+					mes "[Guia de Payon]";
+					mes "O Palácio Central";
+					mes "está localizado ao norte";
+					mes "dentro da cidade de Payon.";
+					if (.@compass_check)
+						viewpoint 1,155,245,6,0x00FF00;
+					break;
+				case 6:
+					mes "[Guia de Payon]";
+					mes "A Imperatriz";
+					mes "pode ser encontrada seguindo";
+					mes "para a parte noroeste de Payon.";
+					if (.@compass_check)
+						viewpoint 1,107,324,7,0x00FF00;
+					break;
+				case 7:
+					mes "[Guia de Payon]";
+					mes "O Anexo do Palácio";
+					mes "pode ser encontrado na";
+					mes "parte ocidental de Payon.";
+					if (.@compass_check)
+						viewpoint 1,130,204,8,0x00FF00;
+					break;
+				case 8:
+					mes "[Guia de Payon]";
+					mes "A Cozinha Real";
+					mes "está localizada próximo ao";
+					mes "extremo norte de Payon.";
+					if (.@compass_check)
+						viewpoint 1,154,325,9,0x00FF00;
+					break;
+				case 9:
+					mes "[Guia de Payon]";
+					mes "A Forja está";
+					mes "situada perto";
+					mes "do centro de Payon.";
+					if (.@compass_check)
+						viewpoint 1,126,169,10,0xFFFF00;
+					break;
+				case 10:
+					mes "[Guia de Payon]";
+					mes "Por favor, peça-me para";
+					mes "''Remover Marcações do Mini-mapa'' se você";
+					mes "não desejar mais ter as";
+					mes "marcas de localizações exibidas";
+					mes "em seu Mini-mapa.";
+					set .@loop2,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,237,41,2,0x00FF00;
+			viewpoint 2,237,41,3,0x0000FF;
+			viewpoint 2,46,345,4,0xFF00FF;
+			viewpoint 2,175,220,5,0xFF0000;
+			viewpoint 2,175,220,6,0xFF0000;
+			viewpoint 2,175,220,7,0xFF0000;
+			viewpoint 2,237,41,8,0x0000FF;
+			viewpoint 2,46,345,9,0x00FF00;
+			viewpoint 2,175,220,10,0xFF0000;
+			set .@compass_check,0;
+			break;
+		case 3:
+			mes "[Guia de Payon]";
+			mes "Avanços na feitiçaria e";
+			mes "tecnologia nos permitiu";
+			mes "atualizarmos o nosso sistema de";
+			mes "informações, permitindo até marcar";
+			mes "os locais em seu Mini-mapa";
+			mes "para uma navegação mais fácil.";
+			next;
+			mes "[Guia de Payon]";
+			mes "Seu Mini-mapa está localizado";
+			mes "no canto superior direito";
+			mes "da tela. Se você não consegue";
+			mes "vê-lo, pressione as teclas ''Ctrl + Tab''";
+			mes "ou clique no botão ''Mapa-múndi'' na janela de Informações Básicas.";
+			next;
+			mes "[Guia de Payon]";
+			mes "No seu Mini-mapa,";
+			mes "clique nos símbolos '+' e '-'";
+			mes "para aumentar ou diminuir o"; 
+ 			mes "zoom do seu Mini-Mapa. Nós"; 
+			mes "esperamos aventureiro, que você aproveite seus"; 
+ 			mes "passeios aqui em Payon."; 
+			break;
+		case 4:
+			mes "[Guia de Payon]";
+			mes "Faça suas viagens";
+			mes "com segurança,";
+			mes "corajoso aventureiro.";
+			close2;
+			set .@loop1,0;
+			break;
+		}
+	}
+	cutin "",255;
+	end;
+}
+
+pay_arche,85,30,2	script	Guia#2pay	708,{
+	cutin "pay_soldier",2;
+	mes "[Guia de Payon]";
+	mes "Bem vindo à";
+	mes "cidade montanhosa de Payon.";
+	mes "Se você não está familiarizado com essa";
+	mes "área, posso ajudá-lo a encontrar o que";
+	mes "você está procurando por aqui.";
+	set .@loop1,1;
+	while (.@loop1) {
+		next;
+		switch(select("Guia da Cidade:Remover Marcações do Mini-mapa:Informações:Cancelar")) {
+		case 1:
+			mes "[Guia de Payon]";
+			mes "Por favor, selecione uma das opções do menu.";
+			if (.@compass_check == 0) {
+				mes "Gostaria de deixar marcações no Mini-mapa?";
+				next;
+				if (select("Sim.:Não.") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+				switch(select("^FF0000Guilda dos Arqueiros^000000:Loja de Utilidades:Calabouço de Payon:Cancelar")) {
+				case 1:
+					mes "[Guia de Payon]";
+					mes "A Guilda dos Arqueiros,";
+					mes "encontra-se à nordeste";
+					mes "da Vila dos Arqueiros.";
+					mes "Lá você poderá mudar de classe";
+					mes "para a classe Arqueiro.";
+					if (.@compass_check)
+						viewpoint 1,144,164,0,0xFFFF00;
+					break;
+				case 2:
+					mes "[Guia de Payon]";
+					mes "Você poderá encontrar";
+					mes "a Loja de Utilidades";
+					mes "na parte nordeste";
+					mes "da Vila dos Arqueiros.";
+					if (.@compass_check)
+						viewpoint 1,71,156,1,0xFFFF00;
+					break;
+				case 3:
+					mes "[Guia de Payon]";
+					mes "A entrada para";
+					mes "o Calabouço de Payon";
+					mes "está localizada no final";
+					mes "da aldeia à oeste.";
+					if (.@compass_check)
+						viewpoint 1,34,132,2,0xFFFFFF;
+					break;
+				case 4:
+					mes "[Guia de Payon]";
+					mes "Se quiser apagar as marcações do Mini-mapa, selecione o menu 'Remover Marcações do Mini-mapa'.";
+					set .@loop2,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,237,41,0,0xFF00FF;
+			viewpoint 2,237,41,1,0xFF0000;
+			viewpoint 2,46,345,2,0xFF00FF;
+			set .@compass_check,0;
+			break;
+		case 3:
+			mes "[Guia de Payon]";
+			mes "Avanços na feitiçaria e";
+			mes "tecnologia nos permitiu";
+			mes "atualizarmos o nosso sistema de";
+			mes "informações, permitindo até marcar";
+			mes "os locais em seu Mini-mapa";
+			mes "para uma navegação mais fácil.";
+			next;
+			mes "[Guia de Payon]";
+			mes "Seu Mini-mapa está localizado";
+			mes "no canto superior direito";
+			mes "da sua tela. Se você não consegue";
+			mes "vê-lo, pressione as teclas ''Ctrl + Tab'',";
+			mes "ou clique no botão ''Mapa-múndi'' na janela de Informações Básicas.";
+			next;
+			mes "[Guia de Payon]";
+			mes "No seu Mini-mapa,";
+			mes "clique nos símbolos '+' e '-'";
+			mes "para aumentar ou diminuir o"; 
+ 			mes "zoom do seu Mini-mapa. Nós"; 
+			mes "esperamos aventureiro, que você aproveite seus"; 
+ 			mes "passeios aqui em Payon."; 
+			break;
+		case 4:
+			mes "[Guia de Payon]";
+			mes "Faça suas viagens";
+			mes "em segurança,";
+			mes "corajoso aventureiro.";
+			close2;
+			set .@loop1,0;
+			break;
+		}
+	}
+	cutin "",255;
+	end;
+}
+

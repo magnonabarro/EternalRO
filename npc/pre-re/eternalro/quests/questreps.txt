@@ -1,0 +1,412 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= [Aegis Conversion]
+//= Added Monster Killing quests.
+//= Repeatable EXP Quest (Anolian Skins)
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+prontera,187,209,3	script	Cuir#Gator_Hunt	106,{
+if (checkquest(60119) != -1) {
+if (checkquest(60119,HUNTING) != 2 ) {
+mes "[Cuir]";
+mes "Have you finished hunting the 50 Alligators?";
+next;
+switch(select("Yes:No:I want to quit")) {
+case 1:
+mes "[Cuir]";
+mes "Hmm, I don't think you've hunted 50 yet...";
+close;
+case 2:
+mes "[Cuir]";
+mes "Remember, I need help hunting Alligators so go and hunt 50 of them.";
+close;
+case 3:
+mes "[Cuir]";
+mes "Are you sure that you want to stop hunting?";
+mes "Any progress that you've made will be erased";
+next;
+switch(select("Yes:No")) {
+case 1:
+mes "[Cuir]";
+mes "Ok then, well come back here if you change your mind.";
+erasequest 60119;
+close;
+case 2:
+mes "[Cuir]";
+mes "Please kill 50 Alligators.";
+close;
+}
+}
+}
+else {
+mes "[Cuir]";
+mes "Amazing, you did that with speed.";
+getexp 68950,43300;
+erasequest 60119;
+close;
+}
+}
+if (checkquest(60120) != -1) {
+if (checkquest(60120,HUNTING) != 2 ) {
+mes "[Cuir]";
+mes "Have you finished hunting the 50 Alligators?";
+next;
+switch(select("Yes:No:I want to quit")) {
+case 1:
+mes "[Cuir]";
+mes "Hmm, I don't think you've hunted 100 yet...";
+close;
+case 2:
+mes "[Cuir]";
+mes "Remember, I need help hunting Alligators so go and hunt 100 of them.";
+close;
+case 3:
+mes "[Cuir]";
+mes "Are you sure that you want to stop hunting?";
+mes "Any progress that you've made will be erased";
+next;
+switch(select("Yes:No")) {
+case 1:
+mes "[Cuir]";
+mes "Ok then, well come back here if you change your mind.";
+erasequest 60120;
+close;
+case 2:
+mes "[Cuir]";
+mes "Please kill 100 Alligators.";
+close;
+}
+}
+}
+else {
+mes "[Cuir]";
+mes "Amazing, you did that with speed.";
+getexp 68950,43300;
+getexp 68950,43300;
+erasequest 60120;
+close;
+}
+}
+if (checkquest(60121) != -1) {
+if (checkquest(60121,HUNTING) != 2 ) {
+mes "[Cuir]";
+mes "Have you finished hunting the 150 Alligators?";
+next;
+switch(select("Yes:No:I want to quit")) {
+case 1:
+mes "[Cuir]";
+mes "Hmm, I don't think you've hunted 150 yet...";
+close;
+case 2:
+mes "[Cuir]";
+mes "Remember, I need help hunting Alligators so go and hunt 150 of them.";
+close;
+case 3:
+mes "[Cuir]";
+mes "Are you sure that you want to stop hunting?";
+mes "Any progress that you've made will be erased";
+next;
+switch(select("Yes:No")) {
+case 1:
+mes "[Cuir]";
+mes "Ok then, well come back here if you change your mind.";
+erasequest 60121;
+close;
+case 2:
+mes "[Cuir]";
+mes "Please kill 150 Alligators.";
+close;
+}
+}
+}
+else {
+mes "[Cuir]";
+mes "Amazing, you did that with speed.";
+getexp 68950,43300;
+getexp 68950,43300;
+getexp 68950,43300;
+erasequest 60121;
+close;
+}
+}
+//for minimum level
+if (BaseLevel > 44) {
+//for maximum level
+if (BaseLevel < 81) {
+mes "[Cuir]";
+mes "You look like a sturdy adventurer!";
+next;
+mes "[Cuir]";
+mes "I was sent here to minimize the Alligator population but the task is proving to be quite difficult for just me to complete.";
+mes "How'd you like to help me out?";
+next;
+switch(select("Sure:No")) {
+case 1:
+mes "[Cuir]";
+mes "You can help me out by either hunting Alligators or by gathering items for me.";
+mes "Which would you like to do?";
+next;
+switch(select("Gather Items:Hunt Alligators:Cancel")) {
+case 1:
+// Item turn in
+mes "[Cuir]";
+mes "If you can bring me ^00CC0020 Anolian Skins^000000. I'll help you get stronger.";
+next;
+switch(select("I have the Anolian Skins:Gators bite!")) {
+case 1:
+/*
+if (checkweight(503,10) == 0) {
+mes "[Cuir]";
+mes "Hey, it looks like that the weight on";
+mes "your back will crush you. Come back";
+mes "after you have lost some weight.";
+close;
+}
+*/
+if (countitem(7003) > 19) {
+mes "[Cuir]";
+mes "Thank you for the ^00CE0020 Anolian Skins^000000!";
+mes "I hope you can continue to help me collect these skins.";
+mes "The armor creators around the world are clamoring for them.";
+delitem 7003,20; //Anolian_Skin
+getexp 68950,43300;
+//getitem 503,10; //Yellow_Potion
+close;
+}
+else {
+mes "[Cuir]";
+mes "I know a gator skin when I see it and I don't see ^00CE0020 Anolian Skins^000000.";
+close;
+}
+case 2:
+mes "[Cuir]";
+mes "I need ^00CE0020 Anolian Skins^000000.";
+close;
+}
+case 2:
+// Kill Count Quest
+mes "[Cuir]";
+mes "Ah, ok I think you can help me out by hunting some Alligators.";
+mes "How many would you like to hunt?";
+next;
+switch(select("50 Alligators:100 Alligators:150 Alligators")) {
+case 1:
+mes "[Cuir]";
+mes "Come back when you've finished your task and I will give you a small reward.";
+setquest 60119;
+close;
+case 2:
+mes "[Cuir]";
+mes "Come back when you've finished your task and I will give you a small reward.";
+setquest 60120;
+close;
+case 3:
+mes "[Cuir]";
+mes "Come back when you've finished your task and I will give you a small reward.";
+setquest 60121;
+close;
+}
+case 3:
+mes "[Cuir]";
+mes "If you change your mind, please come back.";
+close;
+}
+case 2:
+mes "[Cuir]";
+mes "If you change your mind, please come back.";
+close;
+}
+}
+else {
+mes "[Cuir]";
+mes "You are too powerful for this task, I need the skins in fair condition, not exploded!";
+next;
+close;
+}
+}
+else {
+mes "[Cuir]";
+mes "You certainly are brave, but bravery turns to foolishness if you continue going East.";
+mes "Perhaps when you are stronger you and I can do business.";
+close;
+}
+}
+
+moc_para01,33,34,4	script	Atila#Hunter	106,{
+mes "[Atila]";
+mes "Ola ["+strcharinfo(0)+"] em que posso Ajudar";
+callfunc "F_MISSAO_KLAUS1", 20, 50, 1, 1,
+		1018,	60122,	1250,		 1000,	// Creamy
+		1031,	100006,	5000,		 4000,	// poporing
+		1019,	100007,	5500,		 4250,	// Peco Peco
+		1249,	100008,	12500,		 8250,	// Presente
+		1069,	100009,	14750,		10000;	// Peixe-Espada
+	end;
+}
+ 
+function	script	F_MISSAO_KLAUS1	{
+	if (BaseLevel < getarg(0) || (BaseLevel > getarg(1) && getarg(1))){
+		for (.@i = 5; .@i < getargcount(); .@i += 4){
+			if (checkquest(getarg(.@i)) != -1){
+				mes "[ ^3CB371Klaus^000000 ]";
+				mes "Vejo que você não tem mais level para essas missões, não se preocupe, ainda poderá receber suas recompensas.";
+				next;
+				switch(select("^3CB371[»]^000000 Coletar Recompensas","^3CB371[»]^000000 Cencelar")){
+					case 1: goto L_BountyOne;
+					case 2:  close;
+				}
+			}
+		}
+		if (BaseLevel > getarg(1)){
+				mes "[ ^3CB371Klaus^000000 ]";
+				mes "Vejo que você ficou mesmo forte!";
+				mes "Infelizmente minhas missões são apenas para jogadores até o nível "+getarg(1)+".";
+		}
+		close;
+	
+	}
+	
+	mes "[ ^3CB371Klaus^000000 ]";
+	mes "Krishshshshsh, sério que você pretende caçar monstros sendo fraco desse jeito?";
+	mes "Krishsh, tudo bem então!";
+	mes "^FF8C00Ao finalizar cada missão você receberá 1 pontos de Missão^000000"; //Manual de Combate ( removido devido a exploits )
+	next;
+	switch(select("^3CB371[»]^000000 Visualizar Missões","^3CB371[»]^000000 Coletar Recompensas","^3CB371[»]^000000 Abandonar uma Missão","^3CB371[»]^000000 Não tenho Interesse")){
+	case 1:	// Check bounty missions
+		mes "[ ^3CB371Klaus^000000 ]";
+		mes "Vou listar pra você os monstros com recompensas.";
+		mes "Escolha quais deles você irá caçar:";
+		next;
+		for (.@i = 4; .@i < getargcount(); .@i += 4)
+			.@menu$ = .@menu$ + getmonsterinfo(getarg(.@i),MOB_NAME) + ":";
+		.@menu$ = .@menu$ + "Caçar Todos:Cancelar";
+		.@bounty = (select(.@menu$) * 4) + 1;
+		if (.@bounty > getargcount()+1){
+			mes "[ ^3CB371Klaus^000000 ]";
+			mes "Você decidiu não pegar nenhuma missão.";
+			close;
+		} else if (.@bounty == getargcount()+1){
+			for (.@i = 5; .@i < getargcount(); .@i += 4){
+				if (checkquest(getarg(.@i)) == -1)
+					setquest getarg(.@i);
+				.@HuntAllList$ = .@HuntAllList$ + (.@i+4 > getargcount()?" e ":(.@i > 5?", ":"")) + getmonsterinfo(getarg(.@i-1),MOB_NAME);
+			}
+			mes "[ ^3CB371Klaus^000000 ]";
+			mes "Há na lista uma recompensa por caçar " + .@HuntAllList$ + " caçe todos eles.";
+			
+			close;
+		}
+		.@monster$ = getmonsterinfo(getarg(.@bounty-1),MOB_NAME);
+		mes "[ ^3CB371Klaus^000000 ]";
+		mes "Você escolheu caçar " + .@monster$ + ".";
+		next;
+		if (select("^3CB371[»]^000000 Eu farei isso.", "^3CB371[»]^000000 Não tenho interesse.") == 1){
+			if (checkquest(getarg(.@bounty),HUNTING) == -1)
+				setquest getarg(.@bounty);
+			mes "[ ^3CB371Klaus^000000 ]";
+			mes "Você aceitou caçar os "+.@monster$+", boa sorte com sua missão!";
+		}
+		
+		close;
+	case 2:	// Coletar Recompensas
+		mes "[ ^3CB371Klaus^000000 ]";
+		mes "Aqui você pode recolher suas recompensas!";
+		mes "Como você deseja receber a remuneração?";
+		next;
+		switch(select("^3CB371[»]^000000 Coletar Recompensas","^3CB371[»]^000000 Cencelar")){
+			case 1: goto L_BountyOne;
+			case 2: close;
+		}
+	case 3:	// Abandonar uma missão
+		goto L_BountyDel;
+	case 4:	// Não tenho interesse.
+		mes "[ ^3CB371Klaus^000000 ]";
+		mes "Vejo que o franguinho desistiu.";
+		mes "Tudo bem, volte quando tiver coragem de verdade.";
+		
+		close;
+		break;
+	}
+
+L_BountyOne:
+	mes "[ ^3CB371Klaus^000000 ]";
+	mes "Você receberá uma quantidade de Expêriencia para cada Missão concluída!";
+	mes "Escolha o monstro que você caçou.";
+	next;
+	for (.@i = 4; .@i < getargcount(); .@i += 4)
+		.@menu$ = .@menu$ + getmonsterinfo(getarg(.@i),MOB_NAME) + ":";
+	.@menu$ = .@menu$ + "Cancel";
+	.@bounty = (select(.@menu$) * 4) + 1;
+	if (.@bounty > getargcount()){
+		mes "[ ^3CB371Klaus^000000 ]";
+		mes "Volte quando tiver finalizado alguma missão!";
+		close;
+	}
+	if (checkquest(getarg(.@bounty),HUNTING) == 2){
+		erasequest getarg(.@bounty);
+		if (Zeny + 0 <= MAX_ZENY)
+			Zeny += 0;
+		.@BaseExp = getarg(.@bounty+1);
+		.@JobExp = getarg(.@bounty+2);
+		switch(.@vip_reward){
+			case 2:
+				getexp .@BaseExp,0;
+				getexp .@JobExp,0;
+				break;
+			case 3:
+				getexp 0,.@BaseExp;
+				getexp 0,.@JobExp;
+				break;
+			default:
+				getexp .@BaseExp,.@JobExp;
+				set #PTMISSAO, #PTMISSAO + 1; dispbottom "[SweeT Missões] - Agora você tem "+#PTMISSAO+"x Pontos de Missões.";
+
+				break;
+		}
+	} else {
+		mes "[ ^3CB371Klaus^000000 ]";
+		mes "Não tente me enganar! Você ainda não terminou de caçar todos os "+getmonsterinfo(getarg(.@bounty-1),MOB_NAME)+"s.";
+		mes "Volte quando terminar sua missão.";
+	}
+	
+	close;
+
+L_BountyDel:
+	mes "[ ^3CB371Klaus^000000 ]";
+	mes "Vou verificar quais missões você pegou até agora.";
+	mes "Quais dela você deseja abandonar?";
+	next;
+	for (.@i = 5; .@i < getargcount(); .@i += 4){
+		if (checkquest(getarg(.@i),HUNTING) == 1){
+			.@monster$ = getmonsterinfo(getarg(.@i-1),MOB_NAME);
+			mes "[ ^3CB371Klaus^000000 ]";
+			mes "Parece que você não completou a caça de ^0000FF" + .@monster$ + "^000000.";
+			mes "Você pode continuar ou abandonar essa missão.";
+			next;
+			if (select("^3CB371[»]^000000 Continuar Caçando "+.@monster$, "^3CB371[»]^000000 ^FF0000Abandonar a Missão^000000") == 2){
+				erasequest getarg(.@i);
+				mes "[ ^3CB371Klaus^000000 ]";
+				mes "Você abandonou a missão!";
+				close2;
+				.@questerased = 1;
+				
+			}
+		}
+	}
+	
+	if (!.@questerased)
+		close;
+	else
+		end;
+
+}
+

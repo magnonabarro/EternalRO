@@ -1,0 +1,24 @@
+-	script	DropsMVP#HD	-1,{
+
+	OnNPCKillEvent:
+
+		// Verifica se está nos mapas da Cheffenia
+		if (strcharinfo(3) == "bossnia_01" || 
+			strcharinfo(3) == "bossnia_02" || 
+			strcharinfo(3) == "bossnia_03" || 
+			strcharinfo(3) == "bossnia_04")
+		{
+			// Verifica se é MVP
+			if (getmonsterinfo(killedrid, MOB_MVPEXP) > 0)
+			{
+				// Chance de 10%
+				if (rand(1000) < 100)
+				{
+					getitem 12299,1;
+					dispbottom "Parabéns! Você recebeu uma recompensa por derrotar um MVP em " + strcharinfo(3) + ".";
+				}
+			}
+		}
+
+	end;
+}

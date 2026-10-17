@@ -1,0 +1,101 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= Masao
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Custom Version.
+//= Repeatable EXP Quest : Kill 50 Mantis.
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+lou_fild01,240,354,4	script	Pesquisador de Louva-a-Deus	878,{
+
+	if (checkquest(60179) != -1) {
+		if (checkquest(60179,HUNTING) != 2 ) {
+			mes "[Pesquisador de Louva-a-Deus]";
+			mes "Você já terminou de caçar os 50 Louva-a-Deus?";
+			next;
+			switch(select("Sim:Não:Quero desistir")) {
+			case 1:
+				mes "[Pesquisador de Louva-a-Deus]";
+				mes "Hum, acho que você ainda não caçou os 50.";
+				close;
+			case 2:
+				mes "[Pesquisador de Louva-a-Deus]";
+				mes "Lembre-se, preciso da sua ajuda para caçar os Louva-a-Deus. Vá derrotar 50 deles.";
+				close;
+			case 3:
+				mes "[Pesquisador de Louva-a-Deus]";
+				mes "Tem certeza de que deseja desistir da caçada?";
+				mes "Todo o progresso que você fez será perdido.";
+				next;
+				switch(select("Sim:Não")) {
+				case 1:
+					mes "[Pesquisador de Louva-a-Deus]";
+					mes "Tudo bem. Volte aqui se mudar de ideia.";
+					erasequest 60179;
+					close;
+				case 2:
+					mes "[Pesquisador de Louva-a-Deus]";
+					mes "Por favor, derrote 50 Louva-a-Deus para tornar este lugar um bom local para aventureiros ganharem experiência.";
+					close;
+				}
+			}
+		}
+		mes "[Pesquisador de Louva-a-Deus]";
+		mes "Incrível! Você terminou muito rápido.";
+		getexp 18818,7527;
+		erasequest 60179;
+		close;
+	}
+	if ((BaseLevel > 34) && (BaseLevel < 71)) {
+		mes "[Pesquisador de Louva-a-Deus]";
+		mes "Ah, excelente!";
+		mes "Você veio me ajudar, não foi?";
+		mes "Caso contrário, não sei mais o que fazer com os monstros deste lugar!";
+		next;
+		switch(select("Claro:Não")) {
+		case 1:
+			mes "[Pesquisador de Louva-a-Deus]";
+			mes "Ótimo! Desde o momento em que vi você, soube que poderia contar com sua ajuda!";
+			mes "Preciso que reduza a quantidade de monstros que estão causando problemas neste mapa!";
+			mes "Há Louva-a-Deus demais por aqui, o que impede os aventureiros de nível mais baixo de conseguirem uma boa experiência.";
+			next;
+			mes "[Pesquisador de Louva-a-Deus]";
+			mes "Então, ainda deseja me ajudar?";
+			next;
+			switch(select("Claro:Cancelar")) {
+			case 1:
+				if (BaseLevel > 70) {
+					mes "[Pesquisador de Louva-a-Deus]";
+					mes "Obrigado por toda a ajuda com os Louva-a-Deus!";
+					mes "No momento, a situação está sob controle e não preciso mais da sua ajuda para derrotá-los.";
+					close;
+				}
+				mes "[Pesquisador de Louva-a-Deus]";
+				mes "Derrote 50 Louva-a-Deus e volte para falar comigo quando terminar. Eu o recompensarei pelo seu esforço.";
+				setquest 60179;
+				close;
+			case 2:
+				mes "[Pesquisador de Louva-a-Deus]";
+				mes "Se mudar de ideia, volte para falar comigo.";
+				close;
+			}
+		case 2:
+			mes "[Pesquisador de Louva-a-Deus]";
+			mes "Se mudar de ideia, volte para falar comigo.";
+			close;
+		}
+	}
+	mes "[Pesquisador de Louva-a-Deus]";
+	mes "Ai, ai...";
+	next;
+	mes "[Pesquisador de Louva-a-Deus]";
+	mes "Desculpe, não posso conversar agora. Estou em apuros! Esses malditos Louva-a-Deus vão acabar me matando.";
+	close;
+}

@@ -1,0 +1,93 @@
+izlude,139,221,4	script	Loja Wot [Clã]	462,{
+
+//======== Confs
+
+set .np$,"^FF1493[ Loja Wot - Clã ]^000000";		// Nome do NPC.
+setarray .@itens[1],13517,13973,12916,12907,12906,12904,12908,12905,12903,1082,17068; 
+setarray .@kquant[1],5,30,20,10,10,10,10,10,10,50,50; // Quantidade que vem no Kit
+setarray .@pontos[1],8,48,10,30,30,30,30,30,30,50,70; // Pontos por cada item.
+setarray .@dpontos[1],4,24,5,15,15,15,15,15,15,25,35; // Pontos com desconto por cada item.
+
+//======== Fim das Confs
+
+query_sql ("SELECT `pontosgwot` FROM `guild` WHERE `guild_id` = '"+getcharid(2)+"'", .@pontoswot);
+
+if(getcharid(2) == 0){ mes .np$; mes "Me desculpe mas você não possui um clãn."; close; }
+
+set @GID,getcharid(2);
+
+if(strcharinfo(0) != getguildmaster(@GID)){ mes .np$; mes "Me desculpe, mas eu posso vender itens apenas para o líder do seu clã."; close; }
+
+if(getgmlevel() > 1){
+
+mes .np$;
+mes "Olá ^0000FF"+strcharinfo(0)+"^000000, líder da guild ^0000FF"+ getguildname( @GID ) +"^000000.";
+mes "Seu clã tem ^0000FF"+.@pontoswot+"^000000 pontos, deseja trocar por qual item?";
+next;
+mes .np$;
+mes "- ^006600Nome do item^000000";
+mes "- ^0000FFQuantidade de itens no kit^000000";
+mes "- ^FF0000Pontos cobrados por cada kit^000000";
+mes " ";
+mes "^FF0000Obs:^000000 O valor a ser pago com desconto para usuários VIP TOTAL é apresentado somente no final da troca! O desconto é de 50%, aplicado no valor final da troca!";
+set .@menu$,"";
+
+for(set .@e,1;.@e < getarraysize(.@itens);set .@e,.@e + 1)
+set .@menu$,.@menu$ + "- ^006600" + getitemname(.@itens[.@e]) + "^000000 [^0000FF"+.@kquant[.@e]+"^000000] [^FF0000"+.@pontos[.@e]+"^000000]:";
+if(select(.@menu$+"- Cancelar") >= getarraysize(.@itens))close;
+
+next;
+set @escolha,@menu;
+mes .np$;
+mes "Digite a quantidade de "+getitemname(.@itens[@escolha])+" que deseja comprar.";
+input .@qntidade;
+next;
+mes .np$;
+mes "Jogador Vip possui desconto de ^FF000050%^000000 na minha loja.";
+mes "^CC0000"+.@qntidade+"^000000 ~ ^0000EE"+getitemname(.@itens[@escolha])+"^000000 custará ^00B2EE"+.@qntidade*.@pontos[@escolha]+"^000000 pontos, para jogadores vip custará ^FF0000"+.@qntidade*.@dpontos[@escolha]+"^000000 pontos.";
+mes "Quer mesmo comprá-lo?";
+if(select("- Sim:- Não") == 2) close;
+
+if(.@pontoswot < .@qntidade*.@dpontos[@escolha]){ next; mes .np$; mes "Você não tem os pontos necessários para compra."; close; }
+
+next;
+mes .np$;
+mes "Compra realizada com sucesso!";
+query_sql "UPDATE `guild` SET `pontosgwot`=`pontosgwot`-"+.@qntidade*.@dpontos[@escolha]+" WHERE `guild_id`="+getcharid(2)+"";
+getitem .@itens[@escolha],.@qntidade;
+query_sql ("SELECT `pontosgwot` FROM `guild` WHERE `guild_id` = '"+getcharid(2)+"'", .@pontoswot2);
+dispbottom "[Loja Wot]: Você ainda tem "+.@pontoswot2+" Pontos.";
+close;
+}
+
+mes .np$;
+mes "Olá ^00B2EE"+strcharinfo(0)+"^000000, lider da guild ^00B2EE"+getcharid(2)+"^000000.";
+mes "Seu clân tem "+.@pontoswot+" Pontos, deseja trocar por qual item?";
+set .@menu$,"";
+
+for(set .@e,1;.@e < getarraysize(.@itens);set .@e,.@e + 1)
+set .@menu$,.@menu$ + "- " + getitemname(.@itens[.@e]) + ":";
+if(select(.@menu$+"- Cancelar") >= getarraysize(.@itens))close;
+
+next;
+set @escolha,@menu;
+mes .np$;
+mes "Digite a quantidade de "+getitemname(.@itens[@escolha])+" que deseja comprar.";
+input .@qntidade;
+next;
+mes .np$;
+mes "^CC0000"+.@qntidade+"^000000 ~ ^0000EE"+getitemname(.@itens[@escolha])+"^000000 custa(m) ^CC0000"+.@qntidade*.@pontos[@escolha]+"^000000 Pontos.";
+mes "Quer mesmo compra-lo?";
+if(select("- Sim:- Não") == 2) close;
+
+if(.@pontoswot < .@qntidade*.@pontos[@escolha]){ next; mes .np$; mes "Você não tem os pontos necessários para compra."; close; }
+
+next;
+mes .np$;
+mes "Compra realizada com sucesso!";
+query_sql "UPDATE `guild` SET `pontosgwot`=`pontosgwot`-"+.@qntidade*.@pontos[@escolha]+" WHERE `guild_id`="+getcharid(2)+"";
+getitem .@itens[@escolha],.@qntidade;
+query_sql ("SELECT `pontosgwot` FROM `guild` WHERE `guild_id` = '"+getcharid(2)+"'", .@pontoswot2);
+dispbottom "[Loja Wot]: Você ainda tem "+.@pontoswot2+" Pontos.";
+close;
+}

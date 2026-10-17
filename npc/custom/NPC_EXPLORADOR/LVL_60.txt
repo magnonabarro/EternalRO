@@ -1,0 +1,362 @@
+//============================================================
+// MISSOES OURO - rAthena
+// Missões de caça para personagens BaseLevel 10 a 60.
+// Moeda inicial: item ID 675 (Gold / Moeda de Ouro). Altere em OnInit.
+// Progresso salvo por personagem em SQL (tabela missoes_ouro_progress).
+//============================================================
+
+prontera,156,191,4	script	Missões Ouro	4_F_TELEPORTER,{
+
+	mes "^D4AF37[ Missões Ouro ]^000000";
+	mes "Missões de caça para aventureiros.";
+	mes "Recomendado para: ^0055FFNível 10 a 60^000000.";
+	mes "Complete missões para receber Moedas de Ouro.";
+	next;
+
+	switch(select("Pegar missões:Completar missões:Loja:Cancelar missões:Sair")) {
+		case 1:
+			callsub S_Pegar;
+			break;
+		case 2:
+			callsub S_Completar;
+			break;
+		case 3:
+			callsub S_Loja;
+			break;
+		case 4:
+			callsub S_Cancelar;
+			break;
+		default:
+			close;
+	}
+	close;
+
+//------------------------------------------------------------
+// Selecionar categoria e missão
+//------------------------------------------------------------
+S_Pegar:
+	if (BaseLevel < 10) {
+		mes "Você precisa estar no ^0055FFnível 10^000000 para aceitar missões.";
+		return;
+	}
+	if (BaseLevel > 60) {
+		mes "Este quadro aceita novas missões somente até o ^0055FFnível 60^000000.";
+		mes "Você ainda pode concluir missões já aceitas e usar a loja.";
+		return;
+	}
+
+	.@cat_menu$ = "";
+	.@cat_count = 0;
+	for (.@r = 10; .@r <= 50; .@r += 10) {
+		if (BaseLevel >= .@r) {
+			if (.@cat_count > 0)
+				.@cat_menu$ += ":";
+			if (.@r == 10)
+				.@cat_menu$ += "[10-19] Iniciantes";
+			else if (.@r == 20)
+				.@cat_menu$ += "[20-29] Aprendizes";
+			else if (.@r == 30)
+				.@cat_menu$ += "[30-39] Aventureiros";
+			else if (.@r == 40)
+				.@cat_menu$ += "[40-49] Caçadores";
+			else
+				.@cat_menu$ += "[50-60] Veteranos";
+			.@cat_req[.@cat_count] = .@r;
+			.@cat_count++;
+		}
+	}
+	.@cat_choice = select(.@cat_menu$ + ":Cancelar");
+	if (.@cat_choice > .@cat_count)
+		return;
+	.@required_level = .@cat_req[.@cat_choice - 1];
+
+	.@mission_menu$ = "";
+	.@mission_count = 0;
+	for (.@i = 0; .@i < .MissionCount; .@i++) {
+		if (.ReqLevel[.@i] == .@required_level) {
+			if (.@mission_count > 0)
+				.@mission_menu$ += ":";
+			.@mission_menu$ += .MobName$[.@i] + " (" + .MobAmount[.@i] + ")";
+			.@selected_mission[.@mission_count] = .@i;
+			.@mission_count++;
+		}
+	}
+	.@mission_menu$ += ":Pegar todas as missões:Cancelar";
+	mes "Selecione o monstro que deseja caçar.";
+	.@mission_choice = select(.@mission_menu$);
+
+	if (.@mission_choice <= .@mission_count) {
+		callsub S_SelecionarMissao, .@selected_mission[.@mission_choice - 1];
+		return;
+	}
+	if (.@mission_choice == .@mission_count + 1) {
+		.@accepted = 0;
+		for (.@i = 0; .@i < .MissionCount; .@i++) {
+			if (.ReqLevel[.@i] == .@required_level) {
+				.@result = callsub(S_AtivarMissao, .@i);
+				if (.@result == 1)
+					.@accepted++;
+			}
+		}
+		mes "Missões deste grupo processadas.";
+		mes "Novas missões aceitas: ^0055FF" + .@accepted + "^000000.";
+		mes "O progresso das missões que você já tinha aceitado foi preservado.";
+		mes "Use ^0055FFCompletar missões^000000 quando atingir a quantidade necessária.";
+		return;
+	}
+	return;
+
+//------------------------------------------------------------
+// Aceitação individual: teleporte opcional
+//------------------------------------------------------------
+S_SelecionarMissao:
+	.@pick_idx = getarg(0);
+	.@pick_char = getcharid(0);
+	.@pick_mission_id = .@pick_idx + 1;
+	.@pick_rows = query_sql("SELECT status, progress FROM missoes_ouro_progress WHERE char_id = " + .@pick_char + " AND mission_id = " + .@pick_mission_id, .@pick_status, .@pick_progress);
+
+	if (.@pick_rows > 0 && .@pick_status == 1) {
+		mes "Você já está com essa missão.";
+		mes "Monstro: ^0055FF" + .MobName$[.@pick_idx] + "^000000";
+		mes "Progresso: ^0055FF" + .@pick_progress + "/" + .MobAmount[.@pick_idx] + "^000000.";
+		mes "Deseja ser teleportado para o mapa da missão?";
+		if (select("Sim:Não") == 1)
+			warp .MobMap$[.@pick_idx], .MapX[.@pick_idx], .MapY[.@pick_idx];
+		return;
+	}
+
+	mes "Missão: ^0055FF" + .MobName$[.@pick_idx] + "^000000";
+	mes "Quantidade: ^0055FF" + .MobAmount[.@pick_idx] + "^000000 monstros.";
+	mes "Mapa: ^0055FF" + .MobMap$[.@pick_idx] + "^000000.";
+	mes "Recompensa: ^D4AF37" + .RewardAmount[.@pick_idx] + " Moedas de Ouro^000000.";
+	mes "Deseja aceitar esta missão?";
+	switch(select("Aceitar e teleportar:Aceitar sem teleportar:Cancelar")) {
+		case 1:
+			.@pick_result = callsub(S_AtivarMissao, .@pick_idx);
+			if (.@pick_result != 1) {
+				mes "Não foi possível aceitar a missão. Talvez você já tenha o limite de missões ativas.";
+				return;
+			}
+			mes "Missão aceita! Boa caçada.";
+			warp .MobMap$[.@pick_idx], .MapX[.@pick_idx], .MapY[.@pick_idx];
+			return;
+		case 2:
+			.@pick_result = callsub(S_AtivarMissao, .@pick_idx);
+			if (.@pick_result == 1)
+				mes "Missão aceita. Você pode ir ao mapa quando quiser.";
+			else
+				mes "Não foi possível aceitar. Confira suas missões ativas.";
+			return;
+		default:
+			return;
+	}
+
+//------------------------------------------------------------
+// Ativar uma missão. Retorna 1 se uma nova missão foi ativada.
+//------------------------------------------------------------
+S_AtivarMissao:
+	.@act_idx = getarg(0);
+	if (BaseLevel < 10 || BaseLevel > 60 || BaseLevel < .ReqLevel[.@act_idx])
+		return 0;
+	.@act_char = getcharid(0);
+	.@act_id = .@act_idx + 1;
+	.@act_rows = query_sql("SELECT status FROM missoes_ouro_progress WHERE char_id = " + .@act_char + " AND mission_id = " + .@act_id, .@act_status);
+	if (.@act_rows > 0 && .@act_status == 1)
+		return 0;
+	.@active_rows = query_sql("SELECT COUNT(*) FROM missoes_ouro_progress WHERE char_id = " + .@act_char + " AND status = 1", .@active_count);
+	if (.@active_count >= .MaxActive)
+		return 0;
+	query_sql("INSERT INTO missoes_ouro_progress (char_id, mission_id, status, progress) VALUES (" + .@act_char + ", " + .@act_id + ", 1, 0) ON DUPLICATE KEY UPDATE status = 1, progress = 0");
+	return 1;
+
+//------------------------------------------------------------
+// Entregar missões concluídas
+//------------------------------------------------------------
+S_Completar:
+	.@comp_char = getcharid(0);
+	.@comp_rows = query_sql("SELECT mission_id, progress FROM missoes_ouro_progress WHERE char_id = " + .@comp_char + " AND status = 1 ORDER BY mission_id", .@comp_ids, .@comp_progress);
+	.@ready_count = 0;
+	.@ready_menu$ = "";
+	for (.@j = 0; .@j < .@comp_rows; .@j++) {
+		.@idx = .@comp_ids[.@j] - 1;
+		if (.@idx >= 0 && .@idx < .MissionCount && .@comp_progress[.@j] >= .MobAmount[.@idx]) {
+			if (.@ready_count > 0)
+				.@ready_menu$ += ":";
+			.@ready_menu$ += .MobName$[.@idx] + " - Pronta (" + .@comp_progress[.@j] + "/" + .MobAmount[.@idx] + ")";
+			.@ready_idx[.@ready_count] = .@idx;
+			.@ready_count++;
+		}
+	}
+	if (.@ready_count == 0) {
+		mes "Você ainda não tem missões prontas para entregar.";
+		mes "Continue caçando os monstros necessários.";
+		return;
+	}
+	.@ready_menu$ += ":Completar todas as missões:Voltar";
+	mes "Escolha a missão que deseja entregar.";
+	.@ready_choice = select(.@ready_menu$);
+	if (.@ready_choice <= .@ready_count) {
+		callsub S_EntregarMissao, .@ready_idx[.@ready_choice - 1];
+		return;
+	}
+	if (.@ready_choice == .@ready_count + 1) {
+		for (.@j = 0; .@j < .@ready_count; .@j++)
+			callsub S_EntregarMissao, .@ready_idx[.@j];
+	}
+	return;
+
+S_EntregarMissao:
+	.@claim_idx = getarg(0);
+	.@claim_char = getcharid(0);
+	.@claim_id = .@claim_idx + 1;
+	.@claim_rows = query_sql("SELECT status, progress FROM missoes_ouro_progress WHERE char_id = " + .@claim_char + " AND mission_id = " + .@claim_id, .@claim_status, .@claim_progress);
+	if (.@claim_rows == 0 || .@claim_status != 1 || .@claim_progress < .MobAmount[.@claim_idx]) {
+		mes "Esta missão ainda não pode ser entregue.";
+		return 0;
+	}
+	if (!checkweight(.CoinID, .RewardAmount[.@claim_idx])) {
+		mes "Você está carregando muito peso para receber a recompensa.";
+		mes "Libere espaço e tente novamente.";
+		return 0;
+	}
+	query_sql("UPDATE missoes_ouro_progress SET status = 2 WHERE char_id = " + .@claim_char + " AND mission_id = " + .@claim_id + " AND status = 1 AND progress >= " + .MobAmount[.@claim_idx]);
+	getitem .CoinID, .RewardAmount[.@claim_idx];
+	mes "^00AA00Missão concluída!^000000";
+	mes "Monstro: ^0055FF" + .MobName$[.@claim_idx] + "^000000.";
+	mes "Recompensa: ^D4AF37" + .RewardAmount[.@claim_idx] + " Moedas de Ouro^000000.";
+	return 1;
+
+//------------------------------------------------------------
+// Loja de exemplo: moeda customizável e itens clássicos
+//------------------------------------------------------------
+S_Loja:
+	mes "^D4AF37[ Loja das Missões Ouro ]^000000";
+	mes "Saldo: ^0055FF" + countitem(.CoinID) + "^000000 Moedas de Ouro.";
+	next;
+	switch(select("Poção Vermelha x10 - 1 moeda:Poção Laranja x10 - 2 moedas:Asa de Mosca x10 - 1 moeda:Asa de Borboleta x5 - 1 moeda:Poção Verde x10 - 1 moeda:Poção Azul x3 - 3 moedas:Poção de Concentração x1 - 3 moedas:Poção da Fúria x1 - 4 moedas:Sair")) {
+		case 1:
+			callsub S_ComprarItem, 501, 10, 1, "Poção Vermelha";
+			goto S_Loja;
+		case 2:
+			callsub S_ComprarItem, 502, 10, 2, "Poção Laranja";
+			goto S_Loja;
+		case 3:
+			callsub S_ComprarItem, 601, 10, 1, "Asa de Mosca";
+			goto S_Loja;
+		case 4:
+			callsub S_ComprarItem, 602, 5, 1, "Asa de Borboleta";
+			goto S_Loja;
+		case 5:
+			callsub S_ComprarItem, 506, 10, 1, "Poção Verde";
+			goto S_Loja;
+		case 6:
+			callsub S_ComprarItem, 505, 3, 3, "Poção Azul";
+			goto S_Loja;
+		case 7:
+			callsub S_ComprarItem, 645, 1, 3, "Poção de Concentração";
+			goto S_Loja;
+		case 8:
+			callsub S_ComprarItem, 656, 1, 4, "Poção da Fúria";
+			goto S_Loja;
+		default:
+			return;
+	}
+
+S_ComprarItem:
+	.@buy_item = getarg(0);
+	.@buy_amount = getarg(1);
+	.@buy_price = getarg(2);
+	.@buy_name$ = getarg(3);
+	if (countitem(.CoinID) < .@buy_price) {
+		mes "Você não tem Moedas de Ouro suficientes.";
+		return;
+	}
+	if (!checkweight(.@buy_item, .@buy_amount)) {
+		mes "Você está carregando muito peso ou não tem espaço no inventário.";
+		return;
+	}
+	delitem .CoinID, .@buy_price;
+	getitem .@buy_item, .@buy_amount;
+	mes "Compra realizada: ^0055FF" + .@buy_amount + "x " + .@buy_name$ + "^000000.";
+	mes "Moedas gastas: ^D4AF37" + .@buy_price + "^000000.";
+	return;
+
+//------------------------------------------------------------
+// Cancelar uma ou todas as missões ativas
+//------------------------------------------------------------
+S_Cancelar:
+	.@cancel_char = getcharid(0);
+	.@cancel_rows = query_sql("SELECT mission_id, progress FROM missoes_ouro_progress WHERE char_id = " + .@cancel_char + " AND status = 1 ORDER BY mission_id", .@cancel_ids, .@cancel_progress);
+	if (.@cancel_rows == 0) {
+		mes "Você não possui missões ativas para cancelar.";
+		return;
+	}
+	.@cancel_menu$ = "";
+	for (.@j = 0; .@j < .@cancel_rows; .@j++) {
+		.@idx = .@cancel_ids[.@j] - 1;
+		if (.@j > 0)
+			.@cancel_menu$ += ":";
+		.@cancel_menu$ += .MobName$[.@idx] + " (" + .@cancel_progress[.@j] + "/" + .MobAmount[.@idx] + ")";
+	}
+	.@cancel_menu$ += ":Cancelar todas as missões:Voltar";
+	mes "Escolha qual missão deseja abandonar.";
+	.@cancel_choice = select(.@cancel_menu$);
+	if (.@cancel_choice <= .@cancel_rows) {
+		mes "Deseja cancelar a missão de " + .MobName$[.@cancel_ids[.@cancel_choice - 1] - 1] + "?";
+		if (select("Sim:Não") == 1) {
+			query_sql("DELETE FROM missoes_ouro_progress WHERE char_id = " + .@cancel_char + " AND mission_id = " + .@cancel_ids[.@cancel_choice - 1] + " AND status = 1");
+			mes "Missão cancelada.";
+		}
+		return;
+	}
+	if (.@cancel_choice == .@cancel_rows + 1) {
+		mes "Deseja cancelar todas as missões ativas?";
+		if (select("Sim:Não") == 1) {
+			query_sql("DELETE FROM missoes_ouro_progress WHERE char_id = " + .@cancel_char + " AND status = 1");
+			mes "Todas as missões ativas foram canceladas.";
+		}
+	}
+	return;
+
+//------------------------------------------------------------
+// Progresso de caça: salvo por char_id, não por conta
+//------------------------------------------------------------
+OnNPCKillEvent:
+	.@kill_char = getcharid(0);
+	if (.@kill_char <= 0)
+		end;
+	.@kill_rows = query_sql("SELECT mission_id, progress FROM missoes_ouro_progress WHERE char_id = " + .@kill_char + " AND status = 1 ORDER BY mission_id", .@kill_ids, .@kill_progress);
+	if (.@kill_rows <= 0)
+		end;
+	for (.@j = 0; .@j < .@kill_rows; .@j++) {
+		.@kill_idx = .@kill_ids[.@j] - 1;
+		if (.@kill_idx >= 0 && .@kill_idx < .MissionCount) {
+			if (killedrid == .MobID[.@kill_idx] && .@kill_progress[.@j] < .MobAmount[.@kill_idx]) {
+				query_sql("UPDATE missoes_ouro_progress SET progress = LEAST(progress + 1, " + .MobAmount[.@kill_idx] + ") WHERE char_id = " + .@kill_char + " AND mission_id = " + .@kill_ids[.@j] + " AND status = 1");
+				dispbottom "[Missões Ouro] " + .MobName$[.@kill_idx] + ": " + (.@kill_progress[.@j] + 1) + "/" + .MobAmount[.@kill_idx];
+				if (.@kill_progress[.@j] + 1 >= .MobAmount[.@kill_idx])
+					dispbottom "Missão pronta! Fale com o NPC Missões Ouro para receber sua recompensa.";
+			}
+		}
+	}
+	end;
+
+//------------------------------------------------------------
+// Configuração - edite o ID da moeda e os dados das missões aqui
+//------------------------------------------------------------
+OnInit:
+	.CoinID = 675; // ID provisório da Moeda de Ouro. Troque pelo ID do seu item.
+	.CoinName$ = "Moeda de Ouro";
+	.MaxActive = 25;
+	.MissionCount = 25;
+
+	setarray .MobID[0], 1002,1007,1063,1052,1018, 1031,1056,1010,1014,1060, 1023,1153,1026,1028,1127, 1165,1106,1037,1030,1180, 1213,1152,1069,1045,1156;
+	setarray .MobName$[0], "Poring","Fabre","Lunatic","Rocker","Creamy", "Poporing","Smokie","Willow","Spore","Bigfoot", "Orc Warrior","Orc Zombie","Munak","Skeleton Soldier","Hode", "Sandman","Desert Wolf","Side Winder","Anacondaq","Nine Tail", "High Orc","Orc Skeleton","Swordfish","Marc","Petite";
+	setarray .ReqLevel[0], 10,10,10,10,10, 20,20,20,20,20, 30,30,30,30,30, 40,40,40,40,40, 50,50,50,50,50;
+	setarray .MobAmount[0], 20,20,20,20,15, 25,25,25,25,25, 30,30,30,30,30, 35,35,35,35,35, 40,40,40,40,40;
+	setarray .RewardAmount[0], 3,3,3,3,3, 3,3,3,3,3, 3,3,3,3,3, 3,3,3,3,3, 3,3,3,3,3;
+	setarray .MobMap$[0], "prt_fild08","prt_fild00","prt_fild08","prt_fild07","prt_fild00", "pay_fild01","pay_fild09","pay_fild03","pay_fild08","pay_fild07", "gef_fild10","orcsdun01","pay_dun02","pay_dun01","moc_fild11", "moc_fild16","moc_fild13","moc_fild13","moc_fild13","pay_dun04", "gef_fild14","orcsdun02","iz_dun03","iz_dun03","gef_fild06";
+	setarray .MapX[0], 200,180,200,220,180, 200,200,200,200,200, 200,100,100,100,200, 200,200,200,200,100, 200,100,100,100,200;
+	setarray .MapY[0], 180,200,180,180,200, 200,200,200,200,200, 200,100,100,100,200, 200,200,200,200,100, 200,100,100,100,200;
+	end;
+}

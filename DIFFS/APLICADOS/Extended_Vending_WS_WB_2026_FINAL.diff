@@ -1,0 +1,425 @@
+diff --git a/src/map/atcommand.cpp b/src/map/atcommand.cpp
+index f367e9b..9901513 100644
+--- a/src/map/atcommand.cpp
++++ b/src/map/atcommand.cpp
+@@ -8894,6 +8894,411 @@ ACMD_FUNC(rates)
+ 	return 0;
+ }
+ 
++/*==========================================
++ * @ws - Search currently open vending stores
++ *------------------------------------------*/
++ACMD_FUNC(ws)
++{
++	char item_name[100];
++	int32 item_id = 0, refine = 0, card_id = 0, option_id = 0, option_value = 0;
++	int32 sat_num = 0;
++	uint16 count = 1;
++	uint8 search_type = 1; // 1=item, 2=card, 4=refine, 8=option
++	map_session_data* pl_sd;
++	struct s_mapiterator* iter;
++	std::map<t_itemid, std::shared_ptr<item_data>> item_array;
++	bool search_item_name = false;
++
++	nullpo_retr(-1, sd);
++
++	if( !message || !*message ) {
++		clif_displaymessage(fd, "Use: @ws (<+refine> )(<item_id>)(<[card_id]>)((<option_id> <option_value>)) or @ws <name>");
++		return -1;
++	}
++
++	const time_t querytime = time(nullptr);
++
++	if( sd->searchstore.nextquerytime > querytime ) {
++		clif_search_store_info_failed( *sd, SSI_FAILED_LIMIT_SEARCH_TIME );
++		return -1;
++	}
++
++	if( !sd->searchstore.open ) {
++		if( !searchstore_open( *sd, 1, SEARCHSTORE_EFFECT_REMOTE, 0 ) )
++			return -1;
++	} else {
++		// This command performs exactly one query per invocation.
++		sd->searchstore.uses = 1;
++		sd->searchstore.effect = SEARCHSTORE_EFFECT_REMOTE;
++		sd->searchstore.mapid = 0;
++	}
++
++	sd->searchstore.uses--;
++	sd->searchstore.type = SEARCHTYPE_VENDING;
++	sd->searchstore.nextquerytime = querytime + battle_config.searchstore_querydelay;
++
++	searchstore_clear( *sd );
++
++	if( sscanf( message, "+%d %d[%d](%d %d)", &refine, &item_id, &card_id, &option_id, &option_value ) == 5 ) {
++		search_type = 1 + 2 + 4 + 8;
++	} else if( sscanf( message, "+%d %d(%d %d)", &refine, &item_id, &option_id, &option_value ) == 4 ) {
++		search_type = 1 + 4 + 8;
++	} else if( sscanf( message, "+%d [%d](%d %d)", &refine, &card_id, &option_id, &option_value ) == 4 ) {
++		search_type = 2 + 4 + 8;
++	} else if( sscanf( message, "%d[%d](%d %d)", &item_id, &card_id, &option_id, &option_value ) == 4 ) {
++		search_type = 1 + 2 + 8;
++	} else if( sscanf( message, "+%d %d[%d]", &refine, &item_id, &card_id ) == 3 ) {
++		search_type = 1 + 2 + 4;
++	} else if( sscanf( message, "[%d](%d %d)", &card_id, &option_id, &option_value ) == 3 ) {
++		search_type = 2 + 8;
++	} else if( sscanf( message, "+%d (%d %d)", &refine, &option_id, &option_value ) == 3 ) {
++		search_type = 4 + 8;
++	} else if( sscanf( message, "%d(%d %d)", &item_id, &option_id, &option_value ) == 3 ) {
++		search_type = 1 + 8;
++	} else if( sscanf( message, "+%d %d", &refine, &item_id ) == 2 ) {
++		search_type = 1 + 4;
++	} else if( sscanf( message, "+%d [%d]", &refine, &card_id ) == 2 ) {
++		search_type = 2 + 4;
++	} else if( sscanf( message, "%d[%d]", &item_id, &card_id ) == 2 ) {
++		search_type = 1 + 2;
++	} else if( sscanf( message, "(%d %d)", &option_id, &option_value ) == 2 ) {
++		search_type = 8;
++	} else if( sscanf( message, "[%d]", &card_id ) == 1 ) {
++		search_type = 2;
++	} else if( sscanf( message, "+%d", &refine ) == 1 ) {
++		search_type = 4;
++	} else if( sscanf( message, "%d", &item_id ) == 1 && item_id == atoi( message ) ) {
++		search_type = 1;
++		std::shared_ptr<item_data> item = item_db.find( static_cast<t_itemid>( item_id ) );
++
++		if( item == nullptr ) {
++			clif_displaymessage( fd, "No item found with this ID" );
++			return -1;
++		}
++
++		count = itemdb_searchname_array( item_array, MAX_SEARCH, item->name.c_str() );
++		if( !count ) {
++			clif_displaymessage( fd, "No item found with this name" );
++			return -1;
++		}
++
++		search_item_name = true;
++	} else if( sscanf( message, "%99[^\n]", item_name ) == 1 ) {
++		search_type = 1;
++		count = itemdb_searchname_array( item_array, MAX_SEARCH, item_name );
++
++		if( !count ) {
++			clif_displaymessage( fd, "No item found with this name" );
++			return -1;
++		}
++
++		search_item_name = true;
++	} else {
++		clif_displaymessage( fd, "Use: @ws (<+refine> )(<item_id>)(<[card_id]>)((<option_id> <option_value>)) or @ws <name>" );
++		return -1;
++	}
++
++	bool result_limit = false;
++	iter = mapit_getallusers();
++
++	for( const auto& [id, searched_item] : item_array ) {
++		if( search_item_name )
++			item_id = static_cast<int32>( id );
++
++		const std::shared_ptr<item_data> current_item = search_item_name ? searched_item : item_db.find( static_cast<t_itemid>( item_id ) );
++
++		if( current_item == nullptr ) {
++			if( !search_item_name )
++				clif_displaymessage( fd, "Not found an item with that ID" );
++			continue;
++		}
++
++		if( search_type & 2 ) {
++			std::shared_ptr<item_data> card = item_db.find( static_cast<t_itemid>( card_id ) );
++			if( card == nullptr || card->type != IT_CARD ) {
++				clif_displaymessage( fd, "Not found a card with that ID" );
++				mapit_free( iter );
++				return -1;
++			}
++		}
++
++		if( search_type & 4 && ( refine < 0 || refine > MAX_REFINE ) ) {
++			clif_displaymessage( fd, "Refine out of bounds" );
++			mapit_free( iter );
++			return -1;
++		}
++
++		for( pl_sd = (TBL_PC*)mapit_first( iter ); mapit_exists( iter ); pl_sd = (TBL_PC*)mapit_next( iter ) ) {
++			bool found_here = false;
++
++			if( !pl_sd->state.vending )
++				continue;
++
++			for( int32 j = 0; j < pl_sd->vend_num; j++ ) {
++				const item& vend_item = pl_sd->cart.u.items_cart[pl_sd->vending[j].index];
++				const std::shared_ptr<item_data> vend_item_data = item_db.find( vend_item.nameid );
++
++				if( vend_item_data == nullptr )
++					continue;
++				if( ( search_type & 1 ) && vend_item.nameid != static_cast<t_itemid>( item_id ) )
++					continue;
++				if( ( search_type & 2 ) && ( vend_item_data->type != IT_ARMOR && vend_item_data->type != IT_WEAPON ) )
++					continue;
++				if( ( search_type & 2 ) && vend_item.card[0] != card_id && vend_item.card[1] != card_id && vend_item.card[2] != card_id && vend_item.card[3] != card_id )
++					continue;
++				if( ( search_type & 4 ) && ( vend_item_data->type != IT_ARMOR && vend_item_data->type != IT_WEAPON ) )
++					continue;
++				if( ( search_type & 4 ) && vend_item.refine != refine )
++					continue;
++				if( search_type & 8 ) {
++					if( vend_item_data->type != IT_ARMOR && vend_item_data->type != IT_WEAPON )
++						continue;
++
++					bool option_match = false;
++					for( int32 k = 0; k < MAX_ITEM_RDM_OPT; k++ ) {
++						if( vend_item.option[k].id == option_id && vend_item.option[k].value == option_value ) {
++							option_match = true;
++							break;
++						}
++					}
++
++					if( !option_match )
++						continue;
++				}
++
++				if( sd->searchstore.items.size() >= static_cast<size_t>( battle_config.searchstore_maxresults ) ) {
++					result_limit = true;
++					break;
++				}
++
++				std::shared_ptr<s_search_store_info_item> ssitem = std::make_shared<s_search_store_info_item>();
++				ssitem->store_id = pl_sd->vender_id;
++				ssitem->account_id = pl_sd->status.account_id;
++				safestrncpy( ssitem->store_name, pl_sd->message, sizeof( ssitem->store_name ) );
++				ssitem->nameid = vend_item.nameid;
++				ssitem->amount = pl_sd->vending[j].amount;
++				ssitem->price = pl_sd->vending[j].value;
++				for( int32 k = 0; k < MAX_SLOTS; k++ )
++					ssitem->card[k] = vend_item.card[k];
++				ssitem->refine = vend_item.refine;
++				ssitem->enchantgrade = vend_item.enchantgrade;
++				sd->searchstore.items.push_back( ssitem );
++				found_here = true;
++			}
++
++			if( found_here && pl_sd->mapindex == sd->mapindex )
++				clif_viewpoint( *sd, 1, 1, pl_sd->x, pl_sd->y, ++sat_num, 0xFFFFFF );
++
++			if( result_limit )
++				break;
++		}
++
++		if( result_limit )
++			break;
++	}
++
++	mapit_free( iter );
++
++	if( result_limit ) {
++		clif_search_store_info_failed( *sd, SSI_FAILED_OVER_MAXCOUNT );
++		searchstore_clear( *sd );
++		clif_search_store_info_ack( *sd );
++		return 0;
++	}
++
++	if( !sd->searchstore.items.empty() ) {
++		if( count == MAX_SEARCH ) {
++			sprintf( atcmd_output, msg_txt( sd, 269 ), MAX_SEARCH );
++			clif_displaymessage( fd, atcmd_output );
++		}
++
++		std::sort( sd->searchstore.items.begin(), sd->searchstore.items.end(), []( const std::shared_ptr<s_search_store_info_item>& a, const std::shared_ptr<s_search_store_info_item>& b ) {
++			return a->price < b->price;
++		} );
++
++		clif_search_store_info_ack( *sd );
++		sd->searchstore.pages++;
++	} else {
++		searchstore_clear( *sd );
++		clif_search_store_info_failed( *sd, SSI_FAILED_NOTHING_SEARCH_ITEM );
++		clif_search_store_info_ack( *sd );
++	}
++
++	return 0;
++}
++
++/*==========================================
++ * @wb - Search currently open buying stores
++ *------------------------------------------*/
++ACMD_FUNC(wb)
++{
++	char item_name[100];
++	int32 item_id = 0, refine = 0;
++	int32 sat_num = 0;
++	uint16 count = 1;
++	uint8 search_type = 1; // 1=item, 2=refine (buying stores only support refine 0)
++	map_session_data* pl_sd;
++	struct s_mapiterator* iter;
++	std::map<t_itemid, std::shared_ptr<item_data>> item_array;
++	bool search_item_name = false;
++
++	nullpo_retr(-1, sd);
++
++	if( !message || !*message ) {
++		clif_displaymessage(fd, "Use: @wb (<+refine> )(<item_id>) or @wb <name>");
++		return -1;
++	}
++
++	const time_t querytime = time(nullptr);
++
++	if( sd->searchstore.nextquerytime > querytime ) {
++		clif_search_store_info_failed( *sd, SSI_FAILED_LIMIT_SEARCH_TIME );
++		return -1;
++	}
++
++	if( !sd->searchstore.open ) {
++		if( !searchstore_open( *sd, 1, SEARCHSTORE_EFFECT_REMOTE, 0 ) )
++			return -1;
++	} else {
++		sd->searchstore.uses = 1;
++		sd->searchstore.effect = SEARCHSTORE_EFFECT_REMOTE;
++		sd->searchstore.mapid = 0;
++	}
++
++	sd->searchstore.uses--;
++	sd->searchstore.type = SEARCHTYPE_BUYING_STORE;
++	sd->searchstore.nextquerytime = querytime + battle_config.searchstore_querydelay;
++
++	searchstore_clear( *sd );
++
++	if( sscanf( message, "+%d %d", &refine, &item_id ) == 2 ) {
++		search_type = 1 + 2;
++	} else if( sscanf( message, "+%d", &refine ) == 1 ) {
++		search_type = 2;
++	} else if( sscanf( message, "%d", &item_id ) == 1 && item_id == atoi( message ) ) {
++		search_type = 1;
++		std::shared_ptr<item_data> item = item_db.find( static_cast<t_itemid>( item_id ) );
++
++		if( item == nullptr ) {
++			clif_displaymessage( fd, "No item found with this ID" );
++			return -1;
++		}
++
++		count = itemdb_searchname_array( item_array, MAX_SEARCH, item->name.c_str() );
++		if( !count ) {
++			clif_displaymessage( fd, "No item found with this name" );
++			return -1;
++		}
++
++		search_item_name = true;
++	} else if( sscanf( message, "%99[^\n]", item_name ) == 1 ) {
++		search_type = 1;
++		count = itemdb_searchname_array( item_array, MAX_SEARCH, item_name );
++
++		if( !count ) {
++			clif_displaymessage( fd, "No item found with this name" );
++			return -1;
++		}
++
++		search_item_name = true;
++	} else {
++		clif_displaymessage( fd, "Use: @wb (<+refine> )(<item_id>) or @wb <name>" );
++		return -1;
++	}
++
++	if( ( search_type & 2 ) && ( refine < 0 || refine > MAX_REFINE ) ) {
++		clif_displaymessage( fd, "Refine out of bounds" );
++		return -1;
++	}
++
++	bool result_limit = false;
++	iter = mapit_getallusers();
++
++	for( const auto& [id, searched_item] : item_array ) {
++		if( search_item_name )
++			item_id = static_cast<int32>( id );
++
++		const std::shared_ptr<item_data> current_item = search_item_name ? searched_item : item_db.find( static_cast<t_itemid>( item_id ) );
++		if( current_item == nullptr )
++			continue;
++
++		for( pl_sd = (TBL_PC*)mapit_first( iter ); mapit_exists( iter ); pl_sd = (TBL_PC*)mapit_next( iter ) ) {
++			bool found_here = false;
++
++			if( !pl_sd->state.buyingstore )
++				continue;
++
++			for( int32 j = 0; j < pl_sd->buyingstore.slots; j++ ) {
++				const s_buyingstore_item& buy_item = pl_sd->buyingstore.items[j];
++				if( !buy_item.amount || buy_item.nameid != static_cast<t_itemid>( item_id ) )
++					continue;
++
++				// Buying-store entries do not carry refine/card/option data. A refine filter
++				// therefore only matches +0; non-zero refine searches have no valid match.
++				if( ( search_type & 2 ) && refine != 0 )
++					continue;
++
++				if( sd->searchstore.items.size() >= static_cast<size_t>( battle_config.searchstore_maxresults ) ) {
++					result_limit = true;
++					break;
++				}
++
++				std::shared_ptr<s_search_store_info_item> ssitem = std::make_shared<s_search_store_info_item>();
++				ssitem->store_id = pl_sd->buyer_id;
++				ssitem->account_id = pl_sd->status.account_id;
++				safestrncpy( ssitem->store_name, pl_sd->message, sizeof( ssitem->store_name ) );
++				ssitem->nameid = buy_item.nameid;
++				ssitem->amount = buy_item.amount;
++				ssitem->price = static_cast<uint32>( buy_item.price );
++				for( int32 k = 0; k < MAX_SLOTS; k++ )
++					ssitem->card[k] = 0;
++				ssitem->refine = 0;
++				ssitem->enchantgrade = 0;
++				sd->searchstore.items.push_back( ssitem );
++				found_here = true;
++			}
++
++			if( found_here && pl_sd->mapindex == sd->mapindex )
++				clif_viewpoint( *sd, 1, 1, pl_sd->x, pl_sd->y, ++sat_num, 0xFFFFFF );
++
++			if( result_limit )
++				break;
++		}
++
++		if( result_limit )
++			break;
++	}
++
++	mapit_free( iter );
++
++	if( result_limit ) {
++		clif_search_store_info_failed( *sd, SSI_FAILED_OVER_MAXCOUNT );
++		searchstore_clear( *sd );
++		clif_search_store_info_ack( *sd );
++		return 0;
++	}
++
++	if( !sd->searchstore.items.empty() ) {
++		if( count == MAX_SEARCH ) {
++			sprintf( atcmd_output, msg_txt( sd, 269 ), MAX_SEARCH );
++			clif_displaymessage( fd, atcmd_output );
++		}
++
++		std::sort( sd->searchstore.items.begin(), sd->searchstore.items.end(), []( const std::shared_ptr<s_search_store_info_item>& a, const std::shared_ptr<s_search_store_info_item>& b ) {
++			return a->price > b->price;
++		} );
++
++		clif_search_store_info_ack( *sd );
++		sd->searchstore.pages++;
++	} else {
++		searchstore_clear( *sd );
++		clif_search_store_info_failed( *sd, SSI_FAILED_NOTHING_SEARCH_ITEM );
++		clif_search_store_info_ack( *sd );
++	}
++
++	return 0;
++}
++
+ /*==========================================
+  * @me by lordalfa
+  * => Displays the OUTPUT string on top of the Visible players Heads.
+@@ -11623,6 +12028,8 @@ void atcommand_basecommands(void) {
+ 		ACMD_DEF(partysharelvl),
+ 		ACMD_DEF(mapinfo),
+ 		ACMD_DEF(dye),
++		ACMD_DEF(ws),
++		ACMD_DEF(wb),
+ 		ACMD_DEF(hair_style),
+ 		ACMD_DEF(hair_color),
+ 		ACMD_DEF(stat_all),

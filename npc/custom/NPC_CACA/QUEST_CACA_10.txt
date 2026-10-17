@@ -1,0 +1,54 @@
+sala_caca,16,2,4	script	Caça LvL 10#NPC	51,{
+
+	mes "[Caça LvL 10]";
+	mes "Olá aventureiro!";
+	next;
+
+	switch(select("Iniciar Caça LvL 10","Entregar Recompensa","Cancelar")){
+		case 1:
+			callsub S_Start;
+			end;
+		case 2:
+			callsub S_Complete;
+			end;
+		default:
+			close;
+	}
+	end;
+
+//==============================
+// INICIAR QUEST
+//==============================
+S_Start:
+
+	if (checkquest(60311) >= 0) {
+		mes "[Caça LvL 10]";
+		mes "Você já iniciou esta missão!";
+		close;
+	}
+
+	setquest 60311;
+	mes "[Caça LvL 10]";
+	mes "Cace todos os dragões e volte quando terminar!";
+	close;
+	end;
+
+//==============================
+// ENTREGA
+//==============================
+S_Complete:
+
+	if (checkquest(60311,HUNTING) == 2) {
+		erasequest 60311;
+		mes "[Caça LvL 10]";
+		mes "Excelente trabalho!";
+		getexp 30000,20000;
+		getitem Silver_Coin,10;
+		close;
+	} else {
+		mes "[Caça LvL 10]";
+		mes "Você ainda não derrotou todos os dragões.";
+		close;
+	}
+	end;
+}

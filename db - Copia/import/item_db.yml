@@ -1,0 +1,29 @@
+# Custom currency/token items for rAthena.
+# Header version 3 (ITEM_DB).
+
+Header:
+  Type: ITEM_DB
+  Version: 3
+
+Body:
+  - Id: 40722
+    AegisName: Zeny
+    Name: Zeny
+    Type: Etc
+    Buy: 2000
+    Sell: 1000
+    Weight: 1
+  - Id: 40723
+    AegisName: Cash
+    Name: Cash
+    Type: Etc
+    Buy: 2000
+    Sell: 1000
+    Weight: 1
+  - Id: 40724
+    AegisName: Sacola_de_Moedas_B
+    Name: Sacola de Moedas B
+    Type: Etc
+    Buy: 2000
+    Sell: 1000
+    Weight: 1

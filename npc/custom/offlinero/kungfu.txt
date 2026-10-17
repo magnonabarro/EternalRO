@@ -1,0 +1,116 @@
+// Zhen: Manual Barter System for Kung Fu Coins
+prontera,156,226,5	script	Zhen	10608,{
+    mes "[Zhen]";
+    mes "Welcome! You can trade your [Collab] Kung Fu Coins for some exclusive items.";
+    mes "Pick an item or check your coins!";
+    next;
+    switch(select("Open Shop:Cancel")) {
+        case 1:
+            close2; // Close dialog before opening shop
+            callshop "barter_zhen", 1; // Open barter shop
+            end; // Stop script after opening shop
+        case 2:
+            mes "[Zhen]";
+            mes "Come back anytime if you want to trade for armor!";
+            close; // Properly close dialog
+    }
+}
+
+// Shifu: Trade Jellopy for Kung Fu Coins
+prontera,153,224,5	script	Shifu	10607,{
+    mes "[Shifu]";
+    mes "Greetings, young warrior! To master the art of trading with Zhen, you'll need [Collab] Kung Fu Coins.";
+    mes "I can help you get some. Bring me 10 Jellopy, and I'll trade them for 1 Kung Fu Coin!";
+    next;
+    switch(select("Trade Jellopy for Coins:Check Coin Balance:Cancel")) {
+        case 1:
+            mes "[Shifu]";
+            mes "Do you have 10 Jellopy? Let's make the trade!";
+            if (countitem(909) < 10) {
+                mes "You don't have enough Jellopy. Come back with 10!";
+                close;
+            }
+            delitem 909, 10;
+            getitem 1001886, 1;
+            mes "Here's your [Collab] Kung Fu Coin! Train hard and trade with Zhen!";
+            close;
+        case 2:
+            mes "[Shifu]";
+            mes "You currently have " + countitem(1001886) + " [Collab] Kung Fu Coin(s).";
+            mes "Keep collecting Jellopy to get more!";
+            close;
+        case 3:
+            mes "[Shifu]";
+            mes "No trade, no gain! Return when you're ready.";
+            close;
+    }
+}
+
+// Po: Daily Story for 1 Kung Fu Coin
+prontera,158,224,5	script	Po	10603,{
+    mes "[Po]";
+    mes "Yo, what's up? I'm Po, the Dragon Warrior! Wanna hear a quick story about my totally awesome journey?";
+    mes "I only tell it once a day, but you'll get a shiny [Collab] Kung Fu Coin if you listen!";
+    next;
+    if (select("Listen to Po's story:Not now, Po") == 2) {
+        mes "[Po]";
+        mes "Aww, no dumplings for you then! Come back when you are ready!";
+        close;
+    }
+    // Check if player already got the coin today
+    if (getd("KungFuCoin_" + strcharinfo(0)) >= gettime(DT_DAYOFYEAR)) {
+        mes "[Po]";
+        mes "Whoa, I already told you a story today! My throat’s sore from all that awesomeness.";
+        mes "Come back tomorrow for another epic tale!";
+        close;
+    }
+    mes "[Po]";
+    mes "Alright, here's the deal! I was just a noodle-slurping panda working at my dad's shop, dreaming of kung fu.";
+    mes "Then—BAM!—I got picked as the Dragon Warrior! Me! Can you believe it?";
+    mes "I trained with Shifu, fought bad guys, and saved the Valley of Peace. Oh, and I ate like a million dumplings!";
+    mes "Pretty legendary, right?";
+    next;
+    mes "[Po]";
+    mes "Thanks for listening! Here’s a [Collab] Kung Fu Coin for being an awesome fan!";
+    getitem 1001886, 1; // Gives 1 [Collab] Kung Fu Coin
+    setd "KungFuCoin_" + strcharinfo(0), gettime(DT_DAYOFYEAR); // Marks coin received for today
+    close;
+}
+
+
+prontera,147,170,5	script	Knuckles	22244,{
+    mes "[Knuckles]";
+    mes "Hey there, speedster! Trade your Rings, Bookmarks, and Reading Cards for some awesome Sonic-themed items!";
+    mes "What do you want to do?";
+    next;
+    switch(select("Open Shop:Cancel")) {
+        case 1:
+            close2; // Close dialog before opening shop
+            callshop "barter_knuckles", 1; // Open barter shop
+            end; // Stop script after opening shop
+        case 2:
+            mes "[Knuckles]";
+            mes "Come back when you're ready to trade!";
+            close; // Properly close dialog
+    }
+}
+
+// NPC Script for LoVA Card Exchange
+// NPC Name: Robin
+
+prontera,147,174,5	script	Robin	4_4job_robin,{
+    mes "[Robin]";
+    mes "Hello, adventurer! I am the exchanger for special LoVA cards.";
+    mes "You can trade 20 [Event] Phantom's Seal (ID: 25504) to obtain one of the following cards:";
+    next;
+    switch(select("Open Shop:Cancel")) {
+        case 1:
+            close2; // Close dialog before opening shop
+            callshop "barter_lova", 1; // Open barter shop
+            end; // Stop script after opening shop
+        case 2:
+            mes "[Robin]";
+            mes "Alright, come back anytime if you want to exchange cards!";
+            close; // Properly close dialog
+    }
+}

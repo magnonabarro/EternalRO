@@ -1,0 +1,149 @@
+diff --git a/src/map/atcommand.cpp b/src/map/atcommand.cpp
+index f367e9b..2687d9e 100644
+--- a/src/map/atcommand.cpp
++++ b/src/map/atcommand.cpp
+@@ -10155,6 +10155,46 @@ ACMD_FUNC(accinfo) {
+ 	return 0;
+ }
+ 
++/*==========================================
++ * @afk
++ * Initial release by Axl, Rebel
++ * Additional configurations by Secret
++ *------------------------------------------*/
++ACMD_FUNC(afk) {
++	nullpo_retr(-1, sd);
++
++	if( pc_isdead(sd) ) {
++		clif_displaymessage(fd, "You can't use @afk if you are dead.");
++		return -1;
++	}
++
++	if( map_getmapflag(sd->m, MF_AFK) == battle_config.afk_mapflag ) { // Add afk mapflag support [secretdataz]
++		if( map_getmapflag(sd->m, MF_PVP) || map_getmapflag(sd->m, MF_GVG) ) {
++			clif_displaymessage(fd, "You can't use @afk in PVP or GVG map.");
++			return -1;
++		}
++
++		sd->state.autotrade = 1;
++		if( battle_config.afk_battleignore )
++			sd->state.block_action |= PCBLOCK_IMMUNE;
++		pc_setsit(sd);
++		skill_sit(sd, true);
++		clif_sitting(*sd);
++		if( battle_config.afk_viewid )
++			clif_changelook(sd, LOOK_HEAD_TOP, battle_config.afk_viewid);
++		if( battle_config.afk_timeout ) {
++			int32 timeout = atoi(message);
++			status_change_start(nullptr, sd, SC_AUTOTRADE, 10000, 0, 0, 0, 0,
++				((timeout > 0) ? min(timeout, battle_config.afk_timeout) : battle_config.afk_timeout) * 60000,
++				SCSTART_NONE);
++		}
++		clif_authfail_fd(fd, 15);
++	} else
++		clif_displaymessage(fd, "@afk is not allowed on this map.");
++
++	return 0;
++}
++
+ /**
+  * @set <variable name{[index]}>{ <value>}
+  * 
+@@ -11728,6 +11768,7 @@ void atcommand_basecommands(void) {
+ 		ACMD_DEF(showzeny),
+ 		ACMD_DEF(showdelay),
+ 		ACMD_DEF(autotrade),
++		ACMD_DEF(afk),
+ 		ACMD_DEF(changegm),
+ 		ACMD_DEF(changeleader),
+ 		ACMD_DEF(partyoption),
+diff --git a/src/map/battle.cpp b/src/map/battle.cpp
+index 0845dee..4f9069c 100644
+--- a/src/map/battle.cpp
++++ b/src/map/battle.cpp
+@@ -8626,6 +8626,10 @@ static const struct _battle_data {
+ 	{ "quest_exp_rate",                     &battle_config.quest_exp_rate,                  100,    0,      INT_MAX,        },
+ 	{ "at_mapflag",                         &battle_config.autotrade_mapflag,               0,      0,      1,              },
+ 	{ "at_timeout",                         &battle_config.at_timeout,                      0,      0,      INT_MAX,        },
++	{ "afk_timeout",                        &battle_config.afk_timeout,                     0,      0,      INT_MAX,        },
++	{ "afk_mapflag",                        &battle_config.afk_mapflag,                     0,      0,      1,              },
++	{ "afk_viewid",                         &battle_config.afk_viewid,                      0,      0,      INT_MAX,        },
++	{ "afk_battleignore",                   &battle_config.afk_battleignore,                0,      0,      1,              },
+ 	{ "homunculus_autoloot",                &battle_config.homunculus_autoloot,             0,      0,      1,              },
+ 	{ "idle_no_autoloot",                   &battle_config.idle_no_autoloot,                0,      0,      INT_MAX,        },
+ 	{ "max_guild_alliance",                 &battle_config.max_guild_alliance,              3,      0,      3,              },
+diff --git a/src/map/battle.hpp b/src/map/battle.hpp
+index 23ad876..ac868cc 100644
+--- a/src/map/battle.hpp
++++ b/src/map/battle.hpp
+@@ -507,6 +507,10 @@ struct Battle_Config
+ 	int32 quest_exp_rate;
+ 	int32 autotrade_mapflag;
+ 	int32 at_timeout;
++	int32 afk_timeout;
++	int32 afk_mapflag;
++	int32 afk_viewid;
++	int32 afk_battleignore;
+ 	int32 homunculus_autoloot;
+ 	int32 idle_no_autoloot;
+ 	int32 max_guild_alliance;
+diff --git a/src/map/map.hpp b/src/map/map.hpp
+index 6f90c75..95445f4 100644
+--- a/src/map/map.hpp
++++ b/src/map/map.hpp
+@@ -696,6 +696,7 @@ enum e_mapflag : int16 {
+ 	MF_SPECIALPOPUP,
+ 	MF_NOMACROCHECKER,
+ 	MF_INVINCIBLE_TIME,
++	MF_AFK,
+ 	MF_MAX
+ };
+ 
+diff --git a/src/map/script_constants.hpp b/src/map/script_constants.hpp
+index 02cd1ef..d31eb93 100644
+--- a/src/map/script_constants.hpp
++++ b/src/map/script_constants.hpp
+@@ -536,6 +536,7 @@
+ 	export_constant(MF_SPECIALPOPUP);
+ 	export_constant(MF_NOMACROCHECKER);
+ 	export_constant(MF_INVINCIBLE_TIME);
++	export_constant(MF_AFK);
+ 
+ 	/* setcell types */
+ 	export_constant(CELL_WALKABLE);
+diff --git a/conf/battle_athena.conf b/conf/battle_athena.conf
+--- a/conf/battle_athena.conf
++++ b/conf/battle_athena.conf
+@@ -42,6 +42,9 @@
+ // Anything else that didn't fit anywhere else.
+ // Includes duel, day/night, mute/manner, log settings.
+ import: conf/battle/misc.conf
++
++// AFK / Away from keyboard settings.
++import: conf/battle/afk.conf
+ 
+ //Party related configuration
+ import: conf/battle/party.conf
+
+diff --git a/conf/battle/afk.conf b/conf/battle/afk.conf
+new file mode 100644
+--- /dev/null
++++ b/conf/battle/afk.conf
+@@ -0,0 +1,15 @@
++//--------------------------------------------------------------
++// AFK command configuration
++//--------------------------------------------------------------
++
++// Set this to the amount of minutes AFK chars will be kicked from the server.
++afk_timeout: 0
++
++// Allow @afk only in maps with "afk" flag?
++// Set this to "no" to allow @afk where no "afk" mapflag is set.
++// Set this to "yes" to only allow @afk on maps with "afk" mapflag.
++afk_mapflag: no
++
++// Headgear ViewID for AFK hat. Set to 0 to disable.
++afk_viewid: 471
++
++// Should AFK characters be invincible like @battleignore?
++afk_battleignore: no

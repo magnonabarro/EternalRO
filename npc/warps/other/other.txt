@@ -1,0 +1,61 @@
+//===== rAthena Script =======================================
+//= Other Warp Script
+//===== By: ==================================================
+//= Athena (1.0)
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Warp Points for Other Maps
+//===== Additional Comments: =================================
+//= Split off npc_warp.txt
+//============================================================
+
+//guild_room,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs1,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs1,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs1,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs1,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs2,50,88,0	warp	warp4	0,0,hoge,0,0
+//guild_vs2,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs2,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs2,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs3,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs3,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs3,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs3,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs4,7,50,0	warp	warp4	0,0,hoge,0,0
+//guild_vs4,50,7,0	warp	warp4	0,0,hoge,0,0
+//guild_vs4,92,50,0	warp	warp4	0,0,hoge,0,0
+//guild_vs4,50,92,0	warp	warp4	0,0,hoge,0,0
+//guild_vs5,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs5,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs5,0,0,0	warp	warp4	0,0,hoge,0,0
+//guild_vs5,0,0,0	warp	warp4	0,0,hoge,0,0
+
+prontera,170,140,0	warp	event00	0,0,sec_in01,169,163,0
+sec_in01,168,159,0	warp	event01	0,0,prontera,166,140,0
+
+//=========================================================
+prontera,139,140,0	warp	quest00	0,0,sala_quest,9,5,0
+sala_quest,9,0,0	warp	quest01	0,0,prontera,144,140,0
+sala_quest,9,0,0	warp	quest02	0,0,prontera,144,140,0
+
+//=========================================================
+prontera,171,156,0	warp	caca00	0,0,sala_caca,9,5,0
+sala_caca,9,0,0	warp	caca01	0,0,prontera,166,156,0
+sala_caca,9,0,0	warp	caca02	0,0,prontera,166,156,0
+
+//=========================================================
+prontera,139,158,0	warp	explo00	0,0,moc_para01,35,17,0
+moc_para01,30,11,0	warp	explo01	0,0,prontera,145,157,0
+
+//=========================================================
+moc_para01,47,38,0	warp	explo02	0,0,moc_para01,106,17,0
+moc_para01,106,13,0	warp	explo03	0,0,moc_para01,48,36,0
+
+//=========================================================
+moc_para01,101,28,0	warp	explo04	0,0,moc_para01,43,86,0
+moc_para01,101,27,0	warp	explo05	0,0,moc_para01,43,86,0
+moc_para01,48,86,0	warp	explo06	0,0,moc_para01,104,27,0

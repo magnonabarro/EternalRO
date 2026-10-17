@@ -1,0 +1,354 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ platina_cacador.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.4 ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= Missões das habilidades: Flecha Fantasma.
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================// 
+
+pay_arche,109,169,3	script	Arpesto	712,{
+	if (BaseJob == Job_Hunter) {
+		if (qskill_hunter == 100) {
+			if (getskilllv("HT_PHANTASMIC")) {
+				mes "[Arpesto]";
+				mes "Hm, me desculpe se causei";
+				mes "um escândalo quando você me acertou";
+				mes "acidentalmente com aquele ataque. É que eu estava treinando com";
+				mes "tanta dedicação, o açúcar no sangue estava baixíssimo e o cansaço...";
+				next;
+				mes "[Reidin Corse]";
+				mes "Hah! Admita,";
+				mes "velhote! Você estava";
+				mes "com medo! Já eu...";
+				emotion ET_KIK, getnpcid(0, "Reidin Corse#tu");
+				next;
+				mes "[Arpesto]";
+				mes "Seu pirralho!";
+				mes "Não sei do que";
+				mes "você está falando!";
+				close;
+			} else {
+				mes "[Arpesto]";
+				mes "Acho que te reconheço";
+				mes "de algum lugar,";
+				mes "acho. Reidin, você";
+				mes "lembra desse cara?";
+				next;
+				mes "[Reidin Corse]";
+				mes "Ah, qual é, a gente vê";
+				mes "centenas de Arqueiros,";
+				mes "Caçadores, Atiradores...";
+				mes "Não dá pra lembrar de todos.";
+				mes "Mas acho que esse cara é bom.";
+				mes "Confia em mim!";
+				next;
+				mes "[Arpesto]";
+				mes "Certo, certo.";
+				mes "Se o Reidin acha que você";
+				mes "é digno, então provavelmente é.";
+				mes "Nesse caso, gostaria de";
+				mes "te ensinar minha habilidade secreta:";
+				mes "''Flecha Fantasma.''";
+				next;
+				mes "[Reidin Corse]";
+				mes "Espera aí. Esse cara";
+				mes "só precisa de um lembrete.";
+				mes "Tenho quase certeza de que";
+				mes "você já veio aprender essa";
+				mes "habilidade antes. É, tenho um";
+				mes "pressentimento sobre isso.";
+				next;
+				mes "[Arpesto]";
+				mes "Droga. Só uma revisão?";
+				mes "Isso significa que você vai";
+				mes "aprender de graça. Certo...";
+				mes "Agora você deve ser capaz de usar";
+				mes "a habilidade Flecha Fantasma.";
+				mes "Viaje com segurança, ouviu?";
+				skill "HT_PHANTASMIC",1,SKILL_PERM;
+				close;
+			}
+		}
+		else if (qskill_hunter == 1) {
+			if (countitem(724) > 4 && countitem(7115) > 4 && countitem(537) > 29) {
+				mes "[Arpesto]";
+				mes "Hm? Você voltou?";
+				mes "Ah, trouxe tudo?";
+				mes "Ah, trouxe sim. Ótimo!";
+				mes "Agora vou te revelar";
+				mes "minha habilidade ultra secreta...";
+				mes "A 1ª Forma de Arpesto!";
+				next;
+				mes "[Reidin Corse]";
+				mes "Espera! Espera...";
+				mes "Você não tinha chamado isso de";
+				mes "3ª Forma de Arpesto antes?";
+				emotion ET_SWEAT, getnpcid(0, "Reidin Corse#tu");
+				next;
+				mes "[Arpesto]";
+				mes "Er, sim, 3ª Forma de";
+				mes "Arpesto, isso mesmo.";
+				mes "É que tem tantas que... ";
+				mes "Enfim, vou te ensinar";
+				mes "a habilidade ''Flecha de Emergência''.";
+				next;
+				mes "[Reidin Corse]";
+				mes "Ué, espera aí!";
+				mes "''Flecha de Emergência?!''";
+				mes "Esse era o nome antigo que você";
+				mes "tinha dado pra essa habilidade, né?";
+				mes "Você não mudou depois?";
+				emotion ET_HUK;
+				next;
+				emotion ET_HUK;
+				mes "[Arpesto]";
+				mes "Do que você está";
+				mes "falando--";
+				next;
+				mes "[Arpesto]";
+				mes "Ah, você tem razão.";
+				mes "A gente combinou que esse nome";
+				mes "era meio brega. Qual foi o novo mesmo? Hum...";
+				mes "''Flecha Fantasma''?";
+				emotion ET_THINK;
+				next;
+				mes "[Arpesto]";
+				mes "...";
+				mes "......";
+				emotion ET_CRY;
+				next;
+				mes "[Reidin Corse]";
+				mes "Umm....";
+				mes "Ummm........";
+				next;
+				mes "[Reidin Corse]";
+				mes "É, esse era o nome!";
+				mes "''^3131FFFlecha Fantasma^000000'' soa";
+				mes "muito mais legal do que aquele";
+				mes "outro nome que você inventou!";
+				emotion ET_AHA, getnpcid(0, "Reidin Corse#tu");
+				next;
+				mes "[Arpesto]";
+				mes "Você até que é útil às vezes, Reidin.";
+				mes "Agora, voltando ao que interessa.";
+				mes "Vou te ensinar minha incrível";
+				mes "habilidade, Flecha Fantasma. Agora...";
+				mes "Prepare corpo e mente!";
+				next;
+				mes "[Arpesto]";
+				mes "Fle-!";
+				mes "cha-!";
+				mes "Fan-!";
+				mes "tas-!";
+				next;
+				mes "[Arpesto]";
+				mes "MAAAAAAGÓÓÓÓÓÓÓÓÓÓÓÓÓÓRICA~!";
+				specialeffect EF_FLASHER;
+				specialeffect2 EF_FLASHER;
+				next;
+				mes "[Arpesto]";
+				mes "^333333*Ofegante*^000000";
+				mes "Pronto, usei uma técnica especial";
+				mes "para ensinar a habilidade direto no seu cérebro.";
+				mes "Você deve ser capaz de usá-la agora.";
+				mes "Por que não tenta?";
+				next;
+				mes "^3355FF*Zzzzzzuuu!*";
+				mes "*Pá!*^000000";
+				specialeffect EF_HIT2;
+				emotion ET_HUK;
+				emotion ET_HUK, playerattached();
+				next;
+				mes "[Arpesto]";
+				mes "^333333*Ofegante*";
+				mes "*Tosse Tosse*";
+				mes "*Tosse Tosse*^000000";
+				next;
+				mes "[Arpesto]";
+				mes "POOOOR QUEEEE EUUUUU?!";
+				emotion ET_HUK, getnpcid(0, "Reidin Corse#tu");
+				next;
+				mes "^3355FF*Pof*^000000";
+				next;
+				mes "[Reidin Corse]";
+				mes "Ar-Arpesto, não!";
+				mes "...........................";
+				mes "Ah, qual é! A flecha";
+				mes "só te arranhou! Você vai ficar";
+				mes "bem. Pare de frescura.";
+				next;
+				mes "[Reidin Corse]";
+				mes "Eh, não se preocupe com";
+				mes "o Arpesto. Ele só está sendo";
+				mes "um velho maluco. Eu cuido";
+				mes "dele, só garanta que você vai";
+				mes "usar bem essa nova habilidade. Até mais~";
+				delitem 724,5; // Rubi Amaldiçoado
+				delitem 7115,5; // Pena de Harpia
+				delitem 537,30; // Ração para Bichinho
+				set qskill_hunter,100;
+				skill "HT_PHANTASMIC",1,SKILL_PERM;
+				close;
+			} else {
+				mes "[Arpesto]";
+				mes "Se apresse e traga";
+				mes "^3131FF5 Rubis Amaldiçoados^000000,";
+				mes "^3131FF30 Rações para Bichinhos^000000 e";
+				mes "^3131FF5 Penas de Harpia^000000.";
+				mes "Então, poderei te ensinar";
+				mes "a habilidade Flecha de Emergência.";
+				close;
+			}
+		}
+		else {
+			if (getskilllv("HT_PHANTASMIC")) {
+				mes "[Arpesto]";
+				mes "Ah, muito bom.";
+				mes "Hmm, como você demonstrou";
+				mes "mais cedo, minha técnica de ensino";
+				mes "foi perfeita. Mas da próxima vez, use";
+				mes "a habilidade contra inimigos que";
+				mes "merecem apanhar, certo? Ótimo.";
+				set qskill_hunter,100;
+				close;
+			}
+			if (BaseJob == Job_Hunter && JobLevel < 40) {
+				mes "[Arpesto]";
+				mes "O mestre te mandou";
+				mes "até mim? Hmm... Você ainda";
+				mes "parece um pouco verde.";
+				mes "É, acho que ainda não tenho nada para te ensinar.";
+				next;
+				mes "[Arpesto]";
+				mes "Treine mais um pouco e ganhe";
+				mes "mais experiência na sua classe.";
+				mes "Quando for mais experiente em caçadas,";
+				mes "vai entender melhor o que tenho ensinado";
+				mes "a outros Caçadores e Atiradores.";
+				close;
+			} else {
+				mes "[Arpesto]";
+				mes "O mestre te mandou?";
+				mes "Ah, você com certeza tem os olhos";
+				mes "afiados e certeiros de um verdadeiro Caçador.";
+				mes "Você deve estar pronto para aprender minha";
+				mes "habilidade secreta, a 3ª Forma do Arpesto...";
+				next;
+				mes "[Arpesto]";
+				mes "É uma habilidade prática que";
+				mes "desenvolvi enquanto lutava";
+				mes "contra Medusas e fiquei sem";
+				mes "flechas. Eu simplesmente a chamo de";
+				mes "''^3131FFFlecha de Emergência^000000''. Gostaria de aprendê-la?";
+				next;
+				switch(select("Sim, por favor!:Uhm...")) {
+				case 1:
+					mes "[Arpesto]";
+					mes "Ótimo, ótimo. Claro que não dá";
+					mes "pra resistir se você entende o valor";
+					mes "dessa habilidade. Mas, gostaria de pedir";
+					mes "uma pequena taxa de ensino como retorno por te ensinar isso.";
+					next;
+					mes "[Arpesto]";
+					mes "Apesar de me sentir culpado por";
+					mes "cobrar de outro Caçador, criar";
+					mes "essa habilidade exigiu muito sacrifício";
+					mes "e sangue derramado além do imaginável...";
+					next;
+					mes "[Reidin Corse]";
+					mes "Ei! Mentiroso!";
+					mes "Eu estava lá quando você";
+					mes "inventou essa habilidade sem querer";
+					mes "enquanto estava entediado brincando";
+					mes "com um dos Arcos!";
+					emotion ET_KIK, getnpcid(0, "Reidin Corse#tu");
+					next;
+					emotion ET_HUK;
+					mes "[Arpesto]";
+					mes "^333333*Hã-hã*^000000 Por favor, Reidin,";
+					mes "não propague rumores sem fundamento.";
+					mes "Foi só após incontáveis batalhas contra Eddga";
+					mes "que consegui inventar e aperfeiçoar a Flecha de Emergência.";
+					next;
+					mes "[Reidin Corse]";
+					mes "^333333*Tsk tsk*^000000 Hmm.";
+					mes "Achei que você tinha dito";
+					mes "que desenvolveu isso enquanto";
+					mes "lutava contra Medusas.";
+					next;
+					mes "[Arpesto]";
+					mes "D-de qualquer forma, por favor, traga";
+					mes "os seguintes itens";
+					mes "como taxa em troca do";
+					mes "ensinamento dessa habilidade.";
+					next;
+					mes "[Arpesto]";
+					mes "Traga para mim:";
+					mes "^3131FF5 Rubis Amaldiçoados^000000,";
+					mes "^3131FF30 Rações para Bichinhos^000000 e";
+					mes "^3131FF5 Penas de Harpia^000000.";
+					mes "Assim poderei te ensinar";
+					mes "essa habilidade.";
+					next;
+					mes "[Reidin Corse]";
+					mes "30 Rações para Mascote?";
+					mes "Pra que você precisa disso tudo?";
+					next;
+					mes "[Arpesto]";
+					mes "Eu...";
+					mes "vou usar pra alimentar";
+					mes "meu Falcão de estimação.";
+					next;
+					mes "[Reidin Corse]";
+					mes "...";
+					mes "......";
+					mes ".........";
+					mes "......Tá, sei.";
+					emotion ET_THINK, getnpcid(0, "Reidin Corse#tu");
+					set qskill_hunter,1;
+					close;
+				case 2:
+					mes "[Arpesto]";
+					mes "Tudo bem, é sua";
+					mes "decisão. Mas tenho certeza";
+					mes "de que um dia você";
+					mes "vai precisar muito dessa habilidade.";
+					mes "Se mudar de ideia, volte até mim.";
+					close;
+				}
+			}
+		}
+	} else {
+		mes "[Arpesto]";
+		mes "O céu ainda parece limpo, mas ultimamente os ventos que sopram pelas terras carregam um ar de desgraça.";
+		next;
+		emotion ET_HNG, getnpcid(0, "Reidin Corse#tu");
+		mes "[Reidin Corse]";
+		mes "Então...";
+		mes "O perigo está vindo?";
+		mes "Heh! Relaxa, vovô~";
+		mes "Eu dou conta!";
+		next;
+		emotion ET_PROFUSELY_SWEAT;
+		mes "[Arpesto]";
+		mes "Ho ho...";
+		mes "Cheio de energia, mas";
+		mes "arrogante. Esses jovens de hoje...";
+		close;
+	}
+}

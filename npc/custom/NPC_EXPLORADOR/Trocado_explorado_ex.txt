@@ -1,0 +1,84 @@
+moc_para01,21,35,4	script	Reciclador de MVPs	912,{
+	// ID da moeda que o jogador recebe (Ex: Moeda do Grupo Éden ou Booster Coin)
+	.@itembonus = 504;
+
+	// Array com IDs de drops clássicos de MVPs para reciclagem
+	setarray .@itemlista[0],
+		2202, // Elmo de Angelus (Osiris)
+		2301, // Paletó [1]
+		2403, // Botas de Couro de Bezerro (Eddga)
+		2102, // Escudo de Ouro (Maya)
+		1121, // Matadora de Dragões
+		1219, // Lâmina Gêmea
+		1519, // Diadema (Dopelganger)
+		2220, // Chapéu de Mage (Phreeoni)
+		1306, // Adaga da Boa Ventura
+		1123, // Excalibur
+		2108, // Escudo do Destino
+		2505, // Manteau de Vali
+		2406, // Sapatos de Vidar
+		2330, // Armadura de Goibne
+		2231, // Elmo de Goibne
+		1220, // Machado do Apocalipse
+		1410, // Foice (Baphomet)
+		1616, // Cetro de Longinus
+		2610, // Anel de Caveira (Drake)
+		2318, // Manto de Seda [1]
+		701,  // Emblema Real
+		7035, // Pedaço de Escudo Negro (Lord Knight Seyren)
+		1030, // Presa de Dragão
+		984,  // Oridecon
+		985;  // Elunium
+
+	.@tem=0;
+	.@acumulado=0;
+	mes "[Reciclador de Itens MVP]";
+	mes "Eu troco equipamentos e drops de MVPs clássicos por moedas.";
+	next;
+	switch(select("Lista de itens aceitos:Reciclar meus itens")) {
+		case 1:
+			mes "[Lista de Itens]";
+			for (.@i = 0; .@i <  getarraysize(.@itemlista); .@i++) {
+				.@item=.@itemlista[.@i];
+				.@tem = countitem(.@item);
+				.@acumulado +=.@tem;
+				
+				// Formatação visual da quantidade
+				if(.@tem < 10) .@format$ = "00";
+				else if(.@tem < 100) .@format$ = "0";
+				else .@format$ = "";
+				
+				.@format$ += .@tem;
+				mes .@format$ + "x - ^0000FF" + getitemname(.@item) + "^000000";
+			}
+			mes "--------------------------";
+			mes "Total a receber: ^0000FF" + .@acumulado + " " + getitemname(.@itembonus) + "^000000";
+			close;
+			
+		case 2:
+			for (.@i = 0; .@i <  getarraysize(.@itemlista); .@i++) {
+				.@item=.@itemlista[.@i];
+				.@tem = countitem(.@item);
+				if (.@tem > 0) {
+					getitem .@itembonus, .@tem;
+					delitem .@item, .@tem;
+					.@acumulado += .@tem;
+				}
+			}
+			if (.@acumulado > 0) {
+				mes "Pronto! Você reciclou seus itens e recebeu ^0000FF" + .@acumulado + " moedas^000000.";
+			} else {
+				mes "Você não possui nenhum item da lista para reciclar.";
+			}
+			close;
+	}
+	
+	OnInit:
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	showscript("Reciclador de MVPs");
+	setnpctimer 0;
+	end;
+}

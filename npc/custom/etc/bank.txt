@@ -1,0 +1,126 @@
+//
+//========================================================================
+//---------------------------- rAthena Script ----------------------------
+//=                      ___   __  __                                     
+//=                _____/   | / /_/ /_   ___   ____   _____               
+//=               / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `//             
+//=              / /  / ___ / /_/ / / /  __/ / / / // /_/ //              
+//=             /_/  /_/  |_\\_/_/ /_/\\____/_/ /_/\\__,_//               
+//=                                      RagnaERO Scripts                 
+//=                                                                       
+//---------------------- http://rathena.org/board/ -----------------------
+//========================================================================
+//----- NOME DO SCRIPT ---------------------------------------------------
+//= banco.txt
+//----- POR: -------------------------------------------------------------
+//= Equipe de Desenvolvimento rAthena
+//----- VERSÃO ATUAL DO SCRIPT: ------------------------------------------
+//= v2.0
+//----- DESCRIÇÃO: -------------------------------------------------------
+//= 1° Banco de Prontera.
+//----- COMENTÁRIOS ADICIONAIS: ------------------------------------------
+//= Projeto rAthena Pt-BR
+//= Tradução e Revisão Pt-Br Por [ADM] Eragonat PK
+//========================================================================
+
+prontera,132,217,5	script	Banqueiro	109,{
+	set @cost,500;
+	mes "[Banqueiro]";
+	mes "Bem-vind"+(Sex?"o":"a")+" ao Primeiro Banco de Prontera. Como posso ajudá-lo hoje?";
+	next;
+	switch(select("Gostaria de fazer um depósito.:Gostaria de fazer um saque.:Quero ver quanto tenho em conta?:Cancelar!")) {
+	case 1:
+		mes "[Banqueiro]";
+		mes "Muito bem... Quanto gostaria de depositar? O máximo que você pode depositar é 999,999 Zeny.";
+		next;
+		if (@cost > 0) {
+			mes "[Banqueiro]";
+			mes "Ah, eu cobro uma taxa de " +@cost + " Zenys em todo tipo de transação!";
+			next;
+		}
+		input @deposit;
+		if (@deposit < 1) {
+			mes "Tenha certeza de digitar apenas números reais.";
+			close;
+		}
+		else if (@deposit > Zeny) {
+			mes "Parece que você não tem a quantidade de Zeny que quer depositar!";
+			close;
+		}
+		else if (@deposit > (Zeny - @cost)) {
+			mes "Você precisa de " + @cost + " Zenys para pagar a taxa de transação!";
+			close;
+		}
+		else {
+			set Zeny,Zeny - @deposit;
+			set Zeny,Zeny - @cost;
+			set #bankstorage,#bankstorage + @deposit;
+			mes "[Banqueiro]";
+			mes "Muito Obrigado... Seu zeny está em boas mãos.";
+			close;
+		}
+	case 2:
+		mes "[Banqueiro]";
+		mes "Muito Bem... Quanto quer sacar? O Máximo que você pode sacar de uma vez é 999,999 Zenys.";
+		next;
+		if (@cost > 0) {
+			mes "[Banqueiro]";
+			mes "Ah, eu cobro uma taxa de " +@cost + " Zeny(s) em todo tipo de transação!";
+			next;
+		}
+		input @withdrawl;
+		if (@withdrawl < 1) {
+			mes "Por favor, não brinque. Precisa informar um número real para poder sacar.";
+			close;
+		}
+		else if (@withdrawl > #bankstorage) {
+			mes "Você têm apenas ^00FF00"+ #bankstorage +"^000000 Zeny(s) em sua conta!";
+			close;
+		}
+		else if ((@cost > Zeny) && ((Zeny + @withdrawl) > @cost)) {
+			mes "[Banqueiro]";
+			mes "Você não tem Zeny suficiente. Quer que eu desconte a taxa de seu saque?";
+			next;
+			switch(select("Sim, Por favor.:Não, Obrigado!")){
+			case 1:
+				mes "[Banqueiro]";
+				mes "Descontando " + @cost + " de seu saque para cobrir a taxa de transação...";
+				set @withdrawl,@withdrawl - @cost;
+				set #bankstorage,#bankstorage - @cost;
+				set @cost,0;
+				next;
+				set Zeny,Zeny - @cost;
+				set Zeny,Zeny + @withdrawl;
+				set #bankstorage,#bankstorage - @withdrawl;
+				mes "[Banqueiro]";
+				mes "Aqui está o seu Zeny. Tenha um bom dia.";
+				close;
+			case 2:
+				mes "[Banqueiro]";
+				mes "Muito bem... volte sempre.";
+				close;
+			}
+		}
+		else {
+			set Zeny,Zeny - @cost;
+			set Zeny,Zeny + @withdrawl;
+			set #bankstorage,#bankstorage - @withdrawl;
+			mes "[Banqueiro]";
+			mes "Aqui está o seu Zeny. Tenha um bom dia.";
+			close;
+		}
+	case 3:
+		mes "[Banqueiro]";
+		mes "Hmmmm, deixe-me checar a papelada.";
+		next;
+		mes "*Folheando, Folheando*";
+		next;
+		mes "[Banqueiro]";
+		mes "Você tem atualmente " + callfunc("F_InsertComma",#bankstorage) + " Zeny(s) em sua conta.";
+		close;
+	case 4:
+		mes "[Banqueiro]";
+		mes "Muito Bem... Volte Sempre.";
+		close;
+	}
+}

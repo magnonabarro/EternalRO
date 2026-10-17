@@ -1,0 +1,249 @@
+//
+//==================================================================================
+//-------------------------------- RagnaERO Script ---------------------------------
+//=    __________                              _____________________ ________
+//=    \______   \_____     ____   ____ _____  \_   _____/\______   \\_____  \
+//=     |       _/\__  \   / ___\ /    \\__  \  |    __)_  |       _/ /   |   \
+//=   	|    |   \ / __ \_/ /_/  >   |  \/ __ \_|        \ |    |   \/    |    \
+//=   	|____|_  /(____  /\___  /|___|  (____  /_______  / |____|_  /\_______  /
+//=            \/      \//_____/      \/     \/        \/         \/         \/
+//=                                                          RagnaERO Scripts
+//=                                                                       
+//--------------------------- http://rathena.org/board/ ----------------------------
+//==================================================================================
+//----- NOME DO SCRIPT -------------------------------------------------------------
+//= devil_square.txt
+//----- POR: -----------------------------------------------------------------------
+//= Equipe de Desenvolvimento rAthena
+//----- VERSÃO ATUAL DO SCRIPT: ----------------------------------------------------
+//= v1.0
+//----- DESCRIÇÃO: -----------------------------------------------------------------
+//= Devil Square, baseado no Evento do MU Online.
+//  Tem que derrotar três ordas de monstros para adquirir prêmios especiais.
+//----- COMENTÁRIOS ADICIONAIS: ----------------------------------------------------
+//= Projeto RagnaERO
+//= Cabeçalho e Tradução Pt-BR Por [ADM] Eragonat PK
+//================================================================================== 
+
+prontera,160,258,4	script	Guardião Devil Square#1	406,{  //Novo local adicionado pelo [ADM] Eragonat PK.
+
+//prontera,156,185,5	script	Guardião Devil Square#1	406,{  //Local Original.
+	set .@gm_level, 99; // Nível de GM necessário para iniciar/parar o Evento
+
+	mes "[Guardião Devil Square]";
+	mes "Esta é a entrada para a ^FF0000Devil Square^000000.";
+	mes "Se você falhar ou morrer, o portal será fechado e você terá que esperar até que o evento comece novamente para tentar outra vez.";
+	next;
+	switch(select("Entrar.:Informações.:" + ((getgroupid() >= .@gm_level) ? "Menu de GM." : "") + ":Cancelar.")) {
+	case 1:
+		if (.start != 1) { // Período de Inscrição
+			mes "[Guardião Devil Square]";
+			mes "A Devil Square está fechada agora.";
+			mes "Será aberta nestes horários:";
+			mes "00:00 , 02:00 , 04:00 , 06:00"; // Horários aqui
+			mes "08:00 , 10:00 , 12:00 , 14:00";
+			mes "16:00 , 18:00 , 20:00 , 22:00";
+			close;
+		}
+		if (BaseLevel < 70 || Zeny < 20000) { // Requisitos
+			mes "[Guardião Devil Square]";
+			mes "Você não atende a os requisitos necessários para entrar na Devil Square.";
+			mes " ";
+			mes "Requisitos:";
+			mes " - Nível de Base 70.";
+			mes " - Taxa de registro 20.000z.";
+			close;
+		}
+		Zeny -= 20000;
+		announce strcharinfo(0)+" entrou na Devil Square.", bc_npc;
+		percentheal 100,100;
+		warp "ordeal_1-1",183,182;
+		close;
+	case 2:
+		mes "[Guardião Devil Square]";
+		mes "Dentro, você enfrentará 3 ordas de monstros. Os monstros virão cada vez mais fortes a cada orda.";
+		next;
+		mes "[Guardião Devil Square]";
+		mes "Se você derrotar todos os inimigos, terá a oportunidade de abrir 10 Baús do Tesouro e poderá ganhar itens, equipamentos e cartas raras ao abrilos!";
+		close;
+	case 3:
+		mes "[Guardião Devil Square]";
+		switch (.start) { // Começo do Evento
+			case 0: mes "A Devil Square ainda não começou."; break;
+			case 1: mes "A Devil Square está atualmente aceitando participantes."; break;
+			case 2: mes "O Evento Devil Square está na rodada "+ .round +" com os monstros "+ .mob +" restantes."; break;
+		}
+		next;
+		switch(select("Iniciar Evento.:Parar Evento.:Cancelar.")) {
+		case 1:
+			mes "[Guardião Devil Square]";
+			if (.start)
+				mes "A Devil Square já começou.";
+			else {
+				mes "Iniciando a Devil Square...";
+				donpcevent strnpcinfo(0)+"::OnStartEvent";
+			}
+			close;
+		case 2:
+			mes "[Guardião Devil Square]";
+			if (!.start)
+				mes "A Devil Square ainda não começou.";
+			else {
+				mes "Parando a Devil Square...";
+				donpcevent strnpcinfo(0)+"::OnStopEvent";
+			}
+			close;
+		case 3:
+			break;
+		}
+		break;
+	case 4:
+		break;
+	}
+	mes "[Guardião Devil Square]";
+	mes "Adeus.";
+	close;
+
+OnStartEvent:
+OnClock0000:
+OnClock0200:
+OnClock0400:
+OnClock0600:
+OnClock0800:
+OnClock1000:
+OnClock1200:
+OnClock1400:
+OnClock1600:
+OnClock1800:
+OnClock2000:
+OnClock2200:
+	.start = 1;
+	disablenpc "ord11-12"; //De npc/portais/pvp.txt
+	disablenpc "Guardião Devil Square#2";
+	mapannounce "ordeal_1-1","A Devil Square está fechada agora.", bc_map;
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	mapwarp "ordeal_1-1", .@map$, .@x, .@y;
+	killmonsterall "ordeal_1-1";
+	announce "A Devil Square está ABERTO. O Evento começará em 5 minutos.", bc_all;
+	sleep 60000;
+	announce "A Devil Square começará em 4 minutos.", bc_all;
+	sleep 60000;
+	announce "A Devil Square começará em 3 minutos.", bc_all;
+	sleep 60000;
+	announce "A Devil Square começará em 2 minutos.", bc_all;
+	sleep 60000;
+	announce "A Devil Square começará em 1 minuto.", bc_all;
+	sleep 60000;
+	announce "A Devil Square COMEÇOU!", bc_all;
+	if ( !getmapusers("ordeal_1-1") )
+		goto OnStopEvent;
+	.start = 2;
+	.round = 1;
+	.mob = 75;
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] ESQUELETO SOLDADO",1028,10,strnpcinfo(0)+"::OnDevilDead";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] ORC ARQUEIRO",1189,15,strnpcinfo(0)+"::OnDevilDead";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] ARENOSO",1165,10,strnpcinfo(0)+"::OnDevilDead";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] ESQUELETO ARQUEIRO",1016,15,strnpcinfo(0)+"::OnDevilDead";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] MINOROUS",1149,15,strnpcinfo(0)+"::OnDevilDead";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] REQUIEM",1164,10,strnpcinfo(0)+"::OnDevilDead";
+	end;
+
+OnDevilDead:
+	.mob--;
+	if ( .mob == 25 || .mob == 5 )
+		announce "Devil Square : "+ .mob +" monstros restantes na 1ª rodada.", bc_map;
+	else if ( .mob <= 0 ) {
+		announce "A Devil Square está entrando na rodada 2...", bc_map;
+		goto OnDevil2;
+	}
+	end;
+
+OnDevil2:
+	.round = 2;
+	.mob = 70;
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] GÁRGULA",1253,15,strnpcinfo(0)+"::OnDevilDead2";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] ALARME",1193,10,strnpcinfo(0)+"::OnDevilDead2";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] GRANDE ORC",1213,10,strnpcinfo(0)+"::OnDevilDead2";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] INJUSTIÇADO",1257,10,strnpcinfo(0)+"::OnDevilDead2";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] MÍMICO",1191,15,strnpcinfo(0)+"::OnDevilDead2";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] ALMA PENADA",1192,10,strnpcinfo(0)+"::OnDevilDead2";
+	end;
+
+OnDevilDead2:
+	.mob--;
+	if ( .mob == 25 || .mob == 5 )
+		announce "Devil Square : "+ .mob +" monstros restantes na 2ª rodada.", bc_map;
+	else if ( .mob <= 0 ) {
+		announce "A Devil Square está entrando na rodada 3...", bc_map;
+		goto OnDevil3;
+	}
+	end;
+
+OnDevil3:
+	.round = 3;
+	.mob = 58;
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] ANOLIAN",1206,15,strnpcinfo(0)+"::OnDevilDead3";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] ANDARILHO",1208,15,strnpcinfo(0)+"::OnDevilDead3";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] DEVIRUCHI",1109,10,strnpcinfo(0)+"::OnDevilDead3";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] CORINGA",1131,15,strnpcinfo(0)+"::OnDevilDead3";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] FLOR DO LUAR",1150,2,strnpcinfo(0)+"::OnDevilDead3";
+	areamonster "ordeal_1-1",183,182,246,244,"[DS] ILUSÃO DAS TREVAS",1302,1,strnpcinfo(0)+"::OnDevilDead3";
+	end;
+
+OnDevilDead3:
+	.mob--;
+	if ( .mob == 25 || .mob == 5 )
+		announce "Devil Square : "+ .mob +" monstros restantes na rodada final.", bc_map;
+	else if ( .mob <= 0 ) {
+		announce "Devil Square : PARABÉNS. Esses 10 baús são seus.", bc_map;
+		goto OnDevil4;
+	}
+	end;
+
+OnDevil4:
+	.round = 4;
+	.mob = 10;
+	monster "ordeal_1-1",231,250,"Baú do Tesouro",1324,1,strnpcinfo(0)+"::OnTreasureDead";
+	monster "ordeal_1-1",234,247,"Baú do Tesouro",1328,1,strnpcinfo(0)+"::OnTreasureDead";
+	monster "ordeal_1-1",237,244,"Baú do Tesouro",1332,1,strnpcinfo(0)+"::OnTreasureDead";
+	monster "ordeal_1-1",240,241,"Baú do Tesouro",1336,1,strnpcinfo(0)+"::OnTreasureDead";
+	monster "ordeal_1-1",243,238,"Baú do Tesouro",1340,1,strnpcinfo(0)+"::OnTreasureDead";
+	monster "ordeal_1-1",246,235,"Baú do Tesouro",1344,1,strnpcinfo(0)+"::OnTreasureDead";
+	monster "ordeal_1-1",249,232,"Baú do Tesouro",1348,1,strnpcinfo(0)+"::OnTreasureDead";
+	monster "ordeal_1-1",252,229,"Baú do Tesouro",1352,1,strnpcinfo(0)+"::OnTreasureDead";
+	monster "ordeal_1-1",249,241,"Baú do Tesouro",1356,1,strnpcinfo(0)+"::OnTreasureDead";
+	monster "ordeal_1-1",240,249,"Baú do Tesouro",1360,1,strnpcinfo(0)+"::OnTreasureDead";
+	end;
+
+OnTreasureDead:
+	.mob--;
+	announce "Devil Square : "+ strcharinfo(0) +" abriu um Baú do Tesouro na Devil Square.", bc_all;
+	if ( .mob <= 0 )
+		goto OnStopEvent;
+	end;
+
+OnStopEvent:
+	killmonsterall "ordeal_1-1";
+	enablenpc "ord11-12"; //De npc/portais/pvp.txt
+	enablenpc "Guardião Devil Square#2";
+	.start = .round = .mob = 0;
+	end;
+}
+
+ordeal_1-1,246,245,7	script	Guardião Devil Square#2	406,{
+	mes "[Saída]";
+	mes "Adeus.";
+	close2;
+	warp "SavePoint",0,0;
+	end;
+}
+
+ordeal_1-1	mapflag	nowarp
+ordeal_1-1	mapflag	nowarpto
+ordeal_1-1	mapflag	noteleport
+ordeal_1-1	mapflag	monster_noteleport
+ordeal_1-1	mapflag	nosave	SavePoint
+ordeal_1-1	mapflag	nomemo
+ordeal_1-1	mapflag	nobranch
+ordeal_1-1	mapflag	nopenalty
+ordeal_1-1	mapflag	noicewall

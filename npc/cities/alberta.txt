@@ -1,0 +1,408 @@
+//===== rAthena Script =======================================
+//= Alberta Town
+//===== By: ==================================================
+//= DZeroX
+//===== Current Version: =====================================
+//= 1.6
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Town-specific Alberta NPCs
+//===== Additional Comments: =================================
+//= 1.0 Converted from Aegis 10.4 [DZeroX]
+//= 1.1 Optimized, missing next, REMOVED .GATs! again [Lupus]
+//= 1.2 Implemented progression fixes provided by $ephiroth. [L0ne_W0lf]
+//= 1.2b More pregression clean up provided by Barron-Monster. [L0ne_W0lf]
+//= 1.3 Removed npc "Tourist#al" as it's a quest NPC. [L0ne_W0lf]
+//= 1.4 Removed "Fastidious Old Man" duplicate. [L0ne_W0lf]
+//= 1.5 Updated to match AEGIS script. [Kisuka]
+//= 1.6 Added Izlude RE coordinates. [Euphy]
+//= 1.7 Bug fixes and syntax. [Capuche]
+//============================================================
+
+alberta,97,51,0	script	Fabian	84,{
+	mes "[Fabian]";
+	mes "Cara... Ao viajar pelo mundo, você ouvirá falar de algumas coisas malucas.";
+	next;
+	mes "[Fabian]";
+	mes "Certa vez, ouvi dizer que existem cartas que contêm o poder de monstros. Se alguém colocar as mãos em uma carta, poderá usar o poder desse monstro.";
+	next;
+	mes "[Fabian]";
+	mes "Acho que é algum tipo de modismo ou golpe, em que eles obrigam você a colecionar todas as cartas ou algo assim. Quero dizer, como uma carta pode realmente ter o poder de um monstro?!";
+	next;
+	mes "[Fabian]";
+	mes "Sério...";
+	close;
+}
+
+alberta,53,39,0	script	Steiner	100,{
+	mes "[Steiner]";
+	mes "Oh...!";
+	mes "Bem-vindo a Alberta,";
+	mes "jovem aventureiro!";
+	next;
+	mes "[Steiner]";
+	mes "Perdoe-me se pareço distraído. Estou pensando, tentando fazer um plano. Ouvi dizer que há uma loja em Geffen que vende armaduras resistentes à magia.";
+	next;
+	mes "[Steiner]";
+	mes "Se eu comprar muitos deles em grandes quantidades e depois revendê-los aqui por um preço mais alto...";
+	close;
+}
+
+alberta_in,20,183,0	script	Chad	1_M_03,{
+	mes "[Chad]";
+	mes "Se eu comprar muitos deles em grandes quantidades e depois revendê-los aqui por um preço mais alto...";
+	next;
+	mes "[Chad]";
+	mes "As pessoas também dizem que os bebês são montados pelas cegonhas antes do parto, que as garotas gostam de caras que agem como idiotas e que o Papai Noel existe! Mas somente em Lutie.";
+	next;
+	mes "[Chad]";
+	mes "Eu me pergunto...";
+	mes "Se algum desses";
+	mes "é possivelmente";
+	mes "true...";
+	close;
+}
+
+alberta,131,139,2	script	Drunken Old Man	1_M_JOBGUIDER,{
+	mes "[Deagle]";
+	mes "^666666*Soluço*^000000";
+	mes "Wh-what are you";
+	mes "está olhando? Desapareça!!!";
+	next;
+	switch(select("Não diga nada.","Deixe-o em paz.")) {
+	case 1:
+		mes "[Deagle]";
+		mes "Hahahaha ^666666*hiccup*^000000... Você tem muita coragem. Posso parecer inútil agora, mas já fui marinheiro no Going Mary.'";
+		next;
+		switch(select("É mesmo? Não é brincadeira.","É mesmo? Não é brincadeira!")) {
+		case 1:
+			mes "[Deagle]";
+			mes "Nunca ouviu falar?! Todo mundo conhece o famoso navio pirata 'Going Mary!' ^666666*Hiccup~*^000000";
+			next;
+			mes "[Deagle]";
+			mes "Ah~ Os velhos tempos. Se ao menos... Se ao menos não tivéssemos nos deparado com aquela tempestade...^666666*hiccup*^000000";
+			next;
+			mes "[Deagle]";
+			mes "Capitão. Sinto falta do nosso capitão mais do que tudo... Nenhum inimigo sobreviveu à espada do capitão.";
+			close;
+		case 2:
+			mes "[Deagle]";
+			mes "É isso mesmo! NINGUÉM se dá bem com a tripulação do Going Mary! E ninguém consegue vencer o capitão em uma luta de espadas!";
+			next;
+			mes "[Deagle]";
+			mes "CAPITÃO~!!! ^666666*HICCUP~*^000000 Ele balançava sua espada assim, então... ENTÃO!!";
+			next;
+			mes "[Deagle]";
+			mes "O bastardo com quem o capitão estava lutando e todos os seus amigos que estavam perto dele foram cercados por chamas!";
+			next;
+			mes "[Deagle]";
+			mes "Cara, aquela espada devia ter algum tipo de poder misterioso, ou o capitão era simplesmente muito bom...!";
+			next;
+			mes "[Deagle]";
+			mes "Phew~~ ^666666*Sob* *Sob...*^000000 Deus, estou com saudades de todos! Agora estou deprimido! Por favor, vá embora agora.";
+			close;
+		}
+	case 2:
+		mes "[Deagle]";
+		mes "Isso mesmo!";
+		mes "Go AWAY~";
+		close;
+	}
+}
+
+alberta,58,80,2	script	Shakir	99,{
+	mes "[Shakir]";
+	if (rand(2)) {
+		mes "Nós, comerciantes, temos nossa própria habilidade de negociação quando vendemos mercadorias. Essa habilidade pode nos render mais dinheiro do que quando outras pessoas vendem mercadorias.";
+		next;
+		mes "[Shakir]";
+		mes "É mais do que apenas gritar  Você precisa ter carisma e dominar a retórica!";
+		next;
+		mes "[Shakir]";
+		mes "Podemos obter até 24% mais zeny com essa incrível habilidade. Mas lembre-se de treinar bastante para adquiri-la!!";
+	} else {
+		mes "Nós, comerciantes, podemos";
+		mes "abrir barracas de beira de estrada";
+		mes "fazer negócios";
+		next;
+		mes "[Shakir]";
+		mes "Com a habilidade Desconto, podemos comprar mercadorias muito baratas nas lojas das cidades e carregá-las no carrinho que alugamos";
+		next;
+		mes "[Shakir]";
+		mes "Depois disso, podemos viajar para qualquer lugar e vender nossos produtos para obter lucro!";
+		next;
+		mes "[Shakir]";
+		mes "Dessa forma, os negócios são mais convenientes e seguros. Não caia no sono, embora seja muito fácil fazer isso.";
+	}
+	close;
+}
+
+alberta,62,156,2	script	Sonya	102,{
+	mes "[Sonya]";
+	switch(rand(3)){
+	case 0:
+		mes "Ei, sabe, uma vez eu estava andando pela floresta e vi um pequeno caule verde se movendo.";
+		next;
+		mes "[Sonya]";
+		mes "Fui ver o que era e, quando fui tocá-lo, a haste bateu em minha mão. A haste realmente deu um tapa na minha mão!";
+		next;
+		mes "[Sonya]";
+		mes "Isso me assustou, então dei um pulo para trás e percebi que não era um caule, mas um animal muito pequeno.";
+		next;
+		mes "[Sonya]";
+		mes "Tive sorte de não tê-lo irritado. Até mesmo o menor animal pode ser perigoso se for irritado.";
+		close;
+	case 1:
+		mes "Você conhece aqueles ursos de aparência preguiçosa que vivem na floresta a caminho de Payon??";
+		next;
+		mes "[Sonya]";
+		mes "Só por diversão, joguei uma pedra nele e, de repente, ele veio correndo em minha direção! Fiquei tãããão assustado que comecei a fugir, então BAM!!!";
+		next;
+		mes "[Sonya]";
+		mes "Ele se chocou contra um galho baixo de uma árvore e se derrubou! Juro que nunca mais vou provocar um animal por diversão!";
+		close;
+	case 2:
+		mes "Certa vez, vi um bando de lobos enfrentar um desses ursos enormes e preguiçosos!";
+		next;
+		mes "[Sonya]";
+		mes "Os lobos são muito mais cooperativos do que parecem. Se um deles for atacado, todos os lobos próximos correrão para ajudar.";
+		next;
+		mes "[Sonya]";
+		mes "Eu pensaria duas vezes se quisesse lutar com um quando outros de sua espécie estivessem por perto. Cuidado: não seja atacado em grupo!";
+		close;
+	}
+}
+
+alberta,93,174,2	script	Grandmother Alma	103,{
+	mes "[Grandmother Alma]";
+	mes "Há algum tempo atrás";
+	mes "um navio abandonado";
+	mes "drifted into";
+	mes "Alberta harbour.";
+	next;
+	mes "[Grandmother Alma]";
+	mes "Na esperança de salvar os sobreviventes, alguns habitantes da cidade se aventuraram a entrar no navio. No entanto, todos saíram correndo apavorados, dizendo que havia cadáveres andando dentro do navio.";
+	next;
+	mes "[Grandmother Alma]";
+	mes "O navio também estava repleto de organismos marinhos perigosos, e eles não poderiam entrar, mesmo que quisessem.";
+	next;
+	mes "[Grandmother Alma]";
+	mes "Não podíamos fazer nada a respeito daquela nave de aspecto sinistro e a deixamos como estava. Hoje em dia, as equipes de exploração tentam entrar nessa nave e eliminar seus monstros.";
+	next;
+	mes "[Grandmother Alma]";
+	mes "Portanto, pode ser uma boa experiência para um jovem como você ser um recruta. Mas, ainda assim, não vale a pena arriscar sua vida se você não for forte o suficiente.";
+	close;
+}
+
+alberta,189,151,5	script	Fisk	4W_SAILOR,{
+	mes "[Fisk]";
+	mes "Olá, amigo,";
+	mes "onde você estava";
+	mes "quero ir?";
+	next;
+	switch(select("Navio afundado -> 250 zeny.","Izlude Marina -> 500 zeny.","Não importa.")) {
+	case 1:
+		if (Zeny < 250) {
+			mes "[Fisk]";
+			mes "Ei, não tente me enganar! Eu disse 250 zeny!";
+			close;
+		}
+		Zeny = Zeny - 250;
+		warp "alb2trea",43,53;
+		end;
+	case 2:
+		if (Zeny < 500) {
+			mes "[Fisk]";
+			mes "Não há como chegar lá sem os 500 zeny primeiro!";
+			close;
+		}
+		Zeny = Zeny - 500;
+		if (checkre(0))
+			warp "izlude",195,212;
+		else
+			warp "izlude",176,182;
+		end;
+	case 3:
+		mes "[Fisk]";
+		mes "Tudo certo...";
+		mes "Lenhador.";
+		close;
+	}
+}
+
+alb2trea,39,50,6	script	Fisk#a2t	4W_SAILOR,{
+	mes "[Fisk]";
+	mes "Então você quer voltar para o continente em Alberta, hein??";
+	next;
+	if (select("Sim, por favor.","Mudei de ideia.") == 1)
+		warp "alberta",192,169;
+	close;
+}
+
+alberta,195,151,2	script	Paul	4_M_04,{
+	mes "[Paul]";
+	mes "Bom dia~";
+	mes "Você gostaria";
+	mes "to join the";
+	mes "equipe de exploração";
+	mes "do Navio Afundado?";
+	next;
+	mes "[Paul]";
+	mes "Oh! Antes de participar, devo avisá-lo. Se você não for muito forte, talvez não queira ir";
+	next;
+	mes "[Paul]";
+	mes "Então, quer";
+	mes "se inscrever?";
+	mes "A admissão";
+	mes "a taxa é apenas";
+	mes "200 Zeny.";
+	next;
+	switch(select("Inscreva-me!","Não, obrigado.")) {
+	case 1:
+		if (Zeny < 200) {
+			mes "[Paul]";
+			mes "Parece que você não tem o dinheiro, meu amigo. Mas, por favor, volte quando puder pagar.";
+			close;
+		}
+		Zeny = Zeny - 200;
+		warp "alb2trea",62,69;
+		close;
+	case 2:
+		mes "[Paul]";
+		mes "Tudo bem, bem...";
+		mes "Eu estarei por perto";
+		mes "se você mudar";
+		mes "sua mente";
+		close;
+	}
+}
+
+alberta,190,173,4	script	Phelix	4_M_03,{
+	mes "[Phelix]";
+	if ((MaxWeight - Weight) < 10000) {
+		mes "Espere um momento!!!";
+		mes "Você trouxe coisas demais!";
+		mes "Você não pode aceitar mais itens!";
+		mes "Por favor, reduza a quantidade de itens,";
+		mes "then come see me again.";
+		close;
+	}
+	if (@event_zelopy == 0) {
+		mes "Que diabos você está fazendo aqui?";
+		mes "Não há nada que você possa obter de graça nesta nave, se você quer algo, trabalhe por isso!!!";
+		next;
+		mes "[Phelix]";
+		mes "Hmm, então por que você não me traz 10 jellopies e eu lhe dou 1 poção. O que acha?";
+		mes "Ou, se isso for muito difícil para a sua bunda, 3 jellopies por 1 cenoura";
+		next;
+		mes "[Phelix]";
+		mes "Se você estiver interessado em minha oferta, obtenha o material que mencionei.";
+		@event_zelopy = 1;
+		close;
+	}
+	mes "Hmm... você quer trocar jellopies por Red Potions ou algumas Cenouras, hein? Bem... qual deles??";
+	next;
+	switch(select("Poções vermelhas, por favor.", "Cenouras, por favor.")) {
+	case 1:
+		mes "[Phelix]";
+		mes "Tudo bem...";
+		mes "Vamos ver";
+		mes "o que você tem...";
+		next;
+		mes "[Phelix]";
+		if (countitem(909) < 10) {
+			mes "Ei, você não estava ouvindo? Eu disse 10 jellopies por 1 Red Potion... você é surdo??";
+			close;
+		} else {
+			.@max = countitem(909)/10;
+			mes "Hmm, nada mal...";
+			mes "quantas poções";
+			mes "você deseja obter?";
+			next;
+			switch(select("O máximo que eu puder, por favor.","Eu quero muitos.","Não importa, eu gosto de minha gelatina")) {
+			case 1:
+				delitem 909,.@max*10;// Jellopy
+				getitem 501,.@max;// Red_Potion
+				break;
+			case 2:
+				mes "[Phelix]";
+				mes "Não vou lhe dar mais de 100 de uma vez, portanto, não se preocupe, OK? Se você não quiser nenhum, basta dizer .";
+				mes "No momento, o máximo que você pode obter é " + .@max + " mas lembre-se, no máximo 100, você quer quebrar minhas costas?.";
+				input .@amount;
+				next;
+				mes "[Phelix]";
+				if (.@amount <= 0) {
+					mes "Muito obrigado, volte sempre que quiser.";
+					close;
+				}
+				if (.@amount > 100) {
+					mes "Ei, o que eu disse? No máximo 100 por vez, você está tentando me matar, não está?!";
+					close;
+				}
+				if (countitem(909) < .@amount*10) {
+					mes "Hmm, parece que você não tem o suficiente. Vá buscar mais jellopies se quiser mais alguma coisa de mim.";
+					close;
+				}
+				delitem 909,.@amount*10;// Jellopy
+				getitem 501,.@amount;// Red_Potion
+				break;
+			case 3:
+				mes "[Phelix]";
+				mes "Sem problemas";
+				mes "até a próxima";
+				close;
+			}
+			mes "[Phelix]";
+			mes "Aqui está! Como prometi. Não vá sugar todos de uma vez.";
+			close;
+		}
+	case 2:
+		mes "[Phelix]";
+		mes "Muito bem, vamos ver o que você tem...";
+		next;
+		mes "[Phelix]";
+		if (countitem(909) < 3) {
+			mes "Hmm, olha só, eu disse 3 jellopies por 1 cenoura... entendi?";
+			close;
+		}
+		.@max = countitem(909)/3;
+		mes "Não é tão ruim assim, amorzinho...";
+		mes "Quantos você quer";
+		next;
+		switch(select("O máximo que eu conseguir, por favor","Eu quero muitos.","Não importa, eu gosto da minha gelatina.")) {
+		case 1:
+			delitem 909,.@max*3;// Jellopy
+			getitem 515,.@max;// Carrot
+			break;
+		case 2:
+			mes "[Phelix]";
+			mes "Certo, não vou lhe dar mais de 100 de uma vez, portanto, não se incomode, ok? Se você não quiser nenhum, basta dizer '0'.";
+			input .@amount;
+			next;
+			mes "[Phelix]";
+			if (.@amount == 0) {
+				mes "Tudo bem, então, até a próxima.";
+				close;
+			}
+			if (.@amount > 100) {
+				mes "Ei, bundão, eu disse 100 no máximo, não mais do que isso! Não vou quebrar minhas costas por causa de pessoas como você!";
+				close;
+			}
+			if (countitem(909) < .@amount*3) {
+				mes "Parece que você não tem o suficiente. Vá buscar mais se quiser mais alguma coisa.";
+				close;
+			}
+			delitem 909,.@amount*3;// Jellopy
+			getitem 515,.@amount;// Carrot
+			break;
+		case 3:
+			mes "[Phelix]";
+			mes "Até logo.";
+			close;
+		}
+		mes "[Phelix]";
+		mes "Aqui está~! Como prometi. Tente não encher sua cara.";
+		close;
+	}
+}

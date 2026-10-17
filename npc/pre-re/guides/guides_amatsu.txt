@@ -1,0 +1,125 @@
+//
+//============================= rAthena Script ==========================\\
+//= -----------------------------------------------------------------------
+//=                       ___   __  __                                     
+//=                 _____/   | / /_/ /_   ___   ____   ____ _              
+//=                / ___/ /| |/ __/ __ \\/ _ \\/ __ \\/ __ `/              
+//=               / /  / ___ / /_/ / / /  __/ / / / /_/ /  /               
+//=              /_/  /_/  |_\\__/_/ /_/\\___/_/ /_/\\__,_/                
+//=   
+//= -----------------------------------------------------------------------
+//======================== http://rathena.org/board/ ======================
+//====== Nome do Script: ==================================================
+//= [ guias_amatsu.txt ]
+//====== Versão Atual: ====================================================
+//= [ v1.3 - Pré-Renovação ]
+//====== Compatível/Por: ==================================================
+//= [ Projeto e Equipe de Desenvolvimento rAthena ]
+//====== Descrição: =======================================================
+//= [ Guias da cidade de Amatsu. ]
+//====== Créditos: ========================================================
+//= [ Cabeçalho e Tradução Pt-BR - [ADM] Eragonat PK ]
+//=======================================================================//
+
+amatsu,207,89,3	script	Guia de Amatsu#ama	758,{
+	mes "[Amachang]";
+	mes "Bem-vindo à Amatsu,";
+	mes "a cidade dos moradores gentis";
+	mes "e lindas flores de cerejeira.";
+	next;
+	mes "[Amachang]";
+	mes "Eu sou Amachang,";
+	mes "a 13ª 'Miss' de Amatsu.";
+	mes "Eu vou te guiar pela cidade";
+	mes "como Miss Amatsu.";
+	mes "Por favor, me fale";
+	mes "se quiser saber sobre alguma coisa.";
+	next;
+	switch(select("Palácio:Loja de Utilidades:Loja de Armas:Taverna")) {
+	case 1:
+		viewpoint 1,85,235,0,0xFF3355;
+		mes "[Amachang]";
+		mes "No Mini-mapa,";
+		mes "siga o sinal de ^FF3355+^000000";
+		mes "para encontrar o Palácio.";
+		mes "Divirta-se";
+		mes "em Amatsu.";
+		close;
+	case 2:
+		viewpoint 1,96,118,1,0xCE6300;
+		mes "[Amachang]";
+		mes "No Mini-mapa,";
+		mes "siga o sinal de ^CE6300+^000000";
+		mes "para encontrar a Loja de Utilidades.";
+		mes "Divirta-se";
+		mes "em Amatsu.";
+		close;
+	case 3:
+		viewpoint 1,132,117,2,0x55FF33;
+		mes "[Amachang]";
+		mes "No Mini-mapa,";
+		mes "siga o sinal de ^55FF33+^000000";
+		mes "para encontrar a Loja de Armas.";
+		mes "Divirta-se";
+		mes "em Amatsu.";
+		close;
+	case 4:
+		viewpoint 1,217,116,3,0x3355FF;
+		mes "[Amachang]";
+		mes "No Mini-mapa,";
+		mes "siga o sinal de ^3355FF+^000000";
+		mes "para encontrar a Taverna.";
+		mes "Divirta-se";
+		mes "em Amatsu.";
+		close;
+	}
+}
+	
+amatsu,251,283,4	script	Guia#2ama	767,{
+	mes "[Homem Guia]";
+	mes "Bem-vindo, turista de Midgard.";
+	mes "Eu sou o guia da";
+	mes "belícima cidade, Amatsu.";
+	next;
+	mes "[Homem Guia]";
+	mes "O que você está procurando?";
+	next;
+	switch(select("Palácio:Loja de Utilidades:Loja de Armas:Taverna")) {
+	case 1:
+		viewpoint 1,85,235,0,0xFF3355;
+		mes "[Homem Guia]";
+		mes "No Mini-mapa,";
+		mes "siga o sinal de ^FF3355+^000000";
+		mes "para encontrar o Palácio.";
+		mes "Divirta-se";
+		mes "em Amatsu.";
+		close;
+	case 2:
+		viewpoint 1,96,118,1,0xCE6300;
+		mes "[Homem Guia]";
+		mes "No Mini-mapa,";
+		mes "siga o sinal de ^CE6300+^000000";
+		mes "para encontrar a Loja de Utilidades.";
+		mes "Divirta-se";
+		mes "em Amatsu.";
+		close;
+	case 3:
+		viewpoint 1,132,117,2,0x55FF33;
+		mes "[Homem Guia]";
+		mes "No Mini-mapa,";
+		mes "siga o sinal de ^55FF33+^000000";
+		mes "para encontrar a Loja de Armas.";
+		mes "Divirta-se";
+		mes "em Amatsu.";
+		close;
+	case 4:
+		viewpoint 1,217,116,3,0x3355FF;
+		mes "[Homem Guia]";
+		mes "No Mini-mapa,";
+		mes "siga o sinal de ^3355FF+^000000";
+		mes "para encontrar a Taverna.";
+		mes "Divirta-se";
+		mes "em Amatsu.";
+		close;
+	}
+}

@@ -1,0 +1,70 @@
+--- a/src/map/battleground.cpp
++++ b/src/map/battleground.cpp
+@@ -992,6 +992,34 @@
+ }
+ 
+ /**
++ * Route the custom Instance Manager entry through the existing Battleground Queue UI.
++ * The client sends a queue request with the display name from entryqueuelist.lub.
++ * For the first integration stage, only "Torre Sem Fim" is handled here.
++ *
++ * @return true if the request was handled by the Instance Manager, otherwise false.
++ */
++static bool bg_queue_try_instance_manager_request(const char *name, map_session_data *sd, bool party_request)
++{
++	if (name == nullptr || sd == nullptr || strcmpi(name, "Torre Sem Fim") != 0)
++		return false;
++
++	const char *event_name = party_request
++		? "InstanceManagerBridge::OnEndlessTowerParty"
++		: "InstanceManagerBridge::OnEndlessTowerSolo";
++
++	if (npc_event_do_id(event_name, sd->id) <= 0) {
++		clif_bg_queue_apply_result(BG_APPLY_INVALID_NAME, name, sd);
++		clif_displaymessage(sd->fd, "Gerenciador de Instancias nao carregado. Verifique npc/scripts_custom.conf.");
++		return true;
++	}
++
++	// This request is an instance launch, not a real Battleground queue.
++	clif_bg_queue_apply_result(BG_APPLY_QUEUE_FINISHED, name, sd);
++	clif_bg_queue_entry_init(sd);
++	return true;
++}
++
++/**
+  * Join as an individual into a Battleground
+  * @param name: Battleground name
+  * @param sd: Player who requested to join the battlegrounds
+@@ -1003,6 +1031,9 @@
+ 		return;
+ 	}
+ 
++	if (bg_queue_try_instance_manager_request(name, sd, false))
++		return;
++
+ 	std::shared_ptr<s_battleground_type> bg = bg_search_name(name);
+ 
+ 	if (!bg) {
+@@ -1044,6 +1075,9 @@
+ 		}
+ 	}
+ 
++	if (bg_queue_try_instance_manager_request(name, sd, true))
++		return;
++
+ 	std::shared_ptr<s_battleground_type> bg = bg_search_name(name);
+ 
+ 	if (bg) {
+@@ -1108,6 +1142,12 @@
+ 		return; // Not the guild leader
+ 	}
+ 
++	if (name != nullptr && strcmpi(name, "Torre Sem Fim") == 0) {
++		clif_bg_queue_apply_result(BG_APPLY_INVALID_APP, name, sd);
++		clif_displaymessage(sd->fd, "A Torre Sem Fim aceita entrada individual ou por grupo, nao por guilda.");
++		return;
++	}
++
+ 	std::shared_ptr<s_battleground_type> bg = bg_search_name(name);
+ 
+ 	if (bg) {

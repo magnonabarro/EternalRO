@@ -1,0 +1,701 @@
+# This file is a part of rAthena.
+#   Copyright(C) 2022 rAthena Development Team
+#   https://rathena.org - https://github.com/rathena
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+###########################################################################
+# Barter Database
+###########################################################################
+#
+# Barter Settings
+#
+###########################################################################
+#  - Name               NPC name.
+#    Map                Map name. (Default: not on a map)
+#    X                  Map x coordinate. (Default: 0)
+#    Y                  Map y coordinate. (Default: 0)
+#    Direction          Direction the NPC is looking. (Default: North)
+#    Sprite             Sprite name of the NPC. (Default: FakeNpc)
+#    Items:             List of sold items.
+#      - Index          Index of the item inside the shop. (0-...)
+#                       Maximum index depends on client.
+#        Item           Aegis name of the item.
+#        Stock          Amount of item in stock. 0 means unlimited. (Default: 0)
+#        Zeny           Cost of them item in Zeny. (Default: 0)
+#        RequiredItems: List of required items (Optional)
+#          - Index      Index of the required item. (0-4)
+#            Item       Aegis name of required item.
+#            Amount     Amount of required item. (Default: 1)
+#            Refine     Refine level of required item. (Default: 0)
+###########################################################################
+
+Header:
+  Type: BARTER_DB
+  Version: 2
+Body:
+###################### Quest trocado do Shadows #########################
+  - Name: uniao_top
+    Items:
+      - Index: 0
+        Item: Rideword_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 1
+        Item: Blue_Pajamas_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 2
+        Item: Pink_Pajamas_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 7
+        Item: Mask_Of_Ifrit
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 8
+        Item: Lunatic_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 9
+        Item: Whikebain_Ears
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 13
+        Item: Black_Bunny_Band
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 18
+        Item: Balloon_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 19
+        Item: Snake_Head
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 20
+        Item: B_Dragon_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 22
+        Item: Skull_Cap
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 23
+        Item: Crown_Of_Deceit
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 24
+        Item: Academy_Freshman_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 25
+        Item: Academy_Graduating_Cap
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 26
+        Item: Chullos
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 27
+        Item: Santa_Hat_1
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 28
+        Item: Hat_Of_Outlaw
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 29
+        Item: Drooping_Nine_Tail
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+  - Name: uniao_mid
+    Items:
+      - Index: 1
+        Item: Mischievous_Fairy
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 2
+        Item: Takius_Blindfold
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 3
+        Item: Observer
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 4
+        Item: Black_Glasses
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 5
+        Item: Red_Glasses
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 7
+        Item: Pecopeco_Wing_Ears
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 8
+        Item: Ifrit's_Ear
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 9
+        Item: Loki_Mask
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+  - Name: uniao_baixo
+    Items:
+      - Index: 0
+        Item: Scarlet_Rose
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 1
+        Item: Scuba_Mask
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 2
+        Item: Fish_In_Mouth
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 7
+        Item: Rainbow_Scarf
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 10
+        Item: Gang_Scarf
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 11
+        Item: Well_Baked_Toast
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+      - Index: 12
+        Item: Buzzy_Ball_Gum
+        RequiredItems:
+          - Index: 0
+            Item: Silver_Coin 
+            Amount: 300
+###################### Quest PVP #########################
+  - Name: Equipamentos_PVP
+    Items:
+      - Index: 0
+        Item: Alice_Doll
+        RequiredItems:
+          - Index: 0
+            Item: Transparent_Cloth 
+            Amount: 200
+          - Index: 1
+            Item: Soft_Silk_Cloth 
+            Amount: 200
+          - Index: 2
+            Item: Alice's_Apron 
+            Amount: 200
+          - Index: 3
+            Item: Cobaltblue_Dyestuffs 
+            Amount: 1
+          - Index: 4
+            Item: Marionette_Doll 
+            Amount: 1
+      - Index: 1
+        Item: Hockey_Mask
+        RequiredItems:
+          - Index: 0
+            Item: Flexible_String 
+            Amount: 100
+          - Index: 1
+            Item: White_Dyestuffs 
+            Amount: 100
+          - Index: 2
+            Item: Rusty_Cleaver 
+            Amount: 100
+          - Index: 3
+            Item: Mr_Scream 
+            Amount: 1
+          - Index: 4
+            Item: Distorted_Portrait 
+            Amount: 100
+      - Index: 2
+        Item: Freyja_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Gold 
+            Amount: 100
+          - Index: 1
+            Item: Steel 
+            Amount: 100
+          - Index: 2
+            Item: Crystal_Jewel__ 
+            Amount: 100
+          - Index: 3
+            Item: Crown 
+            Amount: 1
+          - Index: 4
+            Item: Lemon_Dyestuffs  
+            Amount: 1
+      - Index: 3
+        Item: Feather_Beret
+        RequiredItems:
+          - Index: 0
+            Item: Cobaltblue_Dyestuffs 
+            Amount: 10
+          - Index: 1
+            Item: Beret 
+            Amount: 1
+          - Index: 2
+            Item: Soft_Feather 
+            Amount: 1
+      - Index: 4
+        Item: Antique_Pipe
+        RequiredItems:
+          - Index: 0
+            Item: Coal 
+            Amount: 100
+          - Index: 1
+            Item: Log 
+            Amount: 100
+          - Index: 2
+            Item: Gun_Powder 
+            Amount: 100
+          - Index: 3
+            Item: Smoking_Pipe 
+            Amount: 1
+          - Index: 4
+            Item: Cigar 
+            Amount: 1
+###################### Quest Coroa #########################
+  - Name: Equipamentos_coroa
+    Items:
+      - Index: 0
+        Item: Aquarius_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Crown 
+            Amount: 1
+          - Index: 1
+            Item: Iron 
+            Amount: 200
+          - Index: 2
+            Item: Gold 
+            Amount: 200
+          - Index: 3
+            Item: Steel 
+            Amount: 200
+          - Index: 4
+            Item: Hydra_Card 
+            Amount: 1
+      - Index: 1
+        Item: Aries_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Crown 
+            Amount: 1
+          - Index: 1
+            Item: Iron 
+            Amount: 200
+          - Index: 2
+            Item: Gold 
+            Amount: 200
+          - Index: 3
+            Item: Steel 
+            Amount: 200
+          - Index: 4
+            Item: Goat_Card 
+            Amount: 1
+      - Index: 2
+        Item: Cancer_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Crown 
+            Amount: 1
+          - Index: 1
+            Item: Iron 
+            Amount: 200
+          - Index: 2
+            Item: Gold 
+            Amount: 200
+          - Index: 3
+            Item: Steel 
+            Amount: 200
+          - Index: 4
+            Item: Vadon_Card 
+            Amount: 1
+      - Index: 3
+        Item: Capricon_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Crown 
+            Amount: 1
+          - Index: 1
+            Item: Iron 
+            Amount: 200
+          - Index: 2
+            Item: Gold 
+            Amount: 200
+          - Index: 3
+            Item: Steel 
+            Amount: 200
+          - Index: 4
+            Item: Goat_Card 
+            Amount: 1
+      - Index: 4
+        Item: Scorpio_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Crown 
+            Amount: 1
+          - Index: 1
+            Item: Iron 
+            Amount: 200
+          - Index: 2
+            Item: Gold 
+            Amount: 200
+          - Index: 3
+            Item: Steel 
+            Amount: 200
+          - Index: 4
+            Item: Scorpion_Card 
+            Amount: 1
+      - Index: 5
+        Item: Gemini_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Crown 
+            Amount: 1
+          - Index: 1
+            Item: Iron 
+            Amount: 200
+          - Index: 2
+            Item: Gold 
+            Amount: 200
+          - Index: 3
+            Item: Steel 
+            Amount: 200
+          - Index: 4
+            Item: Gemini_Card 
+            Amount: 1
+      - Index: 6
+        Item: Leo_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Crown 
+            Amount: 1
+          - Index: 1
+            Item: Iron 
+            Amount: 200
+          - Index: 2
+            Item: Gold 
+            Amount: 200
+          - Index: 3
+            Item: Steel 
+            Amount: 200
+          - Index: 4
+            Item: Hilsrion_Card 
+            Amount: 1
+      - Index: 7
+        Item: Libra_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Crown 
+            Amount: 1
+          - Index: 1
+            Item: Iron 
+            Amount: 200
+          - Index: 2
+            Item: Gold 
+            Amount: 200
+          - Index: 3
+            Item: Steel 
+            Amount: 200
+          - Index: 4
+            Item: Hill_Wind_Card 
+            Amount: 1
+      - Index: 8
+        Item: Pisces_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Crown 
+            Amount: 1
+          - Index: 1
+            Item: Iron 
+            Amount: 200
+          - Index: 2
+            Item: Gold 
+            Amount: 200
+          - Index: 3
+            Item: Steel 
+            Amount: 200
+          - Index: 4
+            Item: Sword_Fish_Card 
+            Amount: 1
+      - Index: 9
+        Item: Sagittarius_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Crown 
+            Amount: 1
+          - Index: 1
+            Item: Iron 
+            Amount: 200
+          - Index: 2
+            Item: Gold 
+            Amount: 200
+          - Index: 3
+            Item: Steel 
+            Amount: 200
+          - Index: 4
+            Item: Nightmare_Card 
+            Amount: 1
+      - Index: 10
+        Item: Taurus_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Crown 
+            Amount: 1
+          - Index: 1
+            Item: Iron 
+            Amount: 200
+          - Index: 2
+            Item: Gold 
+            Amount: 200
+          - Index: 3
+            Item: Steel 
+            Amount: 200
+          - Index: 4
+            Item: Minorous_Card 
+            Amount: 1
+      - Index: 11
+        Item: Virgo_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Crown 
+            Amount: 1
+          - Index: 1
+            Item: Iron 
+            Amount: 200
+          - Index: 2
+            Item: Gold 
+            Amount: 200
+          - Index: 3
+            Item: Steel 
+            Amount: 200
+          - Index: 4
+            Item: Sohee_Card 
+            Amount: 1
+###################### Quest trocado de Frutos #########################
+  - Name: fruto_box
+    Items:
+      - Index: 0
+        Item: Yggdrasilberry
+        RequiredItems:
+          - Index: 0
+            Item: Seed_Of_Yggdrasil 
+            Amount: 1
+      - Index: 1
+        Item: Seed_Of_Yggdrasil
+        RequiredItems:
+          - Index: 0
+            Item: Unripe_Fruit 
+            Amount: 1
+      - Index: 2
+        Item: Iggdrasilberry_Box
+        RequiredItems:
+          - Index: 0
+            Item: Yggdrasilberry 
+            Amount: 15
+      - Index: 3
+        Item: Yggdrasil_Seed_Box
+        RequiredItems:
+          - Index: 0
+            Item: Seed_Of_Yggdrasil 
+            Amount: 30
+###################### Quest trocado de Frutos #########################
+  - Name: arma_aprimorado
+    Items:
+      - Index: 0
+        Item: Upg_Dagger
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 500
+      - Index: 1
+        Item: Upg_Twohand_Sword
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 500
+      - Index: 2
+        Item: Upg_Katar
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 500
+      - Index: 3
+        Item: Upg_Lance
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 500
+      - Index: 4
+        Item: Upg_Mace
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 500
+      - Index: 5
+        Item: Upg_Revolver
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 500
+      - Index: 6
+        Item: Upg_Huuma_Shuriken
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 500
+  - Name: armadura_aprimorado
+    Items:
+      - Index: 0
+        Item: Upg_Boots
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 100
+      - Index: 1
+        Item: Upg_Greave
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 100
+      - Index: 2
+        Item: Improved_Tights
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 100
+      - Index: 3
+        Item: Upg_Clip
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 100
+###################### Quest trocado de Frutos #########################
+  - Name: itens_box
+    Items:
+      - Index: 0
+        Item: Battle_Manual
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 50
+      - Index: 1
+        Item: Reward_Job_BM25
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 50
+      - Index: 2
+        Item: E_Med_Life_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 50
+      - Index: 3
+        Item: B_Def_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 50
+      - Index: 4
+        Item: E_Small_Life_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 50
+      - Index: 5
+        Item: S_Mdef_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 50
+      - Index: 6
+        Item: Bubble_Gum
+        RequiredItems:
+          - Index: 0
+            Item: Golden_Coin_ 
+            Amount: 50

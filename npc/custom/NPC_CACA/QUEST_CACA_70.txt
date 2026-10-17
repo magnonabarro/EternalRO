@@ -1,0 +1,54 @@
+sala_caca,3,2,5	script	Caça LvL 70#NPC	47,{
+
+	mes "[Caça LvL 70]";
+	mes "Olá aventureiro!";
+	next;
+
+	switch(select("Iniciar Caça LvL 70","Entregar Recompensa","Cancelar")){
+		case 1:
+			callsub S_Start;
+			end;
+		case 2:
+			callsub S_Complete;
+			end;
+		default:
+			close;
+	}
+	end;
+
+//==============================
+// INICIAR QUEST
+//==============================
+S_Start:
+
+	if (checkquest(60314) >= 0) {
+		mes "[Caça LvL 70]";
+		mes "Você já iniciou esta missão!";
+		close;
+	}
+
+	setquest 60314;
+	mes "[Caça LvL 70]";
+	mes "Cace todos os dragões e volte quando terminar!";
+	close;
+	end;
+
+//==============================
+// ENTREGA
+//==============================
+S_Complete:
+
+	if (checkquest(60314,HUNTING) == 2) {
+		erasequest 60314;
+		mes "[Caça LvL 70]";
+		mes "Excelente trabalho!";
+		getexp 30000,20000;
+		getitem Silver_Coin,40;
+		close;
+	} else {
+		mes "[Caça LvL 70]";
+		mes "Você ainda não derrotou todos os dragões.";
+		close;
+	}
+	end;
+}

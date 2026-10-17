@@ -1,0 +1,794 @@
+diff --git a/src/custom/script.inc b/src/custom/script.inc
+index 839b990..d11ccd8 100644
+--- a/src/custom/script.inc
++++ b/src/custom/script.inc
+@@ -17,3 +17,127 @@
+ //	script_pushint(st,1);
+ //	return 0;
+ //}
++
++BUILDIN_FUNC(set_custom_rate)
++{
++	map_session_data* sd;
++	int type = script_getnum(st,2),
++		value = script_getnum(st,3);
++
++	if( !script_charid2sd(4,sd) ) {
++		script_pushint(st,0);
++		return SCRIPT_CMD_FAILURE;
++	}
++
++	switch( type ) {
++		case CR_BASE_EXP_RATE:			sd->custom_rate.base_exp_rate = value; break;
++		case CR_JOB_EXP_RATE:			sd->custom_rate.job_exp_rate = value; break;
++		case CR_MVP_EXP_RATE:			sd->custom_rate.mvp_exp_rate = value; break;
++		case CR_QUEST_EXP_RATE:			sd->custom_rate.quest_exp_rate = value; break;
++		case CR_HEAL_EXP_RATE:			sd->custom_rate.heal_exp = value; break;
++		case CR_VIP_BASE_EXP_INCREASE:	sd->custom_rate.vip_base_exp_increase = value; break;
++		case CR_VIP_JOB_EXP_INCREASE:	sd->custom_rate.vip_job_exp_increase = value; break;
++		case CR_VIP_BM_INCREASE:		sd->custom_rate.vip_bm_increase = value; break;
++		case CR_VIP_DROP_INCREASE:		sd->custom_rate.vip_drop_increase = value; break;
++		case CR_IT_RATE_COMMON:			sd->custom_rate.item_rate_common = value; break;
++		case CR_IT_RATE_COMMON_BOSS:	sd->custom_rate.item_rate_common_boss = value; break;
++		case CR_IT_RATE_COMMON_MVP:		sd->custom_rate.item_rate_common_mvp = value; break;
++		case CR_IT_DROP_COMMON_MIN:		sd->custom_rate.item_drop_common_min = value; break;
++		case CR_IT_DROP_COMMON_MAX:		sd->custom_rate.item_drop_common_max = value; break;
++		case CR_IT_RATE_HEAL:			sd->custom_rate.item_rate_heal = value; break;
++		case CR_IT_RATE_HEAL_BOSS:		sd->custom_rate.item_rate_heal_boss = value; break;
++		case CR_IT_RATE_HEAL_MVP:		sd->custom_rate.item_rate_heal_mvp = value; break;
++		case CR_IT_DROP_HEAL_MIN:		sd->custom_rate.item_drop_heal_min = value; break;
++		case CR_IT_DROP_HEAL_MAX:		sd->custom_rate.item_drop_heal_max = value; break;
++		case CR_IT_RATE_USE:			sd->custom_rate.item_rate_use = value; break;
++		case CR_IT_RATE_USE_BOSS:		sd->custom_rate.item_rate_use_boss = value; break;
++		case CR_IT_RATE_USE_MVP:		sd->custom_rate.item_rate_use_mvp = value; break;
++		case CR_IT_DROP_USE_MIN:		sd->custom_rate.item_drop_use_min = value; break;
++		case CR_IT_DROP_USE_MAX:		sd->custom_rate.item_drop_use_max = value; break;
++		case CR_IT_RATE_EQUIP:			sd->custom_rate.item_rate_equip = value; break;
++		case CR_IT_RATE_EQUIP_BOSS:		sd->custom_rate.item_rate_equip_boss = value; break;
++		case CR_IT_RATE_EQUIP_MVP:		sd->custom_rate.item_rate_equip_mvp = value; break;
++		case CR_IT_DROP_EQUIP_MIN:		sd->custom_rate.item_drop_equip_min = value; break;
++		case CR_IT_DROP_EQUIP_MAX:		sd->custom_rate.item_drop_equip_max = value; break;
++		case CR_IT_RATE_CARD:			sd->custom_rate.item_rate_card = value; break;
++		case CR_IT_RATE_CARD_BOSS:		sd->custom_rate.item_rate_card_boss = value; break;
++		case CR_IT_RATE_CARD_MVP:		sd->custom_rate.item_rate_card_mvp = value; break;
++		case CR_IT_DROP_CARD_MIN:		sd->custom_rate.item_drop_card_min = value; break;
++		case CR_IT_DROP_CARD_MAX:		sd->custom_rate.item_drop_card_max = value; break;
++		case CR_IT_RATE_MVP:			sd->custom_rate.item_rate_mvp = value; break;
++		case CR_IT_DROP_MVP_MIN:		sd->custom_rate.item_drop_mvp_min = value; break;
++		case CR_IT_DROP_MVP_MAX:		sd->custom_rate.item_drop_mvp_max = value; break;
++		case CR_IT_RATE_TREASURE:		sd->custom_rate.item_rate_treasure = value; break;
++		case CR_IT_DROP_TREASURE_MIN:	sd->custom_rate.item_drop_treasure_min = value; break;
++		case CR_IT_DROP_TREASURE_MAX:	sd->custom_rate.item_drop_treasure_max = value; break;
++		default:
++			ShowError("buildin_set_custom_rate: Invalid type %d\n", type);
++			script_pushint(st,0);
++			return SCRIPT_CMD_SUCCESS;
++	}
++
++	script_pushint(st,1);
++	return SCRIPT_CMD_SUCCESS;
++}
++
++BUILDIN_FUNC(get_custom_rate)
++{
++	map_session_data* sd;
++	int type = script_getnum(st,2),
++		value = 0;
++
++	if( !script_charid2sd(3,sd) ) {
++		script_pushint(st,0);
++		return SCRIPT_CMD_FAILURE;
++	}
++
++	switch( type ) {
++		case CR_BASE_EXP_RATE:			value = sd->custom_rate.base_exp_rate; break;
++		case CR_JOB_EXP_RATE:			value = sd->custom_rate.job_exp_rate; break;
++		case CR_MVP_EXP_RATE:			value = sd->custom_rate.mvp_exp_rate; break;
++		case CR_QUEST_EXP_RATE:			value = sd->custom_rate.quest_exp_rate; break;
++		case CR_HEAL_EXP_RATE:			value = sd->custom_rate.heal_exp; break;
++		case CR_VIP_BASE_EXP_INCREASE:	value = sd->custom_rate.vip_base_exp_increase; break;
++		case CR_VIP_JOB_EXP_INCREASE:	value = sd->custom_rate.vip_job_exp_increase; break;
++		case CR_VIP_BM_INCREASE:		value = sd->custom_rate.vip_bm_increase; break;
++		case CR_VIP_DROP_INCREASE:		value = sd->custom_rate.vip_drop_increase; break;
++		case CR_IT_RATE_COMMON:			value = sd->custom_rate.item_rate_common; break;
++		case CR_IT_RATE_COMMON_BOSS:	value = sd->custom_rate.item_rate_common_boss; break;
++		case CR_IT_RATE_COMMON_MVP:		value = sd->custom_rate.item_rate_common_mvp; break;
++		case CR_IT_DROP_COMMON_MIN:		value = sd->custom_rate.item_drop_common_min; break;
++		case CR_IT_DROP_COMMON_MAX:		value = sd->custom_rate.item_drop_common_max; break;
++		case CR_IT_RATE_HEAL:			value = sd->custom_rate.item_rate_heal; break;
++		case CR_IT_RATE_HEAL_BOSS:		value = sd->custom_rate.item_rate_heal_boss; break;
++		case CR_IT_RATE_HEAL_MVP:		value = sd->custom_rate.item_rate_heal_mvp; break;
++		case CR_IT_DROP_HEAL_MIN:		value = sd->custom_rate.item_drop_heal_min; break;
++		case CR_IT_DROP_HEAL_MAX:		value = sd->custom_rate.item_drop_heal_max; break;
++		case CR_IT_RATE_USE:			value = sd->custom_rate.item_rate_use; break;
++		case CR_IT_RATE_USE_BOSS:		value = sd->custom_rate.item_rate_use_boss; break;
++		case CR_IT_RATE_USE_MVP:		value = sd->custom_rate.item_rate_use_mvp; break;
++		case CR_IT_DROP_USE_MIN:		value = sd->custom_rate.item_drop_use_min; break;
++		case CR_IT_DROP_USE_MAX:		value = sd->custom_rate.item_drop_use_max; break;
++		case CR_IT_RATE_EQUIP:			value = sd->custom_rate.item_rate_equip; break;
++		case CR_IT_RATE_EQUIP_BOSS:		value = sd->custom_rate.item_rate_equip_boss; break;
++		case CR_IT_RATE_EQUIP_MVP:		value = sd->custom_rate.item_rate_equip_mvp; break;
++		case CR_IT_DROP_EQUIP_MIN:		value = sd->custom_rate.item_drop_equip_min; break;
++		case CR_IT_DROP_EQUIP_MAX:		value = sd->custom_rate.item_drop_equip_max; break;
++		case CR_IT_RATE_CARD:			value = sd->custom_rate.item_rate_card; break;
++		case CR_IT_RATE_CARD_BOSS:		value = sd->custom_rate.item_rate_card_boss; break;
++		case CR_IT_RATE_CARD_MVP:		value = sd->custom_rate.item_rate_card_mvp; break;
++		case CR_IT_DROP_CARD_MIN:		value = sd->custom_rate.item_drop_card_min; break;
++		case CR_IT_DROP_CARD_MAX:		value = sd->custom_rate.item_drop_card_max; break;
++		case CR_IT_RATE_MVP:			value = sd->custom_rate.item_rate_mvp; break;
++		case CR_IT_DROP_MVP_MIN:		value = sd->custom_rate.item_drop_mvp_min; break;
++		case CR_IT_DROP_MVP_MAX:		value = sd->custom_rate.item_drop_mvp_max; break;
++		case CR_IT_RATE_TREASURE:		value = sd->custom_rate.item_rate_treasure; break;
++		case CR_IT_DROP_TREASURE_MIN:	value = sd->custom_rate.item_drop_treasure_min; break;
++		case CR_IT_DROP_TREASURE_MAX:	value = sd->custom_rate.item_drop_treasure_max; break;
++		default:
++			ShowError("buildin_get_custom_rate: Invalid type %d\n", type);
++			script_pushint(st,0);
++			return SCRIPT_CMD_SUCCESS;
++	}
++
++	script_pushint(st,value);
++	return SCRIPT_CMD_SUCCESS;
++}
+diff --git a/src/custom/script_def.inc b/src/custom/script_def.inc
+index 8863992..2b74cab 100644
+--- a/src/custom/script_def.inc
++++ b/src/custom/script_def.inc
+@@ -9,3 +9,5 @@
+  **/
+ 
+ //BUILDIN_DEF(example,""),
++	BUILDIN_DEF(set_custom_rate, "ii?"),
++	BUILDIN_DEF(get_custom_rate, "i?"),
+diff --git a/src/map/atcommand.cpp b/src/map/atcommand.cpp
+index f367e9b..b24a713 100644
+--- a/src/map/atcommand.cpp
++++ b/src/map/atcommand.cpp
+@@ -8114,10 +8114,16 @@ ACMD_FUNC(mobinfo)
+ 
+ 		t_exp base_exp = mob->base_exp;
+ 		t_exp job_exp = mob->job_exp;
++		if (sd->custom_rate.base_exp_rate > 0 && mob->baseExpSet > 0)
++			base_exp = static_cast<t_exp>(cap_value((double)mob->baseExpSet * sd->custom_rate.base_exp_rate / 100.0, 0, MAX_EXP));
++		if (sd->custom_rate.job_exp_rate > 0 && mob->jobExpSet > 0)
++			job_exp = static_cast<t_exp>(cap_value((double)mob->jobExpSet * sd->custom_rate.job_exp_rate / 100.0, 0, MAX_EXP));
+ 
+ 		if (pc_isvip(sd)) { // Display EXP rate increase for VIP
+-			base_exp += (base_exp * battle_config.vip_base_exp_increase) / 100;
+-			job_exp += (job_exp * battle_config.vip_job_exp_increase) / 100;
++			const int32 vip_base_rate = sd->custom_rate.vip_base_exp_increase > 0 ? sd->custom_rate.vip_base_exp_increase : battle_config.vip_base_exp_increase;
++			const int32 vip_job_rate = sd->custom_rate.vip_job_exp_increase > 0 ? sd->custom_rate.vip_job_exp_increase : battle_config.vip_job_exp_increase;
++			base_exp += (base_exp * vip_base_rate) / 100;
++			job_exp += (job_exp * vip_job_rate) / 100;
+ 		}
+ #ifdef RENEWAL_EXP
+ 		if( battle_config.atcommand_mobinfo_type ) {
+@@ -8173,7 +8179,11 @@ ACMD_FUNC(mobinfo)
+ 				if (id == nullptr)
+ 					continue;
+ 
+-				int32 droprate = mob_getdroprate( sd, mob, entry->rate, drop_modifier );
++				int32 base_rate = static_cast<int32>(entry->rate);
++				int32 custom_rate = base_rate;
++				if (pc_custom_mob_rate(sd, mob, entry, &custom_rate))
++					base_rate = custom_rate;
++				int32 droprate = mob_getdroprate(sd, mob, base_rate, drop_modifier);
+ 
+ 				sprintf(atcmd_output2, " - %s  %02.02f%%", item_db.create_item_link( id ).c_str(), (float)droprate / 100);
+ 				strcat(atcmd_output, atcmd_output2);
+@@ -8210,8 +8220,12 @@ ACMD_FUNC(mobinfo)
+ 					if (id == nullptr)
+ 						continue;
+ 
+-					//Because if there are 3 MVP drops at 50%, the first has a chance of 50%, the second 25% and the third 12.5%
+-					float mvppercent = (float)entry->rate * mvpremain / 10000.0f;
++					int32 mvp_rate = static_cast<int32>(entry->rate);
++					int32 custom_mvp_rate = mvp_rate;
++					if (pc_custom_mob_rate_mvp(sd, mob, entry, &custom_mvp_rate))
++						mvp_rate = custom_mvp_rate;
++					// Because if there are 3 MVP drops at 50%, the first has a chance of 50%, the second 25% and the third 12.5%.
++					float mvppercent = (float)mvp_rate * mvpremain / 10000.0f;
+ 					if(battle_config.item_drop_mvp_mode == 0) {
+ 						mvpremain -= mvppercent;
+ 					}
+@@ -8856,39 +8870,62 @@ ACMD_FUNC(mutearea)
+ ACMD_FUNC(rates)
+ {
+ 	char buf[CHAT_SIZE_MAX];
+-
+ 	nullpo_ret(sd);
+ 	memset(buf, '\0', sizeof(buf));
+ 
++	int32 base_exp_rate = sd->custom_rate.base_exp_rate > 0 ? sd->custom_rate.base_exp_rate : battle_config.base_exp_rate;
++	int32 job_exp_rate = sd->custom_rate.job_exp_rate > 0 ? sd->custom_rate.job_exp_rate : battle_config.job_exp_rate;
++	int32 vip_base_exp_increase = sd->custom_rate.vip_base_exp_increase > 0 ? sd->custom_rate.vip_base_exp_increase : battle_config.vip_base_exp_increase;
++	int32 vip_job_exp_increase = sd->custom_rate.vip_job_exp_increase > 0 ? sd->custom_rate.vip_job_exp_increase : battle_config.vip_job_exp_increase;
++	int32 vip_drop_increase = sd->custom_rate.vip_drop_increase > 0 ? sd->custom_rate.vip_drop_increase : battle_config.vip_drop_increase;
++
++	int32 item_rate_common = sd->custom_rate.item_rate_common > 0 ? sd->custom_rate.item_rate_common : battle_config.item_rate_common;
++	int32 item_rate_heal = sd->custom_rate.item_rate_heal > 0 ? sd->custom_rate.item_rate_heal : battle_config.item_rate_heal;
++	int32 item_rate_use = sd->custom_rate.item_rate_use > 0 ? sd->custom_rate.item_rate_use : battle_config.item_rate_use;
++	int32 item_rate_equip = sd->custom_rate.item_rate_equip > 0 ? sd->custom_rate.item_rate_equip : battle_config.item_rate_equip;
++	int32 item_rate_card = sd->custom_rate.item_rate_card > 0 ? sd->custom_rate.item_rate_card : battle_config.item_rate_card;
++	int32 item_rate_common_boss = sd->custom_rate.item_rate_common_boss > 0 ? sd->custom_rate.item_rate_common_boss : battle_config.item_rate_common_boss;
++	int32 item_rate_heal_boss = sd->custom_rate.item_rate_heal_boss > 0 ? sd->custom_rate.item_rate_heal_boss : battle_config.item_rate_heal_boss;
++	int32 item_rate_use_boss = sd->custom_rate.item_rate_use_boss > 0 ? sd->custom_rate.item_rate_use_boss : battle_config.item_rate_use_boss;
++	int32 item_rate_equip_boss = sd->custom_rate.item_rate_equip_boss > 0 ? sd->custom_rate.item_rate_equip_boss : battle_config.item_rate_equip_boss;
++	int32 item_rate_card_boss = sd->custom_rate.item_rate_card_boss > 0 ? sd->custom_rate.item_rate_card_boss : battle_config.item_rate_card_boss;
++	int32 item_rate_common_mvp = sd->custom_rate.item_rate_common_mvp > 0 ? sd->custom_rate.item_rate_common_mvp : battle_config.item_rate_common_mvp;
++	int32 item_rate_heal_mvp = sd->custom_rate.item_rate_heal_mvp > 0 ? sd->custom_rate.item_rate_heal_mvp : battle_config.item_rate_heal_mvp;
++	int32 item_rate_use_mvp = sd->custom_rate.item_rate_use_mvp > 0 ? sd->custom_rate.item_rate_use_mvp : battle_config.item_rate_use_mvp;
++	int32 item_rate_equip_mvp = sd->custom_rate.item_rate_equip_mvp > 0 ? sd->custom_rate.item_rate_equip_mvp : battle_config.item_rate_equip_mvp;
++	int32 item_rate_card_mvp = sd->custom_rate.item_rate_card_mvp > 0 ? sd->custom_rate.item_rate_card_mvp : battle_config.item_rate_card_mvp;
++	int32 item_rate_mvp = sd->custom_rate.item_rate_mvp > 0 ? sd->custom_rate.item_rate_mvp : battle_config.item_rate_mvp;
++	int32 item_rate_treasure = sd->custom_rate.item_rate_treasure > 0 ? sd->custom_rate.item_rate_treasure : battle_config.item_rate_treasure;
++
+ 	snprintf(buf, CHAT_SIZE_MAX, msg_txt(sd,1298), // Experience rates: Base %.2fx / Job %.2fx
+-		(battle_config.base_exp_rate + (pc_isvip(sd) ? (battle_config.vip_base_exp_increase * battle_config.base_exp_rate) / 100 : 0)) / 100.,
+-		(battle_config.job_exp_rate + (pc_isvip(sd) ? (battle_config.vip_job_exp_increase * battle_config.job_exp_rate) / 100 : 0)) / 100.);
++		(base_exp_rate + (pc_isvip(sd) ? (vip_base_exp_increase * base_exp_rate) / 100 : 0)) / 100.,
++		(job_exp_rate + (pc_isvip(sd) ? (vip_job_exp_increase * job_exp_rate) / 100 : 0)) / 100.);
+ 	clif_displaymessage(fd, buf);
+ 	snprintf(buf, CHAT_SIZE_MAX, msg_txt(sd,1299), // Normal Drop Rates: Common %.2fx / Healing %.2fx / Usable %.2fx / Equipment %.2fx / Card %.2fx
+-		(battle_config.item_rate_common + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_common) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_heal + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_heal) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_use + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_use) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_equip + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_equip) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_card + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_card) / 100 : 0)) / 100.);
++		(item_rate_common + (pc_isvip(sd) ? (vip_drop_increase * item_rate_common) / 100 : 0)) / 100.,
++		(item_rate_heal + (pc_isvip(sd) ? (vip_drop_increase * item_rate_heal) / 100 : 0)) / 100.,
++		(item_rate_use + (pc_isvip(sd) ? (vip_drop_increase * item_rate_use) / 100 : 0)) / 100.,
++		(item_rate_equip + (pc_isvip(sd) ? (vip_drop_increase * item_rate_equip) / 100 : 0)) / 100.,
++		(item_rate_card + (pc_isvip(sd) ? (vip_drop_increase * item_rate_card) / 100 : 0)) / 100.);
+ 	clif_displaymessage(fd, buf);
+ 	snprintf(buf, CHAT_SIZE_MAX, msg_txt(sd,1300), // Boss Drop Rates: Common %.2fx / Healing %.2fx / Usable %.2fx / Equipment %.2fx / Card %.2fx
+-		(battle_config.item_rate_common_boss + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_common_boss) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_heal_boss + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_heal_boss) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_use_boss + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_use_boss) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_equip_boss + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_equip_boss) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_card_boss + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_card_boss) / 100 : 0)) / 100.);
++		(item_rate_common_boss + (pc_isvip(sd) ? (vip_drop_increase * item_rate_common_boss) / 100 : 0)) / 100.,
++		(item_rate_heal_boss + (pc_isvip(sd) ? (vip_drop_increase * item_rate_heal_boss) / 100 : 0)) / 100.,
++		(item_rate_use_boss + (pc_isvip(sd) ? (vip_drop_increase * item_rate_use_boss) / 100 : 0)) / 100.,
++		(item_rate_equip_boss + (pc_isvip(sd) ? (vip_drop_increase * item_rate_equip_boss) / 100 : 0)) / 100.,
++		(item_rate_card_boss + (pc_isvip(sd) ? (vip_drop_increase * item_rate_card_boss) / 100 : 0)) / 100.);
+ 	clif_displaymessage(fd, buf);
+ 	snprintf(buf, CHAT_SIZE_MAX, msg_txt(sd,1024), // MVP Drop Rates: Common %.2fx / Healing %.2fx / Usable %.2fx / Equipment %.2fx / Card %.2fx
+-		(battle_config.item_rate_common_mvp + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_common_mvp) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_heal_mvp + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_heal_mvp) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_use_mvp + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_use_mvp) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_equip_mvp + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_equip_mvp) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_card_mvp + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_card_mvp) / 100 : 0)) / 100.);
++		(item_rate_common_mvp + (pc_isvip(sd) ? (vip_drop_increase * item_rate_common_mvp) / 100 : 0)) / 100.,
++		(item_rate_heal_mvp + (pc_isvip(sd) ? (vip_drop_increase * item_rate_heal_mvp) / 100 : 0)) / 100.,
++		(item_rate_use_mvp + (pc_isvip(sd) ? (vip_drop_increase * item_rate_use_mvp) / 100 : 0)) / 100.,
++		(item_rate_equip_mvp + (pc_isvip(sd) ? (vip_drop_increase * item_rate_equip_mvp) / 100 : 0)) / 100.,
++		(item_rate_card_mvp + (pc_isvip(sd) ? (vip_drop_increase * item_rate_card_mvp) / 100 : 0)) / 100.);
+ 	clif_displaymessage(fd, buf);
+ 	snprintf(buf, CHAT_SIZE_MAX, msg_txt(sd,1301), // Other Drop Rates: MvP %.2fx / Card-Based %.2fx / Treasure %.2fx
+-		(battle_config.item_rate_mvp + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_mvp) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_adddrop + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_adddrop) / 100 : 0)) / 100.,
+-		(battle_config.item_rate_treasure + (pc_isvip(sd) ? (battle_config.vip_drop_increase * battle_config.item_rate_treasure) / 100 : 0)) / 100.);
++		(item_rate_mvp + (pc_isvip(sd) ? (vip_drop_increase * item_rate_mvp) / 100 : 0)) / 100.,
++		(battle_config.item_rate_adddrop + (pc_isvip(sd) ? (vip_drop_increase * battle_config.item_rate_adddrop) / 100 : 0)) / 100.,
++		(item_rate_treasure + (pc_isvip(sd) ? (vip_drop_increase * item_rate_treasure) / 100 : 0)) / 100.);
+ 	clif_displaymessage(fd, buf);
+ 
+ 	return 0;
+diff --git a/src/map/clif.cpp b/src/map/clif.cpp
+index 82f2824..f44e8d2 100644
+--- a/src/map/clif.cpp
++++ b/src/map/clif.cpp
+@@ -11182,6 +11182,14 @@ void clif_parse_LoadEndAck(int32 fd,map_session_data *sd)
+ 	}
+ #endif
+ 
++	if (sd->custom_rate.base_exp_rate == 100 || sd->custom_rate.base_exp_rate == 200 || sd->custom_rate.base_exp_rate == 300) {
++		const int32 rate_multiplier = sd->custom_rate.base_exp_rate / 100;
++		const std::string effect = std::string("EFST_") + std::to_string(rate_multiplier) + "XCR_BASE_EXP_RATE";
++		int64 constant;
++		if (script_get_constant(effect.c_str(), &constant))
++			clif_status_change(&sd->bl, static_cast<int>(constant), 1, INFINITE_TICK, 0, 0, 0);
++	}
++
+ 	sd->state.connect_new = 0;
+ 	sd->state.changemap = false;
+ }
+diff --git a/src/map/mob.cpp b/src/map/mob.cpp
+index c538909..c63ea11 100644
+--- a/src/map/mob.cpp
++++ b/src/map/mob.cpp
+@@ -2855,7 +2855,7 @@ int32 mob_getdroprate(block_list *src, std::shared_ptr<s_mob_db> mob, int32 base
+ 
+ 			if (pc_isvip(sd)) { // Increase item drop rate for VIP.
+ 				// Unsure how the VIP and other bonuses should stack, this is additive.
+-				drop_rate_bonus += battle_config.vip_drop_increase;
++				drop_rate_bonus += sd->custom_rate.vip_drop_increase > 0 ? sd->custom_rate.vip_drop_increase : battle_config.vip_drop_increase;
+ 				cap = battle_config.drop_rate_cap_vip;
+ 			} else
+ 				cap = battle_config.drop_rate_cap;
+@@ -3152,23 +3152,27 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
+ 					zeny*=rnd()%250;
+ 			}
+ 
+-			if (map_getmapflag(m, MF_NOBASEEXP) || !md->db->base_exp)
++			const bool custom_base_exp = tmpsd[i]->custom_rate.base_exp_rate > 0 && md->db->baseExpSet > 0;
++			const bool custom_job_exp = tmpsd[i]->custom_rate.job_exp_rate > 0 && md->db->jobExpSet > 0;
++			if (map_getmapflag(m, MF_NOBASEEXP) || (!custom_base_exp && !md->db->base_exp))
+ 				base_exp = 0;
+ 			else {
+-				double exp = apply_rate2(md->db->base_exp, per, 1);
++				t_exp base_rate_exp = custom_base_exp ? static_cast<t_exp>(cap_value((double)md->db->baseExpSet * tmpsd[i]->custom_rate.base_exp_rate / 100.0, 0, MAX_EXP)) : md->db->base_exp;
++				double exp = apply_rate2(base_rate_exp, per, 1);
+ 				exp = apply_rate(exp, bonus);
+ 				exp = apply_rate(exp, map_getmapflag(m, MF_BEXP));
+ 				base_exp = (t_exp)cap_value(exp, 1, MAX_EXP);
+ 			}
+ 
+-			if (map_getmapflag(m, MF_NOJOBEXP) || !md->db->job_exp
++			if (map_getmapflag(m, MF_NOJOBEXP) || (!custom_job_exp && !md->db->job_exp)
+ #ifndef RENEWAL
+ 				|| entry.flag == MDLF_HOMUN // Homun earned job-exp is always lost.
+ #endif
+ 			)
+ 				job_exp = 0;
+ 			else {
+-				double exp = apply_rate2(md->db->job_exp, per, 1);
++				t_exp job_rate_exp = custom_job_exp ? static_cast<t_exp>(cap_value((double)md->db->jobExpSet * tmpsd[i]->custom_rate.job_exp_rate / 100.0, 0, MAX_EXP)) : md->db->job_exp;
++				double exp = apply_rate2(job_rate_exp, per, 1);
+ 				exp = apply_rate(exp, bonus);
+ 				exp = apply_rate(exp, map_getmapflag(m, MF_JEXP));
+ 				job_exp = (t_exp)cap_value(exp, 1, MAX_EXP);
+@@ -3320,6 +3324,9 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
+ 		}
+ 
+ 		// Regular mob drops drop after script-granted drops
++		map_session_data* drop_sd = sd;
++		if (src != nullptr && src->type != BL_PC && !md->state.npc_killmonster)
++			drop_sd = BL_CAST(BL_PC, battle_get_master(src));
+ 		for( const std::shared_ptr<s_mob_drop>& entry : md->db->dropitem ){
+ 			if (entry->nameid == 0)
+ 				continue;
+@@ -3329,7 +3336,11 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
+ 			if (it == nullptr)
+ 				continue;
+ 
+-			drop_rate = mob_getdroprate(src, md->db, entry->rate, drop_modifier, md);
++			int32 base_drop_rate = static_cast<int32>(entry->rate);
++			int32 custom_drop_rate = base_drop_rate;
++			if (drop_sd != nullptr && pc_custom_mob_rate(drop_sd, md->db, entry, &custom_drop_rate))
++				base_drop_rate = custom_drop_rate;
++			drop_rate = mob_getdroprate(src, md->db, base_drop_rate, drop_modifier, md);
+ 
+ 			// attempt to drop the item
+ 			if (rnd() % 10000 >= drop_rate)
+@@ -3351,7 +3362,7 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
+ 			}
+ 			// Announce first, or else ditem will be freed. [Lance]
+ 			// By popular demand, use base drop rate for autoloot code. [Skotlex]
+-			mob_item_drop(md, dlist, ditem, 0, battle_config.autoloot_adjust ? drop_rate : entry->rate, homkillonly || merckillonly);
++			mob_item_drop(md, dlist, ditem, 0, battle_config.autoloot_adjust ? drop_rate : base_drop_rate, homkillonly || merckillonly);
+ 		}
+ 
+ 		// Ore Discovery (triggers if owner has loot priority, does not require to be the killer)
+@@ -3442,8 +3453,9 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
+ 		clif_mvp_effect( *mvp_sd );
+ 
+ 		//mapflag: noexp check [Lorky]
+-		if( md->db->mexp > 0 && !( map_getmapflag( m, MF_NOBASEEXP ) || type&2 ) ){
+-			log_mvp_exp = md->db->mexp;
++		const bool custom_mvp_exp = mvp_sd->custom_rate.mvp_exp_rate > 0 && md->db->mvpExpSet > 0;
++		if( (md->db->mexp > 0 || custom_mvp_exp) && !( map_getmapflag( m, MF_NOBASEEXP ) || type&2 ) ){
++			log_mvp_exp = custom_mvp_exp ? static_cast<t_exp>(cap_value((double)md->db->mvpExpSet * mvp_sd->custom_rate.mvp_exp_rate / 100.0, 0, MAX_EXP)) : md->db->mexp;
+ 
+ #if defined(RENEWAL_EXP)
+ 			int32 penalty = pc_level_penalty_mod( mvp_sd, PENALTY_MVP_EXP, nullptr, md );
+@@ -3488,7 +3500,10 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
+ 				if (i_data == nullptr)
+ 					continue;
+ 
+-				temp = entry->rate;
++				temp = static_cast<int32>(entry->rate);
++				int32 custom_mvp_rate = temp;
++				if (pc_custom_mob_rate_mvp(mvp_sd, md->db, entry, &custom_mvp_rate))
++					temp = custom_mvp_rate;
+ 
+ #if defined(RENEWAL_DROP)
+ 				temp = cap_value( apply_rate( temp, penalty ), 0, 10000 );
+@@ -4805,7 +4820,7 @@ int32 mob_clone_delete(mob_data *md){
+ }
+ 
+ //Adjusts the drop rate of item according to the criteria given. [Skotlex]
+-static uint32 mob_drop_adjust(int32 baserate, int32 rate_adjust, uint16 rate_min, uint16 rate_max)
++uint32 mob_drop_adjust(int32 baserate, int32 rate_adjust, uint16 rate_min, uint16 rate_max)
+ {
+ 	double rate = baserate;
+ 
+@@ -4827,7 +4842,7 @@ static uint32 mob_drop_adjust(int32 baserate, int32 rate_adjust, uint16 rate_min
+  * @param mob_id ID of the monster
+  * @param rate_adjust pointer to store ratio if found
+  */
+-static void item_dropratio_adjust(t_itemid nameid, int32 mob_id, int32 *rate_adjust)
++void item_dropratio_adjust(t_itemid nameid, int32 mob_id, int32 *rate_adjust)
+ {
+ 	std::shared_ptr<s_mob_item_drop_ratio> item_ratio = mob_item_drop_ratio.find(nameid);
+ 	if( item_ratio) {
+@@ -4917,6 +4932,7 @@ bool MobDatabase::parseDropNode( std::string nodeName, const ryml::NodeRef& node
+ 
+ 		drop->nameid = item->nameid;
+ 		drop->rate = rate;
++		drop->rateSet = rate; // Store the unmodified rate for per-character drop rates.
+ 		drop->steal_protected = steal;
+ 		drop->randomopt_group = group;
+ 
+@@ -5074,6 +5090,7 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
+ 		if (!this->asUInt64(node, "BaseExp", exp))
+ 			return 0;
+ 
++		mob->baseExpSet = exp;
+ 		mob->base_exp = static_cast<t_exp>(cap_value((double)exp * (double)battle_config.base_exp_rate / 100., 0, MAX_EXP));
+ 	}
+ 	
+@@ -5083,6 +5100,7 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
+ 		if (!this->asUInt64(node, "JobExp", exp))
+ 			return 0;
+ 
++		mob->jobExpSet = exp;
+ 		mob->job_exp = static_cast<t_exp>(cap_value((double)exp * (double)battle_config.job_exp_rate / 100., 0, MAX_EXP));
+ 	}
+ 	
+@@ -5092,6 +5110,7 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
+ 		if (!this->asUInt64(node, "MvpExp", exp))
+ 			return 0;
+ 
++		mob->mvpExpSet = exp;
+ 		mob->mexp = static_cast<t_exp>(cap_value((double)exp * (double)battle_config.mvp_exp_rate / 100., 0, MAX_EXP));
+ 	}
+ 
+diff --git a/src/map/mob.hpp b/src/map/mob.hpp
+index 47e1a32..7f2c3b4 100644
+--- a/src/map/mob.hpp
++++ b/src/map/mob.hpp
+@@ -256,6 +256,7 @@ struct s_mob_drop {
+ 	uint32 rate;
+ 	uint16 randomopt_group;
+ 	bool steal_protected;
++	uint32 rateSet{};
+ };
+ 
+ struct s_mob_db {
+@@ -281,6 +282,9 @@ struct s_mob_db {
+ 	std::string title;
+ 
+ 	e_mob_bosstype get_bosstype() const;
++	t_exp baseExpSet{};
++	t_exp jobExpSet{};
++	t_exp mvpExpSet{};
+ 	s_mob_db();
+ };
+ 
+@@ -581,6 +585,8 @@ void mvptomb_create(mob_data *md, char *killer, time_t time);
+ void mvptomb_destroy(mob_data *md);
+ 
+ void mob_setdropitem_option( item& itm, const std::shared_ptr<s_mob_drop>& mobdrop );
++void item_dropratio_adjust(t_itemid nameid, int32 mob_id, int32* rate_adjust);
++uint32 mob_drop_adjust(int32 baserate, int32 rate_adjust, uint16 rate_min, uint16 rate_max);
+ 
+ #define CHK_MOBSIZE(size) ((size) >= SZ_SMALL && (size) < SZ_MAX) /// Check valid Monster Size
+ 
+diff --git a/src/map/pc.cpp b/src/map/pc.cpp
+index 5405767..6b5ac82 100644
+--- a/src/map/pc.cpp
++++ b/src/map/pc.cpp
+@@ -2089,6 +2089,7 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
+ 	pc_group_pc_load(sd);
+ 
+ 	memcpy(&sd->status, st, sizeof(*st));
++	sd->custom_rate = {};
+ 
+ 	if (st->sex != sd->status.sex) {
+ 		clif_authfail_fd(sd->fd, 0);
+@@ -8425,16 +8426,19 @@ static void pc_calcexp(map_session_data *sd, t_exp *base_exp, t_exp *job_exp, bl
+ 			bonus += 15; // pk_mode additional exp if monster >20 levels [Valaris]
+ 
+ 		if (src && src->type == BL_MOB && pc_isvip(sd)) { // EXP bonus for VIP player
+-			vip_bonus_base = battle_config.vip_base_exp_increase;
+-			vip_bonus_job = battle_config.vip_job_exp_increase;
++			vip_bonus_base = sd->custom_rate.vip_base_exp_increase > 0 ? sd->custom_rate.vip_base_exp_increase : battle_config.vip_base_exp_increase;
++			vip_bonus_job = sd->custom_rate.vip_job_exp_increase > 0 ? sd->custom_rate.vip_job_exp_increase : battle_config.vip_job_exp_increase;
+ 		}
+ 	}
+ 
+ 	// Give EXPBOOST for quests even if src is nullptr.
+ 	if (sd->sc.getSCE(SC_EXPBOOST)) {
+ 		bonus += sd->sc.getSCE(SC_EXPBOOST)->val1;
+-		if (battle_config.vip_bm_increase && pc_isvip(sd)) // Increase Battle Manual EXP rate for VIP
+-			bonus += (sd->sc.getSCE(SC_EXPBOOST)->val1 / battle_config.vip_bm_increase);
++		if (pc_isvip(sd)) { // Increase Battle Manual EXP rate for VIP
++			int32 vip_bm_increase = sd->custom_rate.vip_bm_increase > 0 ? sd->custom_rate.vip_bm_increase : battle_config.vip_bm_increase;
++			if (vip_bm_increase > 0)
++				bonus += sd->sc.getSCE(SC_EXPBOOST)->val1 / vip_bm_increase;
++		}
+ 	}
+ 
+ 	if (sd->sc.getSCE(SC_PERIOD_PLUSEXP_2ND))
+@@ -13871,6 +13875,94 @@ uint32 JobDatabase::calc_baseap( const uint16 level, const std::shared_ptr<s_job
+ 	return static_cast<uint32>( base_ap );
+ }
+ 
++bool pc_custom_mob_rate_mvp(map_session_data* sd, const std::shared_ptr<s_mob_db>& mob, const std::shared_ptr<s_mob_drop>& drop, int32* rate) {
++	nullpo_retr(false, sd);
++	nullpo_retr(false, rate);
++
++	if (mob == nullptr || drop == nullptr || mob_is_clone(mob->id) || drop->nameid == 0 || drop->rateSet == 0)
++		return false;
++
++	const bool custom = sd->custom_rate.item_rate_mvp > 0 || sd->custom_rate.item_drop_mvp_min > 0 || sd->custom_rate.item_drop_mvp_max > 0;
++	if (!custom)
++		return false;
++
++	int32 rate_adjust = sd->custom_rate.item_rate_mvp > 0 ? sd->custom_rate.item_rate_mvp : battle_config.item_rate_mvp;
++	item_dropratio_adjust(drop->nameid, static_cast<int32>(mob->id), &rate_adjust);
++	const uint16 rate_min = sd->custom_rate.item_drop_mvp_min > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_mvp_min) : battle_config.item_drop_mvp_min;
++	const uint16 rate_max = sd->custom_rate.item_drop_mvp_max > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_mvp_max) : battle_config.item_drop_mvp_max;
++	*rate = static_cast<int32>(mob_drop_adjust(static_cast<int32>(drop->rateSet), rate_adjust, rate_min, rate_max));
++	return true;
++}
++
++bool pc_custom_mob_rate(map_session_data* sd, const std::shared_ptr<s_mob_db>& mob, const std::shared_ptr<s_mob_drop>& drop, int32* rate) {
++	nullpo_retr(false, sd);
++	nullpo_retr(false, rate);
++
++	if (mob == nullptr || drop == nullptr || mob_is_clone(mob->id) || drop->nameid == 0 || drop->rateSet == 0)
++		return false;
++
++	std::shared_ptr<item_data> item = item_db.find(drop->nameid);
++	if (item == nullptr)
++		return false;
++
++	int32 rate_adjust = 100;
++	uint16 rate_min = 1;
++	uint16 rate_max = 10000;
++	bool custom = false;
++
++	if (util::vector_exists(mob->race2, RC2_TREASURE)) {
++		custom = sd->custom_rate.item_rate_treasure > 0 || sd->custom_rate.item_drop_treasure_min > 0 || sd->custom_rate.item_drop_treasure_max > 0;
++		rate_adjust = sd->custom_rate.item_rate_treasure > 0 ? sd->custom_rate.item_rate_treasure : battle_config.item_rate_treasure;
++		rate_min = sd->custom_rate.item_drop_treasure_min > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_treasure_min) : battle_config.item_drop_treasure_min;
++		rate_max = sd->custom_rate.item_drop_treasure_max > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_treasure_max) : battle_config.item_drop_treasure_max;
++	} else {
++		const bool is_mvp = mob->get_bosstype() == BOSSTYPE_MVP;
++		const bool is_boss = mob->get_bosstype() == BOSSTYPE_MINIBOSS;
++		switch (item->type) {
++			case IT_HEALING:
++				custom = (is_mvp && sd->custom_rate.item_rate_heal_mvp > 0) || (is_boss && sd->custom_rate.item_rate_heal_boss > 0) || sd->custom_rate.item_rate_heal > 0 || sd->custom_rate.item_drop_heal_min > 0 || sd->custom_rate.item_drop_heal_max > 0;
++				rate_adjust = is_mvp && sd->custom_rate.item_rate_heal_mvp > 0 ? sd->custom_rate.item_rate_heal_mvp : is_boss && sd->custom_rate.item_rate_heal_boss > 0 ? sd->custom_rate.item_rate_heal_boss : sd->custom_rate.item_rate_heal > 0 ? sd->custom_rate.item_rate_heal : is_mvp ? battle_config.item_rate_heal_mvp : is_boss ? battle_config.item_rate_heal_boss : battle_config.item_rate_heal;
++				rate_min = sd->custom_rate.item_drop_heal_min > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_heal_min) : battle_config.item_drop_heal_min;
++				rate_max = sd->custom_rate.item_drop_heal_max > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_heal_max) : battle_config.item_drop_heal_max;
++				break;
++			case IT_USABLE:
++			case IT_CASH:
++				custom = (is_mvp && sd->custom_rate.item_rate_use_mvp > 0) || (is_boss && sd->custom_rate.item_rate_use_boss > 0) || sd->custom_rate.item_rate_use > 0 || sd->custom_rate.item_drop_use_min > 0 || sd->custom_rate.item_drop_use_max > 0;
++				rate_adjust = is_mvp && sd->custom_rate.item_rate_use_mvp > 0 ? sd->custom_rate.item_rate_use_mvp : is_boss && sd->custom_rate.item_rate_use_boss > 0 ? sd->custom_rate.item_rate_use_boss : sd->custom_rate.item_rate_use > 0 ? sd->custom_rate.item_rate_use : is_mvp ? battle_config.item_rate_use_mvp : is_boss ? battle_config.item_rate_use_boss : battle_config.item_rate_use;
++				rate_min = sd->custom_rate.item_drop_use_min > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_use_min) : battle_config.item_drop_use_min;
++				rate_max = sd->custom_rate.item_drop_use_max > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_use_max) : battle_config.item_drop_use_max;
++				break;
++			case IT_WEAPON:
++			case IT_ARMOR:
++			case IT_PETARMOR:
++				custom = (is_mvp && sd->custom_rate.item_rate_equip_mvp > 0) || (is_boss && sd->custom_rate.item_rate_equip_boss > 0) || sd->custom_rate.item_rate_equip > 0 || sd->custom_rate.item_drop_equip_min > 0 || sd->custom_rate.item_drop_equip_max > 0;
++				rate_adjust = is_mvp && sd->custom_rate.item_rate_equip_mvp > 0 ? sd->custom_rate.item_rate_equip_mvp : is_boss && sd->custom_rate.item_rate_equip_boss > 0 ? sd->custom_rate.item_rate_equip_boss : sd->custom_rate.item_rate_equip > 0 ? sd->custom_rate.item_rate_equip : is_mvp ? battle_config.item_rate_equip_mvp : is_boss ? battle_config.item_rate_equip_boss : battle_config.item_rate_equip;
++				rate_min = sd->custom_rate.item_drop_equip_min > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_equip_min) : battle_config.item_drop_equip_min;
++				rate_max = sd->custom_rate.item_drop_equip_max > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_equip_max) : battle_config.item_drop_equip_max;
++				break;
++			case IT_CARD:
++				custom = (is_mvp && sd->custom_rate.item_rate_card_mvp > 0) || (is_boss && sd->custom_rate.item_rate_card_boss > 0) || sd->custom_rate.item_rate_card > 0 || sd->custom_rate.item_drop_card_min > 0 || sd->custom_rate.item_drop_card_max > 0;
++				rate_adjust = is_mvp && sd->custom_rate.item_rate_card_mvp > 0 ? sd->custom_rate.item_rate_card_mvp : is_boss && sd->custom_rate.item_rate_card_boss > 0 ? sd->custom_rate.item_rate_card_boss : sd->custom_rate.item_rate_card > 0 ? sd->custom_rate.item_rate_card : is_mvp ? battle_config.item_rate_card_mvp : is_boss ? battle_config.item_rate_card_boss : battle_config.item_rate_card;
++				rate_min = sd->custom_rate.item_drop_card_min > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_card_min) : battle_config.item_drop_card_min;
++				rate_max = sd->custom_rate.item_drop_card_max > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_card_max) : battle_config.item_drop_card_max;
++				break;
++			default:
++				custom = (is_mvp && sd->custom_rate.item_rate_common_mvp > 0) || (is_boss && sd->custom_rate.item_rate_common_boss > 0) || sd->custom_rate.item_rate_common > 0 || sd->custom_rate.item_drop_common_min > 0 || sd->custom_rate.item_drop_common_max > 0;
++				rate_adjust = is_mvp && sd->custom_rate.item_rate_common_mvp > 0 ? sd->custom_rate.item_rate_common_mvp : is_boss && sd->custom_rate.item_rate_common_boss > 0 ? sd->custom_rate.item_rate_common_boss : sd->custom_rate.item_rate_common > 0 ? sd->custom_rate.item_rate_common : is_mvp ? battle_config.item_rate_common_mvp : is_boss ? battle_config.item_rate_common_boss : battle_config.item_rate_common;
++				rate_min = sd->custom_rate.item_drop_common_min > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_common_min) : battle_config.item_drop_common_min;
++				rate_max = sd->custom_rate.item_drop_common_max > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_common_max) : battle_config.item_drop_common_max;
++				break;
++		}
++	}
++
++	if (!custom)
++		return false;
++
++	item_dropratio_adjust(drop->nameid, static_cast<int32>(mob->id), &rate_adjust);
++	*rate = static_cast<int32>(mob_drop_adjust(static_cast<int32>(drop->rateSet), rate_adjust, rate_min, rate_max));
++	return true;
++}
++
+ const std::string JobDatabase::getDefaultLocation() {
+ 	return std::string(db_path) + "/job_stats.yml";
+ }
+diff --git a/src/map/pc.hpp b/src/map/pc.hpp
+index 6c2725f..b57cac8 100644
+--- a/src/map/pc.hpp
++++ b/src/map/pc.hpp
+@@ -949,6 +949,18 @@ public:
+ 	int goldpc_tid;
+ 	std::vector<uint32> party_booking_requests;
+ 
++	struct {
++		int base_exp_rate, job_exp_rate, mvp_exp_rate, quest_exp_rate, heal_exp;
++		int vip_base_exp_increase, vip_job_exp_increase, vip_bm_increase, vip_drop_increase;
++		int item_rate_common, item_rate_common_boss, item_rate_common_mvp, item_drop_common_min, item_drop_common_max;
++		int item_rate_heal, item_rate_heal_boss, item_rate_heal_mvp, item_drop_heal_min, item_drop_heal_max;
++		int item_rate_use, item_rate_use_boss, item_rate_use_mvp, item_drop_use_min, item_drop_use_max;
++		int item_rate_equip, item_rate_equip_boss, item_rate_equip_mvp, item_drop_equip_min, item_drop_equip_max;
++		int item_rate_card, item_rate_card_boss, item_rate_card_mvp, item_drop_card_min, item_drop_card_max;
++		int item_rate_mvp, item_drop_mvp_min, item_drop_mvp_max;
++		int item_rate_treasure, item_drop_treasure_min, item_drop_treasure_max;
++	} custom_rate;
++
+ 	void update_look( _look look );
+ };
+ 
+@@ -1798,6 +1810,9 @@ void pc_macro_detector_disconnect(map_session_data &sd);
+ void pc_macro_reporter_area_select(map_session_data &sd, const int16 x, const int16 y, const int8 radius);
+ void pc_macro_reporter_process(map_session_data &sd, int32 reporter_account_id = -1);
+ 
++bool pc_custom_mob_rate_mvp(map_session_data* sd, const std::shared_ptr<s_mob_db>& mob, const std::shared_ptr<s_mob_drop>& drop, int32* rate);
++bool pc_custom_mob_rate(map_session_data* sd, const std::shared_ptr<s_mob_db>& mob, const std::shared_ptr<s_mob_drop>& drop, int32* rate);
++
+ #ifdef MAP_GENERATOR
+ void pc_reputation_generate();
+ #endif
+diff --git a/src/map/script.cpp b/src/map/script.cpp
+index 83308dc..efd09a4 100644
+--- a/src/map/script.cpp
++++ b/src/map/script.cpp
+@@ -11166,7 +11166,7 @@ BUILDIN_FUNC(getexp){
+ 	}
+ 
+ 	// bonus for npc-given exp
+-	double bonus = battle_config.quest_exp_rate / 100.;
++	double bonus = sd->custom_rate.quest_exp_rate > 0 ? sd->custom_rate.quest_exp_rate / 100. : battle_config.quest_exp_rate / 100.;
+ 
+ 	if (base)
+ 		base = (int64) cap_value(base * bonus, 0, MAX_EXP);
+diff --git a/src/map/script.hpp b/src/map/script.hpp
+index 3074703..6529f88 100644
+--- a/src/map/script.hpp
++++ b/src/map/script.hpp
+@@ -2376,4 +2376,16 @@ uint32 *script_array_cpy_list(struct script_array *sa);
+ 
+ bool script_check_RegistryVariableLength(int32 pType, const char *val, size_t* vlen);
+ 
++enum customrate_types {
++	CR_BASE_EXP_RATE = 0, CR_JOB_EXP_RATE, CR_MVP_EXP_RATE, CR_QUEST_EXP_RATE, CR_HEAL_EXP_RATE,
++	CR_VIP_BASE_EXP_INCREASE, CR_VIP_JOB_EXP_INCREASE, CR_VIP_BM_INCREASE, CR_VIP_DROP_INCREASE,
++	CR_IT_RATE_COMMON, CR_IT_RATE_COMMON_BOSS, CR_IT_RATE_COMMON_MVP, CR_IT_DROP_COMMON_MIN, CR_IT_DROP_COMMON_MAX,
++	CR_IT_RATE_HEAL, CR_IT_RATE_HEAL_BOSS, CR_IT_RATE_HEAL_MVP, CR_IT_DROP_HEAL_MIN, CR_IT_DROP_HEAL_MAX,
++	CR_IT_RATE_USE, CR_IT_RATE_USE_BOSS, CR_IT_RATE_USE_MVP, CR_IT_DROP_USE_MIN, CR_IT_DROP_USE_MAX,
++	CR_IT_RATE_EQUIP, CR_IT_RATE_EQUIP_BOSS, CR_IT_RATE_EQUIP_MVP, CR_IT_DROP_EQUIP_MIN, CR_IT_DROP_EQUIP_MAX,
++	CR_IT_RATE_CARD, CR_IT_RATE_CARD_BOSS, CR_IT_RATE_CARD_MVP, CR_IT_DROP_CARD_MIN, CR_IT_DROP_CARD_MAX,
++	CR_IT_RATE_MVP, CR_IT_DROP_MVP_MIN, CR_IT_DROP_MVP_MAX,
++	CR_IT_RATE_TREASURE, CR_IT_DROP_TREASURE_MIN, CR_IT_DROP_TREASURE_MAX
++};
++
+ #endif /* SCRIPT_HPP */
+diff --git a/src/map/script_constants.hpp b/src/map/script_constants.hpp
+index 02cd1ef..c6264e8 100644
+--- a/src/map/script_constants.hpp
++++ b/src/map/script_constants.hpp
+@@ -11064,6 +11064,50 @@
+ 	export_constant(MER_SERA);
+ 	export_constant(MER_DIETER);
+ 	export_constant(MER_ELEANOR);
++	export_constant(EFST_1XCR_BASE_EXP_RATE);
++	export_constant(EFST_2XCR_BASE_EXP_RATE);
++	export_constant(EFST_3XCR_BASE_EXP_RATE);
++	export_constant(CR_BASE_EXP_RATE);
++	export_constant(CR_JOB_EXP_RATE);
++	export_constant(CR_MVP_EXP_RATE);
++	export_constant(CR_QUEST_EXP_RATE);
++	export_constant(CR_HEAL_EXP_RATE);
++	export_constant(CR_VIP_BASE_EXP_INCREASE);
++	export_constant(CR_VIP_JOB_EXP_INCREASE);
++	export_constant(CR_VIP_BM_INCREASE);
++	export_constant(CR_VIP_DROP_INCREASE);
++	export_constant(CR_IT_RATE_COMMON);
++	export_constant(CR_IT_RATE_COMMON_BOSS);
++	export_constant(CR_IT_RATE_COMMON_MVP);
++	export_constant(CR_IT_DROP_COMMON_MIN);
++	export_constant(CR_IT_DROP_COMMON_MAX);
++	export_constant(CR_IT_RATE_HEAL);
++	export_constant(CR_IT_RATE_HEAL_BOSS);
++	export_constant(CR_IT_RATE_HEAL_MVP);
++	export_constant(CR_IT_DROP_HEAL_MIN);
++	export_constant(CR_IT_DROP_HEAL_MAX);
++	export_constant(CR_IT_RATE_USE);
++	export_constant(CR_IT_RATE_USE_BOSS);
++	export_constant(CR_IT_RATE_USE_MVP);
++	export_constant(CR_IT_DROP_USE_MIN);
++	export_constant(CR_IT_DROP_USE_MAX);
++	export_constant(CR_IT_RATE_EQUIP);
++	export_constant(CR_IT_RATE_EQUIP_BOSS);
++	export_constant(CR_IT_RATE_EQUIP_MVP);
++	export_constant(CR_IT_DROP_EQUIP_MIN);
++	export_constant(CR_IT_DROP_EQUIP_MAX);
++	export_constant(CR_IT_RATE_CARD);
++	export_constant(CR_IT_RATE_CARD_BOSS);
++	export_constant(CR_IT_RATE_CARD_MVP);
++	export_constant(CR_IT_DROP_CARD_MIN);
++	export_constant(CR_IT_DROP_CARD_MAX);
++	export_constant(CR_IT_RATE_MVP);
++	export_constant(CR_IT_DROP_MVP_MIN);
++	export_constant(CR_IT_DROP_MVP_MAX);
++	export_constant(CR_IT_RATE_TREASURE);
++	export_constant(CR_IT_DROP_TREASURE_MIN);
++	export_constant(CR_IT_DROP_TREASURE_MAX);
++
+ 
+ 	/* searchstore constants */
+ 	export_constant(SEARCHSTORE_EFFECT_NORMAL);
+diff --git a/src/map/skills/acolyte/heal.cpp b/src/map/skills/acolyte/heal.cpp
+index 84c3211..6a56b84 100644
+--- a/src/map/skills/acolyte/heal.cpp
++++ b/src/map/skills/acolyte/heal.cpp
+@@ -49,9 +49,10 @@ void SkillHeal::castendNoDamageId(block_list *src, block_list *bl, uint16 skill_
+ 		heal = ~heal + 1;
+ 	t_exp heal_get_jobexp = status_heal(bl, heal, 0, 0);
+ 
+-	if (sd && dstsd && heal > 0 && sd != dstsd && battle_config.heal_exp > 0)
++	if (sd && dstsd && heal > 0 && sd != dstsd && (sd->custom_rate.heal_exp > 0 || battle_config.heal_exp > 0))
+ 	{
+-		heal_get_jobexp = heal_get_jobexp * battle_config.heal_exp / 100;
++		const int32 heal_exp_rate = sd->custom_rate.heal_exp > 0 ? sd->custom_rate.heal_exp : battle_config.heal_exp;
++		heal_get_jobexp = heal_get_jobexp * heal_exp_rate / 100;
+ 		if (heal_get_jobexp <= 0)
+ 			heal_get_jobexp = 1;
+ 		pc_gainexp(sd, bl, 0, heal_get_jobexp, 0);
+diff --git a/src/map/skills/acolyte/highnessheal.cpp b/src/map/skills/acolyte/highnessheal.cpp
+index a2a9370..a2a1334 100644
+--- a/src/map/skills/acolyte/highnessheal.cpp
++++ b/src/map/skills/acolyte/highnessheal.cpp
+@@ -46,8 +46,9 @@ void SkillHighnessHeal::castendNoDamageId(block_list *src, block_list *target, u
+ 		heal = ~heal + 1;
+ 	t_exp heal_get_jobexp = status_heal(target,heal,0,0);
+ 
+-	if(sd && dstsd && heal > 0 && sd != dstsd && battle_config.heal_exp > 0){
+-		heal_get_jobexp = heal_get_jobexp * battle_config.heal_exp / 100;
++	if(sd && dstsd && heal > 0 && sd != dstsd && (sd->custom_rate.heal_exp > 0 || battle_config.heal_exp > 0)){
++		const int32 heal_exp_rate = sd->custom_rate.heal_exp > 0 ? sd->custom_rate.heal_exp : battle_config.heal_exp;
++		heal_get_jobexp = heal_get_jobexp * heal_exp_rate / 100;
+ 		if (heal_get_jobexp <= 0)
+ 			heal_get_jobexp = 1;
+ 		pc_gainexp (sd, target, 0, heal_get_jobexp, 0);
+diff --git a/src/map/skills/homunculus/homunculus_healingtouch.cpp b/src/map/skills/homunculus/homunculus_healingtouch.cpp
+index 62136b1..05721b7 100644
+--- a/src/map/skills/homunculus/homunculus_healingtouch.cpp
++++ b/src/map/skills/homunculus/homunculus_healingtouch.cpp
+@@ -45,8 +45,9 @@ void SkillHealingTouch::castendNoDamageId(block_list* src, block_list* target, u
+ 	clif_skill_nodamage(src, *target, getSkillId(), heal);
+ 	t_exp heal_get_jobexp = status_heal(target, heal, 0, 0);
+ 
+-	if (sd && dstsd && heal > 0 && sd != dstsd && battle_config.heal_exp > 0) {
+-		heal_get_jobexp = heal_get_jobexp * battle_config.heal_exp / 100;
++	if (sd && dstsd && heal > 0 && sd != dstsd && (sd->custom_rate.heal_exp > 0 || battle_config.heal_exp > 0)) {
++		const int32 heal_exp_rate = sd->custom_rate.heal_exp > 0 ? sd->custom_rate.heal_exp : battle_config.heal_exp;
++		heal_get_jobexp = heal_get_jobexp * heal_exp_rate / 100;
+ 		if (heal_get_jobexp <= 0) {
+ 			heal_get_jobexp = 1;
+ 		}
+diff --git a/src/map/status.hpp b/src/map/status.hpp
+index a41bd37..7d98fc7 100644
+--- a/src/map/status.hpp
++++ b/src/map/status.hpp
+@@ -2946,6 +2946,9 @@ enum efst_type : int16{
+ /// @APIHOOK_END
+ /// Do not modify code above this, since it will be automatically generated by the API again
+ 	EFST_MAX,
++	EFST_1XCR_BASE_EXP_RATE = 1595,
++	EFST_2XCR_BASE_EXP_RATE = 1596,
++	EFST_3XCR_BASE_EXP_RATE = 1597,
+ 	EFST_VIPSTATE = 1500,
+ 	EFST_ROTD_BRUTE = 1501,
+ 	EFST_ROTD_DEMIHUMAN = 1502,

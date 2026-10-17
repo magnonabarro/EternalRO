@@ -1,0 +1,165 @@
+//======
+//Por: ComeTower
+prontera,150,150,4	script	Missões	105,{
+	mes "[Missões]";
+	if(missaoativa ==0){
+		if($eventmis == 0){
+			set missaoativa,0;
+			mes "Nenhuma missão no momento, espere mais um pouco";
+			close;
+		}
+		callfunc "missevent",$eventmis;
+		end;
+	}
+	callfunc "missprem",missaoativa;
+	end;
+}
+-	script	horasmiss	-1,{
+OnClock1200:
+OnClock1300:
+OnClock1400:
+OnClock1500:
+OnClock1600:
+OnClock1700:
+OnClock1800:
+OnClock1900:
+OnClock2000:
+OnClock2100:
+OnClock2200:
+set $eventmis,rand(1,5);
+announce "Há uma missão ativa e ficará disponível por meia hora",bc_blue|bc_all;
+end;
+OnClock1230:
+OnClock1330:
+OnClock1430:
+OnClock1530:
+OnClock1630:
+OnClock1730:
+OnClock1830:
+OnClock1930:
+OnClock2030:
+OnClock2130:
+OnClock2230:
+set $eventmis,0;
+announce "Tempo esgotado",bc_blue|bc_all;
+end;
+}
+
+function	script	missevent	{
+	if(getarg(0) == 1){
+		mes "Você deve me trazer 30x "+getitemname(7072)+".";
+		mes "Acha que consegue?";
+		if(select("Sim:Não")==2){
+			mes "Certo.";
+			close;
+		}
+		set missaoativa,1;
+	}
+	if(getarg(0) == 2){
+		mes "Você deve me trazer 50x "+getitemname(7156)+".";
+		mes "Acha que consegue?";
+		if(select("Sim:Não")==2){
+			mes "Certo.";
+			close;
+		}
+		set missaoativa,2;		
+	}
+	if(getarg(0) == 3){
+		mes "Você deve me trazer 40x "+getitemname(7099)+".";
+		mes "Acha que consegue?";
+		if(select("Sim:Não")==2){
+			mes "Certo.";
+			close;
+		}
+		set missaoativa,3;
+	}
+	if(getarg(0) == 4){
+		mes "Você deve matar 20x "+getmonsterinfo(1499,0)+".";
+		mes "Acha que consegue?";
+		if(select("Sim:Não")==2){
+			mes "Certo.";
+			close;
+		}
+		set missaoativa,4;
+	}
+	if(getarg(0) == 5){
+		mes "Você deve me trazer 30x "+getitemname(642)+".";
+		mes "Acha que consegue?";
+		if(select("Sim:Não")==2){
+			mes "Certo.";
+			close;
+		}
+		set missaoativa,5;
+	}
+	mes "Boa sorte";
+	close;
+}
+
+function	script	missprem	{
+	if(getarg(0) == 1){
+		if(countitem(7072) < 30){
+			mes "Você não tem 30x "+getitemname(7072)+".";
+			close;
+		}
+		delitem 7072,30;
+		set #pointsmis,#pointsmis+1;
+		mes "Prontinho";
+		close;
+	}
+	if(getarg(0) == 2){
+		if(countitem(7156) < 50){
+			mes "Você não tem 50x "+getitemname(7156)+".";
+			close;
+		}
+		delitem 7156,50;
+		set #pointsmis,#pointsmis+1;
+		mes "Prontinho";
+		close;
+	}
+	if(getarg(0) == 3){
+		if(countitem(7099) < 40){
+			mes "Você não tem 40x "+getitemname(7099)+".";
+			close;
+		}
+		delitem 7099,40;
+		set #pointsmis,#pointsmis+1;
+		mes "Prontinho";
+		close;
+	}
+	if(getarg(0) == 4){
+		if(kill < 20){
+			mes "Você não matou 20x "+getmonsterinfo(1499,0)+".";
+			close;
+		}
+		set killmiss,0;
+		set #pointsmis,#pointsmis+1;
+		mes "Prontinho";
+		close;
+	}
+	if(getarg(0) == 5){
+		if(countitem(642) < 30){
+			mes "VocÊ não tem 30x "+getitemname(642)+".";
+			close;
+		}
+		delitem 642,30;
+		set #pointsmis,#pointsmis+1;
+		mes "Prontinho";
+		close;
+	}
+}
+
+-	script	killeventmiss	-1,{
+OnNPCKillEvent:
+	if(killedrid == 1499){
+		if(missativa == 4){
+			if(killmiss < 20){
+				set killmiss,killmiss+1;
+				dispbottom "Você já matou "+killmiss+".";
+				end;
+			}
+		end;
+		}
+	end;
+	}
+end;
+}

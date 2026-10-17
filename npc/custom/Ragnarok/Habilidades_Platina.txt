@@ -1,0 +1,38 @@
+//===== rAthena Script =======================================
+//= Platinum Skills
+//===== Description: =========================================
+//= Single NPC that assigns quests skills for all classes
+//===== Additional Comments: =================================
+//= 1.0 Initial release. [Keichii] [DarkChild]
+//= 2.0 Added advanced classes. [ShadowLady]
+//= 2.1 Added baby classes. [Midas]
+//= 2.2 Simplified Job Checks. [Silentdragon]
+//= 2.3 Thehell? Cleaned up script, removed the nastiness. Also added rebirth skills. [Spre]
+//= 2.4 Added Advanced skills. [Spre]
+//= 2.5 Added dialog for if the user is none of the listed jobs. [Kisuka]
+//= 2.6 Fixed 2nd advanced classes not being able to get their advanced skills. [Ancyker]
+//= 2.7 Rewrote to give all correct skills to all proper classes. [Paradox924X]
+//= 2.8 Clustered conditionals replaced with switch to include all Upper types. [Euphy]
+//= 2.9 Added MC_CARTDECORATE for Merchant class. [mazvi]
+//= 3.0 Migrate/Integrate to Global Functions. [mazvi]
+//============================================================
+
+prontera,132,217,5	script	Habilidade Platina	667,{
+set $namenpc$, "^CD0000[Habilidade Platina]^000000";
+	mes "[Habilidade Platina]";
+	mes "Posso dar-lhe as habilidades especiais disponíveis para o seu trabalho.";
+	mes "Você gostaria dessas habilidades agora?";
+	next;
+	if (select("Sim, por favor: Não") == 2) {
+		mes "[Habilidade Platina]";
+		mes "Tenha um bom dia... >.>";
+		close;
+	}
+	callfunc "F_GetPlatinumSkills";
+	mes "[Habilidade Platina]";
+	mes "Ai está!";
+	close;
+OnInit:
+waitingroom "[Habilidade]",0;
+end;
+}
