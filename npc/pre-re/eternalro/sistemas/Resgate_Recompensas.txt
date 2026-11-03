@@ -1,0 +1,63 @@
+prontera,119,164,4	script	Resgate de Recompensas	987,{
+	// Configuracao do NPC
+	set .serverName$,"EternalRO";
+	set .npcName$,"[Resgate de Recompensas]";
+	set .redeemTable$,"ragnarok`.`cp_redeemlog";
+	set .rewardDeliveryTable$,"ragnarok`.`cp_reward_delivery";
+	set .showCredits,1;
+	set .numRedemptionsSimul,128;
+
+	mes .npcName$;
+	mes "Ola! Posso ajudar voce a resgatar as recompensas da sua conta.";
+	next;
+	prompt("Quero resgatar minhas recompensas:Quem voce e?:Estou apenas olhando");
+	mes .npcName$;
+	switch(@menu) {
+		case 1:
+			query_sql "SELECT `id`, `nameid`, `quantity`, 0 AS `source` FROM `" + escape_sql(.redeemTable$) + "` WHERE `account_id` = " + getcharid(3) + " AND `redeemed` = 0 UNION ALL SELECT `id`, `nameid`, `quantity`, 1 AS `source` FROM `" + escape_sql(.rewardDeliveryTable$) + "` WHERE `account_id` = " + getcharid(3) + " AND `redeemed` = 0 LIMIT " + .numRedemptionsSimul,.@id,.@nameid,.@quantity,.@source;
+			if (getarraysize(.@id) > 0) {
+				mes "Recompensas pendentes: " + getarraysize(.@id);
+				for (set .@i,0; .@i < getarraysize(.@id); set .@i,.@i+1)
+					if (checkweight(.@nameid[.@i],.@quantity[.@i]) == 0) {
+						mes "Seu inventario esta muito cheio para receber" + (.@i ? " mais" : "") + " recompensas.";
+						mes "Libere espaco e fale comigo novamente.";
+					} else {
+						if (.@source[.@i] == 0)
+							.@claim_result = query_sql("UPDATE `" + escape_sql(.redeemTable$) + "` SET `char_id` = " + getcharid(0) + ", `redeemed` = 1, `redemption_date` = NOW() WHERE `id` = " + .@id[.@i] + " AND `account_id` = " + getcharid(3) + " AND `redeemed` = 0");
+						else
+							.@claim_result = query_sql("UPDATE `" + escape_sql(.rewardDeliveryTable$) + "` SET `char_id` = " + getcharid(0) + ", `redeemed` = 1, `redemption_date` = NOW() WHERE `id` = " + .@id[.@i] + " AND `account_id` = " + getcharid(3) + " AND `redeemed` = 0");
+						if (.@claim_result < 0) { mes "Falha ao registrar o resgate. Tente novamente."; continue; }
+						.@claimed = 0;
+						query_sql "SELECT ROW_COUNT()", .@claimed;
+						if (.@claimed != 1) { mes "Esta recompensa ja foi processada."; continue; }
+						getitem .@nameid[.@i],.@quantity[.@i];
+						mes .@quantity[.@i] + "x " + getitemname(.@nameid[.@i]);
+					}
+				if (.@i == getarraysize(.@id)) {
+					mes "Obrigado! Aproveite sua estadia no " + .serverName$ + ".";
+				}
+				if (.showCredits)
+					callfunc "F_FluxCredits";
+			} else {
+				mes "Nao ha recompensas aguardando resgate na sua conta.";
+			}
+		break;
+		case 2:
+			mes "Entrego recompensas de doacoes e pacotes de codigos do site.";
+			mes "Resgate um codigo valido no painel e fale comigo dentro do jogo.";
+		break;
+		default:
+			mes "Tudo bem. Tenha um bom dia!";
+		break;
+	}
+	close;
+}
+
+// Creditos do Flux Control Panel
+function	script	F_FluxCredits	{
+	mes "-----------------------------------";
+	mes "Powered by Flux Control Panel.";
+	mes "Copyright (c) 2008-2012 Matthew Harris and Nikunj Mehta.";
+	mes "http://fluxcp.googlecode.com/";
+	return;
+}

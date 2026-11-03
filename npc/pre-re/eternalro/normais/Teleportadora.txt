@@ -1,998 +1,1387 @@
-prontera,158,187,5	script	Teleportadora 	91,{
-mes "Olá";
-mes "Seja bem vindo ao meu serviço de";
-mes "teleporte!!";
-mes "Esse serviço teleporta qualquer";
-mes "player ao lugar que queria.";
-mes "Por favor selecione o serviço:";
-next;
-menu "- Cidades",town,"- Cavernas",dungeon,"- Campos",field,"- Nenhum",L_exit;
-
-L_exit:
-	close;
-
-town:
-menu 	"Prontera",wprontera,
-	"Alberta",walberta,
-	"Aldebaran",waldebaran,
-	"Amatsu",wamatsu,
-	"Ayothaya",wayot,
-	"Comodo",wcomodo,
-	"Einbech",weinbech,
-	"Einbroch",weinbroch,
-	"Geffen",wgeffen,
-	"Gonryun",wgonryun,
-	"Hugel",whugel,
-	"Izlude",wizlude,
-	"Jawaii",wjawaii,
-	"Lighthalzen",wlighthalzen,
-	"Louyang",wlouyang,
-	"Lutie",wxmas,	
-	"Morroc",wmorroc,
-	"Ilha Esquecida",wnameless,
-	"Niflheim",wniflheim,
-	"Payon",wpayon,
-	"Moscovia",wmoscovia,
-	"Rachel",wafeltz,
-	"Thor",wthorcamp,
-	"Veins",wveins,
-	"Yuno",wyuno,
-	"Umbala",wumbala;
-
-field:
-menu 	"Campos de Amatsu",wamafild,
-	"Campos de Ayothaya",wayofild,
-	"Campos de Comodo",wcmdfild,
-	"Campos de Einbroch",weinfild,
-	"Campos de Geffen",wgeffild,
-	"Campos de Gonryun",wgonfild,
-	"Campos de Hugel",whufild,
-	"Campos de Lighthalzen",wlhzfild,
-	"Campos de Louyang",wloufild,
-	"Campos de Lutie",wxmasfild,
-	"Campos de Mjolnir",wmjolnir,
-	"Campos de Niflheim",wniffild,
-	"Campos de Odin",wodint,
-	"Campos de Payon",wpayfor,
-	"Campos de Prontera",wprtfild,
-	"Campos de Rachel",warunfild,
-	"Campos de Morroc",wmocfild,
-	"Campos de Umbala",wumfild,
-	"Campos de Veins",wveinsfild,
-	"Campos de Yuno",wyunofild,
-	"Campos de Moscovia",mmoscovia;
-
-dungeon:
-menu 	"Caverna Abbey",wabbey,
-	"Ilha do Abismo",wabyss,
-	"Caverna de Amatsu",ama,
-	"Formigueiro Infernal",ant,
-	"Caverna de Comodo",beach,
-	"Caverna de Ayothaya",wayodun,
-	"Caverna de Byalan",byalan,
-	"Torre do Relógio",clock,
-	"Minas de Carvão",coal,
-	"Esgotos de Prontera",culvert,
-	"Caverna de Einbroch",weindun,
-	"Gefenia",gefenia,
-	"Caverna de Geffen",geffen,
-	"Glast Heim",glast,
-	"Caverna de Gonryun",gon,
-	"Labirintos de Prontera",hidden,
-	"Caverna de Gelo",iced,
-	"Caverna de Juperos",wjuper,
-	"Caverna de Kiel",wkieldun,
-	"Lighthalzen",wlhzdun,
-	"Caverna de Louyang",wloudun,
-	"Caverna de Magma",magma,
-	"Caverna dos Orcs",orc,
-	"Caverna de Payon",payon,
-	"Pirâmides",pyramids,
-	"Santuário de Rachel",rachels,
-	"Esfinge",sphinx,
-	"Navio Fantasma",sunken,
-	"Torre de Thanatos",wthat,
-	"Vulcão de Thor",wthor,
-	"Fábrica de Brinquedos",toy,
-	"Caverna da Tataruga",turtle,
-	"Caverna de Umbala",wumdun,
-	"Caverna de Moscovia",dmosk;
-
-
-//-------------------------------
-//          Campos
-//-------------------------------
-
-warunfild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Rachel 1",drunfild1,
-	"Campos de Rachel 2",drunfild2,
-	"Campos de Rachel 3",drunfild3,
-	"Campos de Rachel 4",drunfild4,
-	"Campos de Rachel 5",drunfild5,
-	"Campos de Rachel 6",drunfild6,
-	"Campos de Rachel 7",drunfild7,
-	"Campos de Rachel 8",drunfild8,
-	"Campos de Rachel 9",drunfild9,
-	"Campos de Rachel 10",drunfild10,
-	"Campos de Rachel 11",drunfild11,
-	"Campos de Rachel 12",drunfild12,
-	"Campos de Rachel 13",drunfild13;
-
-wgeffild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Geffen 0",dgeffild00,
-	"Campos de Geffen 1",dgeffild01,
-	"Campos de Geffen 2",dgeffild02,
-	"Campos de Geffen 3",dgeffild03,
-	"Campos de Geffen 4",dgeffild04,
-	"Campos de Geffen 5",dgeffild05,
-	"Campos de Geffen 6",dgeffild06,
-	"Campos de Geffen 7",dgeffild07,
-	"Campos de Geffen 8",dgeffild08,
-	"Campos de Geffen 9",dgeffild09,
-	"Campos de Geffen 10",dgeffild10,
-	"Campos de Geffen 11",dgeffild11,
-	"Campos de Geffen 12",dgeffild12,
-	"Campos de Geffen 13",dgeffild13,
-	"Campos de Geffen 14",dgeffild14;
-
-wmjolnir:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Mjolnir 1",dmjolnir1,
-	"Campos de Mjolnir 2",dmjolnir2,
-	"Campos de Mjolnir 3",dmjolnir3,
-	"Campos de Mjolnir 4",dmjolnir4,
-	"Campos de Mjolnir 5",dmjolnir5,
-	"Campos de Mjolnir 6",dmjolnir6,
-	"Campos de Mjolnir 7",dmjolnir7,
-	"Campos de Mjolnir 8",dmjolnir8,
-	"Campos de Mjolnir 9",dmjolnir9,
-	"Campos de Mjolnir 10",dmjolnir10,
-	"Campos de Mjolnir 11",dmjolnir11,
-	"Campos de Mjolnir 12",dmjolnir12;
-
-wmocfild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Deserto de Morroc 1",dmocfild1,
-	"Deserto de Morroc 2",dmocfild2,
-	"Deserto de Morroc 3",dmocfild3,
-	"Deserto de Morroc 4",dmocfild4,
-	"Deserto de Morroc 5",dmocfild5,
-	"Deserto de Morroc 6",dmocfild6,
-	"Deserto de Morroc 7",dmocfild7,
-	"Deserto de Morroc 8",dmocfild8,
-	"Deserto de Morroc 9",dmocfild9,
-	"Deserto de Morroc 10",dmocfild10,
-	"Deserto de Morroc 11",dmocfild11,
-	"Deserto de Morroc 12",dmocfild12,
-	"Deserto de Morroc 13",dmocfild13,
-	"Deserto de Morroc 14",dmocfild14,
-	"Deserto de Morroc 15",dmocfild15,
-	"Deserto de Morroc 16",dmocfild16,
-	"Deserto de Morroc 17",dmocfild17,
-	"Deserto de Morroc 18",dmocfild18,
-	"Deserto de Morroc 19",dmocfild19;
-
-wpayfor:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Floresta de Payon 1",dpayfild1,
-	"Floresta de Payon 2",dpayfild2,
-	"Floresta de Payon 3",dpayfild3,
-	"Floresta de Payon 4",dpayfild4,
-	"Floresta de Payon 5",dpayfild5,
-	"Floresta de Payon 6",dpayfild6,
-	"Floresta de Payon 7",dpayfild7,
-	"Floresta de Payon 8",dpayfild8,
-	"Floresta de Payon 9",dpayfild9,
-	"Floresta de Payon 10",dpayfild10,
-	"Floresta de Payon 11",dpayfild11;
-
-wprtfild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Prontera 1",dprtfild1,
-	"Campos de Prontera 2",dprtfild2,
-	"Campos de Prontera 3",dprtfild3,
-	"Campos de Prontera 4",dprtfild4,
-	"Campos de Prontera 5",dprtfild5,
-	"Campos de Prontera 6",dprtfild6,
-	"Campos de Prontera 7",dprtfild7,
-	"Campos de Prontera 8",dprtfild8,
-	"Campos de Prontera 9",dprtfild9,
-	"Campos de Prontera 10",dprtfild10,
-	"Campos de Prontera 11",dprtfild11;
-
-wxmasfild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Lutie 1",dxmasfild1;
-
-wcmdfild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Comodo 1",dcmdfild1,
-	"Campos de Comodo 2",dcmdfild2,
-	"Campos de Comodo 3",dcmdfild3,
-	"Campos de Comodo 4",dcmdfild4,
-	"Campos de Comodo 5",dcmdfild5,
-	"Campos de Comodo 6",dcmdfild6,
-	"Campos de Comodo 7",dcmdfild7,
-	"Campos de Comodo 8",dcmdfild8,
-	"Campos de Comodo 9",dcmdfild9;
-
-wyunofild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Yuno 1",dyunofild1,
-	"Campos de Yuno 2",dyunofild2,
-	"Campos de Yuno 3",dyunofild3,
-	"Campos de Yuno 4",dyunofild4,
-	"Campos de Yuno 5",dyunofild5,
-	"Campos de Yuno 6",dyunofild6,
-	"Campos de Yuno 7",dyunofild7,
-	"Campos de Yuno 8",dyunofild8,
-	"Campos de Yuno 9",dyunofild9,
-	"Campos de Yuno 10",dyunofild10,
-	"Campos de Yuno 11",dyunofild11,
-	"Campos de Yuno 12",dyunofild12;
-
-wamafild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Amatsu 1",damafild1;
-
-wgonfild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Gonryun 1",dgonfild1;
-
-wumfild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Umbala 1",dumfild1,
-	"Campos de Umbala 2",dumfild2,
-	"Campos de Umbala 3",dumfild3,
-	"Campos de Umbala 4",dumfild4;
-
-wniffild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Niflheim 1",dniffild1,
-	"Campos de Field 2",dniffild2;
-
-wodint:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Templo de Odin 1",wodtemp1,
-	"Templo de Odin 2",wodtemp2,
-	"Templo de Odin 3",wodtemp3;
-
-wloufild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Louyang 1",dloufild1;
-
-wayofild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Ayothaya 1",dayofild1,
-	"Campos de Ayothaya 2",dayofild2;
-
-weinfild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Einbroch 1",deinfild1,
-	"Campos de Einbroch 2",deinfild2,
-	"Campos de Einbroch 3",deinfild3,
-	"Campos de Einbroch 4",deinfild4,
-	"Campos de Einbroch 5",deinfild5,
-	"Campos de Einbroch 6",deinfild6,
-	"Campos de Einbroch 7",deinfild7,
-	"Campos de Einbroch 8",deinfild8,
-	"Campos de Einbroch 9",deinfild9,
-	"Campos de Einbroch 10",deinfild10;
-
-wlhzfild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Lighthalzen 1",dlhzfild1,
-	"Campos de Lighthalzen 2",dlhzfild2,
-	"Campos de Lighthalzen 3",dlhzfild3;
-
-whufild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu 	"Campos de Hugel 1",dhufild1,
-	"Campos de Hugel 2",dhufild2,
-	"Campos de Hugel 3",dhufild3,
-	"Campos de Hugel 4",dhufild4,
-	"Campos de Hugel 5",dhufild5,
-	"Campos de Hugel 6",dhufild6,
-	"Campos de Hugel 7",dhufild7;
-
-wveinsfild:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu	"Campos de Veins 1",dvfild1,
-	"Campos de Veins 2",dvfild2,
-	"Campos de Veins 3",dvfild3,
-	"Campos de Veins 4",dvfild4,
-	"Campos de Veins 5",dvfild5,
-	"Campos de Veins 6",dvfild6,
-	"Campos de Veins 7",dvfild7;
-
-mmoscovia:
-mes @vip$;
-mes "Por favor selecione o Campo, Você será teleportado para o centro do mapa..";
-next;
-menu	"Campos de Moscovia 1",cmoscovia01,
-	"Campos de Moscovia 2",cmoscovia02;
-
-//-------------------------------
-//          Dungeons
-//-------------------------------
-
-wjuper:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",djuperos1,
-	"Level 2",djuperos3,
-	"Core",djuperos2;
-
-wumdun:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Carpenter's Shop in the Tree",dumdun1,
-	"Passage to a Foreign World",dumdun2,
-	"Hvergermil's Fountain",dyggdrasil1;
-
-wloudun:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"The Royal Tomb",dloudun1,
-	"Inside the Royal Tomb",dloudun2,
-	"Suei Long Gon",dloudun3;
-
-wayodun:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Ancient Shrine Maze",dayodun1,
-	"Inside Ancient Shrine",dayodun2;
-
-weindun:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",deindun1,
-	"Level 2",deindun2;
-
-wlhzdun:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dlhzdun1,
-	"Level 2",dlhzdun2,
-	"Level 3",dlhzdun3;
-
-wabyss:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dabyss1,
-	"Level 2",dabyss2,
-	"Level 3",dabyss3;
-
-wthat:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-	next;
-menu 	"Level 1",dthat1,
-	"Level 2",dthat2,
-	"Level 3",dthat3,
-	"Level 4",dthat4,
-	"Level 5",dthat5,
-	"Level 6",dthat6,
-	"Level 7",dthat7,
-	"Level 8",dthat8,
-	"Level 9",dthat9,
-	"Level 10",dthat10,
-	"Level 11",dthat11,
-	"Level 12",dthat12;
-
-wkieldun:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dkieldun1,
-	"Level 2",dkieldun2;
-
-ant:
-	mes @vip$;
-	mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-	next;
-menu 	"Level 1",danthell1,
-	"Level 2",danthell2;
-
-beach:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dbeach1,
-	"Level 2",dbeach2,
-	"Level 3",dbeach3;
-
-byalan:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dbyalan1,
-	"Level 2",dbyalan2,
-	"Level 3",dbyalan3,
-	"Level 4",dbyalan4,
-	"Level 5",dbyalan5;
-clock:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dclock1,
-	"Level 2",dclock2,
-	"Level 3",dclock3,
-	"Level 4",dclock4,
-	"Basement 1",dalde1,
-	"Basement 2",dalde2,
-	"Basement 3",dalde3,
-	"Basement 4",dalde4;
-
-coal:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dcoal1,
-	"Level 2",dcoal2,
-	"Level 3",dcoal3;
-
-culvert:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dculvert1,
-	"Level 2",dculvert2,
-	"Level 3",dculvert3,
-	"Level 4",dculvert4;
-
-geffen:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dgeffen1,
-	"Level 2",dgeffen2,
-	"Level 3",dgeffen3,
-	"Level 4",dgeffen4;
-
-glast:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Entrance",dglastent,
-	"Castle 1",dglastcast1,
-	"Castle 2",dglastcast2,
-	"Chivalry 1",dglastchiv1,
-	"Chivalry 2",dglastchiv2,
-	"Churchyard",dglastyard,
-	"Culvert 1",dglastcul1,
-	"Culvert 2",dglastcul1,
-	"Culvert 3",dglastcul3,
-	"Culvert 4",dglastcul4,
-	"St.Abbey",dglastchur,
-	"Staircase Dungeon",dglaststep,
-	"Underground Cave 1",dglastcave1,
-	"Underground Cave 2",dglastcave2,
-	"Underground Prison 1",dglastpris1,
-	"Underground Prison 2",dglastpris2;
-
-hidden:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dhidden1,
-	"Level 2",dhidden2,
-	"Level 3",dhidden3;
-
-iced:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",diced1,
-	"Level 2",diced2,
-	"Level 3",diced3,
-	"Level 4",diced4;
-
-magma:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dmagma1,
-	"Level 2",dmagma2;
-
-orc:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dorc1,
-	"Level 2",dorc2;
-
-payon:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dpayon1,
-	"Level 2",dpayon2,
-	"Level 3",dpayon3,
-	"Level 4",dpayon4,
-	"Level 5",dpayon5;
-
-pyramids:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dpyramids1,
-	"Level 2",dpyramids2,
-	"Level 3",dpyramids3,
-	"Level 4",dpyramids4,
-	"Basement 1",dpyramidsb1,
-	"Basement 2",dpyramidsb2;
-
-sphinx:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dsphinx1,
-	"Level 2",dsphinx2,
-	"Level 3",dsphinx3,
-	"Level 4",dsphinx4,
-	"Level 5",dsphinx5;
-
-sunken:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dsunken1,
-	"Level 2",dsunken2;
-
-toy:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dtoy1,
-	"Level 2",dtoy2;
-
-turtle:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Entrance",dturtleent,
-	"Level 1",dturtle1,
-	"Level 2",dturtle2,
-	"Level 3",dturtle3;
-
-ama:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dama1,
-	"Level 2",dama2,
-	"Level 3",dama3;
-
-gon:
-mes "[BAtendente]";
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dgon1,
-	"Level 2",dgon2,
-	"Level 3",dgon3;
-
-gefenia:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dgefenia1,
-	"Level 2",dgefenia2,
-	"Level 3",dgefenia3,
-	"Level 4",dgefenia4;
-
-wthor:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dthor1,
-	"Level 2",dthor2,
-	"Level 3",dthor3;
-
-rachels:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",drachel1,
-	"Level 2",drachel2,
-	"Level 3",drachel3,
-	"Level 4",drachel4,		
-	"Level 5",drachel5;
-
-wabbey:
-mes @vip$;
-mes "Por favor Selecione o Level, Você será teleportado em instantes.";
-next;
-menu 	"Level 1",dabbey1,
-	"Level 2",dabbey2,
-	"Level 3",dabbey3;
-
-dmosk:
-mes @vip$;
-mes "Por favor selecione o level, Você será teleportado em instantes.";
-next;
-menu	"Level 1",dmosk01,
-	"Level 2",dmosk02,
-	"Level 3",dmosk03;
-
-//-------------------------------
-//          Town Warps
-//-------------------------------
-
-wafeltz:	warp "rachel.gat",130,137;		close;
-walberta:	warp "alberta.gat",28,234;		close;
-waldebaran:	warp "aldebaran.gat",140,131;		close;
-wamatsu:	warp "amatsu.gat",198,84;		close;
-wayot:		warp "ayothaya.gat",150,163;		close;
-wcomodo:	warp "comodo.gat",209,143;		close;
-weinbech:	warp "einbech.gat",70,95;		close;
-weinbroch:	warp "einbroch.gat",64,200;		close;
-whugel:		warp "hugel.gat",96,145;		close;
-wlighthalzen:	warp "lighthalzen.gat",158,92;		close;
-wgonryun:	warp "gonryun.gat",160,121;		close;
-wgeffen:	warp "geffen.gat",119,59;		close;
-wizlude:	warp "izlude.gat",128,114;		close;
-wxmas:		warp "xmas.gat",147,134;		close;
-wjawaii:	warp "jawaii.gat",213,230;		close;
-wmorroc:	warp "morocc.gat",156,93;		close;
-wnameless:	warp	"nameless_n.gat",256,215;	close;
-wniflheim:	warp "niflheim.gat",85,154;		close;
-wpayon:		warp "payon.gat",152,75;		close;
-wprontera:	warp "prontera.gat",155,183;		close;
-wyuno:		warp "yuno.gat",157,51;			close;
-wumbala:	warp "umbala.gat",145,155;		close;
-wlouyang:	warp "louyang.gat",210,108;		close;
-wthorcamp:	warp "thor_camp.gat",254,90;		close;
-wveins:		warp "veins.gat",216,123;		close;
-wmoscovia:	warp	"moscovia",223,184;		close;
-
-//-------------------------------
-//        Dungeon Warps
-//-------------------------------
-
-
-dkieldun1:	warp "kh_dun01.gat",28,226;	close;
-dkieldun2:	warp "kh_dun02.gat",41,198;	close;
-djuperos1:	warp "juperos_01.gat",53,247;	close;
-djuperos3:	warp "juperos_02.gat",37,63;	close;
-djuperos2:	warp "jupe_core.gat",150,285;	close;
-dumdun1:	warp "um_dun01.gat",42,31;	close;
-dumdun2:	warp "um_dun01.gat",48,30;	close;
-dloudun1:	warp "lou_dun01.gat",218,196;	close;
-dloudun2:	warp "lou_dun02.gat",282,20;	close;
-dloudun3:	warp "lou_dun03.gat",165,38;	close;
-dayodun1:	warp "ayo_dun01.gat",275,19;	close;
-dayodun2:	warp "ayo_dun02.gat",24,26;	close;
-deindun1:	warp "ein_dun01.gat",22,14;	close;
-deindun2:	warp "ein_dun02.gat",292,290;	close;
-dlhzdun1:	warp "lhz_dun01.gat",150,288;	close;
-dlhzdun2:	warp "lhz_dun02.gat",150,18;	close;
-dlhzdun3:	warp "lhz_dun03.gat",140,137;	close;
-dabyss1:	warp "abyss_01.gat",192,207;	close;
-dabyss2:	warp "abyss_02.gat",275,270;	close;
-dabyss3:	warp "abyss_03.gat",116,27;	close;
-dthat1:		warp "tha_t01.gat",150,39;	close;
-dthat2:		warp "tha_t02.gat",150,136;	close;
-dthat3:		warp "tha_t03.gat",220,158;	close;
-dthat4:		warp "tha_t04.gat",59,143;	close;
-dthat5:		warp "tha_t05.gat",62,11;	close;
-dthat6:		warp "tha_t06.gat",89,221;	close;
-dthat7:		warp "tha_t07.gat",35,166;	close;
-dthat8:		warp "tha_t08.gat",93,148;	close;
-dthat9:		warp "tha_t09.gat",29,107;	close;
-dthat10:	warp "tha_t10.gat",159,138;	close;
-dthat11:	warp "tha_t11.gat",19,20;	close;
-dthat12:	warp "tha_t12.gat",130,52;	close;
-danthell1:	warp "anthell01.gat",35,262;	close;
-danthell2:	warp "anthell02.gat",168,170;	close;
-dbeach1:	warp "beach_dun.gat",266,67;	close;
-dbeach2:	warp "beach_dun2.gat",255,244;	close;
-dbeach3:	warp "beach_dun3.gat",23,260;	close;
-dbyalan1:	warp "iz_dun00.gat",168,168;	close;
-dbyalan2:	warp "iz_dun01.gat",253,252;	close;
-dbyalan3:	warp "iz_dun02.gat",236,204;	close;
-dbyalan4:	warp "iz_dun03.gat",32,63;	close;
-dbyalan5:	warp "iz_dun04.gat",26,27;	close;
-dalde1:		warp "alde_dun01.gat",297,25;	close;
-dalde2:		warp "alde_dun02.gat",127,169;	close;
-dalde3:		warp "alde_dun03.gat",277,178;	close;
-dalde4:		warp "alde_dun04.gat",268,74;	close;
-dclock1:	warp "c_tower1.gat",199,159;	close;
-dclock2:	warp "c_tower2.gat",148,283;	close;
-dclock3:	warp "c_tower3.gat",65,147;	close;
-dclock4:	warp "c_tower4.gat",56,155;	close;
-dcoal1:		warp "mjo_dun01.gat",52,17;	close;
-dcoal2:		warp "mjo_dun02.gat",381,343;	close;
-dcoal3:		warp "mjo_dun03.gat",302,262;	close;
-dculvert1:	warp "prt_sewb1.gat",131,247;	close;
-dculvert2:	warp "prt_sewb2.gat",19,19;	close;
-dculvert3:	warp "prt_sewb3.gat",180,169;	close;
-dculvert4:	warp "prt_sewb4.gat",100,92;	close;
-dgeffen1:	warp "gef_dun00.gat",104,99;	close;
-dgeffen2:	warp "gef_dun01.gat",115,236;	close;
-dgeffen3:	warp "gef_dun02.gat",106,132;	close;
-dgeffen4:	warp "gef_dun03.gat",203,200;	close;
-dglastent:	warp "glast_01.gat",375,304;	close;
-dglastcast1:	warp "gl_cas01.gat",199,29;	close;
-dglastcast2:	warp "gl_cas02.gat",104,25;	close;
-dglastchiv1:	warp "gl_knt01.gat",150,15;	close;
-dglastchiv2:	warp "gl_knt02.gat",157,287;	close;
-dglastyard:	warp "gl_chyard.gat",147,15;	close;
-dglastcul1:	warp "gl_sew01.gat",258,255;	close;
-dglastcul2:	warp "gl_sew02.gat",108,291;	close;
-dglastcul3:	warp "gl_sew03.gat",171,283;	close;
-dglastcul4:	warp "gl_sew04.gat",68,277;	close;
-dglastchur:	warp "gl_church.gat",156,7;	close;
-dglaststep:	warp "gl_step.gat",12,7;	close;
-dglastcave1:	warp "gl_dun01.gat",133,271;	close;
-dglastcave2:	warp "gl_dun02.gat",224,274;	close;
-dglastpris1:	warp "gl_prison.gat",14,70;	close;
-dglastpris2:	warp "gl_prison1.gat",150,14;	close;
-dhidden1:	warp "prt_maze01.gat",176,7;	close;
-dhidden2:	warp "prt_maze02.gat",94,9;	close;
-dhidden3:	warp "prt_maze03.gat",23,8;	close;
-diced1:		warp "ice_dun01.gat",157,14;	close;
-diced2:		warp "ice_dun02.gat",151,155;	close;
-diced3:		warp "ice_dun03.gat",149,22;	close;
-diced4:		warp "ice_dun04.gat",33,158;	close;
-dmagma1:	warp "mag_dun01.gat",126,68;	close;
-dmagma2:	warp "mag_dun02.gat",47,30;	close;
-dorc1:		warp "orcsdun01.gat",32,170;	close;
-dorc2:		warp "orcsdun02.gat",21,185;	close;
-dpayon1:	warp "pay_dun00.gat",21,183;	close;
-dpayon2:	warp "pay_dun01.gat",19,33;	close;
-dpayon3:	warp "pay_dun02.gat",19,63;	close;
-dpayon4:	warp "pay_dun03.gat",155,159;	close;
-dpayon5:	warp "pay_dun04.gat",201,204;	close;
-dpyramids1:	warp "moc_pryd01.gat",192,9;	close;
-dpyramids2:	warp "moc_pryd02.gat",10,192;	close;
-dpyramids3:	warp "moc_pryd03.gat",100,92;	close;
-dpyramids4:	warp "moc_pryd04.gat",181,11;	close;
-dpyramidsb1:	warp "moc_pryd05.gat",94,96;	close;
-dpyramidsb2:	warp "moc_pryd06.gat",192,8;	close;
-dsphinx1:	warp "in_sphinx1.gat",288,9;	close;
-dsphinx2:	warp "in_sphinx2.gat",149,81;	close;
-dsphinx3:	warp "in_sphinx3.gat",210,54;	close;
-dsphinx4:	warp "in_sphinx4.gat",10,222;	close;
-dsphinx5:	warp "in_sphinx5.gat",100,99;	close;
-dsunken1:	warp "treasure01.gat",69,24;	close;
-dsunken2:	warp "treasure02.gat",102,27;	close;
-dtoy1:		warp "xmas_dun01.gat",205,15;	close;
-dtoy2:		warp "xmas_dun02.gat",129,133;	close;
-dturtleent:	warp "tur_dun01.gat",154,49;	close;
-dturtle1:	warp "tur_dun02.gat",148,261;	close;
-dturtle2:	warp "tur_dun03.gat",132,189;	close;
-dturtle3:	warp "tur_dun04.gat",100,192;	close;
-dama1:		warp "ama_dun01.gat",228,11;	close;
-dama2:		warp "ama_dun02.gat",34,41;	close;
-dama3:		warp "ama_dun03.gat",119,14;	close;
-dgon1:		warp "gon_dun01.gat",153,53;	close;
-dgon2:		warp "gon_dun02.gat",28,113;	close;
-dgon3:		warp "gon_dun03.gat",68,16;	close;
-dgefenia1:	warp "gefenia01.gat",40,103;	close;
-dgefenia2:	warp "gefenia02.gat",203,34;	close;
-dgefenia3:	warp "gefenia03.gat",266,168;	close;
-dgefenia4:	warp "gefenia04.gat",130,272;	close;
-dgldun1:	warp "gld_dun01.gat",119,93;	close;
-dgldun2:	warp "gld_dun02.gat",39,161;	close;
-dgldun3:	warp "gld_dun03.gat",50,44;	close;
-dgldun4:	warp "gld_dun04.gat",116,45;	close;
-casino:		warp "cmd_in02.gat",179,129;	close;
-dthor1:		warp "thor_v01.gat",21,228;	close;
-dthor2:		warp "thor_v02.gat",75,205;	close;
-dthor3:		warp "thor_v03.gat",34,272;	close;
-drachel1:	warp "ra_san01.gat",140,11;	close;
-drachel2:	warp "ra_san02.gat",32,21;	close;
-drachel3:	warp "ra_san03.gat",4,149;	close;
-drachel4:	warp "ra_san04.gat",204,218;	close;
-drachel5:	warp "ra_san05.gat",150,9;	close;
-dabbey1:	warp "abbey01.gat",51,14;	close;
-dabbey2:	warp "abbey02.gat",150,11;	close;
-dabbey3:	warp "abbey03.gat",120,10;	close;
-dmosk01:	warp	"mosk_dun01",0,0;	close;
-dmosk02:	warp	"mosk_dun02",0,0;	close;
-dmosk03:	warp	"mosk_dun03",0,0;	close;
-
-//-------------------------------
-//         Field Warps
-//-------------------------------
-
-drunfild1:	warp "ra_fild01.gat",192,162;	close;
-drunfild2:	warp "ra_fild02.gat",235,166;	close;
-drunfild3:	warp "ra_fild03.gat",202,206;	close;
-drunfild4:	warp "ra_fild04.gat",202,208;	close;
-drunfild5:	warp "ra_fild05.gat",225,202;	close;
-drunfild6:	warp "ra_fild06.gat",202,214;	close;
-drunfild7:	warp "ra_fild07.gat",263,196;	close;
-drunfild8:	warp "ra_fild08.gat",217,201;	close;
-drunfild9:	warp "ra_fild09.gat",87,121;	close;
-drunfild10:	warp "ra_fild10.gat",277,181;	close;
-drunfild11:	warp "ra_fild11.gat",221,185;	close;
-drunfild12:	warp "ra_fild12.gat",175,200;	close;
-drunfild13:	warp "ra_fild13.gat",174,197;	close;
-dgeffild00:	warp "gef_fild00.gat",46,199;	close;
-dgeffild01:	warp "gef_fild01.gat",213,204;	close;
-dgeffild02:	warp "gef_fild02.gat",195,212;	close;
-dgeffild03:	warp "gef_fild03.gat",257,192;	close;
-dgeffild04:	warp "gef_fild04.gat",188,171;	close;
-dgeffild05:	warp "gef_fild05.gat",166,263;	close;
-dgeffild06:	warp "gef_fild06.gat",248,158;	close;
-dgeffild07:	warp "gef_fild07.gat",195,191;	close;
-dgeffild08:	warp "gef_fild08.gat",186,183;	close;
-dgeffild09:	warp "gef_fild09.gat",221,117;	close;
-dgeffild10:	warp "gef_fild10.gat",178,218;	close;
-dgeffild11:	warp "gef_fild11.gat",136,328;	close;
-dgeffild12:	warp "gef_fild12.gat",240,181;	close;
-dgeffild13:	warp "gef_fild13.gat",235,235;	close;
-dgeffild14:	warp "gef_fild14.gat",211,185;	close;
-dmjolnir1:	warp "mjolnir_01.gat",204,120;	close;
-dmjolnir2:	warp "mjolnir_02.gat",175,193;	close;
-dmjolnir3:	warp "mjolnir_03.gat",208,213;	close;
-dmjolnir4:	warp "mjolnir_04.gat",179,180;	close;
-dmjolnir5:	warp "mjolnir_05.gat",181,240;	close;
-dmjolnir6:	warp "mjolnir_06.gat",195,270;	close;
-dmjolnir7:	warp "mjolnir_07.gat",235,202;	close;
-dmjolnir8:	warp "mjolnir_08.gat",188,215;	close;
-dmjolnir9:	warp "mjolnir_09.gat",205,144;	close;
-dmjolnir10:	warp "mjolnir_10.gat",245,223;	close;
-dmjolnir11:	warp "mjolnir_11.gat",180,206;	close;
-dmjolnir12:	warp "mjolnir_12.gat",196,208;	close;
-dmocfild1:	warp "moc_fild01.gat",219,205;	close;
-dmocfild2:	warp "moc_fild02.gat",177,206;	close;
-dmocfild3:	warp "moc_fild03.gat",194,182;	close;
-dmocfild4:	warp "moc_fild04.gat",184,217;	close;
-dmocfild5:	warp "moc_fild05.gat",203,213;	close;
-dmocfild6:	warp "moc_fild06.gat",213,208;	close;
-dmocfild7:	warp "moc_fild07.gat",224,170;	close;
-dmocfild8:	warp "moc_fild08.gat",229,177;	close;
-dmocfild9:	warp "moc_fild09.gat",195,198;	close;
-dmocfild10:	warp "moc_fild10.gat",209,168;	close;
-dmocfild11:	warp "moc_fild11.gat",198,216;	close;
-dmocfild12:	warp "moc_fild12.gat",156,187;	close;
-dmocfild13:	warp "moc_fild13.gat",185,263;	close;
-dmocfild14:	warp "moc_fild14.gat",209,219;	close;
-dmocfild15:	warp "moc_fild15.gat",223,188;	close;
-dmocfild16:	warp "moc_fild16.gat",206,228;	close;
-dmocfild17:	warp "moc_fild17.gat",208,238;	close;
-dmocfild18:	warp "moc_fild18.gat",209,223;	close;
-dmocfild19:	warp "moc_fild19.gat",85,97;	close;
-dpayfild1:	warp "pay_fild01.gat",158,206;	close;
-dpayfild2:	warp "pay_fild02.gat",151,219;	close;
-dpayfild3:	warp "pay_fild03.gat",205,148;	close;
-dpayfild4:	warp "pay_fild04.gat",186,247;	close;
-dpayfild5:	warp "pay_fild05.gat",134,204;	close;
-dpayfild6:	warp "pay_fild06.gat",193,235;	close;
-dpayfild7:	warp "pay_fild07.gat",200,177;	close;
-dpayfild8:	warp "pay_fild08.gat",137,189;	close;
-dpayfild9:	warp "pay_fild09.gat",201,224;	close;
-dpayfild10:	warp "pay_fild10.gat",160,205;	close;
-dpayfild11:	warp "pay_fild11.gat",194,150;	close;
-dprtfild0:	warp "prt_fild00.gat",184,235;	close;
-dprtfild1:	warp "prt_fild01.gat",190,206;	close;
-dprtfild2:	warp "prt_fild02.gat",240,206;	close;
-dprtfild3:	warp "prt_fild03.gat",190,143;	close;
-dprtfild4:	warp "prt_fild04.gat",307,252;	close;
-dprtfild5:	warp "prt_fild05.gat",239,213;	close;
-dprtfild6:	warp "prt_fild06.gat",185,188;	close;
-dprtfild7:	warp "prt_fild07.gat",193,194;	close;
-dprtfild8:	warp "prt_fild08.gat",187,218;	close;
-dprtfild9:	warp "prt_fild09.gat",210,183;	close;
-dprtfild10:	warp "prt_fild10.gat",195,149;	close;
-dprtfild11:	warp "prt_fild11.gat",198,164;	close;
-dxmasfild1:	warp "xmas_fild01.gat",115,145;	close;
-dcmdfild1:	warp "cmd_fild01.gat",180,178;	close;
-dcmdfild2:	warp "cmd_fild02.gat",231,160;	close;
-dcmdfild3:	warp "cmd_fild03.gat",191,172;	close;
-dcmdfild4:	warp "cmd_fild04.gat",228,194;	close;
-dcmdfild5:	warp "cmd_fild05.gat",224,203;	close;
-dcmdfild6:	warp "cmd_fild06.gat",190,223;	close;
-dcmdfild7:	warp "cmd_fild07.gat",234,177;	close;
-dcmdfild8:	warp "cmd_fild08.gat",194,175;	close;
-dcmdfild9:	warp "cmd_fild09.gat",172,172;	close;
-dyunofild1:	warp "yuno_fild01.gat",189,224;	close;
-dyunofild2:	warp "yuno_fild02.gat",192,207;	close;
-dyunofild3:	warp "yuno_fild03.gat",221,157;	close;
-dyunofild4:	warp "yuno_fild04.gat",226,199;	close;
-dyunofild5:	warp "yuno_fild05.gat",223,177;	close;
-dyunofild6:	warp "yuno_fild06.gat",187,232;	close;
-dyunofild7:	warp "yuno_fild07.gat",231,174;	close;
-dyunofild8:	warp "yuno_fild08.gat",196,203;	close;
-dyunofild9:	warp "yuno_fild09.gat",183,214;	close;
-dyunofild10:	warp "yuno_fild10.gat",200,124;	close;
-dyunofild11:	warp "yuno_fild11.gat",195,226;	close;
-dyunofild12:	warp "yuno_fild12.gat",210,304;	close;
-damafild1:	warp "ama_fild01.gat",190,197;	close;
-dgonfild1:	warp "gon_fild01.gat",220,227;	close;
-dumfild1:	warp "um_fild01.gat",217,206;	close;
-dumfild2:	warp "um_fild02.gat",223,221;	close;
-dumfild3:	warp "um_fild03.gat",237,215;	close;
-dumfild4:	warp "um_fild04.gat",202,197;	close;
-dniffild1:	warp "nif_fild01.gat",215,229;	close;
-dniffild2:	warp "nif_fild02.gat",167,234;	close;
-dyggdrasil1:	warp "yggdrasil01.gat",204,78;	close;
-dloufild1:	warp "lou_fild01.gat",229,187;	close;
-dayofild1:	warp "ayo_fild01.gat",173,134;	close;
-dayofild2:	warp "ayo_fild02.gat",212,150;	close;
-deinfild1:	warp "ein_fild01.gat",142,225;	close;
-deinfild2:	warp "ein_fild02.gat",182,141;	close;
-deinfild3:	warp "ein_fild03.gat",187,228;	close;
-deinfild4:	warp "ein_fild04.gat",185,173;	close;
-deinfild5:	warp "ein_fild05.gat",216,173;	close;
-deinfild6:	warp "ein_fild06.gat",195,148;	close;
-deinfild7:	warp "ein_fild07.gat",272,220;	close;
-deinfild8:	warp "ein_fild08.gat",173,214;	close;
-deinfild9:	warp "ein_fild09.gat",207,174;	close;
-deinfild10:	warp "ein_fild10.gat",196,200;	close;
-dlhzfild1:	warp "lhz_fild01.gat",240,179;	close;
-dlhzfild2:	warp "lhz_fild02.gat",185,235;	close;
-dlhzfild3:	warp "lhz_fild03.gat",240,226;	close;
-dhufild1:	warp "hu_fild01.gat",268,101;	close;
-dhufild2:	warp "hu_fild02.gat",222,193;	close;
-dhufild3:	warp "hu_fild03.gat",232,185;	close;
-dhufild4:	warp "hu_fild04.gat",252,189;	close;
-dhufild5:	warp "hu_fild05.gat",196,106;	close;
-dhufild6:	warp "hu_fild06.gat",216,220;	close;
-dhufild7:	warp "hu_fild07.gat",227,197;	close;
-wodtemp1:	warp "odin_tem01.gat",298,167;	close;
-wodtemp2:	warp "odin_tem02.gat",224,149;	close;
-wodtemp3:	warp "odin_tem03.gat",266,280;	close;
-dvfild1:	warp "ve_fild01",186,175;	close;
-dvfild2:	warp "ve_fild02",196,370;	close;
-dvfild3:	warp "ve_fild03",222,45;	close;
-dvfild4:	warp "ve_fild04",51,250;	close;
-dvfild5:	warp "ve_fild05",202,324;	close;
-dvfild6:	warp "ve_fild06",150,223;	close;
-dvfild7:	warp "ve_fild07",149,307;	close;
-cmoscovia01:	warp	"mosk_fild01",0,0;	close;
-cmoscovia02:	warp	"mosk_fild02",0,0;	close;	
-close;
+//===== rAthena Script ======================================= 
+//= Warper
+//===== Description: ========================================= 
+//= A complete - but very condensed - warper script.
+//===== Additional Comments: =================================
+//= 1.0 Initial script By [Euphy].
+//= 1.1 Added missing duplicates and fixed coordinates.
+//=     Some coordinates written by [Tekno-Kanix] and [ToastOfDoom].
+//= 1.2 Added new episodes and simplified functions.
+//= 1.3 Added Renewal checks and Instances menu.
+//=     Aligned coordinates with @go.
+//= 1.4 Added new Guild Dungeons.
+//= 1.4a Slight edits.
+//= 1.4b Added Wolfchev's Laboratory warp.
+//= 1.5 Added Lasagna ,Para Market ,WOE TE ,Instances and settings [sader1992].
+//= 1.5a Fix Bifrost Tower
+//============================================================
+
+-	script	Warper	-1,{
+function Go; function Disp; function Pick; function Restrict;
+
+// --------------------------------------------------
+//	Main Menu:
+// --------------------------------------------------
+
+menu	"Último destino ^777777["+lastwarp$+"]^000000",-,
+    	" ~ Cidades",Towns,
+    	" ~ Campos",Fields,
+    	" ~ Calabouços",Dungeons,
+    	" ~ Castelos de clãs",Castles,
+    	" ~ Calabouços de clãs",Guild_Dungeons,
+    	" ~ Instâncias",Instances,
+    	" ~ Áreas especiais",Special;
+
+	if (lastwarp$ == "")
+		message strcharinfo(0),"Você ainda não utilizou o teletransporte.";
+	else
+		warp lastwarp$,lastwarpx,lastwarpy;
+	end;
+
+// ------------------- Functions -------------------
+// * Go("<map>",<x>,<y>);
+//	~ Warps directly to a map.
+//
+// * Disp("<Menu Option>",<first option>,<last option>);
+// * Pick("<map_prefix>"{,<index offset>});
+//	~ Dynamic menu and map selection (auto-numbered).
+//	~ Fields and Dungeons must use Disp and Pick Functions.
+//
+// * Disp("<Option 1>:<Option 2>:<etc.>");
+// * Pick("","<map1>","<map2>","<etc.>");
+//	~ Manual menu and map selection (listed).
+//
+// * Restrict("<RE | Pre-RE>"{,<menu option numbers>});
+//	~ Only allows map for Renewal or Pre-Renewal modes.
+//     If menu option numbers are given, only those maps
+//     will be restricted (i.e. not for "Go").
+//
+// Other notes:
+//   ~ Array @c[] holds all (x,y) coordinates.
+//   ~ Use @c[2] EXCEPT when maps begin dynamically
+//	  at 0: use @c[0] and Pick() offset 1.
+// --------------------------------------------------
+
+function Go {
+	set lastwarp$, getarg(0);
+	set lastwarpx, getarg(1,0);
+	set lastwarpy, getarg(2,0);
+	warp getarg(0),getarg(1,0),getarg(2,0);
+	end;
 }
+function Disp {
+	if (getargcount() < 3)
+		set @menu$, getarg(0);
+	else {
+		set @menu$,"";
+		for (set .@i,getarg(1); .@i<=getarg(2); set .@i,.@i+1)
+			set @menu$, @menu$+getarg(0)+" "+.@i+":";
+	}
+	return;
+}
+function Pick {
+	set .@warp_block,@warp_block;
+	set @warp_block,0;
+	if((@f && .OnlyFirstFld) || (@d && .OnlyFirstDun)){
+		set .@select,1;
+		if(.@warp_block){
+			while(.@warp_block & (1<<.@select)){
+				.@select += 1;
+			}
+		}
+	}else{
+		set .@select, select(@menu$);
+	}
+	if (getarg(0) == "") {
+		set .@i, .@select;
+		set .@map$, getarg(.@i);
+	} else {
+		set .@i, .@select-getarg(1,0);
+		set .@map$, getarg(0)+((.@i<10)?"0":"")+.@i;
+	}
+	if (.@warp_block & (1<<.@select)) {
+		message strcharinfo(0),"Este mapa não está disponível no modo "+((checkre(0))?"":"Pre-")+"Renewal.";
+		end;
+	}
+	set .@x, @c[.@i*2];
+	set .@y, @c[.@i*2+1];
+	deletearray @c[0],getarraysize(@c);
+	@f = false; @d = false;
+	Go(.@map$,.@x,.@y);
+}
+function Restrict {
+	.@type$ = getarg(0);
+	
+	if (.@type$ == "Brasilis") {
+		// If the official warper to Brasilis is enabled, meaning is either
+		// Renewal mode or Pre-renewal Brasilis is enabled, we lift the restriction
+		if (getnpcid(0, "Crewman_bra2"))
+			return;
+		// Otherwise we apply the renewal restriction
+		.@type$ = "RE";
+	}
+
+	if ((.@type$ == "RE" && !checkre(0)) || (.@type$ == "Pre-RE" && checkre(0))) {
+		if (getarg(1,0)) {
+			set @warp_block,0;
+			for (set .@i,1; .@i<getargcount(); set .@i,.@i+1)
+				set @warp_block, @warp_block | (1<<getarg(.@i));
+		} else {
+			message strcharinfo(0),"Este mapa não está disponível no modo "+((checkre(0))?"":"Pre-")+"Renewal.";
+			end;
+		}
+	}
+	return;
+}
+
+// --------------------------------------------------
+	Towns:
+// --------------------------------------------------
+menu	"Prontera",T1, "Alberta",T2, "Aldebaran",T3, "Amatsu",T4, "Ayothaya",T5,
+    	"Brasilis",T6, "Comodo",T7, "Dewata",T8, "Eclage",T9, "Einbech",T10,
+		"Einbroch",T11, "El Dicastes",T12, "Geffen",T13, "Hugel",T14, "Castelo de Gelo",T15,
+		"Izlude",T16, "Jawaii",T17, "Juno",T18, "Kunlun",T19, "Lasagna",T20,
+		"Lighthalzen",T21, "Luoyang",T22, "Lutie",T23, "Malangdo",T24, "Malaya",T25,
+		"Manuk",T26, "Acampamento da Expedição de Midgard",T27, "Mora",T28, "Morocc",T29, "Moscovia",T30,
+		"Ilha Esquecida (Dia)",T31, "Ilha Esquecida (Noite)",T32, "Niflheim",T33, "Payon",T34, "Rachel",T35,
+		"Rockridge",T36, "Área de Segurança Especial, Cor",T37, "Splendide",T38, "Acampamento de Thor",T39, "Umbala",T40,
+		"Mansão de Varmundt",T41, "Veins",T42, "Sítio Arqueológico de Verus",T43, "Vila dos Lobos",T44;
+
+T1: Go("prontera",155,183);
+T2: Go("alberta",28,234);
+T3: Go("aldebaran",140,131);
+T4: Go("amatsu",198,84);
+T5: Go("ayothaya",208,166);
+T6: Restrict("Brasilis");
+	Go("brasilis",196,217);
+T7: Go("comodo",209,143);
+T8: Restrict("RE");
+	Go("dewata",200,180);
+T9: Restrict("RE");
+	Go("ecl_in01",48,53);
+T10: Go("einbech",63,35);
+T11: Go("einbroch",64,200);
+T12: Restrict("RE");
+	 Go("dicastes01",198,187);
+T13: Go("geffen",119,59);
+T14: Go("hugel",96,145);
+T15: Restrict("RE");
+	 Go("icecastle",185,212);
+T16: Go("izlude",128,(checkre(3)?146:114));
+T17: Go("jawaii",251,132);
+T18: Go("yuno",157,51);
+T19: Go("gonryun",160,120);
+T20: Restrict("RE");
+	 Go("lasagna",193,182);
+T21: Go("lighthalzen",158,92);
+T22: Go("louyang",217,100);
+T23: Go("xmas",147,134);
+T24: Restrict("RE");
+	 Go("malangdo",140,114);
+T25: Restrict("RE");
+	 Go("malaya",231,200);
+T26: Go("manuk",282,138);
+T27: Go("mid_camp",210,288);
+T28: Restrict("RE");
+	 Go("mora",55,146);
+T29: Go("morocc",156,93);
+T30: Go("moscovia",223,184);
+T31: Go("nameless_i",256,215);
+T32: Go("nameless_n",256,215);
+T33: Go("niflheim",202,174);
+T34: Go("payon",179,100);
+T35: Go("rachel",130,110);
+T36: Restrict("RE");
+	 Go("harboro1",298,206);
+T37: Restrict("RE");
+	 Go("sp_cor",160,166);
+T38: Go("splendide",201,147);
+T39: Go("thor_camp",246,68);
+T40: Go("umbala",97,153);
+T41: Restrict("RE");
+	Go("ba_maison",72,146);
+T42: Go("veins",216,123);
+T43: Restrict("RE");
+	 Go("verus04",123,250);
+T44: Restrict("RE");
+	 Go("wolfvill",144,144);
+
+// --------------------------------------------------
+	Fields:
+// --------------------------------------------------
+@f = true;
+menu	"Campos de Amatsu",F1, "Campos de Ayothaya",F2, "Campos de Bifrost", F3,
+    	"Campos de Brasilis",F4, "Campos de Comodo",F5, "Campos de Dewata",F6,
+    	"Campos de Eclage",F7, "Campos de Einbroch",F8, "Campos de El Dicastes",F9,
+    	"Campos das Escamas Congeladas",F10, "Campos de Geffen",F11, "Floresta do Lobo Cinzento",F12,
+		"Campos de Hugel",F13, "Campos de Juno",F14, "Deserto de Kiwawa",F15,
+		"Campos de Kunlun",F16, "Campos de Lasagna",F17, "Campos de Lighthalzen",F18,
+		"Campo de Luoyang",F19, "Campo de Lutie",F20, "Campos de Malaya",F21,
+		"Campos de Manuk",F22, "Campos de Mjolnir",F23, "Campos de Moscovia",F24,
+		"Campos de Niflheim",F25, "Florestas de Payon",F26, "Campos de Prontera",F27,
+		"Campos de Rachel",F28, "Desertos de Sograt",F29, "Campos de Splendide",F30,
+		"Campos de Umbala",F31, "Campos de Veins",F32;
+
+F1: setarray @c[2],190,197;
+	Disp("Campo de Amatsu",1,1); Pick("ama_fild");
+F2: setarray @c[2],173,134,212,150;
+	Disp("Campo de Ayothaya",1,2); Pick("ayo_fild");
+F3: Restrict("RE");
+	setarray @c[2],193,220,220,187;
+	Disp("Campo de Bifrost",1,2); Pick("bif_fild");
+F4: Restrict("Brasilis");
+	setarray @c[2],74,32;
+	Disp("Campo de Brasilis",1,1); Pick("bra_fild");
+F5: Restrict("Pre-RE",5);
+	setarray @c[2],180,178,231,160,191,172,228,194,224,203,190,223,234,177,194,175,172,172;
+	Disp("Campo de Comodo",1,9); Pick("cmd_fild");
+F6: Restrict("RE");
+	setarray @c[2],371,212;
+	Disp("Campo de Dewata",1,1); Pick("dew_fild");
+F7: Restrict("RE");
+	setarray @c[2],97,314;
+	Disp("Campo de Eclage",1,1); Pick("ecl_fild");
+F8: Restrict("Pre-RE",2,10);
+	setarray @c[2],142,225,182,141,187,228,185,173,216,173,195,148,272,220,173,214,207,174,196,200;
+	Disp("Campo de Einbroch",1,10); Pick("ein_fild");
+F9: Restrict("RE");
+	setarray @c[2],143,132,143,217;
+	Disp("Campo de El Dicastes",1,2); Pick("dic_fild");
+F10: Restrict("RE");
+	 setarray @c[2],378,223,223,18,365,241,140,280;
+	 Disp("Colina das Escamas Congeladas:Planícies das Escamas Congeladas:Geleira das Escamas Congeladas:Cauda Congelada"); Pick("","jor_back1","jor_back2","jor_back3","jor_tail");
+F11: Restrict("Pre-RE",13,15);
+	 setarray @c[0],46,199,213,204,195,212,257,192,188,171,166,263,248,158,195,191,186,183,221,117,178,218,136,328,240,181,235,235,211,185;
+	 Disp("Campo de Geffen",0,14); Pick("gef_fild",1);
+F12: Restrict("RE");
+	 setarray @c[2],22,315,122,388;
+	 Disp("Floresta do Lobo Cinzento",1,2); Pick("gw_fild");
+F13: Restrict("Pre-RE",3,7);
+	 setarray @c[2],268,101,222,193,232,185,252,189,196,106,216,220,227,197;
+	 Disp("Campo de Hugel",1,7); Pick("hu_fild");
+F14: Restrict("Pre-RE",5,10);
+	 setarray @c[2],189,224,192,207,221,157,226,199,223,177,187,232,231,174,196,203,183,214,200,124,195,226,210,304;
+	 Disp("Campo de Juno",1,12); Pick("yuno_fild");
+F15: Restrict("RE");
+	 setarray @c[2],38,246,31,207;
+	 Disp("Deserto de Kiwawa",1,2); Pick("","rockrdg1","rockrdg2");
+F16: setarray @c[2],220,227;
+	 Disp("Campo de Kunlun",1,1); Pick("gon_fild");
+F17: Restrict("RE");
+	 setarray @c[2],344,371,20,98;
+	 Disp("Campo de Lasagna",1,2); Pick("lasa_fild");	 
+F18: setarray @c[2],240,179,185,235,240,226;
+	 Disp("Campo de Lighthalzen",1,3); Pick("lhz_fild");
+F19: setarray @c[2],229,187;
+	 Disp("Campo de Luoyang",1,1); Pick("lou_fild");
+F20: setarray @c[2],115,145;
+	 Disp("Campo de Lutie",1,1); Pick("xmas_fild");
+F21: Restrict("RE");
+	 setarray @c[2],40,272,207,180;
+	 Disp("Campo de Malaya",1,2); Pick("ma_fild");
+F22: setarray @c[2],35,236,35,262,84,365;
+	 Disp("Campo de Manuk",1,3); Pick("man_fild");
+F23: setarray @c[2],204,120,175,193,208,213,179,180,181,240,195,270,235,202,188,215,205,144,245,223,180,206,196,208;
+	 Disp("Campo de Mjolnir",1,12); Pick("mjolnir_");
+F24: setarray @c[2],82,104,131,147;
+	 Disp("Campo de Moscovia",1,2); Pick("mosk_fild");
+F25: setarray @c[2],215,229,167,234;
+	 Disp("Campo de Niflheim",1,2); Pick("nif_fild");
+F26: Restrict("Pre-RE",5,11);
+	 setarray @c[2],158,206,151,219,205,148,186,247,134,204,193,235,200,177,137,189,201,224,160,205,194,150;
+	 Disp("Floresta de Payon",1,11); Pick("pay_fild");
+F27: setarray @c[0],208,227,190,206,240,206,190,143,307,252,239,213,185,188,193,194,187,218,210,183,195,149,198,164;
+	 Disp("Campo de Prontera",0,11); Pick("prt_fild",1);
+F28: Restrict("Pre-RE",2,7,9,10,11,13);
+	 setarray @c[2],192,162,235,166,202,206,202,208,225,202,202,214,263,196,217,201,87,121,277,181,221,185,175,200,174,197;
+	 Disp("Campo de Rachel",1,13); Pick("ra_fild");
+F29: if(.Satan_Morocc){
+	 setarray @c[2],219,205,177,206,194,182,224,170,198,216,156,187,185,263,206,228,208,238,209,223,85,97,207,202,31,195,38,195;
+	 Disp("Deserto de Sograt 1:Deserto de Sograt 2:Deserto de Sograt 3:Deserto de Sograt 7:Deserto de Sograt 11:Deserto de Sograt 12:Deserto de Sograt 13:Deserto de Sograt 16:Deserto de Sograt 17:Deserto de Sograt 18:Deserto de Sograt 19:Deserto de Sograt 20:Deserto de Sograt 21:Deserto de Sograt 22");
+	 Pick("","moc_fild01","moc_fild02","moc_fild03","moc_fild07","moc_fild11","moc_fild12","moc_fild13","moc_fild16","moc_fild17","moc_fild18","moc_fild19","moc_fild20","moc_fild21","moc_fild22");
+	 }else{
+	 setarray @c[2],219,205,177,206,194,182,146,297,204,197,275,302,224,170,139,123,101,110,341,39,198,216,156,187,185,263,223,222,170,257,206,228,208,238,209,223,85,97;
+	 Disp("Deserto de Sograt",1,19); Pick("moc_fild");
+	 }
+F30: setarray @c[2],175,186,236,184,188,204;
+	 Disp("Campo de Splendide",1,3); Pick("spl_fild");
+F31: setarray @c[2],217,206,223,221,237,215,202,197;
+	 Disp("Campo de Umbala",1,4); Pick("um_fild");
+F32: Restrict("Pre-RE",5);
+	 setarray @c[2],186,175,196,370,222,45,51,250,202,324,150,223,149,307;
+	 Disp("Campo de Veins",1,7); Pick("ve_fild");
+
+// --------------------------------------------------
+	Dungeons:
+// --------------------------------------------------
+@d = true;
+menu	"Laboratório Abandonado Amicitia",D1, "Lago do Abismo",D2, "Calabouço de Amatsu",D3,
+		"Formigueiro Infernal",D4, "Calabouço de Ayothaya",D5, "Caverna da Praia",D6,
+		"Torre de Bifrost",D7, "Laboratório de Somatologia",D8, "Calabouço de Brasilis",D9,
+		"Calabouço de Byalan",D10, "Torre do Relógio",D11, "Mina de Carvão",D12,
+		"Culvert",D13, "Abadia Amaldiçoada",D14, "Calabouço de Dewata",D15,
+		"Calabouço de Einbroch",D16, "Bacia de Fogo",D17, "Gefenia",D18,
+		"Calabouço de Geffen",D19, "Glast Heim",D20, "Labirinto da Floresta",D21,
+		"Caverna de Gelo",D22, "Calabouços das Ilusões",D23, "Calabouço de Issgard",D24,
+		"Juperos",D25, "Calabouço de Kiel",D26, "Calabouço de Kunlun",D27,
+		"Calabouço de Lasagna",D28, "Calabouço de Luoyang",D29, "Caverna de Magma",D30,
+		"Calabouço de Malangdo",D31, "Calabouço de Moscovia",D32, "Calabouço de Nidhogg",D33,
+		"Calabouço de Niflheim",D34, "Templo de Odin",D35, "Calabouço dos Orcs",D36,
+		"Labirinto de Oz",D37, "Calabouço de Payon",D38, "Subterrâneo de Prontera",D39,
+		"Pirâmides",D40, "Santuário de Rachel",D41, "Calabouço de Rock Ridge",D42,
+		"Calabouço de Rudus",D43, "Túnel dos Scarabas",D44, "Esfinge",D45,
+		"Navio Fantasma",D46, "Torre de Thanatos",D47, "Vulcão de Thor",D48,
+		"Fábrica de Brinquedos",D49, "Ilha das Tartarugas",D50, "Calabouço de Umbala",D51,
+		"Calabouços de Varmundt",D52, "Área de Verus",D53;
+
+D1: Restrict("RE");
+	setarray @c[2],253,244,145,278;
+	Disp("1º Andar - Laboratório Geral:2º Andar - Sala de Cultura Intensiva"); Pick("","amicitia1","amicitia2");
+D2: Restrict("RE",4);
+	setarray @c[2],261,272,275,270,116,27,169,159;
+	Disp("Lago do Abismo",1,4); Pick("abyss_");
+D3: setarray @c[2],228,11,34,41,119,14;
+	Disp("Calabouço de Amatsu",1,3); Pick("ama_dun");
+D4: setarray @c[2],35,262,168,170;
+	Disp("Formigueiro Infernal",1,2); Pick("anthell");
+D5: setarray @c[2],275,19,24,26;
+	Disp("Labirinto do Santuário Antigo:Interior do Santuário Antigo"); Pick("ayo_dun");
+D6: setarray @c[2],266,67,255,244,23,260;
+	Disp("Caverna da Praia",1,3); Pick("","beach_dun","beach_dun2","beach_dun3");
+D7: Restrict("RE");
+	setarray @c[2],57,13,64,88,45,14,26,23;
+	Disp("Torre de Bifrost",1,4); Pick("ecl_tdun");
+D8: Restrict("RE",4,5);
+	setarray @c[2],150,288,150,18,140,134,244,52,100,202;
+	Disp("Laboratório de Somatologia 1:Laboratório de Somatologia 2:Laboratório de Somatologia 3:Laboratório de Somatologia 4:Tumba dos Caídos"); Pick("","lhz_dun01","lhz_dun02","lhz_dun03","lhz_dun04","lhz_dun_n");
+D9: Restrict("Brasilis");
+	setarray @c[2],87,47,262,262;
+	Disp("Calabouço de Brasilis",1,2); Pick("bra_dun");
+D10: Restrict("RE",6);
+	 setarray @c[0],168,168,253,252,236,204,32,63,26,27,141,187;
+	 Disp("Calabouço de Byalan",1,6); Pick("iz_dun",1);
+D11: Restrict("RE",9,10,11);
+	 setarray @c[2],199,159,148,283,65,147,56,155,297,25,127,169,277,178,268,74,266,27,60,142,79,39;
+	 Disp("Torre do Relógio 1:Torre do Relógio 2:Torre do Relógio 3:Torre do Relógio 4:Subsolo 1:Subsolo 2:Subsolo 3:Subsolo 4:Torre do Relógio do Pesadelo, 2º Andar:Torre do Relógio do Pesadelo, 3º Andar:Subsolo Desconhecido");
+	 Pick("","c_tower1","c_tower2","c_tower3","c_tower4","alde_dun01","alde_dun02","alde_dun03","alde_dun04","c_tower2_","c_tower3_","clock_01");
+D12: setarray @c[2],52,17,381,343,302,262;
+	 Disp("Mina de Carvão",1,3); Pick("mjo_dun");
+D13: setarray @c[2],131,247,19,19,180,169,100,92;
+	 Disp("Culvert",1,4); Pick("","prt_sewb1","prt_sewb2","prt_sewb3","prt_sewb4");
+D14: setarray @c[2],51,14,150,11,120,10;
+	 Disp("Abadia Amaldiçoada",1,3); Pick("abbey");
+D15: Restrict("RE");
+	 setarray @c[2],285,160,299,29;
+	 Disp("Calabouço de Dewata",1,2); Pick("dew_dun");
+D16: Restrict("RE",3);
+	 setarray @c[2],22,14,292,290,269,279;
+	 Disp("Calabouço de Einbroch",1,3); Pick("ein_dun");
+D17: Restrict("RE");
+	 Go("moro_vol",97,107);
+D18: setarray @c[2],40,103,203,34,266,168,130,272;
+	 Disp("Gefenia",1,4); Pick("gefenia",0);
+D19: setarray @c[0],104,99,115,236,106,132,203,200;
+	 Disp("Calabouço de Geffen",1,4); Pick("gef_dun",1);
+D20: Restrict("RE",17,18,19);
+	 setarray @c[2],370,304,199,29,104,25,150,15,157,287,147,15,258,255,108,291,171,283,68,277,156,7,12,7,133,271,224,274,14,70,150,14,104,31,148,144,199,29;
+	 Disp("Entrada:Castelo 1:Castelo 2:Cavalaria 1:Cavalaria 2:Cemitério:Culvert 1:Culvert 2:Culvert 3:Culvert 4:Abadia:Escadaria:Caverna Subterrânea 1:Caverna Subterrânea 2:Prisão Subterrânea 1:Prisão Subterrânea 2:Castelo 2 - Modo Pesadelo:Cemitério - Modo Pesadelo:Castelo Abissal de Glast Heim - 1º Andar");
+	 Pick("","glast_01","gl_cas01","gl_cas02","gl_knt01","gl_knt02","gl_chyard","gl_sew01","gl_sew02","gl_sew03","gl_sew04","gl_church","gl_step","gl_dun01","gl_dun02","gl_prison","gl_prison1","gl_cas02_","gl_chyard_","gl_cas01_");
+D21: setarray @c[2],99,31,93,20,182,88;
+	 Disp("Labirinto da Floresta",1,3); Pick("prt_maze");
+D22: setarray @c[2],157,14,151,155,149,22,33,158;
+	 Disp("Caverna de Gelo",1,4); Pick("ice_dun");
+D23: menu	"Ilusão do Abismo",SubD1, "Ilusão do Gelo",SubD2, "Ilusão do Labirinto",SubD3,
+			"Ilusão de Luanda",SubD4, "Ilusão do Luar",SubD5, "Ilusão do Ursinho",SubD6,
+			"Ilusão dos Gêmeos",SubD7, "Ilusão Submarina",SubD8, "Ilusão do Vampiro",SubD9;
+	SubD1: Restrict("RE");
+		   setarray @c[2],132,189,99,186;
+		   Disp("Vila Desolada:Palácio Sombrio das Tartarugas"); Pick("","tur_d03_i","tur_d04_i");
+	SubD2: Restrict("RE");
+		   Go("ice_d03_i",149,22);
+	SubD3: Restrict("RE");
+		   Go("prt_mz03_i",100,100);
+	SubD4: Restrict("RE");
+		   Go("com_d02_i",250,245);
+	SubD5: Restrict("RE");
+		   Go("pay_d03_i",140,44);
+	SubD6: Restrict("RE");
+		   Go("ein_d02_i",164,184);
+	SubD7: Restrict("RE");
+		   Go("ant_d02_i",168,170);
+	SubD8: Restrict("RE");
+		   setarray @c[2],130,230,141,188;
+		   Disp("Caverna do Mar Profundo",1,2); Pick("","iz_d04_i","iz_d05_i");
+	SubD9: Restrict("RE");
+		   Go("gef_d01_i",114,216);
+D24: Restrict("RE");
+	 setarray @c[2],112,15,280,87,112,12,274,85;
+	 Disp("Mina Abandonada - Andar 1:Mina Abandonada - Andar 2:Calor do Deus Serpente 1º Andar:Calor do Deus Serpente 2º Andar"); Pick("","jor_ab01","jor_ab02","jor_dun01","jor_dun02");
+D25: Restrict("RE",5);
+	 setarray @c[2],140,51,53,247,37,63,150,285,146,215;
+	 Disp("Entrada:Juperos 1:Juperos 2:Núcleo:Ruínas Orientais de Juperos");
+	 Pick("","jupe_cave","juperos_01","juperos_02","jupe_core","ver_eju");
+D26: setarray @c[2],28,226,41,198;
+	 Disp("Calabouço de Kiel",1,2); Pick("kh_dun");
+D27: setarray @c[2],153,53,28,113,68,16;
+	 Disp("Calabouço de Kunlun",1,3); Pick("gon_dun");
+D28: Restrict("RE");
+	 setarray @c[2],24,143,22,171,190,18;
+	 Disp("Calabouço de Lasagna",1,3); Pick("lasa_dun");
+D29: setarray @c[2],218,196,282,20,165,38;
+	 Disp("Tumba Real:Interior da Tumba Real:Suei Long Gon"); Pick("lou_dun");
+D30: Restrict("RE",3);
+	 setarray @c[2],126,68,47,30,118,113;
+	 Disp("Caverna de Magma",1,3); Pick("mag_dun");
+D31: Restrict("RE");
+	 setarray @c[2],33,230;
+	 Disp("Calabouço de Malangdo",1,1); Pick("mal_dun");
+D32: setarray @c[2],189,48,165,30,32,135;
+	 Disp("Calabouço de Moscovia",1,3); Pick("mosk_dun");
+D33: setarray @c[2],61,239,60,271;
+	 Disp("Calabouço de Nidhogg",1,2); Pick("nyd_dun");
+D34: Restrict("RE");
+	 setarray @c[2],145,90,150,20;
+	 Disp("Calabouço de Niflheim - 1º Andar:Calabouço de Niflheim - 2º Andar"); Pick("nif_dun");
+D35: Restrict("RE",4);
+	 setarray @c[2],298,167,224,149,266,280,276,236;
+	 Disp("Templo de Odin 1:Templo de Odin 2:Templo de Odin 3:Passado de Odin"); Pick("","odin_tem01","odin_tem02","odin_tem03","odin_past");
+D36: setarray @c[2],32,170,21,185;
+	 Disp("Calabouço dos Orcs",1,2); Pick("orcsdun");
+D37: Restrict("RE");
+	 setarray @c[2],21,191,141,277;
+	 Disp("Labirinto de Oz - Andar 1:Labirinto de Oz - Andar 2"); Pick("oz_dun");
+D38: setarray @c[0],21,183,19,33,19,63,155,159,201,204;
+	 Disp("Calabouço de Payon",1,5); Pick("pay_dun",1);
+D39: Restrict("RE");
+	 setarray @c[2],159,289,155,353;
+	 Disp("Subterrâneo de Prontera Prison:Invasão de Prontera"); Pick("","prt_prison","prt_q");
+D40: Restrict("RE",7,8);
+	 setarray @c[2],192,9,10,192,100,92,181,11,94,96,192,8,94,96,192,8;
+	 Disp("Pirâmides 1:Pirâmides 2:Pirâmides 3:Pirâmides 4:Subsolo 1:Subsolo 2:Subsolo 1 - Modo Pesadelo:Subsolo 2 - Modo Pesadelo");
+	 Pick("","moc_pryd01","moc_pryd02","moc_pryd03","moc_pryd04","moc_pryd05","moc_pryd06","moc_prydn1","moc_prydn2");
+D41: setarray @c[2],140,11,32,21,8,149,204,218,150,9;
+	 Disp("Santuário de Rachel",1,5); Pick("ra_san");
+D42: Restrict("RE");
+	 setarray @c[2],247,19,281,104;
+	 Disp("Mina de Rock Ridge:Canal Subterrâneo"); Pick("","rockmi1","harboro2");
+D43: Restrict("RE");
+	 setarray @c[2],200,377,185,258,366,207,378,178;
+	 Disp("Calabouço de Rudus",1,4); Pick("","sp_rudus","sp_rudus2","sp_rudus3","sp_rudus4");
+D44: Restrict("RE");
+	 setarray @c[2],364,44,101,141,101,141;
+	 Disp("Túnel dos Scarabas",1,3); Pick("dic_dun");
+D45: setarray @c[2],288,9,149,81,210,54,10,222,100,99;
+	 Disp("Esfinge",1,5); Pick("","in_sphinx1","in_sphinx2","in_sphinx3","in_sphinx4","in_sphinx5");
+D46: setarray @c[2],69,24,102,27;
+	 Disp("Navio Fantasma",1,2); Pick("treasure");
+D47: setarray @c[2],150,39,150,136,220,158,59,143,62,11,89,221,35,166,93,148,29,107,159,138,19,20,130,52;
+	 Disp("Torre de Thanatos",1,12); Pick("tha_t");
+D48: setarray @c[2],21,228,75,205,34,272;
+	 Disp("Vulcão de Thor",1,3); Pick("thor_v");
+D49: setarray @c[2],205,15,129,133;
+	 Disp("Fábrica de Brinquedos",1,2); Pick("xmas_dun");
+D50: setarray @c[2],154,49,148,261,132,189,100,192;
+	 Disp("Entrada:Ilha das Tartarugas 1:Ilha das Tartarugas 2:Ilha das Tartarugas 3"); Pick("tur_dun");
+D51: Restrict("Pre-RE",1,2);
+	 setarray @c[2],42,31,48,30,204,78;
+	 Disp("Carpintaria na Árvore:Passagem para Outro Mundo:Fonte de Hvergelmir");
+	 Pick("","um_dun01","um_dun02","yggdrasil01");
+D52: Restrict("RE");
+	 setarray @c[2],275,21,15,115,15,115,159,27,162,36,159,11,156,33,337,333,314,64,163,18,156,20,39,81;
+	 Disp("Estação de Tratamento de Esgoto:Usina 1:Usina 2:Grande Banho Meditatio:Vale da Fazenda Perdida:Corredor das Memórias da Biblioteca:Depósito de Tartaros - Andar Superior:Depósito de Tartaros - Andar Inferior:Runa da Morte:Runa do Fogo:Runa da Natureza:Runa do Gelo"); Pick("","ba_pw02","ba_pw01","ba_pw03","ba_bath","ba_lost","ba_lib","ba_2whs01","ba_2whs02","bl_death","bl_lava","bl_grass","bl_ice");
+D53: Restrict("RE");
+	 setarray @c[2],244,61,72,20,122,22;
+	 Disp("Lab-OPTATIO:R&D-WISH:Praça Central de Verus"); Pick("verus");
+
+// --------------------------------------------------
+	Castles:
+// --------------------------------------------------
+menu	"[FE] Aldebaran Castelos",C1, "[FE] Geffen Castelos",C2, "[FE] Payon Castelos",C3,
+    	"[FE] Prontera Castelos",C4, "[SE] Arunafeltz Castelos",C5, "[SE] Schwarzwald Castelos",C6,
+		"[TE] Aldebaran Castelos",C7, "[TE] Prontera Castelos",C8;
+
+C1: setarray @c[2],48,83,95,249,142,85,239,242,264,90;
+	Disp("Neuschwanstein:Hohenschwangau:Nuenberg:Wuerzburg:Rothenburg");
+	Pick("","alde_gld","alde_gld","alde_gld","alde_gld","alde_gld");
+C2: setarray @c[2],214,75,308,240,143,240,193,278,305,87;
+	Disp("Repherion:Eeyolbriggar:Yesnelph:Bergel:Mersetzdeitz");
+	Pick("","gef_fild13","gef_fild13","gef_fild13","gef_fild13","gef_fild13");
+C3: setarray @c[2],121,233,295,116,317,293,140,160,204,266;
+	Disp("Bosque Resplandecente:Palácio Escarlate:Sombra Sagrada:Altar Sagrado:Colina do Bambuzal");
+	Pick("","pay_gld","pay_gld","pay_gld","pay_gld","pay_gld");
+C4: setarray @c[2],134,65,240,128,153,137,111,240,208,240;
+	Disp("Kriemhild:Swanhild:Fadhgridh:Skoegul:Gondul");
+	Pick("","prt_gld","prt_gld","prt_gld","prt_gld","prt_gld");
+C5: setarray @c[2],158,272,83,47,68,155,299,345,292,107;
+	Disp("Mardol:Cyr:Horn:Gefn:Banadis");
+	Pick("","aru_gld","aru_gld","aru_gld","aru_gld","aru_gld");
+C6: setarray @c[2],293,100,288,252,97,196,137,90,71,315;
+	Disp("Himinn:Andlangr:Viblainn:Hljod:Skidbladnir");
+	Pick("","sch_gld","sch_gld","sch_gld","sch_gld","sch_gld");
+C7: Restrict("RE");
+	setarray @c[2],48,83,95,249,142,85,239,242,264,90;
+	Disp("Kafragarten 1:Kafragarten 2:Kafragarten 3:Kafragarten 4:Kafragarten 5");
+	Pick("","te_alde_gld","te_alde_gld","te_alde_gld","te_alde_gld","te_alde_gld");
+C8: Restrict("RE");
+	setarray @c[2],134,65,240,128,153,137,111,240,208,240;
+	Disp("Gloria 1:Gloria 2:Gloria 3:Gloria 4:Gloria 5");
+	Pick("","te_prt_gld","te_prt_gld","te_prt_gld","te_prt_gld","te_prt_gld");
+	
+// --------------------------------------------------
+	Guild_Dungeons:
+// --------------------------------------------------
+menu	"Baldur",G1, "Luina",G2, "Valkyrie",G3, "Britoniah",G4,
+    	"Arunafeltz",G5, "Schwarzwald",G6, "Kafragarten",G7,
+		"Gloria",G8;
+
+G1: Restrict("RE",2,3);
+	setarray @c[2],119,93,119,93,120,130;
+	Disp("Baldur F1:Baldur F2:Salão do Abismo");
+	Pick("","gld_dun01","gld_dun01_2","gld2_pay");
+G2: Restrict("RE",2,3);
+	setarray @c[2],39,161,39,161,147,155;
+	Disp("Luina F1:Luina F2:Salão do Abismo");
+	Pick("","gld_dun02","gld_dun02_2","gld2_ald");
+G3: Restrict("RE",2,3);
+	setarray @c[2],50,44,50,44,140,132;
+	Disp("Valkyrie F1:Valkyrie F2:Salão do Abismo");
+	Pick("","gld_dun03","gld_dun03_2","gld2_prt");
+G4: Restrict("RE",2,3);
+	setarray @c[2],116,45,116,45,152,118;
+	Disp("Britoniah F1:Britoniah F2:Salão do Abismo");
+	Pick("","gld_dun04","gld_dun04_2","gld2_gef");
+G5: Go("arug_dun01",199,195);
+G6: Go("schg_dun01",200,124);
+G7: Restrict("RE");
+	Go("teg_dun01",42,36);
+G8: Restrict("RE");
+	Go("teg_dun02",26,160);
+
+// --------------------------------------------------
+	Instances:
+// --------------------------------------------------
+menu	"Lago de Bakonawa",I1, "Hospital de Bangungot - 2º Andar",I2, "Caverna de Buwaya",I3,
+		"Torre do Diabo",I4, "Interior de Eclage",I5, "Torre Sem Fim",I6,
+		"Ninho dos Faceworms",I7, "Torneio de Magia de Geffen",I8, "Palácio Fantasma",I9,
+		"Labirinto Nebuloso",I10, "Fábrica do Terror",I11, "Esgotos de Malangdo",I12,
+		"Ninho de Nidhogg",I13, "Caverna do Polvo",I14, "Glast Heim Antiga",I15,
+		"Memorial dos Orcs",I16, "Sara e Fenrir",I17, "Memórias de Sara",I18,
+		"Santuário Selado",I19, "Laboratório de Wolfchev",I20;
+
+I1: Restrict("RE");
+	Go("ma_scene01",172,175);
+I2: Restrict("RE");
+	Go("ma_dun01",151,8);
+I3: Restrict("RE");
+	Go("ma_fild02",316,317);
+I4: Restrict("RE");
+	Go("dali02",137,115);
+I5: Restrict("RE");
+	Go("ecl_hub01",129,12);
+I6: Go("e_tower",72,112);
+I7: Restrict("RE");
+	Go("dali",85,64);
+I8: Restrict("RE");
+	Go("dali",94,141);
+I9: Restrict("RE");
+	Go("dali02",46,128);
+I10: Restrict("RE");
+	Go("bif_fild01",161,334);
+I11: Restrict("RE");
+	Go("xmas",234,298);
+I12: Restrict("RE");
+	Go("mal_in01",164,21);
+I13: Go("nyd_dun02",95,193);
+I14: Restrict("RE");
+	Go("mal_dun01",152,230);
+I15: Restrict("RE");
+	Go("glast_01",204,268);
+I16: Go("gef_fild10",240,198);
+I17: Restrict("RE");
+	Go("dali02",92,141);
+I18: Restrict("RE");
+	Go("dali",133,108);
+I19: Go("monk_test",306,143);
+I20: Restrict("RE");
+	Go("lhz_dun04",148,269);
+
+// --------------------------------------------------
+	Special:
+// --------------------------------------------------
+menu	"Casa de Leilões",S1, "Batalha Campal",S2, "Casino",S3, "Fenda Dimensional",S4,
+		"Sede do Grupo Éden",S5, "Arena de Kunlun",S6, "Arena de Izlude",S7, 
+		"Corrida de Monstros",S8, "Mercado de Para",S9, "Corrida Turbo",S10;
+
+S1: Go("auction_01",22,68);
+S2: Go("bat_room",154,150);
+S3: Go("cmd_in02",179,129);
+S4: Restrict("RE");
+	Go("dali",113,82);	
+S5: Restrict("RE");
+	Go("moc_para01",31,14);
+S6: Go("gon_test",48,10);
+S7: Go("arena_room",100,88);
+S8: Go("p_track01",62,41);
+S9: Restrict("RE");
+	Go("paramk",97,17);
+S10: Go("turbo_room",99,114);
+
+OnNaviGenerate:
+
+	// for non-prontera warpers, just give it warp to prontera
+	// this cuts down the number of links considerably
+	if (strnpcinfo(4) != "prontera") {
+		naviregisterwarp("Warper > Prontera", "prontera", 155, 183);
+		end;
+	}
+
+	naviregisterwarp("Warper > Prontera", "prontera", 155, 183);
+	naviregisterwarp("Warper > Alberta", "alberta", 28, 234);
+	naviregisterwarp("Warper > Al De Baran", "aldebaran", 140, 131);
+	naviregisterwarp("Warper > Amatsu", "amatsu", 198, 84);
+	naviregisterwarp("Warper > Ayothaya", "ayothaya", 208, 166);
+	naviregisterwarp("Warper > Einbech", "einbech",63,35);
+	naviregisterwarp("Warper > Einbroch", "einbroch",64,200);
+	naviregisterwarp("Warper > Geffen", "geffen",119,59);
+	naviregisterwarp("Warper > Hugel", "hugel",96,145);
+	naviregisterwarp("Warper > Izlude", "izlude",128,(checkre(3)?146:114));
+	naviregisterwarp("Warper > Jawaii", "jawaii",251,132);
+	naviregisterwarp("Warper > Juno", "yuno",157,51);
+	naviregisterwarp("Warper > Kunlun", "gonryun",160,120);
+	naviregisterwarp("Warper > Lighthalzen", "lighthalzen",158,92);
+	naviregisterwarp("Warper > Luoyang", "louyang",217,100);
+	naviregisterwarp("Warper > Lutie", "xmas",147,134);
+	naviregisterwarp("Warper > Manuk", "manuk",282,138);
+	naviregisterwarp("Warper > Acampamento da Expedição de Midgard", "mid_camp",210,288);
+	naviregisterwarp("Warper > Morocc", "morocc",156,93);
+	naviregisterwarp("Warper > Moscovia", "moscovia",223,184);
+	naviregisterwarp("Warper > Nameless Island", "nameless_n",256,215);
+	naviregisterwarp("Warper > Niflheim", "niflheim",202,174);
+	naviregisterwarp("Warper > Payon", "payon",179,100);
+	naviregisterwarp("Warper > Rachel", "rachel",130,110);
+	naviregisterwarp("Warper > Splendide", "splendide",201,147);
+	naviregisterwarp("Warper > Acampamento de Thor", "thor_camp",246,68);
+	naviregisterwarp("Warper > Umbala", "umbala",97,153);
+	naviregisterwarp("Warper > Veins", "veins",216,123);
+
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Brasilis", "brasilis", 196, 217);
+		naviregisterwarp("Warper > Dewata", "dewata",200,180);
+		naviregisterwarp("Warper > Eclage", "ecl_in01",48,53);
+		naviregisterwarp("Warper > El Dicastes", "dicastes01",198,187);
+		naviregisterwarp("Warper > Lasagna", "lasagna",193,182);
+		naviregisterwarp("Warper > Malangdo", "malangdo",140,114);
+		naviregisterwarp("Warper > Malaya", "malaya",231,200);
+		naviregisterwarp("Warper > Mora", "mora",55,146);
+	}
+
+	// fields
+	naviregisterwarp("Warper > Campo de Amatsu", "ama_fild01", 190, 197);
+	naviregisterwarp("Warper > Campo de Ayothaya", "ayo_fild01", 173, 134);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Ayothaya", "ayo_fild02", 212, 150);
+	}
+
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Campo de Bifrost", "bif_fild01", 193, 220);
+		if (!.OnlyFirstFld) {
+			naviregisterwarp("Warper > Campo de Bifrost", "bif_fild02", 220, 187);
+		}
+		naviregisterwarp("Warper > Campo de Brasilis", "bra_fild01", 74, 32);
+	}
+
+	naviregisterwarp("Warper > Campo de Comodo", "cmd_fild01", 180, 178);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Comodo", "cmd_fild02", 231, 160);
+		naviregisterwarp("Warper > Campo de Comodo", "cmd_fild03", 191, 172);
+		naviregisterwarp("Warper > Campo de Comodo", "cmd_fild04", 228, 194);
+		if (!checkre(0)) {
+			naviregisterwarp("Warper > Campo de Comodo", "cmd_fild05", 224, 203);
+		}
+		naviregisterwarp("Warper > Campo de Comodo", "cmd_fild06", 190, 223);
+		naviregisterwarp("Warper > Campo de Comodo", "cmd_fild07", 234, 177);
+		naviregisterwarp("Warper > Campo de Comodo", "cmd_fild08", 194, 175);
+		naviregisterwarp("Warper > Campo de Comodo", "cmd_fild09", 172, 172);
+	}
+
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Campo de Dewata", "dew_fild01", 371, 212);
+		naviregisterwarp("Warper > Campo de Eclage", "ecl_fild01", 97, 314);
+	}
+
+	naviregisterwarp("Warper > Campo de Einbroch", "ein_fild01", 142, 225);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Einbroch", "ein_fild03", 187, 228);
+		naviregisterwarp("Warper > Campo de Einbroch", "ein_fild04", 185, 173);
+		naviregisterwarp("Warper > Campo de Einbroch", "ein_fild05", 216, 173);
+		naviregisterwarp("Warper > Campo de Einbroch", "ein_fild06", 195, 148);
+		naviregisterwarp("Warper > Campo de Einbroch", "ein_fild07", 272, 220);
+		naviregisterwarp("Warper > Campo de Einbroch", "ein_fild08", 173, 214);
+		naviregisterwarp("Warper > Campo de Einbroch", "ein_fild09", 207, 174);
+		if (!checkre(0)) {
+			naviregisterwarp("Warper > Campo de Einbroch", "ein_fild02", 182, 141);
+			naviregisterwarp("Warper > Campo de Einbroch", "ein_fild10", 196, 200);
+		}
+	}
+
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Campo de El Dicastes", "dic_fild01", 143, 132);
+		if (!.OnlyFirstFld) {
+			naviregisterwarp("Warper > Campo de El Dicastes", "dic_fild02", 143, 217);
+		}
+	}
+
+	naviregisterwarp("Warper > Campo de Geffen 0", "gef_fild00", 46, 199);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Geffen 1", "gef_fild01", 213, 204);
+		naviregisterwarp("Warper > Campo de Geffen 2", "gef_fild02", 195, 212);
+		naviregisterwarp("Warper > Campo de Geffen 3", "gef_fild03", 257, 192);
+		naviregisterwarp("Warper > Campo de Geffen 4", "gef_fild04", 188, 171);
+		naviregisterwarp("Warper > Campo de Geffen 5", "gef_fild05", 166, 263);
+		naviregisterwarp("Warper > Campo de Geffen 6", "gef_fild06", 248, 158);
+		naviregisterwarp("Warper > Campo de Geffen 7", "gef_fild07", 195, 191);
+		naviregisterwarp("Warper > Campo de Geffen 8", "gef_fild08", 186, 183);
+		naviregisterwarp("Warper > Campo de Geffen 9", "gef_fild09", 221, 117);
+		naviregisterwarp("Warper > Campo de Geffen 10", "gef_fild10", 178, 218);
+		naviregisterwarp("Warper > Campo de Geffen 11", "gef_fild11", 136, 328);
+		naviregisterwarp("Warper > Campo de Geffen 13", "gef_fild13", 235, 235);
+		if (checkre(0)) {
+			naviregisterwarp("Warper > Campo de Geffen 12", "gef_fild12", 240, 181);
+			naviregisterwarp("Warper > Campo de Geffen 14", "gef_fild14", 211, 185);
+		}
+	}
+
+	naviregisterwarp("Warper > Campo de Kunlun 1", "gon_fild01", 220, 227);
+
+	naviregisterwarp("Warper > Campo de Hugel 1", "hu_fild01", 268, 101);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Hugel 2", "hu_fild02", 222, 193);
+		naviregisterwarp("Warper > Campo de Hugel 4", "hu_fild04", 252, 189);
+		naviregisterwarp("Warper > Campo de Hugel 5", "hu_fild05", 196, 106);
+		naviregisterwarp("Warper > Campo de Hugel 6", "hu_fild06", 216, 220);
+		if (!checkre(0)) {
+			naviregisterwarp("Warper > Campo de Hugel 3", "hu_fild03", 232, 185);
+			naviregisterwarp("Warper > Campo de Hugel 7", "hu_fild07", 227, 197);
+		}
+	}
+
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Campo de Lasagna 1", "lasa_fild01", 344, 371);
+		if (!.OnlyFirstFld) {
+			naviregisterwarp("Warper > Campo de Lasagna 2", "lasa_fild02", 20, 98);
+		}
+	}
+
+	naviregisterwarp("Warper > Campo de Lighthalzen 1", "lhz_fild01", 240, 179);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Lighthalzen 2", "lhz_fild02", 185, 235);
+		naviregisterwarp("Warper > Campo de Lighthalzen 3", "lhz_fild03", 240, 226);
+	}
+
+	naviregisterwarp("Warper > Campo de Luoyang 1", "lou_fild01", 229, 187);
+
+	naviregisterwarp("Warper > Campo de Lutie 1", "xmas_fild01", 115, 145);
+
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Campo de Malaya 1", "ma_fild01", 40, 272);
+		if (!.OnlyFirstFld) {
+			naviregisterwarp("Warper > Campo de Malaya 2", "ma_fild02", 207, 180);
+		}
+	}
+
+	naviregisterwarp("Warper > Campo de Manuk 1", "man_fild01", 35, 236);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Manuk 2", "man_fild02", 35, 262);
+		naviregisterwarp("Warper > Campo de Manuk 3", "man_fild03", 84, 365);
+	}
+
+	naviregisterwarp("Warper > Campo de Mjolnir 1", "mjolnir_01", 204, 120);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Mjolnir 2", "mjolnir_02", 175, 193);
+		naviregisterwarp("Warper > Campo de Mjolnir 3", "mjolnir_03", 208, 213);
+		naviregisterwarp("Warper > Campo de Mjolnir 4", "mjolnir_04", 179, 180);
+		naviregisterwarp("Warper > Campo de Mjolnir 5", "mjolnir_05", 181, 240);
+		naviregisterwarp("Warper > Campo de Mjolnir 6", "mjolnir_06", 195, 270);
+		naviregisterwarp("Warper > Campo de Mjolnir 7", "mjolnir_07", 235, 202);
+		naviregisterwarp("Warper > Campo de Mjolnir 8", "mjolnir_08", 188, 215);
+		naviregisterwarp("Warper > Campo de Mjolnir 9", "mjolnir_09", 205, 144);
+		naviregisterwarp("Warper > Campo de Mjolnir 10", "mjolnir_10", 245, 223);
+		naviregisterwarp("Warper > Campo de Mjolnir 11", "mjolnir_11", 180, 206);
+		naviregisterwarp("Warper > Campo de Mjolnir 12", "mjolnir_12", 196, 208);
+	}
+
+	naviregisterwarp("Warper > Campo de Moscovia 1", "mosk_fild01", 82, 104);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Moscovia 2", "mosk_fild02", 131, 147);
+	}
+
+	naviregisterwarp("Warper > Campo de Niflheim 1", "nif_fild01", 215, 229);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warer > Campo de Niflheim 2", "nif_fild02", 167, 234);
+	}
+
+	naviregisterwarp("Warper > Floresta de Payon 1", "pay_fild01", 158, 206);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Floresta de Payon 2", "pay_fild02", 151, 219);
+		naviregisterwarp("Warper > Floresta de Payon 3", "pay_fild03", 205, 148);
+		naviregisterwarp("Warper > Floresta de Payon 4", "pay_fild04", 186, 247);
+		naviregisterwarp("Warper > Floresta de Payon 6", "pay_fild06", 193, 235);
+		naviregisterwarp("Warper > Floresta de Payon 7", "pay_fild07", 200, 177);
+		naviregisterwarp("Warper > Floresta de Payon 8", "pay_fild08", 137, 189);
+		naviregisterwarp("Warper > Floresta de Payon 9", "pay_fild09", 201, 224);
+		naviregisterwarp("Warper > Floresta de Payon 10", "pay_fild10", 160, 205);
+		if (!checkre(0)) {
+			naviregisterwarp("Warper > Floresta de Payon 5", "pay_fild05", 134, 204);
+			naviregisterwarp("Warper > Floresta de Payon 11", "pay_fild11", 194, 150);
+		}
+	}
+
+	naviregisterwarp("Warper > Campo de Prontera 0", "prt_fild00", 208, 227);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Prontera 1", "prt_fild01", 190, 206);
+		naviregisterwarp("Warper > Campo de Prontera 2", "prt_fild02", 240, 206);
+		naviregisterwarp("Warper > Campo de Prontera 3", "prt_fild03", 190, 143);
+		naviregisterwarp("Warper > Campo de Prontera 4", "prt_fild04", 307, 252);
+		naviregisterwarp("Warper > Campo de Prontera 5", "prt_fild05", 239, 213);
+		naviregisterwarp("Warper > Campo de Prontera 6", "prt_fild06", 185, 188);
+		naviregisterwarp("Warper > Campo de Prontera 7", "prt_fild07", 193, 194);
+		naviregisterwarp("Warper > Campo de Prontera 8", "prt_fild08", 187, 218);
+		naviregisterwarp("Warper > Campo de Prontera 9", "prt_fild09", 210, 183);
+		naviregisterwarp("Warper > Campo de Prontera 10", "prt_fild10", 195, 149);
+		naviregisterwarp("Warper > Campo de Prontera 11", "prt_fild11", 198, 164);
+	}
+
+	naviregisterwarp("Warper > Campo de Rachel 1", "ra_fild01", 192, 162);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Rachel 3", "ra_fild03", 202, 206);
+		naviregisterwarp("Warper > Campo de Rachel 4", "ra_fild04", 202, 208);
+		naviregisterwarp("Warper > Campo de Rachel 5", "ra_fild05", 225, 202);
+		naviregisterwarp("Warper > Campo de Rachel 6", "ra_fild06", 202, 214);
+		naviregisterwarp("Warper > Campo de Rachel 8", "ra_fild08", 217, 201);
+		naviregisterwarp("Warper > Campo de Rachel 12", "ra_fild12", 175, 200);
+
+		if (!checkre(0)) {
+			naviregisterwarp("Warper > Campo de Rachel 2", "ra_fild02", 235, 166);
+			naviregisterwarp("Warper > Campo de Rachel 7", "ra_fild07", 263, 196);
+			naviregisterwarp("Warper > Campo de Rachel 9", "ra_fild09", 87, 121);
+			naviregisterwarp("Warper > Campo de Rachel 10", "ra_fild10", 277, 181);
+			naviregisterwarp("Warper > Campo de Rachel 11", "ra_fild11", 221, 185);
+			naviregisterwarp("Warper > Campo de Rachel 13", "ra_fild13", 174, 197);
+		}
+	}
+
+	if (.Satan_Morocc) {
+		naviregisterwarp("Warper > Deserto de Sograt 1", "moc_fild01", 219, 205);
+		if (!.OnlyFirstFld) {
+			naviregisterwarp("Warper > Deserto de Sograt 2", "moc_fild02", 177, 206);
+			naviregisterwarp("Warper > Deserto de Sograt 3", "moc_fild03", 194, 182);
+			naviregisterwarp("Warper > Deserto de Sograt 7", "moc_fild07", 224, 170);
+			naviregisterwarp("Warper > Deserto de Sograt 11", "moc_fild11", 198, 216);
+			naviregisterwarp("Warper > Deserto de Sograt 12", "moc_fild12", 156, 187);
+			naviregisterwarp("Warper > Deserto de Sograt 13", "moc_fild13", 185, 263);
+			naviregisterwarp("Warper > Deserto de Sograt 16", "moc_fild16", 206, 228);
+			naviregisterwarp("Warper > Deserto de Sograt 17", "moc_fild17", 208, 238);
+			naviregisterwarp("Warper > Deserto de Sograt 18", "moc_fild18", 209, 223);
+			naviregisterwarp("Warper > Deserto de Sograt 19", "moc_fild19", 85, 97);
+			naviregisterwarp("Warper > Deserto de Sograt 20", "moc_fild20", 207, 202);
+			naviregisterwarp("Warper > Deserto de Sograt 21", "moc_fild21", 31, 195);
+			naviregisterwarp("Warper > Deserto de Sograt 22", "moc_fild22", 38, 195);
+		}
+	} else {
+		naviregisterwarp("Warper > Deserto de Sograt 1", "moc_fild01", 219, 205);
+		if (!.OnlyFirstFld) {
+			naviregisterwarp("Warper > Deserto de Sograt 2", "moc_fild02", 177, 206);
+			naviregisterwarp("Warper > Deserto de Sograt 3", "moc_fild03", 194, 182);
+			naviregisterwarp("Warper > Deserto de Sograt 4", "moc_fild04", 146, 297);
+			naviregisterwarp("Warper > Deserto de Sograt 5", "moc_fild05", 204, 197);
+			naviregisterwarp("Warper > Deserto de Sograt 6", "moc_fild06", 275, 302);
+			naviregisterwarp("Warper > Deserto de Sograt 7", "moc_fild07", 224, 170);
+			naviregisterwarp("Warper > Deserto de Sograt 8", "moc_fild08", 139, 123);
+			naviregisterwarp("Warper > Deserto de Sograt 9", "moc_fild09", 101, 110);
+			naviregisterwarp("Warper > Deserto de Sograt 10", "moc_fild10", 341, 39);
+			naviregisterwarp("Warper > Deserto de Sograt 11", "moc_fild11", 198, 216);
+			naviregisterwarp("Warper > Deserto de Sograt 12", "moc_fild12", 156, 187);
+			naviregisterwarp("Warper > Deserto de Sograt 13", "moc_fild13", 185, 263);
+			naviregisterwarp("Warper > Deserto de Sograt 14", "moc_fild14", 223, 222);
+			naviregisterwarp("Warper > Deserto de Sograt 15", "moc_fild15", 170, 257);
+			naviregisterwarp("Warper > Deserto de Sograt 16", "moc_fild16", 206, 228);
+			naviregisterwarp("Warper > Deserto de Sograt 17", "moc_fild17", 208, 238);
+			naviregisterwarp("Warper > Deserto de Sograt 18", "moc_fild18", 209, 223);
+			naviregisterwarp("Warper > Deserto de Sograt 19", "moc_fild19", 85, 97);
+		}
+	}
+
+	naviregisterwarp("Warper > Campo de Splendide 1", "spl_fild01", 175, 186);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Splendide 2", "spl_fild02", 236, 184);
+		naviregisterwarp("Warper > Campo de Splendide 3", "spl_fild03", 188, 204);
+	}
+
+	naviregisterwarp("Warper > Campo de Umbala 1", "um_fild01", 217, 206);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Umbala 2", "um_fild02", 223, 221);
+		naviregisterwarp("Warper > Campo de Umbala 3", "um_fild03", 237, 215);
+		naviregisterwarp("Warper > Campo de Umbala 4", "um_fild04", 202, 197);
+	}
+
+	naviregisterwarp("Warper > Campo de Veins 1", "ve_fild01", 186, 175);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Veins 2", "ve_fild02", 196, 370);
+		naviregisterwarp("Warper > Campo de Veins 3", "ve_fild03", 222, 45);
+		naviregisterwarp("Warper > Campo de Veins 4", "ve_fild04", 51, 250);
+		naviregisterwarp("Warper > Campo de Veins 6", "ve_fild06", 150, 223);
+		naviregisterwarp("Warper > Campo de Veins 7", "ve_fild07", 149, 307);
+		if (!checkre(0)) {
+			naviregisterwarp("Warper > Campo de Veins 5", "ve_fild05", 202, 324);
+		}
+	}
+
+	naviregisterwarp("Warper > Campo de Juno 1", "yuno_fild01", 189, 224);
+	if (!.OnlyFirstFld) {
+		naviregisterwarp("Warper > Campo de Juno 2", "yuno_fild02", 192, 207);
+		naviregisterwarp("Warper > Campo de Juno 3", "yuno_fild03", 221, 157);
+		naviregisterwarp("Warper > Campo de Juno 4", "yuno_fild04", 226, 199);
+		naviregisterwarp("Warper > Campo de Juno 6", "yuno_fild06", 187, 232);
+		naviregisterwarp("Warper > Campo de Juno 7", "yuno_fild07", 231, 174);
+		naviregisterwarp("Warper > Campo de Juno 8", "yuno_fild08", 196, 203);
+		naviregisterwarp("Warper > Campo de Juno 9", "yuno_fild09", 183, 214);
+		naviregisterwarp("Warper > Campo de Juno 11", "yuno_fild11", 195, 226);
+		naviregisterwarp("Warper > Campo de Juno 12", "yuno_fild12", 210, 304);
+		if (!checkre(0)) {
+			naviregisterwarp("Warper > Campo de Juno 5", "yuno_fild05", 223, 177);
+			naviregisterwarp("Warper > Campo de Juno 10", "yuno_fild10", 200, 124);
+		}
+	}
+
+	naviregisterwarp("Warper > Lago do Abismo 1", "abyss_01", 261, 272);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Lago do Abismo 2", "abyss_02", 275, 270);
+		naviregisterwarp("Warper > Lago do Abismo 3", "abyss_03", 116, 27);
+	}
+	naviregisterwarp("Warper > Calabouço de Amatsu 1", "ama_dun01", 228, 11);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Calabouço de Amatsu 2", "ama_dun02", 34, 41);
+		naviregisterwarp("Warper > Calabouço de Amatsu 3", "ama_dun03", 119, 14);
+	}
+	
+	naviregisterwarp("Warper > Formigueiro Infernal 1", "anthell01", 35, 262);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Formigueiro Infernal 2", "anthell02", 168, 170);
+	}
+
+	naviregisterwarp("Warper > Labirinto do Santuário Antigo", "ayo_dun01", 275, 19);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Interior do Santuário Antigo", "ayo_dun02", 24, 26);
+	}
+
+	naviregisterwarp("Warper > Caverna da Praia 1", "beach_dun", 266, 67);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Caverna da Praia 2", "beach_dun2", 255, 244);
+		naviregisterwarp("Warper > Caverna da Praia 3", "beach_dun3", 23, 260);
+	}
+
+	naviregisterwarp("Warper > Laboratório de Somatologia 1", "lhz_dun01", 150, 288);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Laboratório de Somatologia 2", "lhz_dun02", 150, 18);
+		naviregisterwarp("Warper > Laboratório de Somatologia 3", "lhz_dun03", 140, 134);
+		if (checkre(0)) {
+			naviregisterwarp("Warper > Laboratório de Somatologia 4", "lhz_dun04", 244, 52);
+		}
+	}
+
+	naviregisterwarp("Warper > Calabouço de Brasilis 1", "bra_dun01", 87, 47);
+	if (!.OnlyFirstDun) {
+		if (checkre(0)) {
+			naviregisterwarp("Warper > Calabouço de Brasilis 2", "bra_dun02", 262, 262);
+		}
+	}
+
+	naviregisterwarp("Warper > Calabouço de Byalan 1", "iz_dun00", 168, 168);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Calabouço de Byalan 2", "iz_dun01", 253, 252);
+		naviregisterwarp("Warper > Calabouço de Byalan 3", "iz_dun02", 236, 204);
+		naviregisterwarp("Warper > Calabouço de Byalan 4", "iz_dun03", 32, 63);
+		naviregisterwarp("Warper > Calabouço de Byalan 5", "iz_dun04", 26, 27);
+		if (checkre(0)) {
+			naviregisterwarp("Warper > Calabouço de Byalan 6", "iz_dun05", 141, 187);
+		}
+	}
+	naviregisterwarp("Warper > Torre do Relógio 1", "c_tower1", 199, 159);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Torre do Relógio 2", "c_tower2", 148, 283);
+		naviregisterwarp("Warper > Torre do Relógio 3", "c_tower3", 65, 147);
+		naviregisterwarp("Warper > Torre do Relógio 4", "c_tower4", 56, 155);
+		naviregisterwarp("Warper > Subsolo 1", "alde_dun01", 297, 25);
+		naviregisterwarp("Warper > Subsolo 2", "alde_dun02", 127, 169);
+		naviregisterwarp("Warper > Subsolo 3", "alde_dun03", 277, 178);
+		naviregisterwarp("Warper > Subsolo 4", "alde_dun04", 268, 74);
+	}
+	naviregisterwarp("Warper > Mina de Carvão 1", "mjo_dun01", 52, 17);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Mina de Carvão 2", "mjo_dun02", 381, 343);
+		naviregisterwarp("Warper > Mina de Carvão 3", "mjo_dun03", 302, 262);
+	}
+	naviregisterwarp("Warper > Culvert 1", "prt_sewb1", 131, 247);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Culvert 2", "prt_sewb2", 19, 19);
+		naviregisterwarp("Warper > Culvert 3", "prt_sewb3", 180, 169);
+		naviregisterwarp("Warper > Culvert 4", "prt_sewb4", 100, 92);
+	}
+	naviregisterwarp("Warper > Abadia Amaldiçoada 1", "abbey01", 51, 14);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Abadia Amaldiçoada 2", "abbey02", 150, 11);
+		naviregisterwarp("Warper > Abadia Amaldiçoada 3", "abbey03", 120, 10);
+	}
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Calabouço de Dewata 1", "dew_dun01", 285, 160);
+		if (!.OnlyFirstDun) {
+			naviregisterwarp("Warper > Calabouço de Dewata 2", "dew_dun02", 299, 29);
+		}
+	}
+	naviregisterwarp("Warper > Calabouço de Einbroch 1", "ein_dun01", 22, 14);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Calabouço de Einbroch 2", "ein_dun02", 292, 290);
+	}
+	naviregisterwarp("Warper > Gefenia 1", "gefenia01", 40, 103);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Gefenia 2", "gefenia02", 203, 34);
+		naviregisterwarp("Warper > Gefenia 3", "gefenia03", 266, 168);
+		naviregisterwarp("Warper > Gefenia 4", "gefenia04", 130, 272);
+	}
+	naviregisterwarp("Warper > Calabouço de Geffen 1", "gef_dun00", 104, 99);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Calabouço de Geffen 2", "gef_dun01", 115, 236);
+		naviregisterwarp("Warper > Calabouço de Geffen 3", "gef_dun02", 106, 132);
+		naviregisterwarp("Warper > Calabouço de Geffen 4", "gef_dun03", 203, 200);
+	}
+	naviregisterwarp("Warper > Entrada", "glast_01", 370, 304);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Castelo 1", "gl_cas01", 199, 29);
+		naviregisterwarp("Warper > Castelo 2", "gl_cas02", 104, 25);
+		naviregisterwarp("Warper > Cavalaria 1", "gl_knt01", 150, 15);
+		naviregisterwarp("Warper > Cavalaria 2", "gl_knt02", 157, 287);
+		naviregisterwarp("Warper > Cemitério", "gl_chyard", 147, 15);
+		naviregisterwarp("Warper > Culvert 1", "gl_sew01", 258, 255);
+		naviregisterwarp("Warper > Culvert 2", "gl_sew02", 108, 291);
+		naviregisterwarp("Warper > Culvert 3", "gl_sew03", 171, 283);
+		naviregisterwarp("Warper > Culvert 4", "gl_sew04", 68, 277);
+		naviregisterwarp("Warper > Abadia", "gl_church", 156, 7);
+		naviregisterwarp("Warper > Escadaria", "gl_step", 12, 7);
+		naviregisterwarp("Warper > Caverna Subterrânea 1", "gl_dun01", 133, 271);
+		naviregisterwarp("Warper > Caverna Subterrânea 2", "gl_dun02", 224, 274);
+		naviregisterwarp("Warper > Prisão Subterrânea 1", "gl_prison", 14, 70);
+		naviregisterwarp("Warper > Prisão Subterrânea 2", "gl_prison1", 150, 14);
+	}
+	naviregisterwarp("Warper > Calabouço de Kunlun 1", "gon_dun01", 153, 53);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Calabouço de Kunlun 2", "gon_dun02", 28, 113);
+		naviregisterwarp("Warper > Calabouço de Kunlun 3", "gon_dun03", 68, 16);
+	}
+	naviregisterwarp("Warper > Labirinto da Floresta 1", "prt_maze01", 176, 7);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Labirinto da Floresta 2", "prt_maze02", 93, 20);
+		naviregisterwarp("Warper > Labirinto da Floresta 3", "prt_maze03", 23, 8);
+	}
+	naviregisterwarp("Warper > Caverna de Gelo 1", "ice_dun01", 157, 14);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Caverna de Gelo 2", "ice_dun02", 151, 155);
+		naviregisterwarp("Warper > Caverna de Gelo 3", "ice_dun03", 149, 22);
+		naviregisterwarp("Warper > Caverna de Gelo 4", "ice_dun04", 33, 158);
+	}
+	naviregisterwarp("Warper > Entrada", "jupe_cave", 140, 51);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Juperos 1", "juperos_01", 53, 247);
+		naviregisterwarp("Warper > Juperos 2", "juperos_02", 37, 63);
+		naviregisterwarp("Warper > Núcleo", "jupe_core", 150, 285);
+	}
+	naviregisterwarp("Warper > Calabouço de Kiel 1", "kh_dun01", 28, 226);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Calabouço de Kiel 2", "kh_dun02", 41, 198);
+	}
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Calabouço de Lasagna 1", "lasa_dun01", 24, 143);
+		if (!.OnlyFirstDun) {
+			naviregisterwarp("Warper > Calabouço de Lasagna 2", "lasa_dun02", 22, 171);
+			naviregisterwarp("Warper > Calabouço de Lasagna 3", "lasa_dun03", 190, 18);
+		}
+	}
+	naviregisterwarp("Warper > Tumba Real", "lou_dun01", 218, 196);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Interior da Tumba Real", "lou_dun02", 282, 20);
+		naviregisterwarp("Warper > Suei Long Gon", "lou_dun03", 165, 38);
+	}
+	naviregisterwarp("Warper > Caverna de Magma 1", "mag_dun01", 126, 68);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Caverna de Magma 2", "mag_dun02", 47, 30);
+	}
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Calabouço de Malangdo 1", "mal_dun01", 33, 230);
+	}
+	naviregisterwarp("Warper > Calabouço de Moscovia 1", "mosk_dun01", 189, 48);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Calabouço de Moscovia 2", "mosk_dun02", 165, 30);
+		naviregisterwarp("Warper > Calabouço de Moscovia 3", "mosk_dun03", 32, 135);
+	}
+	naviregisterwarp("Warper > Calabouço de Nidhogg 1", "nyd_dun01", 61, 239);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Calabouço de Nidhogg 2", "nyd_dun02", 60, 271);
+	}
+	naviregisterwarp("Warper > Templo de Odin 1", "odin_tem01", 298, 167);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Templo de Odin 2", "odin_tem02", 224, 149);
+		naviregisterwarp("Warper > Templo de Odin 3", "odin_tem03", 266, 280);
+	}
+	naviregisterwarp("Warper > Calabouço dos Orcs 1", "orcsdun01", 32, 170);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Calabouço dos Orcs 2", "orcsdun02", 21, 185);
+	}
+	naviregisterwarp("Warper > Calabouço de Payon 1", "pay_dun00", 21, 183);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Calabouço de Payon 2", "pay_dun01", 19, 33);
+		naviregisterwarp("Warper > Calabouço de Payon 3", "pay_dun02", 19, 63);
+		naviregisterwarp("Warper > Calabouço de Payon 4", "pay_dun03", 155, 159);
+		naviregisterwarp("Warper > Calabouço de Payon 5", "pay_dun04", 201, 204);
+	}
+	naviregisterwarp("Warper > Pirâmides 1", "moc_pryd01", 192, 9);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Pirâmides 2", "moc_pryd02", 10, 192);
+		naviregisterwarp("Warper > Pirâmides 3", "moc_pryd03", 100, 92);
+		naviregisterwarp("Warper > Pirâmides 4", "moc_pryd04", 181, 11);
+		naviregisterwarp("Warper > Subsolo 1", "moc_pryd05", 94, 96);
+		naviregisterwarp("Warper > Subsolo 2", "moc_pryd06", 192, 8);
+		if (checkre(0)) {
+			naviregisterwarp("Warper > Subsolo 1 - Modo Pesadelo", "moc_prydn1", 94, 96);
+			naviregisterwarp("Warper > Subsolo 2 - Modo Pesadelo", "moc_prydn2", 192, 8);
+		}
+	}
+	naviregisterwarp("Warper > Santuário de Rachel 1", "ra_san01", 140, 11);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Santuário de Rachel 2", "ra_san02", 32, 21);
+		naviregisterwarp("Warper > Santuário de Rachel 3", "ra_san03", 8, 149);
+		naviregisterwarp("Warper > Santuário de Rachel 4", "ra_san04", 204, 218);
+		naviregisterwarp("Warper > Santuário de Rachel 5", "ra_san05", 150, 9);
+	}
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Túnel dos Scarabas 1", "dic_dun01", 364, 44);
+		if (!.OnlyFirstDun) {
+			naviregisterwarp("Warper > Túnel dos Scarabas 2", "dic_dun02", 101, 141);
+		}
+	}
+	naviregisterwarp("Warper > Esfinge 1", "in_sphinx1", 288, 9);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Esfinge 2", "in_sphinx2", 149, 81);
+		naviregisterwarp("Warper > Esfinge 3", "in_sphinx3", 210, 54);
+		naviregisterwarp("Warper > Esfinge 4", "in_sphinx4", 10, 222);
+		naviregisterwarp("Warper > Esfinge 5", "in_sphinx5", 100, 99);
+	}
+	naviregisterwarp("Warper > Navio Fantasma 1", "treasure01", 69, 24);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Navio Fantasma 2", "treasure02", 102, 27);
+	}
+	naviregisterwarp("Warper > Torre de Thanatos 1", "tha_t01", 150, 39);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Torre de Thanatos 2", "tha_t02", 150, 136);
+		naviregisterwarp("Warper > Torre de Thanatos 3", "tha_t03", 220, 158);
+		naviregisterwarp("Warper > Torre de Thanatos 4", "tha_t04", 59, 143);
+		naviregisterwarp("Warper > Torre de Thanatos 5", "tha_t05", 62, 11);
+		naviregisterwarp("Warper > Torre de Thanatos 6", "tha_t06", 89, 221);
+		naviregisterwarp("Warper > Torre de Thanatos 7", "tha_t07", 35, 166);
+		naviregisterwarp("Warper > Torre de Thanatos 8", "tha_t08", 93, 148);
+		naviregisterwarp("Warper > Torre de Thanatos 9", "tha_t09", 29, 107);
+		naviregisterwarp("Warper > Torre de Thanatos 10", "tha_t10", 159, 138);
+		naviregisterwarp("Warper > Torre de Thanatos 11", "tha_t11", 19, 20);
+		naviregisterwarp("Warper > Torre de Thanatos 12", "tha_t12", 130, 52);
+	}
+	naviregisterwarp("Warper > Vulcão de Thor 1", "thor_v01", 21, 228);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Vulcão de Thor 2", "thor_v02", 75, 205);
+		naviregisterwarp("Warper > Vulcão de Thor 3", "thor_v03", 34, 272);
+	}
+	naviregisterwarp("Warper > Fábrica de Brinquedos 1", "xmas_dun01", 205, 15);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Fábrica de Brinquedos 2", "xmas_dun02", 129, 133);
+	}
+	naviregisterwarp("Warper > Entrada", "tur_dun01", 154, 49);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Ilha das Tartarugas 1", "tur_dun02", 148, 261);
+		naviregisterwarp("Warper > Ilha das Tartarugas 2", "tur_dun03", 132, 189);
+		naviregisterwarp("Warper > Ilha das Tartarugas 3", "tur_dun04", 100, 192);
+	}
+	naviregisterwarp("Warper > Carpintaria na Árvore", "um_dun01", 42, 31);
+	if (!.OnlyFirstDun) {
+		naviregisterwarp("Warper > Passagem para Outro Mundo", "um_dun02", 48, 30);
+		naviregisterwarp("Warper > Fonte de Hvergelmir", "yggdrasil01", 204, 78);
+	}
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Torre de Bifrost 1", "ecl_tdun01", 57, 13);
+		if (!.OnlyFirstDun) {
+			naviregisterwarp("Warper > Torre de Bifrost 2", "ecl_tdun02", 64, 88);
+			naviregisterwarp("Warper > Torre de Bifrost 3", "ecl_tdun03", 45, 14);
+			naviregisterwarp("Warper > Torre de Bifrost 4", "ecl_tdun04", 26, 23);
+		}
+	}
+
+	// castles
+
+	naviregisterwarp("Warper > Neuschwanstein", "alde_gld", 48, 83);
+	naviregisterwarp("Warper > Hohenschwangau", "alde_gld", 95, 249);
+	naviregisterwarp("Warper > Nuenberg", "alde_gld", 142, 85);
+	naviregisterwarp("Warper > Wuerzburg", "alde_gld", 239, 242);
+	naviregisterwarp("Warper > Rothenburg", "alde_gld", 264, 90);
+	naviregisterwarp("Warper > Repherion", "gef_fild13", 214, 75);
+	naviregisterwarp("Warper > Eeyolbriggar", "gef_fild13", 308, 240);
+	naviregisterwarp("Warper > Yesnelph", "gef_fild13", 143, 240);
+	naviregisterwarp("Warper > Bergel", "gef_fild13", 193, 278);
+	naviregisterwarp("Warper > Mersetzdeitz", "gef_fild13", 305, 87);
+	naviregisterwarp("Warper > Bosque Resplandecente", "pay_gld", 121, 233);
+	naviregisterwarp("Warper > Palácio Escarlate", "pay_gld", 295, 116);
+	naviregisterwarp("Warper > Sombra Sagrada", "pay_gld", 317, 293);
+	naviregisterwarp("Warper > Altar Sagrado", "pay_gld", 140, 160);
+	naviregisterwarp("Warper > Colina do Bambuzal", "pay_gld", 204, 266);
+	naviregisterwarp("Warper > Kriemhild", "prt_gld", 134, 65);
+	naviregisterwarp("Warper > Swanhild", "prt_gld", 240, 128);
+	naviregisterwarp("Warper > Fadhgridh", "prt_gld", 153, 137);
+	naviregisterwarp("Warper > Skoegul", "prt_gld", 111, 240);
+	naviregisterwarp("Warper > Gondul", "prt_gld", 208, 240);
+	naviregisterwarp("Warper > Mardol", "aru_gld", 158, 272);
+	naviregisterwarp("Warper > Cyr", "aru_gld", 83, 47);
+	naviregisterwarp("Warper > Horn", "aru_gld", 68, 155);
+	naviregisterwarp("Warper > Gefn", "aru_gld", 299, 345);
+	naviregisterwarp("Warper > Banadis", "aru_gld", 292, 107);
+	naviregisterwarp("Warper > Himinn", "sch_gld", 293, 100);
+	naviregisterwarp("Warper > Andlangr", "sch_gld", 288, 252);
+	naviregisterwarp("Warper > Viblainn", "sch_gld", 97, 196);
+	naviregisterwarp("Warper > Hljod", "sch_gld", 137, 90);
+	naviregisterwarp("Warper > Skidbladnir", "sch_gld", 71, 315);
+
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Kafragarten 1", "te_alde_gld", 48, 83);
+		naviregisterwarp("Warper > Kafragarten 2", "te_alde_gld", 95, 249);
+		naviregisterwarp("Warper > Kafragarten 3", "te_alde_gld", 142, 85);
+		naviregisterwarp("Warper > Kafragarten 4", "te_alde_gld", 239, 242);
+		naviregisterwarp("Warper > Kafragarten 5", "te_alde_gld", 264, 90);
+		naviregisterwarp("Warper > Gloria 1", "te_prt_gld", 134, 65);
+		naviregisterwarp("Warper > Gloria 2", "te_prt_gld", 240, 128);
+		naviregisterwarp("Warper > Gloria 3", "te_prt_gld", 153, 137);
+		naviregisterwarp("Warper > Gloria 4", "te_prt_gld", 111, 240);
+		naviregisterwarp("Warper > Gloria 5", "te_prt_gld", 208, 240);
+	}
+
+	// guild dungeons
+	naviregisterwarp("Warper > Baldur F1", "gld_dun01", 119, 93);
+	naviregisterwarp("Warper > Luina F1", "gld_dun02", 39, 161);
+	naviregisterwarp("Warper > Valkyrie F1", "gld_dun03", 50, 44);
+	naviregisterwarp("Warper > Britoniah F1", "gld_dun04", 116, 45);
+	naviregisterwarp("Warper > Arunafeltz", "arug_dun01", 199, 195);
+	naviregisterwarp("Warper > Schwarzwald", "schg_dun01", 200,124);
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Baldur F2", "gld_dun01_2", 119, 93);
+		naviregisterwarp("Warper > Salão do Abismo", "gld2_pay", 120, 130);
+		naviregisterwarp("Warper > Luina F2", "gld_dun02_2", 39, 161);
+		naviregisterwarp("Warper > Salão do Abismo", "gld2_ald", 147, 155);
+		naviregisterwarp("Warper > Valkyrie F2", "gld_dun03_2", 50, 44);
+		naviregisterwarp("Warper > Salão do Abismo", "gld2_prt", 140, 132);
+		naviregisterwarp("Warper > Britoniah F2", "gld_dun04_2", 116, 45);
+		naviregisterwarp("Warper > Salão do Abismo", "gld2_gef", 152, 118);
+		naviregisterwarp("Warper > Kafragarten", "teg_dun01", 42, 36);
+		naviregisterwarp("Warper > Gloria", "teg_dun02", 26, 160);
+	}
+	end;
+
+	// instances
+	naviregisterwarp("Warper > Torre Sem Fim", "e_tower", 72, 112);
+	naviregisterwarp("Warper > Ninho de Nidhogg", "nyd_dun02", 95, 193);
+	naviregisterwarp("Warper > Memorial dos Orcs", "gef_fild10", 240, 198);
+	naviregisterwarp("Warper > Santuário Selado", "monk_test", 306, 143);
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Lago de Bakonawa", "ma_scene01", 172, 175);
+		naviregisterwarp("Warper > Hospital de Bangungot - 2º Andar", "ma_dun01", 151, 8);
+		naviregisterwarp("Warper > Caverna de Buwaya", "ma_fild02", 316, 317);
+		naviregisterwarp("Warper > Torre do Diabo", "dali02", 137, 115);
+		naviregisterwarp("Warper > Interior de Eclage", "ecl_hub01", 129, 12);
+		naviregisterwarp("Warper > Ninho dos Faceworms", "dali", 85, 64);
+		naviregisterwarp("Warper > Torneio de Magia de Geffen", "dali", 94, 141);
+		naviregisterwarp("Warper > Palácio Fantasma", "dali02", 46, 128);
+		naviregisterwarp("Warper > Labirinto Nebuloso", "bif_fild01", 161, 334);
+		naviregisterwarp("Warper > Fábrica do Terror", "xmas", 234, 298);
+		naviregisterwarp("Warper > Esgotos de Malangdo", "mal_in01", 164, 21);
+		naviregisterwarp("Warper > Caverna do Polvo", "mal_dun01", 152, 230);
+		naviregisterwarp("Warper > Glast Heim Antiga", "glast_01", 204, 268);
+		naviregisterwarp("Warper > Sara e Fenrir", "dali02", 92, 141);
+		naviregisterwarp("Warper > Memórias de Sara", "dali", 133, 108);
+		naviregisterwarp("Warper > Laboratório de Wolfchev", "lhz_dun04", 148, 269);
+	}
+
+
+	// special
+	naviregisterwarp("Warper > Casa de Leilões", "auction_01", 22, 68);
+	naviregisterwarp("Warper > Batalha Campal", "bat_room", 154, 150);
+	naviregisterwarp("Warper > Casino", "cmd_in02", 179, 129);
+	naviregisterwarp("Warper > Arena de Kunlun", "gon_test", 48, 10);
+	naviregisterwarp("Warper > Arena de Izlude", "arena_room", 100, 88);
+	naviregisterwarp("Warper > Corrida de Monstros", "p_track01", 62, 41);
+	naviregisterwarp("Warper > Corrida Turbo", "turbo_room", 99, 114);
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Fenda Dimensional", "dali", 113, 82);
+		naviregisterwarp("Warper > Sede do Grupo Éden", "moc_para01", 31, 14);
+		naviregisterwarp("Warper > Mercado de Para", "paramk", 97, 17);
+	}
+
+OnInit:
+	.Satan_Morocc = true;	//	false will enable moc_fild 4,5,6,8,9,10,14,15 while disable moc_fild 20,21,22 Default is true.
+	.OnlyFirstFld = false;	//	true will teleport to the first level of the Fields  Default is false.
+	.OnlyFirstDun = false;	//	true will teleport to the first level of the Dungeons  Default is false.
+}
+
+// --------------------------------------------------
+//	Duplicates:
+// --------------------------------------------------
+alb2trea,57,70,6	duplicate(Warper)	Warper#tre	811
+alberta,28,240,4	duplicate(Warper)	Warper#alb	811
+aldebaran,145,118,4	duplicate(Warper)	Warper#alde	811
+amatsu,203,87,4	duplicate(Warper)	Warper#ama	811
+ayothaya,209,169,6	duplicate(Warper)	Warper#ayo	811
+comodo,194,158,4	duplicate(Warper)	Warper#com	811
+einbech,59,38,6	duplicate(Warper)	Warper#einbe	811
+einbroch,69,202,4	duplicate(Warper)	Warper#einbr	811
+gef_fild10,71,339,4	duplicate(Warper)	Warper#orc	811
+geffen,124,72,4	duplicate(Warper)	Warper#gef	811
+glast_01,372,308,4	duplicate(Warper)	Warper#glh	811
+gonryun,162,122,4	duplicate(Warper)	Warper#gon	811
+hugel,101,151,4	duplicate(Warper)	Warper#hug	811
+izlu2dun,110,92,4	duplicate(Warper)	Warper#izd	811
+izlude,134,150,4	duplicate(Warper)	Warper#izl	811	//Pre-RE: (132,120)
+jawaii,253,138,4	duplicate(Warper)	Warper#jaw	811
+lighthalzen,162,102,4	duplicate(Warper)	Warper#lhz	811
+louyang,208,103,6	duplicate(Warper)	Warper#lou	811
+manuk,274,146,6	duplicate(Warper)	Warper#man	811
+mid_camp,216,288,4	duplicate(Warper)	Warper#mid	811
+mjolnir_02,85,364,4	duplicate(Warper)	Warper#mjo	811
+moc_ruins,64,164,4	duplicate(Warper)	Warper#moc	811
+morocc,159,97,4	duplicate(Warper)	Warper#mor	811
+moscovia,229,191,4	duplicate(Warper)	Warper#mos	811
+nameless_n,259,213,4	duplicate(Warper)	Warper#nam	811
+niflheim,205,179,4	duplicate(Warper)	Warper#nif	811
+pay_arche,42,134,4	duplicate(Warper)	Warper#arc	811
+payon,182,108,4	duplicate(Warper)	Warper#pay	811
+prontera,165,197,4	duplicate(Warper)	Warper#prt	811
+prt_fild05,279,223,6	duplicate(Warper)	Warper#cul	811
+rachel,135,116,4	duplicate(Warper)	Warper#rac	811
+splendide,205,153,4	duplicate(Warper)	Warper#spl	811
+thor_camp,249,76,4	duplicate(Warper)	Warper#thor	811
+umbala,106,150,3	duplicate(Warper)	Warper#umb	811
+veins,214,123,4	duplicate(Warper)	Warper#ve	811
+xmas,150,136,6	duplicate(Warper)	Warper#xmas	811
+yuno,162,47,4	duplicate(Warper)	Warper#yuno	811
+
+// --------------------------------------------------
+//	Duplicates (Renewal):
+// --------------------------------------------------
+brasilis,201,222,4	duplicate(Warper)	Warper#bra	811
+dewata,204,186,6	duplicate(Warper)	Warper#dew	811
+dicastes01,194,194,6	duplicate(Warper)	Warper#dic	811
+ecl_in01,51,60,4	duplicate(Warper)	Warper#ecl	811
+lasagna,196,187,4	duplicate(Warper)	Warper#las	811
+malangdo,134,117,6	duplicate(Warper)	Warper#mal	811
+malaya,231,204,4	duplicate(Warper)	Warper#ma	811
+mora,57,152,4	duplicate(Warper)	Warper#mora	811

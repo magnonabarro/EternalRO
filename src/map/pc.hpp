@@ -960,7 +960,10 @@ public:
 		int item_rate_card, item_rate_card_boss, item_rate_card_mvp, item_drop_card_min, item_drop_card_max;
 		int item_rate_mvp, item_drop_mvp_min, item_drop_mvp_max;
 		int item_rate_treasure, item_drop_treasure_min, item_drop_treasure_max;
-		bool pvm_seasonal; // Hero Saga: seasonal PvM rewards (level 99).
+		bool pvm_seasonal; // Hero Saga: seasonal PvM bonuses.
+		int pvm_bonus_level, pvm_physical_damage, pvm_magic_damage, pvm_ranged_damage;
+		int pvm_drop, pvm_hp, pvm_sp, pvm_heal, pvm_def, pvm_mdef;
+		int pvm_perfect_dodge, pvm_aftercast_delay;
 	} custom_rate;
 
 	void update_look( _look look );

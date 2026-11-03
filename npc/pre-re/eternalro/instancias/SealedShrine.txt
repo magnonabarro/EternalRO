@@ -41,7 +41,7 @@ monk_test,309,146,3	script	Frei Patrick#edq	412,{
 	switch(.@selection) {
 	case 1:
 		mes "[Frei Patrick]";
-		mes "Huh... Você não sabe? Este é o Mosteiro de Santa Capitolina, onde os Irmãos que desejam se tornar monges treinam e oram.";
+		mes "Ué... Você não sabe? Este é o Mosteiro de Santa Capitolina, onde os Irmãos que desejam se tornar monges treinam e oram.";
 		next;
 		mes "[Frei Patrick]";
 		mes "E este lugar é... Como posso dizer posso dizer... É a sepultura do diabo...";
@@ -109,7 +109,7 @@ monk_test,309,146,3	script	Frei Patrick#edq	412,{
 						mes "Umm... Mas parece que há um problema aqui... Vou verificar rapidamente. Por favor, espere.";
 					}
 					else {
-						mes "Ok... Vou ajustar o selo do santuário para que você e seu grupo possam entrar.";
+						mes "Certo... Vou ajustar o selo do santuário para que você e seu grupo possam entrar.";
 						next;
 						mes "[Frei Patrick]";
 						mes "Você verá um sinal quando o selo estiver quebrado. Aguarde até que o sinal apareça...";
@@ -216,7 +216,7 @@ monk_test,306,151,3	script	Tumba do Bafomé#edq	111,{
 			mes "Para entrar neste lugar perigoso, você não pode ir sozinho. Volte depois de se juntar a uma grupo.";
 			close;
 		case IE_OK:
-			mapannounce "monk_test","[" + strcharinfo(0) + "] membro do grupo [" + getpartyname(.@party_id) + "], entrou no Santuário Selado.",bc_map,"0x00ff99";
+			mapannounce "monk_test","O jogador " + strcharinfo(0) + ", do grupo " + getpartyname(.@party_id) + ", entrou no Santuário Selado.",bc_map,"0x00ff99";
 			setquest 3040;
 			//warp "1@cata",100,224;
 			close;
@@ -722,7 +722,7 @@ OnInstanceInit: //Solução temporária para o comando @reloadscript.
 			delitem 6001,countitem(6001); //Essência de Fogo
 			set 'ins_baphomet,4;
 			mes "[Alma do Herói]";
-			mes "OK. Você fez o seu trabalho. Agora verifique seus companheiros e me diga quando todos terminaram seu trabalho.";
+			mes "Certo. Você fez o seu trabalho. Agora verifique seus companheiros e me diga quando todos terminaram seu trabalho.";
 		}
 		else {
 			mes "[Alma do Herói]";
@@ -740,7 +740,7 @@ OnInstanceInit: //Solução temporária para o comando @reloadscript.
 		if (countitem(6002) > 0) {
 			set 'ins_baphomet,4;
 			mes "[Alma do Herói]";
-			mes "OK. Você fez o seu trabalho. Informe o seu líder do grupo para verificar seus companheiros e venha até mim quando todos terminaram seu trabalho.";
+			mes "Certo. Você fez o seu trabalho. Informe o seu líder do grupo para verificar seus companheiros e venha até mim quando todos terminaram seu trabalho.";
 		}
 		else {
 			mes "[Alma do Herói]";
@@ -1153,7 +1153,7 @@ OnInstanceInit:
 	switch(select("Deixe-me sair do Santuário.:Parar de falar.")) {
 	case 1:
 		mes "[Alma do Herói]";
-		mes "OK. Eu deixarei você e seu Grupo sair daqui com segurança.";
+		mes "Certo. Eu deixarei você e seu Grupo sair daqui com segurança.";
 		next;
 		mes "[Alma do Herói]";
 		mes "Se você sair, mande um olá para o Patrick por mim.";

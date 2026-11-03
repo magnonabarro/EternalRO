@@ -63,19 +63,22 @@ Thumbs.db
 /3rdparty/httplib/Makefile
 /3rdparty/httplib/obj
 
-# /db/
-/db/import
+# /db/import contains the server custom databases and must be versioned.
 
-# /conf/
-/conf/import
-/conf/msg_conf/import
+# Local connections stay private. Gameplay overrides can be versioned.
+/conf/import/*
+!/conf/import/atcommands.yml
+!/conf/import/battle_conf.txt
+!/conf/import/groups.yml
+!/conf/import/packet_conf.txt
+!/conf/import/script_conf.txt
 
 # /lib
 /lib
 
-# /log/
-/log/*.log
-/log/*.leaks
+# Runtime logs (keep only the empty directory in a fresh checkout).
+/log/*
+!/log/.gitkeep
 
 # /src/char/
 /src/char/Makefile
@@ -87,8 +90,7 @@ Thumbs.db
 /src/common/obj_sql
 /src/common/version.hpp
 
-# /src/custom/
-/src/custom
+# /src/custom contains custom source hooks and must be versioned.
 
 # /src/login/
 /src/login/Makefile
@@ -152,3 +154,44 @@ Thumbs.db
 
 # generated files
 generated
+
+# EternalRO: local backups, duplicate trees and compiler output.
+/backups/
+/backup/
+/build-*/
+/rathena-master/
+/src - Copia/
+/db - Copia/
+/npc/pre-re/eternalro/quests/eden.zip
+**/__pycache__/
+*.pyc
+*.pyo
+*.obj
+*.ilk
+*.iobj
+*.ipdb
+*.pdb
+*.exe
+*.exe.*
+*.dll
+*.admin.lock
+*.bak
+*.orig
+*.rej
+*.tmp
+*.temp
+*.log
+*.leaks
+
+# Credentials, private keys and database dumps. Keep SQL installation schemas.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.sql.gz
+*.sql.zip
+/dumps/
+/sql-backups/

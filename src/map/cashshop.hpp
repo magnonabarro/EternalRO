@@ -72,6 +72,7 @@ public:
 	}
 
 	const std::string getDefaultLocation();
+	bool loadSql();
 	uint64 parseBodyNode( const ryml::NodeRef& node );
 
 	// Additional

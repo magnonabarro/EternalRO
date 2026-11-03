@@ -46,6 +46,11 @@ Body:
     Name: Player
     Level: 0
     Commands:
+      autotrade: true
+      whereis: true
+      whodrops: true
+      mobinfo: true
+      iteminfo: true
       changedress: true
       resurrect: true
       afk: true
@@ -60,38 +65,8 @@ Body:
     Inherit:
       Player: true
     Level: 0
-    Commands:
       # Informational commands
-      commands: true
-      charcommands: true
-      help: true
-      rates: true
-      uptime: true
-      showdelay: true
-      exp: true
-      mobinfo: true
-      iteminfo: true
-      whodrops: true
-      servertime: true
-      jailtime: true
-      hominfo: true
-      homstats: true
-      showexp: true
-      showzeny: true
-      whereis: true
       # Feature commands
-      refresh: true
-      noask: true
-      noks: true
-      autoloot: true
-      alootid: true
-      autoloottype: true
-      autotrade: true
-      request: true
-      go: true
-      breakguild: true
-      channel: true
-      langtype: true
     Permissions:
       attendance: false
   - Id: 2
@@ -118,62 +93,17 @@ Body:
       view_equipment: true
   - Id: 3
     Name: Script Manager
-    Inherit:
-      Support: true
     Level: 1
-    Commands:
-      tonpc: true
-      hidenpc: true
-      shownpc: true
-      loadnpc: true
-      unloadnpc: true
-      npcmove: true
-      addwarp: true
-    LogCommands: true
+    LogCommands: false
     Permissions:
-      any_warp: true
+      any_warp: false
   - Id: 4
     Name: Event Manager
-    Inherit:
-      Support: true
     Level: 1
-    Commands:
-      monster: true
-      monstersmall: true
-      monsterbig: true
-      killmonster2: true
-      cleanarea: true
-      cleanmap: true
-      item: true
-      zeny: true
-      disguise: true
-      undisguise: true
-      size: true
-      raise: true
-      raisemap: true
-      day: true
-      night: true
-      skillon: true
-      skilloff: true
-      pvpon: true
-      pvpoff: true
-      gvgon: true
-      gvgoff: true
-      allowks: true
-      me: true
-      marry: true
-      divorce: true
-      refreshall: true
-    CharCommands:
-      item: true
-      zeny: true
-      disguise: true
-      undisguise: true
-      size: true
-    LogCommands: true
+    LogCommands: false
     Permissions:
       can_trade: false
-      any_warp: true
+      any_warp: false
   - Id: 5
     Name: VIP
     # Can do everything Players can
@@ -181,7 +111,35 @@ Body:
       Player: true
     Level: 0
     Commands:
+        # Informational commands
+      commands: true
+      help: true
       rates: true
+      uptime: true
+      showdelay: true
+      exp: true
+      mobinfo: true
+      iteminfo: true
+      whodrops: true
+      servertime: true
+      jailtime: true
+      hominfo: true
+      homstats: true
+      showexp: true
+      showzeny: true
+      whereis: true
+      # Feature commands
+      refresh: true
+      noask: true
+      noks: true
+      autoloot: true
+      alootid: true
+      autoloottype: true
+      autotrade: true
+      request: true
+      breakguild: true
+      channel: true
+      langtype: true
       who: true
   - Id: 10
     Name: Law Enforcement

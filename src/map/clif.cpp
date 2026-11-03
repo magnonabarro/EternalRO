@@ -5110,6 +5110,32 @@ void clif_getareachar_unit( map_session_data* sd,block_list *bl ){
 	case BL_MOB:
 		{
 			TBL_MOB* md = (TBL_MOB*)bl;
+
+			// Mark monsters that are still required by an active hunting quest.
+			bool is_hateffect = false;
+			for (int32 i = 0; i < sd->avail_quests; i++) {
+				if (sd->quest_log[i].state != Q_ACTIVE)
+					continue;
+
+				std::shared_ptr<s_quest_db> qi = quest_search(sd->quest_log[i].quest_id);
+				if (!qi)
+					continue;
+
+				for (size_t j = 0; j < qi->objectives.size(); j++) {
+					const auto& objective = qi->objectives[j];
+					if (objective->mob_id == md->mob_id && sd->quest_log[i].count[j] < objective->count) {
+						is_hateffect = true;
+						break;
+					}
+				}
+
+				if (is_hateffect)
+					break;
+			}
+
+			if (is_hateffect)
+				clif_hat_effect_single(*md, 185, true);
+
 			if(md->special_state.size==SZ_BIG) // tiny/big mobs [Valaris]
 				clif_specialeffect_single(bl,EF_GIANTBODY2,sd->fd);
 			else if(md->special_state.size==SZ_MEDIUM)
@@ -20864,17 +20890,21 @@ void DumpUnknown(int32 fd,TBL_PC *sd,int32 cmd,int32 packet_len)
 /// Roulette System
 /// Author: Yommy
 
+// One inventory currency for all roulette rounds. Legacy gold/silver/bronze balances are not spent.
+static constexpr t_itemid ROULETTE_CURRENCY_ITEM = 50032;
+static int32 roulette_currency_balance(const map_session_data& sd){
+    int32 amount = 0;
+    for (int32 i = 0; i < MAX_INVENTORY; ++i)
+        if (sd.inventory.u.items_inventory[i].nameid == ROULETTE_CURRENCY_ITEM)
+            amount += sd.inventory.u.items_inventory[i].amount;
+    return amount;
+}
+
 void roulette_generate_bonus( map_session_data& sd ){
 	if( battle_config.feature_roulette_bonus_reward && sd.roulette.bonusItemID == 0 ){
 		int32 next_stage = 0;
 
-		if( sd.roulette_point.bronze > 0 ){
-			next_stage = 0;
-		}else if( sd.roulette_point.silver > 9 ){
-			next_stage = 2;
-		}else if( sd.roulette_point.gold > 9 ){
-			next_stage = 4;
-		}
+
 
 		// Get bonus item stage only from current stage or higher
 		int32 reward_stage = rnd_value( next_stage, MAX_ROULETTE_LEVEL - 1 );
@@ -20899,9 +20929,9 @@ void clif_roulette_open( map_session_data* sd ){
 	p.Step = (sd->roulette.claimPrize) ? sd->roulette.stage - 1 : 0;
 	p.Idx = (sd->roulette.claimPrize) ? sd->roulette.prizeIdx : -1;
 	p.AdditionItemID = sd->roulette.bonusItemID;
-	p.GoldPoint = sd->roulette_point.gold;
-	p.SilverPoint = sd->roulette_point.silver;
-	p.BronzePoint = sd->roulette_point.bronze;
+	p.GoldPoint = 0;
+	p.SilverPoint = 0;
+	p.BronzePoint = roulette_currency_balance(*sd);
 
 	sd->state.roulette_open = true;
 
@@ -21010,6 +21040,7 @@ static uint8 clif_roulette_getitem(map_session_data *sd) {
 
 	it.nameid = rd.nameid[sd->roulette.prizeStage][sd->roulette.prizeIdx];
 	it.identify = 1;
+	const t_itemid previous_bonus = sd->roulette.bonusItemID;
 
 	if( sd->roulette.bonusItemID != 0 ){
 		if( sd->roulette.bonusItemID == it.nameid && battle_config.feature_roulette_bonus_reward && !( rd.flag[sd->roulette.prizeStage][sd->roulette.prizeIdx]&1 ) ){
@@ -21031,8 +21062,10 @@ static uint8 clif_roulette_getitem(map_session_data *sd) {
 		}
 	}
 
-	if ((res = pc_additem(sd, &it, rd.qty[sd->roulette.prizeStage][sd->roulette.prizeIdx] * factor, LOG_TYPE_ROULETTE)) == 0) {
-		; // onSuccess
+	if ((res = pc_additem(sd, &it, rd.qty[sd->roulette.prizeStage][sd->roulette.prizeIdx] * factor, LOG_TYPE_ROULETTE)) != ADDITEM_SUCCESS) {
+		// Keep the pending prize available when the inventory cannot receive it.
+		sd->roulette.bonusItemID = previous_bonus;
+		return res;
 	}
 
 	if( sd->roulette.bonusItemID == 0 ){
@@ -21058,9 +21091,9 @@ void clif_roulette_generate( map_session_data *sd, unsigned char result, int16 s
 	p.Step = stage;
 	p.Idx = prizeIdx;
 	p.AdditionItemID = battle_config.feature_roulette_bonus_reward ? bonusItemID : 0;
-	p.RemainGold = sd->roulette_point.gold;
-	p.RemainSilver = sd->roulette_point.silver;
-	p.RemainBronze = sd->roulette_point.bronze;
+	p.RemainGold = 0;
+	p.RemainSilver = 0;
+	p.RemainBronze = roulette_currency_balance(*sd);
 
 	clif_send( &p, sizeof( p ), sd, SELF );
 }
@@ -21081,9 +21114,14 @@ void clif_parse_roulette_generate( int32 fd, map_session_data* sd ){
 		return;
 	}
 
-	// Player has not claimed his prize yet
+	// Deliver the previous prize without restarting an ongoing round.
 	if( sd->roulette.claimPrize ){
-		clif_roulette_getitem( sd );
+		const auto next_stage = sd->roulette.stage;
+		if (clif_roulette_getitem(sd) != ADDITEM_SUCCESS) {
+			clif_roulette_recvitem_ack(sd, RECV_ITEM_FAILED);
+			return;
+		}
+		sd->roulette.stage = next_stage;
 	}
 
 	if (sd->roulette.stage >= MAX_ROULETTE_LEVEL){
@@ -21094,23 +21132,14 @@ void clif_parse_roulette_generate( int32 fd, map_session_data* sd ){
 		sd->roulette.prizeIdx = -1;
 	}
 
-	if( !sd->roulette.stage && sd->roulette_point.bronze <= 0 && sd->roulette_point.silver < 10 && sd->roulette_point.gold < 10 ){
-		result = GENERATE_ROULETTE_NO_ENOUGH_POINT;
-	}else{
-		if (!sd->roulette.stage) {
-			if (sd->roulette_point.bronze > 0) {
-				sd->roulette_point.bronze -= 1;
-				pc_setreg2(sd, ROULETTE_BRONZE_VAR, sd->roulette_point.bronze);
-			} else if (sd->roulette_point.silver > 9) {
-				sd->roulette_point.silver -= 10;
-				sd->roulette.stage = 2;
-				pc_setreg2(sd, ROULETTE_SILVER_VAR, sd->roulette_point.silver);
-			} else if (sd->roulette_point.gold > 9) {
-				sd->roulette_point.gold -= 10;
-				sd->roulette.stage = 4;
-				pc_setreg2(sd, ROULETTE_GOLD_VAR, sd->roulette_point.gold);
-			}
-		}
+    const int32 currency_index = pc_search_inventory(sd, ROULETTE_CURRENCY_ITEM);
+    if (!sd->roulette.stage && (currency_index < 0 || sd->inventory.u.items_inventory[currency_index].amount < 1)) {
+        result = GENERATE_ROULETTE_NO_ENOUGH_POINT;
+    } else {
+        if (!sd->roulette.stage && pc_delitem(sd, currency_index, 1, 0, 0, LOG_TYPE_ROULETTE) != 0) {
+            clif_roulette_generate(sd, GENERATE_ROULETTE_NO_ENOUGH_POINT, 0, 0, sd->roulette.bonusItemID);
+            return;
+        }
 
 		sd->roulette.prizeStage = sd->roulette.stage;
 		sd->roulette.prizeIdx = rnd()%rd.items[sd->roulette.stage];

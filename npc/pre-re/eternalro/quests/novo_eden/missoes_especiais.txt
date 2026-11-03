@@ -1,0 +1,212 @@
+//===== rAthena Script =======================================
+//= Eden Group Quests - Missões Especiais (Caçada a Monstros Campeões)
+//===== By: ==================================================
+//= Vibe
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Hunting Quests for Champion Monsters
+//= Repeatable with 4h cooldown (TimeLimit: 4h in quest_db.yml)
+//= No max level restriction (can only take quests below or equal to player level)
+//= No Job EXP reward, only Base EXP and Class EXP
+//= Organized by region in submenus
+//= Flow: Player accepts quest -> kills champion monster -> delivers to Monstrólogo -> gets reward + cooldown quest
+//===== Additional Comments: =================================
+//= Based on quests de Caçadada.txt
+//= ID 22508 = Eden Group Mark (required)
+//= Quest IDs: 99200-99393 (each monster has 2 quests: even ID for hunt, odd ID for cooldown)
+//= NPC: Quadro Missões Especiais at moc_para01,16,33,3
+//============================================================
+
+moc_para01,16,33,3	script	Missões Especiais	857,{
+	// Verifica se é membro do Eden
+	if (!(countitem(22508) > 0)) {
+		mes "Para aceitar estas missões, preciso entrar no Grupo Éden primeiro.";
+		mes "Devo encontrar a Secretária Lime Evenor e me tornar um membro.";
+		close;
+	}
+	
+	mes "[Quadro de Missões Especiais]";
+	mes "Instruções de Pagamento:";
+	mes "Elimine o Monstro alvo.";
+	mes "Reporte-se ao Monstrólogo.";
+	next;
+	
+L_ShowMenu:
+	switch(select("Leste do Reino:Centro-Oeste do Reino:Oeste do Reino:Campos da República:Cavernas da República:Arunafeltz:Outras Regiões:Cancelar")) {
+		case 1: goto L_LesteReino;
+		case 2: goto L_CentroOesteReino;
+		case 3: goto L_OesteReino;
+		case 4: goto L_CamposRepublica;
+		case 5: goto L_CavernasRepublica;
+		case 6: goto L_Arunafeltz;
+		case 7: goto L_OutrasRegioes;
+		case 8: close;
+	}
+	goto L_ShowMenu;
+
+// ===== Leste do Reino =====
+L_LesteReino:
+	switch(select("Zangão Fugaz (10):Rocker Fugaz (10):Ambernite Fugaz (10):Muka Alfa (20):Pé-Grande Alfa (20):Besouro-Chifre Brutal (30):Salgueiro Ancião Ágil (30):Koko Brutal (30):Yoyo Ágil (30):Magnólia Fugaz (40):Volta")) {
+		case 1: .@qid = 99200; .@min = 10; .@exp = 600; .@job_exp = 1350; goto L_Offer;
+		case 2: .@qid = 99202; .@min = 10; .@exp = 740; .@job_exp = 1670; goto L_Offer;
+		case 3: .@qid = 99204; .@min = 10; .@exp = 870; .@job_exp = 1940; goto L_Offer;
+		case 4: .@qid = 99206; .@min = 20; .@exp = 1080; .@job_exp = 3650; goto L_Offer;
+		case 5: .@qid = 99208; .@min = 20; .@exp = 1350; .@job_exp = 4550; goto L_Offer;
+		case 6: .@qid = 99210; .@min = 30; .@exp = 1620; .@job_exp = 5450; goto L_Offer;
+		case 7: .@qid = 99212; .@min = 30; .@exp = 1740; .@job_exp = 5900; goto L_Offer;
+		case 8: .@qid = 99214; .@min = 30; .@exp = 2030; .@job_exp = 6840; goto L_Offer;
+		case 9: .@qid = 99216; .@min = 30; .@exp = 2030; .@job_exp = 6840; goto L_Offer;
+		case 10: .@qid = 99218; .@min = 40; .@exp = 3470; .@job_exp = 11120; goto L_Offer;
+		case 11: goto L_ShowMenu;
+	}
+	goto L_LesteReino;
+
+// ===== Centro-Oeste do Reino =====
+L_CentroOesteReino:
+	switch(select("Guerreiro Orc Feroz (40):Goblin Ágil (40):Goblin Fugaz (40):Petite Ágil (75):Petite Brutal (75):Carat Fugaz (100):Majoruros Feroz (100):Raydric Brutal (110):Raydric Ágil (110):Andarilho Feroz (110):Volta")) {
+		case 1: .@qid = 99220; .@min = 40; .@exp = 2630; .@job_exp = 12150; goto L_Offer;
+		case 2: .@qid = 99222; .@min = 40; .@exp = 2760; .@job_exp = 9320; goto L_Offer;
+		case 3: .@qid = 99224; .@min = 40; .@exp = 2760; .@job_exp = 9320; goto L_Offer;
+		case 4: .@qid = 99226; .@min = 75; .@exp = 9650; .@job_exp = 29610; goto L_Offer;
+		case 5: .@qid = 99228; .@min = 75; .@exp = 9650; .@job_exp = 29610; goto L_Offer;
+		case 6: .@qid = 99230; .@min = 100; .@exp = 17490; .@job_exp = 43263; goto L_Offer;
+		case 7: .@qid = 99232; .@min = 100; .@exp = 27810; .@job_exp = 65340; goto L_Offer;
+		case 8: .@qid = 99234; .@min = 110; .@exp = 27000; .@job_exp = 61626; goto L_Offer;
+		case 9: .@qid = 99236; .@min = 110; .@exp = 27000; .@job_exp = 61626; goto L_Offer;
+		case 10: .@qid = 99238; .@min = 110; .@exp = 33045; .@job_exp = 110631; goto L_Offer;
+		case 11: goto L_ShowMenu;
+	}
+	goto L_CentroOesteReino;
+
+// ===== Oeste do Reino =====
+L_OesteReino:
+	switch(select("Arenoso Feroz (50):Foca Ágil (60):Grove Fugaz (60):Crocodilo Brutal (60):Guerreiro Wootan Feroz (60):Dríade Ágil (60):Massacre Ágil (120):Banshee Ágil (120):Necromante Alfa (120):Volta")) {
+		case 1: .@qid = 99248; .@min = 50; .@exp = 4920; .@job_exp = 15840; goto L_Offer;
+		case 2: .@qid = 99250; .@min = 60; .@exp = 2700; .@job_exp = 9090; goto L_Offer;
+		case 3: .@qid = 99252; .@min = 60; .@exp = 3830; .@job_exp = 12330; goto L_Offer;
+		case 4: .@qid = 99254; .@min = 60; .@exp = 3830; .@job_exp = 12330; goto L_Offer;
+		case 5: .@qid = 99256; .@min = 60; .@exp = 5580; .@job_exp = 17960; goto L_Offer;
+		case 6: .@qid = 99258; .@min = 60; .@exp = 6590; .@job_exp = 21110; goto L_Offer;
+		case 7: .@qid = 99260; .@min = 120; .@exp = 31035; .@job_exp = 80238; goto L_Offer;
+		case 8: .@qid = 99262; .@min = 120; .@exp = 44070; .@job_exp = 103950; goto L_Offer;
+		case 9: .@qid = 99264; .@min = 120; .@exp = 44850; .@job_exp = 148005; goto L_Offer;
+		case 10: goto L_ShowMenu;
+	}
+	goto L_OesteReino;
+
+// ===== Campos da República =====
+L_CamposRepublica:
+	switch(select("Molusco Ágil (40):Planta Carnívora Brutal (70):Grand Peco Alfa (70):Bode Alfa (70):Rochoso Ágil (70):Talo de Verme Ágil (80):Holden Brutal (80):Rafflesia Ágil (80):Nuvem Venenosa Alfa (80):Nuvem Tóxica Feroz (80):Novus Fugaz (80):Volta")) {
+		case 1: .@qid = 99276; .@min = 40; .@exp = 3180; .@job_exp = 10220; goto L_Offer;
+		case 2: .@qid = 99278; .@min = 70; .@exp = 7410; .@job_exp = 22730; goto L_Offer;
+		case 3: .@qid = 99280; .@min = 70; .@exp = 7320; .@job_exp = 22460; goto L_Offer;
+		case 4: .@qid = 99282; .@min = 70; .@exp = 8790; .@job_exp = 26910; goto L_Offer;
+		case 5: .@qid = 99284; .@min = 70; .@exp = 8520; .@job_exp = 26100; goto L_Offer;
+		case 6: .@qid = 99286; .@min = 80; .@exp = 8910; .@job_exp = 27320; goto L_Offer;
+		case 7: .@qid = 99288; .@min = 80; .@exp = 9950; .@job_exp = 30560; goto L_Offer;
+		case 8: .@qid = 99290; .@min = 80; .@exp = 9650; .@job_exp = 29610; goto L_Offer;
+		case 9: .@qid = 99292; .@min = 80; .@exp = 9800; .@job_exp = 30060; goto L_Offer;
+		case 10: .@qid = 99294; .@min = 80; .@exp = 7320; .@job_exp = 40140; goto L_Offer;
+		case 11: .@qid = 99296; .@min = 80; .@exp = 10770; .@job_exp = 33840; goto L_Offer;
+		case 12: goto L_ShowMenu;
+	}
+	goto L_CamposRepublica;
+
+// ===== Cavernas da República =====
+L_CavernasRepublica:
+	switch(select("Pesadelo Sombrio Feroz (100):Mímico Antigo Alfa (110):Palavra Morta Brutal (110):Venatu Feroz (110):Dimik Ágil (110):Ferus Feroz (120):Acidus Brutal (120):Conforto Fugaz (120):Observação Alfa (120):Laurell Weinder Alfa (130):Cecil Damon Brutal (140):Volta")) {
+		case 1: .@qid = 99304; .@min = 100; .@exp = 18315; .@job_exp = 54339; goto L_Offer;
+		case 2: .@qid = 99306; .@min = 110; .@exp = 23865; .@job_exp = 61380; goto L_Offer;
+		case 3: .@qid = 99308; .@min = 110; .@exp = 25005; .@job_exp = 57072; goto L_Offer;
+		case 4: .@qid = 99310; .@min = 110; .@exp = 23865; .@job_exp = 60438; goto L_Offer;
+		case 5: .@qid = 99312; .@min = 110; .@exp = 28425; .@job_exp = 76773; goto L_Offer;
+		case 6: .@qid = 99314; .@min = 120; .@exp = 40800; .@job_exp = 88704; goto L_Offer;
+		case 7: .@qid = 99316; .@min = 120; .@exp = 44070; .@job_exp = 100584; goto L_Offer;
+		case 8: .@qid = 99318; .@min = 120; .@exp = 36630; .@job_exp = 119244; goto L_Offer;
+		case 9: .@qid = 99320; .@min = 120; .@exp = 41670; .@job_exp = 126225; goto L_Offer;
+		case 10: .@qid = 99322; .@min = 130; .@exp = 43875; .@job_exp = 162606; goto L_Offer;
+		case 11: .@qid = 99324; .@min = 140; .@exp = 248505; .@job_exp = 818976; goto L_Offer;
+		case 12: goto L_ShowMenu;
+	}
+	goto L_CavernasRepublica;
+
+// ===== Região de Arunafeltz =====
+L_Arunafeltz:
+	switch(select("Roween Brutal (90):Stapo Alfa (90):Vento da Colina Ágil (100):Kobold Brutal (100):Kobold Arqueiro Ágil (100):Yeti Brutal (100):Titã de Gelo Ágil (100):Isilla Alfa (120):Echio Alfa (120):Agav Ágil (120):Volta")) {
+		case 1: .@qid = 99328; .@min = 90; .@exp = 15210; .@job_exp = 42800; goto L_Offer;
+		case 2: .@qid = 99330; .@min = 90; .@exp = 14160; .@job_exp = 39870; goto L_Offer;
+		case 3: .@qid = 99332; .@min = 100; .@exp = 17100; .@job_exp = 42273; goto L_Offer;
+		case 4: .@qid = 99334; .@min = 100; .@exp = 20460; .@job_exp = 50637; goto L_Offer;
+		case 5: .@qid = 99336; .@min = 100; .@exp = 19440; .@job_exp = 77814; goto L_Offer;
+		case 6: .@qid = 99338; .@min = 100; .@exp = 17490; .@job_exp = 43263; goto L_Offer;
+		case 7: .@qid = 99340; .@min = 100; .@exp = 24510; .@job_exp = 78507; goto L_Offer;
+		case 8: .@qid = 99342; .@min = 120; .@exp = 33690; .@job_exp = 76971; goto L_Offer;
+		case 9: .@qid = 99344; .@min = 120; .@exp = 35970; .@job_exp = 82170; goto L_Offer;
+		case 10: .@qid = 99346; .@min = 120; .@exp = 38340; .@job_exp = 87516; goto L_Offer;
+		case 11: goto L_ShowMenu;
+	}
+	goto L_Arunafeltz;
+
+// ===== Outras Regiões =====
+L_OutrasRegioes:
+	switch(select("Fumacento Feroz (20):Pirralho Alfa (50):Espírito do Vento Feroz (70):Sorrateiro Brutal (70):Karakasa Ágil (70):Mi Gao Fugaz (80):Vespa Vagalume Fugaz (100):Pinguicula Brutal (110):Centopéia Ágil (120):Dolomedes Alfa (130):Scaraba Galhado Fugaz (130):Plagiador Alfa (130):Pequeno Fatum Feroz (130):Volta")) {
+		case 1: .@qid = 99358; .@min = 20; .@exp = 1350; .@job_exp = 4550; goto L_Offer;
+		case 2: .@qid = 99360; .@min = 50; .@exp = 4190; .@job_exp = 13410; goto L_Offer;
+		case 3: .@qid = 99362; .@min = 70; .@exp = 5190; .@job_exp = 12240; goto L_Offer;
+		case 4: .@qid = 99364; .@min = 70; .@exp = 5670; .@job_exp = 18230; goto L_Offer;
+		case 5: .@qid = 99366; .@min = 70; .@exp = 6320; .@job_exp = 19350; goto L_Offer;
+		case 6: .@qid = 99368; .@min = 80; .@exp = 9900; .@job_exp = 34380; goto L_Offer;
+		case 7: .@qid = 99370; .@min = 100; .@exp = 22095; .@job_exp = 53607; goto L_Offer;
+		case 8: .@qid = 99372; .@min = 110; .@exp = 20475; .@job_exp = 71775; goto L_Offer;
+		case 9: .@qid = 99374; .@min = 120; .@exp = 31200; .@job_exp = 80487; goto L_Offer;
+		case 10: .@qid = 99376; .@min = 130; .@exp = 50265; .@job_exp = 153054; goto L_Offer;
+		case 11: .@qid = 99378; .@min = 130; .@exp = 47475; .@job_exp = 156024; goto L_Offer;
+		case 12: .@qid = 99380; .@min = 130; .@exp = 69225; .@job_exp = 187110; goto L_Offer;
+		case 13: .@qid = 99382; .@min = 130; .@exp = 73125; .@job_exp = 193050; goto L_Offer;
+		case 14: goto L_ShowMenu;
+	}
+	goto L_OutrasRegioes;
+
+// ===== Handler de Missões =====
+L_Offer:
+	.@qstatus = checkquest(.@qid,HUNTING);
+	
+	if (.@qstatus == 2) {
+		// Quest completa - entregar
+		mes "[Quadro Missões Especiais]";
+		mes "Você já completou esta missão. Entregue ao Monstrólogo para registrar.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	if (.@qstatus != -1) {
+		// Quest já em andamento
+		mes "[Quadro Missões Especiais]";
+		mes "Você já está em uma missão semelhante.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	// Quest disponível - oferecer para pegar
+	if (BaseLevel < .@min) {
+		mes "[Quadro Missões Especiais]";
+		mes "Esta missão é muito desafiadora para você no momento.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	mes "[Quadro Missões Especiais]";
+	mes "Deseja aceitar esta missão?";
+	next;
+	if(select("Aceitar:Negar") == 1) {
+		setquest .@qid;
+		mes "Boa sorte! Encontre e derrote o monstro.";
+		next;
+		goto L_ShowMenu;
+	} else {
+		goto L_ShowMenu;
+	}
+}

@@ -8251,6 +8251,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 547,200;
   - Id: 12530
     AegisName: Mastela_Fruit_Box
     Name: Mastela Fruit Box
@@ -8263,6 +8265,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 522,200;
   - Id: 12531
     AegisName: White_Potion_Box
     Name: White Potion Box
@@ -8275,6 +8279,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 504,100;
   - Id: 12532
     AegisName: Royal_Jelly_Box2
     Name: Royal Jelly Box2
@@ -8287,6 +8293,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 526,100;
   - Id: 12533
     AegisName: Blue_Herb_Box2
     Name: Blue Herb Box2
@@ -8299,6 +8307,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 510,100;
   - Id: 12534
     AegisName: Yggdrasil_Seed_Box
     Name: Yggdrasil Seed Box
@@ -8311,6 +8321,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 608,30;
   - Id: 12535
     AegisName: Iggdrasilberry_Box
     Name: Iggdrasilberry Box
@@ -8323,6 +8335,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 607,15;
   - Id: 12536
     AegisName: NY_Rice_Cake_Soup
     Name: NY Rice Cake Soup
@@ -8450,6 +8464,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 547,100;
   - Id: 12550
     AegisName: Poison_Bottle_Box2
     Name: Poison Bottle Box2
@@ -8462,6 +8478,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 678,30;
   - Id: 12551
     AegisName: MVP_Tele_Scroll
     Name: MVP Tele Scroll
@@ -8607,6 +8625,8 @@ Body:
     Weight: 250
     Flags:
       BuyingStore: true
+    Script: |
+      getitem 1773,500;
   - Id: 12576
     AegisName: Hunting_Arrow_Cntr
     Name: Hunting Arrow Cntr
@@ -8615,6 +8635,8 @@ Body:
     Weight: 250
     Flags:
       BuyingStore: true
+    Script: |
+      getitem 1774,500;
   - Id: 12577
     AegisName: Lucky_Egg_C6
     Name: Lucky Egg C6
@@ -9201,14 +9223,20 @@ Body:
     AegisName: Valentine_Gift_Box1
     Name: Valentine Gift Box
     Type: Usable
+    Script: |
+      getitem 7946,1;
   - Id: 12743
     AegisName: Valentine_Gift_Box2
     Name: Valentine Gift Box
     Type: Usable
+    Script: |
+      getitem 7947,1;
   - Id: 12744
     AegisName: Chocotate_Box
     Name: Chocolate Box
     Type: Usable
+    Script: |
+      getitem 558,1;
   - Id: 12745
     AegisName: Skull_Scroll
     Name: Skull Scroll

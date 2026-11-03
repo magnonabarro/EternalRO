@@ -1,0 +1,37 @@
+// Copie para conf/import/inter_conf.txt e configure as suas conexoes SQL.
+// Credenciais abaixo sao placeholders; substitua antes de executar.
+login_server_ip: 127.0.0.1
+login_server_port: 3306
+login_server_id: CHANGE_ME_USER
+login_server_pw: CHANGE_ME_PASSWORD
+login_server_db: ragnarok
+
+ipban_db_ip: 127.0.0.1
+ipban_db_port: 3306
+ipban_db_id: CHANGE_ME_USER
+ipban_db_pw: CHANGE_ME_PASSWORD
+ipban_db_db: ragnarok
+
+char_server_ip: 127.0.0.1
+char_server_port: 3306
+char_server_id: CHANGE_ME_USER
+char_server_pw: CHANGE_ME_PASSWORD
+char_server_db: ragnarok
+
+map_server_ip: 127.0.0.1
+map_server_port: 3306
+map_server_id: CHANGE_ME_USER
+map_server_pw: CHANGE_ME_PASSWORD
+map_server_db: ragnarok
+
+web_server_ip: 127.0.0.1
+web_server_port: 3306
+web_server_id: CHANGE_ME_USER
+web_server_pw: CHANGE_ME_PASSWORD
+web_server_db: ragnarok
+
+log_db_ip: 127.0.0.1
+log_db_port: 3306
+log_db_id: CHANGE_ME_USER
+log_db_pw: CHANGE_ME_PASSWORD
+log_db_db: ragnarok

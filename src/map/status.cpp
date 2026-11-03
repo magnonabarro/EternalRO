@@ -3890,15 +3890,15 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 
 	memset(&sd->bonus, 0, sizeof(sd->bonus));
 
-	// Hero Saga seasonal PvM bonuses start at level 99 on this server.
-	// These are rebuilt every status calculation, so equipment changes do not erase them.
-	if (sd->custom_rate.pvm_seasonal && sd->status.base_level >= 99) {
-		sd->bonus.hp += 10; // +10 flat HP.
-		sd->bonus.sp += 10; // +10 flat SP.
-		sd->bonus.add_heal_rate += 10;
-		sd->def_rate += 5;
-		sd->mdef_rate += 5;
-		sd->bonus.delayrate += 5; // Positive delayrate reduces after-cast delay in this source.
+	// Seasonal PvM status bonuses are configured in CustomRates.txt and rebuilt with status.
+	if (sd->custom_rate.pvm_seasonal && sd->custom_rate.pvm_bonus_level > 0 &&
+		sd->status.base_level >= sd->custom_rate.pvm_bonus_level) {
+		sd->bonus.hp += sd->custom_rate.pvm_hp;
+		sd->bonus.sp += sd->custom_rate.pvm_sp;
+		sd->bonus.add_heal_rate += sd->custom_rate.pvm_heal;
+		sd->def_rate += sd->custom_rate.pvm_def;
+		sd->mdef_rate += sd->custom_rate.pvm_mdef;
+		sd->bonus.delayrate += sd->custom_rate.pvm_aftercast_delay; // Positive delayrate reduces after-cast delay in this source.
 	}
 
 	// Autobonus
@@ -4455,9 +4455,10 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		sd->flee2_rate = 0;
 	if(sd->flee2_rate != 100)
 		base_status->flee2 = base_status->flee2 * sd->flee2_rate/100;
-	// Screenshot specifies +5 Perfect Dodge points (not +5 percent).
-	if (sd->custom_rate.pvm_seasonal && sd->status.base_level >= 99 && (BL_PC & battle_config.enable_perfect_flee))
-		base_status->flee2 = cap_value(base_status->flee2 + 50, 0, SHRT_MAX); // Internally represented in tenths.
+	// Perfect Dodge is represented in tenths internally, so each configured point adds 10.
+	if (sd->custom_rate.pvm_seasonal && sd->custom_rate.pvm_bonus_level > 0 &&
+		sd->status.base_level >= sd->custom_rate.pvm_bonus_level && (BL_PC & battle_config.enable_perfect_flee))
+		base_status->flee2 = cap_value(base_status->flee2 + sd->custom_rate.pvm_perfect_dodge * 10, 0, SHRT_MAX);
 
 	if (sd->patk_rate < 0)
 		sd->patk_rate = 0;

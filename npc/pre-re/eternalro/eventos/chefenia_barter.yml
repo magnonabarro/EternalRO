@@ -1,0 +1,2005 @@
+# Loja de Moedas Cheffenia: variantes de preco para cada dificuldade e rate.
+# A interface barter mostra icone, nome do item e preco efetivo em moedas.
+
+Header:
+  Type: BARTER_DB
+  Version: 2
+
+Body:
+  - Name: chefenia_normal_baixo_d0
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 2
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 5
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 10
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 8
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 8
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 8
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 8
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 8
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 8
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 15
+
+  - Name: chefenia_normal_baixo_d10
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 2
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 5
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 9
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 8
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 8
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 8
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 8
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 8
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 8
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 14
+
+  - Name: chefenia_normal_baixo_d15
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 2
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 5
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 9
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 7
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 7
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 7
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 7
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 7
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 7
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 13
+
+  - Name: chefenia_normal_baixo_d30
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 2
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 4
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 7
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 6
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 6
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 6
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 6
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 6
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 6
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 11
+
+  - Name: chefenia_normal_baixo_d60
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 1
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 2
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 4
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 4
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 4
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 4
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 4
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 4
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 4
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 6
+
+  - Name: chefenia_normal_baixo_d70
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 1
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 2
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 3
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 3
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 3
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 3
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 3
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 3
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 3
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 5
+
+  - Name: chefenia_normal_medio_d0
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 40
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 40
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 50
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 50
+
+  - Name: chefenia_normal_medio_d10
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 36
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 36
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 45
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 45
+
+  - Name: chefenia_normal_medio_d15
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 34
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 34
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 43
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 43
+
+  - Name: chefenia_normal_medio_d30
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 28
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 28
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 35
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 35
+
+  - Name: chefenia_normal_medio_d60
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 16
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 16
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 20
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 20
+
+  - Name: chefenia_normal_medio_d70
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 12
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 12
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 15
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 15
+
+  - Name: chefenia_normal_alto_d0
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 300
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 500
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 600
+
+  - Name: chefenia_normal_alto_d10
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 270
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 450
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 540
+
+  - Name: chefenia_normal_alto_d15
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 255
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 425
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 510
+
+  - Name: chefenia_normal_alto_d30
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 210
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 350
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 420
+
+  - Name: chefenia_normal_alto_d60
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 120
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 200
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 240
+
+  - Name: chefenia_normal_alto_d70
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 90
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 150
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Normal
+            Amount: 180
+
+  - Name: chefenia_hard_baixo_d0
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 2
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 5
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 10
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 8
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 8
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 8
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 8
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 8
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 8
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 15
+
+  - Name: chefenia_hard_baixo_d10
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 2
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 5
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 9
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 8
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 8
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 8
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 8
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 8
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 8
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 14
+
+  - Name: chefenia_hard_baixo_d15
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 2
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 5
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 9
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 7
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 7
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 7
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 7
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 7
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 7
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 13
+
+  - Name: chefenia_hard_baixo_d30
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 2
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 4
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 7
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 6
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 6
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 6
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 6
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 6
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 6
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 11
+
+  - Name: chefenia_hard_baixo_d60
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 1
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 2
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 4
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 4
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 4
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 4
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 4
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 4
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 4
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 6
+
+  - Name: chefenia_hard_baixo_d70
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 1
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 2
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 3
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 3
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 3
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 3
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 3
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 3
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 3
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 5
+
+  - Name: chefenia_hard_medio_d0
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 40
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 40
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 50
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 50
+
+  - Name: chefenia_hard_medio_d10
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 36
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 36
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 45
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 45
+
+  - Name: chefenia_hard_medio_d15
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 34
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 34
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 43
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 43
+
+  - Name: chefenia_hard_medio_d30
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 28
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 28
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 35
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 35
+
+  - Name: chefenia_hard_medio_d60
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 16
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 16
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 20
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 20
+
+  - Name: chefenia_hard_medio_d70
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 12
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 12
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 15
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 15
+
+  - Name: chefenia_hard_alto_d0
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 300
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 500
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 600
+
+  - Name: chefenia_hard_alto_d10
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 270
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 450
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 540
+
+  - Name: chefenia_hard_alto_d15
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 255
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 425
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 510
+
+  - Name: chefenia_hard_alto_d30
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 210
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 350
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 420
+
+  - Name: chefenia_hard_alto_d60
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 120
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 200
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 240
+
+  - Name: chefenia_hard_alto_d70
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 90
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 150
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Hard
+            Amount: 180
+
+  - Name: chefenia_insana_baixo_d0
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 2
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 5
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 10
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 8
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 8
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 8
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 8
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 8
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 8
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 15
+
+  - Name: chefenia_insana_baixo_d10
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 2
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 5
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 9
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 8
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 8
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 8
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 8
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 8
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 8
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 14
+
+  - Name: chefenia_insana_baixo_d15
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 2
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 5
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 9
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 7
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 7
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 7
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 7
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 7
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 7
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 13
+
+  - Name: chefenia_insana_baixo_d30
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 2
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 4
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 7
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 6
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 6
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 6
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 6
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 6
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 6
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 11
+
+  - Name: chefenia_insana_baixo_d60
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 1
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 2
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 4
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 4
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 4
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 4
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 4
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 4
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 4
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 6
+
+  - Name: chefenia_insana_baixo_d70
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 1
+      - Index: 1
+        Item: Small_Life_Potion_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 2
+      - Index: 2
+        Item: White_Slim_Potion_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 3
+      - Index: 3
+        Item: Str_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 3
+      - Index: 4
+        Item: Int_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 3
+      - Index: 5
+        Item: Vit_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 3
+      - Index: 6
+        Item: Agi_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 3
+      - Index: 7
+        Item: Dex_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 3
+      - Index: 8
+        Item: Luk_Dish10
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 3
+      - Index: 9
+        Item: Acidbomb_10_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 5
+
+  - Name: chefenia_insana_medio_d0
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 40
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 40
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 50
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 50
+
+  - Name: chefenia_insana_medio_d10
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 36
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 36
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 45
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 45
+
+  - Name: chefenia_insana_medio_d15
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 34
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 34
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 43
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 43
+
+  - Name: chefenia_insana_medio_d30
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 28
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 28
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 35
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 35
+
+  - Name: chefenia_insana_medio_d60
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 16
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 16
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 20
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 20
+
+  - Name: chefenia_insana_medio_d70
+    Items:
+      - Index: 0
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 12
+      - Index: 1
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 12
+      - Index: 2
+        Item: Enchant_Stone_Box
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 15
+      - Index: 3
+        Item: Premium_Reset_Stone
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 15
+
+  - Name: chefenia_insana_alto_d0
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 300
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 500
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 600
+
+  - Name: chefenia_insana_alto_d10
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 270
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 450
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 540
+
+  - Name: chefenia_insana_alto_d15
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 255
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 425
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 510
+
+  - Name: chefenia_insana_alto_d30
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 210
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 350
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 420
+
+  - Name: chefenia_insana_alto_d60
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 120
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 200
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 240
+
+  - Name: chefenia_insana_alto_d70
+    Items:
+      - Index: 0
+        Item: C_Blossom_Fluttering
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 90
+      - Index: 1
+        Item: C_Wing_Of_Angel_Move_BK
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 150
+      - Index: 2
+        Item: elmo_negro
+        RequiredItems:
+          - Index: 0
+            Item: Cheffenia_Coin_Insana
+            Amount: 180

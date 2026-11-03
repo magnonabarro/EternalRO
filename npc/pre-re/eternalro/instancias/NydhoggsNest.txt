@@ -207,7 +207,7 @@ L_Enter:
 		mes "Onde estão os outros membro, para que possam trabalhar juntos? Cada membro não pode ser admitido aqui individualmente...";
 		close;
 	case IE_OK:
-		mapannounce "nyd_dun02", getpartyname(getcharid(1))+" membro Grupo "+strcharinfo(0)+" entrou no Ninho de Nidhogg.",bc_map,"0x00ff99";
+		mapannounce "nyd_dun02", "O jogador "+strcharinfo(0)+", do grupo "+getpartyname(getcharid(1))+", entrou no Ninho de Nidhogg.",bc_map,"0x00ff99";
 		if (checkquest(3135) == -1) setquest 3135;
 		if (checkquest(3136) == -1) setquest 3136;
 		//warp "1@nyd",32,36;
@@ -275,7 +275,7 @@ mid_camp,271,299,3	script	Historiador Magnifier#edq	755,3,3,{
 		mes "Leve uma menssagem para minha asssistente que está na Biblioteca de Prontera. Então, ajude-a a encontrar mais informações.";
 		next;
 		mes "[Historiador Magnifier]";
-		mes "Definitivamente vou ajudá-los a encontrar uma maneira de entrar na Grande Árvore, apenas acredite em mim! Ok~!";
+		mes "Definitivamente vou ajudá-los a encontrar uma maneira de entrar na Grande Árvore, apenas acredite em mim! Certo~!";
 		set ins_nyd,3;
 		close;
 	} else if (ins_nyd == 3) {
@@ -655,7 +655,7 @@ splendide,198,178,3	script	Soldado Resmungão#edq	447,3,3,{
 }
 
 splendide,240,164,3	script	Soldado Suspirante#edq	461,3,3,{
-	mes "[Sighing Soldier]";
+	mes "[Soldado Suspirante]";
 	if (isequipped(2782) == 1) {
 		mes "Quando terminaremos esse combate com o Sapha? Ugghhhh...";
 		next;
@@ -712,7 +712,7 @@ splendide,240,164,3	script	Soldado Suspirante#edq	461,3,3,{
 }
 
 spl_in01,109,60,3	script	Comandante Lebiordirr#edq	435,3,3,{
-	mes "[Commander Lebiordirr]";
+	mes "[Comandante Lebiordirr]";
 	if (isequipped(2782) == 1) {
 		if (ins_nyd == 51) {
 			mes "Você está...? Você é quem coleciona informações de meus soldados...?";
@@ -821,10 +821,10 @@ spl_in01,109,60,3	script	Comandante Lebiordirr#edq	435,3,3,{
 			mes "Acalme-se, senhor. Vou colocar esse estranho na prisão.";
 			next;
 			mes "[Comandante Lebiordirr]";
-			mes "Não... Não, espere. Ok, vou aceitá-lo. Posso aceitar sua admissão nos Sagrados Sekos.";
+			mes "Não... Não, espere. Certo, vou aceitá-lo. Posso aceitar sua admissão nos Sagrados Sekos.";
 			next;
 			mes "[Comandante Lebiordirr]";
-			mes "OK. Se você é um servo de Yggdrasil, eu permitirei sua admissão. Mas eu não sou responsável por suas ações.";
+			mes "Certo. Se você é um servo de Yggdrasil, eu permitirei sua admissão. Mas eu não sou responsável por suas ações.";
 			next;
 			mes "[Comandante Lebiordirr]";
 			mes "E certifique-se de que, se você encontrar algo fora do comum lá, que você compartilhá-lo conosco!";
@@ -1417,7 +1417,7 @@ man_in01,291,62,3	script	Prisioneira Esplêndida#edq	437,3,3,{
 			mes "Com a atual situação da tribo de Laphine, não temos forças suficientes para cercar os campos de Manuk, e atacar os gigantes a distância.";
 			next;
 			mes "[Prisioneira Esplêndida]";
-			mes "Ok, já que a situação chegou a este ponto, eu irei ajudar você. Nunca há becos sem-saídas. Se você continuar, você irá encontrar o caminho certo.";
+			mes "Certo, já que a situação chegou a este ponto, eu irei ajudar você. Nunca há becos sem-saídas. Se você continuar, você irá encontrar o caminho certo.";
 			next;
 			mes "[Prisioneira Esplêndida]";
 			mes "Mesmo que eu não tivesse dito nada, minha situação aqui continuaria a mesma.";
@@ -1494,7 +1494,7 @@ man_in01,291,62,3	script	Prisioneira Esplêndida#edq	437,3,3,{
 		} else {
 			mes "......";
 			next;
-			mes "[Manuk Guard]";
+			mes "[Guarda de Manuk]";
 			mes "Ei, estrangeir"+((Sex)?"o":"a")+"! Afaste-se da prisioneira!";
 			close;
 		}

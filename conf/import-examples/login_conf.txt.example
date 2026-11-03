@@ -1,0 +1,3 @@
+// Copie para conf/import/login_conf.txt se precisar sobrescrever o login-server.
+// As conexoes SQL sao configuradas no inter_conf.txt privado.
+login_port: 6900

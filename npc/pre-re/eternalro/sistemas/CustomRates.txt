@@ -1,8 +1,8 @@
 //===== rAthena Script =======================================
 //= Custom Rate - Hero Saga
 //= Adaptado para as rates exibidas na tela de configuracao.
-//= Nota: bonus PvM, descontos e recursos VIP dependem de scripts/mods
-//= adicionais do servidor; este arquivo configura EXP e taxas de drop.
+//= As rates de EXP valem desde o inicio; os bonus extras de drop e PvM
+//= sao ativados a partir do nivel 90 para personagens ate o nivel maximo 99.
 //============================================================
 -	script	Custom Rate#main	-1,{
 OnInit:
@@ -17,8 +17,25 @@ OnInit:
 		6, "Rates 1x [Temporada]"
 	;
 
-	// Todas as taxas de EXP usam o multiplicador da rate selecionada.
-	// Os drops usam apenas as bonificacoes mostradas na imagem:
+	// Gerenciador central dos bonus PvM da Temporada (valores em porcentagem,
+	// exceto HP/SP e Esquiva Perfeita, que sao valores fixos).
+	// Edite estes valores para balancear a Temporada sem procurar numeros no C++.
+	.SeasonalBonusLevel = 90;
+	.SeasonalPhysicalDamage = 15;
+	.SeasonalMagicDamage = 15;
+	.SeasonalRangedDamage = 15; // Soma ao dano fisico para ataques com arma a distancia.
+	.SeasonalDropBonus = 10; // Pontos percentuais adicionais sobre o bonus de drop da rate.
+	.SeasonalHP = 10;
+	.SeasonalSP = 10;
+	.SeasonalHeal = 10;
+	.SeasonalDEF = 5;
+	.SeasonalMDEF = 5;
+	.SeasonalPerfectDodge = 5;
+	.SeasonalAftercastDelay = 5; // Reducao percentual da pos-conjuracao.
+
+	// As taxas de EXP usam o multiplicador selecionado desde o inicio.
+	// Os bonus de drop selecionados entram em vigor a partir do nivel 90.
+	// Os drops usam as bonificacoes mostradas na imagem:
 	// 100x = +0%, 50x = +12%, 25x = +25%, 12x = +37%, 1x = +50%, temporada = +60%.
 	// Min/max de drop ficam em 1/10000 para nao escalar os limites junto com a EXP.
 	// Os quatro parametros de VIP ficam fora do set_custom_rate para preservar as configs do servidor.
@@ -314,8 +331,10 @@ OnPCLoginEvent:
 			mes "^FFCC33RATE 12x^000000 - Drops: +37%; descontos de 30%.";
 			mes "^FFCC33RATE 1x NORMAL^000000 - Drops: +50%; descontos de 60%.";
 			mes "^FFCC33RATE 1x TEMPORADA^000000 - Drops: +60%; descontos de 70%.";
-			mes "Os recursos de desconto e os bonus PvM dependem dos scripts especificos do servidor.";
+			mes "Os bonus extras de drop e os bonus PvM da Temporada ficam ativos do nivel " + .SeasonalBonusLevel + " ao 99.";
 			next;
+			// Libera a janela de escolha: o cutin grande pode cobrir as opcoes do menu.
+			cutin "", 255;
 			prompt(.@buildin$);
 			if (@menu == 255) {
 				mes "^FF0000[Servidor]^000000";
@@ -339,29 +358,24 @@ OnPCLoginEvent:
 					break;
 				case 25:
 					mes "EXP: 25x | Drops: +25% | Descontos: 15%.";
-					mes "Agente VIP sem ser VIP e @buff sem ser VIP.";
-					mes "Esses recursos exigem scripts adicionais para realmente funcionar.";
 					break;
 				case 12:
 					mes "EXP: 12x | Drops: +37% | Descontos: 30%.";
-					mes "Agente VIP sem ser VIP e @buff sem ser VIP.";
-					mes "Esses recursos exigem scripts adicionais para realmente funcionar.";
 					break;
 				case 1:
 					mes "EXP: 1x | Drops: +50% | Descontos: 60%.";
-					mes "Agente VIP sem ser VIP e @buff sem ser VIP.";
-					mes "Esses recursos exigem scripts adicionais para realmente funcionar.";
 					break;
 				case 6:
 					mes "EXP: 1x | Drops: +60% | Descontos: 70%.";
-					mes "Agente VIP sem ser VIP e @buff sem ser VIP.";
-					mes "Bonus PvM da Temporada ativado no nivel 99.";
-					mes "+15% dano fisico e magico; +15% adicional para dano fisico a distancia.";
-					mes "+10% drop adicional, +10 HP/SP, +10% efetividade de cura.";
-					mes "+5% DEF/DEFM, +5 Esquiva Perfeita e -5% pos-conjuracao.";
-					mes "Descontos, Agente VIP e @buff sem VIP continuam dependendo de scripts proprios.";
+					mes "Bonus PvM e de drop da Temporada ativos do nivel " + .SeasonalBonusLevel + " ao 99.";
+					mes "+" + .SeasonalPhysicalDamage + "% dano fisico, +" + .SeasonalMagicDamage + "% magico.";
+					mes "+" + .SeasonalRangedDamage + "% adicional para dano fisico a distancia.";
+					mes "+" + .SeasonalDropBonus + "% drop adicional, +" + .SeasonalHP + " HP e +" + .SeasonalSP + " SP.";
+					mes "+" + .SeasonalHeal + "% cura, +" + .SeasonalDEF + "% DEF, +" + .SeasonalMDEF + "% DEFM.";
+					mes "+" + .SeasonalPerfectDodge + " Esquiva Perfeita e -" + .SeasonalAftercastDelay + "% pos-conjuracao.";
 					break;
 			}
+			mes "@buff: VIP, Curandeira Premium ativa ou Temporada do nivel 90 em diante.";
 			mes "A escolha e permanente para este personagem.";
 			next;
 			switch (prompt("- Sim, confirmar.", "- Nao, escolher outra.")) {
@@ -401,8 +415,21 @@ OnPCLoginEvent:
 	for (.@i = 0; .@i < getarraysize(.@Flags); .@i++)
 		set_custom_rate .@Flags[.@i], .@RateSettings[.@i];
 
-	// Only Rate 1x Temporada (ID 6) receives the PvM bonuses; this call also recalculates status.
-	set_custom_rate CR_PVM_SEASONAL, (CUSTOM_RATE == 6);
+	// Apply each managed PvM value before enabling the flag; the final call recalculates status.
+	.@SeasonalEnabled = (CUSTOM_RATE == 6);
+	set_custom_rate CR_PVM_BONUS_LEVEL, (.@SeasonalEnabled ? .SeasonalBonusLevel : 0);
+	set_custom_rate CR_PVM_PHYSICAL_DAMAGE, (.@SeasonalEnabled ? .SeasonalPhysicalDamage : 0);
+	set_custom_rate CR_PVM_MAGIC_DAMAGE, (.@SeasonalEnabled ? .SeasonalMagicDamage : 0);
+	set_custom_rate CR_PVM_RANGED_DAMAGE, (.@SeasonalEnabled ? .SeasonalRangedDamage : 0);
+	set_custom_rate CR_PVM_DROP, (.@SeasonalEnabled ? .SeasonalDropBonus : 0);
+	set_custom_rate CR_PVM_HP, (.@SeasonalEnabled ? .SeasonalHP : 0);
+	set_custom_rate CR_PVM_SP, (.@SeasonalEnabled ? .SeasonalSP : 0);
+	set_custom_rate CR_PVM_HEAL, (.@SeasonalEnabled ? .SeasonalHeal : 0);
+	set_custom_rate CR_PVM_DEF, (.@SeasonalEnabled ? .SeasonalDEF : 0);
+	set_custom_rate CR_PVM_MDEF, (.@SeasonalEnabled ? .SeasonalMDEF : 0);
+	set_custom_rate CR_PVM_PERFECT_DODGE, (.@SeasonalEnabled ? .SeasonalPerfectDodge : 0);
+	set_custom_rate CR_PVM_AFTERCAST_DELAY, (.@SeasonalEnabled ? .SeasonalAftercastDelay : 0);
+	set_custom_rate CR_PVM_SEASONAL, .@SeasonalEnabled;
 
 	message strcharinfo(0), "[Servidor]: Taxas aplicadas: " + .@RatesName$[.@Index] + ".";
 	end;

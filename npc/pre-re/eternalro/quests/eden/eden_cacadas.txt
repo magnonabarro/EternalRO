@@ -1,0 +1,456 @@
+function	script	F_EdenHuntWarp	{
+
+
+
+	.@i=getarg(0);
+
+
+
+	.@tier=.@i/5;
+
+
+
+	.@qid=getvariableofnpc(.Quest[.@i],"EdenCacadas");
+
+
+
+	.@state=checkquest(.@qid);
+
+
+
+	if (BaseLevel<getvariableofnpc(.Min[.@tier],"EdenCacadas") || (.@state!=0 && .@state!=1)) {
+
+
+
+		mes "Aceite uma caçada liberada para seu nível antes de teleportar.";
+
+
+
+		close;
+
+
+
+	}
+
+
+
+	.@map$=getvariableofnpc(.Map$[.@i],"EdenCacadas");
+
+
+
+	if (.@map$=="" || getmapflag(.@map$,mf_nowarpto) || getmapflag(strcharinfo(3),mf_nowarp)) {
+
+
+
+		mes "O teleporte para este destino está indisponível neste momento.";
+
+
+
+		close;
+
+
+
+	}
+
+
+
+	mes "[Teleporte de Caça]";
+
+
+
+	mes "Alvo: "+getvariableofnpc(.Name$[.@i],"EdenCacadas")+".";
+
+
+
+	mes "Mapa: ^0055FF"+.@map$+"^000000.";
+
+
+
+	mes "População configurada: "+getvariableofnpc(.MapCount[.@i],"EdenCacadas")+" monstros deste alvo.";
+
+
+
+	mes "Este é o destino indicado para esta caçada. O teleporte é gratuito.";
+
+
+
+	next;
+
+
+
+	if (select("Teleportar para o mapa de caça:Continuar no Éden")==2) close;
+
+
+
+	close2;
+
+
+
+	warp .@map$,0,0;
+
+
+
+	end;
+
+
+
+}
+
+
+
+
+
+
+
+// Cacadas do Eden: objetivos e contadores nativos em db/import/quests/eden_cacadas.yml.
+
+// Sem limite maximo de nivel. Uma cacada ativa por personagem.
+
+// Configuracao de recompensas e catalogo: OnInit de EdenCacadas.
+
+
+
+function	script	F_EdenCacadas	{
+
+	.@tier = getarg(0);
+
+	.@min = getvariableofnpc(.Min[.@tier],"EdenCacadas");
+
+	mes "[Caçadas do Éden]";
+
+	mes "Categoria: ^0055FF"+getvariableofnpc(.TierName$[.@tier],"EdenCacadas")+"^000000.";
+
+	mes "Nível mínimo: ^0055FF"+.@min+"^000000. Sem limite máximo.";
+
+	if (BaseLevel < .@min) {
+
+		mes "Você ainda não tem o nível necessário para estas caçadas.";
+
+		close;
+
+	}
+
+	if (!callfunc("F_HasEdenGroupMark")) {
+
+		mes "Entre para o Grupo Éden com a secretária Lime Evenor antes de aceitar uma caçada.";
+
+		close;
+
+	}
+
+	.@total = getvariableofnpc(.Total,"EdenCacadas");
+
+	.@active = -1;
+
+	for (.@i=0; .@i<.@total; .@i++) {
+
+		.@qid = getvariableofnpc(.Quest[.@i],"EdenCacadas");
+
+		if (checkquest(.@qid) == 0 || checkquest(.@qid) == 1) {
+
+			.@active = .@i;
+
+			break;
+
+		}
+
+	}
+
+	if (.@active >= 0) {
+
+		.@i = .@active;
+
+		.@qid = getvariableofnpc(.Quest[.@i],"EdenCacadas");
+
+		.@mob = getvariableofnpc(.Mob[.@i],"EdenCacadas");
+
+		.@count = getvariableofnpc(.Count[.@i],"EdenCacadas");
+
+		.@name$ = getvariableofnpc(.Name$[.@i],"EdenCacadas");
+
+		.@questtier = .@i / 5;
+
+		mes "Caçada atual: ^0055FF"+.@name$+"^000000.";
+
+		mes "Objetivo: derrotar "+.@count+" monstros.";
+
+		mes "Confira a contagem na janela de missões (Alt+U).";
+
+		next;
+
+		if (checkquest(.@qid,HUNTING) == 2) {
+
+			mes "[Caçadas do Éden]";
+
+			mes "Caçada concluída!";
+
+			.@coins = getvariableofnpc(.Coins[.@questtier],"EdenCacadas");
+
+			.@coin = getvariableofnpc(.Coin,"EdenCacadas");
+
+			.@bexp = getvariableofnpc(.BaseExp[.@questtier],"EdenCacadas");
+
+			.@jexp = getvariableofnpc(.JobExp[.@questtier],"EdenCacadas");
+
+			mes "Recompensa: "+.@coins+" moedas do Éden, "+.@bexp+" EXP base e "+.@jexp+" EXP de classe.";
+
+			if (select("Receber recompensa:Voltar depois") == 2) close;
+
+			if (!checkweight(.@coin,.@coins) || countitem(.@coin)+.@coins > 30000) {
+
+				mes "Libere espaço e peso no inventário. Sua recompensa continua disponível.";
+
+				close;
+
+			}
+
+			// Complete antes da entrega para impedir resgates repetidos.
+
+			completequest .@qid;
+
+			.@cool = getvariableofnpc(.Cooldown[.@i],"EdenCacadas");
+
+			if (checkquest(.@cool) >= 0) erasequest .@cool;
+
+			setquest .@cool;
+
+			getitem .@coin,.@coins;
+
+			getexp .@bexp,.@jexp;
+
+			mes "Use suas moedas no NPC Troca do Eden.";
+
+			mes "Esta caçada poderá ser repetida após 3 horas. As outras continuam disponíveis.";
+
+			close;
+
+		}
+
+		mes "[Caçadas do Éden]";
+
+		switch(select("Continuar a caçada:Teleportar para a caçada:Cancelar a caçada")) {
+
+		case 1:
+
+			mes "Derrote "+.@count+" "+.@name$+" e volte a qualquer quadro de caçadas do Éden.";
+
+			mes "Você pode usar @whereis "+.@mob+" para procurar os mapas do monstro.";
+
+			close;
+
+		case 2:
+
+			callfunc "F_EdenHuntWarp",.@i;
+
+			close;
+
+		case 3:
+
+			mes "O progresso desta caçada será perdido. Deseja cancelar?";
+
+			next;
+
+			if (select("Manter a caçada:Confirmar cancelamento") == 2) {
+
+				erasequest .@qid;
+
+				mes "Caçada cancelada. Você pode escolher outra.";
+
+			}
+
+			close;
+
+		}
+
+	}
+
+	mes "Escolha uma caçada. Você pode fazer as categorias de nível menor que o seu.";
+
+	mes "Todas as missões deste quadro têm a dificuldade desta categoria.";
+
+	mes "Recompensa por caçada: ^0055FF"+getvariableofnpc(.Coins[.@tier],"EdenCacadas")+" moedas do Éden^000000 + EXP.";
+
+	next;
+
+	.@menu$ = "";
+
+	for (.@n=0; .@n<5; .@n++) {
+
+		.@i = .@tier*5+.@n;
+
+		.@cool = getvariableofnpc(.Cooldown[.@i],"EdenCacadas");
+
+		.@wait = checkquest(.@cool,PLAYTIME);
+
+		.@menu$ += getvariableofnpc(.Name$[.@i],"EdenCacadas")+" ("+getvariableofnpc(.Count[.@i],"EdenCacadas")+")";
+
+		if (.@wait == 0 || .@wait == 1) .@menu$ += " [Aguardando]";
+
+		.@menu$ += ":";
+
+	}
+
+	.@selected = select(.@menu$+"Sair")-1;
+
+	if (.@selected == 5) close;
+
+	.@i = .@tier*5+.@selected;
+
+	.@qid = getvariableofnpc(.Quest[.@i],"EdenCacadas");
+
+	.@cool = getvariableofnpc(.Cooldown[.@i],"EdenCacadas");
+
+	.@wait = checkquest(.@cool,PLAYTIME);
+
+	mes "[Caçadas do Éden]";
+
+	if (.@wait == 0 || .@wait == 1) {
+
+		mes "Esta caçada está em espera. Aguarde 3 horas a partir da última entrega ou escolha outro monstro.";
+
+		close;
+
+	}
+
+	mes "Alvo: ^0055FF"+getvariableofnpc(.Name$[.@i],"EdenCacadas")+"^000000.";
+
+	mes "Quantidade: "+getvariableofnpc(.Count[.@i],"EdenCacadas")+".";
+
+	mes "Moedas do Éden: "+getvariableofnpc(.Coins[.@tier],"EdenCacadas")+".";
+
+	mes "EXP base: "+getvariableofnpc(.BaseExp[.@tier],"EdenCacadas")+". EXP de classe: "+getvariableofnpc(.JobExp[.@tier],"EdenCacadas")+".";
+
+	mes "Somente monstros derrotados após aceitar a missão serão contados.";
+
+	next;
+
+	if (select("Aceitar caçada:Cancelar") == 2) close;
+
+	if (BaseLevel < .@min) close;
+
+	// Revalida antes de criar a missao; o progresso fica exclusivamente no quest_db.
+
+	for (.@n=0; .@n<.@total; .@n++) {
+
+		.@other = getvariableofnpc(.Quest[.@n],"EdenCacadas");
+
+		if (checkquest(.@other) == 0 || checkquest(.@other) == 1) {
+
+			mes "Você já possui uma caçada em andamento.";
+
+			close;
+
+		}
+
+	}
+
+	if (checkquest(.@cool) >= 0) erasequest .@cool;
+
+	if (checkquest(.@qid) >= 0) erasequest .@qid;
+
+	setquest .@qid;
+
+	mes "Caçada iniciada! Acompanhe a contagem em Alt+U.";
+
+	mes "Ao terminar, volte a um quadro do Éden para receber suas moedas.";
+
+	callfunc "F_EdenHuntWarp",.@i;
+
+	close;
+
+}
+
+
+
+moc_para01,36,38,3	script	Éden Caça 11-25	4_BOARD3,{
+
+	callfunc "F_EdenCacadas",0;
+
+	end;
+
+}
+
+moc_para01,38,38,3	script	Éden Caça 26-40	4_BOARD3,{
+
+	callfunc "F_EdenCacadas",1;
+
+	end;
+
+}
+
+moc_para01,40,38,3	script	Éden Caça 41-55	4_BOARD3,{
+
+	callfunc "F_EdenCacadas",2;
+
+	end;
+
+}
+
+moc_para01,42,38,3	script	Éden Caça 56-70	4_BOARD3,{
+
+	callfunc "F_EdenCacadas",3;
+
+	end;
+
+}
+
+moc_para01,44,38,3	script	Éden Caça 71-85	4_BOARD3,{
+
+	callfunc "F_EdenCacadas",4;
+
+	end;
+
+}
+
+moc_para01,48,175,3	script	Éden Caça 86-90	4_BOARD3,{
+
+	callfunc "F_EdenCacadas",5;
+
+	end;
+
+}
+
+moc_para01,48,177,3	script	Éden Caça 91-99	4_BOARD3,{
+
+	callfunc "F_EdenCacadas",6;
+
+	end;
+
+}
+
+
+
+-	script	EdenCacadas	-1,{
+
+	end;
+
+OnInit:
+
+	.Coin = 25223; // Para_Team_Coin: mesma moeda das lojas uniao_top/mid/baixo.
+
+	.Total = 35;
+
+	setarray .Min[0],11,26,41,56,71,86,91;
+
+	setarray .TierName$[0],"Iniciante (11-25)","Aprendiz (26-40)","Intermediária (41-55)","Avançada (56-70)","Veterana (71-85)","Elite (86-90)","Mestre (91-99)";
+
+	setarray .Coins[0],2,4,6,8,10,12,15;
+
+	setarray .BaseExp[0],1800,5000,15000,30000,60000,100000,140000;
+
+	setarray .JobExp[0],450,1250,3750,7500,15000,25000,35000;
+
+	// BEGIN GENERATED HUNT CATALOG
+	setarray .Quest[0],61000,61001,61002,61003,61004,61005,61006,61007,61008,61009,61010,61011,61012,61013,61014,61015,61016,61017,61018,61019,61020,61021,61022,61023,61024,61025,61026,61027,61028,61029,61030,61031,61032,61033,61034;
+	setarray .Cooldown[0],61100,61101,61102,61103,61104,61105,61106,61107,61108,61109,61110,61111,61112,61113,61114,61115,61116,61117,61118,61119,61120,61121,61122,61123,61124,61125,61126,61127,61128,61129,61130,61131,61132,61133,61134;
+	setarray .Mob[0],1004,1052,1014,1024,1019,1077,1056,1033,1104,1034,1023,1273,1166,1041,1139,1170,1026,1177,1029,1099,1154,1140,1163,1109,1117,1379,1384,1385,1310,1206,1219,1374,1370,1320,1295;
+	setarray .Name$[0],"Zangão","Rocker","Esporo","Cauda de Verme","Peco Peco","Esporo Venenoso","Smokie","Salgueiro Ancião","Coco","Sapo de Thara","Guerreiro Orc","Senhora Orc","Selvagem","Múmia","Mantis","Sohee","Munak","Zenorc","Isis","Argiope","Pasana","Marduk","Raydric","Deviruchi","Druida Maligno","Pesadelo Sombrio","Deletério Voador","Deletério Terrestre","Majoruros","Anolian","Cavaleiro do Abismo","Incubus","Succubus","Duque Coruja","Barão Coruja";
+	setarray .Count[0],20,20,20,20,20,30,30,30,30,30,40,40,40,40,40,50,50,50,50,50,60,60,60,60,60,70,70,70,70,70,80,80,80,80,80;
+	setarray .Map$[0],"mjolnir_04","prt_fild07","pay_fild01","pay_fild06","moc_fild02","pay_fild05","pay_fild09","moc_fild03","mjolnir_01","beach_dun3","gef_fild10","gef_fild10","prt_fild10","moc_pryd03","mjolnir_08","pay_dun03","pay_dun02","orcsdun02","moc_pryd04","mjolnir_05","in_sphinx5","in_sphinx3","gl_knt01","gef_dun02","gl_church","mag_dun02","mag_dun02","mag_dun02","gl_dun02","gl_sew04","gefenia01","gefenia03","gefenia02","tha_t05","tha_t06";
+	setarray .MapCount[0],70,80,100,90,70,65,80,70,70,50,20,70,70,70,60,70,40,50,50,70,70,65,60,35,60,46,38,40,45,100,10,20,20,80,40;
+	// END GENERATED HUNT CATALOG
+
+	end;
+
+}
+

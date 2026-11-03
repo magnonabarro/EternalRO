@@ -1,0 +1,4 @@
+# Copie para conf/import/inter_server.yml se usar configuracoes locais de storage.
+Header:
+  Type: INTER_SERVER_DB
+  Version: 1

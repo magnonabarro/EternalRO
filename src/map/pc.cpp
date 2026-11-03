@@ -13881,6 +13881,9 @@ bool pc_custom_mob_rate_mvp(map_session_data* sd, const std::shared_ptr<s_mob_db
 
 	if (mob == nullptr || drop == nullptr || mob_is_clone(mob->id) || drop->nameid == 0 || drop->rateSet == 0)
 		return false;
+	// Selected-rate drop bonuses are unlocked when the character reaches level 90.
+	if (sd->status.base_level < 90)
+		return false;
 
 	const bool custom = sd->custom_rate.item_rate_mvp > 0 || sd->custom_rate.item_drop_mvp_min > 0 || sd->custom_rate.item_drop_mvp_max > 0;
 	if (!custom)
@@ -13888,8 +13891,9 @@ bool pc_custom_mob_rate_mvp(map_session_data* sd, const std::shared_ptr<s_mob_db
 
 	int32 rate_adjust = sd->custom_rate.item_rate_mvp > 0 ? sd->custom_rate.item_rate_mvp : battle_config.item_rate_mvp;
 	item_dropratio_adjust(drop->nameid, static_cast<int32>(mob->id), &rate_adjust);
-	if (sd->custom_rate.pvm_seasonal && sd->status.base_level >= 99 && rate_adjust > 0)
-		rate_adjust += 10; // Seasonal +10 percentage points on top of the selected drop rate.
+	if (sd->custom_rate.pvm_seasonal && sd->custom_rate.pvm_bonus_level > 0 &&
+		sd->status.base_level >= sd->custom_rate.pvm_bonus_level && rate_adjust > 0)
+		rate_adjust += sd->custom_rate.pvm_drop; // Seasonal percentage points on top of the selected drop rate.
 	const uint16 rate_min = sd->custom_rate.item_drop_mvp_min > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_mvp_min) : battle_config.item_drop_mvp_min;
 	const uint16 rate_max = sd->custom_rate.item_drop_mvp_max > 0 ? static_cast<uint16>(sd->custom_rate.item_drop_mvp_max) : battle_config.item_drop_mvp_max;
 	*rate = static_cast<int32>(mob_drop_adjust(static_cast<int32>(drop->rateSet), rate_adjust, rate_min, rate_max));
@@ -13901,6 +13905,9 @@ bool pc_custom_mob_rate(map_session_data* sd, const std::shared_ptr<s_mob_db>& m
 	nullpo_retr(false, rate);
 
 	if (mob == nullptr || drop == nullptr || mob_is_clone(mob->id) || drop->nameid == 0 || drop->rateSet == 0)
+		return false;
+	// Selected-rate drop bonuses are unlocked when the character reaches level 90.
+	if (sd->status.base_level < 90)
 		return false;
 
 	std::shared_ptr<item_data> item = item_db.find(drop->nameid);
@@ -13961,8 +13968,9 @@ bool pc_custom_mob_rate(map_session_data* sd, const std::shared_ptr<s_mob_db>& m
 		return false;
 
 	item_dropratio_adjust(drop->nameid, static_cast<int32>(mob->id), &rate_adjust);
-	if (sd->custom_rate.pvm_seasonal && sd->status.base_level >= 99 && rate_adjust > 0)
-		rate_adjust += 10; // Seasonal +10 percentage points on top of the selected drop rate.
+	if (sd->custom_rate.pvm_seasonal && sd->custom_rate.pvm_bonus_level > 0 &&
+		sd->status.base_level >= sd->custom_rate.pvm_bonus_level && rate_adjust > 0)
+		rate_adjust += sd->custom_rate.pvm_drop; // Seasonal percentage points on top of the selected drop rate.
 	*rate = static_cast<int32>(mob_drop_adjust(static_cast<int32>(drop->rateSet), rate_adjust, rate_min, rate_max));
 	return true;
 }

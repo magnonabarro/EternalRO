@@ -12,7 +12,7 @@ setarray .@dpontos[1],2,16,7,7,7,7,7,7,7,12,17; // Pontos com desconto por cada 
 
 query_sql ("SELECT `pontoswot` FROM `login` WHERE `account_id` = '"+getcharid(3)+"'", .@pontoswot);
 
-if(getgmlevel() > 1){
+if(getgroupid() == 5 || getgmlevel() >= 99){
 
 mes .np$;
 mes "Sou eu quem troca os pontos conquistados na WOT por prêmios, posso ajudar?";
@@ -26,7 +26,7 @@ mes "- ^006600Nome do item^000000";
 mes "- ^0000FFQuantidade de itens no kit^000000";
 mes "- ^FF0000Pontos cobrados por cada kit^000000";
 mes " ";
-mes "^FF0000Obs:^000000 O valor a ser pago com desconto para usuários VIP TOTAL é apresentado somente no final da troca! O desconto é de 50%, aplicado no valor final da troca!";
+mes "^FF0000Obs:^000000 O valor a ser pago com desconto para usuários VIP é apresentado somente no final da troca! O desconto é de 50%, aplicado no valor final da troca!";
 set .@menu$,"";
 
 
@@ -70,7 +70,7 @@ mes "- ^006600Nome do item^000000";
 mes "- ^0000FFQuantidade de itens no kit^000000";
 mes "- ^FF0000Pontos cobrados por cada kit^000000";
 mes " ";
-mes "^FF0000Obs:^000000 O valor a ser pago com desconto para usuários VIP TOTAL é apresentado somente no final da troca! O desconto é de 50%, aplicado no valor final da troca!";
+mes "^FF0000Obs:^000000 O valor a ser pago com desconto para usuários VIP é apresentado somente no final da troca! O desconto é de 50%, aplicado no valor final da troca!";
 set .@menu$,"";
 
 

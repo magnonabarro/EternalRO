@@ -1,0 +1,514 @@
+//===== Script rAthena =======================================
+//= Missões do Grupo Éden - Níveis [56 - 70]
+//===== Autor: ==============================================
+//= L0ne_W0lf
+//===== Versão atual: ========================================
+//= 1.7
+//===== Compatibilidade: =====================================
+//= Projeto rAthena
+//===== Descrição: ===========================================
+//= Missões repetíveis para personagens do nível base 56 ao 70.
+//===== Histórico de alterações: =============================
+//= 1.0 Primeira versão.
+//= 1.1 Pequenas otimizações. [Masao]
+//= 1.2 Adicionada verificação de checkquest para -1. [Euphy]
+//= 1.3 Corrigido o ID da missão A Agonia do Mestre das Marionetes (12217 -> 3259). [Joseph]
+//= 1.4 Corrigida verificação inválida na missão Varinha Mágica. [Joseph]
+//= 1.5 Otimizações baseadas no código de Zopokx. [Euphy]
+//= 1.6 Adicionado suporte a Para_Team_Mark_ no Grupo Éden. [Ragno]
+//= 1.7 Adicionado uso da função F_HasEdenGroupMark. [Ragno]
+//= 1.8 Restaurada a solicitação de Troncos na missão Varinha Mágica. [Carlosgrr]
+//============================================================
+
+moc_para01,42,38,3	script	Mission [56 - 70]	857,{
+	if (!callfunc("F_HasEdenGroupMark")) {
+		mes "Para receber estas missões, primeiro preciso entrar para o Grupo Éden. Devo procurar a secretária Lime Evenor e me tornar membro.";
+		close;
+	}
+
+	mes "Aqui está uma lista de aventuras para aventureiros do nível 56 ao 70.";
+	next;
+
+	mes "Há várias missões, como caçar monstros, entregar mercadorias e encontrar pessoas.";
+	next;
+
+	switch(select("Missões 1 a 5:Missões 6 a 10:Missões 11 a 15")) {
+	case 1:
+		switch(select("O que é essa bandagem?:Jacarés perigosos.:Aquilo não era uma sereia...:Meu país está me chamando!")) {
+			case 1: callsub L_HuntingQuest,3250,15000,5000,930,30;
+			case 2: callsub L_HuntingQuest,3251,16000,6000;
+			case 3: callsub L_HuntingQuest,3252,17000,8000;
+			case 4: callsub L_Quest,3254,18000,8000,7043,10,1056,30;
+		}
+
+	case 2:
+		switch(select("Caçar Javali:Preparando o verão:O rancor de uma mulher:Ingredientes especiais:A agonia do Mestre das Marionetes")) {
+			case 1: callsub L_HuntingQuest,3255,16000,7000;
+			case 2: callsub L_Quest,3256,15000,5000,918,30;
+			case 3: callsub L_HuntingQuest,3257,17000,8000;
+			case 4: callsub L_Quest,3258,16000,7000,7198,40;
+			case 5: callsub L_HuntingQuest,3259,17000,7000,1060,30;
+		}
+
+	case 3:
+		switch(select("Moscas irritantes:Munak perigosa:Deixe o mundo mais verde:Varinha mágica")) {
+			case 1: callsub L_HuntingQuest,3260,16000,6000;
+			case 2: callsub L_HuntingQuest,3261,16000,7000;
+			case 3: callsub L_Quest,3262,17000,7000,1032,40;
+			case 4: callsub L_Quest,3263,18000,8000,1021,30,1019,30;
+		}
+	}
+	end;
+
+L_Quest:
+	.@quest_id = getarg(0);
+
+	if (checkquest(.@quest_id) == -1) {
+		callsub L_Details, .@quest_id;
+		next;
+
+		mes "Deseja aceitar esta missão?";
+		next;
+
+		if(select("Aceitar a missão.:Não aceitar a missão.") == 1) {
+			if (BaseLevel < 55 || BaseLevel > 70) {
+				mes "Essas missões não são adequadas ao meu nível. Devo procurar outras missões.";
+				close;
+			}
+
+			setquest .@quest_id;
+
+			mes "Aceitei a missão com sucesso. Preciso voltar e confirmar a conclusão depois de terminar o trabalho.";
+			next;
+
+			mes "Esta missão não tem limite de tempo.";
+		}
+		close;
+	}
+
+	if (getargcount() > 5) {
+		if (countitem(getarg(5)) < getarg(6))
+			set .@items,1; // missão incompleta
+		else
+			set .@items,2; // missão completa
+	}
+
+	if (checkquest(.@quest_id) < 2 && (countitem(getarg(3)) < getarg(4) || .@items == 1)) {
+		mes "Você tem uma missão em andamento. Deseja consultar os detalhes?";
+		next;
+
+		if(select("Consultar os detalhes.:Cancelar.") == 1)
+			callsub L_Details, .@quest_id;
+
+		close;
+	}
+	else {
+		mes "Concluí a missão. Devo entregá-la agora?";
+		next;
+
+		if(select("Entregar a missão.:Ainda não entregar.") == 1) {
+			delitem getarg(3),getarg(4);
+
+			if (.@items)
+				delitem getarg(5),getarg(6);
+
+			getexp getarg(1),getarg(2);
+
+			// Recompensa em moedas conforme a categoria da missão.
+			if (.@quest_id <= 3254)
+				callfunc("F_EdenMissionCoinReward",4);
+			else
+				callfunc("F_EdenMissionCoinReward",5);
+
+			erasequest .@quest_id;
+
+			mes "Você concluiu a missão. Receba sua recompensa.";
+		}
+		close;
+	}
+	end;
+
+L_HuntingQuest:
+	.@quest_id = getarg(0);
+
+	if (checkquest(.@quest_id) == -1) {
+		callsub L_Details, .@quest_id;
+		next;
+
+		mes "Deseja aceitar esta missão?";
+		next;
+
+		if(select("Aceitar a missão.:Não aceitar a missão.") == 1) {
+			if (BaseLevel < 55 || BaseLevel > 70) {
+				mes "Essas missões não são adequadas ao meu nível. Devo procurar outras missões.";
+				close;
+			}
+
+			setquest .@quest_id;
+
+			mes "Aceitei a missão com sucesso. Preciso voltar e confirmar a conclusão depois de terminar o trabalho.";
+			next;
+
+			mes "Esta missão não tem limite de tempo.";
+		}
+		close;
+	}
+
+	if (getargcount() > 3) {
+		if (countitem(getarg(3)) < getarg(4))
+			set .@items,1; // missão incompleta
+		else
+			set .@items,2; // missão completa
+	}
+
+	if (checkquest(.@quest_id,HUNTING) < 2 || .@items == 1) {
+		mes "Você tem uma missão em andamento. Deseja consultar os detalhes?";
+		next;
+
+		if(select("Consultar os detalhes.:Cancelar.") == 1)
+			callsub L_Details, .@quest_id;
+
+		close;
+	}
+	else if (checkquest(.@quest_id,HUNTING) == 2) {
+		mes "Concluí a missão. Devo entregá-la agora?";
+		next;
+
+		if(select("Entregar a missão.:Ainda não entregar.") == 1) {
+			if (.@items)
+				delitem getarg(3),getarg(4);
+
+			getexp getarg(1),getarg(2);
+
+			// Recompensa em moedas conforme a categoria da missão.
+			if (.@quest_id <= 3254)
+				callfunc("F_EdenMissionCoinReward",4);
+			else
+				callfunc("F_EdenMissionCoinReward",5);
+
+			erasequest .@quest_id;
+
+			mes "Você concluiu a missão. Receba sua recompensa.";
+		}
+		close;
+	}
+	end;
+
+L_Details:
+	switch(getarg(0)) {
+
+	case 3250:
+		mes "Esta missão foi solicitada pela Corporação Rekenber, de Lighthalzen. Confira os detalhes a seguir.";
+		next;
+
+		mes "A Corporação Rekenber está prestes a lançar um projeto chamado 'Centro Médico Verde'. Para o primeiro produto, estamos preparando bandagens terapêuticas.";
+		next;
+
+		mes "Como parte do projeto, precisamos estudar como os monstros reagem quando são envolvidos por bandagens podres.";
+		next;
+
+		mes "Se tiver interesse, cace 30 Múmias e traga 30 bandagens podres. Você pode encontrá-las na Pirâmide, a oeste de Morroc.";
+		next;
+
+		mes "Quando concluir a missão, volte para confirmar o resultado e receber a recompensa.";
+		next;
+
+		mes "- Diretora-geral da Corporação Rekenber, Julie E. Delph -";
+		break;
+
+	case 3251:
+		mes "Esta missão foi solicitada pela cooperativa de Comodo. Confira os detalhes a seguir.";
+		next;
+
+		mes "Os jacarés estão fora de controle e atacam mulheres e pessoas embriagadas que ficam perto da praia.";
+		next;
+
+		mes "Isso é vergonhoso para nós, que vivemos no melhor destino de férias de Rune-Midgard.";
+		next;
+
+		mes "Por isso, seria muito útil se você caçasse 30 jacarés para resolver essa situação.";
+		next;
+
+		mes "Quando concluir a missão, volte para confirmar o resultado e receber a recompensa.";
+		break;
+
+	case 3252:
+		mes "Esta missão foi solicitada por uma pessoa desconhecida de Izlude.";
+		next;
+
+		mes "Admiro a praia de Izlude desde que nasci.";
+		next;
+
+		mes "Quando era jovem, encontrei uma criatura misteriosa na caverna de Izlude. Nunca tinha visto algo parecido...";
+		next;
+
+		mes "Na mesma hora, pensei que fosse uma sereia. Fiquei tão surpreso que passei a vida inteira estudando sereias.";
+		next;
+
+		mes "Mas, quanto mais estudava, mais percebia que aquela criatura não era uma sereia... Ela não era nem um pouco bonita como as outras sereias...";
+		next;
+
+		mes "Por fim, descobri que era um sereio, e não uma sereia!";
+		next;
+
+		mes "Sereio... Desperdicei minha vida estudando esse monstro! Por favor, cace 30 sereios para me consolar.";
+		next;
+
+		mes "Quando concluir a missão, volte para confirmar o resultado e receber a recompensa.";
+		next;
+
+		mes "-- A sereia do sonho perdido de Izlude --";
+		break;
+
+	case 3254:
+		mes "Esta missão foi solicitada por um funcionário do governo do Reino de Rune-Midgard.";
+		next;
+
+		mes "Para evitar enchentes em Prontera, decidimos construir uma grande barragem para controlar o fluxo de água.";
+		next;
+
+		mes "No entanto, faltam materiais e precisamos reunir Areia Fina e Cascalho.";
+		next;
+
+		mes "Por isso, pedimos sua ajuda. Traga 10 Areias Finas e 30 Cascalhos para que possamos construir a barragem.";
+		next;
+
+		mes "Você pode obter esses materiais derrotando o Homem-da-Areia. Boa sorte!";
+		next;
+
+		mes "Quando concluir a missão, volte para confirmar o resultado e receber a recompensa.";
+		next;
+
+		mes "-- Dufre Kent, funcionário do governo do Reino de Rune-Midgard --";
+		break;
+
+	case 3255:
+		mes "Esta missão foi solicitada pela prefeitura de Payon.";
+		next;
+
+		mes "Os animais selvagens sempre causam problemas aos agricultores.";
+		next;
+
+		mes "Eles atacam nossas fazendas e destroem toda a plantação! Não aguentamos mais!";
+		next;
+
+		mes "Por isso, pedimos a ajuda de aventureiros corajosos.";
+		next;
+
+		mes "Por favor, cace 30 selvagens para salvar nossas plantações!";
+		next;
+
+		mes "Você encontra esses monstros facilmente nos arredores da cidade e nos campos próximos.";
+		next;
+
+		mes "Quando concluir a missão, volte para confirmar o resultado e receber a recompensa.";
+		next;
+
+		mes "-- Funcionários da prefeitura de Payon --";
+		break;
+
+	case 3256:
+		mes "Esta missão foi solicitada pelo ferreiro Aragham, de Morroc.";
+		next;
+
+		mes "Oláááá, aventureiros! Aqui é Aragham, o ferreiro mais incrível de Morroc!";
+		next;
+
+		mes "Enfim, tenho um filho chamado Aragam Junior, aquele fofinho. Haha.";
+		next;
+
+		mes "Ele vai participar de um acampamento de verão, mas não sabe nadar.";
+		next;
+
+		mes "Quero ensiná-lo, mas, como você sabe, sou ferreiro e estou longe de ser um nadador! Hehe.";
+		next;
+
+		mes "Então pensei em fabricar nadadeiras de natação para aumentar a confiança dele~!";
+		next;
+
+		mes "Para fabricá-las, preciso de 30 patas pegajosas de Sapo Roda. Você pode trazê-las para mim?";
+		next;
+
+		mes "Quando concluir a missão, volte para confirmar o resultado e receber a recompensa.";
+		next;
+
+		mes "P.S.: Não me compare com Hollgrehenn ou Antonio!!!!";
+		next;
+
+		mes "-- Aragham, o ferreiro mais incrível de Morroc --";
+		break;
+
+	case 3257:
+		mes "Esta missão foi solicitada pelo inventor Dorian, de Izlude.";
+		next;
+
+		mes "Já ouviu a história de que mulheres magoadas podem provocar desastres naturais?";
+		next;
+
+		mes "Uau, então os homens precisam tomar cuidado com mulheres sensíveis! Não deixe que guardem rancor de você.";
+		next;
+
+		mes "As mulheres podem provocar fenômenos muito estranhos!";
+		next;
+
+		mes "Essa história me intrigou tanto que estou tentando provar que ela é verdadeira.";
+		next;
+
+		mes "Então preciso deixar algumas mulheres irritadas! Haha, que ideia maldosa, não é?";
+		next;
+
+		mes "Mas é tudo apenas para fins de estudo... Por favor, cace 30 Sohees, que parecem ter renascido de almas atormentadas.";
+		next;
+
+		mes "Assim poderei continuar estudando o fenômeno.";
+		next;
+
+		mes "Quando concluir a missão, volte para confirmar o resultado e receber a recompensa.";
+		next;
+
+		mes "-- Dorian, o inventor elegante --";
+		break;
+
+	case 3258:
+		mes "Esta missão foi solicitada por Wallah, de Payon.";
+		next;
+
+		mes "Olá, aventureiro! Como vai? Está se sentindo bem?";
+		next;
+
+		mes "Sou farmacêutica e ultimamente estou tendo dificuldade para conseguir Ingredientes Especiais.";
+		next;
+
+		mes "Sou uma garota um pouco delicada. Como conseguiria reunir tudo isso sozinha?";
+		next;
+
+		mes "Por favor, ajude-me. Traga 40 folhas grandes; isso será suficiente para preparar meu remédio especial!";
+		next;
+
+		mes "Traga os itens o quanto antes; as pessoas precisam do meu remédio.";
+		next;
+
+		mes "Quando concluir a missão, volte para confirmar o resultado e receber a recompensa.";
+		next;
+
+		mes "-- Wallah --";
+		break;
+
+	case 3259:
+		mes "Esta missão foi solicitada pelo mestre de marionetes Woonute, de Geffen.";
+		next;
+
+		mes "Ser mestre de marionetes é um trabalho difícil, principalmente para satisfazer as pessoas.";
+		next;
+
+		mes "Hoje em dia, as pessoas conseguem encontrar e conhecer muitas coisas por conta própria.";
+		next;
+
+		mes "As expectativas delas estão cada vez maiores, e já não consigo satisfazê-las.";
+		next;
+
+		mes "Mas, se eu criar novos conceitos de brinquedos, como brinquedos vivos, será uma grande inovação.";
+		next;
+
+		mes "Ouvi dizer que existem bonecas vivas chamadas Marionetes. Você pode caçar 30 delas e trazer 30 cabelos dourados? Serão ótimos materiais para os novos brinquedos.";
+		next;
+
+		mes "Quando concluir a missão, volte para confirmar o resultado e receber a recompensa.";
+		next;
+
+		mes "-- Mestre das Marionetes Woonute --";
+		break;
+
+	case 3260:
+		mes "Esta missão foi solicitada por um exterminador de pragas de Prontera.";
+		next;
+
+		mes "Com o clima mais quente, os insetos se multiplicam cada vez mais. A situação já está fora de controle.";
+		next;
+
+		mes "As pessoas de Prontera não conseguem dormir por causa dos insetos em suas casas.";
+		next;
+
+		mes "Por favor, ajude-nos caçando 30 Moscas Caçadoras para reduzir a quantidade de moscas.";
+		next;
+
+		mes "Quando concluir a missão, volte para confirmar o resultado e receber a recompensa.";
+		next;
+
+		mes "-- Exterminador de pragas de Prontera --";
+		break;
+
+	case 3261:
+		mes "Esta missão foi solicitada por Cheese Dongja, de Payon.";
+		next;
+
+		mes "Você já ouviu falar de Munak?";
+		next;
+
+		mes "O horrível monstro Munak está ameaçando os moradores de Payon.";
+		next;
+
+		mes "Precisamos de aventureiros corajosos como você!";
+		next;
+
+		mes "Por favor, cace 30 Munaks para que Payon volte a ter paz.";
+		next;
+
+		mes "Quando concluir a missão, volte para confirmar o resultado e receber a recompensa.";
+		next;
+
+		mes "- Cheese Dongja, de Payon -";
+		break;
+
+	case 3262:
+		mes "Esta missão foi solicitada pelo comerciante de gemas Ibraham, de Morroc.";
+		next;
+
+		mes "Uma pequena e bela flor no deserto árido... Que cena incrível seria!";
+		next;
+
+		mes "Plantar flores pode deixar o mundo mais verde e torná-lo muito mais bonito.";
+		next;
+
+		mes "Pretendo plantar flores resistentes no deserto de Morroc para melhorar o solo.";
+		next;
+
+		mes "Preciso de 40 flores devoradoras. Sei que são flores feias, mas ainda são plantas.";
+		next;
+
+		mes "Espero que você cace Floras e consiga 40 flores devoradoras. Você está tornando o mundo mais verde! Orgulhe-se disso!";
+		next;
+
+		mes "Quando concluir a missão, volte para confirmar o resultado e receber a recompensa.";
+		next;
+
+		mes "-- Ibraham, de Morroc --";
+		break;
+
+	case 3263:
+		mes "Esta missão foi solicitada pelo ferreiro Antonio, de Payon.";
+		next;
+
+		mes "Varinha mágica! Você já ouviu falar dela? É uma varinha incrível!";
+		next;
+
+		mes "Se disser as palavras mágicas e balançar a varinha, seus desejos se realizarão.";
+		next;
+
+		mes "Por isso, decidi fabricar uma eu mesmo. Assim ficarei rico e poderoso~! Haha!!";
+		next;
+
+		mes "Para fabricar a varinha, preciso de alguns materiais especiais.";
+		next;
+
+		mes "Traga 30 troncos e 30 chifres de Dokebi. Em troca, emprestarei minha varinha mágica para você uma vez. Haha, que tal?";
+		next;
+
+		mes "Quando concluir a missão, volte para confirmar o resultado e receber a recompensa.";
+		next;
+
+		mes "-- Antonio, ferreiro de Payon --";
+		break;
+	}
+	return;
+}

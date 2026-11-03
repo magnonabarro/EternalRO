@@ -119,6 +119,39 @@ uint64 CashShopDatabase::parseBodyNode( const ryml::NodeRef& node ){
 	return 1;
 }
 
+// The SQL catalog is shared with the FluxCP ROPs manager.
+bool CashShopDatabase::loadSql(){
+    if (Sql_Query(mmysql_handle, "SELECT `tab`, `nameid`, `price` FROM `cashshop_catalog` ORDER BY `tab`, `nameid`") != SQL_SUCCESS){
+        Sql_ShowDebug(mmysql_handle);
+        ShowError("Cash shop SQL catalog could not be loaded; previous catalog preserved.\n");
+        return false;
+    }
+    std::vector<std::shared_ptr<s_cash_item_tab>> tabs(CASHSHOP_TAB_MAX);
+    uint32 count = 0;
+    while (Sql_NextRow(mmysql_handle) == SQL_SUCCESS){
+        char *tab_text, *id_text, *price_text;
+        Sql_GetData(mmysql_handle, 0, &tab_text, nullptr);
+        Sql_GetData(mmysql_handle, 1, &id_text, nullptr);
+        Sql_GetData(mmysql_handle, 2, &price_text, nullptr);
+        const uint32 tab = static_cast<uint32>(strtoul(tab_text, nullptr, 10));
+        const t_itemid nameid = static_cast<t_itemid>(strtoul(id_text, nullptr, 10));
+        const uint32 price = static_cast<uint32>(strtoul(price_text, nullptr, 10));
+        if (tab >= CASHSHOP_TAB_MAX || !item_db.exists(nameid) || price == 0 || price > MAX_CASHPOINT){
+            ShowWarning("Invalid cashshop_catalog row: tab=%u item=%u price=%u; reload rejected.\n", tab, nameid, price);
+            Sql_FreeResult(mmysql_handle);
+            return false;
+        }
+        if (!tabs[tab]){ tabs[tab] = std::make_shared<s_cash_item_tab>(); tabs[tab]->tab = static_cast<e_cash_shop_tab>(tab); }
+        auto item = std::make_shared<s_cash_item>(); item->nameid = nameid; item->price = price;
+        tabs[tab]->items.push_back(item); ++count;
+    }
+    Sql_FreeResult(mmysql_handle);
+    this->clear();
+    for (uint16 tab = 0; tab < CASHSHOP_TAB_MAX; ++tab) if (tabs[tab]) this->put(tab, tabs[tab]);
+    ShowStatus("Loaded %u cash shop offers from SQL table cashshop_catalog.\n", count);
+    return true;
+}
+
 std::shared_ptr<s_cash_item> CashShopDatabase::findItemInTab( e_cash_shop_tab tab, t_itemid nameid ){
 	std::shared_ptr<s_cash_item_tab> cash_tab = this->find( static_cast<uint16>( tab ) );
 
@@ -402,8 +435,11 @@ void sale_notify_login( map_session_data* sd ){
 }
 #endif
 
+static void cashshop_clear_sales();
+
 static void cashshop_read_db( void ){
-	cash_shop_db.load();
+	if (!cash_shop_db.loadSql()) return;
+	cashshop_clear_sales();
 
 #if PACKETVER_SUPPORTS_SALES
 	int32 i;
@@ -627,7 +663,6 @@ bool cashshop_buylist( map_session_data* sd, uint32 kafrapoints, int32 n, const 
  * Reloads cashshop database by destroying it and reading it again.
  */
 void cashshop_reloaddb( void ){
-	do_final_cashshop();
 	do_init_cashshop();
 }
 
@@ -637,6 +672,10 @@ void cashshop_reloaddb( void ){
  */
 void do_final_cashshop( void ){
 	cash_shop_db.clear();
+	cashshop_clear_sales();
+}
+
+static void cashshop_clear_sales(){
 
 #if PACKETVER_SUPPORTS_SALES
 	if( sale_items.count > 0 ){

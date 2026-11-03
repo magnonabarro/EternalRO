@@ -1,0 +1,286 @@
+# Caçadas 61000-61034; espera individual 61100-61134.
+# Objetivos nativos: sem contadores por OnNPCKillEvent.
+Header:
+  Type: QUEST_DB
+  Version: 3
+Body:
+- Id: 61000
+  Title: Quest do Éden [11-25] - Zangão
+  Targets:
+  - Mob: HORNET
+    Count: 20
+- Id: 61100
+  Title: Espera Éden [11-25] - Zangão
+  TimeLimit: +3h
+- Id: 61001
+  Title: Quest do Éden [11-25] - Rocker
+  Targets:
+  - Mob: ROCKER
+    Count: 20
+- Id: 61101
+  Title: Espera Éden [11-25] - Rocker
+  TimeLimit: +3h
+- Id: 61002
+  Title: Quest do Éden [11-25] - Esporo
+  Targets:
+  - Mob: SPORE
+    Count: 20
+- Id: 61102
+  Title: Espera Éden [11-25] - Esporo
+  TimeLimit: +3h
+- Id: 61003
+  Title: Quest do Éden [11-25] - Cauda de Verme
+  Targets:
+  - Mob: WORM_TAIL
+    Count: 20
+- Id: 61103
+  Title: Espera Éden [11-25] - Cauda de Verme
+  TimeLimit: +3h
+- Id: 61004
+  Title: Quest do Éden [11-25] - Peco Peco
+  Targets:
+  - Mob: PECOPECO
+    Count: 20
+- Id: 61104
+  Title: Espera Éden [11-25] - Peco Peco
+  TimeLimit: +3h
+- Id: 61005
+  Title: Quest do Éden [26-40] - Esporo Venenoso
+  Targets:
+  - Mob: POISON_SPORE
+    Count: 30
+- Id: 61105
+  Title: Espera Éden [26-40] - Esporo Venenoso
+  TimeLimit: +3h
+- Id: 61006
+  Title: Quest do Éden [26-40] - Smokie
+  Targets:
+  - Mob: SMOKIE
+    Count: 30
+- Id: 61106
+  Title: Espera Éden [26-40] - Smokie
+  TimeLimit: +3h
+- Id: 61007
+  Title: Quest do Éden [26-40] - Salgueiro Ancião
+  Targets:
+  - Mob: ELDER_WILOW
+    Count: 30
+- Id: 61107
+  Title: Espera Éden [26-40] - Salgueiro Ancião
+  TimeLimit: +3h
+- Id: 61008
+  Title: Quest do Éden [26-40] - Coco
+  Targets:
+  - Mob: COCO
+    Count: 30
+- Id: 61108
+  Title: Espera Éden [26-40] - Coco
+  TimeLimit: +3h
+- Id: 61009
+  Title: Quest do Éden [26-40] - Sapo de Thara
+  Targets:
+  - Mob: THARA_FROG
+    Count: 30
+- Id: 61109
+  Title: Espera Éden [26-40] - Sapo de Thara
+  TimeLimit: +3h
+- Id: 61010
+  Title: Quest do Éden [41-55] - Guerreiro Orc
+  Targets:
+  - Mob: ORK_WARRIOR
+    Count: 40
+- Id: 61110
+  Title: Espera Éden [41-55] - Guerreiro Orc
+  TimeLimit: +3h
+- Id: 61011
+  Title: Quest do Éden [41-55] - Senhora Orc
+  Targets:
+  - Mob: ORC_LADY
+    Count: 40
+- Id: 61111
+  Title: Espera Éden [41-55] - Senhora Orc
+  TimeLimit: +3h
+- Id: 61012
+  Title: Quest do Éden [41-55] - Selvagem
+  Targets:
+  - Mob: SAVAGE
+    Count: 40
+- Id: 61112
+  Title: Espera Éden [41-55] - Selvagem
+  TimeLimit: +3h
+- Id: 61013
+  Title: Quest do Éden [41-55] - Múmia
+  Targets:
+  - Mob: MUMMY
+    Count: 40
+- Id: 61113
+  Title: Espera Éden [41-55] - Múmia
+  TimeLimit: +3h
+- Id: 61014
+  Title: Quest do Éden [41-55] - Mantis
+  Targets:
+  - Mob: MANTIS
+    Count: 40
+- Id: 61114
+  Title: Espera Éden [41-55] - Mantis
+  TimeLimit: +3h
+- Id: 61015
+  Title: Quest do Éden [56-70] - Sohee
+  Targets:
+  - Mob: SOHEE
+    Count: 50
+- Id: 61115
+  Title: Espera Éden [56-70] - Sohee
+  TimeLimit: +3h
+- Id: 61016
+  Title: Quest do Éden [56-70] - Munak
+  Targets:
+  - Mob: MUNAK
+    Count: 50
+- Id: 61116
+  Title: Espera Éden [56-70] - Munak
+  TimeLimit: +3h
+- Id: 61017
+  Title: Quest do Éden [56-70] - Zenorc
+  Targets:
+  - Mob: ZENORC
+    Count: 50
+- Id: 61117
+  Title: Espera Éden [56-70] - Zenorc
+  TimeLimit: +3h
+- Id: 61018
+  Title: Quest do Éden [56-70] - Isis
+  Targets:
+  - Mob: ISIS
+    Count: 50
+- Id: 61118
+  Title: Espera Éden [56-70] - Isis
+  TimeLimit: +3h
+- Id: 61019
+  Title: Quest do Éden [56-70] - Argiope
+  Targets:
+  - Mob: ARGIOPE
+    Count: 50
+- Id: 61119
+  Title: Espera Éden [56-70] - Argiope
+  TimeLimit: +3h
+- Id: 61020
+  Title: Quest do Éden [71-85] - Pasana
+  Targets:
+  - Mob: PASANA
+    Count: 60
+- Id: 61120
+  Title: Espera Éden [71-85] - Pasana
+  TimeLimit: +3h
+- Id: 61021
+  Title: Quest do Éden [71-85] - Marduk
+  Targets:
+  - Mob: MARDUK
+    Count: 60
+- Id: 61121
+  Title: Espera Éden [71-85] - Marduk
+  TimeLimit: +3h
+- Id: 61022
+  Title: Quest do Éden [71-85] - Raydric
+  Targets:
+  - Mob: RAYDRIC
+    Count: 60
+- Id: 61122
+  Title: Espera Éden [71-85] - Raydric
+  TimeLimit: +3h
+- Id: 61023
+  Title: Quest do Éden [71-85] - Deviruchi
+  Targets:
+  - Mob: DEVIRUCHI
+    Count: 60
+- Id: 61123
+  Title: Espera Éden [71-85] - Deviruchi
+  TimeLimit: +3h
+- Id: 61024
+  Title: Quest do Éden [71-85] - Druida Maligno
+  Targets:
+  - Mob: EVIL_DRUID
+    Count: 60
+- Id: 61124
+  Title: Espera Éden [71-85] - Druida Maligno
+  TimeLimit: +3h
+- Id: 61025
+  Title: Quest do Éden [86-90] - Pesadelo Sombrio
+  Targets:
+  - Mob: NIGHTMARE_TERROR
+    Count: 70
+- Id: 61125
+  Title: Espera Éden [86-90] - Pesadelo Sombrio
+  TimeLimit: +3h
+- Id: 61026
+  Title: Quest do Éden [86-90] - Deletério Voador
+  Targets:
+  - Mob: DELETER
+    Count: 70
+- Id: 61126
+  Title: Espera Éden [86-90] - Deletério Voador
+  TimeLimit: +3h
+- Id: 61027
+  Title: Quest do Éden [86-90] - Deletério Terrestre
+  Targets:
+  - Mob: DELETER_
+    Count: 70
+- Id: 61127
+  Title: Espera Éden [86-90] - Deletério Terrestre
+  TimeLimit: +3h
+- Id: 61028
+  Title: Quest do Éden [86-90] - Majoruros
+  Targets:
+  - Mob: MAJORUROS
+    Count: 70
+- Id: 61128
+  Title: Espera Éden [86-90] - Majoruros
+  TimeLimit: +3h
+- Id: 61029
+  Title: Quest do Éden [86-90] - Anolian
+  Targets:
+  - Mob: ANOLIAN
+    Count: 70
+- Id: 61129
+  Title: Espera Éden [86-90] - Anolian
+  TimeLimit: +3h
+- Id: 61030
+  Title: Quest do Éden [91-99] - Cavaleiro do Abismo
+  Targets:
+  - Mob: KNIGHT_OF_ABYSS
+    Count: 80
+- Id: 61130
+  Title: Espera Éden [91-99] - Cavaleiro do Abismo
+  TimeLimit: +3h
+- Id: 61031
+  Title: Quest do Éden [91-99] - Incubus
+  Targets:
+  - Mob: INCUBUS
+    Count: 80
+- Id: 61131
+  Title: Espera Éden [91-99] - Incubus
+  TimeLimit: +3h
+- Id: 61032
+  Title: Quest do Éden [91-99] - Succubus
+  Targets:
+  - Mob: SUCCUBUS
+    Count: 80
+- Id: 61132
+  Title: Espera Éden [91-99] - Succubus
+  TimeLimit: +3h
+- Id: 61033
+  Title: Quest do Éden [91-99] - Duque Coruja
+  Targets:
+  - Mob: OWL_DUKE
+    Count: 80
+- Id: 61133
+  Title: Espera Éden [91-99] - Duque Coruja
+  TimeLimit: +3h
+- Id: 61034
+  Title: Quest do Éden [91-99] - Barão Coruja
+  Targets:
+  - Mob: OWL_BARON
+    Count: 80
+- Id: 61134
+  Title: Espera Éden [91-99] - Barão Coruja
+  TimeLimit: +3h

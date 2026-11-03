@@ -1,0 +1,202 @@
+//===== rAthena Script =======================================
+//= Eden Group Quests - Mission [1 - 39]
+//===== By: ==================================================
+//= Vibe
+//===== Current Version: =====================================
+//= 4.2 - Modified with quest status tags
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Repetable Quests for Players between Baselevel 1 - 39.
+//= Removed one-quest-at-a-time restriction.
+//= Removed max level restriction (can only take quests below or equal to player level).
+//= Simplified quest collection flow.
+//= Quest names with status tags: [Em Progresso], [Concluído]
+//===== Additional Comments: =================================
+//= Based on bROWiki information and official Eden Group Quests.
+//= ID 22508 = Eden Group Mark
+//= ID 25223 = Eden Coin
+//= Quest IDs: 99001-99012
+//= Delivery integrated in the same menu
+//= Organized by location in submenus
+//============================================================
+
+moc_para01,36,38,3	script	Quadro [1 - 39]	857,{
+	if (!(countitem(22508) > 0)) {
+		mes "Para pegar essas missões, preciso entrar no Grupo Éden primeiro. Devo encontrar a Secretária Lime Evenor e me tornar um membro.";
+		close;
+	}
+	
+	mes "Quadro de Missões [1 - 39]";
+	next;
+	
+L_ShowMenu:
+	switch(select("Payon:Prontera:Vila dos Arqueiros:Izlude:Comodo:Cancelar")) {
+		case 1: goto L_Payon;
+		case 2: goto L_Prontera;
+		case 3: goto L_VilaArqueiros;
+		case 4: goto L_Izlude;
+		case 5: goto L_Comodo;
+		case 6: close;
+	}
+	goto L_ShowMenu;
+
+// ===== Payon =====
+L_Payon:
+	// Quest tags for Payon
+	.@q1 = 99001; .@c1 = 99384; .@s1 = checkquest(.@q1,HUNTING); .@d1 = checkquest(.@c1,HUNTING);
+	.@t1$ = ""; if (.@d1 != -1) .@t1$ = " [Concluído]"; else if (.@s1 == 2) .@t1$ = " [Entregar]"; else if (.@s1 != -1) .@t1$ = " [Em Progresso]";
+	.@q2 = 99002; .@c2 = 99385; .@s2 = checkquest(.@q2,HUNTING); .@d2 = checkquest(.@c2,HUNTING);
+	.@t2$ = ""; if (.@d2 != -1) .@t2$ = " [Concluído]"; else if (.@s2 == 2) .@t2$ = " [Entregar]"; else if (.@s2 != -1) .@t2$ = " [Em Progresso]";
+	.@q3 = 99003; .@c3 = 99386; .@s3 = checkquest(.@q3,HUNTING); .@d3 = checkquest(.@c3,HUNTING);
+	.@t3$ = ""; if (.@d3 != -1) .@t3$ = " [Concluído]"; else if (.@s3 == 2) .@t3$ = " [Entregar]"; else if (.@s3 != -1) .@t3$ = " [Em Progresso]";
+	.@q4 = 99004; .@c4 = 99387; .@s4 = checkquest(.@q4,HUNTING); .@d4 = checkquest(.@c4,HUNTING);
+	.@t4$ = ""; if (.@d4 != -1) .@t4$ = " [Concluído]"; else if (.@s4 == 2) .@t4$ = " [Entregar]"; else if (.@s4 != -1) .@t4$ = " [Em Progresso]";
+	
+	switch(select("Trabalho Braçal!(1)" + .@t1$ + ":Medo de Cobras!(15)" + .@t2$ + ":Não é uma Cebola!(15)" + .@t3$ + ":Cogumelo Estranho!(15)" + .@t4$ + ":Volta")) {
+		case 1: .@qid = 99001; .@min = 1; .@exp = 800; .@job_exp = 800; .@i1 = 1068; .@a1 = 3; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99384; goto L_Handle;
+		case 2: .@qid = 99002; .@min = 15; .@exp = 1600; .@job_exp = 1400; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99385; goto L_Handle;
+		case 3: .@qid = 99003; .@min = 15; .@exp = 1600; .@job_exp = 1400; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99386; goto L_Handle;
+		case 4: .@qid = 99004; .@min = 15; .@exp = 3000; .@job_exp = 2000; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99387; goto L_Handle;
+		case 5: goto L_ShowMenu;
+	}
+	goto L_Payon;
+
+// ===== Prontera =====
+L_Prontera:
+	.@q1 = 99005; .@c1 = 99388; .@s1 = checkquest(.@q1,HUNTING); .@d1 = checkquest(.@c1,HUNTING);
+	.@t1$ = ""; if (.@d1 != -1) .@t1$ = " [Concluído]"; else if (.@s1 == 2) .@t1$ = " [Entregar]"; else if (.@s1 != -1) .@t1$ = " [Em Progresso]";
+	.@q2 = 99006; .@c2 = 99389; .@s2 = checkquest(.@q2,HUNTING); .@d2 = checkquest(.@c2,HUNTING);
+	.@t2$ = ""; if (.@d2 != -1) .@t2$ = " [Concluído]"; else if (.@s2 == 2) .@t2$ = " [Entregar]"; else if (.@s2 != -1) .@t2$ = " [Em Progresso]";
+	.@q3 = 99007; .@c3 = 99390; .@s3 = checkquest(.@q3,HUNTING); .@d3 = checkquest(.@c3,HUNTING);
+	.@t3$ = ""; if (.@d3 != -1) .@t3$ = " [Concluído]"; else if (.@s3 == 2) .@t3$ = " [Entregar]"; else if (.@s3 != -1) .@t3$ = " [Em Progresso]";
+	
+	switch(select("Salvando o Parquinho!(10)" + .@t1$ + ":Insetos Musicais!(10)" + .@t2$ + ":Problema Pegajoso!(10)" + .@t3$ + ":Volta")) {
+		case 1: .@qid = 99005; .@min = 10; .@exp = 1200; .@job_exp = 1000; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99388; goto L_Handle;
+		case 2: .@qid = 99006; .@min = 10; .@exp = 1600; .@job_exp = 1400; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99389; goto L_Handle;
+		case 3: .@qid = 99007; .@min = 10; .@exp = 2000; .@job_exp = 2000; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99390; goto L_Handle;
+		case 4: goto L_ShowMenu;
+	}
+	goto L_Prontera;
+
+// ===== Vila dos Arqueiros =====
+L_VilaArqueiros:
+	.@q1 = 99008; .@c1 = 99391; .@s1 = checkquest(.@q1,HUNTING); .@d1 = checkquest(.@c1,HUNTING);
+	.@t1$ = ""; if (.@d1 != -1) .@t1$ = " [Concluído]"; else if (.@s1 == 2) .@t1$ = " [Entregar]"; else if (.@s1 != -1) .@t1$ = " [Em Progresso]";
+	
+	switch(select("Guerra aos Mortos!(15)" + .@t1$ + ":Volta")) {
+		case 1: .@qid = 99008; .@min = 15; .@exp = 3200; .@job_exp = 3000; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99391; goto L_Handle;
+		case 2: goto L_ShowMenu;
+	}
+	goto L_VilaArqueiros;
+
+// ===== Izlude =====
+L_Izlude:
+	.@q1 = 99009; .@c1 = 99392; .@s1 = checkquest(.@q1,HUNTING); .@d1 = checkquest(.@c1,HUNTING);
+	.@t1$ = ""; if (.@d1 != -1) .@t1$ = " [Concluído]"; else if (.@s1 == 2) .@t1$ = " [Entregar]"; else if (.@s1 != -1) .@t1$ = " [Em Progresso]";
+	
+	switch(select("Bichos Barulhentos!(20)" + .@t1$ + ":Volta")) {
+		case 1: .@qid = 99009; .@min = 20; .@exp = 4800; .@job_exp = 4200; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99392; goto L_Handle;
+		case 2: goto L_ShowMenu;
+	}
+	goto L_Izlude;
+
+// ===== Comodo =====
+L_Comodo:
+	.@q1 = 99010; .@c1 = 99393; .@s1 = checkquest(.@q1,HUNTING); .@d1 = checkquest(.@c1,HUNTING);
+	.@t1$ = ""; if (.@d1 != -1) .@t1$ = " [Concluído]"; else if (.@s1 == 2) .@t1$ = " [Entregar]"; else if (.@s1 != -1) .@t1$ = " [Em Progresso]";
+	.@q2 = 99011; .@c2 = 99394; .@s2 = checkquest(.@q2,HUNTING); .@d2 = checkquest(.@c2,HUNTING);
+	.@t2$ = ""; if (.@d2 != -1) .@t2$ = " [Concluído]"; else if (.@s2 == 2) .@t2$ = " [Entregar]"; else if (.@s2 != -1) .@t2$ = " [Em Progresso]";
+	.@q3 = 99012; .@c3 = 99395; .@s3 = checkquest(.@q3,HUNTING); .@d3 = checkquest(.@c3,HUNTING);
+	.@t3$ = ""; if (.@d3 != -1) .@t3$ = " [Concluído]"; else if (.@s3 == 2) .@t3$ = " [Entregar]"; else if (.@s3 != -1) .@t3$ = " [Em Progresso]";
+	
+	switch(select("Churrasco Ruim!(30)" + .@t1$ + ":Tratamento de Pele!(30)" + .@t2$ + ":Tempero Korasera!(30)" + .@t3$ + ":Volta")) {
+		case 1: .@qid = 99010; .@min = 30; .@exp = 5500; .@job_exp = 5500; .@i1 = 918; .@a1 = 10; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99393; goto L_Handle;
+		case 2: .@qid = 99011; .@min = 30; .@exp = 5500; .@job_exp = 5500; .@i1 = 962; .@a1 = 5; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99394; goto L_Handle;
+		case 3: .@qid = 99012; .@min = 30; .@exp = 5500; .@job_exp = 5500; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99395; goto L_Handle;
+		case 4: goto L_ShowMenu;
+	}
+	goto L_Comodo;
+
+L_Handle:
+	.@qstatus = checkquest(.@qid,HUNTING);
+	
+	if (.@qstatus == 2) {
+		// Quest completa - entregar
+		// Verificar itens apenas se a quest exigir (i1 > 0 ou i2 > 0)
+		if (.@i1 > 0) {
+			if (countitem(.@i1) < .@a1) {
+				mes "Você não tem os itens necessários para esta missão.";
+				mes "Precisa de " + .@a1 + " " + getitemname(.@i1) + ".";
+				next;
+				goto L_ShowMenu;
+			}
+		}
+		if (.@i2 > 0) {
+			if (countitem(.@i2) < .@a2) {
+				mes "Você não tem os itens necessários para esta missão.";
+				mes "Precisa de " + .@a2 + " " + getitemname(.@i2) + ".";
+				next;
+				goto L_ShowMenu;
+			}
+		}
+		// Remover itens se necessário
+		if (.@i1 > 0) delitem .@i1,.@a1;
+		if (.@i2 > 0) delitem .@i2,.@a2;
+		
+		getexp .@exp,.@job_exp;
+		erasequest .@qid;
+		setquest .@cooldown_qid;
+		mes "Missão entregue! Recompensa: " + .@exp + " EXP de Base e " + .@job_exp + " EXP de Classe.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	if (.@qstatus != -1) {
+		// Quest já em andamento
+		mes "Você já tem esta missão em andamento.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	// Verificar se o cooldown está ativo
+	if (checkquest(.@cooldown_qid, HUNTING) != -1) {
+		mes "Você já completou esta missão recentemente. Aguarde o tempo de espera para pegá-la novamente.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	// Quest disponível - oferecer para pegar
+	if (BaseLevel < .@min) {
+		mes "Esta missão requer nível mínimo de " + .@min + ". Devo procurar missões mais fáceis.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	// Mostrar objetivo da missão
+	mes "Objetivo da Missão:";
+	if (.@qid == 99001) mes "Caçar 5 [Salgueiros] + Coletar 3 [Tronco Estéril]";
+	else if (.@qid == 99002) mes "Caçar 5 [Jiboia]";
+	else if (.@qid == 99003) mes "Caçar 5 [Rabo de Verme]";
+	else if (.@qid == 99004) mes "Caçar 10 [Esporo]";
+	else if (.@qid == 99005) mes "Caçar 10 [Zangão]";
+	else if (.@qid == 99006) mes "Caçar 10 [Rocker]";
+	else if (.@qid == 99007) mes "Caçar 10 [Ambernite]";
+	else if (.@qid == 99008) mes "Caçar 10 [Zumbi] + 20 [Esqueleto]";
+	else if (.@qid == 99009) mes "Caçar 10 [Muka] + 20 [PecoPeco]";
+	else if (.@qid == 99010) mes "Caçar 10 [Sapo de Thara] + Coletar 10 [Pata Pegajosa]";
+	else if (.@qid == 99011) mes "Caçar 10 [Hidra] + Coletar 5 [Tentáculo]";
+	else if (.@qid == 99012) mes "Caçar 10 [Megalodon]";
+	next;
+	
+	mes "Deseja aceitar a missão?";
+	next;
+	if(select("Aceitar:Negar") == 1) {
+		setquest .@qid;
+		mes "Missão aceita!";
+		next;
+		goto L_ShowMenu;
+	} else {
+		goto L_ShowMenu;
+	}
+}

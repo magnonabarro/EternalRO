@@ -1,11 +1,13 @@
 -	script	Assistente VIP::warpvip	91,{
 cutin "katsua01",2;
+// Acesso beneficios por rate tambem e concedido pelas rates de bonus a partir do nivel 90.
+.@rate_vip = (BaseLevel >= 90 && (CUSTOM_RATE == 25 || CUSTOM_RATE == 12 || CUSTOM_RATE == 1 || CUSTOM_RATE == 6));
 
 //----------------------------------------------------------------------------
 set @npc$,"[ ^FF0000 Assistente VIP ^000000 ]";
 //----------------------------------------------------------------------------
 
-if (getgroupid() < 1){
+if (getgroupid() != 5 && getgmlevel() < 99 && !.@rate_vip){
 mes @npc$;
 mes "Me desculpe, mas atendo somente a";
 mes "usuários VIP.";
@@ -18,18 +20,16 @@ close;
 
 mes @npc$;
 mes "Olá ^CD3333"+strcharinfo(0)+"^000000!";
-if (getgroupid() >= 2){
-mes "Você é um usuário ^FF0000VIP TOTAL^000000."; 
-mes "Seu passe esta confirmado.";
+if (getgroupid() == 5 || getgmlevel() >= 99){
+mes "Voce e um usuario ^FF0000VIP^000000.";
 mes "Diga-me o que deseja.";
-}else if (getgroupid() == 1){
-mes "Você é um usuário ^FF0000VIP FREE^000000."; 
-mes "Seu passe esta confirmado.";
+}else if (.@rate_vip){
+mes "Sua rate libera estes servicos a partir do nivel 90.";
 mes "Diga-me o que deseja.";
 }
 next;
 
-if(getgroupid () >= 2){
+if (getgroupid() == 5 || getgmlevel() >= 99){
 menu "- Curar/Encantamentos",L_a,"- Arenas MVP",L_m,"- Teleportador",L_g,"- Removedor de Cartas",L_d,"- Reparador de Equipamentos",L_e,"- Resetador de Pontos",L_f,"- Estilista",L_c,"- Teleportador WOE",L_h,"- Administração",L_ADM;
 } else {
 menu "- Curar/Encantamentos",L_a,"- Reparador de Equipamentos",L_e,"- Estilista",L_c,"- Teleportador WOE",L_h;
@@ -1701,7 +1701,7 @@ L_adc:
 	mes "Digite o login da conta que deseja adicionar o CashPoints.";
 	input .@cash$;
 
-		query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+.@cash$+"'",.@cont;
+		query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+escape_sql(.@cash$)+"'",.@cont;
 		if(.@cont == 0)
 	{	
 	next;
@@ -1714,7 +1714,7 @@ L_adc:
 	mes @npc$;
 	mes "Agora digite a quantidade de CashPoints que deseja adicionar a conta "+.@cash$+".";
 	input .@valor;
-	if(.@valor == 0)
+	if(.@valor <= 0)
 	{
 	next;
 	mes @npc$;
@@ -1731,7 +1731,7 @@ L_adc:
 	next;
 	mes @npc$;
 		mes "Os CashPoints da conta "+@cash$+" foram adicionados com sucesso.";
-		query_sql "UPDATE `login` SET `cash` = `cash` +"+.@valor+" WHERE `userid`='"+.@cash$+"'";
+		query_sql "UPDATE `login` SET `cash` = `cash` +"+.@valor+" WHERE `userid`='"+escape_sql(.@cash$)+"'";
 	close;
 
 //-------------------------------
@@ -1743,7 +1743,7 @@ L_adv:
 	mes "Digite o login da conta que deseja adicionar os dias vip";
 	input .@conta$;
 
-	query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+.@conta$+"'",.@cont;
+	query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+escape_sql(.@conta$)+"'",.@cont;
 	if(.@cont == 0)
 	{
 	next;
@@ -1755,7 +1755,7 @@ L_adv:
 	mes @npc$;
 	mes "Agora digite a quantidade de dias vip que deseja adicionar a conta "+.@conta$+".";
 	input .@quant;
-			if(.@quant == 0)
+			if(.@quant <= 0)
 			{
 			next;
 			mes @npc$;
@@ -1770,7 +1770,7 @@ L_adv:
 	next;
 		mes @npc$;
 		mes "Os dias vip da conta "+@conta$+" foram adicionados com sucesso.";
-		query_sql "UPDATE `login` SET `group_id`='1',`diasvip`=`diasvip`+"+.@quant+" WHERE `userid`='"+.@conta$+"'";
+		query_sql "UPDATE `login` SET `group_id`='5',`diasvip`=`diasvip`+"+.@quant+" WHERE `userid`='"+escape_sql(.@conta$)+"'";
 	close;	
 
 //-------------------------------
@@ -1783,7 +1783,7 @@ L_rmc:
 	mes "Digite o login da conta que deseja remover CashPoints.";
 	input .@cash$;
 
-		query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+.@cash$+"'",.@cont;
+		query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+escape_sql(.@cash$)+"'",.@cont;
 		if(.@cont == 0)
 {
 	next;
@@ -1796,7 +1796,7 @@ L_rmc:
 	mes @npc$;
 	mes "Agora digite a quantidade de CashPoints que deseja remover da conta "+.@cash$+".";
 	input .@valor;
-	if(.@valor == 0)
+	if(.@valor <= 0)
 	{
 
 	next;
@@ -1813,8 +1813,8 @@ L_rmc:
 	next;
 	mes @npc$;
 	mes "Os CashPoints da conta "+@cash$+" foram removidos com sucesso.";
-		query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+.@cash$+"'",.@id;
-		query_sql "UPDATE `acc_reg_num_db` SET `value` = `value`-"+.@valor+" WHERE `account_id`='"+.@id+"'";
+		query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+escape_sql(.@cash$)+"'",.@id;
+		query_sql "UPDATE `acc_reg_num_db` SET `value` = GREATEST(0, `value`-"+.@valor+") WHERE `account_id`='"+.@id+"' AND `key`='#CASHPOINTS' AND `index`=0";
 	close;
 
 //-------------------------------
@@ -1825,7 +1825,7 @@ L_rmv:
 	mes @npc$;
 	mes "Digite o login da conta que deseja remover os dias vip";
 	input .@conta$;
-			query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+.@conta$+"'",.@cont;
+			query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+escape_sql(.@conta$)+"'",.@cont;
 			if(.@cont == 0)
 			{
 			next;
@@ -1837,7 +1837,7 @@ L_rmv:
 	mes @npc$;
 	mes "Agora digite a quantidade de dias vip que deseja remover da conta "+.@conta$+".";
 	input .@quant;
-			if(.@quant == 0)
+			if(.@quant <= 0)
 			{
 			next;
 			mes @npc$;
@@ -1852,7 +1852,7 @@ L_rmv:
 	next;
 	mes @npc$;
 	mes "Os dias vip da conta "+@conta1$+" foram removidos com sucesso.";
-	query_sql "UPDATE `login` SET `group_id`='1',`diasvip`=`diasvip`-"+.@quant+" WHERE `userid`='"+.@conta$+"'";
+	query_sql "UPDATE `login` SET `group_id`='5',`diasvip`=`diasvip`-"+.@quant+" WHERE `userid`='"+escape_sql(.@conta$)+"'";
 	close;	
 	
 //-------------------------------
@@ -1865,7 +1865,7 @@ L_csc:
 	mes "Digite o login da conta que deseja ver a quantidade de CashPoints.";
 	input .@cash$;
 
-		query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+.@cash$+"'",.@cont;
+		query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+escape_sql(.@cash$)+"'",.@cont;
 		if(.@cont == 0)
 	{
 	next;
@@ -1875,8 +1875,8 @@ L_csc:
 	}
 	
 	next;
-		query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+.@cash$+"'",.@id;
-		query_sql "SELECT `value` FROM `acc_reg_num_db` WHERE `account_id`='"+.@id+"'",.@saldo;
+		query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+escape_sql(.@cash$)+"'",.@id;
+		query_sql "SELECT `value` FROM `acc_reg_num_db` WHERE `account_id`='"+.@id+"' AND `key`='#CASHPOINTS' AND `index`=0",.@saldo;
 	mes @npc$;
 	mes "A conta "+@cash$+" possui ^00BFFF"+.@saldo+"^000000 CashPoints. ";
 	close;
@@ -1889,7 +1889,7 @@ L_csv:
 	mes @npc$;
 	mes "Digite o login da conta que deseja ver a quantidade de dias vip";
 	input .@conta$;
-			query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+.@conta$+"'",.@cont;
+			query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+escape_sql(.@conta$)+"'",.@cont;
 			if(.@cont == 0)
 			{
 			next;
@@ -1899,7 +1899,7 @@ L_csv:
 			}
 	next;
 	mes @npc$;
-	query_sql "SELECT `diasvip` FROM `login` WHERE `userid` = '"+.@conta$+"'", .@diasvip;
+	query_sql "SELECT `diasvip` FROM `login` WHERE `userid` = '"+escape_sql(.@conta$)+"'", .@diasvip;
 	mes "A Conta ^00BFFF"+.@conta$+"^000000 Possui ^00BFFF"+.@diasvip+"^000000 dias de vip.";
 	close;
 }
@@ -1913,7 +1913,7 @@ if(.@cash == 0){ end; }
 
 dispbottom "Olá "+strcharinfo(0)+" você acaba de ganhar  "+.@cash+" CashPoins.";
 set #CASHPOINTS,#CASHPOINTS+.@cash;
-query_sql "UPDATE `login` SET `cash` = `cash` =0 WHERE `account_id`='"+getcharid(3)+"'";
+query_sql "UPDATE `login` SET `cash` = 0 WHERE `account_id`='"+getcharid(3)+"'";
 end;
 }
 
@@ -1930,13 +1930,11 @@ end;
 -	script	Sistema Vip#02	-1,{
 
 OnClock0001: 
-query_sql "UPDATE `login` SET `diasvip`=`diasvip`-1 WHERE `group_id`='1'"; //VIP FREE
-query_sql "UPDATE `login` SET `diasvip`=`diasvip`-1 WHERE `group_id`='2'"; //VIP TOTAL
+query_sql "UPDATE `login` SET `diasvip`=GREATEST(0,`diasvip`-1) WHERE `group_id`=5 AND `vip_time`=0";
 end;
 
 OnClock0002: 
-query_sql "UPDATE `login` SET `group_id`='0' WHERE `diasvip`<='0' AND `group_id`='1'"; //VIP FREE
-query_sql "UPDATE `login` SET `group_id`='0' WHERE `diasvip`<='0' AND `group_id`='2'"; //VIP TOTAL
+query_sql "UPDATE `login` SET `group_id`=0 WHERE `diasvip`<=0 AND `group_id`=5 AND `vip_time`=0";
 end; 
 
 end;
@@ -1948,10 +1946,8 @@ OnPCLoginEvent:
 if (getgmlevel() >= 20){ end; }
 query_sql "SELECT `diasvip` FROM `login` WHERE `account_id` = '"+getcharid(3)+"'", .@diasvip;
 if(.@diasvip == 0){ end; }
-if (getgroupid () >= 2){
-dispbottom "Olá "+strcharinfo(0)+" você possui "+.@diasvip+" dias VIP Total.";
-} else if (getgroupid () == 1){
-dispbottom "Olá "+strcharinfo(0)+" você possui "+.@diasvip+" dias VIP Free.";
+if (getgroupid() == 5 && !vip_status(1)) {
+    dispbottom "Voce possui "+.@diasvip+" dias VIP.";
 }
 
 end;

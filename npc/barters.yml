@@ -49,5 +49,6 @@ Header:
 Footer:
   Imports:
   - Path: npc/re/merchants/barters.yml
-    Mode: Renewal
-  - Path: npc/custom/barters.yml
+    Mode: Pre-re
+  - Path: npc/pre-re/eternalro/olds/barters.yml
+  - Path: npc/pre-re/eternalro/eventos/chefenia_barter.yml

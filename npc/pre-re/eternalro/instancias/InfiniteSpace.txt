@@ -11,65 +11,65 @@
 //============================================================
 
 cmd_fild07,58,278,3	script	Reckless Explorer#pa0829_01	4_F_GON,{
-	mes "^FF0000Please note that, any abnormal monster handling inside the instance such as taming is not considered normal and may hinder the instance progress.^000000"; 
+	mes "^FF0000Observe que qualquer manuseio anormal de monstros dentro da instância, como domá-los, não é considerado normal e pode atrapalhar o progresso da instância.^000000";
 	next;
 	if (BaseLevel < 99) {
-		mes "[ Reckless Explorer ]";
-		mes "Will you come back to me after getting a little bit stronger? How about getting to level 100 first?";
+		mes "[ Explorador Imprudente ]";
+		mes "Você voltaria a falar comigo depois de ficar um pouco mais forte? Que tal chegar ao nível 100 primeiro?";
 		close;
 	}
 	if (isbegin_quest(12364) != 2) {
-		mes "[ Reckless Explorer ]";
-		mes "Ah, no, I didn't meant to go inside. I didn't meant to violate any laws.";
+		mes "[ Explorador Imprudente ]";
+		mes "Ah, não, eu não pretendia entrar. Eu não pretendia violar nenhuma lei.";
 		next;
-		select("What are you talking about?");
-		mes "[ Reckless Explorer ]";
-		mes "Ha?";
+		select("Do que você está falando?");
+		mes "[ Explorador Imprudente ]";
+		mes "Hã?";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "Hmm, are you one of the Royal Palace's suppression squad?";
+		mes "[ Explorador Imprudente ]";
+		mes "Hmm, você é do esquadrão de supressão do Palácio Real?";
 		next;
-		select("I'm an ordinary adventurer.");
-		mes "[ Reckless Explorer ]";
-		mes "Phew~ That's a relief.";
-		mes "I've never soon you before, so I thought you are one of the suppression squad of the palace.";
+		select("Sou apenas um aventureiro comum.");
+		mes "[ Explorador Imprudente ]";
+		mes "Ufa~ Que alívio.";
+		mes "Eu nunca o vi antes, então achei que fosse um dos membros do esquadrão de supressão do palácio.";
 		next;
-		if (select("What if I am one of the suppression squad?:What's the matter?") == 1) {
-			mes "[ Reckless Explorer ]";
-			mes "I'm just an ordinary woman who's out for a walk. And this is the end of my walk, and I'm going to...";
+		if (select("E se eu fizer parte do esquadrão de contenção?:O que houve?") == 1) {
+			mes "[ Explorador Imprudente ]";
+			mes "Sou apenas uma mulher comum que saiu para passear. E este é o fim do meu passeio, e eu vou...";
 			close;
 		}
-		mes "[ Reckless Explorer ]";
-		mes "Have you heard about the Paros Lighthouse collapse?";
+		mes "[ Explorador Imprudente ]";
+		mes "Você ouviu falar sobre o colapso do Farol de Paros?";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "^777700(She moved close to me)^000000";
-		mes "The Paros Lighthouse here collapsed for some unknown reason some time ago, and there's a lot of stuff underneath it.";
+		mes "[ Explorador Imprudente ]";
+		mes "^777700(Ela se aproximou de mim)^000000";
+		mes "O Farol de Paros aqui desabou por algum motivo desconhecido há algum tempo, e há muitas coisas abaixo dele.";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "Some of the restoration workers and guards that were sent to the palace went missing. Rumors has it that monsters are crawling down there.";
+		mes "[ Explorador Imprudente ]";
+		mes "Alguns dos trabalhadores da restauração e guardas que foram enviados ao palácio desapareceram. Dizem os rumores que monstros estão rastejando por lá.";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "Because its depth is seemingly endless, the people here became afraid of this place and started calling it Infinite Space.";
+		mes "[ Explorador Imprudente ]";
+		mes "Como sua profundidade parece infinita, as pessoas aqui ficaram com medo deste lugar e começaram a chamá-lo de Espaço Infinito.";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "I know some people who sneaked in and made a fortune. That's why I'm going to give it a try, are you interested?";
+		mes "[ Explorador Imprudente ]";
+		mes "Conheço algumas pessoas que entraram sorrateiramente e fizeram fortuna. É por isso que vou tentar, você está interessado?";
 		next;
-		if (select("I'm not interested.:Yes.") == 1) {
-			mes "[ Reckless Explorer ]";
-			mes "That's unfortunate. Come back whenever you change your mind. I'll welcome you anytime.";
+		if (select("Não tenho interesse.:Sim.") == 1) {
+			mes "[ Explorador Imprudente ]";
+			mes "Que pena. Volte sempre que mudar de ideia. Serei bem-vindo a qualquer momento.";
 			close;
 		}
-		mes "[ Reckless Explorer ]";
-		mes "All right, Just one thing, I'm inexperienced and a novice adventurer. So I'll help you explore down there by guiding you from somewhere safe.";
+		mes "[ Explorador Imprudente ]";
+		mes "Tudo bem, apenas uma coisa, sou inexperiente e uma aventureira Aprendiz. Então, ajudarei você a explorar lá embaixo guiando-o de algum lugar seguro.";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "I'm an adventure tour, and you can explore it yourself. Aren't we compatible with each other? Then, let's get started when you're ready.";
+		mes "[ Explorador Imprudente ]";
+		mes "Eu sou uma aventureira, e você pode explorar sozinho. Não somos compatíveis um com o outro? Então, vamos começar quando estiver pronto.";
 		setquest 12364;
 		completequest 12364;
 	} else {
-		mes "[ Reckless Explorer ]";
-		mes "Are you going in there again this time?";
+		mes "[ Explorador Imprudente ]";
+		mes "Você vai entrar aí de novo desta vez?";
 		switch (checkquest(12365,PLAYTIME)) {
 			case -1:
 				break;
@@ -77,8 +77,8 @@ cmd_fild07,58,278,3	script	Reckless Explorer#pa0829_01	4_F_GON,{
 			case 0:
 			case 1:
 				next;
-				mes "[ Reckless Explorer ]";
-				mes "Oh, your whole body is shouting that it's tired. You can't go down there like this.";
+				mes "[ Explorador Imprudente ]";
+				mes "Oh, seu corpo inteiro está gritando que está cansado. Você não pode descer lá desse jeito.";
 				close;
 
 			case 2:
@@ -90,16 +90,16 @@ cmd_fild07,58,278,3	script	Reckless Explorer#pa0829_01	4_F_GON,{
 	.@md_name$ = "Infinite Space";
 	.@party_id = getcharid(1);
 	if (!.@party_id) {
-		mes "[ Reckless Explorer ]";
-		mes "It's impossible alone. Would you like to organize a party at least one person or join another party and come back?";
+		mes "[ Explorador Imprudente ]";
+		mes "É impossível sozinho. Você gostaria de organizar um grupo com pelo menos uma pessoa ou entrar em outro grupo e voltar depois?";
 		close;
 	}
-	if (select("Prepare to enter Infinite Space:Cancel") == 2)
+	if (select("Preparar-se para entrar no Espaço Infinito:Cancelar") == 2)
 		close;
-	mes "[ Reckless Explorer ]";
-	mes "Once the passage opens, take a breath for a while and talk to me again.";
+	mes "[ Explorador Imprudente ]";
+	mes "Assim que a passagem abrir, respire um pouco e fale comigo novamente.";
 	if (instance_create(.@md_name$) == -3)
-		dispbottom "The reservation of the instance '" + .@md_name$ + "' has failed due to an active instance.";
+		dispbottom "A reserva da instância '" + .@md_name$ + "' falhou porque já existe uma instância ativa.";
 	close;
 }
 
@@ -110,7 +110,7 @@ cmd_fild07,54,280,5	script	Temporary Entrance#pa0829_01	PORTAL,{
 
 		case 0:
 		case 1:
-			mes "The passage is not yet activated.";
+			mes "A passagem ainda não foi ativada.";
 			close;
 
 		case 2:
@@ -123,11 +123,11 @@ cmd_fild07,54,280,5	script	Temporary Entrance#pa0829_01	PORTAL,{
 	switch (instance_enter(.@md_name$)) {
 		case IE_OK:
 			setquest 12365;
-			mapannounce "cmd_fild07", strcharinfo(0) + " of the party, "+ .@party_name$ +", is entering the " + .@md_name$ + ".", bc_map, "0x00FF99";
+			mapannounce "cmd_fild07", strcharinfo(0) + " faz parte do grupo "+ .@party_name$ +" está entrando na instância " + .@md_name$ + ".", bc_map, "0x00FF99";
 			end;
 
 		default:
-			mes "The passage is not yet activated.";
+			mes "A passagem ainda não foi ativada.";
 			close;
 	}
 }
@@ -531,7 +531,7 @@ OnUnitSpawn:
 		sleep 10000;
 		while (.@index < getarraysize(.@unit_id)) {
 			if (unitexists('boss_id)) {
-				mapannounce 'map$,"The boss monster is trying to summon its allies.",0xFFFF00;
+				mapannounce 'map$,"O monstro chefe está tentando invocar seus aliados.",0xFFFF00;
 				getunitdata 'boss_id,.@data;
 				.@x = .@data[UMOB_X];
 				.@y = .@data[UMOB_Y];
@@ -556,14 +556,14 @@ OnMobKill:
 			enablenpc instance_npcname("#w" + 'floor + "_t");
 
 		if ('floor == 50) {
-			mapannounce 'map$,"Reckless Explorer : It seems there are no other way from here. It's dangerous, so you'd better return outside.",0xFFFF00;
+			mapannounce 'map$,"Explorador Imprudente: Parece que não há outro caminho por aqui. É perigoso, então é melhor voltar para fora.",0xFFFF00;
 			enablenpc instance_npcname("#w50_ppl");
 		}
 		if ('floor < 50) {
 			if (('floor%10) == 0)
-				mapannounce 'map$,"Reckless Explorer : This area is safe. Use the passage to go to the next area.",0xFFFF00;
+				mapannounce 'map$,"Explorador Imprudente: Esta área é segura. Use a passagem para seguir à próxima área.",0xFFFF00;
 			else
-				mapannounce 'map$,"Reckless Explorer : This area is safe. Go through the passage to the next area.",0xFFFF00;
+				mapannounce 'map$,"Explorador Imprudente: Esta área é segura. Atravesse a passagem para seguir à próxima área.",0xFFFF00;
 			// Enable warp portal to next floor
 			enablenpc instance_npcname("#w" + 'floor);
 			'floor += 1;
@@ -575,38 +575,38 @@ OnPoringKill:
 
 1@infi,42,8,1	script	#w0_0	4_F_GON,{
 	if (is_party_leader() && !'mode && 'sanity == 0) {
-		mes "[ Reckless Explorer ]";
-		mes "I have went in and out of this place many times and figured out a way to provoke the monsters in here. You can get more rewards if you're going to deal with heated ones.";
+		mes "[ Explorador Imprudente ]";
+		mes "Já entrei e saí deste lugar muitas vezes e descobri uma maneira de provocar os monstros daqui. Você pode obter mais recompensas se lidar com os mais enfurecidos.";
 		next;
-		mes "[ Reckless Explorer ]";
-		mes "What do you think? Would you like to try something challenging?";
+		mes "[ Explorador Imprudente ]";
+		mes "O que acha? Você gostaria de tentar algo desafiador?";
 		next;
-		if (select("I want to proceed normally:I want to proceed with something difficult") == 1 && 'sanity == 0) {
+		if (select("Quero prosseguir normalmente:Quero enfrentar um desafio maior") == 1 && 'sanity == 0) {
 			'mode = 1;
 			'poring_chance = 1;
 		} else {
 			'mode = 2;
 			'poring_chance = 2;
 		}
-		mes "[ Reckless Explorer ]";
-		mes "Good. Shall we go now?";
+		mes "[ Explorador Imprudente ]";
+		mes "Bom. Vamos agora?";
 		close2;
 		if ('sanity == 0) {
 			'sanity = 1;
 			disablenpc instance_npcname(strnpcinfo(0));
 			hideoffnpc instance_npcname("#w0");
-			npctalk "Reckless Explorer : Woah~ It's very neat for a sunken place, don't you think?",instance_npcname("#w0");
+			npctalk "Exploradora Imprudente : Uau~ É muito organizado para um lugar submerso, você não acha?",instance_npcname("#w0");
 			sleep 3000;
-			npctalk "Reckless Explorer : I would believe it to be an ancient site, not a lighthouse. It's so well organized...",instance_npcname("#w0");
+			npctalk "Exploradora Imprudente : Eu acreditaria que é um local antigo, não um farol. É tão bem organizado...",instance_npcname("#w0");
 			sleep 3000;
-			npctalk "Reckless Explorer : Oh, did you hear something?",instance_npcname("#w0");
+			npctalk "Exploradora Imprudente : Oh, você ouviu algo?",instance_npcname("#w0");
 			donpcevent instance_npcname("#inf_space_mobs") + "::OnSummon";
 			sleep 3000;
-			npctalk "Reckless Explorer : Oh, that must be the monsters haunting this place.",instance_npcname("#w0");
+			npctalk "Exploradora Imprudente : Oh, devem ser os monstros que assombram este lugar.",instance_npcname("#w0");
 			sleep 3000;
-			npctalk "Reckless Explorer : They look no different from the ones we saw outside, but I can feel a very strong energy.",instance_npcname("#w0");
+			npctalk "Exploradora Imprudente : Eles não parecem diferentes dos que vimos lá fora, mas posso sentir uma energia muito forte.",instance_npcname("#w0");
 			sleep 3000;
-			npctalk "Reckless Explorer : Hm~ It looks dangerous, so I'll go back up. I'll give you directions from above.",instance_npcname("#w0");
+			npctalk "Exploradora Imprudente : Hm~ Parece perigoso, então vou voltar. Darei orientações de cima.",instance_npcname("#w0");
 			disablenpc instance_npcname("#w0");
 		}
 	}
@@ -618,11 +618,11 @@ OnPoringKill:
 }
 
 1@infi,366,392,4	script	#w50_ppl	4_F_GON,{
-	mes "[ Reckless Explorer ]";
-	mes "I'll keep a separate record of this expedition. If you've been lucky, you might have gotten a decent reward from your expedition.";
+	mes "[ Explorador Imprudente ]";
+	mes "Manterei um registro separado desta expedição. Se você tiver sorte, talvez tenha conseguido uma recompensa decente em sua exploração.";
 	next;
-	mes "[ Reckless Explorer ]";
-	mes "So, shall we get out of here?";
+	mes "[ Explorador Imprudente ]";
+	mes "Então, vamos sair daqui?";
 	close2;
 	warp "cmd_fild07",53,270;
 	end;

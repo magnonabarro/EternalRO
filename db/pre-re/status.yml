@@ -6849,3 +6849,39 @@ Body:
       StopAttacking: true
       StopCasting: true
       BossResist: true
+
+  # Renewal statuses required by imported monster skills.
+  - Status: All_Stat_Down
+    Icon: EFST_ALL_STAT_DOWN
+    DurationLookup: NPC_ALL_STAT_DOWN
+    CalcFlags:
+      Str: true
+      Agi: true
+      Vit: true
+      Int: true
+      Dex: true
+      Luk: true
+    Flags:
+      NoDispell: true
+      NoClearance: true
+  - Status: Damage_Heal
+    Icon: EFST_DAMAGE_HEAL
+    DurationLookup: NPC_DAMAGE_HEAL
+    Flags:
+      NoDispell: true
+  - Status: Deadly_Defeasance
+    Icon: EFST_DEADLY_DEFEASANCE
+    DurationLookup: AG_DEADLY_PROJECTION
+    CalcFlags:
+      All: true
+    Flags:
+      BlEffect: true
+      DisplayPc: true
+  - Status: Gradual_Gravity
+    Icon: EFST_GRADUAL_GRAVITY
+    DurationLookup: NPC_GRADUAL_GRAVITY
+    Flags:
+      BlEffect: true
+      DisplayPc: true
+      NoDispell: true
+      NoClearance: true

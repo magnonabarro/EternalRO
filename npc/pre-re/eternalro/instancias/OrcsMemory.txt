@@ -84,7 +84,7 @@ L_Enter:
 		mes "Somente um membro do grupo pode entrar no Memorial dos Orcs.";
 		close;
 	case IE_OK:
-		mapannounce "gef_fild10", getpartyname( getcharid(1) ) +" membros do grupo "+strcharinfo(0)+" entraram no Memorial dos Orcs.",bc_map,"0x00ff99";
+		mapannounce "gef_fild10", "O jogador "+strcharinfo(0)+" do grupo "+getpartyname( getcharid(1) )+" entrou no Memorial dos Orcs.",bc_map,"0x00ff99";
 		if (checkquest(12059) == -1) setquest 12059;
 		//warp "1@orcs",179,15;
 		if (getarg(0) == 0) close;
@@ -339,7 +339,7 @@ OnTimer14610:
 	end;
 
 OnTimer20210:
-	mapannounce instance_mapname("1@orcs"), "Kruger: Droga.. Eles estarão aqui a qualquer minuto. Ok. Me escutem.",bc_map,"0xffff00";
+	mapannounce instance_mapname("1@orcs"), "Kruger: Droga.. Eles estarão aqui a qualquer minuto. Certo. Me escutem.",bc_map,"0xffff00";
 	end;
 
 OnTimer24910:

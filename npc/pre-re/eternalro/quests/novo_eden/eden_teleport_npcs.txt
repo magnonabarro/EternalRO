@@ -1,0 +1,91 @@
+// =================================================================
+// NPCs de Atalho e Teleporte - Grupo do Éden (Bypass de Entradas)
+// Diálogos Alternativos Baseados em Quests (rAthena)
+// =================================================================
+
+// --- Função Auxiliar de Verificação de Quests ---
+function	script	F_CheckEdenBypass	{
+	set .@npc_type, getarg(0);
+	
+	if (.@npc_type == 1) return (checkquest(99177, Q_STARTED) == 1);
+	if (.@npc_type == 3) return (checkquest(99158, Q_STARTED)==1 || checkquest(99159, Q_STARTED)==1 || checkquest(99160, Q_STARTED)==1 || checkquest(99342, Q_STARTED)==1 || checkquest(99344, Q_STARTED)==1 || checkquest(99346, Q_STARTED)==1);
+	if (.@npc_type == 4) return (checkquest(99161, Q_STARTED)==1 || checkquest(99162, Q_STARTED)==1 || checkquest(99163, Q_STARTED)==1 || checkquest(99164, Q_STARTED)==1 || checkquest(99165, Q_STARTED)==1 || checkquest(99166, Q_STARTED)==1 || checkquest(99167, Q_STARTED)==1 || checkquest(99168, Q_STARTED)==1 || checkquest(99169, Q_STARTED)==1 || checkquest(99170, Q_STARTED)==1 || checkquest(99171, Q_STARTED)==1 || checkquest(99172, Q_STARTED)==1 || checkquest(99322, Q_STARTED)==1 || checkquest(99324, Q_STARTED)==1);
+	if (.@npc_type == 5) return (checkquest(99260, Q_STARTED)==1 || checkquest(99262, Q_STARTED)==1 || checkquest(99264, Q_STARTED)==1);
+	if (.@npc_type == 6) return (checkquest(99142, Q_STARTED)==1 || checkquest(99143, Q_STARTED)==1 || checkquest(99144, Q_STARTED)==1 || checkquest(99145, Q_STARTED)==1 || checkquest(99318, Q_STARTED)==1 || checkquest(99320, Q_STARTED)==1);
+	return 0;
+}
+
+// --- 1. Mingmin - Geffenia ---
+geffen,129,46,4	script	Mingmin	643,{
+	if (!callfunc("F_CheckEdenBypass", 1)) {
+		mes "Ela parece concentrada em algo....";
+		close;
+	}
+	mes "[Mingmin]";
+	mes "Estou estudando os monstros daqui e sei uma forma de entrar em Geffenia.";
+	next;
+	if (select("Me leve","Ainda não.") == 2) close;
+	close2;
+	warp "gefenia03",143,40;
+	end;
+}
+
+// --- 3. Eduardo - Santuário de Rachel ---
+ra_temple,168,169,4	script	Eduardo	928,{
+	if (!callfunc("F_CheckEdenBypass", 3)) {
+		mes "Ele esta olhando para dentro do santuário.....";
+		close;
+	}
+	mes "[Eduardo]";
+	mes "Escuto barulhos estranhos desde que o templo foi fechado... mas conheço uma entrada.";
+	next;
+	if (select("Me leve","Ainda não.") == 2) close;
+	close2;
+	warp "ra_san01",46,46;
+	end;
+}
+
+// --- 4. Iyla - Biolaboratório ---
+lighthalzen,310,306,4	script	Iyla	879,{
+	if (!callfunc("F_CheckEdenBypass", 4)) {
+		mes "Ela parece ser uma moradora das favelas.....";
+		close;
+	}
+	mes "[Iyla]";
+	mes "Ouvi rumores de que houveram experimentos estranhos no laboratório e sei de uma passagem escondida para entrar.";
+	next;
+	if (select("Me leve","Ainda não.") == 2) close;
+	close2;
+	warp "lhz_dun01",149,285;
+	end;
+}
+
+// --- 5. Taíssa - Ilha Esquecida ---
+ve_fild07,109,145,4	script	Taíssa	919,{
+	if (!callfunc("F_CheckEdenBypass", 5)) {
+		mes "Ela esta com olheiras, quase dormindo em pé.....";
+		close;
+	}
+	mes "[Taíssa]";
+	mes "Não consigo dormir de noite com os gritos que vêm da ilha... Vai lá descobrir o que é? Posso te levar de canoa.";
+	next;
+	if (select("Me leve","Ainda não.") == 2) close;
+	close2;
+	warp "nameless_n",249,232;
+	end;
+}
+
+// --- 6. Burled - Torre de Thanatos ---
+tha_t06,126,128,4	script	Burled	874,{
+	if (!callfunc("F_CheckEdenBypass", 6)) {
+		mes "Ele parece estar esperando alguém melhor não incomodar.....";
+		close;
+	}
+	mes "[Burled]";
+	mes "Sei que você está com uma missão do Grupo Éden, posso ajudar a chegar onde precisa.";
+	next;
+	if (select("Me leve","Ainda não.") == 2) close;
+	close2;
+	warp "tha_t07",113,129;
+	end;
+}

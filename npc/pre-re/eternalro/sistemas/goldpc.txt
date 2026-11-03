@@ -1,38 +1,76 @@
+// Loja de Presença - GOLDPCCAFE
+// Correção defensiva do processamento de compras.
+// IDs mantidos conforme o arquivo original: 40735 e 13810.
+
 -	script	Loja de Presenca::GOLDPCCAFE	10380,{
-     OnEvent:
-    callshop("hourly_shop", 1);
-    npcshopattach("hourly_shop");
-    end;
+
+    OnEvent:
+        callshop("hourly_shop", 1);
+        npcshopattach("hourly_shop");
+        end;
 
     OnBuyItem:
-        mes("[Loja de Presenca]");
+        // Verifica se o jogador consegue carregar os itens selecionados.
         if (!checkweight2(@bought_nameid, @bought_quantity)) {
-            mes("Desculpe mas vocÃª nao pode carregar todos estes itens");
-            close3;
+            dispbottom("Desculpe, você não consegue carregar todos esses itens.");
+            end;
         }
-        
-        for (.@i = 0; .@i < getarraysize(@bought_nameid); .@i++){
-            .@itemIndex = inarray(.Shop, @bought_nameid[.@i]);
+
+        .@costs = 0;
+
+        // Busca cada item somente nas posições de IDs (0, 2, 4...)
+        // e obtém o preço da posição seguinte. Isso evita calcular um
+        // preço inválido se o item comprado não estiver configurado.
+        for (.@i = 0; .@i < getarraysize(@bought_nameid); .@i++) {
+            .@itemIndex = -1;
+
+            for (.@j = 0; .@j < getarraysize(.Shop); .@j += 2) {
+                if (.Shop[.@j] == @bought_nameid[.@i]) {
+                    .@itemIndex = .@j;
+                    break;
+                }
+            }
+
+            if (.@itemIndex < 0 || .@itemIndex + 1 >= getarraysize(.Shop)) {
+                dispbottom("Este item não está configurado nesta loja. Avise a administração.");
+                end;
+            }
+
+            if (@bought_quantity[.@i] <= 0) {
+                dispbottom("A quantidade selecionada é inválida.");
+                end;
+            }
+
             .@costs += (.Shop[.@itemIndex + 1] * @bought_quantity[.@i]);
         }
 
-        if (.@costs > Goldpc_Points) {
-            mes("VocÃª nao tem pontos suficientes.");
-            close3;
+        if (.@costs <= 0) {
+            dispbottom("Não foi possível calcular o custo da compra. Avise a administração.");
+            end;
         }
 
+        if (Goldpc_Points < .@costs) {
+            dispbottom("Você não tem pontos de presença suficientes.");
+            end;
+        }
+
+        // Debita os pontos somente após validar todos os itens e o saldo.
         Goldpc_Points -= .@costs;
-        for(.@i = 0; .@i < getarraysize(@bought_nameid); .@i++) {
+
+        for (.@i = 0; .@i < getarraysize(@bought_nameid); .@i++) {
             getitem(@bought_nameid[.@i], @bought_quantity[.@i]);
-            dispbottom("Purchased " + @bought_quantity[.@i] + " x " + getitemname(@bought_nameid[.@i]) + ".");
+            dispbottom("Compra realizada: " + @bought_quantity[.@i] + " x " + getitemname(@bought_nameid[.@i]) + ".");
         }
 
-        mes("Obrigado pela compra!");
-        mes("VocÃª tem ^0000ff" +Goldpc_Points+ "^000000 pontos de presenÃ§a.");
-        close3;
+        dispbottom("Compra realizada com sucesso!");
+        dispbottom("Saldo de pontos de presença: " + Goldpc_Points);
+        end;
 
     OnInit:
-        setarray(.Shop[0], 40735,1,13810,1 );
-        npcshopitem("hourly_shop", 40735,1,13810,1 );
+        // Formato: ID do item, custo em pontos, ID do item, custo em pontos...
+        setarray(.Shop[0], 40735, 1, 13810, 1);
+        npcshopitem("hourly_shop", 40735, 1, 13810, 1);
+        end;
 }
+
 -	pointshop	hourly_shop	-1,Goldpc_Points,40735:-1.

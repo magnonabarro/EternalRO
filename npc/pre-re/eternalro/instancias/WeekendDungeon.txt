@@ -10,41 +10,41 @@
 pay_arche,44,124,5	script	Marry Jae	4_F_JOB_BLACKSMITH,{
 	mes "[Marry Jae]";
 	if (BaseLevel < 60) {
-		mes "Your base level is too low, come back when you hit level 60+.";
+		mes "Seu nível base está muito baixo, volte quando atingir o nível 60+.";
 		close;
 	}
-	mes "^ff0000If you attempt to tame any monsters, it will not count as a kill. Please be careful.^000000";
+	mes "^ff0000Se você tentar domar algum monstro, isso não contará como uma eliminação. Por favor, tome cuidado.^000000";
 	next;
 	.@day = gettime(DT_DAYOFWEEK);
 	if (.@day != SATURDAY && .@day != SUNDAY) {
 		mes "[Marry Jae]";
-		mes "Oh, a curious onlooker? I'm Marry Jae, the person in charge of weekends among the days of the week.";
+		mes "Oh, um curioso observador? Eu sou Marry Jae, a pessoa responsável pelos finais de semana entre os dias da semana.";
 		next;
 		mes "[Marry Jae]";
-		mes "What is the weekend dungeon? Actually, it's a specially designed space for new adventurers to train.";
+		mes "O que é a masmorra de fim de semana? Na verdade, é um espaço projetado especialmente para novos aventureiros treinarem.";
 		next;
-		mes "^0000FFLooking around, it's obvious that Marry Jae is talking to you.^000000";
-		next;
-		mes "[Marry Jae]";
-		mes "For those who do not have a party on the weekends, this place is hunting and experience gaining grounds for lonely adventurers!";
+		mes "^0000FFOlhando ao redor, é óbvio que Marry Jae está falando com você.^000000";
 		next;
 		mes "[Marry Jae]";
-		mes "Besides, the experience gain here is very generous.";
-		next;
-		select( "When is the opening time?" );
-		mes "[Marry Jae]";
-		mes "The dungeon will be open during:";
-		mes "^0000FFSaturday 00:00 ~ Sunday 23:59^000000";
+		mes "Para aqueles que não têm um grupo nos fins de semana, este lugar é um campo de caça e ganho de experiência para aventureiros solitários!";
 		next;
 		mes "[Marry Jae]";
-		mes "I hope to see you when the weekend arrives~";
+		mes "Além disso, o ganho de experiência aqui é muito generoso.";
+		next;
+		select( "Quando é o horário de funcionamento?" );
+		mes "[Marry Jae]";
+		mes "A masmorra ficará aberta durante:";
+		mes "^0000FFSábado 00:00 ~ Domingo 23:59^000000";
+		next;
+		mes "[Marry Jae]";
+		mes "Espero ver você quando o fim de semana chegar~";
 		close;
 	}
 	.@md_name$ = "Weekend Dungeon";
 
 	if (getcharid(1) < 1) {
 		mes "[Marry Jae]";
-		mes "You need to form a party of one member or more.";
+		mes "Você precisa formar um grupo de um ou mais membros.";
 		close;
 	}
 	switch( checkquest(12378,PLAYTIME) ) {
@@ -56,8 +56,8 @@ pay_arche,44,124,5	script	Marry Jae	4_F_JOB_BLACKSMITH,{
 		case -1:
 		case 2:
 			mes "[Marry Jae]";
-			mes "Sorry, but the entry period to the " + .@md_name$ + " has expired.";
-			mes "Take a rest while waiting for the dungeon to be available again.";
+			mes "Desculpe, mas o período de entrada para a" + .@md_name$ + "expirou.";
+			mes "Descanse enquanto espera a masmorra ficar disponível novamente.";
 			close;
 		case 0:
 		case 1:
@@ -68,8 +68,8 @@ pay_arche,44,124,5	script	Marry Jae	4_F_JOB_BLACKSMITH,{
 		erasequest 12377;
 		erasequest 12378;
 		mes "[Marry Jae]";
-		mes "The cooldown has expired.";
-		mes "You may re-enter the Memorial Dungeon.";
+		mes "O tempo de espera expirou.";
+		mes "Você pode entrar novamente na Masmorra Memorial.";
 		close;
 	}
 
@@ -77,30 +77,30 @@ pay_arche,44,124,5	script	Marry Jae	4_F_JOB_BLACKSMITH,{
 		.@menu$ = "Prepare Memorial Dungeon";
 
 	mes "[Marry Jae]";
-	mes "I think you're just about ready.";
-	mes "Now, would you like to enter it now?";
+	mes "Acho que você está quase pronto.";
+	mes "Agora, você gostaria de entrar nela agora?";
 	next;
-	switch( select( .@menu$, "Enter Weekend Dungeon", "Cancel" ) ) {
+	switch( select( .@menu$, "Entrar na Masmorra de Fim de Semana", "Cancelar" ) ) {
 	case 1:
 		instance_create(.@md_name$);
 		mes "[Marry Jae]";
-		mes "The Memorial Dungeon has been created.";
-		mes "You may now enter.";
+		mes "A Masmorra Memorial foi criada.";
+		mes "Você já pode entrar.";
 		close;
 	case 2:
 		switch( instance_enter(.@md_name$) ) {
 		case IE_NOMEMBER:
 			end;
 		case IE_NOINSTANCE:
-			mes "There is no Memorial Dungeon registered.";
+			mes "Não há nenhuma Masmorra Memorial registrada.";
 			close;
 		case IE_OTHER:
-			mes "An unknown error has occurred.";
+			mes "Ocorreu um erro desconhecido.";
 			close;
 		case IE_OK:
 			mes "[Marry Jae]";
-			mes "Off you go!";
-			mapannounce "pay_arche", "" + strcharinfo(0) + " of the party, " + getpartyname( getcharid(1) ) + ", is entering the " + .@md_name$ + ".", bc_map, 0xFF99;
+			mes "Pode ir!";
+			mapannounce "pay_arche", "" + strcharinfo(0) + ", do grupo " + getpartyname( getcharid(1) ) + ", está entrando na instância " + .@md_name$ + ".", bc_map, 0xFF99;
 			if (isbegin_quest(12377) == 0)
 				setquest 12377;
 			if (isbegin_quest(12378) == 0)
@@ -110,8 +110,8 @@ pay_arche,44,124,5	script	Marry Jae	4_F_JOB_BLACKSMITH,{
 		end;
 	case 3:
 		mes "[Marry Jae]";
-		mes "You have not prepared?";
-		mes "Can't really help it I guess.";
+		mes "Você não se preparou?";
+		mes "Acho que não tem jeito.";
 		close;
 	}
 }
@@ -120,16 +120,16 @@ pay_arche,44,124,5	script	Marry Jae	4_F_JOB_BLACKSMITH,{
 pay_arche,44,121,5	script	Gift Supplies Clerk	4_F_02,{
 	.@zeny = 60000;
 	mes "[Gift Supplies Clerk]";
-	mes "I offer packaging services for those who wish to present a precious gift to a cherished one.";
+	mes "Ofereço serviços de embalagem para aqueles que desejam presentear um ente querido com um mimo precioso.";
 	next;
 	mes "[Gift Supplies Clerk]";
-	mes "If you have 5 units of <ITEM>" + getitemname(23143) + "<INFO>23143</INFO></ITEM> or <ITEM>" + getitemname(23142) + "<INFO>23142</INFO></ITEM>, I can pack it for just ^FF0000" + F_InsertComma(.@zeny) + "^000000 Zeny!";
-	mes "Do you want to pack it right now?";
+	mes "Se você tiver 5 unidades de <ITEM>" + getitemname(23143) + "<INFO>23143</INFO></ITEM> ou <ITEM>" + getitemname(23142) + "<INFO>23142</INFO></ITEM>, posso embalar por apenas ^FF0000" + F_InsertComma(.@zeny) + "^000000 Zenys!";
+	mes "Você quer embalar agora mesmo?";
 	next;
-	switch( select( "Cancel", "Growth Elixir Packing", "Job Elixir Packing" ) ) {
+	switch( select( "Cancelar", "Preparar Elixir de Crescimento", "Preparar Elixir de Classe" ) ) {
 	case 1:
 		mes "[Gift Supplies Clerk]";
-		mes "Come back whenever you need packaging services!";
+		mes "Volte sempre que precisar de serviços de embalagem!";
 		close;
 	case 2:
 		.@item = 23142;
@@ -142,27 +142,27 @@ pay_arche,44,121,5	script	Gift Supplies Clerk	4_F_02,{
 	}
 	mes "[Gift Supplies Clerk]";
 	if (countitem(.@item) < 5) {
-		mes "Please come back when you have enough materials.";
+		mes "Por favor, volte quando tiver materiais suficientes.";
 		close;
 	}
 	if (Zeny < .@zeny) {
-		mes "Please come back when you have enough Zeny.";
-		mes F_InsertComma(.@zeny) + "z to be specific.";
+		mes "Por favor, volte quando tiver Zenys suficientes.";
+		mes F_InsertComma(.@zeny) + "z para ser específico.";
 		close;
 	}
 	if (checkweight(23144,1) == 0) {
-		mes "You have too many kinds of objects. Clear your inventory.";
+		mes "Você tem muitos tipos de objetos. Esvazie seu inventário.";
 		close;
 	}
 	if (MaxWeight - Weight < 10000) {
-		mes "Can't continue because you have too many heavy objects. Reduce your total weight by clearing your inventory.";
+		mes "Não posso continuar porque você tem muitos objetos pesados. Reduza seu peso total esvaziando seu inventário.";
 		close;
 	}
-	mes "Confirm to spend " + F_InsertComma(.@zeny) + "z to package 5 <ITEM>" + getitemname(.@item) + "<INFO>" + .@item + "</INFO></ITEM> into <ITEM>" + getitemname(.@box) + "<INFO>" + .@box + "</INFO></ITEM>?";
+	mes "Confirmar o gasto de" + F_InsertComma(.@zeny) + "z para embalar 5 <ITEM>" + getitemname(.@item) + "<INFO>" + .@item + "</INFO></ITEM> em <ITEM>" + getitemname(.@box) + "<INFO>" + .@box + "</INFO></ITEM>?";
 	next;
-	if (select( "Yes", "No" ) == 2) {
+	if (select( "Sim", "Não" ) == 2) {
 		mes "[Gift Supplies Clerk]";
-		mes "Come back whenever you need packaging services!";
+		mes "Volte sempre que precisar de serviços de embalagem!";
 		close;
 	}
 	Zeny -= .@zeny;
@@ -176,10 +176,10 @@ pay_arche,44,121,5	script	Gift Supplies Clerk	4_F_02,{
 	if (is_party_leader() == false)
 		end;
 	mes "[Marry Jae]";
-	mes "Before we start setting up the environment here, we'll give you the chance to choose an appropriate difficulty level.";
-	mes "I could make my own choice, but each person handles it differently based on their abilities.";
+	mes "Antes de começarmos a configurar o ambiente aqui, lhe daremos a chance de escolher um nível de dificuldade apropriado.";
+	mes "Eu poderia fazer minha própria escolha, mas cada pessoa lida com isso de forma diferente com base em suas habilidades.";
 	next;
-	switch( select( "Cancel", "Lv60 ~ 79", "Lv80 ~ 99", "Lv100 ~ 119", "Lv120 ~ 139", "Lv140 ~ 159", "Lv160 ~ " ) ) {
+	switch( select( "Cancelar", "Nv. 60 ~ 79", "Nv. 80 ~ 99", "Nv. 100 ~ 119", "Nv. 120 ~ 139", "Nv. 140 ~ 159", "Nv. 160 ~ " ) ) {
 	case 1:
 		end;
 	//Familiar, Skeleton, Zombie
@@ -210,12 +210,12 @@ pay_arche,44,121,5	script	Gift Supplies Clerk	4_F_02,{
 	}
 	mes "[Marry Jae]";
 	if (BaseLevel < .@min_level) {
-		mes "Your base level is too low to select this, you need to be level " + .@min_level + " + .";
+		mes "Seu nível base é muito baixo para selecionar isso, você precisa ser nível" + .@min_level + "+ .";
 		close;
 	}
 
-	mes "Good luck finding the treasures!";
-	npctalk "Good luck~";
+	mes "Boa sorte encontrando os tesouros!";
+	npctalk "Boa sorte~";
 	donpcevent instance_npcname("map_md_pay_spawn") + "::OnStart";
 	close;
 }
@@ -391,7 +391,7 @@ OnInstanceInit:
 
 OnStart:
 	enablenpc();
-	instance_announce -1, "A treasure chest appeared somewhere in the dungeon. It'll disappear after a while, so let's find it.", bc_map, "0xff5500";
+	instance_announce -1, "Um baú do tesouro apareceu em algum lugar da masmorra. Ele desaparecerá em breve, então vamos encontrá-lo.", bc_map, "0xff5500";
 	initnpctimer;
 	end;
 OnTimer180000:	//3min before chest disappears

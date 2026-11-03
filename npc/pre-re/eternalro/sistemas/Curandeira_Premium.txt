@@ -405,6 +405,11 @@ if (.buff_premium[1] && #Curandeira_Premium > gettimetick(2)) {
 				dispbottom "[ @buff ] : Digite @buff map <map_name> ou @buff char <char_name>.";
 			}
 		} else {
+			if (!@Curandeira_NPCClick && getgroupid() != 5 && getgmlevel() < 99 && #Curandeira_Premium <= gettimetick(2) && !(BaseLevel >= 90 && CUSTOM_RATE == 6)) {
+				dispbottom "[ @buff ] : Requer VIP, Curandeira Premium ativa ou rate Temporada a partir do nivel 90.";
+				end;
+			}
+			@Curandeira_NPCClick = 0;
 			if (!CURAFIX && !BUFFFIX) doevent strnpcinfo(0)+"::OnDisableCurandeira";
 			callsub curandeira,1,0;
 		}
@@ -735,14 +740,14 @@ OnCurandeira:
 				debugmes "Curandeira : Cobranca ativa com valor zerado.";
 			}else{
 				.@pricebuff = .RPS_currencyBuff[1];
-				if (getgroupid() >= .vip_needed) .@pricebuff -= (.RPS_currencyBuff[1]*.RPS_currencyHeal[2]/100);
+				if ((getgroupid() == 5 || getgmlevel() >= 99)) .@pricebuff -= (.RPS_currencyBuff[1]*.RPS_currencyHeal[2]/100);
 				if (#Curandeira_Premium) .@pricebuff -= (.RPS_currencyBuff[1]*.RPS_currencyHeal[3]/100);
 			}
 			if(.enablelvlup && BaseLevel < .currencybaselvl) set .@pricebuff, 0;
 			else{
 				if(getarg(1)){
 					if(.limitbaselvl == 2 && #Curandeira_Premium) set .@pricebuff, 0;
-					if(.limitbaselvl == 1 && (#Curandeira_Premium || getgroupid() < .vip_needed)) set .@pricebuff, 0;
+					if(.limitbaselvl == 1 && (#Curandeira_Premium || getgroupid() != 5)) set .@pricebuff, 0;
 				}
 			}
 			if(.@pricebuff < 0) set .@pricebuff, 0;
@@ -763,7 +768,7 @@ OnCurandeira:
 			if(.tax_enable) set $tax_healer, $tax_healer + .@pricebuff;
 		}
 		
-		if (getgroupid() >= .vip_needed) {
+		if ((getgroupid() == 5 || getgmlevel() >= 99)) {
 			if (.repairall[0])	repairall getcharid(0);
 			if (.identifyall[0]) identifyall;
 			
@@ -847,12 +852,12 @@ OnCurandeira:
 				if(.enablelvlup && BaseLevel > .currencybaselvl){
 									
 					.@priceHP = .@curaHp;
-					if (getgroupid() >= .vip_needed) .@priceHP -= (.@curaHp*.RPS_currencyHeal[2]/100);
+					if ((getgroupid() == 5 || getgmlevel() >= 99)) .@priceHP -= (.@curaHp*.RPS_currencyHeal[2]/100);
 					if (#Curandeira_Premium) .@priceHP -= (.@curaHp*.RPS_currencyHeal[3]/100);
 					if (.@priceHP < 0) set .@priceHP, 0;
 					
 					.@priceSP = .@curaSp;
-					if (getgroupid() >= .vip_needed) .@priceSP -= (.@curaSp*.RPS_currencyHeal[2]/100);
+					if ((getgroupid() == 5 || getgmlevel() >= 99)) .@priceSP -= (.@curaSp*.RPS_currencyHeal[2]/100);
 					if (#Curandeira_Premium) .@priceSP -= (.@curaSp*.RPS_currencyHeal[3]/100);
 					if (.@priceSP < 0) set .@priceSP, 0;
 				} else {
@@ -963,7 +968,7 @@ OnCurandeira:
 			}else{
 				if(.enablelvlup && BaseLevel > .currencybaselvl){
 					.@price = .RPS_currencyHeal[1];
-					if (getgroupid() >= .vip_needed) .@price -= (.RPS_currencyHeal[1]*.RPS_currencyHeal[2]/100);
+					if ((getgroupid() == 5 || getgmlevel() >= 99)) .@price -= (.RPS_currencyHeal[1]*.RPS_currencyHeal[2]/100);
 					if (#Curandeira_Premium) .@price -= (.RPS_currencyHeal[1]*.RPS_currencyHeal[3]/100);
 					if (.@price < 0) set .@price, 0;
 				}else set .@price, 0;
@@ -1070,58 +1075,63 @@ function	script	RPS_InsertDot	{
 }
 
 //====================================================================================
+-	script	CurandeiraNPC	-1,{
+	@Curandeira_NPCClick = 1;
+	doevent "Curandeira::OnAtcommand_buff";
+	end;
+}
 //= Duplicates (Cidades)
 //====================================================================================
-alberta,125,59,4	duplicate(Curandeira)	Curandeira#alb	646
-aldebaran,135,118,6	duplicate(Curandeira)	Curandeira#alde	646
-amatsu,102,144,6	duplicate(Curandeira)	Curandeira#ama	646
-ayothaya,212,179,6	duplicate(Curandeira)	Curandeira#ayo	646
-comodo,184,158,6	duplicate(Curandeira)	Curandeira#com	646
-einbech,194,131,6	duplicate(Curandeira)	Curandeira#einbe	646
-einbroch,57,202,6	duplicate(Curandeira)	Curandeira#einbr	646
-geffen,115,58,5	duplicate(Curandeira)	Curandeira#gef	646
-gonryun,156,122,6	duplicate(Curandeira)	Curandeira#gon	646
-hugel,89,150,6	duplicate(Curandeira)	Curandeira#hug	646
-izlude,128,120,6	duplicate(Curandeira)	Curandeira#izl	646	//Pre-RE: (125,118)
-jawaii,120,180,6	duplicate(Curandeira)	Curandeira#jaw	646
-lighthalzen,154,85,6	duplicate(Curandeira)	Curandeira#lhz	646
-louyang,226,103,4	duplicate(Curandeira)	Curandeira#lou	646
-manuk,272,144,6	duplicate(Curandeira)	Curandeira#man	646
-mid_camp,203,289,6	duplicate(Curandeira)	Curandeira#mid	646
-moc_ruins,72,164,4	duplicate(Curandeira)	Curandeira#moc	646
-morocc,153,97,6	duplicate(Curandeira)	Curandeira#mor	646
-moscovia,220,191,4	duplicate(Curandeira)	Curandeira#mos	646
-niflheim,212,182,5	duplicate(Curandeira)	Curandeira#nif	646
-payon,166,110,5	duplicate(Curandeira)	Curandeira#pay	646
-prontera,149,190,5	duplicate(Curandeira)	Curandeira#prt	646
-rachel,125,144,6	duplicate(Curandeira)	Curandeira#rac	646
-splendide,201,153,4	duplicate(Curandeira)	Curandeira#spl	646
-thor_camp,249,74,4	duplicate(Curandeira)	Curandeira#thor	646
-umbala,105,148,3	duplicate(Curandeira)	Curandeira#umb	646
-veins,217,121,4	duplicate(Curandeira)	Curandeira#ve	646
-xmas,143,136,4	duplicate(Curandeira)	Curandeira#xmas	646
-yuno,152,188,6	duplicate(Curandeira)	Curandeira#yuno	646
+alberta,125,59,4	duplicate(CurandeiraNPC)	Curandeira#alb	646
+aldebaran,135,118,6	duplicate(CurandeiraNPC)	Curandeira#alde	646
+amatsu,102,144,6	duplicate(CurandeiraNPC)	Curandeira#ama	646
+ayothaya,212,179,6	duplicate(CurandeiraNPC)	Curandeira#ayo	646
+comodo,184,158,6	duplicate(CurandeiraNPC)	Curandeira#com	646
+einbech,194,131,6	duplicate(CurandeiraNPC)	Curandeira#einbe	646
+einbroch,57,202,6	duplicate(CurandeiraNPC)	Curandeira#einbr	646
+geffen,115,58,5	duplicate(CurandeiraNPC)	Curandeira#gef	646
+gonryun,156,122,6	duplicate(CurandeiraNPC)	Curandeira#gon	646
+hugel,89,150,6	duplicate(CurandeiraNPC)	Curandeira#hug	646
+izlude,128,120,6	duplicate(CurandeiraNPC)	Curandeira#izl	646	//Pre-RE: (125,118)
+jawaii,120,180,6	duplicate(CurandeiraNPC)	Curandeira#jaw	646
+lighthalzen,154,85,6	duplicate(CurandeiraNPC)	Curandeira#lhz	646
+louyang,226,103,4	duplicate(CurandeiraNPC)	Curandeira#lou	646
+manuk,272,144,6	duplicate(CurandeiraNPC)	Curandeira#man	646
+mid_camp,203,289,6	duplicate(CurandeiraNPC)	Curandeira#mid	646
+moc_ruins,72,164,4	duplicate(CurandeiraNPC)	Curandeira#moc	646
+morocc,153,97,6	duplicate(CurandeiraNPC)	Curandeira#mor	646
+moscovia,220,191,4	duplicate(CurandeiraNPC)	Curandeira#mos	646
+niflheim,212,182,5	duplicate(CurandeiraNPC)	Curandeira#nif	646
+payon,166,110,5	duplicate(CurandeiraNPC)	Curandeira#pay	646
+prontera,151,193,5	duplicate(CurandeiraNPC)	Curandeira#prt	646
+rachel,125,144,6	duplicate(CurandeiraNPC)	Curandeira#rac	646
+splendide,201,153,4	duplicate(CurandeiraNPC)	Curandeira#spl	646
+thor_camp,249,74,4	duplicate(CurandeiraNPC)	Curandeira#thor	646
+umbala,105,148,3	duplicate(CurandeiraNPC)	Curandeira#umb	646
+veins,217,121,4	duplicate(CurandeiraNPC)	Curandeira#ve	646
+xmas,143,136,4	duplicate(CurandeiraNPC)	Curandeira#xmas	646
+yuno,152,188,6	duplicate(CurandeiraNPC)	Curandeira#yuno	646
 
-yuno_fild03,39,143,4	duplicate(Curandeira)	Curandeira#hmag	646
-cmd_fild07,266,332,5	duplicate(Curandeira)	Curandeira#cmd2	646
-cmd_fild08,322,357,5	duplicate(Curandeira)	Curandeira#hcmd8	646
-alb2trea,62,69,5	duplicate(Curandeira)	Curandeira#hnv1	646
-gef_fild10,76,340,4	duplicate(Curandeira)	Curandeira#h03a	646
-gef_tower,156,36,3	duplicate(Curandeira)	Curandeira#hgeft	646
-glast_01,203,297,4	duplicate(Curandeira)	Curandeira#hgla	646
-hu_fild05,186,209,5	duplicate(Curandeira)	Curandeira#habys1	646
-in_orcs01,35,176,4	duplicate(Curandeira)	Curandeira#h03ab	646
-izlu2dun,104,88,5	duplicate(Curandeira)	Curandeira#h06a	646
-moc_fild19,108,101,4	duplicate(Curandeira)	Curandeira#hmoc19	646
-moc_ruins,69,164,4	duplicate(Curandeira)	Curandeira#h2moc1	646
-pay_arche,55,121,4	duplicate(Curandeira)	Curandeira#h4a	646
-prt_fild05,290,217,4	duplicate(Curandeira)	Curandeira#fprt5	646
-ra_fild01,227,328,5	duplicate(Curandeira)	Curandeira#hice	646
-ve_fild03,164,237,5	duplicate(Curandeira)	Curandeira#hthor	646
+yuno_fild03,39,143,4	duplicate(CurandeiraNPC)	Curandeira#hmag	646
+cmd_fild07,266,332,5	duplicate(CurandeiraNPC)	Curandeira#cmd2	646
+cmd_fild08,322,357,5	duplicate(CurandeiraNPC)	Curandeira#hcmd8	646
+alb2trea,62,69,5	duplicate(CurandeiraNPC)	Curandeira#hnv1	646
+gef_fild10,76,340,4	duplicate(CurandeiraNPC)	Curandeira#h03a	646
+gef_tower,156,36,3	duplicate(CurandeiraNPC)	Curandeira#hgeft	646
+glast_01,203,297,4	duplicate(CurandeiraNPC)	Curandeira#hgla	646
+hu_fild05,186,209,5	duplicate(CurandeiraNPC)	Curandeira#habys1	646
+in_orcs01,35,176,4	duplicate(CurandeiraNPC)	Curandeira#h03ab	646
+izlu2dun,104,88,5	duplicate(CurandeiraNPC)	Curandeira#h06a	646
+moc_fild19,108,101,4	duplicate(CurandeiraNPC)	Curandeira#hmoc19	646
+moc_ruins,69,164,4	duplicate(CurandeiraNPC)	Curandeira#h2moc1	646
+pay_arche,55,121,4	duplicate(CurandeiraNPC)	Curandeira#h4a	646
+prt_fild05,290,217,4	duplicate(CurandeiraNPC)	Curandeira#fprt5	646
+ra_fild01,227,328,5	duplicate(CurandeiraNPC)	Curandeira#hice	646
+ve_fild03,164,237,5	duplicate(CurandeiraNPC)	Curandeira#hthor	646
 
 // Duplicates (Renewal)
 //============================================================
-brasilis,190,222,6	duplicate(Curandeira)	Curandeira#bra	646
+brasilis,190,222,6	duplicate(CurandeiraNPC)	Curandeira#bra	646
 //dewata,195,187,4	duplicate(Curandeira)	Curandeira#dew	646
 //dicastes01,201,194,4	duplicate(Curandeira)	Curandeira#dic	646
 //ecl_in01,45,60,4	duplicate(Curandeira)	Curandeira#ecl	646

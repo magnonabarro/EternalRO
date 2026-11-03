@@ -285,6 +285,11 @@ Body:
     Title: Getting back Professor Worm's memory
   - Id: 1228
     Title: Getting back Professor Worm's memory
+  - Id: 1261
+    Title: Cursed Swordman
+    TimeLimit: 4h
+  - Id: 1263
+    Title: Cursed Swordman
   - Id: 2000
     Title: Job Change to Blacksmith
   - Id: 2001
@@ -2897,6 +2902,33 @@ Body:
     Title: Find the chief of staff!
   - Id: 7453
     Title: The last of the chief of staff
+  - Id: 7568
+    Title: Explore the tower
+    TimeLimit: +1h30mn
+  - Id: 7569
+    Title: Treat the injured
+  - Id: 7570
+    Title: Destroy the demons
+    Targets:
+      - Mob: MM_EVIL_SHADOW1
+        Count: 7
+      - Mob: MM_EVIL_SHADOW2
+        Count: 7
+      - Mob: MM_EVIL_SHADOW3
+        Count: 7
+  - Id: 7571
+    Title: Tower Expedition
+  - Id: 7572
+    Title: Lucile...?
+  - Id: 7573
+    Title: Magic Swordman Thanatos
+  - Id: 7574
+    Title: Thanatos Tower
+  - Id: 7576
+    Title: Morocc castle seal
+  - Id: 7577
+    Title: Space distortion
+    TimeLimit: 4h
   - Id: 8000
     Title: Quitting Job Change
   - Id: 8001
@@ -3652,6 +3684,94 @@ Body:
     Title: Survey investigation notes
   - Id: 9262
     Title: Mystery Robbery Incident 16
+  - Id: 9284
+    Title: Stopping Geffen Gangsters
+  - Id: 9285
+    Title: Beating Geffen Gangsters
+  - Id: 9286
+    Title: Stop Geffen Gangsters
+  - Id: 9287
+    Title: Defeating Geffen Gangsters
+  - Id: 9288
+    Title: Catch a Geffen thief
+  - Id: 9289
+    Title: Get things back from the thief
+  - Id: 9290
+    Title: Participate in Magic competitions
+  - Id: 9291
+    Title: Participate in Magic competitions
+  - Id: 9292
+    Title: Participate in Magic competitions
+  - Id: 9293
+    Title: Register in Magic Competition
+    Targets:
+      - Mob: DESERT_WOLF
+        Count: 1
+  - Id: 9294
+    Title: Registration Complete
+  - Id: 9295
+    Title: 1st match of the Tournament has started
+  - Id: 9296
+    Title: 2nd match of the Competition has started
+  - Id: 9297
+    Title: 3rd match of the Competition has started
+  - Id: 9298
+    Title: 4th match of the Competition has started
+  - Id: 9299
+    Title: 5th match of the Competition has started
+  - Id: 9300
+    Title: 6th match of the Competition has started
+  - Id: 9301
+    Title: 7th match of the Competition has started
+  - Id: 9302
+    Title: 8th match of the Competition has started
+  - Id: 9303
+    Title: 9th match of the Competition has started
+  - Id: 9304
+    Title: 10th match of the Competition has started
+  - Id: 9305
+    Title: 11th match of the Competition has started
+  - Id: 9306
+    Title: 12th match of the Competition has started
+  - Id: 9307
+    Title: Final match of the Competition has started
+  - Id: 9308
+    Title: Magic Competition Win~!
+  - Id: 9309
+    Title: Magic Tournament defeat
+  - Id: 9310
+    Title: Encounter Iris
+  - Id: 9311
+    Title: Encounter Chaos
+  - Id: 9312
+    Title: Encounter Lydia
+  - Id: 9313
+    Title: Encounter Fenrir
+  - Id: 9314
+    Title: Encounter Loki
+  - Id: 9315
+    Title: Exploring the dimensional gap
+  - Id: 9316
+    Title: Re-exploring the crack of spaces
+    TimeLimit: 4h
+  - Id: 9318
+    Title: Pursuing Hiding Morocc
+    Targets:
+      - Mob: EP14_MORS_BOSSB
+        Count: 1
+  - Id: 9319
+    Title: Pursuing Hiding Morocc Continues
+    TimeLimit: 4h
+  - Id: 9418
+    Title: Attack Sky Fortress Invading Prontera
+    Targets:
+      - Mob: AS_RAGGED_GOLEM
+        Count: 1
+  - Id: 9419
+    Title: Attack Sky Fortress Invading Prontera
+    TimeLimit: 3d 4h
+  - Id: 9427
+    Title: Clearing the Sky Fortress for the Same Time
   - Id: 10000
     Title: To the Prontera Royal Court
   - Id: 10001
@@ -5235,6 +5355,8 @@ Body:
     Title: Revisiting Etran
   - Id: 12301
     Title: Two remaining friends
+  - Id: 12316
+    Title: Meeting Hugin
   - Id: 12317
     Title: Fake Keyblade
     TimeLimit: +23h
@@ -5242,8 +5364,60 @@ Body:
     Title: "Upper Cats: annoying guy"
   - Id: 12319
     Title: "Upper Cats: annoying guy"
+  - Id: 12320
+    Title: Time Traveler
+  - Id: 12321
+    Title: Time Conqueror
+  - Id: 12322
+    Title: Space Distortion
+  - Id: 12325
+    Title: Faceworm's Nest after-effects
+    TimeLimit: 4h
+  - Id: 12326
+    Title: The owner of old ring
+    TimeLimit: 4h
+  - Id: 12327
+    Title: The memory of old photo album
+    TimeLimit: 4h
+  - Id: 12328
+    Title: Dol-Seoi's Sorrow
+    TimeLimit: 4h
+  - Id: 12329
+    Title: Keaton's Bracelet
+    TimeLimit: 4h
+  - Id: 12330
+    Title: Skull-faced Girl
+  - Id: 12331
+    Title: Trail of Toy Factory
+    TimeLimit: 4h
+  - Id: 12346
+    Title: Strange Ancient Science
+  - Id: 12347
+    Title: Trace of Laboratory Access
+    TimeLimit: 4h
   - Id: 12363
     Title: ?????? ?? ??
+  - Id: 12364
+    Title: Fallen Paros Lighthouse
+  - Id: 12365
+    Title: Gloomy Spirit of the Underground
+    TimeLimit: +3h
+  - Id: 12377
+    Title: Attack on Weekend Dungeon
+    TimeLimit: +1h
+  - Id: 12378
+    Title: Time to Rest
+    TimeLimit: 4h
+  - Id: 12379
+    Title: Time to Rest
+    TimeLimit: 4h
+  - Id: 12416
+    Title: Contract with Emily
+  - Id: 12417
+    Title: Recovering Fatigue
+    TimeLimit: 4h
+  - Id: 12418
+    Title: First visit to Poring Village
   - Id: 13000
     Title: RWC2011Card Gathering
   - Id: 13001
@@ -5785,6 +5959,28 @@ Body:
   - Id: 13168
     Title: Rake horn Scaraba Story - Wait
     TimeLimit: +1h
+  - Id: 13181
+    Title: Nightmarish Jitterbug
+  - Id: 13182
+    Title: "Nightmarish Jitterbug: Waiting"
+    TimeLimit: 4h
+  - Id: 13183
+    Title: "Nightmarish Jitterbug: Completed"
+  - Id: 13184
+    Title: Charleston Factory
+  - Id: 13185
+    Title: Charleston Factory - Hold
+    TimeLimit: 4h
+  - Id: 13186
+    Title: Charleston Factory - Complete
+  - Id: 13187
+    Title: Deal with the Staff
+    Targets:
+      - Mob: STEP
+        Count: 50
+  - Id: 13188
+    Title: Deal with the Staff - Hold
+    TimeLimit: 4h
   - Id: 14118
     Title: Wuhari's concern
   - Id: 14119
@@ -5826,6 +6022,43 @@ Body:
     Title: To Wuhari
   - Id: 14141
     Title: Ingredients for research
+  - Id: 14585
+    Title: Investigating the Cause
+    Targets:
+      - Mob: POPE_MD_E_LUWMIN
+        Count: 1
+  - Id: 14586
+    Title: Time to Rest
+    TimeLimit: 4h
+  - Id: 14587
+    Title: Investigating the Cause
+    Targets:
+      - Mob: POPE_MD_H_KTULLANUX
+        Count: 1
+  - Id: 14594
+    Title: Ready to walk the dream
+  - Id: 15002
+    Title: "Memorial dungeon: Sara's Memory"
+    TimeLimit: 4h
+  - Id: 15003
+    Title: Adventurer leon
+  - Id: 15005
+    Title: "Memorial Dungeon: Isle of Bios"
+    TimeLimit: 4h
+  - Id: 15006
+    Title: Isle of Bios Exploration
+  - Id: 15007
+    Title: "Memorial Dungeon: Isle of Bios"
+    TimeLimit: +5mn
+  - Id: 15008
+    Title: "Memorial Dungeon: Isle of Bios"
+    TimeLimit: +5mn
+  - Id: 15050
+    Title: "Memorial Dungeon: Airship Assault"
+    TimeLimit: 4h
+  - Id: 15051
+    Title: "Memorial Dungeon: Airship Assault"
+    TimeLimit: +5mn
   - Id: 15055
     Title: "Christmas : We are the great Single Union Army!"
   - Id: 15056
@@ -7209,3 +7442,2161 @@ Body:
         Count: 200
       - Mob: WHIKEBAIN
         Count: 200
+  - Id: 99001
+    Title: "Trabalho Braçal"
+    Targets:
+      - Mob: WILOW
+        Count: 5
+  - Id: 99002
+    Title: "Medo de Cobras"
+    Targets:
+      - Mob: SNAKE
+        Count: 5
+  - Id: 99003
+    Title: "Não é uma Cebola"
+    Targets:
+      - Mob: WORM_TAIL
+        Count: 5
+  - Id: 99004
+    Title: "Cogumelo Estranho"
+    Targets:
+      - Mob: SPORE
+        Count: 10
+  - Id: 99005
+    Title: "Salvando o Parquinho"
+    Targets:
+      - Mob: HORNET
+        Count: 10
+  - Id: 99006
+    Title: "Insetos Musicais"
+    Targets:
+      - Mob: ROCKER
+        Count: 10
+  - Id: 99007
+    Title: "Problema Pegajoso"
+    Targets:
+      - Mob: AMBERNITE
+        Count: 10
+  - Id: 99008
+    Title: "Guerra aos Mortos"
+    Targets:
+      - Mob: ZOMBIE
+        Count: 10
+      - Mob: SKELETON
+        Count: 20
+  - Id: 99009
+    Title: "Bichos Barulhentos"
+    Targets:
+      - Mob: MUKA
+        Count: 10
+      - Mob: PECOPECO
+        Count: 20
+  - Id: 99010
+    Title: "Churrasco Ruim"
+    Targets:
+      - Mob: THARA_FROG
+        Count: 10
+  - Id: 99011
+    Title: "Tratamento de Pele"
+    Targets:
+      - Mob: HYDRA
+        Count: 10
+  - Id: 99012
+    Title: "Tempero Korasera"
+    Targets:
+      - Mob: MEGALODON
+        Count: 10
+  - Id: 99013
+    Title: "Resgatar Amigos!"
+    Targets:
+      - Mob: PIRATE_SKEL
+        Count: 10
+  - Id: 99014
+    Title: "Barata do Mar!"
+    Targets:
+      - Mob: KUKRE
+        Count: 10
+  - Id: 99015
+    Title: "Tesouro do Mar!"
+  - Id: 99016
+    Title: "Limpando o Navio!"
+    Targets:
+      - Mob: HYDRA
+        Count: 10
+  - Id: 99017
+    Title: "Navio Assombrado!"
+    Targets:
+      - Mob: WHISPER
+        Count: 10
+      - Mob: C1_SAILOR_SKELETON
+        Count: 1
+  - Id: 99018
+    Title: "Guerra na Praia!"
+    Targets:
+      - Mob: ASTER
+        Count: 10
+      - Mob: CRAB
+        Count: 10
+  - Id: 99019
+    Title: "Catador de Ostras!"
+    Targets:
+      - Mob: SHELLFISH
+        Count: 10
+  - Id: 99020
+    Title: "Orcs Infernais!"
+    Targets:
+      - Mob: ORC_ZOMBIE
+        Count: 20
+      - Mob: ORC_SKELETON
+        Count: 20
+  - Id: 99021
+    Title: "Ganancioso!"
+    Targets:
+      - Mob: ZENORC
+        Count: 20
+  - Id: 99022
+    Title: "Família Orc!"
+    Targets:
+      - Mob: ORK_WARRIOR
+        Count: 15
+      - Mob: ORC_LADY
+        Count: 15
+      - Mob: ORC_BABY
+        Count: 10
+  - Id: 99023
+    Title: "Goblins Ferozes!"
+    Targets:
+      - Mob: GOBLIN_3
+        Count: 10
+      - Mob: GOBLIN_2
+        Count: 10
+  - Id: 99024
+    Title: "Goblins Velozes!"
+    Targets:
+      - Mob: GOBLIN_1
+        Count: 10
+      - Mob: GOBLIN_4
+        Count: 10
+  - Id: 99025
+    Title: "Goblins Atrozes!"
+    Targets:
+      - Mob: GOBLIN_ARCHER
+        Count: 10
+      - Mob: GOBLIN_5
+        Count: 10
+  - Id: 99026
+    Title: "Estranhos do Deserto!"
+    Targets:
+      - Mob: MAGNOLIA
+        Count: 10
+      - Mob: METALLER
+        Count: 10
+  - Id: 99027
+    Title: "Biologia Marinha!"
+    Targets:
+      - Mob: MARINA
+        Count: 10
+      - Mob: PLANKTON
+        Count: 10
+    Drops:
+      - Mob: MARINA
+        Item: Single_Cell
+        Count: 10
+        Rate: 10000
+  - Id: 99028
+    Title: "Amuleto de Caranguejo!"
+    Targets:
+      - Mob: VADON
+        Count: 10
+  - Id: 99029
+    Title: "Cuidando do Grupo!"
+    Targets:
+      - Mob: SWORD_FISH
+        Count: 10
+      - Mob: MARC
+        Count: 10
+  - Id: 99030
+    Title: "Ingredientes Culinários!"
+    Targets:
+      - Mob: MARSE
+        Count: 20
+  - Id: 99031
+    Title: "Sereia Encantadora!"
+    Targets:
+      - Mob: OBEAUNE
+        Count: 10
+  - Id: 99032
+    Title: "Deus dos Oceanos!"
+    Targets:
+      - Mob: MERMAN
+        Count: 10
+  - Id: 99033
+    Title: "A Caixa da Múmia!"
+    Targets:
+      - Mob: MUMMY
+        Count: 10
+  - Id: 99034
+    Title: "Preciso Dormir!"
+    Targets:
+      - Mob: VERIT
+        Count: 10
+      - Mob: MINOROUS
+        Count: 10
+  - Id: 99035
+    Title: "Metade Cobra!"
+    Targets:
+      - Mob: ISIS
+        Count: 20
+  - Id: 99036
+    Title: "Pedreiros!"
+    Targets:
+      - Mob: ZEROM
+        Count: 15
+      - Mob: REQUIEM
+        Count: 15
+  - Id: 99037
+    Title: "Enigma da Esfinge!"
+    Targets:
+      - Mob: MARDUK
+        Count: 15
+      - Mob: PASANA
+        Count: 15
+    Drops:
+      - Mob: MARDUK
+        Item: Worn_Out_Papyrus
+        Count: 10
+        Rate: 3000
+  - Id: 99038
+    Title: "Areia Movediça!"
+    Targets:
+      - Mob: SAND_MAN
+        Count: 10
+  - Id: 99039
+    Title: "Ritual de Exorcismo!"
+    Targets:
+      - Mob: MUNAK
+        Count: 15
+      - Mob: BON_GUN
+        Count: 15
+    Drops:
+      - Mob: MUNAK
+        Item: Amulet
+        Count: 15
+        Rate: 3000
+      - Mob: BON_GUN
+        Item: Amulet
+        Count: 15
+        Rate: 3000
+  - Id: 99040
+    Title: "Oferenda aos Espíritos!"
+  - Id: 99041
+    Title: "Cheiro de Magia!"
+    Targets:
+      - Mob: SOHEE
+        Count: 12
+    Drops:
+      - Mob: SOHEE
+        Item: Handkerchief_of_Girl
+        Count: 3
+        Rate: 3000
+  - Id: 99042
+    Title: "Caça à Caçadora!"
+    Targets:
+      - Mob: HUNTER_FLY
+        Count: 10
+  - Id: 99043
+    Title: "Magia Maligna!"
+    Targets:
+      - Mob: JAKK
+        Count: 10
+      - Mob: GHOUL
+        Count: 10
+  - Id: 99044
+    Title: "Amigos na Praia!"
+    Targets:
+      - Mob: FUR_SEAL
+        Count: 10
+      - Mob: SEE_OTTER
+        Count: 10
+  - Id: 99045
+    Title: "Duro como Pedra!"
+    Targets:
+      - Mob: STALACTIC_GOLEM
+        Count: 10
+      - Mob: TRI_JOINT
+        Count: 5
+      - Mob: MEGALITH
+        Count: 5
+  - Id: 99046
+    Title: "A Cor Verde!"
+    Targets:
+      - Mob: GREEN_IGUANA
+        Count: 15
+      - Mob: ALLIGATOR
+        Count: 10
+  - Id: 99048
+    Title: "Proteger a Academia!"
+    Targets:
+      - Mob: HARPY
+        Count: 15
+      - Mob: SLEEPER
+        Count: 15
+  - Id: 99049
+    Title: "Itens Valiosos!"
+  - Id: 99050
+    Title: "Animais no Campus!"
+    Targets:
+      - Mob: GOAT
+        Count: 20
+      - Mob: GRAND_PECO
+        Count: 20
+  - Id: 99051
+    Title: "Faxina na Torre!"
+    Targets:
+      - Mob: PUNK
+        Count: 15
+      - Mob: RIDEWORD
+        Count: 20
+  - Id: 99052
+    Title: "Objeto Animado!"
+    Targets:
+      - Mob: CLOCK
+        Count: 15
+  - Id: 99053
+    Title: "Objeto Vivo!"
+    Targets:
+      - Mob: ALARM
+        Count: 20
+  - Id: 99054
+    Title: "Risadas no Subsolo!"
+    Targets:
+      - Mob: BATHORY
+        Count: 20
+  - Id: 99055
+    Title: "Purificando o Lugar!"
+    Targets:
+      - Mob: WRAITH
+        Count: 15
+      - Mob: EVIL_DRUID
+        Count: 15
+  - Id: 99056
+    Title: "Fugindo da Prisão!"
+    Targets:
+      - Mob: ZOMBIE_PRISONER
+        Count: 10
+      - Mob: SKEL_PRISONER
+        Count: 10
+  - Id: 99057
+    Title: "Gosto da Vingança!"
+    Targets:
+      - Mob: INJUSTICE
+        Count: 20
+  - Id: 99058
+    Title: "Torturador Sádico!"
+    Targets:
+      - Mob: RYBIO
+        Count: 10
+  - Id: 99059
+    Title: "Cemitério de Sacerdotes!"
+    Targets:
+      - Mob: DARK_PRIEST
+        Count: 10
+      - Mob: C4_DARK_PRIEST
+        Count: 1
+  - Id: 99060
+    Title: "Dragões Fofinhos!"
+    Targets:
+      - Mob: PETIT_
+        Count: 10
+  - Id: 99061
+    Title: "Dragões Fortinhos!"
+    Targets:
+      - Mob: PETIT
+        Count: 10
+  - Id: 99062
+    Title: "Seres Demoníacos!"
+    Targets:
+      - Mob: MARIONETTE
+        Count: 10
+      - Mob: DEVIRUCHI
+        Count: 10
+  - Id: 99063
+    Title: "Cavalos Sinistros!"
+    Targets:
+      - Mob: NIGHTMARE
+        Count: 10
+  - Id: 99064
+    Title: "Patrulhamento!"
+    Targets:
+      - Mob: MOLE
+        Count: 10
+  - Id: 99065
+    Title: "Gases Venenosos!"
+    Targets:
+      - Mob: VENOMOUS
+        Count: 20
+  - Id: 99066
+    Title: "Gases Tóxicos!"
+    Targets:
+      - Mob: NOXIOUS
+        Count: 20
+  - Id: 99067
+    Title: "Boneco Assassino!"
+    Targets:
+      - Mob: TEDDY_BEAR
+        Count: 15
+  - Id: 99068
+    Title: "Trabalhadores da Mina!"
+    Targets:
+      - Mob: PITMAN
+        Count: 20
+  - Id: 99069
+    Title: "Como isso se move?!"
+    Targets:
+      - Mob: WASTE_STOVE
+        Count: 15
+  - Id: 99070
+    Title: "Minérios Saltitantes!"
+    Targets:
+      - Mob: MINERAL
+        Count: 15
+      - Mob: OBSIDIAN
+        Count: 5
+  - Id: 99071
+    Title: "Uma Grande Piscina!"
+    Targets:
+      - Mob: RAFFLESIA
+        Count: 20
+  - Id: 99072
+    Title: "Bate no Tornozelo!"
+    Targets:
+      - Mob: STEM_WORM
+        Count: 20
+  - Id: 99073
+    Title: "Brisa Desagradável!"
+    Targets:
+      - Mob: BREEZE
+        Count: 20
+  - Id: 99074
+    Title: "Passeio pela Ilha!"
+    Targets:
+      - Mob: SPRING_RABBIT
+        Count: 10
+      - Mob: DRAGON_TAIL
+        Count: 10
+  - Id: 99075
+    Title: "Nativos da Ilha! (Parte 1)"
+    Targets:
+      - Mob: PERMETER
+        Count: 10
+      - Mob: FREEZER
+        Count: 10
+  - Id: 99076
+    Title: "Nativos da Ilha! (Parte 2)"
+    Targets:
+      - Mob: SOLIDER
+        Count: 10
+      - Mob: HEATER
+        Count: 10
+  - Id: 99077
+    Title: "Tartaruga Ninja!"
+    Targets:
+      - Mob: ASSULTER
+        Count: 10
+  - Id: 99078
+    Title: "Arauto do Templo!"
+    Targets:
+      - Mob: TAMRUAN
+        Count: 20
+  - Id: 99079
+    Title: "Pássaro Colorido!"
+    Targets:
+      - Mob: TOUCAN
+        Count: 20
+  - Id: 99080
+    Title: "Lenda do Folclore!"
+    Targets:
+      - Mob: HEADLESS_MULE
+        Count: 20
+  - Id: 99081
+    Title: "Pesadelo Soviético!"
+    Targets:
+      - Mob: UZHAS
+        Count: 20
+  - Id: 99082
+    Title: "Vovó Vidente!"
+    Targets:
+      - Mob: VAVAYAGA
+        Count: 20
+  - Id: 99083
+    Title: "Areias Atacam?!"
+    Targets:
+      - Mob: INCREASE_SOIL
+        Count: 20
+  - Id: 99084
+    Title: "Tumba de Segredos!"
+    Targets:
+      - Mob: LI_ME_MANG_RYANG
+        Count: 15
+      - Mob: HYEGUN
+        Count: 15
+  - Id: 99085
+    Title: "Bonecas Delicadas!"
+    Targets:
+      - Mob: MIYABI_NINGYO
+        Count: 20
+  - Id: 99086
+    Title: "Vigia Morto-Vivo!"
+    Targets:
+      - Mob: ANTIQUE_FIRELOCK
+        Count: 20
+  - Id: 99087
+    Title: "Alguém à Espreita!"
+    Targets:
+      - Mob: SHINOBI
+        Count: 20
+  - Id: 99088
+    Title: "Donzela Celestial!"
+    Targets:
+      - Mob: WICKED_NYMPH
+        Count: 20
+  - Id: 99089
+    Title: "Árvore que Anda!"
+    Targets:
+      - Mob: LIVE_PEACH_TREE
+        Count: 20
+  - Id: 99090
+    Title: "Homem nas Nuvens!"
+    Targets:
+      - Mob: EVIL_CLOUD_HERMIT
+        Count: 20
+  - Id: 99091
+    Title: "Problema na Fronteira!"
+    Targets:
+      - Mob: MANTIS
+        Count: 10
+      - Mob: GEOGRAPHER
+        Count: 10
+  - Id: 99092
+    Title: "Um Grande Lago!"
+    Targets:
+      - Mob: NOVUS_
+        Count: 10
+      - Mob: NOVUS
+        Count: 10
+  - Id: 99093
+    Title: "Peregrinação Pacífica!"
+    Targets:
+      - Mob: ROWEEN
+        Count: 30
+  - Id: 99094
+    Title: "Guardião da Beleza!"
+    Targets:
+      - Mob: SIROMA
+        Count: 30
+  - Id: 99095
+    Title: "Pedra sobre Pedra!"
+    Targets:
+      - Mob: STAPO
+        Count: 30
+  - Id: 99096
+    Title: "Filtro dos Sonhos"
+    Targets:
+      - Mob: NIGHTMARE_TERROR
+        Count: 30
+  - Id: 99097
+    Title: "Dragões de Fogo"
+    Targets:
+      - Mob: DELETER
+        Count: 30
+      - Mob: DELETER_
+        Count: 30
+  - Id: 99098
+    Title: "Estudo Geológico"
+  - Id: 99099
+    Title: "Pobre Palhaço"
+    Targets:
+      - Mob: CARAT
+        Count: 30
+  - Id: 99100
+    Title: "O MVP mais Forte"
+    Targets:
+      - Mob: ARCLOUSE
+        Count: 30
+  - Id: 99101
+    Title: "Limpeza de Esgoto"
+    Targets:
+      - Mob: ANOLIAN
+        Count: 30
+  - Id: 99102
+    Title: "Mão Inimiga"
+    Targets:
+      - Mob: STING
+        Count: 30
+  - Id: 99103
+    Title: "Touro Valente"
+    Targets:
+      - Mob: MAJORUROS
+        Count: 30
+  - Id: 99104
+    Title: "Menina das Flores"
+    Targets:
+      - Mob: PINGUICULA
+        Count: 30
+  - Id: 99105
+    Title: "Brilho Fatal"
+    Targets:
+      - Mob: LUCIOLA_VESPA
+        Count: 30
+  - Id: 99106
+    Title: "Rei do Novo Mundo"
+    Targets:
+      - Mob: TENDRILRION
+        Count: 1
+  - Id: 99107
+    Title: "Vila da Colina"
+    Targets:
+      - Mob: HILL_WIND_1
+        Count: 30
+  - Id: 99108
+    Title: "Alcateia no Deserto"
+    Targets:
+      - Mob: DESERT_WOLF
+        Count: 30
+  - Id: 99109
+    Title: "Pelos de Cachorro"
+  - Id: 99110
+    Title: "Mutação Vulcânica"
+    Targets:
+      - Mob: MAGMARING
+        Count: 30
+  - Id: 99111
+    Title: "Minhas Bebidas Geladas"
+  - Id: 99112
+    Title: "Monstro das Neves"
+    Targets:
+      - Mob: SNOWIER
+        Count: 30
+  - Id: 99113
+    Title: "Vilarejo dos Kobolds"
+    Targets:
+      - Mob: KOBOLD_1
+        Count: 20
+      - Mob: KOBOLD_2
+        Count: 20
+      - Mob: KOBOLD_3
+        Count: 20
+  - Id: 99114
+    Title: "Guerra contra as Plantas"
+    Targets:
+      - Mob: MUSCIPULAR
+        Count: 30
+      - Mob: DROSERA
+        Count: 30
+  - Id: 99115
+    Title: "Cristais são Duros?"
+    Targets:
+      - Mob: GAZETI
+        Count: 10
+      - Mob: ICE_TITAN
+        Count: 30
+  - Id: 99116
+    Title: "Armadura Vazia"
+    Targets:
+      - Mob: RAYDRIC
+        Count: 30
+  - Id: 99117
+    Title: "Ajeite a Postura"
+    Targets:
+      - Mob: KHALITZBURG
+        Count: 30
+  - Id: 99118
+    Title: "Viajante sem Rumo"
+    Targets:
+      - Mob: WANDER_MAN
+        Count: 30
+  - Id: 99119
+    Title: "Inimigo à Altura"
+    Targets:
+      - Mob: KNIGHT_OF_ABYSS
+        Count: 10
+  - Id: 99120
+    Title: "Menina Veneno"
+    Targets:
+      - Mob: PINGUICULA_D
+        Count: 30
+  - Id: 99121
+    Title: "Marcador de Páginas"
+    Targets:
+      - Mob: NEPENTHES
+        Count: 30
+  - Id: 99122
+    Title: "Belos Músculos!"
+    Targets:
+      - Mob: NAGA
+        Count: 30
+  - Id: 99123
+    Title: "Conto de Fadas"
+    Targets:
+      - Mob: CORNUS
+        Count: 30
+  - Id: 99124
+    Title: "Espinhos Perigosos"
+    Targets:
+      - Mob: CENTIPEDE_LARVA
+        Count: 20
+  - Id: 99125
+    Title: "Poder do Chifre"
+  - Id: 99126
+    Title: "Uma Caixa Viva"
+    Targets:
+      - Mob: ANCIENT_MIMIC
+        Count: 30
+  - Id: 99127
+    Title: "Palavras ao Vento"
+    Targets:
+      - Mob: DEATHWORD
+        Count: 30
+  - Id: 99128
+    Title: "Barão do Reino"
+    Targets:
+      - Mob: OWL_BARON
+        Count: 20
+  - Id: 99129
+    Title: "Páginas de um Livro"
+  - Id: 99130
+    Title: "Manuscritos Mágicos"
+  - Id: 99131
+    Title: "Aula de Reciclagem"
+  - Id: 99132
+    Title: "Formigas de Aço"
+    Targets:
+      - Mob: VENATU_2
+        Count: 20
+      - Mob: VENATU_1
+        Count: 20
+  - Id: 99133
+    Title: "Formigas de Ferro"
+    Targets:
+      - Mob: VENATU_4
+        Count: 20
+      - Mob: VENATU_3
+        Count: 20
+  - Id: 99134
+    Title: "Robôs Coloridos"
+    Targets:
+      - Mob: DIMIK_2
+        Count: 10
+      - Mob: DIMIK_3
+        Count: 10
+  - Id: 99135
+    Title: "Robôs Multicoloridos"
+    Targets:
+      - Mob: DIMIK_1
+        Count: 10
+      - Mob: DIMIK_4
+        Count: 10
+  - Id: 99136
+    Title: "Menina Gótica"
+    Targets:
+      - Mob: SKOGUL
+        Count: 20
+  - Id: 99137
+    Title: "Purificar o Mal"
+    Targets:
+      - Mob: FRUS
+        Count: 20
+  - Id: 99138
+    Title: "Seres Gelatinosos"
+    Targets:
+      - Mob: SKEGGIOLD_
+        Count: 5
+      - Mob: SKEGGIOLD
+        Count: 5
+  - Id: 99139
+    Title: "Dragões do Lago"
+    Targets:
+      - Mob: FERUS_
+        Count: 30
+      - Mob: FERUS
+        Count: 30
+  - Id: 99140
+    Title: "Dragões do Subsolo"
+    Targets:
+      - Mob: ACIDUS_
+        Count: 30
+      - Mob: ACIDUS
+        Count: 30
+  - Id: 99141
+    Title: "Dragão do Tesouro"
+    Targets:
+      - Mob: HYDRO
+        Count: 1
+  - Id: 99142
+    Title: "Punição Angelical"
+    Targets:
+      - Mob: RETRIBUTION
+        Count: 30
+  - Id: 99143
+    Title: "Som Angelical"
+    Targets:
+      - Mob: SOLACE
+        Count: 30
+  - Id: 99144
+    Title: "Descanso Angelical"
+    Targets:
+      - Mob: SHELTER
+        Count: 30
+  - Id: 99145
+    Title: "Vigia Angelical"
+    Targets:
+      - Mob: OBSERVATION
+        Count: 30
+  - Id: 99146
+    Title: "Alerta Venenoso"
+    Targets:
+      - Mob: CENTIPEDE
+        Count: 30
+  - Id: 99147
+    Title: "Animal Pateta"
+    Targets:
+      - Mob: TATACHO
+        Count: 30
+  - Id: 99148
+    Title: "Parece uma Joia"
+    Targets:
+      - Mob: DOLOMEDES
+        Count: 30
+  - Id: 99149
+    Title: "Um Único Chifre"
+    Targets:
+      - Mob: HORN_SCARABA
+        Count: 30
+  - Id: 99150
+    Title: "São Dois Chifres"
+    Targets:
+      - Mob: HORN_SCARABA2
+        Count: 30
+  - Id: 99151
+    Title: "Chifres de Galho"
+    Targets:
+      - Mob: ANTLER_SCARABA
+        Count: 30
+  - Id: 99152
+    Title: "Chifres de Pinça"
+    Targets:
+      - Mob: RAKE_SCARABA
+        Count: 30
+  - Id: 99153
+    Title: "Animais de Fogo"
+    Targets:
+      - Mob: FIRE_CONDOR
+        Count: 15
+      - Mob: FIRE_FRILLDORA
+        Count: 15
+  - Id: 99154
+    Title: "Criaturas de Fogo"
+    Targets:
+      - Mob: FIRE_GOLEM
+        Count: 15
+      - Mob: FIRE_SAND_MAN
+        Count: 15
+  - Id: 99155
+    Title: "Irmãos Zumbis"
+    Targets:
+      - Mob: ZOMBIE_SLAUGHTER
+        Count: 30
+      - Mob: RAGGED_ZOMBIE
+        Count: 30
+  - Id: 99156
+    Title: "Gritos e mais Gritos"
+    Targets:
+      - Mob: BANSHEE
+        Count: 30
+  - Id: 99157
+    Title: "Controle dos Mortos"
+    Targets:
+      - Mob: NECROMANCER
+        Count: 20
+  - Id: 99158
+    Title: "Limpe a Ala Oeste"
+    Targets:
+      - Mob: ISILLA
+        Count: 20
+      - Mob: VANBERK
+        Count: 20
+  - Id: 99159
+    Title: "Limpe a Ala Leste"
+    Targets:
+      - Mob: HODREMLIN
+        Count: 30
+  - Id: 99160
+    Title: "Limpe a Ala Sul"
+    Targets:
+      - Mob: AGAV
+        Count: 20
+      - Mob: ECHIO
+        Count: 20
+  - Id: 99161
+    Title: "Cobaia Espadachim"
+    Targets:
+      - Mob: YGNIZEM
+        Count: 30
+  - Id: 99162
+    Title: "Cobaia Mercadora"
+    Targets:
+      - Mob: ARMAIA
+        Count: 30
+  - Id: 99163
+    Title: "Cobaia Gatuna"
+    Targets:
+      - Mob: WHIKEBAIN
+        Count: 30
+  - Id: 99164
+    Title: "Cobaia Arqueiro"
+    Targets:
+      - Mob: KAVAC
+        Count: 30
+  - Id: 99165
+    Title: "Cobaia Noviço"
+    Targets:
+      - Mob: EREND
+        Count: 30
+  - Id: 99166
+    Title: "Cobaia Mago"
+    Targets:
+      - Mob: RAWREL
+        Count: 30
+  - Id: 99167
+    Title: "Cobaia Atiradora"
+    Targets:
+      - Mob: SHECIL
+        Count: 2
+  - Id: 99168
+    Title: "Cobaia Arquimaga"
+    Targets:
+      - Mob: KATRINN
+        Count: 2
+  - Id: 99169
+    Title: "Cobaia Sacerdotisa"
+    Targets:
+      - Mob: MAGALETA
+        Count: 2
+  - Id: 99170
+    Title: "Cobaia Lorde"
+    Targets:
+      - Mob: SEYREN
+        Count: 2
+  - Id: 99171
+    Title: "Cobaia Algoz"
+    Targets:
+      - Mob: EREMES
+        Count: 2
+  - Id: 99172
+    Title: "Cobaia Ferreiro"
+    Targets:
+      - Mob: HARWORD
+        Count: 2
+  - Id: 99173
+    Title: "Forma de Anjo"
+    Targets:
+      - Mob: MOROCC_1
+        Count: 30
+  - Id: 99174
+    Title: "Forma de Lama"
+    Targets:
+      - Mob: MOROCC_2
+        Count: 30
+  - Id: 99175
+    Title: "Forma Humana"
+    Targets:
+      - Mob: MOROCC_3
+        Count: 30
+  - Id: 99176
+    Title: "Forma Fantasma"
+    Targets:
+      - Mob: MOROCC_4
+        Count: 30
+  - Id: 99177
+    Title: "Demônios dos Sonhos"
+    Targets:
+      - Mob: INCUBUS
+        Count: 5
+      - Mob: SUCCUBUS
+        Count: 5
+  - Id: 99178
+    Title: "Carinha Felpudo"
+    Targets:
+      - Mob: MIMING
+        Count: 20
+  - Id: 99179
+    Title: "Fada Travessa"
+    Targets:
+      - Mob: LITTLE_FATUM
+        Count: 20
+  - Id: 99180
+    Title: "Entrega: Felpa"
+  - Id: 99181
+    Title: "Entrega: Pata Pegajosa"
+  - Id: 99182
+    Title: "Entrega: Perna de Gafanhoto"
+  - Id: 99183
+    Title: "Entrega: Casco de Caramujo"
+  - Id: 99184
+    Title: "Entrega: Bico de Ave"
+  - Id: 99185
+    Title: "Entrega: Pata de Urso"
+  - Id: 99186
+    Title: "Entrega: Resina"
+  - Id: 99187
+    Title: "Entrega: Cauda de Yoyo"
+  - Id: 99188
+    Title: "Entrega: Lampião"
+  - Id: 99189
+    Title: "Entrega: Concha"
+  - Id: 99190
+    Title: "Entrega: Coração de Sereia"
+  - Id: 99191
+    Title: "Entrega: Crina"
+  - Id: 99192
+    Title: "Entrega: Cabelos Morenos"
+  - Id: 99193
+    Title: "Entrega: Ferradura"
+  - Id: 99194
+    Title: "Entrega: Pata de Inseto"
+  - Id: 99195
+    Title: "Entrega: Areia Molhada"
+  - Id: 99196
+    Title: "Entrega: Areia Seca"
+  - Id: 99197
+    Title: "Entrega: Casco de Tartaruga"
+  - Id: 99198
+    Title: "Entrega: Pequeno Chifre Maligno"
+  - Id: 99199
+    Title: "Entrega: Coração Glacial"
+  - Id: 99200
+    Title: "[É]Zangão Fugaz"
+    Targets:
+      - Mob: C5_HORNET
+        Count: 1
+  - Id: 99201
+    Title: "[É]Zangão Fugaz"
+    TimeLimit: 4h
+  - Id: 99202
+    Title: "[É]Rocker Fugaz"
+    Targets:
+      - Mob: C5_ROCKER
+        Count: 1
+  - Id: 99203
+    Title: "[É]Rocker Fugaz"
+    TimeLimit: 4h
+  - Id: 99204
+    Title: "[É]Ambernite Fugaz"
+    Targets:
+      - Mob: C5_AMBERNITE
+        Count: 1
+  - Id: 99205
+    Title: "[É]Ambernite Fugaz"
+    TimeLimit: 4h
+  - Id: 99206
+    Title: "[É]Muka Alfa"
+    Targets:
+      - Mob: C3_MUKA
+        Count: 1
+  - Id: 99207
+    Title: "[É]Muka Alfa"
+    TimeLimit: 4h
+  - Id: 99208
+    Title: "[É]Pé-Grande Alfa"
+    Targets:
+      - Mob: C3_BIGFOOT
+        Count: 1
+  - Id: 99209
+    Title: "[É]Pé-Grande Alfa"
+    TimeLimit: 4h
+  - Id: 99210
+    Title: "[É]Besouro-Chifre Brutal"
+    Targets:
+      - Mob: C2_HORN
+        Count: 1
+  - Id: 99211
+    Title: "[É]Besouro-Chifre Brutal"
+    TimeLimit: 4h
+  - Id: 99212
+    Title: "[É]Salgueiro Ancião Ágil"
+    Targets:
+      - Mob: C1_ELDER_WILOW
+        Count: 1
+  - Id: 99213
+    Title: "[É]Salgueiro Ancião Ágil"
+    TimeLimit: 4h
+  - Id: 99214
+    Title: "[É]Koko Brutal"
+    Targets:
+      - Mob: SEYREN
+        Count: 1
+  - Id: 99215
+    Title: "[É]Koko Brutal"
+    TimeLimit: 4h
+  - Id: 99216
+    Title: "[É]Yoyo Ágil"
+    Targets:
+      - Mob: C1_YOYO
+        Count: 1
+  - Id: 99217
+    Title: "[É]Yoyo Ágil"
+    TimeLimit: 4h
+  - Id: 99218
+    Title: "[É]Magnólia Fugaz"
+    Targets:
+      - Mob: C5_MAGNOLIA
+        Count: 1
+  - Id: 99219
+    Title: "[É]Magnólia Fugaz"
+    TimeLimit: 4h
+  - Id: 99220
+    Title: "[É]Guerreiro Orc Feroz"
+    Targets:
+      - Mob: C4_ORK_WARRIOR
+        Count: 1
+  - Id: 99221
+    Title: "[É]Guerreiro Orc Feroz"
+    TimeLimit: 4h
+  - Id: 99222
+    Title: "[É]Goblin Ágil"
+    Targets:
+      - Mob: C1_GOBLIN_1
+        Count: 1
+  - Id: 99223
+    Title: "[É]Goblin Ágil"
+    TimeLimit: 4h
+  - Id: 99224
+    Title: "[É]Goblin Fugaz"
+    Targets:
+      - Mob: SEYREN
+        Count: 1
+  - Id: 99225
+    Title: "[É]Goblin Fugaz"
+    TimeLimit: 4h
+  - Id: 99226
+    Title: "[É]Petite Ágil"
+    Targets:
+      - Mob: C1_PETIT
+        Count: 1
+  - Id: 99227
+    Title: "[É]Petite Ágil"
+    TimeLimit: 4h
+  - Id: 99228
+    Title: "[É]Petite Brutal"
+    Targets:
+      - Mob: C2_PETIT
+        Count: 1
+  - Id: 99229
+    Title: "[É]Petite Brutal"
+    TimeLimit: 4h
+  - Id: 99230
+    Title: "[É]Carat Fugaz"
+    Targets:
+      - Mob: C5_CARAT
+        Count: 1
+  - Id: 99231
+    Title: "[É]Carat Fugaz"
+    TimeLimit: 4h
+  - Id: 99232
+    Title: "[É]Majoruros Feroz"
+    Targets:
+      - Mob: C4_MAJORUROS
+        Count: 1
+  - Id: 99233
+    Title: "[É]Majoruros Feroz"
+    TimeLimit: 4h
+  - Id: 99234
+    Title: "[É]Raydric Brutal"
+    Targets:
+      - Mob: C2_RAYDRIC
+        Count: 1
+  - Id: 99235
+    Title: "[É]Raydric Brutal"
+    TimeLimit: 4h
+  - Id: 99236
+    Title: "[É]Raydric Ágil"
+    Targets:
+      - Mob: C1_RAYDRIC
+        Count: 1
+  - Id: 99237
+    Title: "[É]Raydric Ágil"
+    TimeLimit: 4h
+  - Id: 99238
+    Title: "[É]Andarilho Feroz"
+    Targets:
+      - Mob: C4_WANDER_MAN
+        Count: 1
+  - Id: 99239
+    Title: "[É]Andarilho Feroz"
+    TimeLimit: 4h
+  - Id: 99248
+    Title: "[É]Arenoso Feroz"
+    Targets:
+      - Mob: C4_SAND_MAN
+        Count: 1
+  - Id: 99249
+    Title: "[É]Arenoso Feroz"
+    TimeLimit: 4h
+  - Id: 99250
+    Title: "[É]Foca Ágil"
+    Targets:
+      - Mob: C1_FUR_SEAL
+        Count: 1
+  - Id: 99251
+    Title: "[É]Foca Ágil"
+    TimeLimit: 4h
+  - Id: 99252
+    Title: "[É]Grove Fugaz"
+    Targets:
+      - Mob: C5_GREEN_IGUANA
+        Count: 1
+  - Id: 99253
+    Title: "[É]Grove Fugaz"
+    TimeLimit: 4h
+  - Id: 99254
+    Title: "[É]Crocodilo Brutal"
+    Targets:
+      - Mob: C2_ALLIGATOR
+        Count: 1
+  - Id: 99255
+    Title: "[É]Crocodilo Brutal"
+    TimeLimit: 4h
+  - Id: 99256
+    Title: "[É]Guerreiro Wootan Feroz"
+    Targets:
+      - Mob: C4_WOOTAN_FIGHTER
+        Count: 1
+  - Id: 99257
+    Title: "[É]Guerreiro Wootan Feroz"
+    TimeLimit: 4h
+  - Id: 99258
+    Title: "[É]Dríade Ágil"
+    Targets:
+      - Mob: C1_DRYAD
+        Count: 1
+  - Id: 99259
+    Title: "[É]Dríade Ágil"
+    TimeLimit: 4h
+  - Id: 99260
+    Title: "[É]Massacre Ágil"
+    Targets:
+      - Mob: C1_ZOMBIE_SLAUGHTER
+        Count: 1
+  - Id: 99261
+    Title: "[É]Massacre Ágil"
+    TimeLimit: 4h
+  - Id: 99262
+    Title: "[É]Banshee Ágil"
+    Targets:
+      - Mob: C1_BANSHEE
+        Count: 1
+  - Id: 99263
+    Title: "[É]Banshee Ágil"
+    TimeLimit: 4h
+  - Id: 99264
+    Title: "[É]Necromante Alfa"
+    Targets:
+      - Mob: C3_NECROMANCER
+        Count: 1
+  - Id: 99265
+    Title: "[É]Necromante Alfa"
+    TimeLimit: 4h
+  - Id: 99276
+    Title: "[É]Molusco Ágil"
+    Targets:
+      - Mob: C1_SHELLFISH
+        Count: 1
+  - Id: 99277
+    Title: "[É]Molusco Ágil"
+    TimeLimit: 4h
+  - Id: 99278
+    Title: "[É]Planta Carnívora Brutal"
+    Targets:
+      - Mob: C2_GEOGRAPHER
+        Count: 1
+  - Id: 99279
+    Title: "[É]Planta Carnívora Brutal"
+    TimeLimit: 4h
+  - Id: 99280
+    Title: "[É]Grand Peco Alfa"
+    Targets:
+      - Mob: C3_GRAND_PECO
+        Count: 1
+  - Id: 99281
+    Title: "[É]Grand Peco Alfa"
+    TimeLimit: 4h
+  - Id: 99282
+    Title: "[É]Bode Alfa"
+    Targets:
+      - Mob: C3_GOAT
+        Count: 1
+  - Id: 99283
+    Title: "[É]Bode Alfa"
+    TimeLimit: 4h
+  - Id: 99284
+    Title: "[É]Rochoso Ágil"
+    Targets:
+      - Mob: C1_SLEEPER
+        Count: 1
+  - Id: 99285
+    Title: "[É]Rochoso Ágil"
+    TimeLimit: 4h
+  - Id: 99286
+    Title: "[É]Talo de Verme Ágil"
+    Targets:
+      - Mob: C1_STEM_WORM
+        Count: 1
+  - Id: 99287
+    Title: "[É]Talo de Verme Ágil"
+    TimeLimit: 4h
+  - Id: 99288
+    Title: "[É]Holden Brutal"
+    Targets:
+      - Mob: C2_MOLE
+        Count: 1
+  - Id: 99289
+    Title: "[É]Holden Brutal"
+    TimeLimit: 4h
+  - Id: 99290
+    Title: "[É]Rafflesia Ágil"
+    Targets:
+      - Mob: C1_ALNOLDI
+        Count: 1
+  - Id: 99291
+    Title: "[É]Rafflesia Ágil"
+    TimeLimit: 4h
+  - Id: 99292
+    Title: "[É]Nuvem Venenosa Alfa"
+    Targets:
+      - Mob: C3_VENOMOUS
+        Count: 1
+  - Id: 99293
+    Title: "[É]Nuvem Venenosa Alfa"
+    TimeLimit: 4h
+  - Id: 99294
+    Title: "[É]Nuvem Tóxica Feroz"
+    Targets:
+      - Mob: C4_NOXIOUS
+        Count: 1
+  - Id: 99295
+    Title: "[É]Nuvem Tóxica Feroz"
+    TimeLimit: 4h
+  - Id: 99296
+    Title: "[É]Novus Fugaz"
+    Targets:
+      - Mob: C5_NOVUS
+        Count: 1
+  - Id: 99297
+    Title: "[É]Novus Fugaz"
+    TimeLimit: 4h
+  - Id: 99304
+    Title: "[É]Pesadelo Sombrio Feroz"
+    Targets:
+      - Mob: C4_NIGHTMARE_TERROR
+        Count: 1
+  - Id: 99305
+    Title: "[É]Pesadelo Sombrio Feroz"
+    TimeLimit: 4h
+  - Id: 99306
+    Title: "[É]Mímico Antigo Alfa"
+    Targets:
+      - Mob: C3_ANCIENT_MIMIC
+        Count: 1
+  - Id: 99307
+    Title: "[É]Mímico Antigo Alfa"
+    TimeLimit: 4h
+  - Id: 99308
+    Title: "[É]Palavra Morta Brutal"
+    Targets:
+      - Mob: C2_DEATHWORD
+        Count: 1
+  - Id: 99309
+    Title: "[É]Palavra Morta Brutal"
+    TimeLimit: 4h
+  - Id: 99310
+    Title: "[É]Venatu Feroz"
+    Targets:
+      - Mob: C4_VENATU_1
+        Count: 1
+  - Id: 99311
+    Title: "[É]Venatu Feroz"
+    TimeLimit: 4h
+  - Id: 99312
+    Title: "[É]Dimik Ágil"
+    Targets:
+      - Mob: C1_DIMIK_1
+        Count: 1
+  - Id: 99313
+    Title: "[É]Dimik Ágil"
+    TimeLimit: 4h
+  - Id: 99314
+    Title: "[É]Ferus Feroz"
+    Targets:
+      - Mob: C4_FERUS_
+        Count: 1
+  - Id: 99315
+    Title: "[É]Ferus Feroz"
+    TimeLimit: 4h
+  - Id: 99316
+    Title: "[É]Acidus Brutal"
+    Targets:
+      - Mob: C2_ACIDUS_
+        Count: 1
+  - Id: 99317
+    Title: "[É]Acidus Brutal"
+    TimeLimit: 4h
+  - Id: 99318
+    Title: "[É]Conforto Fugaz"
+    Targets:
+      - Mob: C5_SOLACE
+        Count: 1
+  - Id: 99319
+    Title: "[É]Conforto Fugaz"
+    TimeLimit: 4h
+  - Id: 99320
+    Title: "[É]Observação Alfa"
+    Targets:
+      - Mob: C3_OBSERVATION
+        Count: 1
+  - Id: 99321
+    Title: "[É]Observação Alfa"
+    TimeLimit: 4h
+  - Id: 99322
+    Title: "[É]Laurell Weinder Alfa"
+    Targets:
+      - Mob: C3_RAWREL
+        Count: 1
+  - Id: 99323
+    Title: "[É]Laurell Weinder Alfa"
+    TimeLimit: 4h
+  - Id: 99324
+    Title: "[É]Cecil Damon Brutal"
+    Targets:
+      - Mob: C2_SHECIL
+        Count: 1
+  - Id: 99325
+    Title: "[É]Cecil Damon Brutal"
+    TimeLimit: 4h
+  - Id: 99328
+    Title: "[É]Roween Brutal"
+    Targets:
+      - Mob: C2_ROWEEN
+        Count: 1
+  - Id: 99329
+    Title: "[É]Roween Brutal"
+    TimeLimit: 4h
+  - Id: 99330
+    Title: "[É]Stapo Alfa"
+    Targets:
+      - Mob: C3_STAPO
+        Count: 1
+  - Id: 99331
+    Title: "[É]Stapo Alfa"
+    TimeLimit: 4h
+  - Id: 99332
+    Title: "[É]Vento da Colina Ágil"
+    Targets:
+      - Mob: C1_HILL_WIND_1
+        Count: 1
+  - Id: 99333
+    Title: "[É]Vento da Colina Ágil"
+    TimeLimit: 4h
+  - Id: 99334
+    Title: "[É]Kobold Brutal"
+    Targets:
+      - Mob: C2_KOBOLD_1
+        Count: 1
+  - Id: 99335
+    Title: "[É]Kobold Brutal"
+    TimeLimit: 4h
+  - Id: 99336
+    Title: "[É]Kobold Arqueiro Ágil"
+    Targets:
+      - Mob: C1_KOBOLD_ARCHER
+        Count: 1
+  - Id: 99337
+    Title: "[É]Kobold Arqueiro Ágil"
+    TimeLimit: 4h
+  - Id: 99338
+    Title: "[É]Yeti Brutal"
+    Targets:
+      - Mob: C2_SNOWIER
+        Count: 1
+  - Id: 99339
+    Title: "[É]Yeti Brutal"
+    TimeLimit: 4h
+  - Id: 99340
+    Title: "[É]Titã de Gelo Ágil"
+    Targets:
+      - Mob: C1_ICE_TITAN
+        Count: 1
+  - Id: 99341
+    Title: "[É]Titã de Gelo Ágil"
+    TimeLimit: 4h
+  - Id: 99342
+    Title: "[É]Isilla Alfa"
+    Targets:
+      - Mob: C3_ISILLA
+        Count: 1
+  - Id: 99343
+    Title: "[É]Isilla Alfa"
+    TimeLimit: 4h
+  - Id: 99344
+    Title: "[É]Echio Alfa"
+    Targets:
+      - Mob: C3_ECHIO
+        Count: 1
+  - Id: 99345
+    Title: "[É]Echio Alfa"
+    TimeLimit: 4h
+  - Id: 99346
+    Title: "[É]Agav Ágil"
+    Targets:
+      - Mob: C1_AGAV
+        Count: 1
+  - Id: 99347
+    Title: "[É]Agav Ágil"
+    TimeLimit: 4h
+  - Id: 99358
+    Title: "[É]Fumacento Feroz"
+    Targets:
+      - Mob: C5_SOLACE
+        Count: 1
+  - Id: 99359
+    Title: "[É]Fumacento Feroz"
+    TimeLimit: 4h
+  - Id: 99360
+    Title: "[É]Pirralho Alfa"
+    Targets:
+      - Mob: C3_RICE_CAKE_BOY
+        Count: 1
+  - Id: 99361
+    Title: "[É]Pirralho Alfa"
+    TimeLimit: 4h
+  - Id: 99362
+    Title: "[É]Espírito do Vento Feroz"
+    Targets:
+      - Mob: C4_TOUCAN
+        Count: 1
+  - Id: 99363
+    Title: "[É]Espírito do Vento Feroz"
+    TimeLimit: 4h
+  - Id: 99364
+    Title: "[É]Sorrateiro Brutal"
+    Targets:
+      - Mob: C2_SIDE_WINDER
+        Count: 1
+  - Id: 99365
+    Title: "[É]Sorrateiro Brutal"
+    TimeLimit: 4h
+  - Id: 99366
+    Title: "[É]Karakasa Ágil"
+    Targets:
+      - Mob: C1_KARAKASA
+        Count: 1
+  - Id: 99367
+    Title: "[É]Karakasa Ágil"
+    TimeLimit: 4h
+  - Id: 99368
+    Title: "[É]Mi Gao Fugaz"
+    Targets:
+      - Mob: C5_INCREASE_SOIL
+        Count: 1
+  - Id: 99369
+    Title: "[É]Mi Gao Fugaz"
+    TimeLimit: 4h
+  - Id: 99370
+    Title: "[É]Vespa Vagalume Fugaz"
+    Targets:
+      - Mob: C5_LUCIOLA_VESPA
+        Count: 1
+  - Id: 99371
+    Title: "[É]Vespa Vagalume Fugaz"
+    TimeLimit: 4h
+  - Id: 99372
+    Title: "[É]Pinguicula Brutal"
+    Targets:
+      - Mob: C2_PINGUICULA_D
+        Count: 1
+  - Id: 99373
+    Title: "[É]Pinguicula Brutal"
+    TimeLimit: 4h
+  - Id: 99374
+    Title: "[É]Centopéia Ágil"
+    Targets:
+      - Mob: C1_CENTIPEDE
+        Count: 1
+  - Id: 99375
+    Title: "[É]Centopéia Ágil"
+    TimeLimit: 4h
+  - Id: 99376
+    Title: "[É]Dolomedes Alfa"
+    Targets:
+      - Mob: C3_DOLOMEDES
+        Count: 1
+  - Id: 99377
+    Title: "[É]Dolomedes Alfa"
+    TimeLimit: 4h
+  - Id: 99378
+    Title: "[É]Scaraba Galhado Fugaz"
+    Targets:
+      - Mob: C5_ANTLER_SCARABA
+        Count: 1
+  - Id: 99379
+    Title: "[É]Scaraba Galhado Fugaz"
+    TimeLimit: 4h
+  - Id: 99380
+    Title: "[É]Plagiador Alfa"
+    Targets:
+      - Mob: C3_MIMING
+        Count: 1
+  - Id: 99381
+    Title: "[É]Plagiador Alfa"
+    TimeLimit: 4h
+  - Id: 99382
+    Title: "[É]Pequeno Fatum Feroz"
+    Targets:
+      - Mob: C4_LITTLE_FATUM
+        Count: 1
+  - Id: 99383
+    Title: "[É]Pequeno Fatum Feroz"
+    TimeLimit: 4h
+  - Id: 99384
+    Title: "Espera - Trabalho Braçal"
+    TimeLimit: 4h
+  - Id: 99385
+    Title: "Espera - Medo de Cobras"
+    TimeLimit: 4h
+  - Id: 99386
+    Title: "Espera - Não é uma Cebola"
+    TimeLimit: 4h
+  - Id: 99387
+    Title: "Espera - Cogumelo Estranho"
+    TimeLimit: 4h
+  - Id: 99388
+    Title: "Espera - Salvando o Parquinho"
+    TimeLimit: 4h
+  - Id: 99389
+    Title: "Espera - Insetos Musicais"
+    TimeLimit: 4h
+  - Id: 99390
+    Title: "Espera - Problema Pegajoso"
+    TimeLimit: 4h
+  - Id: 99391
+    Title: "Espera - Guerra aos Mortos"
+    TimeLimit: 4h
+  - Id: 99392
+    Title: "Espera - Bichos Barulhentos"
+    TimeLimit: 4h
+  - Id: 99393
+    Title: "Espera - Churrasco Ruim"
+    TimeLimit: 4h
+  - Id: 99394
+    Title: "Espera - Tratamento de Pele"
+    TimeLimit: 4h
+  - Id: 99395
+    Title: "Espera - Tempero Korasera"
+    TimeLimit: 4h
+  - Id: 99396
+    Title: "Espera - Resgatar Amigos!"
+    TimeLimit: 4h
+  - Id: 99397
+    Title: "Espera - Barata do Mar!"
+    TimeLimit: 4h
+  - Id: 99398
+    Title: "Espera - Tesouro do Mar!"
+    TimeLimit: 4h
+  - Id: 99399
+    Title: "Espera - Limpando o Navio!"
+    TimeLimit: 4h
+  - Id: 99400
+    Title: "Espera - Navio Assombrado!"
+    TimeLimit: 4h
+  - Id: 99401
+    Title: "Espera - Guerra na Praia!"
+    TimeLimit: 4h
+  - Id: 99402
+    Title: "Espera - Catador de Ostras!"
+    TimeLimit: 4h
+  - Id: 99403
+    Title: "Espera - Orcs Infernais!"
+    TimeLimit: 4h
+  - Id: 99404
+    Title: "Espera - Ganancioso!"
+    TimeLimit: 4h
+  - Id: 99405
+    Title: "Espera - Família Orc!"
+    TimeLimit: 4h
+  - Id: 99406
+    Title: "Espera - Goblins Ferozes!"
+    TimeLimit: 4h
+  - Id: 99407
+    Title: "Espera - Goblins Velozes!"
+    TimeLimit: 4h
+  - Id: 99408
+    Title: "Espera - Goblins Atrozes!"
+    TimeLimit: 4h
+  - Id: 99409
+    Title: "Espera - Estranhos do Deserto!"
+    TimeLimit: 4h
+  - Id: 99410
+    Title: "Espera - Biologia Marinha!"
+    TimeLimit: 4h
+  - Id: 99411
+    Title: "Espera - Amuleto de Caranguejo!"
+    TimeLimit: 4h
+  - Id: 99412
+    Title: "Espera - Cuidando do Grupo!"
+    TimeLimit: 4h
+  - Id: 99413
+    Title: "Espera - Ingredientes Culinários!"
+    TimeLimit: 4h
+  - Id: 99414
+    Title: "Espera - Sereia Encantadora!"
+    TimeLimit: 4h
+  - Id: 99415
+    Title: "Espera - Deus dos Oceanos!"
+    TimeLimit: 4h
+  - Id: 99416
+    Title: "Espera - A Caixa da Múmia!"
+    TimeLimit: 4h
+  - Id: 99417
+    Title: "Espera - Preciso Dormir!"
+    TimeLimit: 4h
+  - Id: 99418
+    Title: "Espera - Metade Cobra!"
+    TimeLimit: 4h
+  - Id: 99419
+    Title: "Espera - Pedreiros!"
+    TimeLimit: 4h
+  - Id: 99420
+    Title: "Espera - Enigma da Esfinge!"
+    TimeLimit: 4h
+  - Id: 99421
+    Title: "Espera - Areia Movediça!"
+    TimeLimit: 4h
+  - Id: 99422
+    Title: "Espera - Ritual de Exorcismo!"
+    TimeLimit: 4h
+  - Id: 99423
+    Title: "Espera - Oferenda aos Espíritos!"
+    TimeLimit: 4h
+  - Id: 99424
+    Title: "Espera - Cheiro de Magia!"
+    TimeLimit: 4h
+  - Id: 99425
+    Title: "Espera - Caça à Caçadora!"
+    TimeLimit: 4h
+  - Id: 99426
+    Title: "Espera - Magia Maligna!"
+    TimeLimit: 4h
+  - Id: 99427
+    Title: "Espera - Amigos na Praia!"
+    TimeLimit: 4h
+  - Id: 99428
+    Title: "Espera - Duro como Pedra!"
+    TimeLimit: 4h
+  - Id: 99429
+    Title: "Espera - A Cor Verde!"
+    TimeLimit: 4h
+  - Id: 99430
+    Title: "Espera - Proteger a Academia!"
+    TimeLimit: 4h
+  - Id: 99431
+    Title: "Espera - Itens Valiosos!"
+    TimeLimit: 4h
+  - Id: 99432
+    Title: "Espera - Animais no Campus!"
+    TimeLimit: 4h
+  - Id: 99433
+    Title: "Espera - Faxina na Torre!"
+    TimeLimit: 4h
+  - Id: 99434
+    Title: "Espera - Objeto Animado!"
+    TimeLimit: 4h
+  - Id: 99435
+    Title: "Espera - Objeto Vivo!"
+    TimeLimit: 4h
+  - Id: 99436
+    Title: "Espera - Risadas no Subsolo!"
+    TimeLimit: 4h
+  - Id: 99437
+    Title: "Espera - Purificando o Lugar!"
+    TimeLimit: 4h
+  - Id: 99438
+    Title: "Espera - Fugindo da Prisão!"
+    TimeLimit: 4h
+  - Id: 99439
+    Title: "Espera - Gosto da Vingança!"
+    TimeLimit: 4h
+  - Id: 99440
+    Title: "Espera - Torturador Sádico!"
+    TimeLimit: 4h
+  - Id: 99441
+    Title: "Espera - Cemitério de Sacerdotes!"
+    TimeLimit: 4h
+  - Id: 99442
+    Title: "Espera - Dragões Fofinhos!"
+    TimeLimit: 4h
+  - Id: 99443
+    Title: "Espera - Dragões Fortinhos!"
+    TimeLimit: 4h
+  - Id: 99444
+    Title: "Espera - Seres Demoníacos!"
+    TimeLimit: 4h
+  - Id: 99445
+    Title: "Espera - Cavalos Sinistros!"
+    TimeLimit: 4h
+  - Id: 99446
+    Title: "Espera - Patrulhamento!"
+    TimeLimit: 4h
+  - Id: 99447
+    Title: "Espera - Gases Venenosos!"
+    TimeLimit: 4h
+  - Id: 99448
+    Title: "Espera - Gases Tóxicos!"
+    TimeLimit: 4h
+  - Id: 99449
+    Title: "Espera - Boneco Assassino!"
+    TimeLimit: 4h
+  - Id: 99450
+    Title: "Espera - Trabalhadores da Mina!"
+    TimeLimit: 4h
+  - Id: 99451
+    Title: "Espera - Como isso se move?!"
+    TimeLimit: 4h
+  - Id: 99452
+    Title: "Espera - Minérios Saltitantes!"
+    TimeLimit: 4h
+  - Id: 99453
+    Title: "Espera - Uma Grande Piscina!"
+    TimeLimit: 4h
+  - Id: 99454
+    Title: "Espera - Bate no Tornozelo!"
+    TimeLimit: 4h
+  - Id: 99455
+    Title: "Espera - Brisa Desagradável!"
+    TimeLimit: 4h
+  - Id: 99456
+    Title: "Espera - Passeio pela Ilha!"
+    TimeLimit: 4h
+  - Id: 99457
+    Title: "Espera - Nativos da Ilha! (Parte 1)"
+    TimeLimit: 4h
+  - Id: 99458
+    Title: "Espera - Nativos da Ilha! (Parte 2)"
+    TimeLimit: 4h
+  - Id: 99459
+    Title: "Espera - Tartaruga Ninja!"
+    TimeLimit: 4h
+  - Id: 99460
+    Title: "Espera - Arauto do Templo!"
+    TimeLimit: 4h
+  - Id: 99461
+    Title: "Espera - Pássaro Colorido!"
+    TimeLimit: 4h
+  - Id: 99462
+    Title: "Espera - Lenda do Folclore!"
+    TimeLimit: 4h
+  - Id: 99463
+    Title: "Espera - Pesadelo Soviético!"
+    TimeLimit: 4h
+  - Id: 99464
+    Title: "Espera - Vovó Vidente!"
+    TimeLimit: 4h
+  - Id: 99465
+    Title: "Espera - Areias Atacam?!"
+    TimeLimit: 4h
+  - Id: 99466
+    Title: "Espera - Tumba de Segredos!"
+    TimeLimit: 4h
+  - Id: 99467
+    Title: "Espera - Bonecas Delicadas!"
+    TimeLimit: 4h
+  - Id: 99468
+    Title: "Espera - Vigia Morto-Vivo!"
+    TimeLimit: 4h
+  - Id: 99469
+    Title: "Espera - Alguém à Espreita!"
+    TimeLimit: 4h
+  - Id: 99470
+    Title: "Espera - Donzela Celestial!"
+    TimeLimit: 4h
+  - Id: 99471
+    Title: "Espera - Árvore que Anda!"
+    TimeLimit: 4h
+  - Id: 99472
+    Title: "Espera - Homem nas Nuvens!"
+    TimeLimit: 4h
+  - Id: 99473
+    Title: "Espera - Problema na Fronteira!"
+    TimeLimit: 4h
+  - Id: 99474
+    Title: "Espera - Um Grande Lago!"
+    TimeLimit: 4h
+  - Id: 99475
+    Title: "Espera - Peregrinação Pacífica!"
+    TimeLimit: 4h
+  - Id: 99476
+    Title: "Espera - Guardião da Beleza!"
+    TimeLimit: 4h
+  - Id: 99477
+    Title: "Espera - Pedra sobre Pedra!"
+    TimeLimit: 4h
+  - Id: 99478
+    Title: "Espera - Filtro dos Sonhos"
+    TimeLimit: 4h
+  - Id: 99479
+    Title: "Espera - Dragões de Fogo"
+    TimeLimit: 4h
+  - Id: 99480
+    Title: "Espera - Estudo Geológico"
+    TimeLimit: 4h
+  - Id: 99481
+    Title: "Espera - Pobre Palhaço"
+    TimeLimit: 4h
+  - Id: 99482
+    Title: "Espera - O MVP mais Forte"
+    TimeLimit: 4h
+  - Id: 99483
+    Title: "Espera - Limpeza de Esgoto"
+    TimeLimit: 4h
+  - Id: 99484
+    Title: "Espera - Mão Inimiga"
+    TimeLimit: 4h
+  - Id: 99485
+    Title: "Espera - Touro Valente"
+    TimeLimit: 4h
+  - Id: 99486
+    Title: "Espera - Menina das Flores"
+    TimeLimit: 4h
+  - Id: 99487
+    Title: "Espera - Brilho Fatal"
+    TimeLimit: 4h
+  - Id: 99488
+    Title: "Espera - Rei do Novo Mundo"
+    TimeLimit: 4h
+  - Id: 99489
+    Title: "Espera - Vila da Colina"
+    TimeLimit: 4h
+  - Id: 99490
+    Title: "Espera - Alcateia no Deserto"
+    TimeLimit: 4h
+  - Id: 99491
+    Title: "Espera - Pelos de Cachorro"
+    TimeLimit: 4h
+  - Id: 99492
+    Title: "Espera - Mutação Vulcânica"
+    TimeLimit: 4h
+  - Id: 99493
+    Title: "Espera - Minhas Bebidas Geladas"
+    TimeLimit: 4h
+  - Id: 99494
+    Title: "Espera - Monstro das Neves"
+    TimeLimit: 4h
+  - Id: 99495
+    Title: "Espera - Vilarejo dos Kobolds"
+    TimeLimit: 4h
+  - Id: 99496
+    Title: "Espera - Guerra contra as Plantas"
+    TimeLimit: 4h
+  - Id: 99497
+    Title: "Espera - Cristais são Duros?"
+    TimeLimit: 4h
+  - Id: 99498
+    Title: "Espera - Armadura Vazia"
+    TimeLimit: 4h
+  - Id: 99499
+    Title: "Espera - Ajeite a Postura"
+    TimeLimit: 4h
+  - Id: 99500
+    Title: "Espera - Viajante sem Rumo"
+    TimeLimit: 4h
+  - Id: 99501
+    Title: "Espera - Inimigo à Altura"
+    TimeLimit: 4h
+  - Id: 99502
+    Title: "Espera - Menina Veneno"
+    TimeLimit: 4h
+  - Id: 99503
+    Title: "Espera - Marcador de Páginas"
+    TimeLimit: 4h
+  - Id: 99504
+    Title: "Espera - Belos Músculos!"
+    TimeLimit: 4h
+  - Id: 99505
+    Title: "Espera - Conto de Fadas"
+    TimeLimit: 4h
+  - Id: 99506
+    Title: "Espera - Espinhos Perigosos"
+    TimeLimit: 4h
+  - Id: 99507
+    Title: "Espera - Poder do Chifre"
+    TimeLimit: 4h
+  - Id: 99508
+    Title: "Espera - Uma Caixa Viva"
+    TimeLimit: 4h
+  - Id: 99509
+    Title: "Espera - Palavras ao Vento"
+    TimeLimit: 4h
+  - Id: 99510
+    Title: "Espera - Barão do Reino"
+    TimeLimit: 4h
+  - Id: 99511
+    Title: "Espera - Páginas de um Livro"
+    TimeLimit: 4h
+  - Id: 99512
+    Title: "Espera - Manuscritos Mágicos"
+    TimeLimit: 4h
+  - Id: 99513
+    Title: "Espera - Aula de Reciclagem"
+    TimeLimit: 4h
+  - Id: 99514
+    Title: "Espera - Formigas de Aço"
+    TimeLimit: 4h
+  - Id: 99515
+    Title: "Espera - Formigas de Ferro"
+    TimeLimit: 4h
+  - Id: 99516
+    Title: "Espera - Robôs Coloridos"
+    TimeLimit: 4h
+  - Id: 99517
+    Title: "Espera - Robôs Multicoloridos"
+    TimeLimit: 4h
+  - Id: 99518
+    Title: "Espera - Menina Gótica"
+    TimeLimit: 4h
+  - Id: 99519
+    Title: "Espera - Purificar o Mal"
+    TimeLimit: 4h
+  - Id: 99520
+    Title: "Espera - Seres Gelatinosos"
+    TimeLimit: 4h
+  - Id: 99521
+    Title: "Espera - Dragões do Lago"
+    TimeLimit: 4h
+  - Id: 99522
+    Title: "Espera - Dragões do Subsolo"
+    TimeLimit: 4h
+  - Id: 99523
+    Title: "Espera - Dragão do Tesouro"
+    TimeLimit: 4h
+  - Id: 99524
+    Title: "Espera - Punição Angelical"
+    TimeLimit: 4h
+  - Id: 99525
+    Title: "Espera - Som Angelical"
+    TimeLimit: 4h
+  - Id: 99526
+    Title: "Espera - Descanso Angelical"
+    TimeLimit: 4h
+  - Id: 99527
+    Title: "Espera - Vigia Angelical"
+    TimeLimit: 4h
+  - Id: 99528
+    Title: "Espera - Alerta Venenoso"
+    TimeLimit: 4h
+  - Id: 99529
+    Title: "Espera - Animal Pateta"
+    TimeLimit: 4h
+  - Id: 99530
+    Title: "Espera - Parece uma Joia"
+    TimeLimit: 4h
+  - Id: 99531
+    Title: "Espera - Um Único Chifre"
+    TimeLimit: 4h
+  - Id: 99532
+    Title: "Espera - São Dois Chifres"
+    TimeLimit: 4h
+  - Id: 99533
+    Title: "Espera - Chifres de Galho"
+    TimeLimit: 4h
+  - Id: 99534
+    Title: "Espera - Chifres de Pinça"
+    TimeLimit: 4h
+  - Id: 99535
+    Title: "Espera - Animais de Fogo"
+    TimeLimit: 4h
+  - Id: 99536
+    Title: "Espera - Criaturas de Fogo"
+    TimeLimit: 4h
+  - Id: 99537
+    Title: "Espera - Irmãos Zumbis"
+    TimeLimit: 4h
+  - Id: 99538
+    Title: "Espera - Gritos e mais Gritos"
+    TimeLimit: 4h
+  - Id: 99539
+    Title: "Espera - Controle dos Mortos"
+    TimeLimit: 4h
+  - Id: 99540
+    Title: "Espera - Limpe a Ala Oeste"
+    TimeLimit: 4h
+  - Id: 99541
+    Title: "Espera - Limpe a Ala Leste"
+    TimeLimit: 4h
+  - Id: 99542
+    Title: "Espera - Limpe a Ala Sul"
+    TimeLimit: 4h
+  - Id: 99543
+    Title: "Espera - Cobaia Espadachim"
+    TimeLimit: 4h
+  - Id: 99544
+    Title: "Espera - Cobaia Mercadora"
+    TimeLimit: 4h
+  - Id: 99545
+    Title: "Espera - Cobaia Gatuna"
+    TimeLimit: 4h
+  - Id: 99546
+    Title: "Espera - Cobaia Arqueiro"
+    TimeLimit: 4h
+  - Id: 99547
+    Title: "Espera - Cobaia Noviço"
+    TimeLimit: 4h
+  - Id: 99548
+    Title: "Espera - Cobaia Mago"
+    TimeLimit: 4h
+  - Id: 99549
+    Title: "Espera - Cobaia Atiradora"
+    TimeLimit: 4h
+  - Id: 99550
+    Title: "Espera - Cobaia Arquimaga"
+    TimeLimit: 4h
+  - Id: 99551
+    Title: "Espera - Cobaia Sacerdotisa"
+    TimeLimit: 4h
+  - Id: 99552
+    Title: "Espera - Cobaia Lorde"
+    TimeLimit: 4h
+  - Id: 99553
+    Title: "Espera - Cobaia Algoz"
+    TimeLimit: 4h
+  - Id: 99554
+    Title: "Espera - Cobaia Ferreiro"
+    TimeLimit: 4h
+  - Id: 99555
+    Title: "Espera - Forma de Anjo"
+    TimeLimit: 4h
+  - Id: 99556
+    Title: "Espera - Forma de Lama"
+    TimeLimit: 4h
+  - Id: 99557
+    Title: "Espera - Forma Humana"
+    TimeLimit: 4h
+  - Id: 99558
+    Title: "Espera - Forma Fantasma"
+    TimeLimit: 4h
+  - Id: 99559
+    Title: "Espera - Demônios dos Sonhos"
+    TimeLimit: 4h
+  - Id: 99560
+    Title: "Espera - Carinha Felpudo"
+    TimeLimit: 4h
+  - Id: 99561
+    Title: "Espera - Fada Travessa"
+    TimeLimit: 4h

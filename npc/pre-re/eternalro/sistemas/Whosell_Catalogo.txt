@@ -1,0 +1,9 @@
+// Abre o catalogo de lojas pelo comando @whosell.
+-	script	WhosellCatalogo	-1,{
+OnInit:
+    bindatcmd "whosell", "WhosellCatalogo::OnCatalogo", 0, 99;
+    end;
+OnCatalogo:
+    searchstores 255, SEARCHSTORE_EFFECT_NORMAL, "all";
+    end;
+}

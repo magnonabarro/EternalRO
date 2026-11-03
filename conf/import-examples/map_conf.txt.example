@@ -1,0 +1,8 @@
+// Copie para conf/import/map_conf.txt; ajuste para sua instalacao.
+// Use a mesma conta de comunicacao configurada no char-server.
+userid: CHANGE_ME_USER
+passwd: CHANGE_ME_PASSWORD
+char_ip: 127.0.0.1
+char_port: 6121
+map_ip: 127.0.0.1
+map_port: 5121

@@ -1,0 +1,359 @@
+//===== rAthena Script =======================================
+//= Eden Group Quests - Mission [40 - 69]
+//===== By: ==================================================
+//= Vibe
+//===== Current Version: =====================================
+//= 4.2 - Modified with quest status tags
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Repetable Quests for Players between Baselevel 40 - 69.
+//= Removed one-quest-at-a-time restriction.
+//= Removed max level restriction (can only take quests below or equal to player level).
+//= Simplified quest collection flow.
+//= Quest names with status tags: [Em Progresso], [Concluído]
+//===== Additional Comments: =================================
+//= Based on bROWiki information and official Eden Group Quests.
+//= ID 22508 = Eden Group Mark
+//= ID 25223 = Eden Coin
+//= Quest IDs: 99013-99047
+//= Delivery integrated in the same menu
+//= Organized by location in submenus
+//= Special handling for quest 99015 (Tesouro do Mar) - gives items on accept, requires items on delivery
+//============================================================
+
+moc_para01,38,38,3	script	Quadro [40 - 69]	857,{
+	if (!(countitem(22508) > 0)) {
+		mes "Para pegar essas missões, preciso entrar no Grupo Éden primeiro. Devo encontrar a Secretária Lime Evenor e me tornar um membro.";
+		close;
+	}
+	
+	mes "Quadro de Missões [40 - 69]";
+	next;
+	
+L_ShowMenu:
+	switch(select("Navio Fantasma:Hugel:Vila dos Orcs:Izlude:Morroc:Caverna de Payon:Torre de Geffen:Comodo:Cancelar")) {
+		case 1: goto L_NavioFantasma;
+		case 2: goto L_Hugel;
+		case 3: goto L_VilaOrcs;
+		case 4: goto L_Izlude;
+		case 5: goto L_Morroc;
+		case 6: goto L_CavernaPayon;
+		case 7: goto L_TorreGeffen;
+		case 8: goto L_Comodo;
+		case 9: close;
+	}
+	goto L_ShowMenu;
+
+// ===== Navio Fantasma =====
+L_NavioFantasma:
+	.@q1 = 99013; .@c1 = 99396; .@s1 = checkquest(.@q1,HUNTING); .@d1 = checkquest(.@c1,HUNTING);
+	.@t1$ = ""; if (.@d1 != -1) .@t1$ = " [Concluído]"; else if (.@s1 == 2) .@t1$ = " [Entregar]"; else if (.@s1 != -1) .@t1$ = " [Em Progresso]";
+	.@q2 = 99014; .@c2 = 99397; .@s2 = checkquest(.@q2,HUNTING); .@d2 = checkquest(.@c2,HUNTING);
+	.@t2$ = ""; if (.@d2 != -1) .@t2$ = " [Concluído]"; else if (.@s2 == 2) .@t2$ = " [Entregar]"; else if (.@s2 != -1) .@t2$ = " [Em Progresso]";
+	.@q3 = 99015; .@c3 = 99398; .@s3 = checkquest(.@q3,HUNTING); .@d3 = checkquest(.@c3,HUNTING);
+	.@t3$ = ""; if (.@d3 != -1) .@t3$ = " [Concluído]"; else if (.@s3 == 2 && countitem(25074) == 0) .@t3$ = " [Entregar]"; else if (.@s3 == 2) .@t3$ = " [Em Progresso]"; else if (.@s3 != -1) .@t3$ = " [Em Progresso]";
+	.@q4 = 99016; .@c4 = 99399; .@s4 = checkquest(.@q4,HUNTING); .@d4 = checkquest(.@c4,HUNTING);
+	.@t4$ = ""; if (.@d4 != -1) .@t4$ = " [Concluído]"; else if (.@s4 == 2) .@t4$ = " [Entregar]"; else if (.@s4 != -1) .@t4$ = " [Em Progresso]";
+	.@q5 = 99017; .@c5 = 99400; .@s5 = checkquest(.@q5,HUNTING); .@d5 = checkquest(.@c5,HUNTING);
+	.@t5$ = ""; if (.@d5 != -1) .@t5$ = " [Concluído]"; else if (.@s5 == 2) .@t5$ = " [Entregar]"; else if (.@s5 != -1) .@t5$ = " [Em Progresso]";
+	
+	switch(select("Resgatar Amigos!(40)" + .@t1$ + ":Barata do Mar!(40)" + .@t2$ + ":Tesouro do Mar!(40)" + .@t3$ + ":Limpando o Navio!(40)" + .@t4$ + ":Navio Assombrado!(40)" + .@t5$ + ":Volta")) {
+		case 1: .@qid = 99013; .@min = 40; .@exp = 8600; .@job_exp = 9600; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99396; goto L_Handle;
+		case 2: .@qid = 99014; .@min = 40; .@exp = 6500; .@job_exp = 6500; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99397; goto L_Handle;
+		case 3: .@qid = 99015; .@min = 40; .@exp = 7000; .@job_exp = 7000; .@i1 = 25074; .@a1 = 10; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99398; goto L_Handle;
+		case 4: .@qid = 99016; .@min = 40; .@exp = 9600; .@job_exp = 8280; .@i1 = 932; .@a1 = 10; .@i2 = 955; .@a2 = 10; .@cooldown_qid = 99399; goto L_Handle;
+		case 5: .@qid = 99017; .@min = 40; .@exp = 11800; .@job_exp = 9600; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99400; goto L_Handle;
+		case 6: goto L_ShowMenu;
+	}
+	goto L_NavioFantasma;
+
+// ===== Hugel =====
+L_Hugel:
+	.@q1 = 99018; .@c1 = 99401; .@s1 = checkquest(.@q1,HUNTING); .@d1 = checkquest(.@c1,HUNTING);
+	.@t1$ = ""; if (.@d1 != -1) .@t1$ = " [Concluído]"; else if (.@s1 == 2) .@t1$ = " [Entregar]"; else if (.@s1 != -1) .@t1$ = " [Em Progresso]";
+	.@q2 = 99019; .@c2 = 99402; .@s2 = checkquest(.@q2,HUNTING); .@d2 = checkquest(.@c2,HUNTING);
+	.@t2$ = ""; if (.@d2 != -1) .@t2$ = " [Concluído]"; else if (.@s2 == 2) .@t2$ = " [Entregar]"; else if (.@s2 != -1) .@t2$ = " [Em Progresso]";
+	
+	switch(select("Guerra na Praia!(40)" + .@t1$ + ":Catador de Ostras!(40)" + .@t2$ + ":Volta")) {
+		case 1: .@qid = 99018; .@min = 40; .@exp = 8400; .@job_exp = 8380; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99401; goto L_Handle;
+		case 2: .@qid = 99019; .@min = 40; .@exp = 8400; .@job_exp = 8380; .@i1 = 966; .@a1 = 5; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99402; goto L_Handle;
+		case 3: goto L_ShowMenu;
+	}
+	goto L_Hugel;
+
+// ===== Vila dos Orcs =====
+L_VilaOrcs:
+	.@q1 = 99020; .@c1 = 99403; .@s1 = checkquest(.@q1,HUNTING); .@d1 = checkquest(.@c1,HUNTING);
+	.@t1$ = ""; if (.@d1 != -1) .@t1$ = " [Concluído]"; else if (.@s1 == 2) .@t1$ = " [Entregar]"; else if (.@s1 != -1) .@t1$ = " [Em Progresso]";
+	.@q2 = 99021; .@c2 = 99404; .@s2 = checkquest(.@q2,HUNTING); .@d2 = checkquest(.@c2,HUNTING);
+	.@t2$ = ""; if (.@d2 != -1) .@t2$ = " [Concluído]"; else if (.@s2 == 2) .@t2$ = " [Entregar]"; else if (.@s2 != -1) .@t2$ = " [Em Progresso]";
+	.@q3 = 99022; .@c3 = 99405; .@s3 = checkquest(.@q3,HUNTING); .@d3 = checkquest(.@c3,HUNTING);
+	.@t3$ = ""; if (.@d3 != -1) .@t3$ = " [Concluído]"; else if (.@s3 == 2) .@t3$ = " [Entregar]"; else if (.@s3 != -1) .@t3$ = " [Em Progresso]";
+	.@q4 = 99023; .@c4 = 99406; .@s4 = checkquest(.@q4,HUNTING); .@d4 = checkquest(.@c4,HUNTING);
+	.@t4$ = ""; if (.@d4 != -1) .@t4$ = " [Concluído]"; else if (.@s4 == 2) .@t4$ = " [Entregar]"; else if (.@s4 != -1) .@t4$ = " [Em Progresso]";
+	.@q5 = 99024; .@c5 = 99407; .@s5 = checkquest(.@q5,HUNTING); .@d5 = checkquest(.@c5,HUNTING);
+	.@t5$ = ""; if (.@d5 != -1) .@t5$ = " [Concluído]"; else if (.@s5 == 2) .@t5$ = " [Entregar]"; else if (.@s5 != -1) .@t5$ = " [Em Progresso]";
+	.@q6 = 99025; .@c6 = 99408; .@s6 = checkquest(.@q6,HUNTING); .@d6 = checkquest(.@c6,HUNTING);
+	.@t6$ = ""; if (.@d6 != -1) .@t6$ = " [Concluído]"; else if (.@s6 == 2) .@t6$ = " [Entregar]"; else if (.@s6 != -1) .@t6$ = " [Em Progresso]";
+	
+	switch(select("Orcs Infernais!(40)" + .@t1$ + ":Ganancioso!(40)" + .@t2$ + ":Família Orc!(40)" + .@t3$ + ":Goblins Ferozes!(40)" + .@t4$ + ":Goblins Velozes!(40)" + .@t5$ + ":Goblins Atrozes!(50)" + .@t6$ + ":Volta")) {
+		case 1: .@qid = 99020; .@min = 40; .@exp = 28700; .@job_exp = 27400; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99403; goto L_Handle;
+		case 2: .@qid = 99021; .@min = 40; .@exp = 16000; .@job_exp = 12000; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99404; goto L_Handle;
+		case 3: .@qid = 99022; .@min = 40; .@exp = 23520; .@job_exp = 24300; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99405; goto L_Handle;
+		case 4: .@qid = 99023; .@min = 40; .@exp = 13000; .@job_exp = 8200; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99406; goto L_Handle;
+		case 5: .@qid = 99024; .@min = 40; .@exp = 13000; .@job_exp = 8600; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99407; goto L_Handle;
+		case 6: .@qid = 99025; .@min = 50; .@exp = 11800; .@job_exp = 11900; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99408; goto L_Handle;
+		case 7: goto L_ShowMenu;
+	}
+	goto L_VilaOrcs;
+
+// ===== Izlude =====
+L_Izlude:
+	.@q1 = 99026; .@c1 = 99409; .@s1 = checkquest(.@q1,HUNTING); .@d1 = checkquest(.@c1,HUNTING);
+	.@t1$ = ""; if (.@d1 != -1) .@t1$ = " [Concluído]"; else if (.@s1 == 2) .@t1$ = " [Entregar]"; else if (.@s1 != -1) .@t1$ = " [Em Progresso]";
+	.@q2 = 99027; .@c2 = 99410; .@s2 = checkquest(.@q2,HUNTING); .@d2 = checkquest(.@c2,HUNTING);
+	.@t2$ = ""; if (.@d2 != -1) .@t2$ = " [Concluído]"; else if (.@s2 == 2) .@t2$ = " [Entregar]"; else if (.@s2 != -1) .@t2$ = " [Em Progresso]";
+	.@q3 = 99028; .@c3 = 99411; .@s3 = checkquest(.@q3,HUNTING); .@d3 = checkquest(.@c3,HUNTING);
+	.@t3$ = ""; if (.@d3 != -1) .@t3$ = " [Concluído]"; else if (.@s3 == 2) .@t3$ = " [Entregar]"; else if (.@s3 != -1) .@t3$ = " [Em Progresso]";
+	.@q4 = 99029; .@c4 = 99412; .@s4 = checkquest(.@q4,HUNTING); .@d4 = checkquest(.@c4,HUNTING);
+	.@t4$ = ""; if (.@d4 != -1) .@t4$ = " [Concluído]"; else if (.@s4 == 2) .@t4$ = " [Entregar]"; else if (.@s4 != -1) .@t4$ = " [Em Progresso]";
+	.@q5 = 99030; .@c5 = 99413; .@s5 = checkquest(.@q5,HUNTING); .@d5 = checkquest(.@c5,HUNTING);
+	.@t5$ = ""; if (.@d5 != -1) .@t5$ = " [Concluído]"; else if (.@s5 == 2) .@t5$ = " [Entregar]"; else if (.@s5 != -1) .@t5$ = " [Em Progresso]";
+	.@q6 = 99031; .@c6 = 99414; .@s6 = checkquest(.@q6,HUNTING); .@d6 = checkquest(.@c6,HUNTING);
+	.@t6$ = ""; if (.@d6 != -1) .@t6$ = " [Concluído]"; else if (.@s6 == 2) .@t6$ = " [Entregar]"; else if (.@s6 != -1) .@t6$ = " [Em Progresso]";
+	.@q7 = 99032; .@c7 = 99415; .@s7 = checkquest(.@q7,HUNTING); .@d7 = checkquest(.@c7,HUNTING);
+	.@t7$ = ""; if (.@d7 != -1) .@t7$ = " [Concluído]"; else if (.@s7 == 2) .@t7$ = " [Entregar]"; else if (.@s7 != -1) .@t7$ = " [Em Progresso]";
+	
+	switch(select("Estranhos do Deserto!(40)" + .@t1$ + ":Biologia Marinha!(40)" + .@t2$ + ":Amuleto de Caranguejo!(40)" + .@t3$ + ":Cuidando do Grupo!(50)" + .@t4$ + ":Ingredientes Culinários!(50)" + .@t5$ + ":Sereia Encantadora!(50)" + .@t6$ + ":Deus dos Oceanos!(50)" + .@t7$ + ":Volta")) {
+		case 1: .@qid = 99026; .@min = 40; .@exp = 8400; .@job_exp = 8380; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99409; goto L_Handle;
+		case 2: .@qid = 99027; .@min = 40; .@exp = 9600; .@job_exp = 8380; .@i1 = 1052; .@a1 = 10; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99410; goto L_Handle;
+		case 3: .@qid = 99028; .@min = 40; .@exp = 7800; .@job_exp = 8380; .@i1 = 960; .@a1 = 5; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99411; goto L_Handle;
+		case 4: .@qid = 99029; .@min = 50; .@exp = 12400; .@job_exp = 14380; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99412; goto L_Handle;
+		case 5: .@qid = 99030; .@min = 50; .@exp = 10640; .@job_exp = 10240; .@i1 = 1024; .@a1 = 10; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99413; goto L_Handle;
+		case 6: .@qid = 99031; .@min = 50; .@exp = 9600; .@job_exp = 9600; .@i1 = 950; .@a1 = 1; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99414; goto L_Handle;
+		case 7: .@qid = 99032; .@min = 50; .@exp = 17200; .@job_exp = 15600; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99415; goto L_Handle;
+		case 8: goto L_ShowMenu;
+	}
+	goto L_Izlude;
+
+// ===== Morroc =====
+L_Morroc:
+	.@q1 = 99033; .@c1 = 99416; .@s1 = checkquest(.@q1,HUNTING); .@d1 = checkquest(.@c1,HUNTING);
+	.@t1$ = ""; if (.@d1 != -1) .@t1$ = " [Concluído]"; else if (.@s1 == 2) .@t1$ = " [Entregar]"; else if (.@s1 != -1) .@t1$ = " [Em Progresso]";
+	.@q2 = 99034; .@c2 = 99417; .@s2 = checkquest(.@q2,HUNTING); .@d2 = checkquest(.@c2,HUNTING);
+	.@t2$ = ""; if (.@d2 != -1) .@t2$ = " [Concluído]"; else if (.@s2 == 2) .@t2$ = " [Entregar]"; else if (.@s2 != -1) .@t2$ = " [Em Progresso]";
+	.@q3 = 99035; .@c3 = 99418; .@s3 = checkquest(.@q3,HUNTING); .@d3 = checkquest(.@c3,HUNTING);
+	.@t3$ = ""; if (.@d3 != -1) .@t3$ = " [Concluído]"; else if (.@s3 == 2) .@t3$ = " [Entregar]"; else if (.@s3 != -1) .@t3$ = " [Em Progresso]";
+	.@q4 = 99036; .@c4 = 99419; .@s4 = checkquest(.@q4,HUNTING); .@d4 = checkquest(.@c4,HUNTING);
+	.@t4$ = ""; if (.@d4 != -1) .@t4$ = " [Concluído]"; else if (.@s4 == 2) .@t4$ = " [Entregar]"; else if (.@s4 != -1) .@t4$ = " [Em Progresso]";
+	.@q5 = 99037; .@c5 = 99420; .@s5 = checkquest(.@q5,HUNTING); .@d5 = checkquest(.@c5,HUNTING);
+	.@t5$ = ""; if (.@d5 != -1) .@t5$ = " [Concluído]"; else if (.@s5 == 2) .@t5$ = " [Entregar]"; else if (.@s5 != -1) .@t5$ = " [Em Progresso]";
+	.@q6 = 99038; .@c6 = 99421; .@s6 = checkquest(.@q6,HUNTING); .@d6 = checkquest(.@c6,HUNTING);
+	.@t6$ = ""; if (.@d6 != -1) .@t6$ = " [Concluído]"; else if (.@s6 == 2) .@t6$ = " [Entregar]"; else if (.@s6 != -1) .@t6$ = " [Em Progresso]";
+	
+	switch(select("A Caixa da Múmia!(40)" + .@t1$ + ":Preciso Dormir!(50)" + .@t2$ + ":Metade Cobra!(60)" + .@t3$ + ":Pedreiros!(60)" + .@t4$ + ":Enigma da Esfinge!(60)" + .@t5$ + ":Areia Movediça!(50)" + .@t6$ + ":Volta")) {
+		case 1: .@qid = 99033; .@min = 40; .@exp = 7200; .@job_exp = 7800; .@i1 = 934; .@a1 = 1; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99416; goto L_Handle;
+		case 2: .@qid = 99034; .@min = 50; .@exp = 12000; .@job_exp = 12800; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99417; goto L_Handle;
+		case 3: .@qid = 99035; .@min = 60; .@exp = 16740; .@job_exp = 17880; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99418; goto L_Handle;
+		case 4: .@qid = 99036; .@min = 60; .@exp = 19450; .@job_exp = 20090; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99419; goto L_Handle;
+		case 5: .@qid = 99037; .@min = 60; .@exp = 25640; .@job_exp = 24210; .@i1 = 25073; .@a1 = 10; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99420; goto L_Handle;
+		case 6: .@qid = 99038; .@min = 50; .@exp = 10800; .@job_exp = 9600; .@i1 = 1056; .@a1 = 5; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99421; goto L_Handle;
+		case 7: goto L_ShowMenu;
+	}
+	goto L_Morroc;
+
+// ===== Caverna de Payon =====
+L_CavernaPayon:
+	.@q1 = 99039; .@c1 = 99422; .@s1 = checkquest(.@q1,HUNTING); .@d1 = checkquest(.@c1,HUNTING);
+	.@t1$ = ""; if (.@d1 != -1) .@t1$ = " [Concluído]"; else if (.@s1 == 2) .@t1$ = " [Entregar]"; else if (.@s1 != -1) .@t1$ = " [Em Progresso]";
+	.@q2 = 99040; .@c2 = 99423; .@s2 = checkquest(.@q2,HUNTING); .@d2 = checkquest(.@c2,HUNTING);
+	.@t2$ = ""; if (.@d2 != -1) .@t2$ = " [Concluído]"; else if (.@s2 == 2 && countitem(25079) == 0) .@t2$ = " [Entregar]"; else if (.@s2 == 2) .@t2$ = " [Em Progresso]"; else if (.@s2 != -1) .@t2$ = " [Em Progresso]";
+	.@q3 = 99041; .@c3 = 99424; .@s3 = checkquest(.@q3,HUNTING); .@d3 = checkquest(.@c3,HUNTING);
+	.@t3$ = ""; if (.@d3 != -1) .@t3$ = " [Concluído]"; else if (.@s3 == 2) .@t3$ = " [Entregar]"; else if (.@s3 != -1) .@t3$ = " [Em Progresso]";
+	
+	switch(select("Ritual de Exorcismo!(50)" + .@t1$ + ":Oferenda aos Espíritos!(50)" + .@t2$ + ":Cheiro de Magia!(55)" + .@t3$ + ":Volta")) {
+		case 1: .@qid = 99039; .@min = 50; .@exp = 13200; .@job_exp = 12300; .@i1 = 609; .@a1 = 15; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99422; goto L_Handle;
+		case 2: .@qid = 99040; .@min = 50; .@exp = 9600; .@job_exp = 9600; .@i1 = 25079; .@a1 = 10; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99423; goto L_Handle;
+		case 3: .@qid = 99041; .@min = 50; .@exp = 10480; .@job_exp = 12400; .@i1 = 25188; .@a1 = 3; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99424; goto L_Handle;
+		case 4: goto L_ShowMenu;
+	}
+	goto L_CavernaPayon;
+
+// ===== Torre de Geffen =====
+L_TorreGeffen:
+	.@q1 = 99042; .@c1 = 99425; .@s1 = checkquest(.@q1,HUNTING); .@d1 = checkquest(.@c1,HUNTING);
+	.@t1$ = ""; if (.@d1 != -1) .@t1$ = " [Concluído]"; else if (.@s1 == 2) .@t1$ = " [Entregar]"; else if (.@s1 != -1) .@t1$ = " [Em Progresso]";
+	.@q2 = 99043; .@c2 = 99426; .@s2 = checkquest(.@q2,HUNTING); .@d2 = checkquest(.@c2,HUNTING);
+	.@t2$ = ""; if (.@d2 != -1) .@t2$ = " [Concluído]"; else if (.@s2 == 2) .@t2$ = " [Entregar]"; else if (.@s2 != -1) .@t2$ = " [Em Progresso]";
+	
+	switch(select("Caça à Caçadora!(55)" + .@t1$ + ":Magia Maligna!(55)" + .@t2$ + ":Volta")) {
+		case 1: .@qid = 99042; .@min = 55; .@exp = 8000; .@job_exp = 6800; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99425; goto L_Handle;
+		case 2: .@qid = 99043; .@min = 55; .@exp = 14800; .@job_exp = 13660; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99426; goto L_Handle;
+		case 3: goto L_ShowMenu;
+	}
+	goto L_TorreGeffen;
+
+// ===== Comodo =====
+L_Comodo:
+	.@q1 = 99044; .@c1 = 99427; .@s1 = checkquest(.@q1,HUNTING); .@d1 = checkquest(.@c1,HUNTING);
+	.@t1$ = ""; if (.@d1 != -1) .@t1$ = " [Concluído]"; else if (.@s1 == 2) .@t1$ = " [Entregar]"; else if (.@s1 != -1) .@t1$ = " [Em Progresso]";
+	.@q2 = 99045; .@c2 = 99428; .@s2 = checkquest(.@q2,HUNTING); .@d2 = checkquest(.@c2,HUNTING);
+	.@t2$ = ""; if (.@d2 != -1) .@t2$ = " [Concluído]"; else if (.@s2 == 2) .@t2$ = " [Entregar]"; else if (.@s2 != -1) .@t2$ = " [Em Progresso]";
+	.@q3 = 99046; .@c3 = 99429; .@s3 = checkquest(.@q3,HUNTING); .@d3 = checkquest(.@c3,HUNTING);
+	.@t3$ = ""; if (.@d3 != -1) .@t3$ = " [Concluído]"; else if (.@s3 == 2) .@t3$ = " [Entregar]"; else if (.@s3 != -1) .@t3$ = " [Em Progresso]";
+	
+	switch(select("Amigos na Praia!(60)" + .@t1$ + ":Duro como Pedra!(60)" + .@t2$ + ":A Cor Verde!(60)" + .@t3$ + ":Volta")) {
+		case 1: .@qid = 99044; .@min = 60; .@exp = 10000; .@job_exp = 10000; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99427; goto L_Handle;
+		case 2: .@qid = 99045; .@min = 60; .@exp = 20000; .@job_exp = 20000; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99428; goto L_Handle;
+		case 3: .@qid = 99046; .@min = 60; .@exp = 15000; .@job_exp = 15000; .@i1 = 0; .@a1 = 0; .@i2 = 0; .@a2 = 0; .@cooldown_qid = 99429; goto L_Handle;
+		case 4: goto L_ShowMenu;
+	}
+	goto L_Comodo;
+
+L_Handle:
+	.@qstatus = checkquest(.@qid,HUNTING);
+	
+	// Quest 99015: Tesouro do Mar - especial: não requer status=2, apenas que não tenhas itens
+	if (.@qid == 99015 && .@qstatus != -1) {
+		if (countitem(25074) > 0) {
+			mes "Você ainda tem Dobrões no inventário.";
+			mes "Precisa esconder todos os 10 Dobrões nas Caixas Antigas antes de entregar a missão.";
+			next;
+			goto L_ShowMenu;
+		}
+		getexp .@exp,.@job_exp;
+		erasequest .@qid;
+		setquest .@cooldown_qid;
+		mes "Missão entregue! Recompensa: " + .@exp + " EXP de Base e " + .@job_exp + " EXP de Classe.";
+		next;
+		goto L_ShowMenu;
+	}
+	// Quest 99040: Oferenda aos Espíritos - especial: não requer status=2, apenas que não tenhas itens
+	if (.@qid == 99040 && .@qstatus != -1) {
+		if (countitem(25079) > 0) {
+			mes "Você ainda tem Último Suspiro no inventário.";
+			mes "Precisa ofertar todos os 10 Último Suspiro aos Espíritos Malignos antes de entregar a missão.";
+			next;
+			goto L_ShowMenu;
+		}
+		getexp .@exp,.@job_exp;
+		erasequest .@qid;
+		setquest .@cooldown_qid;
+		mes "Missão entregue! Recompensa: " + .@exp + " EXP de Base e " + .@job_exp + " EXP de Classe.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	if (.@qstatus == 2) {
+		// Quest completa - entregar
+		if (.@i1 > 0) {
+			if (countitem(.@i1) < .@a1) {
+				mes "Você não tem os itens necessários para esta missão.";
+				mes "Precisa de " + .@a1 + " " + getitemname(.@i1) + ".";
+				next;
+				goto L_ShowMenu;
+			}
+		}
+		if (.@i2 > 0) {
+			if (countitem(.@i2) < .@a2) {
+				mes "Você não tem os itens necessários para esta missão.";
+				mes "Precisa de " + .@a2 + " " + getitemname(.@i2) + ".";
+				next;
+				goto L_ShowMenu;
+			}
+		}
+		// Remover itens se necessario
+		if (.@i1 > 0) delitem .@i1,.@a1;
+		if (.@i2 > 0) delitem .@i2,.@a2;
+		
+		getexp .@exp,.@job_exp;
+		erasequest .@qid;
+		setquest .@cooldown_qid;
+		mes "Missão entregue! Recompensa: " + .@exp + " EXP de Base e " + .@job_exp + " EXP de Classe.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	if (.@qstatus != -1) {
+		// Quest já em andamento
+		mes "Você já tem esta missão em andamento.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	// Verificar se o cooldown está ativo
+	if (checkquest(.@cooldown_qid, HUNTING) != -1) {
+		mes "Você já completou esta missão recentemente. Aguarde o tempo de espera para pegá-la novamente.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	// Quest disponível - oferecer para pegar
+	if (BaseLevel < .@min) {
+		mes "Esta missão requer nível mínimo de " + .@min + ". Devo procurar missões mais fáceis.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	// Mostrar objetivo da missão
+	mes "Objetivo da Missão:";
+	if (.@qid == 99013) mes "Caçar 10 [Esqueleto Pirata]";
+	else if (.@qid == 99014) mes "Caçar 10 [Kukre]";
+	else if (.@qid == 99015) mes "Esconder 10 [Dobrão]";
+	else if (.@qid == 99016) mes "Caçar 10 [Hidra] + Coletar 10 [Osso] + 10 [Pele de Verme] + 5 [Tentáculo]";
+	else if (.@qid == 99017) mes "Caçar 10 [Sussurro] + 1 [Marinheiro Ágil]";
+	else if (.@qid == 99018) mes "Caçar 10 [Estrela-do-Mar] + 10 [Caranguejo]";
+	else if (.@qid == 99019) mes "Caçar 10 [Molusco] + Coletar 5 [Carne de Ostra]";
+	else if (.@qid == 99020) mes "Caçar 20 [Orc Zumbi] + 20 [Orc Esqueleto]";
+	else if (.@qid == 99021) mes "Caçar 20 [Zenorc]";
+	else if (.@qid == 99022) mes "Caçar 15 [Guerreiro Orc] + 15 [Senhora Orc] + 10 [Filhote de Orc]";
+	else if (.@qid == 99023) mes "Caçar 10 [Goblin Machado] + 10 [Goblin Mangual]";
+	else if (.@qid == 99024) mes "Caçar 10 [Goblin Adaga] + 10 [Goblin Martelo]";
+	else if (.@qid == 99025) mes "Caçar 10 [Goblin Arqueiro] + 10 [Goblin Maça]";
+	else if (.@qid == 99026) mes "Caçar 10 [Magnólia] + 10 [Metaller]";
+	else if (.@qid == 99027) mes "Caçar 10 [Marina] + 10 [Plâncton] + Coletar 10 [Célula Única]";
+	else if (.@qid == 99028) mes "Caçar 10 [Vadon] + Coletar 5 [Garra de Crustáceo]";
+	else if (.@qid == 99029) mes "Caçar 10 [Peixe-Espada] + 10 [Cavalo-Marinho]";
+	else if (.@qid == 99030) mes "Caçar 20 [Marse] + Coletar 10 [Tinta de Polvo]";
+	else if (.@qid == 99031) mes "Caçar 10 [Obeaune] + Coletar 1 [Coração de Sereia]";
+	else if (.@qid == 99032) mes "Caçar 10 [Strouf] + 10 [Tritão]";
+	else if (.@qid == 99033) mes "Caçar 10 [Múmia] + Coletar 1 [Espólio]";
+	else if (.@qid == 99034) mes "Caçar 10 [Verit] + 10 [Minorous]";
+	else if (.@qid == 99035) mes "Caçar 20 [Ísis]";
+	else if (.@qid == 99036) mes "Caçar 15 [Zerom] + 15 [Réquiem]";
+	else if (.@qid == 99037) mes "Caçar 15 [Marduk] + 15 [Pasana] + Coletar 10 [Antigo Papiro]";
+	else if (.@qid == 99038) mes "Caçar 10 [Arenoso] + Coletar 5 [Torrão de Areia]";
+	else if (.@qid == 99039) mes "Caçar 15 [Munak] + 15 [Bongun] + Coletar 15 [Amuleto]";
+	else if (.@qid == 99040) mes "Usar 10 [Último Suspiro]";
+	else if (.@qid == 99041) mes "Caçar 12 [Sohee] + Coletar 3 [Lenço de Menina]";
+	else if (.@qid == 99042) mes "Caçar 10 [Mosca Caçadora]";
+	else if (.@qid == 99043) mes "Caçar 10 [Jakk] + 10 [Carniçal]";
+	else if (.@qid == 99044) mes "Caçar 10 [Foca] + 10 [Lontra]";
+	else if (.@qid == 99045) mes "Caçar 10 [Golem Estalactítico] + 5 [Trilobita] + 5 [Megalith]";
+	else if (.@qid == 99046) mes "Caçar 15 [Grove] + 10 [Crocodilo]";
+	next;
+	
+	mes "Deseja aceitar a missão?";
+	next;
+	if(select("Aceitar:Negar") == 1) {
+		setquest .@qid;
+		// Quest 99015: Tesouro do Mar - dar 10 Antique_Coin ao aceitar
+		if (.@qid == 99015) {
+			getitem 25074,10;
+			mes "Recebi 10 Dobrão!";
+			next;
+		}
+		// Quest 99040: Oferenda aos Espíritos - dar 10 Último Suspiro ao aceitar
+		if (.@qid == 99040) {
+			getitem 25079,10;
+			mes "Recebi 10 Último Suspiro!";
+			next;
+		}
+		mes "Missão aceita!";
+		next;
+		goto L_ShowMenu;
+	} else {
+		goto L_ShowMenu;
+	}
+}

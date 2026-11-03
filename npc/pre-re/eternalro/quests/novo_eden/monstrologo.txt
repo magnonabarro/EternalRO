@@ -1,0 +1,237 @@
+//===== rAthena Script =======================================
+//= Eden Group Quests - Monstrólogo (Entrega de Missões de Caçada)
+//===== By: ==================================================
+//= Vibe
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Delivery NPC for Hunting Quests (Champion Monsters)
+//= Receives completed hunting quests and activates cooldown quests
+//= No item collection, just verifies hunt completion
+//= Gives Base EXP and Class EXP rewards
+//= Activates cooldown quest (odd ID) with 4h TimeLimit
+//===== Additional Comments: =================================
+//= Based on quests de Caçadada.txt
+//= ID 22508 = Eden Group Mark (required)
+//= Quest IDs: 99200-99393 (even IDs for hunt, odd IDs for cooldown)
+//= NPC: Monstrólogo (Sprite: 88) at moc_para01,21,96,3
+//============================================================
+
+moc_para01,18,35,3	script	Monstrólogo	88,{
+	// Verifica se é membro do Eden
+	if (!(countitem(22508) > 0)) {
+		mes "[Monstrólogo]";
+		mes "Apenas membros do Grupo Éden podem entregar missões de caçada.";
+		mes "Fale com a Secretária Lime Evenor para ingressar.";
+		close;
+	}
+	
+	mes "[Monstrólogo]";
+	mes "Olá, aventureiro! Eu estou estudando os monstros da região.";
+	mes "Se você derrotou algum monstro especial recentemente, eu posso registrá-lo.";
+	next;
+	
+	// Verifica se tem alguma quest de caça completa
+	.@has_hunt = 0;
+	.@hunt_qid = 0;
+	
+	// Leste do Reino (99200-99219)
+	for (.@i = 99200; .@i <= 99218; .@i += 2) {
+		if (checkquest(.@i, HUNTING) == 2) {
+			.@has_hunt = 1;
+			.@hunt_qid = .@i;
+			break;
+		}
+	}
+	
+	// Centro-Oeste do Reino (99220-99238)
+	if (!.@has_hunt) {
+		for (.@i = 99220; .@i <= 99238; .@i += 2) {
+			if (checkquest(.@i, HUNTING) == 2) {
+				.@has_hunt = 1;
+				.@hunt_qid = .@i;
+				break;
+			}
+		}
+	}
+	
+	// Oeste do Reino (99248-99264)
+	if (!.@has_hunt) {
+		for (.@i = 99248; .@i <= 99264; .@i += 2) {
+			if (checkquest(.@i, HUNTING) == 2) {
+				.@has_hunt = 1;
+				.@hunt_qid = .@i;
+				break;
+			}
+		}
+	}
+	
+	// Campos da República (99276-99296)
+	if (!.@has_hunt) {
+		for (.@i = 99276; .@i <= 99296; .@i += 2) {
+			if (checkquest(.@i, HUNTING) == 2) {
+				.@has_hunt = 1;
+				.@hunt_qid = .@i;
+				break;
+			}
+		}
+	}
+	
+	// Cavernas da República (99304-99324)
+	if (!.@has_hunt) {
+		for (.@i = 99304; .@i <= 99324; .@i += 2) {
+			if (checkquest(.@i, HUNTING) == 2) {
+				.@has_hunt = 1;
+				.@hunt_qid = .@i;
+				break;
+			}
+		}
+	}
+	
+	// Arunafeltz (99328-99346)
+	if (!.@has_hunt) {
+		for (.@i = 99328; .@i <= 99346; .@i += 2) {
+			if (checkquest(.@i, HUNTING) == 2) {
+				.@has_hunt = 1;
+				.@hunt_qid = .@i;
+				break;
+			}
+		}
+	}
+	
+	// Outras Regiões (99358-99382)
+	if (!.@has_hunt) {
+		for (.@i = 99358; .@i <= 99382; .@i += 2) {
+			if (checkquest(.@i, HUNTING) == 2) {
+				.@has_hunt = 1;
+				.@hunt_qid = .@i;
+				break;
+			}
+		}
+	}
+	
+	if (.@has_hunt) {
+		// Definir recompensas com base na quest ID
+		// Usando switch para evitar loops desnecessários
+		switch(.@hunt_qid) {
+			// Leste do Reino
+			case 99200: .@exp = 600; .@job_exp = 1350; .@cooldown_qid = 99201; break;
+			case 99202: .@exp = 740; .@job_exp = 1670; .@cooldown_qid = 99203; break;
+			case 99204: .@exp = 870; .@job_exp = 1940; .@cooldown_qid = 99205; break;
+			case 99206: .@exp = 1080; .@job_exp = 3650; .@cooldown_qid = 99207; break;
+			case 99208: .@exp = 1350; .@job_exp = 4550; .@cooldown_qid = 99209; break;
+			case 99210: .@exp = 1620; .@job_exp = 5450; .@cooldown_qid = 99211; break;
+			case 99212: .@exp = 1740; .@job_exp = 5900; .@cooldown_qid = 99213; break;
+			case 99214: .@exp = 2030; .@job_exp = 6840; .@cooldown_qid = 99215; break;
+			case 99216: .@exp = 2030; .@job_exp = 6840; .@cooldown_qid = 99217; break;
+			case 99218: .@exp = 3470; .@job_exp = 11120; .@cooldown_qid = 99219; break;
+			
+			// Centro-Oeste do Reino
+			case 99220: .@exp = 2630; .@job_exp = 12150; .@cooldown_qid = 99221; break;
+			case 99222: .@exp = 2760; .@job_exp = 9320; .@cooldown_qid = 99223; break;
+			case 99224: .@exp = 2760; .@job_exp = 9320; .@cooldown_qid = 99225; break;
+			case 99226: .@exp = 9650; .@job_exp = 29610; .@cooldown_qid = 99227; break;
+			case 99228: .@exp = 9650; .@job_exp = 29610; .@cooldown_qid = 99229; break;
+			case 99230: .@exp = 17490; .@job_exp = 43263; .@cooldown_qid = 99231; break;
+			case 99232: .@exp = 27810; .@job_exp = 65340; .@cooldown_qid = 99233; break;
+			case 99234: .@exp = 27000; .@job_exp = 61626; .@cooldown_qid = 99235; break;
+			case 99236: .@exp = 27000; .@job_exp = 61626; .@cooldown_qid = 99237; break;
+			case 99238: .@exp = 33045; .@job_exp = 110631; .@cooldown_qid = 99239; break;
+			
+			// Oeste do Reino
+			case 99248: .@exp = 4920; .@job_exp = 15840; .@cooldown_qid = 99249; break;
+			case 99250: .@exp = 2700; .@job_exp = 9090; .@cooldown_qid = 99251; break;
+			case 99252: .@exp = 3830; .@job_exp = 12330; .@cooldown_qid = 99253; break;
+			case 99254: .@exp = 3830; .@job_exp = 12330; .@cooldown_qid = 99255; break;
+			case 99256: .@exp = 5580; .@job_exp = 17960; .@cooldown_qid = 99257; break;
+			case 99258: .@exp = 6590; .@job_exp = 21110; .@cooldown_qid = 99259; break;
+			case 99260: .@exp = 31035; .@job_exp = 80238; .@cooldown_qid = 99261; break;
+			case 99262: .@exp = 44070; .@job_exp = 103950; .@cooldown_qid = 99263; break;
+			case 99264: .@exp = 44850; .@job_exp = 148005; .@cooldown_qid = 99265; break;
+			
+			// Campos da República
+			case 99276: .@exp = 3180; .@job_exp = 10220; .@cooldown_qid = 99277; break;
+			case 99278: .@exp = 7410; .@job_exp = 22730; .@cooldown_qid = 99279; break;
+			case 99280: .@exp = 7320; .@job_exp = 22460; .@cooldown_qid = 99281; break;
+			case 99282: .@exp = 8790; .@job_exp = 26910; .@cooldown_qid = 99283; break;
+			case 99284: .@exp = 8520; .@job_exp = 26100; .@cooldown_qid = 99285; break;
+			case 99286: .@exp = 8910; .@job_exp = 27320; .@cooldown_qid = 99287; break;
+			case 99288: .@exp = 9950; .@job_exp = 30560; .@cooldown_qid = 99289; break;
+			case 99290: .@exp = 9650; .@job_exp = 29610; .@cooldown_qid = 99291; break;
+			case 99292: .@exp = 9800; .@job_exp = 30060; .@cooldown_qid = 99293; break;
+			case 99294: .@exp = 7320; .@job_exp = 40140; .@cooldown_qid = 99295; break;
+			case 99296: .@exp = 10770; .@job_exp = 33840; .@cooldown_qid = 99297; break;
+			
+			// Cavernas da República
+			case 99304: .@exp = 18315; .@job_exp = 54339; .@cooldown_qid = 99305; break;
+			case 99306: .@exp = 23865; .@job_exp = 61380; .@cooldown_qid = 99307; break;
+			case 99308: .@exp = 25005; .@job_exp = 57072; .@cooldown_qid = 99309; break;
+			case 99310: .@exp = 23865; .@job_exp = 60438; .@cooldown_qid = 99311; break;
+			case 99312: .@exp = 28425; .@job_exp = 76773; .@cooldown_qid = 99313; break;
+			case 99314: .@exp = 40800; .@job_exp = 88704; .@cooldown_qid = 99315; break;
+			case 99316: .@exp = 44070; .@job_exp = 100584; .@cooldown_qid = 99317; break;
+			case 99318: .@exp = 36630; .@job_exp = 119244; .@cooldown_qid = 99319; break;
+			case 99320: .@exp = 41670; .@job_exp = 126225; .@cooldown_qid = 99321; break;
+			case 99322: .@exp = 43875; .@job_exp = 162606; .@cooldown_qid = 99323; break;
+			case 99324: .@exp = 248505; .@job_exp = 818976; .@cooldown_qid = 99325; break;
+			
+			// Arunafeltz
+			case 99328: .@exp = 15210; .@job_exp = 42800; .@cooldown_qid = 99329; break;
+			case 99330: .@exp = 14160; .@job_exp = 39870; .@cooldown_qid = 99331; break;
+			case 99332: .@exp = 17100; .@job_exp = 42273; .@cooldown_qid = 99333; break;
+			case 99334: .@exp = 20460; .@job_exp = 50637; .@cooldown_qid = 99335; break;
+			case 99336: .@exp = 19440; .@job_exp = 77814; .@cooldown_qid = 99337; break;
+			case 99338: .@exp = 17490; .@job_exp = 43263; .@cooldown_qid = 99339; break;
+			case 99340: .@exp = 24510; .@job_exp = 78507; .@cooldown_qid = 99341; break;
+			case 99342: .@exp = 33690; .@job_exp = 76971; .@cooldown_qid = 99343; break;
+			case 99344: .@exp = 35970; .@job_exp = 82170; .@cooldown_qid = 99345; break;
+			case 99346: .@exp = 38340; .@job_exp = 87516; .@cooldown_qid = 99347; break;
+			
+			// Outras Regiões
+			case 99358: .@exp = 1350; .@job_exp = 4550; .@cooldown_qid = 99359; break;
+			case 99360: .@exp = 4190; .@job_exp = 13410; .@cooldown_qid = 99361; break;
+			case 99362: .@exp = 5190; .@job_exp = 12240; .@cooldown_qid = 99363; break;
+			case 99364: .@exp = 5670; .@job_exp = 18230; .@cooldown_qid = 99365; break;
+			case 99366: .@exp = 6320; .@job_exp = 19350; .@cooldown_qid = 99367; break;
+			case 99368: .@exp = 9900; .@job_exp = 34380; .@cooldown_qid = 99369; break;
+			case 99370: .@exp = 22095; .@job_exp = 53607; .@cooldown_qid = 99371; break;
+			case 99372: .@exp = 20475; .@job_exp = 71775; .@cooldown_qid = 99373; break;
+			case 99374: .@exp = 31200; .@job_exp = 80487; .@cooldown_qid = 99375; break;
+			case 99376: .@exp = 50265; .@job_exp = 153054; .@cooldown_qid = 99377; break;
+			case 99378: .@exp = 47475; .@job_exp = 156024; .@cooldown_qid = 99379; break;
+			case 99380: .@exp = 69225; .@job_exp = 187110; .@cooldown_qid = 99381; break;
+			case 99382: .@exp = 73125; .@job_exp = 193050; .@cooldown_qid = 99383; break;
+			default: .@exp = 0; .@job_exp = 0; .@cooldown_qid = 0; break;
+		}
+		
+		// Entregar recompensa e ativa cooldown
+		mes "[Monstrólogo]";
+		mes "Impressionante! Você derrotou um monstro campeão.";
+		mes "Isso é muito valioso para nossos estudos.";
+		next;
+		
+		// Remove a quest de caça
+		erasequest .@hunt_qid;
+		
+		// Dá a recompensa
+		getexp .@exp, .@job_exp;
+		
+		// Ativa a quest de cooldown
+		setquest .@cooldown_qid;
+		
+		mes "[Monstrólogo]";
+		mes "Seu esforço foi recompensado. Continue assim!";
+		next;
+		mes "[Monstrólogo]";
+		mes "Quando encontrar outro monstro especial, volte aqui para registrá-lo.";
+		close;
+	} else {
+		// Não tem missão completa
+		mes "[Monstrólogo]";
+		mes "No momento, não tenho nada para registrar.";
+		mes "Procure por missões no Quadro Missões Especiais.";
+		close;
+	}
+}

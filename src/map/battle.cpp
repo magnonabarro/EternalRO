@@ -6789,15 +6789,17 @@ struct Damage battle_calc_attack(int32 attack_type,block_list *bl,block_list *ta
 
 	map_session_data *sd = BL_CAST(BL_PC, bl);
 
-	// Hero Saga seasonal PvM rewards: both the +265 and +275 tiers are moved to level 99.
-	// The +15% physical/magic bonus stacks additively with +15% for long-range weapon attacks.
+	// Hero Saga seasonal PvM bonuses are configured in CustomRates.txt.
 	if (sd != nullptr && target->type == BL_MOB && sd->custom_rate.pvm_seasonal &&
-		sd->status.base_level >= 99 && d.damage + d.damage2 > 0) {
+		sd->status.base_level >= sd->custom_rate.pvm_bonus_level && sd->custom_rate.pvm_bonus_level > 0 &&
+		d.damage + d.damage2 > 0) {
 		int32 pvm_damage_bonus = 0;
-		if (attack_type == BF_WEAPON || attack_type == BF_MAGIC)
-			pvm_damage_bonus = 15; // +10% from the first tier and +5% from the second.
+		if (attack_type == BF_WEAPON)
+			pvm_damage_bonus = sd->custom_rate.pvm_physical_damage;
+		else if (attack_type == BF_MAGIC)
+			pvm_damage_bonus = sd->custom_rate.pvm_magic_damage;
 		if (attack_type == BF_WEAPON && (flag & BF_LONG))
-			pvm_damage_bonus += 15; // Additional long-range damage.
+			pvm_damage_bonus += sd->custom_rate.pvm_ranged_damage;
 		if (pvm_damage_bonus > 0) {
 			if (d.damage > 0)
 				d.damage = static_cast<int64>(d.damage) * (100 + pvm_damage_bonus) / 100;

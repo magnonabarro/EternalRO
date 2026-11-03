@@ -1,0 +1,68 @@
+# Custom currency/token items for rAthena.
+# Header version 3 (ITEM_DB).
+
+Header:
+  Type: ITEM_DB
+  Version: 3
+
+Body:
+  - Id: 40722
+    AegisName: Zeny
+    Name: Zeny
+    Type: Etc
+    Buy: 2000
+    Sell: 1000
+    Weight: 1
+  - Id: 40723
+    AegisName: Cash
+    Name: Cash
+    Type: Etc
+    Buy: 2000
+    Sell: 1000
+    Weight: 1
+  - Id: 40724
+    AegisName: Sacola_de_Moedas_B
+    Name: Sacola de Moedas B
+    Type: Etc
+    Buy: 2000
+    Sell: 1000
+    Weight: 1
+  - Id: 50028
+    AegisName: Cheffenia_Coin_Normal
+    Name: Moeda Cheffenia Normal
+    Type: Etc
+    Buy: 0
+    Sell: 0
+    Weight: 0
+  - Id: 50029
+    AegisName: Cheffenia_Coin_Hard
+    Name: Moeda Cheffenia Hard
+    Type: Etc
+    Buy: 0
+    Sell: 0
+    Weight: 0
+  - Id: 50030
+    AegisName: Cheffenia_Coin_Insana
+    Name: Moeda Cheffenia Insana
+    Type: Etc
+    Buy: 0
+    Sell: 0
+    Weight: 0
+  - Id: 50031
+    AegisName: Moeda_RMT
+    Name: Moeda RMT
+    Type: Etc
+    Buy: 0
+    Sell: 0
+    Weight: 0
+    Trade:
+      NoSell: true
+  - Id: 50032
+    AegisName: Moeda_Roleta
+    Name: Moeda da Roleta
+    Type: Etc
+    Buy: 0
+    Sell: 0
+    Weight: 0
+    Trade:
+      NoSell: true

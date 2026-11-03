@@ -10281,6 +10281,7 @@
 	export_constant(HAT_EF_ATROCE4);
 	export_constant(HAT_EF_ATROCE5);
 	export_constant(HAT_EF_ATROCEM);
+	// outros hat efects
 	export_constant(HAT_EF_C_IGUAZU_FALLS);
 	export_constant(FOOTPRINT_EF_BLOSSOM);
 	export_constant(FOOTPRINT_EF_BUD);
@@ -10318,6 +10319,7 @@
 	export_constant(HAT_EF_C_JAOW_PIRUN);
 	export_constant(FOOTPRINT_EF_FLOWER_GARDEN);
 	export_constant(HAT_EF_C_ANGEL_GIFT);
+	export_constant(HAT_EF_DAILY_QUEST);
 
 	/* pet catch */
 	export_constant(PET_CATCH_UNIVERSAL_NO_BOSS);
@@ -11198,6 +11200,18 @@
 	export_constant(CR_IT_DROP_TREASURE_MIN);
 	export_constant(CR_IT_DROP_TREASURE_MAX);
 	export_constant(CR_PVM_SEASONAL);
+	export_constant(CR_PVM_BONUS_LEVEL);
+	export_constant(CR_PVM_PHYSICAL_DAMAGE);
+	export_constant(CR_PVM_MAGIC_DAMAGE);
+	export_constant(CR_PVM_RANGED_DAMAGE);
+	export_constant(CR_PVM_DROP);
+	export_constant(CR_PVM_HP);
+	export_constant(CR_PVM_SP);
+	export_constant(CR_PVM_HEAL);
+	export_constant(CR_PVM_DEF);
+	export_constant(CR_PVM_MDEF);
+	export_constant(CR_PVM_PERFECT_DODGE);
+	export_constant(CR_PVM_AFTERCAST_DELAY);
 
 
 	/* searchstore constants */

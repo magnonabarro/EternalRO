@@ -1,0 +1,304 @@
+prontera,147,168,6	script	Ganhe Dinheiro $$$	58,{
+	set .@n$, 			"[Ganhe Dinheiro]";
+	set .@settings, 	1;		// 0 = item, 1 = shop
+	set .@itemReward, 	520;	// if settings is set to item
+	set .@convertRate, 	2;		// 2 Vote point for 1 Red Potion
+	set .@per, 90; // jogador recebe 90%; servidor retém 10%
+	set .@moedaRMT, 50031; // Moeda RMT do inventario
+	set .@valorCentavos, 100; // Cada moeda vale R$ 1,00 antes da taxa
+	set .@rmt, 0;
+	if (.@moedaRMT > 0) set .@rmt, countitem(.@moedaRMT);
+	cutin "ururu_ginta",2;
+	switch (.@settings) {
+		case 0:
+			mes .@n$;
+			mes "Você quer trocar seus pontos? Atualmente você tem: "+ .@rmt +" ";
+			next;
+			menu "Sim, vamos lá", L_Convert, "Não, obrigado.", -;
+			mes .@n$;
+			mes "Obrigado, até mais.";
+			break;
+		case 1:
+			mes .@n$;
+			mes "Você tem ^ff0000"+ .@rmt +"^000000 MOEDAS RMT.";
+			mes "O que você gostaria de fazer?";
+			next;
+			menu "- Informações", Info,"- ^0000FFSolicitar Transação^000000", Transacao,"- ^ff0000Cadastrar Dados^000000", PIX,"- ^008000Alterar Dados^000000", DADOS,"- ^72007fVisualizar Solicitações de Troca^000000", Trocas,"Nada, obrigado", L_Goodbye;
+			mes .@n$;
+			end;
+	}
+	
+	MEUSDADOS:
+		mes .@n$;
+		mes "chama no dados";
+		close2;
+		cutin "",255;
+		end;
+	
+	PIX:
+	
+	if( #cadastro == 1){ 
+	query_sql "SELECT `nome` FROM `login` WHERE `account_id` = "+getcharid(3), @nome_cadastro$;
+	query_sql "SELECT `cpf` FROM `login` WHERE `account_id` = "+getcharid(3), @cpf1$;
+	query_sql "SELECT `chave_pix` FROM `login` WHERE `account_id` = "+getcharid(3), @chave_pix1$;
+	mes .@n$; 
+	mes "Você já está cadastrado em nosso sistema."; 
+	mes "Seus dados:";
+	mes "Nome: ^ff0000"+@nome_cadastro$+"^000000";
+	mes "Cpf: ^ff0000"+@cpf1$+"^000000";
+	mes "Chave Pix: ^ff0000"+@chave_pix1$+"^000000";
+	
+	close2;
+	cutin "",255;
+	end;
+	}
+	
+	
+	mes .@n$;
+	mes "Cadastro da conta conectada.";
+	mes "Insira seu nome Completo";
+	input .@nome$;
+	if(.@nome$!=""){
+		query_sql "UPDATE `login` SET `nome` = '"+escape_sql(.@nome$)+"' WHERE `account_id` = "+getcharid(3);
+	next;
+	mes .@n$;
+	mes "Insira seu CPF";
+	input .@cpf$;
+	if(.@cpf$!=""){
+		query_sql "UPDATE `login` SET `cpf` = '"+escape_sql(.@cpf$)+"' WHERE `account_id` = "+getcharid(3);
+	next;
+	mes .@n$;
+	mes "Insira sua chave PIX";
+	input .@chave_pix$;
+	if(.@chave_pix$!=""){
+		query_sql "UPDATE `login` SET `chave_pix` = '"+escape_sql(.@chave_pix$)+"' WHERE `account_id` = "+getcharid(3);
+	next;
+	mes "Cadastro realizado com ^008000sucesso.^000000";
+	set #cadastro,1;
+		close2;
+		cutin "",255;
+		end;
+	} } }
+	mes "Cancelado";
+	end;
+		
+	Info:		
+		mes .@n$;
+		mes "^ff0000[Sobre as Transações]^000000";
+		mes "Trocando o dinheiro:";
+		mes "1) ^0000FFTodo dinheiro (MOEDAS RMT) obtido no jogo pode ser convertido em dinheiro REAL.^000000";
+		if(select("Continuar:Fechar")==2)close; else next;
+		mes .@n$;
+		mes "2) O servidor retem 10% do valor bruto; voce recebe 90%.";
+		if(select("Continuar:Fechar")==2)close; else next;
+		mes .@n$;
+		mes "3) ^0000FFO próprio sistema irá pedir seus DADOS, não compartilhe com ninguém. Caso algum dado lançado no sistema esteja diferente na hora de entregar o dinheiro (transação), a solicitação será cancelada de imediato.^000000";
+		if(select("Continuar:Fechar")==2)close; else next;
+		mes .@n$;
+		mes "4) ^0000FFPara continuar com a solicitação da transação, você deverá possuir uma CHAVE NO PIX, nela deve conter seus dados reais (Nome),(Chave),(CPF).^000000";
+		if(select("Continuar:Fechar")==2)close; else next;
+		mes .@n$;
+		mes "5) O saque minimo e de 100 moedas RMT no inventario.";
+		if(select("Continuar:Fechar")==2)close; else next;	
+		mes .@n$;
+		mes "6) ^0000FFExiste um prazo de até 48 HORAS para confirmação da sua solicitação, podendo não ser atendido aos finais de semana e feriado. Portanto, deverá ter paciência. Suas solicitações podem ser acompanhadas nesse mesmo NPC.^000000";
+		if(select("Continuar:Fechar")==2)close; else next;				
+		mes .@n$;
+		mes "7) ^0000FFApenas em caso de PROBLEMA devesse comunicar os administradores.^000000";
+		close2;
+		cutin "",255;
+		end;
+	
+	Dados:		
+	mes .@n$;
+	mes "Atualizacao dos dados da conta conectada.";
+	mes "Insira seu nome Completo";
+	input .@nome$;
+	if(.@nome$!=""){
+		query_sql "UPDATE `login` SET `nome` = '"+escape_sql(.@nome$)+"' WHERE `account_id` = "+getcharid(3);
+	next;
+	mes .@n$;
+	mes "Insira seu CPF";
+	input .@cpf$;
+	if(.@cpf$!=""){
+		query_sql "UPDATE `login` SET `cpf` = '"+escape_sql(.@cpf$)+"' WHERE `account_id` = "+getcharid(3);
+	next;
+	mes .@n$;
+	mes "Insira sua chave PIX";
+	input .@chave_pix$;
+	if(.@chave_pix$!=""){
+		query_sql "UPDATE `login` SET `chave_pix` = '"+escape_sql(.@chave_pix$)+"' WHERE `account_id` = "+getcharid(3);
+	next;
+	mes "Dados alterados com ^008000sucesso.^000000";
+	close2;
+	cutin "",255;
+	end;
+	} } }
+	mes "Cancelado";
+	end;
+	
+	Trocas:
+	query_sql "SELECT COUNT(1) FROM `rmt_logs` WHERE `account_id` = "+getcharid(3), .@LMT;
+	set .@n$,"[RMT Transações]";
+	//set $@LMT1, 30;
+	query_sql "SELECT nome, valor, chave_pix, cpf, id, check_transacao, data_transacao, account_id FROM rmt_logs WHERE account_id = "+getcharid(3),@nome_cadastro$, @valor$, @chave_pix$, @cpf$, @id, @check, @data_transacao$ ,@account_id;
+	
+	mes "Lista das suas transações";
+	mes "^FFFFFF.^000000";
+	for (SET .@A,0; .@A < .@LMT; SET .@A, .@A+1 ){
+	if(@account_id[.@A] == getcharid(3)){
+	mes "- ID DA TRANSAÇÃO "+@id[.@A]+":";
+	mes "Data : "+@data_transacao$[.@A]+"";
+	mes "Chave : "+@chave_pix$[.@A]+"";
+	mes "Valor : "+@valor$[.@A]+"R$";
+	mes "Status : "+$valstats$[(@check[.@A])]+"";
+	}
+	mes "^FFFFFF.^000000";
+	}
+	mes "Está é sua lista de transações";
+	close2;
+	cutin "",255;
+	end;
+	
+	
+	CCancelar:
+	mes"Ok";
+	close2;
+	cutin "",255;
+	end;	
+	Transacao:
+		if (.@moedaRMT <= 0 || .@valorCentavos <= 0) {
+			mes "Saque aguardando configuracao da Moeda RMT.";
+			close2;
+			cutin "",255;
+			end;
+		}	
+		set .@qntTrans,100;
+		mes .@n$;
+		if(countitem(.@moedaRMT) < .@qntTrans){
+			mes "Me desculpe ^ff0000"+strcharinfo(0)+"^000000, para solicitar uma transação você precisa no mínimo: ^ff0000["+.@qntTrans+" MOEDAS RMT]^000000.";
+			close2;
+			cutin "",255;
+			end;
+		}
+		mes "Digite quanto você quer sacar";
+		input .@qntRMT;
+		if(.@qntRMT == 0) {
+			mes "Você não pode trocar ^ff0000[0 RMT's]^000000";
+			close2;
+			cutin "",255;
+			end;
+		} else {
+			if(.@qntRMT <.@qntTrans){
+				mes "Me desculpe ^ff0000"+strcharinfo(0)+"^000000, para solicitar uma transação você precisa no mínimo: ^ff0000["+.@qntTrans+" MOEDAS RMT]^000000.";
+				close2;
+				cutin "",255;
+				end;
+			}
+		}
+		if(countitem(.@moedaRMT) < .@qntRMT){ 
+		next;
+		mes .@n$;
+		mes "Me desculpe ^ff0000"+strcharinfo(0)+"^000000 mas você não tem a quantidade de ^ff0000[MOEDAS RMT]^000000 necessário.";
+		close2;
+		cutin "",255;
+		end;
+		}
+		if (#cadastro) {
+		mes "Ok, vamos lá..";
+		mes "Por favor, confirme seus dados:";
+		next;
+		query_sql "SELECT `nome` FROM `login` WHERE `account_id` = "+getcharid(3), .@nome_cadastro2$;
+		query_sql "SELECT `cpf` FROM `login` WHERE `account_id` = "+getcharid(3), .@cpf2$;
+		query_sql "SELECT `chave_pix` FROM `login` WHERE `account_id` = "+getcharid(3), .@chave_pix2$;
+		query_sql "SELECT `userid` FROM `login` WHERE `account_id` = "+getcharid(3), .@usuario$;
+		query_sql "SELECT `account_id` FROM `login` WHERE `account_id` = "+getcharid(3), .@usuario_id$;
+		mes .@n$; 
+		set .@valtrade,(.@qntRMT * .@valorCentavos * .@per)/100;
+			set .@i$,callfunc( "F_RMT_FormatMoney", .@valtrade );
+			mes "Você está solicitando uma troca de :";
+			mes "^0000FF"+.@qntRMT+"^000000 moedas RMT por ^FF0000"+.@i$+"^000000 Reais";
+		if(select("Continuar:Fechar")==2)close; else next;	
+		mes "Esse(a) é você?"; 
+		mes "Seus dados:";
+		mes "Nome: ^ff0000"+escape_sql(.@nome_cadastro2$)+"^000000";
+		mes "Cpf: ^ff0000"+escape_sql(.@cpf2$)+"^000000";
+		mes "Chave Pix: ^ff0000"+escape_sql(.@chave_pix2$)+"^000000";
+		menu "- Sim", -,"- Não, vou verificar meus dados.", Verific;
+		next;
+		mes .@n$;
+		mes "Ótimo! Vou solicitar a transação para você";
+		next;
+		progressbar "ffff00",5;
+		if(countitem(.@moedaRMT) < .@qntRMT){ 
+		next;
+		mes .@n$;
+		mes "Algo errado acaba de acontecer, tente novamente.";
+		close2;
+		cutin "",255;
+		end;
+		}
+		.@insert_result = query_sql("insert into `rmt_logs`(`valor`, `cpf`, `nome`, `chave_pix`, `userid`, `account_id`)   values ('"+.@i$+"', '"+escape_sql(.@cpf2$)+"', '"+escape_sql(.@nome_cadastro2$)+"', '"+escape_sql(.@chave_pix2$)+"', '"+escape_sql(.@usuario$)+"', '"+.@usuario_id$+"') ");
+		if (.@insert_result < 0) {
+			mes "Nao foi possivel registrar. Seu moedas RMT nao foi descontado.";
+			close2;
+			cutin "",255;
+			end;
+		}
+		delitem .@moedaRMT, .@qntRMT;
+		//delitem 520, .@qntRMT;
+		next;
+		mes "Solicitação realizada com ^008000sucesso^000000!";
+		mes "Dentro de ^ff000048hrs^000000 o dinheiro estará em sua conta.";
+		mes "Informamos que será cobrada uma taxa de ^ff0000"+(100-.@per)+"%^000000 do valor total de sua transação";
+		mes "Para mais informaçõesdo Sistema RMT acesse a aba ^ff0000Informações^000000 , nosso ^ff0000site^000000 ou procure um membro de nossa ^ff0000equipe^000000.";
+		mes "Lhe desejo um ótimo dia.";
+		mes "Muito obrigado por confiar no ^ff0000EternalRO^000000, bom jogo!";
+		close2;
+		cutin "",255;
+		end;
+	}
+		next;
+		mes .@n$;
+		mes "Por favor ^ff0000"+strcharinfo(0)+"^000000";
+		mes "Cadastre os seus ^ff0000dados^000000 para fazer ^ff0000transações^000000.";
+		close2;
+		cutin "",255;
+		end;
+
+	Verific:
+		next;
+		mes "Ok "+strcharinfo(0)+" ";
+		mes "Fico aqui té esperando, até mais!";
+		close2;
+		cutin "",255;
+		end;
+	L_Convert:
+		goto L_Goodbye;
+	L_Goodbye:
+		mes .@n$;
+		mes "Ok, então, até mais!";
+		close2;
+		cutin "",255;
+		end;
+	
+	OnInit:
+	setarray $valstats$[0],"","^ffc600Aguardando pagamento^000000","^0000FFPago^000000","^FF0000Cancelado^000000";	
+	chat_novamente:
+	waitingroom "RMT",0;
+	sleep 3000;
+	delwaitingroom;	
+	waitingroom "VENDA SEUS ITENS",0;
+	sleep 3000;
+	delwaitingroom;	
+	waitingroom "GANHE DINHEIRO",0;
+	sleep 3000;
+	delwaitingroom;	
+	goto chat_novamente;
+	end;
+}
+
+function	script	F_RMT_FormatMoney	{
+	.@centavos = getarg(0);
+	return (.@centavos / 100) + "," + ((.@centavos % 100) < 10 ? "0" : "") + (.@centavos % 100);
+}

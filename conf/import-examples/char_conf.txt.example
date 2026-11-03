@@ -1,0 +1,8 @@
+// Copie para conf/import/char_conf.txt; ajuste para sua instalacao.
+// userid/passwd devem corresponder a conta de comunicacao entre os servidores.
+userid: CHANGE_ME_USER
+passwd: CHANGE_ME_PASSWORD
+login_ip: 127.0.0.1
+login_port: 6900
+char_ip: 127.0.0.1
+char_port: 6121

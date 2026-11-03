@@ -1,0 +1,53 @@
+# This file is a part of rAthena.
+#   Copyright(C) 2017 rAthena Development Team
+#   https://rathena.org - https://github.com/rathena
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+###########################################################################
+# Atcommand Database
+###########################################################################
+#
+# Atcommand Settings
+#
+###########################################################################
+# - Command                  Command name.
+#   Aliases:                 Aliases for the command. (Optional)
+#     - <AliasName>
+#   Help                     Help message for the command. (Optional)
+###########################################################################
+
+Header:
+  Type: ATCOMMAND_DB
+  Version: 1
+
+Body:
+  - Command: go
+    Help: |
+      Uso: @go <nome ou numero>
+      Teleporta para uma cidade ou para a sede do Grupo Eden.
+       0: prontera       13: niflheim       26: midgard camp
+       1: morocc         14: louyang        27: manuk
+       2: geffen         15: start point    28: splendide
+       3: payon          16: prison/jail    29: brasilis
+       4: alberta        17: jawaii         30: el dicastes
+       5: izlude         18: ayothaya       31: mora
+       6: aldebaran      19: einbroch       32: dewata
+       7: xmas (lutie)   20: lighthalzen    33: malangdo island
+       8: comodo         21: einbech        34: malaya port
+       9: yuno           22: hugel          35: eclage
+      10: amatsu         23: rachel         36: lasagna
+      11: gonryun        24: veins          37: eden
+      12: umbala         25: moscovia
+      Grupo Eden: @go eden ou @go 37.

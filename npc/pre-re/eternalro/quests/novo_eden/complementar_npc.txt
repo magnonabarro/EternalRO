@@ -1,0 +1,526 @@
+// =================================================================
+// Scripts Complementares - Versão Definitiva (Autocontida)
+// =================================================================
+
+// --- 1. CAIXA ANTIGA (Quest: Tesouro do Mar - ID: 99015) ---
+
+treasure01,25,31,4	script	Caixa Antiga#1	844,{
+    if (countitem(25074) == 0) { mes "[Caixa Antiga]"; mes "Vazia."; close; }
+    mes "- Esconder dobrões aqui? -";
+    next;
+    if (select("Esconder rapidamente.", "Acho que tem alguém olhando.") == 2) { close; }
+    close2;
+    if (progressbar(1500, 1)) {
+        if (countitem(25074) > 0) {
+            delitem 25074, 1;
+            npctalk "Tire suas mãos sujas daqui pirata!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldown";
+    end;
+OnCooldown:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+treasure01,113,33,4	script	Caixa Antiga#2	844,{
+    if (countitem(25074) == 0) { mes "[Caixa Antiga]"; mes "Vazia."; close; }
+    mes "- Esconder dobrões aqui? -";
+    next;
+    if (select("Esconder rapidamente.", "Acho que tem alguém olhando.") == 2) { close; }
+    close2;
+    if (progressbar(1500, 1)) {
+        if (countitem(25074) > 0) {
+            delitem 25074, 1;
+            npctalk "Tire esse tesouro imundo daqui e caia fora! Pirata idiota!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldown";
+    end;
+OnCooldown:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+treasure01,26,108,4	script	Caixa Antiga#3	844,{
+    if (countitem(25074) == 0) { mes "[Caixa Antiga]"; mes "Vazia."; close; }
+    mes "- Esconder dobrões aqui? -";
+    next;
+    if (select("Esconder rapidamente.", "Acho que tem alguém olhando.") == 2) { close; }
+    close2;
+    if (progressbar(1500, 1)) {
+        if (countitem(25074) > 0) {
+            delitem 25074, 1;
+            npctalk "Saiam do meu navio seus piratas!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldown";
+    end;
+OnCooldown:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+treasure01,112,107,4	script	Caixa Antiga#4	844,{
+    if (countitem(25074) == 0) { mes "[Caixa Antiga]"; mes "Vazia."; close; }
+    mes "- Esconder dobrões aqui? -";
+    next;
+    if (select("Esconder rapidamente.", "Acho que tem alguém olhando.") == 2) { close; }
+    close2;
+    if (progressbar(1500, 1)) {
+        if (countitem(25074) > 0) {
+            delitem 25074, 1;
+            npctalk "Nem pense em esconder isso no meu navio pirata arrogante!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldown";
+    end;
+OnCooldown:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+treasure01,123,160,4	script	Caixa Antiga#5	844,{
+    if (countitem(25074) == 0) { mes "[Caixa Antiga]"; mes "Vazia."; close; }
+    mes "- Esconder dobrões aqui? -";
+    next;
+    if (select("Esconder rapidamente.", "Acho que tem alguém olhando.") == 2) { close; }
+    close2;
+    if (progressbar(1500, 1)) {
+        if (countitem(25074) > 0) {
+            delitem 25074, 1;
+            npctalk "Piratas! O que vocês fazem no meu navio?";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldown";
+    end;
+OnCooldown:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+treasure01,121,168,4	script	Caixa Antiga#6	844,{
+    if (countitem(25074) == 0) { mes "[Caixa Antiga]"; mes "Vazia."; close; }
+    mes "- Esconder dobrões aqui? -";
+    next;
+    if (select("Esconder rapidamente.", "Acho que tem alguém olhando.") == 2) { close; }
+    close2;
+    if (progressbar(1500, 1)) {
+        if (countitem(25074) > 0) {
+            delitem 25074, 1;
+            npctalk "Tire suas mãos sujas daqui pirata!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldown";
+    end;
+OnCooldown:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+treasure01,167,162,4	script	Caixa Antiga#7	844,{
+    if (countitem(25074) == 0) { mes "[Caixa Antiga]"; mes "Vazia."; close; }
+    mes "- Esconder dobrões aqui? -";
+    next;
+    if (select("Esconder rapidamente.", "Acho que tem alguém olhando.") == 2) { close; }
+    close2;
+    if (progressbar(1500, 1)) {
+        if (countitem(25074) > 0) {
+            delitem 25074, 1;
+            npctalk "Tire esse tesouro imundo daqui e caia fora! Pirata idiota!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldown";
+    end;
+OnCooldown:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+treasure01,160,55,4	script	Caixa Antiga#8	844,{
+    if (countitem(25074) == 0) { mes "[Caixa Antiga]"; mes "Vazia."; close; }
+    mes "- Esconder dobrões aqui? -";
+    next;
+    if (select("Esconder rapidamente.", "Acho que tem alguém olhando.") == 2) { close; }
+    close2;
+    if (progressbar(1500, 1)) {
+        if (countitem(25074) > 0) {
+            delitem 25074, 1;
+            npctalk "Saiam do meu navio seus piratas!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldown";
+    end;
+OnCooldown:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+treasure01,76,179,4	script	Caixa Antiga#9	844,{
+    if (countitem(25074) == 0) { mes "[Caixa Antiga]"; mes "Vazia."; close; }
+    mes "- Esconder dobrões aqui? -";
+    next;
+    if (select("Esconder rapidamente.", "Acho que tem alguém olhando.") == 2) { close; }
+    close2;
+    if (progressbar(1500, 1)) {
+        if (countitem(25074) > 0) {
+            delitem 25074, 1;
+            npctalk "Nem pense em esconder isso no meu navio pirata arrogante!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldown";
+    end;
+OnCooldown:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+treasure01,89,150,4	script	Caixa Antiga#10	844,{
+    if (countitem(25074) == 0) { mes "[Caixa Antiga]"; mes "Vazia."; close; }
+    mes "- Esconder dobrões aqui? -";
+    next;
+    if (select("Esconder rapidamente.", "Acho que tem alguém olhando.") == 2) { close; }
+    close2;
+    if (progressbar(1500, 1)) {
+        if (countitem(25074) > 0) {
+            delitem 25074, 1;
+            npctalk "Piratas! O que vocês fazem no meu navio?";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldown";
+    end;
+OnCooldown:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+treasure01,78,159,4	script	Caixa Antiga#11	844,{
+    if (countitem(25074) == 0) { mes "[Caixa Antiga]"; mes "Vazia."; close; }
+    mes "- Esconder dobrões aqui? -";
+    next;
+    if (select("Esconder rapidamente.", "Acho que tem alguém olhando.") == 2) { close; }
+    close2;
+    if (progressbar(1500, 1)) {
+        if (countitem(25074) > 0) {
+            delitem 25074, 1;
+            npctalk "Tire suas mãos sujas daqui pirata!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldown";
+    end;
+OnCooldown:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+treasure01,61,75,4	script	Caixa Antiga#12	844,{
+    if (countitem(25074) == 0) { mes "[Caixa Antiga]"; mes "Vazia."; close; }
+    mes "- Esconder dobrões aqui? -";
+    next;
+    if (select("Esconder rapidamente.", "Acho que tem alguém olhando.") == 2) { close; }
+    close2;
+    if (progressbar(1500, 1)) {
+        if (countitem(25074) > 0) {
+            delitem 25074, 1;
+            npctalk "Tire esse tesouro imundo daqui e caia fora! Pirata idiota!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldown";
+    end;
+OnCooldown:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+
+// --- 2. ESPÍRITO MALIGNO (Quest: Oferenda aos Espíritos - ID: 99040) ---
+
+pay_dun03,84,86,4	script	Espírito Maligno#1	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+pay_dun03,81,60,4	script	Espírito Maligno#2	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+pay_dun03,50,44,4	script	Espírito Maligno#3	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+pay_dun03,103,128,4	script	Espírito Maligno#4	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+pay_dun03,69,237,4	script	Espírito Maligno#5	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+pay_dun03,91,145,4	script	Espírito Maligno#6	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+pay_dun03,262,135,4	script	Espírito Maligno#7	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+pay_dun03,197,125,4	script	Espírito Maligno#8	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+pay_dun03,86,214,4	script	Espírito Maligno#9	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+pay_dun03,258,120,4	script	Espírito Maligno#10	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+pay_dun03,76,76,4	script	Espírito Maligno#11	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+pay_dun03,206,248,4	script	Espírito Maligno#12	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+pay_dun03,168,118,4	script	Espírito Maligno#13	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}
+
+pay_dun03,154,111,4	script	Espírito Maligno#14	10043,{
+    if (countitem(25079) == 0) end;
+    unittalk getcharid(3), strcharinfo(0) + ": Espero que de certo....";
+    if (progressbar(1500, 1)) {
+        if (countitem(25079) > 0) {
+            delitem 25079, 1;
+            specialeffect 85;
+            npctalk "Kyaaaaaaaaa----!!!";
+        }
+    }
+    donpcevent strnpcinfo(0) + "::OnCooldownEspirito";
+    end;
+OnCooldownEspirito:
+    hideonnpc strnpcinfo(0);
+    sleep 300000;
+    hideoffnpc strnpcinfo(0);
+    end;
+}

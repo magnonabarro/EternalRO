@@ -157,7 +157,7 @@ pay_arche,55,123,0	script	Funcionária Kafra::kaf_payon3	4_F_KAFRA1,{
 
 // Prontera
 //============================================================
-prontera,170,179,4	script	Funcionária Kafra::kaf_prontera	112,{
+prontera,149,190,4	script	Funcionária Kafra::kaf_prontera	112,{
 	cutin "kafra_06",2;
 	callfunc "F_KafSet";
 	mes "[Funcionária Kafra]";

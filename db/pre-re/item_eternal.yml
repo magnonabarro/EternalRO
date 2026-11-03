@@ -161,28 +161,6 @@ Body:
       NoConsume: true
     Script: |
       doevent "BattlePass#system::OnItemUse";
-  - Id: 50024
-    AegisName: Passe_de_Aventura
-    Name: Passe de Batalha
-    Type: Usable
-    Buy: 10
-    Weight: 1
-    Flags:
-      NoConsume: true
-    Script: |
-      doevent "BattlePass#system::OnItemUse";
-
-  - Id: 50024
-    AegisName: Passe_de_Aventura
-    Name: Passe de Batalha
-    Type: Usable
-    Buy: 10
-    Weight: 1
-    Flags:
-      NoConsume: true
-    Script: |
-      doevent "BattlePass#system::OnItemUse";
-
   - Id: 50025
     AegisName: Essencia_Batalha_Diluida
     Name: Essencia de Batalha Diluida

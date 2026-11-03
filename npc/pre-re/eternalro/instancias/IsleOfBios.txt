@@ -9,16 +9,16 @@
 
 moro_cav,50,64,5	script	Yellow Seed#bios	CLEAR_NPC,{
 	if (BaseLevel < 99) {
-		mes "^ff0000Characters below Level 160 cannot enter this dungeon.^000000";
+		mes "^ff0000Personagens abaixo do nível 160 não podem entrar nesta instância.^000000";
 		close;
 	}
 	if (isbegin_quest(15006) == 0) {
-		mes "^ff0000You first must meet Wandering Old Man to gain access to this dungeon.^000000";
+		mes "^ff0000Você deve primeiro encontrar o Velho Viajante para obter acesso a esta instância.^000000";
 		close;
 	}
 	.@party_id = getcharid(1);
 	if (.@party_id < 1) {
-		mes "^ff0000You first must form/join a party of at least 1 person to enter this dungeon.^000000";
+		mes "^ff0000Você deve primeiro formar/entrar em um grupo de pelo menos 1 pessoa para entrar nesta instância.^000000";
 		close;
 	}
 	switch( checkquest(15005,PLAYTIME) ) {
@@ -27,7 +27,7 @@ moro_cav,50,64,5	script	Yellow Seed#bios	CLEAR_NPC,{
 	case 0:
 	case 1:
 		if (checkquest(15007,PLAYTIME) == 2) {// 5 mins to re-enter
-			mes "^ff0000This Memorial Dungeon cannot be accessed for 23 hours after your last visit.^000000";
+			mes "^ff0000Esta instância não pode ser acessada por 23 horas após sua última visita.^000000";
 			close;
 		}
 		switch( checkquest(15008,PLAYTIME) ) {
@@ -35,7 +35,7 @@ moro_cav,50,64,5	script	Yellow Seed#bios	CLEAR_NPC,{
 			break;
 		case 0:
 		case 1:
-			mes "^0000ffThis Memorial Dungeon cannot be accessed for 23 hours after your last visit.^000000";
+			mes "^0000ffEsta instância não pode ser acessada por 23 horas após sua última visita.^000000";
 			close;
 		case 2:
 			break;
@@ -50,11 +50,11 @@ moro_cav,50,64,5	script	Yellow Seed#bios	CLEAR_NPC,{
 	}
 	if (is_party_leader() == true)
 		.@create$ = "Create Memorial dungeon.";
-	switch( select( .@create$, "Enter Isle of Bios.", "Cancel." ) ) {
+	switch( select( .@create$, "Entrar na Ilha de Biore.", "Cancelar." ) ) {
 	case 1:
 		instance_create("Isle of Bios");
-		mes "^ff0000Created the Memorial dungeon.^000000";
-		mes "^ff0000Please click and press Enter again.^000000";
+		mes "^ff0000A instância foi criada.^000000";
+		mes "^ff0000Por favor, clique e pressione Enter novamente.^000000";
 		close;
 	case 2:
 		switch( instance_enter("Isle of Bios") ) {
@@ -62,13 +62,13 @@ moro_cav,50,64,5	script	Yellow Seed#bios	CLEAR_NPC,{
 		case IE_NOINSTANCE:
 		case IE_OTHER:
 			if (is_party_leader(.@party_id) == false) {
-				mes "^ff0000Please note that This Memorial Dungeon cannot be accessed for 23 hours after your last visit.^000000";
+				mes "^ff0000Observe que esta instância não pode ser acessada por 23 horas após sua última visita.^000000";
 				next;
 			}
-			mes "^ff0000Your party leader has not yet created a Crack of Time.^000000";
+			mes "^ff0000O líder do seu grupo ainda não criou uma Fenda Dimensional.^000000";
 			close;
 		case IE_OK:
-			mapannounce "moro_cav", "" + strcharinfo(0) + " of the party, " + getpartyname( getcharid(1) ) + ", is entering Isle of Bios.",bc_map,"0x00FF99";
+			mapannounce "moro_cav", "" + strcharinfo(0) + ", do grupo " + getpartyname( getcharid(1) ) + ", está entrando na Ilha de Biore.",bc_map,"0x00FF99";
 			if (isbegin_quest(15005) == 0) {
 				setquest 15005;// Memorial Dungeon: Isle of Bios
 				setquest 15007;// Memorial Dungeon: Isle of Bios
@@ -90,45 +90,45 @@ OnInit:
 
 moro_cav,45,60,5	script	Wandering Old Man#sara	4_M_EINOLD,{
 	if (BaseLevel < 99) {
-		mes "[Wandering Old Man]";
+		mes "[Velho Errante]";
 		mes "...";
-		mes "I'm afraid you're not up for this yet.";
-		mes "You have to be at least Level 160.";
+		mes "Receio que você ainda não esteja pronto para isso.";
+		mes "Você precisa ter pelo menos o nível 160.";
 		close;
 	}
 	if (isbegin_quest(15006) == 0) {
-		mes "[Wandering Old Man]";
-		mes "...Where am I?";
+		mes "[Velho Errante]";
+		mes "...Onde estou?";
 		next;
-		mes "[Wandering Old Man]";
-		mes "I don't know when it began...";
-		mes "The same nightmare has been plaguing me for a long time.";
+		mes "[Velho Errante]";
+		mes "Não sei quando começou...";
+		mes "O mesmo pesadelo tem me atormentado por muito tempo.";
 		next;
-		mes "[Wandering Old Man]";
-		mes "In my nightmare, Demon King Morocc awakens from his century-long slumber and fills the world with darkness and horror.";
+		mes "[Velho Errante]";
+		mes "No meu pesadelo, o Rei Demônio Morocc desperta de seu sono secular e preenche o mundo com escuridão e horror.";
 		next;
-		mes "[Wandering Old Man]";
-		mes "I couldn't shake off the vivid images I saw in that nightmare. I've wandered off and around like a madman and finally arrived here.";
+		mes "[Velho Errante]";
+		mes "Eu não conseguia me livrar das imagens vívidas que vi naquele pesadelo. Vaguei por toda parte como um louco e finalmente cheguei aqui.";
 		next;
-		mes "[Wandering Old Man]";
-		mes "I saw this place in my dream. It's where Demon God Morocc awakens from his slumber. My dream was showing me a possible future.";
+		mes "[Velho Errante]";
+		mes "Eu vi este lugar em meu sonho. É onde o Deus Demônio Morocc desperta de seu sono. Meu sonho estava me mostrando um futuro possível.";
 		next;
-		mes "[Wandering Old Man]";
-		mes "If my dream really is a premonition, the forces of Demon God Morocc's are within that yellow seed.";
+		mes "[Velho Errante]";
+		mes "Se o meu sonho é realmente um presságio, as forças do Deus Demônio Morocc estão dentro daquela semente amarela.";
 		next;
-		mes "[Wandering Old Man]";
-		mes "I tried to enter the seed, but to no avail: I'm just too old and weak. But perhaps you can.";
+		mes "[Velho Errante]";
+		mes "Tentei entrar na semente, mas não tive sucesso: sou velho e fraco demais. Mas talvez você consiga.";
 		next;
-		mes "[Wandering Old Man]";
-		mes "Please investigate that yellow seed.";
-		mes "It's too dangerous for you to go alone. You should take at least one comrade with you.";
+		mes "[Velho Errante]";
+		mes "Por favor, investigue aquela semente amarela.";
+		mes "É perigoso demais para você ir sozinho. Você deve levar pelo menos um companheiro com você.";
 		setquest 15006;// Isle of Bios Exploration
 		completequest 15006;// Isle of Bios Exploration
 		close;
 	}
-	mes "[Wandering Old Man]";
-	mes "Please investigate that yellow seed.";
-	mes "It's too dangerous for you to go alone. You should take at least one comrade with you.";
+	mes "[Velho Errante]";
+	mes "Por favor, investigue aquela semente amarela.";
+	mes "É perigoso demais para você ir sozinho. Você deve levar pelo menos um companheiro com você.";
 	close;
 }
 
@@ -151,90 +151,90 @@ OnTouch_:
 	'vrid$ = instance_npcname("Vrid#bios1");
 	'reaper$ = instance_npcname("Grim Reaper Ankou#bios1");
 	initnpctimer;
-	npctalk "Vrid: Ah, someone else has come to join us.", 'vrid$;
+	npctalk "Vrid: Ah, alguém mais veio se juntar a nós.", 'vrid$;
 	end;
 OnTimer2500:
-	npctalk "Vrid: Did you also come to stop Morocc's resurrection?", 'vrid$;
+	npctalk "Vrid: Você também veio para impedir a ressurreição de Morocc?", 'vrid$;
 	end;
 OnTimer5000:
-	npctalk "Vrid: I'm Vrid and this is Zeith, from Prontera. We've been traveling around the world, fighting for justice.", 'vrid$;
+	npctalk "Vrid: Eu sou Vrid e este é Zeith, de Prontera. Temos viajado pelo mundo, lutando por justiça.", 'vrid$;
 	end;
 OnTimer7500:
-	npctalk "Vrid: Hey, Zeith. Say something.", 'vrid$;
+	npctalk "Vrid: Ei, Zeith. Diga alguma coisa.", 'vrid$;
 	end;
 OnTimer10000:
 	npctalk "Zeith: ...", 'zeith$;
 	end;
 OnTimer12500:
-	npctalk "Zeith: I'm Zeith.", 'zeith$;
+	npctalk "Zeith: Eu sou Zeith.", 'zeith$;
 	end;
 OnTimer15000:
 	npctalk "Zeith: ...", 'zeith$;
 	end;
 OnTimer17500:
-	npctalk "Vrid: Don't mind him. He's not so quiet when there are only two of us.", 'vrid$;
+	npctalk "Vrid: Não ligue para ele. Ele não é tão quieto quando estamos apenas nós dois.", 'vrid$;
 	end;
 OnTimer19500:
-	npctalk "Zeith: ...You talk enough for both of us.", 'zeith$;
+	npctalk "Zeith: ...Você fala o suficiente pelos dois.", 'zeith$;
 	end;
 OnTimer21000:
-	npctalk "Vrid: We only came because the old geezer down below kept rambling about Morocc's resurrection.", 'vrid$;
+	npctalk "Vrid: Só viemos porque aquele velho lá embaixo não parava de falar sobre a ressurreição de Morocc.", 'vrid$;
 	end;
 OnTimer23500:
-	npctalk "Vrid: Err, what's this place? I just touched the seed, and suddenly the scenery changed.", 'vrid$;
+	npctalk "Vrid: Er, que lugar é este? Eu apenas toquei na semente e, de repente, o cenário mudou.", 'vrid$;
 	end;
 OnTimer26000:
-	npctalk "Vrid: Holy cow, are we flying in the sky?!", 'vrid$;
+	npctalk "Vrid: Meu Deus, nós estamos voando no céu?!", 'vrid$;
 	end;
 OnTimer28500:
-	npctalk "???: *Chuckle* Do you want to know where you are?", 'reaper$;
+	npctalk "???: *Risada* Você quer saber onde está?", 'reaper$;
 	end;
 OnTimer31000:
-	npctalk "Zeith: Who's there?!", 'zeith$;
+	npctalk "Zeith: Quem está aí?!", 'zeith$;
 	end;
 OnTimer33500:
 	enablenpc 'reaper$;
-	npctalk "Grim Reaper Ankou: *Chuckle* This is the Isle of Bios, a place I conjured up in my mind.", 'reaper$;
+	npctalk "Ceifador Ankou: *Risada* Esta é a Ilha de Bios, um lugar que criei em minha mente.", 'reaper$;
 	end;
 OnTimer36000:
-	npctalk "Grim Reaper Ankou: You've walked into the trap, making yourself willing sacrifices for my Lord Morocc. Aren't you afraid of dying?", 'reaper$;
+	npctalk "Ceifador Ankou: Vocês caíram na armadilha, tornando-se sacrifícios voluntários para o meu Lorde Morocc. Vocês não têm medo de morrer?", 'reaper$;
 	end;
 OnTimer38500:
-	npctalk "Vrid: Pah! If I was I wouldn't have come willingly, would I?", 'vrid$;
+	npctalk "Vrid: Pah! Se tivesse, eu não teria vindo por vontade própria, teria?", 'vrid$;
 	end;
 OnTimer41000:
-	npctalk "Vrid: Whoever you are, we'll kill you before you do!", 'vrid$;
+	npctalk "Vrid: Quem quer que você seja, vamos acabar com você antes que você faça algo!", 'vrid$;
 	end;
 OnTimer43500:
-	npctalk "Grim Reaper Ankou: Don't tempt me, human.", 'reaper$;
+	npctalk "Ceifador Ankou: Não me tente, humano.", 'reaper$;
 	end;
 OnTimer46000:
-	npctalk "Grim Reaper Ankou: I want to watch you die slowly and painfully. *Chuckle*", 'reaper$;
+	npctalk "Ceifador Ankou: Quero vê-los morrer lenta e dolorosamente. *Risada*", 'reaper$;
 	end;
 OnTimer48500:
 	disablenpc 'reaper$;
 	end;
 OnTimer51000:
-	npctalk "Vrid: Who's he? Is he trying to resurrect Morocc? ", 'vrid$;
+	npctalk "Vrid: Quem é ele? Ele está tentando ressuscitar Morocc?", 'vrid$;
 	end;
 OnTimer53500:
-	npctalk "Vrid: Let's chase him! Zeith, hurry!", 'vrid$;
+	npctalk "Vrid: Vamos persegui-lo! Zeith, depressa!", 'vrid$;
 	end;
 OnTimer54000:
 	disablenpc 'vrid$;
 	end;
 OnTimer56000:
-	npctalk "Zeith: ...Ack.", 'zeith$;
+	npctalk "Zeith: ...Argh.", 'zeith$;
 	end;
 OnTimer58500:
-	npctalk "Zeith: I hate running.", 'zeith$;
+	npctalk "Zeith: Eu odeio correr.", 'zeith$;
 	end;
 OnTimer61000:
 	disablenpc 'zeith$;
 	end;
 OnTimer66000:
 	stopnpctimer;
-	mapannounce 'map_dth1$, "System: Eliminate all the enemies on the island and exit through the door on the other side to move on to the next area.",bc_map,"0xFFFF00";
+	mapannounce 'map_dth1$, "Sistema: Derrote todos os inimigos da ilha e saia pela porta do outro lado para seguir à próxima área.",bc_map,"0xFFFF00";
 	'zeith$ = 'vrid$ = 'reaper$ = "";
 	end;
 }
@@ -273,11 +273,11 @@ OnStart:
 OnMyMobDead:
 	.@count = mobcount( 'map_dth1$,instance_npcname("mobs#bios1") + "::OnMyMobDead" );
 	if (.@count == 10 || .@count == 5)
-		mapannounce 'map_dth1$, "System: " + .@count + " monsters remain on the island.",bc_map,"0xFFFF00";
+		mapannounce 'map_dth1$, "Sistema: " + .@count + " monstros permanecem na ilha.",bc_map,"0xFFFF00";
 	else if (.@count == 1)
-		mapannounce 'map_dth1$, "System: 1 last monster remains on the island.",bc_map,"0xFFFF00";
+		mapannounce 'map_dth1$, "Sistema: Resta 1 monstro na ilha.",bc_map,"0xFFFF00";
 	else if (.@count == 0) {
-		mapannounce 'map_dth1$, "System: You have eliminated all the monsters. Use the exit at 3 o'clock to move on to the next area.",bc_map,"0xFFFF00";
+		mapannounce 'map_dth1$, "Sistema: Todos os monstros foram derrotados. Use a saída na posição de três horas para seguir à próxima área.",bc_map,"0xFFFF00";
 		disablenpc instance_npcname("mobs#bios1");
 		enablenpc instance_npcname("warp1#bios1");
 		enablenpc instance_npcname("start1#bios2");
@@ -291,7 +291,7 @@ OnMyMobDead:
 	end;
 OnTouch_:
 	disablenpc instance_npcname("start1#bios2");
-	mapannounce 'map_dth2$, "System: Eliminate all the enemies on the island and exit through the door on the other side to move on to the next area.",bc_map,"0xFFFF00";
+	mapannounce 'map_dth2$, "Sistema: Derrote todos os inimigos da ilha e saia pela porta do outro lado para seguir à próxima área.",bc_map,"0xFFFF00";
 	end;
 }
 
@@ -330,11 +330,11 @@ OnStart:
 OnMyMobDead:
 	.@count = mobcount( 'map_dth2$,instance_npcname("mobs#bios2") + "::OnMyMobDead" );
 	if (.@count == 10 || .@count == 5)
-		mapannounce 'map_dth2$, "System: " + .@count + " monsters remain on the island.",bc_map,"0xFFFF00";
+		mapannounce 'map_dth2$, "Sistema: " + .@count + " monstros permanecem na ilha.",bc_map,"0xFFFF00";
 	else if (.@count == 1)
-		mapannounce 'map_dth2$, "System: 1 last monster remains on the island.",bc_map,"0xFFFF00";
+		mapannounce 'map_dth2$, "Sistema: Resta 1 monstro na ilha.",bc_map,"0xFFFF00";
 	else if (.@count == 0) {
-		mapannounce 'map_dth2$, "System: You have eliminated all the monsters. Use the exit at 3 o'clock to move on to the next area.",bc_map,"0xFFFF00";
+		mapannounce 'map_dth2$, "Sistema: Todos os monstros foram derrotados. Use a saída na posição de três horas para seguir à próxima área.",bc_map,"0xFFFF00";
 		disablenpc instance_npcname("mobs#bios2");
 		enablenpc instance_npcname("warp1#bios2");
 		enablenpc instance_npcname("Zeith#bios3");
@@ -349,12 +349,12 @@ OnMyMobDead:
 1@dth3,64,74,5	script	Vrid#bios3	4_M_KNIGHT_BLACK,{
 	if ('reward == 1) {
 		mes "[Vrid]";
-		mes "I came by";
-		mes "this Hero Token by accident.";
-		mes "I want to give it to you. You deserve it.";
+		mes "Eu consegui";
+		mes "este Token de Herói por acidente.";
+		mes "Quero dar a você. Você merece.";
 		next;
 		mes "[Vrid]";
-		mes "Let's get out of this creepy place!";
+		mes "Vamos sair deste lugar assustador!";
 		close2;
 		getitem 6684,1;// Token Of Hero
 		if (ep14_3_isle == 0)
@@ -384,55 +384,55 @@ OnStart:
 	'zeith3$ = instance_npcname("Zeith#bios3");
 	'vrid3$ = instance_npcname("Vrid#bios3");
 	initnpctimer;
-	npctalk "Vrid: You're lucky to be here. I got totally lost the moment I entered that maze.", 'vrid3$;
+	npctalk "Vrid: Você tem sorte de estar aqui. Eu me perdi completamente no momento em que entrei naquele labirinto.", 'vrid3$;
 	end;
 OnTimer2500:
-	npctalk "Vrid: If it weren't for Zeith, I'd still be in there, wandering. Thanks, Zeith.", 'vrid3$;
+	npctalk "Vrid: Se não fosse pelo Zeith, eu ainda estaria lá, vagando. Obrigado, Zeith.", 'vrid3$;
 	end;
 OnTimer5000:
-	npctalk "Zeith: ...Something's been bothering me.", 'zeith3$;
+	npctalk "Zeith: ...Algo tem me incomodado.", 'zeith3$;
 	end;
 OnTimer7500:
-	npctalk "Vrid: What's up?", 'vrid3$;
+	npctalk "Vrid: O que foi?", 'vrid3$;
 	end;
 OnTimer10000:
-	npctalk "Zeith: I've got the feeling that the monsters were growing stronger with time.", 'zeith3$;
+	npctalk "Zeith: Tenho a sensação de que os monstros estavam ficando mais fortes com o passar do tempo.", 'zeith3$;
 	end;
 OnTimer12500:
-	npctalk "Zeith: Just like children growing up into adults.", 'zeith3$;
+	npctalk "Zeith: Assim como crianças crescendo e se tornando adultas.", 'zeith3$;
 	end;
 OnTimer15000:
-	npctalk "Vrid: Um, I think you're right.", 'vrid3$;
+	npctalk "Vrid: Hum, acho que você tem razão.", 'vrid3$;
 	end;
 OnTimer17500:
-	npctalk "Vrid: They're all small in the beginning, and then we faced bigger and stronger ones over time.", 'vrid3$;
+	npctalk "Vrid: Eles são todos pequenos no começo e, com o tempo, enfrentamos outros maiores e mais fortes.", 'vrid3$;
 	end;
 OnTimer20000:
-	npctalk "Vrid: To me, that sounds natural. What are you worried about?", 'vrid3$;
+	npctalk "Vrid: Para mim, isso soa natural. Com o que você está preocupado?", 'vrid3$;
 	end;
 OnTimer22500:
-	npctalk "Zeith: Well, I'm curious about the monster we'll face now.", 'zeith3$;
+	npctalk "Zeith: Bem, estou curioso sobre o monstro que enfrentaremos agora.", 'zeith3$;
 	end;
 OnTimer25000:
-	npctalk "Zeith: Whether they're stronger versions of their original selves, or something completely different.", 'zeith3$;
+	npctalk "Zeith: Se eles são versões mais fortes de si mesmos ou algo completamente diferente.", 'zeith3$;
 	end;
 OnTimer27000:
 	enablenpc 'reaper3$;
 	end;
 OnTimer27500:
-	npctalk "Grim Reaper Ankou: *Chuckle* At least one of you has a good head on his shoulders.", 'reaper3$;
+	npctalk "Grim Reaper Ankou: *Risada* Pelo menos um de vocês tem bom senso.", 'reaper3$;
 	end;
 OnTimer30000:
-	npctalk "Vrid: You again?", 'vrid3$;
+	npctalk "Vrid: Você de novo?", 'vrid3$;
 	end;
 OnTimer32500:
-	npctalk "Grim Reaper Ankou: Are you curious about your next adversaries?", 'reaper3$;
+	npctalk "Grim Reaper Ankou: Estão curiosos sobre seus próximos adversários?", 'reaper3$;
 	end;
 OnTimer35000:
-	npctalk "Grim Reaper Ankou: Ahead of you is an army of the immortal.", 'reaper3$;
+	npctalk "Grim Reaper Ankou: À frente de vocês está um exército dos imortais.", 'reaper3$;
 	end;
 OnTimer37500:
-	npctalk "Grim Reaper Ankou: *Chuckle* Come out, my soldiers!", 'reaper3$;
+	npctalk "Grim Reaper Ankou: *Risada* Saiam, meus soldados!", 'reaper3$;
 	end;
 OnTimer37700:
 	specialeffect EF_READYPORTAL,AREA,'reaper3$;
@@ -444,16 +444,16 @@ OnTimer40000:
 	}
 	end;
 OnTimer42000:
-	npctalk "Vrid: Shut up, you fiend! We don't have time for your lackeys!", 'vrid3$;
+	npctalk "Vrid: Cale a boca, seu demônio! Não temos tempo para seus lacaios!", 'vrid3$;
 	end;
 OnTimer45000:
-	npctalk "Vrid: I'll get rid of you myself!", 'vrid3$;
+	npctalk "Vrid: Eu mesmo vou acabar com você!", 'vrid3$;
 	end;
 OnTimer47500:
-	npctalk "Grim Reaper Ankou: Right back at you, bigmouth.", 'reaper3$;
+	npctalk "Grim Reaper Ankou: O mesmo digo a você, falastrão.", 'reaper3$;
 	end;
 OnTimer50000:
-	npctalk "Grim Reaper Ankou: I'll teach you how terrifying it is to be helpless in the face of horror!", 'reaper3$;
+	npctalk "Grim Reaper Ankou: Vou te ensinar como é aterrorizante ser impotente diante do horror!", 'reaper3$;
 	end;
 OnTimer52500:
 	specialeffect EF_STORMGUST,AREA,'reaper3$;
@@ -478,35 +478,35 @@ OnTimer52700:
 	}
 	end;
 OnTimer55000:
-	npctalk "Vrid: Ugh! W-what's going on?! I-I can't move!", 'vrid3$;
+	npctalk "Vrid: Argh! Q-o que está acontecendo?! E-eu não consigo me mexer!", 'vrid3$;
 	end;
 OnTimer57500:
-	npctalk "Zeith: N-neither can I! I can't move my feet!", 'zeith3$;
+	npctalk "Zeith: E-eu também não! Não consigo mover meus pés!", 'zeith3$;
 	end;
 OnTimer60000:
-	npctalk "Grim Reaper Ankou: On the Isle of Bios, each day is a lifetime.", 'reaper3$;
+	npctalk "Grim Reaper Ankou: Na Ilha de Bios, cada dia é uma vida inteira.", 'reaper3$;
 	end;
 OnTimer62500:
-	npctalk "Grim Reaper Ankou: You must have noticed my soldiers have grown up before the sunset.", 'reaper3$;
+	npctalk "Grim Reaper Ankou: Vocês devem ter notado que meus soldados cresceram antes do pôr do sol.", 'reaper3$;
 	end;
 OnTimer65000:
-	npctalk "Grim Reaper Ankou: After nightfall, they've reached the final stage of their development: life beyond death.", 'reaper3$;
+	npctalk "Grim Reaper Ankou: Após o cair da noite, eles atingiram o estágio final de seu desenvolvimento: a vida além da morte.", 'reaper3$;
 	end;
 OnTimer67500:
-	npctalk "Grim Reaper Ankou: That's right. It's time for you to experience death.", 'reaper3$;
+	npctalk "Grim Reaper Ankou: Isso mesmo. É hora de vocês experimentarem a morte.", 'reaper3$;
 	end;
 OnTimer70000:
-	npctalk "Grim Reaper Ankou: Get ready to feel the fear of death! *Chuckle*", 'reaper3$;
+	npctalk "Grim Reaper Ankou: Preparem-se para sentir o medo da morte! *Risada*", 'reaper3$;
 	// note: unfreeze player
 	end;
 OnTimer72000:
 	disablenpc 'reaper3$;
 	end;
 OnTimer72500:
-	npctalk "Vrid: Damn it, the undead are coming, but I can't fight because I can't move my feet!", 'vrid3$;
+	npctalk "Vrid: Droga, os mortos-vivos estão vindo, mas não consigo lutar porque não consigo mexer meus pés!", 'vrid3$;
 	end;
 OnTimer75000:
-	npctalk "Vrid: Ack, I don't want to die!", 'vrid3$;
+	npctalk "Vrid: Argh, eu não quero morrer!", 'vrid3$;
 	end;
 OnTimer77500:
 	npctalk "Zeith: ...Ugh...", 'zeith3$;
@@ -536,10 +536,10 @@ OnMyMobDead:
 OnStart:
 	enablenpc instance_npcname("verit#bios3");
 	initnpctimer;
-	npctalk "Vrid: Wow, you're amazing! Did you kill them all?", 'vrid3$;
+	npctalk "Vrid: Uau, você é incrível! Você matou todos eles?", 'vrid3$;
 	end;
 OnTimer2500:
-	npctalk "Zeith: Not yet. More are coming!", 'zeith3$;
+	npctalk "Zeith: Ainda não. Estão vindo mais!", 'zeith3$;
 	end;
 OnTimer5000:
 	stopnpctimer;
@@ -562,10 +562,10 @@ OnMyMobDead:
 OnStart:
 	enablenpc instance_npcname("megalodon#bios3");
 	initnpctimer;
-	npctalk "Vrid: I hope that really was the last of them.", 'vrid3$;
+	npctalk "Vrid: Espero que esses tenham sido realmente os últimos.", 'vrid3$;
 	end;
 OnTimer2500:
-	npctalk "Zeith: Nope, we aren't so lucky--more is on the way!", 'zeith3$;
+	npctalk "Zeith: Não, não temos tanta sorte assim--mais estão vindo!", 'zeith3$;
 	end;
 OnTimer5000:
 	stopnpctimer;
@@ -590,13 +590,13 @@ OnStart:
 	initnpctimer;
 	end;
 OnTimer500:
-	npctalk "Grim Reaper Ankou: I underestimated you, or my soldiers aren't as strong as I thought.", 'reaper3$;
+	npctalk "Grim Reaper Ankou: Subestimei vocês, ou meus soldados não são tão fortes quanto pensei.", 'reaper3$;
 	end;
 OnTimer3000:
-	npctalk "Vrid: You're cheating! Release us and fight fairly!", 'vrid3$;
+	npctalk "Vrid: Você está trapaceando! Liberte-nos e lute de forma justa!", 'vrid3$;
 	end;
 OnTimer5500:
-	npctalk "Grim Reaper Ankou: You're still talking. I'll just kill you myself and get it over with!", 'reaper3$;
+	npctalk "Grim Reaper Ankou: Você ainda está falando. Vou apenas matá-los eu mesmo e acabar logo com isso!", 'reaper3$;
 	end;
 OnTimer7500:
 	disablenpc 'reaper3$;
@@ -626,13 +626,13 @@ OnMyBossDead:
 	initnpctimer;
 	end;
 OnTimer3000:
-	npctalk "Grim Reaper Ankou: You're strong...", 'reaper3$;
+	npctalk "Grim Reaper Ankou: Vocês são fortes...", 'reaper3$;
 	end;
 OnTimer6500:
-	npctalk "Grim Reaper Ankou: But my goal has been accomplished... Don't think this is over.", 'reaper3$;
+	npctalk "Grim Reaper Ankou: Mas meu objetivo foi alcançado... Não pensem que isso acabou.", 'reaper3$;
 	end;
 OnTimer8000:
-	npctalk "Grim Reaper Ankou: Soon Lord Morocc will return. *Chuckle* The fear of death will follow you wherever you go.", 'reaper3$;
+	npctalk "Grim Reaper Ankou: Em breve o Lorde Morocc retornará. *Risada* O medo da morte seguirá vocês aonde quer que vão.", 'reaper3$;
 	end;
 OnTimer10500:
 	disablenpc 'reaper3$;
@@ -642,20 +642,20 @@ OnTimer10500:
 	setnpcdisplay( 'zeith3$, 4_M_GUILLOTINE );
 	end;
 OnTimer13000:
-	npctalk "Vrid: Ah, finally I can move!", 'vrid3$;
+	npctalk "Vrid: Ah, finalmente posso me mover!", 'vrid3$;
 	end;
 OnTimer16500:
-	npctalk "Zeith: Hmpf, I'm ashamed of myself for being so weak...", 'zeith3$;
+	npctalk "Zeith: Hmpf, estou envergonhado por ter sido tão fraco...", 'zeith3$;
 	end;
 OnTimer18000:
-	npctalk "Vrid: Whew, that reaper was much stronger than me and Zeith combined.", 'vrid3$;
+	npctalk "Vrid: Ufa, aquele ceifador era muito mais forte do que eu e Zeith juntos.", 'vrid3$;
 	end;
 OnTimer20500:
-	npctalk "Vrid: We could have died if it weren't for you.", 'vrid3$;
+	npctalk "Vrid: Poderíamos ter morrido se não fosse por você.", 'vrid3$;
 	end;
 OnTimer23000:
 	stopnpctimer;
-	npctalk "Vrid: I want to give you something for saving our lives. Talk to me again when you're ready to accept it.", 'vrid3$;
+	npctalk "Vrid: Quero te dar algo por ter salvado nossas vidas. Fale comigo novamente quando estiver pronto para aceitar.", 'vrid3$;
 	'reward = 1;
 	disablenpc instance_npcname("boss#bios3");
 	end;
@@ -669,15 +669,15 @@ OnStart:
 OnTimer15000:
 	.@r = rand(7);
 	if (.@r == 0)
-		npctalk "Zeith: Ugh... I feel so helpless...", 'zeith3$;
+		npctalk "Zeith: Ugh... Sinto-me tão impotente...", 'zeith3$;
 	else if (.@r == 1)
-		npctalk "Zeith: That guy Ankou smells dangerous. You better move once he starts using a skill.", 'zeith3$;
+		npctalk "Zeith: Aquele sujeito Ankou cheira a perigo. É melhor você se mover quando ele começar a usar uma habilidade.", 'zeith3$;
 	else if (.@r == 2)
-		npctalk "Vrid: Ack, I'm sorry we can't help.", 'vrid3$;
+		npctalk "Vrid: Droga, sinto muito por não podermos ajudar.", 'vrid3$;
 	else if (.@r == 3)
-		npctalk "Vrid: You cheater, fight fairly!", 'vrid3$;
+		npctalk "Vrid: Seu trapaceiro, lute de forma justa!", 'vrid3$;
 	else if (.@r == 4)
-		npctalk "Vrid: Damn it, I can't move...", 'vrid3$;
+		npctalk "Vrid: Maldito, eu não consigo me mover...", 'vrid3$;
 	initnpctimer;
 	end;
 OnStop:
@@ -693,13 +693,13 @@ OnStart:
 OnTimer13000:
 	.@r = rand(6);
 	if (.@r == 0)
-		unittalk 'boss_id, "Grim Reaper Ankou: *Chuckle*";
+		unittalk 'boss_id, "Ceifador Ankou: *Risada*";
 	else if (.@r == 1)
-		unittalk 'boss_id, "Grim Reaper Ankou: Feel the fear of death!";
+		unittalk 'boss_id, "Ceifador Ankou: Tema a morte!";
 	else if (.@r == 2)
-		unittalk 'boss_id, "Grim Reaper Ankou: Lord Morocc will return soon.";
+		unittalk 'boss_id, "Ceifador Ankou: Lorde Morroc voltará em breve.";
 	else if (.@r == 3)
-		unittalk 'boss_id, "Grim Reaper Ankou: Is this the best you can do? Such weak creatures, you humans.";
+		unittalk 'boss_id, "Ceifador Ankou: Isso é o melhor que conseguem fazer? Vocês, humanos, são criaturas tão fracas.";
 	initnpctimer;
 	end;;
 OnStop:

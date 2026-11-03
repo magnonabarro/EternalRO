@@ -1,0 +1,170 @@
+//===== rAthena Script =======================================
+//= Eden Group Quests - Delivery Quests
+//===== By: ==================================================
+//= Vibe
+//===== Current Version: =====================================
+//= 2.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Delivery Quests for Eden Group
+//= Repeatable with 1h cooldown (TimeLimit: 1h in quest_db.yml)
+//= No max level restriction
+//= No Job EXP reward
+//= Organized by level range in submenus
+//= Flow: Player selects -> NPC checks level -> checks cooldown -> checks items -> setquest (triggers TimeLimit)
+//===== Additional Comments: =================================
+//= Based on quests de entrega.txt and exemplo.txt
+//= Based on quest 1152 (Help the poor cat) cooldown pattern
+//= ID 22508 = Eden Group Mark (required)
+//= ID 25223 = Eden Coin
+//= Quest IDs: 99180-99199
+//= NPC: Estoquista (ID:995) at moc_para01,29,35,6
+//============================================================
+
+moc_para01,29,35,3	script	Estoquista	995,{
+	// Verifica se é membro do Eden
+	if (!(countitem(22508) > 0)) {
+		mes "[Estoquista]";
+		mes "Desculpe, mas apenas membros do Grupo Éden podem participar destas missões.";
+		mes "Fale com a Secretária Lime Evenor para se tornar um membro.";
+		close;
+	}
+	
+	mes "[Estoquista]";
+	mes "Olá, aventureiro! Sou o Estoquista do Grupo Éden.";
+	next;
+	mes "[Estoquista]";
+	mes "Se você coletou itens em suas jornadas, posso recompensá-lo por eles.";
+	mes "Isso ajuda nossa organização a manter nossos suprimentos.";
+	next;
+	
+L_ShowMenu:
+	mes "[Estoquista]";
+	mes "Em qual categoria de itens você pode nos ajudar hoje?";
+	next;
+	switch(select("Nível 1~30:Nível 35~55:Nível 60~80:Nível 85~100:Cancelar")) {
+		case 1: goto L_Level1_30;
+		case 2: goto L_Level35_55;
+		case 3: goto L_Level60_80;
+		case 4: goto L_Level85_100;
+		case 5: close;
+	}
+	goto L_ShowMenu;
+
+// ===== Nível 1~30 =====
+L_Level1_30:
+	mes "[Estoquista]";
+	mes "Itens mais comuns que sempre precisamos:";
+	next;
+	switch(select("Felpa (30):Pata Pegajosa (30):Perna de Gafanhoto (30):Casco de Caramujo (30):Bico de Ave (30):Pata de Urso (30):Volta")) {
+		case 1: .@qid = 99180; .@min = 1; .@exp = 5000; .@i1 = 914; .@a1 = 30; goto L_Deliver;
+		case 2: .@qid = 99181; .@min = 10; .@exp = 5400; .@i1 = 918; .@a1 = 30; goto L_Deliver;
+		case 3: .@qid = 99182; .@min = 15; .@exp = 5940; .@i1 = 940; .@a1 = 30; goto L_Deliver;
+		case 4: .@qid = 99183; .@min = 20; .@exp = 7020; .@i1 = 946; .@a1 = 30; goto L_Deliver;
+		case 5: .@qid = 99184; .@min = 25; .@exp = 9720; .@i1 = 925; .@a1 = 30; goto L_Deliver;
+		case 6: .@qid = 99185; .@min = 30; .@exp = 10800; .@i1 = 948; .@a1 = 30; goto L_Deliver;
+		case 7: goto L_ShowMenu;
+	}
+	goto L_Level1_30;
+
+// ===== Nível 35~55 =====
+L_Level35_55:
+	mes "[Estoquista]";
+	mes "Itens um pouco mais raros que estamos coletando:";
+	next;
+	switch(select("Resina (30):Cauda de Yoyo (30):Lampião (30):Concha (30):Coração de Sereia (30):Volta")) {
+		case 1: .@qid = 99186; .@min = 35; .@exp = 13980; .@i1 = 907; .@a1 = 30; goto L_Deliver;
+		case 2: .@qid = 99187; .@min = 40; .@exp = 16200; .@i1 = 942; .@a1 = 30; goto L_Deliver;
+		case 3: .@qid = 99188; .@min = 45; .@exp = 19980; .@i1 = 1041; .@a1 = 30; goto L_Deliver;
+		case 4: .@qid = 99189; .@min = 50; .@exp = 22140; .@i1 = 961; .@a1 = 30; goto L_Deliver;
+		case 5: .@qid = 99190; .@min = 55; .@exp = 28560; .@i1 = 950; .@a1 = 30; goto L_Deliver;
+		case 6: goto L_ShowMenu;
+	}
+	goto L_Level35_55;
+
+// ===== Nível 60~80 =====
+L_Level60_80:
+	mes "[Estoquista]";
+	mes "Itens valiosos que temos grande necessidade:";
+	next;
+	switch(select("Crina (30):Cabelos Morenos (30):Ferradura (30):Pata de Inseto (30):Areia Molhada (30):Volta")) {
+		case 1: .@qid = 99191; .@min = 60; .@exp = 34380; .@i1 = 1028; .@a1 = 30; goto L_Deliver;
+		case 2: .@qid = 99192; .@min = 65; .@exp = 35640; .@i1 = 1020; .@a1 = 30; goto L_Deliver;
+		case 3: .@qid = 99193; .@min = 70; .@exp = 36000; .@i1 = 944; .@a1 = 30; goto L_Deliver;
+		case 4: .@qid = 99194; .@min = 75; .@exp = 48600; .@i1 = 1042; .@a1 = 30; goto L_Deliver;
+		case 5: .@qid = 99195; .@min = 80; .@exp = 62040; .@i1 = 7124; .@a1 = 30; goto L_Deliver;
+		case 6: goto L_ShowMenu;
+	}
+	goto L_Level60_80;
+
+// ===== Nível 85~100 =====
+L_Level85_100:
+	mes "[Estoquista]";
+	mes "Itens raros que são difíceis de encontrar:";
+	next;
+	switch(select("Areia Seca (30):Casco de Tartaruga (30):Pequeno Chifre Maligno (30):Coração Glacial (30):Volta")) {
+		case 1: .@qid = 99196; .@min = 85; .@exp = 72060; .@i1 = 7264; .@a1 = 30; goto L_Deliver;
+		case 2: .@qid = 99197; .@min = 90; .@exp = 78300; .@i1 = 967; .@a1 = 30; goto L_Deliver;
+		case 3: .@qid = 99198; .@min = 95; .@exp = 108360; .@i1 = 1038; .@a1 = 30; goto L_Deliver;
+		case 4: .@qid = 99199; .@min = 100; .@exp = 116640; .@i1 = 7561; .@a1 = 30; goto L_Deliver;
+		case 5: goto L_ShowMenu;
+	}
+	goto L_Level85_100;
+
+// ===== Handler de Entrega =====
+// Fluxo: Jogador seleciona -> NPC verifica nivel -> verifica cooldown -> verifica itens -> remove itens -> setquest (ativa cooldown) -> EXP
+L_Deliver:
+	// Verifica nível mínimo
+	if (BaseLevel < .@min) {
+		mes "[Estoquista]";
+		mes "Parece que você não tem força suficiente para esta entrega.";
+		mes "Tente uma das outras opções disponíveis.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	// 1. VERIFICAÇÃO DO COOLDOWN
+	// checkquest retorna 1 se a quest está ativa/em cooldown no alt+u
+	if (checkquest(.@qid, PLAYTIME) == 1) {
+		mes "[Estoquista]";
+		mes "Acho que você já nos ajudou com isso hoje.";
+		mes "Volte mais tarde, sempre precisamos de mais suprimentos.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	// Verifica se tem os itens
+	if (countitem(.@i1) < .@a1) {
+		mes "[Estoquista]";
+		mes "Parece que você não tem os itens que preciso no momento.";
+		mes "Preciso de " + .@a1 + " " + getitemname(.@i1) + " para esta entrega.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	// Pergunta se quer entregar
+	mes "[Estoquista]";
+	mes "Você tem " + .@a1 + " " + getitemname(.@i1) + " para me entregar?";
+	next;
+	if (select("Sim, aqui estão eles:Não, não tenho") == 2) {
+		mes "[Estoquista]";
+		mes "Sem problemas. Volte quando tiver os itens.";
+		next;
+		goto L_ShowMenu;
+	}
+	
+	// 3. ENTREGA DA RECOMPENSA E ATIVAÇÃO DO COOLDOWN
+	delitem .@i1,.@a1;
+	getexp .@exp,0;
+	
+	// Ativa a quest no banco de dados do jogador.
+	// O rAthena vai começar a contar o TimeLimit a partir deste comando.
+	setquest .@qid;
+	
+	mes "[Estoquista]";
+	mes "Excelente! Obrigado pela contribuição.";
+	mes "Seu esforço é muito valioso para o Grupo Éden.";
+	next;
+	goto L_ShowMenu;
+}

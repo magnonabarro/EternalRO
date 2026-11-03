@@ -33918,3 +33918,627 @@ Body:
       IsGuild: true
       IgnoreKagehumi: true
     Duration2: 300000
+
+  # Renewal skill definitions required by imported monster AI.
+  - Id: 709
+    Name: NPC_ICEMINE
+    Description: Ice Mine
+    MaxLevel: 10
+    Type: Magic
+    TargetType: Self
+    DamageFlags:
+      IgnoreDefense: true
+      IgnoreDefCard: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    Duration1: 10000
+    Unit:
+      Id: Icemine
+      Range: 3
+      Interval: 1000
+      Target: Enemy
+      Flag:
+        NoOverlap: true
+        PathCheck: true
+        RemovedByFireRain: true
+  - Id: 711
+    Name: NPC_FLAMECROSS
+    Description: Flame Cross
+    MaxLevel: 5
+    Type: Magic
+    TargetType: Self
+    DamageFlags:
+      IgnoreDefCard: true
+    Flags:
+      IsNpc: true
+      IgnoreLandProtector: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    Knockback: 2
+    Duration1: 3000
+    Unit:
+      Id: Flamecross
+      Layout: -1
+      Interval: 1000
+      Target: Enemy
+      Flag:
+        NoOverlap: true
+        PathCheck: true
+        RemovedByFireRain: true
+  - Id: 715
+    Name: NPC_DARKPIERCING
+    Description: Dark Piercing
+    MaxLevel: 1
+    Type: Weapon
+    TargetType: Attack
+    DamageFlags:
+      Splash: true
+    Flags:
+      IsNpc: true
+    Range: 3
+    Hit: Single
+    HitCount: 1
+    SplashArea: 2
+    ActiveInstance: 14
+    Cooldown: 2000
+  - Id: 718
+    Name: NPC_DEATHSUMMON
+    Description: Death Summon
+    MaxLevel: 10
+    Type: Magic
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+    Flags:
+      IsNpc: true
+    HitCount: 1
+  - Id: 719
+    Name: NPC_HELLBURNING
+    Description: Hell Burning
+    MaxLevel: 1
+    Type: Magic
+    TargetType: Self
+    Flags:
+      IsNpc: true
+      IgnoreLandProtector: true
+    Hit: Single
+    HitCount: 1
+    Element: Fire
+    Duration1: 3000
+    Unit:
+      Id: Hellburning
+      Layout: 1
+      Interval: 20
+      Target: Enemy
+      Flag:
+        NoOverlap: true
+        PathCheck: true
+        RangedSingleUnit: true
+  - Id: 751
+    Name: NPC_ALL_STAT_DOWN
+    Description: Decrease All Stats
+    MaxLevel: 5
+    TargetType: Attack
+    DamageFlags:
+      NoDamage: true
+    Flags:
+      IsNpc: true
+    Range: 9
+    Duration1: 10000
+    Status: ALL_STAT_DOWN
+  - Id: 752
+    Name: NPC_GRADUAL_GRAVITY
+    Description: Increased Gravity
+    MaxLevel: 3
+    TargetType: Attack
+    DamageFlags:
+      NoDamage: true
+    Flags:
+      IsNpc: true
+    Range: 9
+    Duration1: 3000
+    Status: GRADUAL_GRAVITY
+  - Id: 753
+    Name: NPC_DAMAGE_HEAL
+    Description: Damage Heal
+    MaxLevel: 3
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+    Flags:
+      IsNpc: true
+    Duration1: 30000
+    Status: DAMAGE_HEAL
+  - Id: 754
+    Name: NPC_IMMUNE_PROPERTY
+    Description: Property Immune
+    MaxLevel: 10
+    TargetType: Support
+    DamageFlags:
+      NoDamage: true
+    Flags:
+      IsNpc: true
+    Range: 14 #TODO: confirm
+    Duration1: 30000
+  - Id: 755
+    Name: NPC_MOVE_COORDINATE
+    Description: Change Location
+    MaxLevel: 1
+    TargetType: Attack
+    DamageFlags:
+      NoDamage: true
+    Flags:
+      IsNpc: true
+    Range: 14
+  - Id: 756
+    Name: NPC_WIDEBLEEDING2
+    Description: Wide Bleeding
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration2: 108000
+    Status: Bleeding
+  - Id: 757
+    Name: NPC_WIDESILENCE2
+    Description: Wide Silence
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration2: 18000
+    Status: Silence
+  - Id: 759
+    Name: NPC_WIDESTONE2
+    Description: Wide Petrify
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration1: 100
+    Duration2: 17000
+    Status: StoneWait
+  - Id: 761
+    Name: NPC_WIDECURSE2
+    Description: Wide Curse
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration2: 18000
+    Status: Curse
+  - Id: 762
+    Name: NPC_WIDECONFUSE2
+    Description: Wide Confusion
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration2: 18000
+    Status: Confusion
+  - Id: 763
+    Name: NPC_WIDEFREEZE2
+    Description: Wide Freeze
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IsNpc: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 5
+      - Level: 3
+        Area: 8
+      - Level: 4
+        Area: 11
+      - Level: 5
+        Area: 14
+    Duration2: 27000
+    Status: Freeze
+  - Id: 764
+    Name: NPC_BLEEDING2
+    Description: Bleeding
+    MaxLevel: 5
+    Type: Weapon
+    TargetType: Attack
+    Flags:
+      IsNpc: true
+    Range: -9
+    Hit: Single
+    HitCount: 1
+    Element: Neutral
+    Duration2: 108000
+    Status: Bleeding
+  - Id: 765
+    Name: NPC_ICEBREATH2
+    Description: Ice Breath
+    MaxLevel: 10
+    Type: Weapon
+    TargetType: Attack
+    Flags:
+      IsNpc: true
+    Range: 6
+    Hit: Single
+    HitCount: 1
+    Element: Water
+    SplashArea: 4
+    ActiveInstance: 14
+    Duration2: 27000
+    Status: Freeze
+  - Id: 768
+    Name: NPC_HELLJUDGEMENT2
+    Description: Hell's Judgement
+    MaxLevel: 10
+    Type: Weapon
+    TargetType: Self
+    DamageFlags:
+      Splash: true
+    Flags:
+      IsNpc: true
+      TargetTrap: true
+      ShowScale: true
+    Hit: Single
+    HitCount: 1
+    Element: Neutral
+    SplashArea: 14
+    Duration2: 18000
+    Status: Curse
+  - Id: 769
+    Name: NPC_RAINOFMETEOR
+    Description: Rain of Meteor
+    MaxLevel: 10
+    Type: Magic
+    TargetType: Ground
+    Range: 9
+    Flags:
+      IsNpc: true
+    Hit: Multi_Hit
+    HitCount: 7
+    Element: Fire
+    SplashArea:
+      - Level: 1
+        Area: 1
+      - Level: 2
+        Area: 1
+      - Level: 3
+        Area: 2
+      - Level: 4
+        Area: 2
+      - Level: 5
+        Area: 3
+      - Level: 6
+        Area: 3
+      - Level: 7
+        Area: 4
+      - Level: 8
+        Area: 4
+      - Level: 9
+        Area: 5
+      - Level: 10
+        Area: 5
+    Duration1:
+      - Level: 1
+        Time: 1000
+      - Level: 2
+        Time: 2000
+      - Level: 3
+        Time: 3000
+      - Level: 4
+        Time: 4000
+      - Level: 5
+        Time: 5000
+      - Level: 6
+        Time: 6000
+      - Level: 7
+        Time: 7000
+      - Level: 8
+        Time: 8000
+      - Level: 9
+        Time: 9000
+      - Level: 10
+        Time: 10000
+    Unit:
+      Id: Dummyskill
+      Range: 3
+      Interval: 1000
+      Target: Enemy
+      Flag:
+        PathCheck: true
+  - Id: 779
+    Name: NPC_DEADLYCURSE2
+    Description: Deadly Curse 2
+    MaxLevel: 5
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Flags:
+      IgnoreGtb: true
+      IsNpc: true
+    SplashArea:
+      - Level: 1
+        Area: 2
+      - Level: 2
+        Area: 3
+      - Level: 3
+        Area: 4
+      - Level: 4
+        Area: 5
+      - Level: 5
+        Area: 6
+    Duration2: 30000
+    Status: Deadly_Defeasance
+  - Id: 780
+    Name: NPC_CANE_OF_EVIL_EYE
+    Description: Cane of evil eye
+    MaxLevel: 10
+    Type: Misc
+    TargetType: Ground
+    DamageFlags:
+      IgnoreFlee: true
+    Flags:
+      IsNpc: true
+    Hit: Single
+    Range: 11  # unknown
+    HitCount:
+      - Level: 1
+        Count: 1
+      - Level: 2
+        Count: 2
+      - Level: 3
+        Count: 3
+      - Level: 4
+        Count: 4
+      - Level: 5
+        Count: 5
+      - Level: 6
+        Count: 6
+      - Level: 7
+        Count: 7
+      - Level: 8
+        Count: 8
+      - Level: 9
+        Count: 9
+      - Level: 10
+        Count: 10
+    CastTime: 500
+    Duration1:
+      - Level: 1
+        Time: 1000
+      - Level: 2
+        Time: 2000
+      - Level: 3
+        Time: 3000
+      - Level: 4
+        Time: 4000
+      - Level: 5
+        Time: 5000
+      - Level: 6
+        Time: 6000
+      - Level: 7
+        Time: 7000
+      - Level: 8
+        Time: 8000
+      - Level: 9
+        Time: 9000
+      - Level: 10
+        Time: 10000
+    Unit:
+      Id: Cane_of_evil_eye
+      Interval: 3000
+      Target: Enemy
+      Flag:
+        NoReiteration: true
+        NoOverlap: true
+  - Id: 8601
+    Name: ABR_BATTLE_BUSTER
+    Description: Battle Buster
+    MaxLevel: 1
+    Type: Weapon
+    TargetType: Attack
+    Range: 1
+    Hit: Single
+    HitCount: 1
+    AfterCastActDelay: 500
+    Cooldown: 5000
+    FixedCastTime: 500
+    Requires:
+      SpCost: 1
+  - Id: 8602
+    Name: ABR_DUAL_CANNON_FIRE
+    Description: Dual Cannon Fire
+    MaxLevel: 1
+    Type: Weapon
+    TargetType: Attack
+    Range: 9
+    Hit: Single
+    HitCount: 1
+    AfterCastActDelay: 500
+    Cooldown: 5000
+    FixedCastTime: 500
+    Requires:
+      SpCost: 1
+  - Id: 8603
+    Name: ABR_NET_REPAIR
+    Description: Net Repair
+    MaxLevel: 1
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Hit: Single
+    HitCount: 1
+    SplashArea: 12
+    AfterCastActDelay: 500
+    Cooldown: 5000
+    FixedCastTime: 500
+    Requires:
+      SpCost: 1
+  - Id: 8604
+    Name: ABR_NET_SUPPORT
+    Description: Net Support
+    MaxLevel: 1
+    TargetType: Self
+    DamageFlags:
+      NoDamage: true
+      Splash: true
+    Hit: Single
+    HitCount: 1
+    SplashArea: 12
+    AfterCastActDelay: 500
+    Cooldown: 5000
+    FixedCastTime: 500
+    Requires:
+      SpCost: 1
+  - Id: 8605
+    Name: ABR_INFINITY_BUSTER
+    Description: Infinity Buster
+    MaxLevel: 1
+    Type: Weapon
+    TargetType: Attack
+    Range: 9
+    Hit: Single
+    HitCount: 1
+    AfterCastActDelay: 500
+    Cooldown: 5000
+    FixedCastTime: 500
+    Requires:
+      SpCost: 1
+
+  # Skill used by the Renewal Deadly_Defeasance duration lookup.
+  - Id: 5214
+    Name: AG_DEADLY_PROJECTION
+    Description: Deadly Projection
+    MaxLevel: 5
+    Type: Magic
+    TargetType: Attack
+    Flags:
+      IgnoreGtb: true
+    Range: 9
+    Hit: Single
+    HitCount: 1
+    Element: Undead
+    CastTime: 3000
+    AfterCastActDelay: 500
+    Duration1:
+      - Level: 1
+        Time: 4000
+      - Level: 2
+        Time: 5000
+      - Level: 3
+        Time: 6000
+      - Level: 4
+        Time: 7000
+      - Level: 5
+        Time: 8000
+    Cooldown: 2000
+    FixedCastTime: 1500
+    Requires:
+      SpCost:
+        - Level: 1
+          Amount: 70
+        - Level: 2
+          Amount: 75
+        - Level: 3
+          Amount: 80
+        - Level: 4
+          Amount: 85
+        - Level: 5
+          Amount: 90
+    Status: Deadly_Defeasance

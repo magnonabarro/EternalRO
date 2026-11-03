@@ -1,54 +1,89 @@
-prontera,132,125,4	script	cheffenia	908,{
+function	script	F_CheffeniaRateDiscount	{
+    .@discount = 0;
+    switch (CUSTOM_RATE) {
+        case 25: .@discount = 15; break;
+        case 12: .@discount = 30; break;
+        case 1:  .@discount = 60; break;
+        case 6:  .@discount = 70; break;
+    }
+    if (vip_status(VIP_STATUS_ACTIVE) && .@discount < 10)
+        .@discount = 10;
+    return .@discount;
+}
 
-	// Jogadores VIP recebem 10% de desconto no custo de entrada.
-	// Jogadores não VIP pagam o valor total de 5.000 zenys.
-	mes "Rancor contra mim. O custo é baseado no seu status VIP.";
-	next;
+prontera,183,213,4	script	Cheffenia	908,{
+    mes "[Cheffenia]";
+    mes "Escolha uma dificuldade: Normal, Hard ou Insano.";
+    next;
 
-	// Define o custo base e calcula o desconto para VIPs
-	set .@custo_base, 5000;
-	set .@desconto_vip, (.@custo_base * 10) / 100; // 10% de desconto
-	set .@custo_vip, .@custo_base - .@desconto_vip;
+    .@difficulty = select("Normal:Hard:Insano:Cancelar");
+    if (.@difficulty == 4 || .@difficulty == 255) close;
 
-	// Verifica o status VIP e define o custo final
-	if(getgmlevel() > 1) {
-		mes "[Riss]";
-		mes "Como você é VIP, recebe 10% de desconto.";
-		mes "O custo será ^FF0000" + .@custo_vip + " zenys^000000.";
-		set .@custo_final, .@custo_vip;
-	} else {
-		mes "[Riss]";
-		mes "Para não VIPs, o custo será ^FF0000" + .@custo_base + " zenys^000000.";
-		set .@custo_final, .@custo_base;
-	}
+    switch (.@difficulty) {
+        case 1: .@map$ = "bossnia_01"; .@difficulty$ = "Normal"; .@zeny_cost = 5000000; .@zeny_text$ = "5kk"; .@vote_cost = 1; break;
+        case 2: .@map$ = "bossnia_02"; .@difficulty$ = "Hard"; .@zeny_cost = 10000000; .@zeny_text$ = "10kk"; .@vote_cost = 2; break;
+        case 3: .@map$ = "bossnia_03"; .@difficulty$ = "Insano"; .@zeny_cost = 15000000; .@zeny_text$ = "15kk"; .@vote_cost = 3; break;
+    }
 
-	next;
+    mes "[Cheffenia]";
+    mes "Modo escolhido: " + .@difficulty$ + ".";
+    mes "Acesso: " + .@zeny_text$ + " zenys ou " + .@vote_cost + " ponto(s) de voto.";
+    mes "Seu saldo de pontos de voto: " + #VOTEPOINTS + ".";
+    next;
 
-	// Verifica se o jogador tem zenys suficientes
-	if (Zeny >= .@custo_final) {
-		mes "[Riss]";
-		mes "Você realmente gostaria de aceitar o desafio?";
-		mes "Ok, apenas escolha o percurso.";
-		next;
+    .@payment = select("Pagar " + .@zeny_text$ + " zenys:Pagar " + .@vote_cost + " ponto(s) de voto:Cancelar");
+    if (.@payment == 3 || .@payment == 255) close;
 
-		// Seleção da dificuldade
-		set .@i, select("Chefenia [Normal]:Chefenia [Hard]:Chefenia [Pesadelo]");
-		mes "[Riss]";
-		mes "Cuidado, garoto~";
-		mes "Não guarde rancor contra mim.";
-		close2;
+    if (.@payment == 1) {
+        if (Zeny < .@zeny_cost) {
+            mes "[Cheffenia]";
+            mes "Voce nao tem zenys suficientes.";
+            close;
+        }
+        if (select("Confirmar pagamento de " + .@zeny_text$ + " zenys:Cancelar") != 1) close;
+        Zeny -= .@zeny_cost;
+    } else {
+        if (#VOTEPOINTS < .@vote_cost) {
+            mes "[Cheffenia]";
+            mes "Voce nao tem pontos de voto suficientes.";
+            close;
+        }
+        if (select("Confirmar pagamento de " + .@vote_cost + " ponto(s) de voto:Cancelar") != 1) close;
+        #VOTEPOINTS -= .@vote_cost;
+    }
 
-		// Deduz o custo em zenys e teletransporta o jogador
-		set Zeny, Zeny - .@custo_final;
-		warp "bossnia_0"+.@i,rand(202,204),rand(202,204);
-		end;
-	} else {
-		// Caso não tenha zenys suficientes
-		mes "[Riss]";
-		mes "Você não tem dinheiro suficiente...";
-		mes "Volte quando tiver pelo menos ^FF0000" + .@custo_final + " zenys^000000.";
-		close;
-	}
+    close2;
+    warp .@map$, rand(202,204), rand(202,204);
+    end;
+}
+
+prontera,182,214,4	script	Loja de Moedas Cheffenia	4_M_01,{
+    .@discount = callfunc("F_CheffeniaRateDiscount");
+    mes "[Loja Cheffenia]";
+    mes "Escolha a dificuldade da moeda que voce vai usar.";
+    mes "Desconto da sua rate: " + .@discount + "%.";
+    next;
+
+    .@currency_choice = select("Moeda Cheffenia Normal:Moeda Cheffenia Hard:Moeda Cheffenia Insana:Cancelar");
+    if (.@currency_choice == 4 || .@currency_choice == 255) close;
+    switch (.@currency_choice) {
+        case 1: .@currency$ = "normal"; break;
+        case 2: .@currency$ = "hard"; break;
+        case 3: .@currency$ = "insana"; break;
+    }
+
+    .@category_choice = select("Consumiveis de baixo custo:Minerios e utilidades de medio custo:Visuais e equipamentos de alto custo:Cancelar");
+    if (.@category_choice == 4 || .@category_choice == 255) close;
+    if (.@category_choice == 1)
+        .@category$ = "baixo";
+    else if (.@category_choice == 2)
+        .@category$ = "medio";
+    else
+        .@category$ = "alto";
+
+    .@shop$ = "chefenia_" + .@currency$ + "_" + .@category$ + "_d" + .@discount;
+    callshop .@shop$;
+    end;
 }
 
 // Warp Portals
@@ -232,41 +267,53 @@ bossnia_04,122,195,1,1	monster	Beelzebub	1873,1
 bossnia_04,45,118,1,1	monster	Beelzebub	1873,1
 bossnia_04,196,122,1,1	monster	Valkyrie Randgris	1751,1
 
+// Regras aplicadas a todos os mapas da Cheffenia.
+bossnia_01	mapflag	noloot
+bossnia_01	mapflag	noteleport
+bossnia_01	mapflag	nowarp
+bossnia_01	mapflag	nowarpto
+bossnia_02	mapflag	noloot
+bossnia_02	mapflag	noteleport
+bossnia_02	mapflag	nowarp
+bossnia_02	mapflag	nowarpto
+bossnia_03	mapflag	noloot
+bossnia_03	mapflag	noteleport
+bossnia_03	mapflag	nowarp
+bossnia_03	mapflag	nowarpto
+bossnia_04	mapflag	noloot
+bossnia_04	mapflag	noteleport
+bossnia_04	mapflag	nowarp
+bossnia_04	mapflag	nowarpto
+
 -	script	PontosCheffenia	-1,{
+OnInit:
+    .CoinChance = 25; // chance configuravel em porcentagem
+    end;
 
-	OnNPCKillEvent:
-		// Verifica se o jogador está no mapa bossnia_01
-		if (strcharinfo(3) == "bossnia_01") {
-			// Lista de IDs dos MVPs presentes no mapa
-			setarray .mvp_ids[0], 1252, 1768, 1272, 1046, 1389, 1112, 1719, 1147, 1059, 
-			                     1039, 1658, 1511, 1785, 1685, 1115, 1038, 1190, 1087, 
-			                     1492, 1150, 1373, 1779, 1734, 1708, 1688, 1583, 1312, 
-			                     1157, 1251, 1871, 1159, 1086, 1418, 1623, 1647, 1648, 
-			                     1873, 1751, 1832;
+OnNPCKillEvent:
+    .@map$ = strcharinfo(3);
+    .@coin_id = 0;
+    .@coin_name$ = "";
+    if (.@map$ == "bossnia_01") {
+        .@coin_id = 50028;
+        .@coin_name$ = "Moeda Cheffenia Normal";
+    } else if (.@map$ == "bossnia_02") {
+        .@coin_id = 50029;
+        .@coin_name$ = "Moeda Cheffenia Hard";
+    } else if (.@map$ == "bossnia_03" || .@map$ == "bossnia_04") {
+        .@coin_id = 50030;
+        .@coin_name$ = "Moeda Cheffenia Insana";
+    }
+    if (.@coin_id == 0 || getmonsterinfo(killedrid, MOB_MVPEXP) <= 0)
+        end;
+    if (rand(100) >= .CoinChance)
+        end;
+    if (!checkweight(.@coin_id, 1)) {
+        dispbottom "[Cheffenia] Inventario cheio; a moeda nao foi entregue.";
+        end;
+    }
 
-			// Verifica se o monstro morto é um dos MVPs
-			for (set .@i, 0; .@i < getarraysize(.mvp_ids); set .@i, .@i + 1) {
-				if (killedrid == .mvp_ids[.@i]) {
-					// Adiciona 1 moeda de Cheffenia ao inventário
-					getitem 7539, 1; // 7539 é o ID da "Moeda de Cheffenia"
-
-					// Exibe a mensagem ao jogador
-					dispbottom "Você recebeu 1 Moeda de Cheffenia!";
-
-					end;
-				}
-			}
-		}
-		end;
+    getitem .@coin_id, 1;
+    dispbottom "[Cheffenia] Voce recebeu 1 " + .@coin_name$ + "!";
+    end;
 }
-
-
-
-
-
-
-
-
-
-
-
